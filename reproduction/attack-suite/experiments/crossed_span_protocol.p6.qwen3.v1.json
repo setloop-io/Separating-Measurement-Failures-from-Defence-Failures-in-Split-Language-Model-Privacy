@@ -1,0 +1,100 @@
+{
+  "schema": "llm_attacker.p6_qwen3.v1",
+  "protocol_id": "p6-corrected-qwen3-20260917-v1",
+  "status": "frozen",
+  "authorisation": "User explicitly requested scheduling and starting all pending Phase 2 experiments on existing nodes.",
+  "scope": "Prospective Qwen3 Mode-2 replication of corrected GPT2 matrix; no historical preregistration, Mode1/P5 claim or direct token-level cross-tokenizer equivalence.",
+  "historical_protocol_sha256": "e404b2e6702c5de66b82fcb8d30e1dcb59b6f4f11117eaa82fa6babb1b9f07fb",
+  "input": "results/p6-qwen-input-v1/input.json",
+  "input_sha256": "44e67d3f140ffe324126132a0c4a510c229169c76b3042bec105a1a8be6c86ac",
+  "model": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "partition_counts": {
+    "calibration": 32,
+    "train": 128,
+    "evaluation": 256
+  },
+  "seq_len": 32,
+  "train_steps": 128,
+  "lr": 5e-05,
+  "spans": [
+    2,
+    4,
+    6
+  ],
+  "starts": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "defenses": [
+    "D0",
+    "D1"
+  ],
+  "victim_seeds": [
+    11,
+    22,
+    33,
+    44,
+    55,
+    66,
+    77,
+    88
+  ],
+  "property_tokens": [
+    16,
+    320,
+    264
+  ],
+  "property_selection": "Three closest-to-half prevalence tokens on calibration only; ascending token ID tie-break.",
+  "attack_seed": 17,
+  "order_seed": 41778,
+  "statistics": {
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 41777,
+    "cluster_seed": 41779,
+    "family_size": 4
+  },
+  "analysis_specification": "docs/p6-qwen3-followup-2026-09-17.md",
+  "analysis_specification_sha256": "bea4406fea5d791acd3af77831b840916f0a05646cc514ce8bea7b400b18daab",
+  "implementation_sha256": {
+    "experiments/run_p6_corrected.py": "92a44100a79e69c39e05bcc6e11e1d3cbdd4a6daad586a6cc784384d6bf1e19f",
+    "experiments/analyze_p6_corrected.py": "a9a077ca6efb8a81d1f7c48a53c5539a9af5e4950cb63b93f6ede45bc09b906d",
+    "experiments/pilot_measurements.py": "394a2aa24041fac4e83b0b1160e10707c7056e6825e04418d1c641c2a97daf4d",
+    "attacker/splitbench.py": "69515a4c379851a3e558510ff5a53e6c1670acf4b269e90fc52c36b11fb20979",
+    "attacker/attacks/seam_inversion.py": "cd70e7de028f38909b81990796a7fb0178fe45d02189af789caa94d5372ac7d4",
+    "attacker/attacks/label_scoring.py": "06bf9eede5144db272a326a329c5f2177118917206e7688be72668e4085e71e8",
+    "attacker/gate.py": "7e213b4ed5432b13868b32fc9a44399f8490028c980c27befe3350facd8b0f0f",
+    "experiments/qwen_p6/queue.py": "168a6223f26ef42a70d574e8eeca7f934d00d4561b45573b222ac4be74af4484",
+    "experiments/qwen_p6/prepare.py": "fb3b8fc5aadb3681d39f33e956f9cc9e2ea24a54b1ff09b20b70b640a2d0e59b",
+    "experiments/qwen_p6/analyze.py": "cb52d7095e1732d27d5d89bc39d8ff93ecc934d4b09c8526022634291b0b6a2d"
+  },
+  "attack_timeout_s": 3600,
+  "cell_timeout_s": 7200,
+  "scheduling": "Koula GPU sequential two excluded canaries then globally shuffled grid; 24h total deadline, 1.5x measured projection plus30min analysis reserve; no paid infrastructure.",
+  "failures": "Any failure blocks comparative analysis; immutable evidence, fresh whole-cell attempt, no outcome-driven retry.",
+  "deviations_from_v1": [
+    "Pinned explicit final-state heldout observation",
+    "128-step one-pass budget",
+    "Calibration-only property specification",
+    "Single-seed attack label",
+    "Nonnegative R2 significance uses within-seed/span permutation; alpha family explicitly four",
+    "Global span-interleaved order on one device where feasible"
+  ],
+  "num_hidden_layers": 28,
+  "parent_protocol_sha256": "88e2286339109d8c6356b75b5263a23647261136eb0d039ecca15075c03d533b",
+  "calibration_property_document_counts": {
+    "16": 16,
+    "320": 15,
+    "264": 18
+  },
+  "source_document_sha256": "e5360e2a8bbcf768a9b45523643ea0eda2d393f60259e4b31392c56c3fc57ef9",
+  "deviations_from_gpt2": [
+    "Pinned Qwen model and tokenizer",
+    "Identical source-document partitions retokenized from original text; Qwen prefix windows differ",
+    "Calibration-only Qwen token property selection",
+    "Analytic layer fraction denominator28",
+    "24h sequential GPU budget with trained and all-local canaries"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "adversary_strength": 0.5,
+  "baseline_eval_loss": 4.689927324652672,
+  "baseline_eval_seconds": 0.6759144379757345,
+  "candidate_eval_loss": 4.250082716345787,
+  "candidate_eval_seconds": 0.17883641400840133,
+  "cloud_state_contains_hidden_width": false,
+  "device": "cuda",
+  "dp": {
+    "adjacency": "replace_one",
+    "delta": 1e-06,
+    "epsilon": {
+      "composed": 32246986.526494462,
+      "forward": 19335060.221125644,
+      "return": 12929102.302778829
+    },
+    "method": "zcdp_gaussian_replace_one",
+    "parameters": {
+      "forward_clip": 1.0,
+      "forward_noise_multiplier": 0.1,
+      "return_clip": 1.0,
+      "return_noise_multiplier": 0.1
+    },
+    "releases": {
+      "forward": 96512,
+      "return": 64512
+    },
+    "rho": {
+      "forward": 19302399.999999996,
+      "return": 12902399.999999998
+    }
+  },
+  "eval_blocks": 16,
+  "eval_loss_delta": -0.43984460830688477,
+  "eval_time_ratio": 0.26458439701922987,
+  "gates": {
+    "cloud_latent_only": true,
+    "eval_time_ratio_le_3": true,
+    "privacy_above_band_le_1pct": true,
+    "utility_delta_le_0_35": true
+  },
+  "hidden_dim": 1024,
+  "label_free_majority_pct": 5.2734375,
+  "latent_dim": 128,
+  "limitations": [
+    "single-process pilot; two-node protocol not yet exercised",
+    "short training run; not convergence or paper evidence",
+    "fresh probe is a diagnostic subset, not the complete /attacker suite"
+  ],
+  "mean_step_seconds": 0.038349121390958314,
+  "model": "/workspace/experiments/models/qwen3-0.6b",
+  "noise_multiplier": 0.1,
+  "recovery_above_label_free_pct": -0.78125,
+  "resume_after": 26,
+  "schema": "dtraining.latent_native_v5_06b.v1",
+  "seed": 42,
+  "sequence_length": 32,
+  "split_after": 23,
+  "status": "completed",
+  "steps": 2000,
+  "token_recovery_pct": 4.4921875,
+  "train_blocks": 256,
+  "train_seconds": 76.69824278191663,
+  "training_tail": [
+    {
+      "attacker_loss": 7.264206886291504,
+      "distill_loss": 0.15309791266918182,
+      "language_loss": 4.4699835777282715,
+      "step": 1997
+    },
+    {
+      "attacker_loss": 7.178372383117676,
+      "distill_loss": 0.18078632652759552,
+      "language_loss": 4.303554534912109,
+      "step": 1998
+    },
+    {
+      "attacker_loss": 7.078362464904785,
+      "distill_loss": 0.15761053562164307,
+      "language_loss": 4.195154190063477,
+      "step": 1999
+    }
+  ],
+  "warmup_steps": 500
+}

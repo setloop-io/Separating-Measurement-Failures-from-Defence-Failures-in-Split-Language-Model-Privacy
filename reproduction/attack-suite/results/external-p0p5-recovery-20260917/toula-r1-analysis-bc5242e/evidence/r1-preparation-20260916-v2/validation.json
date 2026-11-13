@@ -1,0 +1,21 @@
+{
+  "archive_sha256": "54b21ae2415756c4d8bf518b2d5c5f4bc48fc9df5d34b713d01aea172219d9e1",
+  "bundle_sha256": "e123089f1955e9fb7c9d22b0035e448a57a7b5960c4609a30eabcab3e6f03a3d",
+  "reason": "Stage A engA001 failed on run smoke-gradient-noise--s61001--trained with a CUDA/CPU device mismatch: src/pcr/remote_service.py _defend_outbound moved defense noise by dtype only. Fixed in fcd0922 (noise now moves to value.device, value.dtype), matching the two sibling defense sites. R1 systems battery 57/57 passed after the fix. New packet per the code-change-requires-new-packet rule; the engA001 admission remains consumed.",
+  "restore_check": "archive extracted to disposable /Users/geo/r1-bundle-eng-20260916-v2-restore and verify-bundle executed from the restored copy",
+  "schema_version": "r1-preparation-validation-1.0",
+  "scientific_evidence": false,
+  "scope": "Preparation and byte-recovery evidence only. No training, no GPU execution, no scientific admission.",
+  "source_commit": "fcd0922",
+  "source_inventory_sha256": "c96d16ecde0c8982eb0cf1761310b349ba4f1611e92e73c54be4db0c30f097e0",
+  "supersedes": "evidence/r1-preparation-20260916 (bundle 45d7682e) for engineering execution; the v1 acceptance records and the engA001 failure remain preserved on toula and will be retrieved as failure evidence",
+  "transport_note": "archive built with COPYFILE_DISABLE=1 (xattr-free), the defect corrected in the v1 package",
+  "validated_at_utc": "2026-09-16",
+  "verify_bundle_output": {
+    "files": 183,
+    "scientific_execution_admitted": false,
+    "status": "verified",
+    "study_id": "p3-r1-fresh-start"
+  },
+  "working_tree_clean_at_prepare": true
+}

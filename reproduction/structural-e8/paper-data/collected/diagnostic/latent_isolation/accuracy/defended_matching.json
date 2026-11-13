@@ -1,0 +1,42 @@
+{
+  "schema": "dtraining.attacker.latent_matching.v1",
+  "config": {
+    "attack": "latent_matching",
+    "mode": "training",
+    "restarts": 2,
+    "epochs": 20
+  },
+  "threat_model": "VMA-style centroid matching and permutation order-recovery against gauged+chaffed latent bundles; extends the frozen gate.",
+  "provenance": {
+    "hostname": "MacBookPro",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-08-19T21:58:41Z",
+    "dtraining_commit": "f0168588c9ac5e6826bb869b415724f3b11f32b9"
+  },
+  "results": [
+    {
+      "arm": "vma_centroid_match",
+      "top1_pct": 0.08806693367660046,
+      "majority_pct": 5.856451019644737,
+      "excess_pp": -5.768384085968137,
+      "eval_rows": 4542
+    },
+    {
+      "arm": "sorted_signature_matching_position_free",
+      "top1_pct": 1.7613386173491854,
+      "majority_pct": 5.856451019644737,
+      "excess_pp": -4.095112402295552,
+      "eval_rows": 4542
+    }
+  ],
+  "summary": [
+    {
+      "arms": [
+        "vma_centroid_match",
+        "sorted_signature_matching_position_free"
+      ],
+      "worst_excess_pp": -4.095112402295552,
+      "note": "matching arms adapted from VMA (ICML'25) and permutation reversal (arXiv:2505.18332) to the latent surface; frozen latent_probe gate unchanged"
+    }
+  ]
+}

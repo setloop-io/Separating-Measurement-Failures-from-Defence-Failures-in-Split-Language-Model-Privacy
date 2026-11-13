@@ -1,0 +1,164 @@
+{
+  "schema": "llm_attacker.defended_pilot_cell.v1",
+  "status": "COMPLETE",
+  "split": 6,
+  "seed": 11,
+  "defense": "gaussian",
+  "paired_control": "../none/cell.json",
+  "wall_seconds": 4.363350630970672,
+  "attack_seconds": 88.89926189603284,
+  "cuda_peak_allocated_bytes": 1759721472,
+  "resources_scope": "cell wall includes capture I/O; cuda peak is process-wide (experiment.json convention)",
+  "utility_before": {
+    "cross_entropy": 4.527629107236862,
+    "per_document_cross_entropy": [
+      3.495105504989624,
+      5.151322364807129,
+      3.71730637550354,
+      4.334795951843262,
+      3.6239302158355713,
+      4.621974945068359,
+      5.009909629821777,
+      4.1421427726745605,
+      3.3138253688812256,
+      3.2236077785491943,
+      3.9183735847473145,
+      3.5804975032806396,
+      4.924056529998779,
+      4.511830806732178,
+      5.807098388671875,
+      3.5471816062927246,
+      4.344304084777832,
+      3.2902638912200928,
+      5.506032943725586,
+      5.840600490570068,
+      5.135684967041016,
+      5.157527923583984,
+      4.272251129150391,
+      4.078103065490723,
+      5.3945465087890625,
+      5.107117652893066,
+      5.66725492477417,
+      4.984134674072266,
+      3.2441904544830322,
+      6.295830249786377,
+      5.403988838195801,
+      4.239340305328369
+    ],
+    "perplexity": 92.53890097909225
+  },
+  "utility_after": {
+    "cross_entropy": 3.876477561891079,
+    "per_document_cross_entropy": [
+      3.1687140464782715,
+      4.188152313232422,
+      3.6317479610443115,
+      4.216166973114014,
+      3.0103514194488525,
+      3.081209182739258,
+      3.8442301750183105,
+      3.7246901988983154,
+      2.78617000579834,
+      3.0989415645599365,
+      3.2159061431884766,
+      3.3358731269836426,
+      3.908029794692993,
+      3.3803205490112305,
+      5.928966045379639,
+      2.718796730041504,
+      3.738924503326416,
+      3.1209747791290283,
+      4.596728801727295,
+      5.193912506103516,
+      4.008823394775391,
+      4.8131537437438965,
+      2.106940746307373,
+      3.6819241046905518,
+      5.153687477111816,
+      4.87019157409668,
+      5.450485706329346,
+      4.376664638519287,
+      2.8357884883880615,
+      5.209318161010742,
+      4.379758358001709,
+      3.2717387676239014
+    ],
+    "perplexity": 48.253943831789144
+  },
+  "training": {
+    "steps_run": 64,
+    "final_loss": 2.551683187484741,
+    "mean_loss": 3.6419462338089943
+  },
+  "access": {
+    "schema": "llm_attacker.defended_pilot_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 32,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 8,
+        "beam_width": 2
+      },
+      "sipit": {
+        "steps_per_token": 64
+      },
+      "scored_sequences": 32
+    }
+  },
+  "provenance": {
+    "path": "run.json",
+    "sha256": "5d4600b4d4000adcacc9d0c3c8049f9cbf30c5976352d186330399d83b82f4b4"
+  },
+  "run_artifact": "run.json",
+  "evidence": "run.json.evidence.json",
+  "captures_dir": "captures",
+  "attacks": {
+    "forward": {
+      "accuracy": 0.8828125,
+      "n_tokens": 1024,
+      "n_sequences": 32,
+      "candidate_count": 8,
+      "beam_width": 2,
+      "work": {
+        "head_forward_calls": 32,
+        "head_forward_sequences": 16128,
+        "head_forward_token_positions": 270080,
+        "head_backward_calls": 0,
+        "head_backward_token_positions": 0,
+        "vocabulary_dot_products": 51463168,
+        "wall_seconds": 6.97228052909486,
+        "cuda_seconds": 6.9721181640625,
+        "peak_allocated_bytes": 2362026496,
+        "incremental_peak_allocated_bytes": 1311798272
+      },
+      "artifact": "forward-baseline.json"
+    },
+    "sipit": {
+      "accuracy": 0.87890625,
+      "n_tokens": 1024,
+      "n_sequences": 32,
+      "steps_per_token": 64,
+      "work": {
+        "head_forward_calls": 4096,
+        "head_forward_sequences": 131072,
+        "head_forward_token_positions": 2162688,
+        "head_backward_calls": 2048,
+        "head_backward_token_positions": 1081344,
+        "vocabulary_dot_products": 3293642752,
+        "wall_seconds": 80.20394036103971,
+        "cuda_seconds": 80.20353125,
+        "peak_allocated_bytes": 1759721472,
+        "incremental_peak_allocated_bytes": 503557632
+      },
+      "artifact": "sipit-baseline.json"
+    }
+  }
+}

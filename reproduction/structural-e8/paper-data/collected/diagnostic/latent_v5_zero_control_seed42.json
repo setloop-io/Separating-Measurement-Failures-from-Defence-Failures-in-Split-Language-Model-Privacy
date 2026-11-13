@@ -1,0 +1,91 @@
+{
+  "active_cloud_delta": 0.0,
+  "adversary_strength": 0.5,
+  "baseline_eval_loss": 5.030908651649952,
+  "baseline_eval_seconds": 1.216217060922645,
+  "candidate_eval_loss": 4.686284355819225,
+  "candidate_eval_seconds": 0.869921064004302,
+  "cloud_correction_loss_improvement": 0.8682092428207397,
+  "cloud_state_contains_hidden_width": false,
+  "device": "cuda",
+  "dp": {
+    "adjacency": "replace_one",
+    "delta": 1e-06,
+    "epsilon": {
+      "composed": 32861787.04047495,
+      "forward": 19642519.090864565,
+      "return": 13236618.317361854
+    },
+    "method": "zcdp_gaussian_replace_one",
+    "parameters": {
+      "forward_clip": 1.0,
+      "forward_noise_multiplier": 0.1,
+      "return_clip": 1.0,
+      "return_noise_multiplier": 0.1
+    },
+    "releases": {
+      "forward": 98048,
+      "return": 66048
+    },
+    "rho": {
+      "forward": 19609599.999999996,
+      "return": 13209599.999999998
+    }
+  },
+  "eval_blocks": 64,
+  "eval_loss_delta": -0.3446242958307266,
+  "eval_time_ratio": 0.7152679336239237,
+  "gates": {
+    "cloud_correction_improves_loss": true,
+    "cloud_latent_only": true,
+    "eval_time_ratio_le_3": true,
+    "privacy_above_band_le_1pct": true,
+    "utility_delta_le_0_35": true
+  },
+  "hidden_dim": 1024,
+  "label_free_majority_pct": 3.857421875,
+  "latent_dim": 128,
+  "limitations": [
+    "single-process pilot; two-node protocol not exercised",
+    "short training run; not convergence or paper evidence",
+    "fresh probe is a diagnostic subset, not the complete /attacker suite"
+  ],
+  "mean_step_seconds": 0.0474397938955226,
+  "model": "/workspace/experiments/models/qwen3-0.6b",
+  "noise_multiplier": 0.1,
+  "recovery_above_label_free_pct": 0.9765625,
+  "remote_protocol": null,
+  "remote_tampered_frames": 0,
+  "resume_after": 26,
+  "schema": "dtraining.latent_native_v5_06b.v1",
+  "seed": 42,
+  "sequence_length": 32,
+  "split_after": 23,
+  "status": "completed",
+  "steps": 2000,
+  "token_recovery_pct": 4.833984375,
+  "train_blocks": 256,
+  "train_seconds": 94.8795877910452,
+  "training_tail": [
+    {
+      "attacker_loss": 7.082487106323242,
+      "distill_loss": 0.15188147127628326,
+      "language_loss": 4.448579788208008,
+      "step": 1997
+    },
+    {
+      "attacker_loss": 7.066242218017578,
+      "distill_loss": 0.17915821075439453,
+      "language_loss": 4.3013763427734375,
+      "step": 1998
+    },
+    {
+      "attacker_loss": 7.078571796417236,
+      "distill_loss": 0.1591174453496933,
+      "language_loss": 4.167436599731445,
+      "step": 1999
+    }
+  ],
+  "warmup_steps": 500,
+  "zero_cloud_eval_loss": 5.554493598639965
+}

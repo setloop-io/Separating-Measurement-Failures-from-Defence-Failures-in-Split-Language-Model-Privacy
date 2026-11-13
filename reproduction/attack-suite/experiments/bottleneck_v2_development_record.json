@@ -1,0 +1,104 @@
+{
+  "schema": "llm_attacker.bottleneck_v2_development.v1",
+  "source_commit": "09882af",
+  "source_clean": true,
+  "tests_passed": 202,
+  "verified_manifests": 15,
+  "tier": "bounded pretrained development check",
+  "scope": {
+    "model": "GPT2",
+    "split": 3,
+    "victim_seeds": [
+      11,
+      22,
+      33
+    ],
+    "training_steps": 64,
+    "bottleneck_dim": 64,
+    "utility_documents": 32,
+    "attack_sequences": 4,
+    "sipit_steps_per_token": 4,
+    "frozen_evaluation_accessed": false
+  },
+  "summary": {
+    "none": {
+      "perplexity_after": 48.10506899623475,
+      "forward_accuracy": 0.921875,
+      "sipit_accuracy": 0.036458333333333336
+    },
+    "trained-bottleneck": {
+      "perplexity_after": 179.58327426423475,
+      "forward_accuracy": 0.5651041666666666,
+      "sipit_accuracy": 0.015625
+    }
+  },
+  "cells": [
+    {
+      "seed": 33,
+      "defense": "trained-bottleneck",
+      "perplexity_before": 293.0937456290173,
+      "perplexity_after": 180.60285007267245,
+      "forward_accuracy": 0.578125,
+      "sipit_accuracy": 0.0078125,
+      "cell_manifest_sha256": "81fd5d532e8b533d92e7ac141be5fadbbe66f9f87100f8d4887679c58b1c5bc6",
+      "path": "results/bottleneck-v2-corrected-development/split3/seed-33/trained-bottleneck/cell.json"
+    },
+    {
+      "seed": 33,
+      "defense": "none",
+      "perplexity_before": 92.18835002117531,
+      "perplexity_after": 47.48105919679687,
+      "forward_accuracy": 0.921875,
+      "sipit_accuracy": 0.0234375,
+      "cell_manifest_sha256": "e1f81cb7e580b8cee674a9c64051808a7791c925791d91c44730f0982e4461f7",
+      "path": "results/bottleneck-v2-corrected-development/split3/seed-33/none/cell.json"
+    },
+    {
+      "seed": 11,
+      "defense": "trained-bottleneck",
+      "perplexity_before": 287.5282059891563,
+      "perplexity_after": 184.78558453089903,
+      "forward_accuracy": 0.515625,
+      "sipit_accuracy": 0.015625,
+      "cell_manifest_sha256": "949c8165fc96ad6169d0fd519302fd28b86d190f3e4a18ecd36f3b21f3a67517",
+      "path": "results/bottleneck-v2-corrected-development/split3/seed-11/trained-bottleneck/cell.json"
+    },
+    {
+      "seed": 11,
+      "defense": "none",
+      "perplexity_before": 92.18835002117531,
+      "perplexity_after": 49.10410370936134,
+      "forward_accuracy": 0.90625,
+      "sipit_accuracy": 0.015625,
+      "cell_manifest_sha256": "21afa5ae167eb7ffa23c7ebb25374cce12ca076d075ca942e9e4b5cd7b9b26fe",
+      "path": "results/bottleneck-v2-corrected-development/split3/seed-11/none/cell.json"
+    },
+    {
+      "seed": 22,
+      "defense": "trained-bottleneck",
+      "perplexity_before": 288.009064740579,
+      "perplexity_after": 173.36138818913275,
+      "forward_accuracy": 0.6015625,
+      "sipit_accuracy": 0.0234375,
+      "cell_manifest_sha256": "086648c05bc733bad030ddbd3007aa0007f89d87cb2f7f640609f7b033a4aa1e",
+      "path": "results/bottleneck-v2-corrected-development/split3/seed-22/trained-bottleneck/cell.json"
+    },
+    {
+      "seed": 22,
+      "defense": "none",
+      "perplexity_before": 92.18835002117531,
+      "perplexity_after": 47.73004408254604,
+      "forward_accuracy": 0.9375,
+      "sipit_accuracy": 0.0703125,
+      "cell_manifest_sha256": "cc39ece5bb51d9b445569a34ed3ae8b413568d7b8377bbd2b7e9be73f2f32da6",
+      "path": "results/bottleneck-v2-corrected-development/split3/seed-22/none/cell.json"
+    }
+  ],
+  "analysis_sha256": "146aa5fcf48949e71d81716f48f20682970b7bb48bb120a1a372348fc803bae2",
+  "limits": [
+    "Mechanism v2 is a different utility-constrained compression baseline; not an external defense reproduction.",
+    "Compression still incurs substantial utility loss; collapse repair is not a privacy certificate.",
+    "Only split 3 and bounded attack budgets; not the full original 30-cell pilot or frozen study.",
+    "Common attacks use the public cloud decoder but remain public-head baselines; no claim of strongest adaptive attack."
+  ]
+}

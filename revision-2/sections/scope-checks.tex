@@ -1,0 +1,139 @@
+\section{Checking the scope of privacy claims}
+\label{sec:scopechecks}
+
+\subsection{Attack success under broader access}
+
+Adversary privileges govern when empirical attack outcomes transfer across
+threat models. A simple monotonic relationship separates demonstrated
+breaches from empirical non-detections.
+
+\begin{samepage}
+\begin{proposition}[Transfer under nested observations]
+Fix a target distribution, recovery metric, and computational budget.
+Suppose observer $B$ receives every value visible to observer $A$ and can
+apply every budget-admissible attack for $A$ after projecting onto $A$'s
+observation space. Observer $B$ then matches or exceeds the expected
+recovery of any individual attack available to $A$. Non-detection by a
+tested attack under $A$ places zero upper bound on recovery under $B$.
+\end{proposition}
+\begin{proof}
+Projecting $B$'s input onto $A$'s view and running $A$'s attack reproduces
+the exact output distribution and recovery score within budget. Existence
+of that projected attack leaves open whether a particular gradient
+optimiser finds it, while failure of one tested attack under $A$ leaves
+stronger uses of $B$'s extra state unconstrained.
+\end{proof}
+\end{samepage}
+
+Shared-key orthogonal wrapping illustrates why Proposition~1 invalidates
+careless threat-model upgrades (\artifact{E8}). Multiplying hidden states
+by an orthogonal matrix $Q$ transforms boundary traffic via
+\begin{equation}
+ h'=hQ,\qquad h=h'Q^{\mathsf T}.
+ \label{eq:rotation}
+\end{equation}
+Who holds $Q$ defines the security boundary. While a passive network tap
+lacking $Q$ sees rotated coordinates $h'$, an authorised cloud server that
+stores or derives $Q$ in host RAM to compute $h=h'Q^{\mathsf T}$ breaks the
+no-key premise immediately if compromised. Archived experiment accounts and
+collection manifests restrict the restoration result to passive wire and
+capture observers (\artifact{E8}, \artifact{ER}). Recent attacks that
+invert statistical and permutation obfuscation in third-party LLM serving
+highlight the same host-exposure boundary \cite{permattack2025}.
+
+Orthogonal maps also preserve Euclidean norms and token inner products
+exactly. Coordinate mismatch explains why a position-wise MLP decoder fails
+on $h'$ while relational Gram geometry stays intact across the sequence.
+Stronger known-plaintext alignment solvers inside the robustness archive
+exploit labelled pairs to recover the subspace at depth-dependent sample
+sizes (\artifact{E8}), consistent with independent findings that deeper
+transformer cuts retain recoverable internal states
+\cite{depth2025,actinv2026,bettisplit2026}.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}rrrr@{}}
+\toprule
+Depth & Estimated $K_{50}$ & Measured bracket & $K_{50}/5120$ \\
+\midrule
+1 & 258.32 & 200 to 300 & 0.05045 \\
+4 & 355.81 & 300 to 400 & 0.06949 \\
+8 & 617.93 & 600 to 700 & 0.12069 \\
+\bottomrule
+\end{tabular}
+\caption{Interpolated absolute 50\% token-recovery crossings ($K_{50}$)
+from the 27B ($H=5120$) robustness artifact across split depths
+(\artifact{E8}). Normalized ratios $K_{50}/5120$ span a $2.39$-fold range
+across depth without confidence intervals on the interpolated crossings.}
+\label{tab:k50}
+\end{table}
+
+Aggregating sessions can obscure peak exposure as well (\artifact{E8}).
+Under per-session rotation at depth~1, the pooled top-1 recovery score is
+$3.71\%$, yet constituent sessions reach $5.73\%$, $3.65\%$, and $2.34\%$.
+Pooled averages understate the leakiest session. Because known-plaintext
+solvers extract sensitive partial spans well below the absolute 50\%
+crossing in Table~\ref{tab:k50}, interpolated $K_{50}$ brackets track
+empirical attack scaling in the lab without defining safe operational key
+lifetimes.
+
+\subsection{Comparing rotation cadences}
+
+Archived deployment logs separate a three-session Mistral-7B per-session
+rotation test from a later eight-run Mistral-NeMo-12B per-epoch ratcheting
+matrix (\artifact{ER}). Per-session swaps add negligible latency. Within
+the 12B per-epoch matrix, greedy-decode identity holds in 20 of 24 sessions
+and four of the eight runs carry documented admissibility caveats, while
+the \texttt{N=256} arm executes zero rotations across its 60-token horizon
+and acts as a static control. Wire decoders scored zero top-1 recovery on
+rotated epochs within that bounded capture setup.
+
+Frequent ratcheting imposes steep latency penalties (\artifact{ER}). At
+cadence \texttt{N=16} with zero emulated RTT in session~1, recorded
+throughput drops from $7.6$ tokens/s on the static baseline to $2.8$
+tokens/s under ratcheting (a $63.16\%$ reduction at saved precision),
+whereas the evidence-triggered budget arm runs near $5.5$ to $5.6$
+tokens/s. Model scale, rotation cadence, and RTT twins remain
+distinct experimental factors across those extracted logs.
+
+Provenance reconciliation explains why two internal documents disagreed
+about this matrix (\artifact{ER}). An early summary flagged the entire
+ratchet sweep invalid before a subsequent RTT-twin audit readmitted the
+supporting runs alongside explicit identity, throughput, and cloud-RAM key
+caveats. Following our precedence rule, we adopt the later collection
+manifest together with every attached operational restriction.
+
+\subsection{Reading mutual information estimates}
+
+Companion boundary evaluations report near-zero neural mutual-information
+estimates on defended latent splits (\artifact{MI}). For any measurable
+critic $T$, the population Donsker-Varadhan variational objective obeys
+\begin{equation}
+ L_T=\mathbb E_{P_{XZ}}[T(X,Z)]-
+ \log\mathbb E_{P_XP_Z}[e^{T(X,Z)}]\le \operatorname{MI}(X,Z),
+ \label{eq:dv}
+\end{equation}
+where $\operatorname{MI}(X,Z)$ denotes true mutual information. That
+inequality bounds leakage strictly from below. In addition to severe finite-sample bias and exponential variance in
+variational estimators \cite{mcallester2020,song2020}, Eq.~\eqref{eq:dv}
+points in the wrong direction to certify an upper leakage budget, just as
+weak empirical attacks in differential-privacy auditing never prove small
+$\varepsilon$ \cite{jagielski2020}.
+
+A trivial analytic channel exposes the flaw immediately. Let input $X$ be
+uniform over $m$ discrete symbols, transmit plaintext $Z=X$, and evaluate
+constant critic $T=0$. Critic output $L_T$ equals zero identically even
+though $\operatorname{MI}(X,Z)=\log m$ nats ($8$ full bits at $m=256$).
+Adding a second under-powered lower-bound critic leaves the inequality
+direction unchanged, and the companion draft's own limitations section
+acknowledges that neither estimator furnishes an upper bound
+(\artifact{MI}).
+
+We therefore treat near-zero critic readouts as finite non-detections by a
+particular neural family while leaving true channel leakage open in both
+directions. Architectural ablations require identical restraint
+(\artifact{MI}). Observing comparable task metrics across a handful of
+invariant MLP and radial remote modules demonstrates empirical saturation
+within the tested training budget, whereas proving a universal
+information-theoretic capacity ceiling would require bounding every
+admissible remote function family.

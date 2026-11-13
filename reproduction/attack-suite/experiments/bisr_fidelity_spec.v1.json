@@ -1,0 +1,256 @@
+{
+  "schema": "llm_attacker.bisr_fidelity_spec.v1",
+  "status": "DESIGN_SPECIFIED_EXECUTION_NOT_ADMITTED",
+  "date": "2026-09-17",
+  "historical_results_already_seen": true,
+  "retroactive_qualification_allowed": false,
+  "base_protocol": {
+    "path": "experiments/validation_protocol.v4.json",
+    "sha256": "cc23f15d5d7597ff2e73edd45e6f77b65aaf19ce3ed6f86d121352ce1ca5c4fc",
+    "mutated": false
+  },
+  "normative_specification": {
+    "path": "docs/bisr-fidelity-specification-2026-09-17.md",
+    "sha256": "1f91c431bce25b6154c7b177c72394f6b252f78e590a6789351ee3417bfae532"
+  },
+  "routes": {
+    "R": {
+      "claim": "published-setting replication",
+      "requires_original_processed_data": true,
+      "status": "BLOCKED_ORIGINAL_DATA_AND_CADENCE"
+    },
+    "C": {
+      "claim": "implementation conformance on matched inputs",
+      "requires": [
+        "mechanical_gate",
+        "eight_endpoint_equivalence"
+      ],
+      "status": "NOT_IMPLEMENTED"
+    },
+    "A": {
+      "claim": "BiSR-inspired single-seam comparison",
+      "preferred_progress_route": true,
+      "requires": [
+        "C_on_explicit_adaptation",
+        "separate_frozen_execution_amendment"
+      ],
+      "discharges_published_replication_limitation": false,
+      "status": "NOT_IMPLEMENTED"
+    }
+  },
+  "algorithm": {
+    "arms": [
+      "sip",
+      "b",
+      "f",
+      "bf"
+    ],
+    "bf_order": [
+      "sip",
+      "gradient_matching",
+      "smashed_data_matching"
+    ],
+    "f_initialisation": "SIP argmax; not framework beam",
+    "gm_position_zero": "SIP argmax; SM may change it",
+    "sip_decoder": {
+      "architecture": "single-layer unidirectional GRU",
+      "hidden_size": 256,
+      "dropout": 0.1
+    },
+    "mlp_scope": "separate adaptation/ablation only",
+    "primary_namoe": false,
+    "gm": {
+      "iterations": 32,
+      "lr": 0.09,
+      "beta": 0.85,
+      "tau": 1.2
+    },
+    "sm": {
+      "iterations": 800,
+      "lr": 0.01,
+      "weight_decay": 0.01
+    },
+    "adamw_betas": [
+      0.9,
+      0.999
+    ],
+    "reference_cuts": [
+      6,
+      27
+    ],
+    "adaptation_cuts": [
+      3,
+      6
+    ]
+  },
+  "validation": {
+    "fresh_seed_pairs": [
+      31415,
+      27182,
+      16180
+    ],
+    "documents": 256,
+    "document_weighting": "equal",
+    "selection_salt": "bisr-conformance-v1",
+    "aux_selection_salt": "bisr-aux-v1",
+    "exclude": [
+      "v3_all_partitions",
+      "pilot",
+      "SIP_aux",
+      "historical_B1_inputs"
+    ],
+    "mechanical": {
+      "dtype": "float32",
+      "tf32": false,
+      "atol": 1e-06,
+      "rtol": 1e-05,
+      "metric_atol": 1e-12,
+      "checks": [
+        "wire_replay",
+        "checkpoint_grants",
+        "no_victim_updates",
+        "SIP_logits",
+        "GM_SM_losses",
+        "optimised_variable_gradients",
+        "one_AdamW_update",
+        "label_shift",
+        "position_zero",
+        "bf_order",
+        "f_SIP_initialisation",
+        "scoring_label_noninterference"
+      ]
+    },
+    "equivalence": {
+      "co_primary_arms": [
+        "sip",
+        "b",
+        "f",
+        "bf"
+      ],
+      "co_primary_metrics": [
+        "positional_accuracy",
+        "rouge_l_f1"
+      ],
+      "difference": "candidate_minus_reference",
+      "margin_fraction": 0.01,
+      "ci_level": 0.9,
+      "method": "Student_t_on_three_paired_seed_means",
+      "degrees_of_freedom": 2,
+      "critical_value": 2.919985580355516,
+      "all_endpoints_must_pass": true,
+      "rule": "Every CI strictly contained in (-0.01,0.01); fixed validation documents",
+      "multiplicity": "intersection_union_all_eight",
+      "justification": "Implementation discrepancy below half v4 practical margin; study choice, not authors tolerance",
+      "outcomes": [
+        "CONFORMANCE_ESTABLISHED",
+        "INCONCLUSIVE",
+        "NON_EQUIVALENT",
+        "NOT_EVALUABLE",
+        "CONFORMANCE_FAILED"
+      ]
+    },
+    "partition_selection_order": [
+      "validation_from_wikitext2_test_excluding_historical_and_v3",
+      "aux_from_wikitext2_train_excluding_reserved_validation"
+    ]
+  },
+  "published_point_target": {
+    "metric": "rouge_l_f1",
+    "value": 0.9979,
+    "margin_fraction": 0.01,
+    "ci_level": 0.9,
+    "requires": "R_configuration_provenance_pass",
+    "pass_label": "PUBLISHED_POINT_TARGET_COMPATIBLE",
+    "population_equivalence_claim": false
+  },
+  "adaptation_sip_training": {
+    "aux_articles": 112,
+    "seq_len": 32,
+    "windowing": "complete_nonoverlapping_no_cross_article",
+    "epochs": 20,
+    "batch_size": 32,
+    "optimizer": "AdamW",
+    "lr": 0.001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.0,
+    "early_stopping": false
+  },
+  "v4_comparison": {
+    "depths": [
+      3,
+      6
+    ],
+    "knowledge": [
+      "public",
+      "exact"
+    ],
+    "victim_seeds": [
+      101,
+      202,
+      303,
+      404,
+      505,
+      606,
+      707,
+      808,
+      909,
+      1010
+    ],
+    "attack_seeds": [
+      17,
+      29
+    ],
+    "documents": 256,
+    "main_arms": [
+      "sip",
+      "bf"
+    ],
+    "arm_cells": 160,
+    "primary": "bf minus joint_true_k32 at depth6/public",
+    "practical_margin": 0.02,
+    "ci_level": 0.95,
+    "primary_classification": {
+      "practically_larger": "lower>0.02",
+      "practically_smaller": "upper< -0.02",
+      "operationally_equivalent": "lower> -0.02 and upper<0.02",
+      "otherwise": "INCONCLUSIVE"
+    },
+    "equal_compute_claim_allowed": false,
+    "compute_scope": "algorithm_budgeted; offline_training_reported_separately",
+    "exact_knowledge_requires_enforced_checkpoint_loader": true
+  },
+  "admission": {
+    "launch_allowed_now": false,
+    "historical_B1_admissible": false,
+    "automatic_pass": false,
+    "requires": [
+      "spec_digest",
+      "source_commit_and_patch",
+      "models_tokenizers_checkpoints",
+      "inputs_partitions_aux",
+      "resolved_arguments",
+      "ordered_attack_events",
+      "environment_lock",
+      "metric_resources",
+      "mechanical_check_code",
+      "scoring_code",
+      "fresh_outputs",
+      "resource_canary",
+      "prospective_committed_manifest"
+    ],
+    "null_pins_allowed": false,
+    "skipped_disjointness_allowed": false,
+    "missing_cells": "block_analysis",
+    "outcome_driven_retries": false,
+    "outcome_driven_sample_extension": false,
+    "expanded_compute_authorisation": false
+  },
+  "primary_sources": [
+    "https://arxiv.org/html/2409.00960v2",
+    "https://github.com/StupidTrees/SplitLLM/tree/c376590227f9718077765824af4088665bb78687"
+  ]
+}

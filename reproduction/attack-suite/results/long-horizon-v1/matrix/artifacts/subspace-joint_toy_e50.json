@@ -1,0 +1,318 @@
+{
+  "schema": "dtraining.attacker.subspace_joint.v1",
+  "config": {
+    "attack": "subspace_joint",
+    "mode": "training",
+    "toy": true,
+    "hidden": 64,
+    "subspace_dims": [
+      8,
+      16
+    ],
+    "pairs_per_epoch": [
+      4,
+      8,
+      16,
+      32
+    ],
+    "epochs": 50,
+    "alt_iters": 5,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "threat_model": "oracle-labeled attacker under per-epoch rotation, but JOINT across epochs: exploits the stable low-dim activation subspace by alternating minimization over (shared basis B, per-epoch keys W_t), needing fewer labeled pairs per epoch than the independent per-epoch polar(lstsq) solves of E-R1a.",
+  "provenance": {
+    "hostname": "MacBookPro",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-16T01:37:19Z",
+    "dtraining_commit": "ec08486849760f2233f7036d44f580412976088f"
+  },
+  "results": [
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 4,
+      "seed": 0,
+      "joint_top1_mean": 3.1354,
+      "independent_top1_mean": 6.253905333333333,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 4,
+      "seed": 1,
+      "joint_top1_mean": 3.2148,
+      "independent_top1_mean": 6.070310666666667,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 4,
+      "seed": 2,
+      "joint_top1_mean": 2.905,
+      "independent_top1_mean": 6.055987999999999,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 8,
+      "seed": 0,
+      "joint_top1_mean": 3.1771,
+      "independent_top1_mean": 10.032555333333333,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 8,
+      "seed": 1,
+      "joint_top1_mean": 3.1641,
+      "independent_top1_mean": 10.08203,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 8,
+      "seed": 2,
+      "joint_top1_mean": 2.8802,
+      "independent_top1_mean": 10.087241333333333,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 16,
+      "seed": 0,
+      "joint_top1_mean": 3.0781,
+      "independent_top1_mean": 20.97786533333333,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 16,
+      "seed": 1,
+      "joint_top1_mean": 3.194,
+      "independent_top1_mean": 20.851559333333334,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 16,
+      "seed": 2,
+      "joint_top1_mean": 2.8242,
+      "independent_top1_mean": 21.404948,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 32,
+      "seed": 0,
+      "joint_top1_mean": 2.9362,
+      "independent_top1_mean": 52.445312666666666,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 32,
+      "seed": 1,
+      "joint_top1_mean": 3.1836,
+      "independent_top1_mean": 51.541666666666664,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 32,
+      "seed": 2,
+      "joint_top1_mean": 2.9896,
+      "independent_top1_mean": 52.03385666666667,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 4,
+      "seed": 0,
+      "joint_top1_mean": 3.03,
+      "independent_top1_mean": 6.253905333333333,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 4,
+      "seed": 1,
+      "joint_top1_mean": 2.9076,
+      "independent_top1_mean": 6.070310666666667,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 4,
+      "seed": 2,
+      "joint_top1_mean": 3.0273,
+      "independent_top1_mean": 6.055987999999999,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 8,
+      "seed": 0,
+      "joint_top1_mean": 3.0977,
+      "independent_top1_mean": 10.032555333333333,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 8,
+      "seed": 1,
+      "joint_top1_mean": 3.1224,
+      "independent_top1_mean": 10.08203,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 8,
+      "seed": 2,
+      "joint_top1_mean": 2.9779,
+      "independent_top1_mean": 10.087241333333333,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 16,
+      "seed": 0,
+      "joint_top1_mean": 3.2448,
+      "independent_top1_mean": 20.97786533333333,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 16,
+      "seed": 1,
+      "joint_top1_mean": 3.0912,
+      "independent_top1_mean": 20.851559333333334,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 16,
+      "seed": 2,
+      "joint_top1_mean": 2.9661,
+      "independent_top1_mean": 21.404948,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 32,
+      "seed": 0,
+      "joint_top1_mean": 3.0391,
+      "independent_top1_mean": 52.445312666666666,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 32,
+      "seed": 1,
+      "joint_top1_mean": 3.1615,
+      "independent_top1_mean": 51.541666666666664,
+      "n_solve_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 32,
+      "seed": 2,
+      "joint_top1_mean": 3.0208,
+      "independent_top1_mean": 52.03385666666667,
+      "n_solve_seeds": 3
+    }
+  ],
+  "summary": [
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 4,
+      "joint_mean": 3.0850728888888885,
+      "independent_mean": 6.126734666666667,
+      "n_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 8,
+      "joint_mean": 3.0737853333333334,
+      "independent_mean": 10.067275555555556,
+      "n_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 16,
+      "joint_mean": 3.032120888888889,
+      "independent_mean": 21.078124222222222,
+      "n_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 8,
+      "pairs_per_epoch": 32,
+      "joint_mean": 3.0364602222222223,
+      "independent_mean": 52.006945333333334,
+      "n_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 4,
+      "joint_mean": 2.9882848888888884,
+      "independent_mean": 6.126734666666667,
+      "n_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 8,
+      "joint_mean": 3.065973111111111,
+      "independent_mean": 10.067275555555556,
+      "n_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 16,
+      "joint_mean": 3.1006986666666663,
+      "independent_mean": 21.078124222222222,
+      "n_seeds": 3
+    },
+    {
+      "experiment": "subspace_joint",
+      "k": 16,
+      "pairs_per_epoch": 32,
+      "joint_mean": 3.073786444444444,
+      "independent_mean": 52.006945333333334,
+      "n_seeds": 3
+    }
+  ],
+  "interpretation": "If joint recovery crosses 50% at pairs-per-epoch where the independent solve is still in the band, max_safe_epoch drops and the B=128 budget needs revision."
+}

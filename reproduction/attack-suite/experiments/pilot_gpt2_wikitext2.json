@@ -1,0 +1,99 @@
+{
+  "schema": "llm_attacker.pilot_protocol.v1",
+  "purpose": "Pretrained pilot for effect sizes, variability, utility and attack cost; not a confirmatory security claim",
+  "source_tag": "V.0.1",
+  "source_commit": "660eee31eb7f9eeee8efe4497855613a2e5753b0",
+  "model": "openai-community/gpt2",
+  "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "dataset": "Salesforce/wikitext",
+  "dataset_revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+  "dataset_configuration": "wikitext-2-raw-v1",
+  "source_split": "train",
+  "reserved_splits": [
+    "validation",
+    "test"
+  ],
+  "articles": 96,
+  "partition_sizes": {
+    "calibration": 32,
+    "victim_train": 32,
+    "utility_eval": 32
+  },
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55
+  ],
+  "data_seed": 2026,
+  "split_depths": [
+    3,
+    6
+  ],
+  "defenses": [
+    "none",
+    "gaussian"
+  ],
+  "gaussian_sigma": 0.1,
+  "adaptive": true,
+  "seq_len": 32,
+  "train_steps": 32,
+  "training_lr": 5e-05,
+  "decode_steps": 4,
+  "attack_steps": 50,
+  "calibration_seqs": 32,
+  "joint_beam": 2,
+  "joint_candidates": 4,
+  "attack_arms": {
+    "training": [
+      "vmi",
+      "wbi",
+      "joint"
+    ],
+    "inference": [
+      "vmi",
+      "wbi"
+    ]
+  },
+  "expected_cells": 100,
+  "controls": [
+    "paired undefended",
+    "public calibration majority",
+    "document-deranged scoring",
+    "joint forward-only and backward-only diagnostics"
+  ],
+  "statistics": {
+    "unit": "independent run seed conditional on this fixed article sample",
+    "interval": "two-sided Student t",
+    "alpha": 0.05,
+    "family_size": 60,
+    "reason": "3 comparison types x 10 mode/defense/arm groups x 2 split depths; conservative inclusion of baseline self-contrasts"
+  },
+  "execution": {
+    "node_assignment": {
+      "3": "toula",
+      "6": "koula"
+    },
+    "device": "cuda",
+    "separate_process_per_seed": false,
+    "local_capture_rig": true,
+    "separate_process_per_split_depth": true
+  },
+  "rules": [
+    "All planned cells retained, including failures",
+    "No outcome-based changes to budgets or sample",
+    "Engineering preflight outcomes excluded from pilot",
+    "No repeated tokens treated as independent seeds",
+    "Fixed pretrained-model public head; final victim head not granted"
+  ],
+  "limitations": [
+    "Training and inference score different document partitions and training-time states; their contrast is descriptive, not causal",
+    "Split depth is confounded with host; same GPU type and package versions are checked but not a host crossover",
+    "Published attacks are local adaptations, not certified reproductions",
+    "Beam search and optimizer steps are not matched compute",
+    "Small pilot corpus and five seeds do not establish generalization or equivalence"
+  ],
+  "corpus_sha256": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77",
+  "corpus_preparation_script_sha256": "da43610661aa8a12521a320e83f3de78edb102842961f843fdda992168e12db6"
+}

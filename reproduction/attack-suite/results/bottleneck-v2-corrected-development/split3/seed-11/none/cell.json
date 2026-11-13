@@ -1,0 +1,117 @@
+{
+  "schema": "llm_attacker.defended_pilot_cell.v1",
+  "status": "COMPLETE",
+  "measurement_version": 2,
+  "observation_location": "body_input_seam",
+  "baseline_scope": "public-head reconstruction; uses public cloud decoder for bottleneck v2",
+  "split": 3,
+  "seed": 11,
+  "defense": "none",
+  "paired_control": null,
+  "wall_seconds": 15.57825733255595,
+  "attack_seconds": 9.727639749646187,
+  "cuda_peak_allocated_bytes": null,
+  "resources_scope": "victim wall includes capture I/O and matched utility measurements; attack time is separate; cuda peak is process-wide (experiment.json convention)",
+  "utility_before": {
+    "cross_entropy": 4.523833767060311,
+    "perplexity": 92.18835002117531,
+    "tokens": 992,
+    "documents": 32,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "before_victim_training"
+  },
+  "utility_after": {
+    "cross_entropy": 3.893942609910042,
+    "perplexity": 49.10410370936134,
+    "tokens": 992,
+    "documents": 32,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "after_victim_training"
+  },
+  "training": {
+    "steps_run": 64,
+    "final_loss": 2.8914918899536133,
+    "mean_loss": 3.6256862804293633
+  },
+  "access": {
+    "schema": "llm_attacker.defended_pilot_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 32,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "public_defense_decoder": "granted when the defense exposes a cloud decoder (bottleneck v2)",
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 8,
+        "beam_width": 2
+      },
+      "sipit": {
+        "steps_per_token": 4
+      },
+      "scored_sequences": 4
+    }
+  },
+  "provenance": {
+    "path": "run.json",
+    "sha256": "85ee5d1fa0d0fa37ed9986bd86b023419aa156f5063e9307653b349776d27e61"
+  },
+  "run_artifact": "run.json",
+  "evidence": "run.json.evidence.json",
+  "captures_dir": "captures",
+  "attacks": {
+    "forward": {
+      "accuracy": 0.90625,
+      "n_tokens": 128,
+      "n_sequences": 4,
+      "candidate_count": 8,
+      "beam_width": 2,
+      "work": {
+        "head_forward_calls": 32,
+        "head_forward_sequences": 2016,
+        "head_forward_token_positions": 33760,
+        "head_backward_calls": 0,
+        "head_backward_token_positions": 0,
+        "vocabulary_dot_products": 6432896,
+        "wall_seconds": 2.0789537923410535,
+        "cuda_seconds": null,
+        "peak_allocated_bytes": null,
+        "incremental_peak_allocated_bytes": null
+      },
+      "artifact": "forward-baseline.json"
+    },
+    "sipit": {
+      "accuracy": 0.015625,
+      "n_tokens": 128,
+      "n_sequences": 4,
+      "steps_per_token": 4,
+      "work": {
+        "head_forward_calls": 256,
+        "head_forward_sequences": 1024,
+        "head_forward_token_positions": 16896,
+        "head_backward_calls": 128,
+        "head_backward_token_positions": 8448,
+        "vocabulary_dot_products": 25731584,
+        "wall_seconds": 3.852139332331717,
+        "cuda_seconds": null,
+        "peak_allocated_bytes": null,
+        "incremental_peak_allocated_bytes": null
+      },
+      "artifact": "sipit-baseline.json"
+    }
+  },
+  "artifact_hashes": {
+    "sipit-baseline.json": "02c2420150cf9a4ac85ca89cb1f2f902c2f39f16cb806207ec68c280566237d2",
+    "forward-baseline.json": "84d9f25ee6c237ad243d598b048f6764b035b6096982b7ac7d77af0869b6b901",
+    "sipit-predictions.json": "99ff3224b518b2416a41a2c8419bde19fa62acf2ca78a486083afacd502c6247",
+    "run.json": "85ee5d1fa0d0fa37ed9986bd86b023419aa156f5063e9307653b349776d27e61",
+    "forward-predictions.json": "3e85a31247784cf338723368283c34ec9f22fb3a5bec4734054eb6af511bcf3b"
+  }
+}

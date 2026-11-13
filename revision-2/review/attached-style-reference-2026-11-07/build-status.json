@@ -1,0 +1,46 @@
+[
+  {
+    "command": [
+      "pdflatex",
+      "-no-shell-escape",
+      "-interaction=nonstopmode",
+      "-halt-on-error",
+      "-file-line-error",
+      "main.tex"
+    ],
+    "exit_code": 0,
+    "log": "build-pass-1.txt"
+  },
+  {
+    "command": [
+      "bibtex",
+      "main"
+    ],
+    "exit_code": 0,
+    "log": "build-pass-2.txt"
+  },
+  {
+    "command": [
+      "pdflatex",
+      "-no-shell-escape",
+      "-interaction=nonstopmode",
+      "-halt-on-error",
+      "-file-line-error",
+      "main.tex"
+    ],
+    "exit_code": 0,
+    "log": "build-pass-3.txt"
+  },
+  {
+    "command": [
+      "pdflatex",
+      "-no-shell-escape",
+      "-interaction=nonstopmode",
+      "-halt-on-error",
+      "-file-line-error",
+      "main.tex"
+    ],
+    "exit_code": 0,
+    "log": "build-pass-4.txt"
+  }
+]

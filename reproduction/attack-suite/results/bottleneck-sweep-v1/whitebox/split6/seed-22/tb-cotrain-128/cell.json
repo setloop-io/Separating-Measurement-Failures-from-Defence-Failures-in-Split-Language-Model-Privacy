@@ -1,0 +1,53 @@
+{
+  "schema": "llm_attacker.whitebox_sweep_cell.v1",
+  "status": "NOT_EVALUABLE",
+  "tier": "whitebox",
+  "split": 6,
+  "seed": 22,
+  "method": "tb-cotrain",
+  "dim": 128,
+  "base_cell": "split6/seed-22/dim-128/tb-cotrain",
+  "not_evaluable_reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+  "access": {
+    "schema": "llm_attacker.whitebox_sweep_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 32,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "public_defense_decoder": "granted when the defense exposes a cloud decoder (bottleneck v2 geometry, pca-compress basis)",
+    "defense_aware_arm": {
+      "knowledge": "defense CLASS and released width k only (no defense weights or randomness)",
+      "surrogate": "PCA encoder+inverse fit on the public calibration partition at the same k",
+      "use": "learned prior over the observed wire for the forward/beam/SIPIT kernels (BPDA-style straight-through approximation)"
+    },
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 32,
+        "beam_width": 4
+      },
+      "sipit": {
+        "steps_per_token": 128
+      },
+      "scored_sequences": 32
+    },
+    "tier": "whitebox",
+    "whitebox_extension": {
+      "granted": "the defended cell's ACTUAL trained defense checkpoint and provenance sidecar (encoder weights for tb-*, fitted PCA basis for pca-compress), in addition to everything the defense-aware surrogate arm holds",
+      "strength": "strictly stronger than the surrogate arm's defense-class + k + public-calibration knowledge",
+      "rationale": "mirrors the defense framework's assumption that the current transform is necessarily visible to the executor",
+      "base_cell": "split6/seed-22/dim-128/tb-cotrain",
+      "defense_checkpoint": "split6/seed-22/dim-128/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "arms": {
+        "whitebox_inverter": "MLP inverse of the TRUE defense map trained on public-calibration activations pushed through the true encoder; forward-beam + SIPIT on the reconstruction",
+        "whitebox_optimization": "Adam input optimization against the frozen true encoder's input-output map (steps_per_wire = the sweep's SIPIT steps budget), decoded via the public head"
+      },
+      "caveat": "white-box recovery is measured under strictly stronger access; it does not constrain black-box recovery of the same wire, nor the surrogate arm or any defense-internals-hidden adversary"
+    }
+  }
+}

@@ -1,0 +1,200 @@
+protocol_status: frozen_for_confirmation
+protocol_version: p5-delegation-sweep-1.0
+study: remote_substitutability_delegation_sweep
+purpose: empirical_delegation_triangle_test_privacy_utility_share
+cohort: confirmatory
+freeze_note: Frozen for the P5 delegation-sweep study on 2026-09-07, BEFORE any run under this config
+  and before inspecting any artifact produced under it. Seeds are fresh and disjoint from all prior cohorts
+  (exploratory [101, 202, 303]; P2 [11..88]; P2b [7..87]; P2c [3..83]; P3 [9..89]; calibration [909, 919,
+  929] and P4a/P4b [939, 949, 959, 969, 9390, 9490, 9590, 9690]; P5 calibration [9391, 9491]). Changes
+  after this freeze require a versioned amendment written before inspecting affected outcomes.
+fixed:
+  backbone:
+    vocab_size: 256
+    d_model: 256
+    n_heads: 8
+    n_layers: 8
+    d_ff: 1024
+    max_seq_len: 128
+    init_std: 0.02
+  checkpoint_digest: none_seeded_init_per_run
+  tokenizer: byte_level_identity_vocab_256
+  tokenizer_digest: afba54bc5a1634ee9b070fe918bf9c9a2e15b3cfcbdc6bf24bce941dcb785585
+  corpus: data/raw/tinyshakespeare.txt
+  corpus_sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+  corpus_split:
+    rule: first_90_percent_train_last_10_percent_heldout_by_byte_offset
+    train_fraction: 0.9
+  corpus_split_digest: 6cd31100b2979ed8770cb5b68f9d67759ace427d926197dac604023ef195fb66
+  sequence_length: 128
+  batch_size: 32
+  optimizer:
+    name: adamw
+    lr: 0.0003
+    min_lr: 3.0e-05
+    betas:
+    - 0.9
+    - 0.95
+    weight_decay: 0.1
+    no_decay:
+    - layer_norm_weights
+    - biases
+    grad_clip: 1.0
+  scheduler:
+    warmup_steps: 100
+    decay: cosine_to_min_lr
+  steps: 2000
+  eval_every: 100
+  eval_batches: 64
+  convergence_rule: fixed_2000_steps_no_early_stop
+  boundary_defense:
+    type: uniform_per_tensor_affine_quantization
+    ste_in_training: true
+    serialization: true_quantized_packed_codes_plus_8_byte_affine_metadata
+    note: 'q_bits is swept by the defense axis (d0: 8, d1: 4); gradient defense per the defense axis'
+  surrogate_family:
+    type: single_preln_transformer_block_plus_final_layernorm
+    head_dim: 32
+    d_ff_multiplier: 4
+  transcript_schema_version: 1.0.0
+  transcript_sample_every: 200
+  probe_batch_size: 8
+  ema_beta: 0.95
+  device: auto
+  dtype: float32
+factors:
+  segment_span:
+    s1at3:
+      start: 3
+      span: 1
+      remote_depth: 1
+    s2at3:
+      start: 3
+      span: 2
+      remote_depth: 1
+    s3at2:
+      start: 2
+      span: 3
+      remote_depth: 2
+    s4at2:
+      start: 2
+      span: 4
+      remote_depth: 2
+    s5at1:
+      start: 1
+      span: 5
+      remote_depth: 3
+    s6at1:
+      start: 1
+      span: 6
+      remote_depth: 3
+    s7at0:
+      start: 0
+      span: 7
+      remote_depth: 4
+  defenses:
+    d0:
+      q_bits: 8
+      grad_defense: null
+    d1:
+      q_bits: 4
+      grad_defense:
+        clip_norm: 1.0
+        noise_std: 0.1
+  latent_width:
+    high: 256
+  remote_mode:
+  - trained
+  - frozen_random
+  seed:
+  - 21
+  - 31
+  - 41
+  - 51
+  - 61
+  - 71
+  - 81
+  - 91
+controls:
+  all_local: {}
+  removed_remote:
+    width: high
+    q_bits: 8
+    note: d0 boundary for removed controls; identity per remote block (no remote trainable params)
+pairing:
+  block_id: pb-p5-{seed}
+  shared_encoder_decoder_initialization: true
+  shared_minibatch_order: true
+  shared_trusted_random_streams: true
+  only_remote_parameter_updates_differ: true
+  note: the D1 grad-defense noise stream (derive_seed('grad-defense', seed)) is shared within a pair
+operational_rate:
+  unit: bits_per_token
+  measurement_stage: serialized_remote_transcript
+  includes_repeated_releases: true
+matched_controls:
+- all_local
+- removed_remote
+primary_outcomes:
+- heldout_replacement_penalty
+- per_family_attack_advantage
+- measured_remote_flop_share
+- causal_remote_learning_gain
+calibration:
+  gradient_channel_captures:
+    cohort: calibration
+    seeds:
+    - 9391
+    - 9491
+    mode: trained
+    segment:
+      start: 2
+      span: 4
+    width: 256
+    remote_depth: 2
+    steps: 600
+    transcript_sample_every: 1
+    defenses:
+    - d0
+    - d1
+    note: dense 4-channel probe captures for gradient-channel attack qualification; forward channels reuse
+      qualified instruments (919; P4b dense captures)
+confirmatory_rule:
+  inferential_unit: independent_training_run_seed
+  pairing: per-seed paired contrast within block pb-p5-{seed}
+  gates:
+    privacy: 'for each qualified attack family x channel, the cell''s worst per-seed advantage <= 0.02;
+      families: token-inversion (P0), sequence-property-v2, structure-semantic-v2 (P4b); channels: forward
+      latents AND returned (inbound) gradients; gradient-channel variants qualify on fresh calibration
+      captures with the same frozen floors (property r-advantage >= 0.10, structure >= 0.02, token-inversion
+      0.05; |null| <= 0.02); a channel-variant that fails qualification is DISQUALIFIED and named'
+    utility: mean Delta_U = L(trained) - L(all_local) <= 0.10 nats with the upper 95% CI <= 0.12
+    delegated_share: measured analytic remote FLOP fraction (remote fwd+bwd / total fwd+bwd, per the validated
+      instrumentation) >= 0.15
+  triangle_verdict_language:
+    if_empty: within the swept space, defense options, and attack suite, no tested configuration holds
+      all three gates
+    if_non_empty: cells {…} hold all three gates
+  triangle_note: an empirical feasible-set statement within this mechanism family, not a universal law
+  missing_data: at most one retry per run with identical cell identity; a seed is dropped from affected
+    tests only (predeclared, never outcome-based)
+failure_policy:
+  operational_failure_classes:
+  - device_error
+  - out_of_memory
+  - io_error
+  - schema_validation_error
+  max_retries: 1
+  rule: Failures are recorded with manifest status operational_failure and partial artifacts; never excluded
+    based on outcome.
+notes:
+- 'External motivation: arXiv:2609.04382 (Privacy Failure in Split-LLM Training): the returned-gradient
+  channel is a privacy surface; per-row gradient clipping + noising is the D1 defense axis.'
+- 'remote_depth = ceil(span/2): surrogate blocks at width 256 stacked to match delegated share with span;
+  removed_remote uses identity per block (zero remote trainable params).'
+- D1 gradient defense constants (clip 1.0, noise 0.1) frozen arbitrarily but before outcomes; sensitivity
+  deferred to a later amendment.
+- 'Named omissions (per AGENTS.md rule 6): history-accumulation and canary-membership families (instruments
+  unqualified, P4b); timing; optimizer state beyond the remote module; active/adaptive attackers; natural-sequence
+  membership; cross-run joint attacks; arch2/corpus2 (single-setting sweep by design; replication deferred).'
+- Timing is logged for systems accounting only and enters no privacy claim.

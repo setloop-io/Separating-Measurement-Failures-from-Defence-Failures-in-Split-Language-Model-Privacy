@@ -1,0 +1,506 @@
+{
+  "scope": "Post-hoc descriptive pilot analysis. Not frozen P6 confirmation; utility controls, heldout partitions and property attack absent.",
+  "driver_commit": "8bb145235f12e4238ffa6037234e46c520c8efe8",
+  "defenses": {
+    "D0": {
+      "vmi_excess_mean": 0.567724609375,
+      "conditional_start_analysis": {
+        "partial_r2": 0.9994455310962346,
+        "seed_bootstrap_interval": [
+          0.9993467107983361,
+          0.9997783307020012
+        ],
+        "permutation_p": 9.999000099990002e-05,
+        "alpha_adjusted": 0.025,
+        "start_matters": true,
+        "interpretation": "Start plus span-by-start interaction, conditional on span; not a P5 gate."
+      },
+      "heldout_seed_comparison": {
+        "span_only_rmse": 0.35043514816340177,
+        "span_plus_start_rmse": 0.11776134138061721,
+        "ten_percent_improvement": true,
+        "interpretation": "Prespecified held-out-seed descriptive comparison, no refitting or re-splitting."
+      }
+    },
+    "D1": {
+      "vmi_excess_mean": 0.014036458333333333,
+      "conditional_start_analysis": {
+        "partial_r2": 0.9494048692963538,
+        "seed_bootstrap_interval": [
+          0.9135240780412122,
+          0.98775153589365
+        ],
+        "permutation_p": 9.999000099990002e-05,
+        "alpha_adjusted": 0.025,
+        "start_matters": true,
+        "interpretation": "Start plus span-by-start interaction, conditional on span; not a P5 gate."
+      },
+      "heldout_seed_comparison": {
+        "span_only_rmse": 0.013475975416767061,
+        "span_plus_start_rmse": 0.004322563416993047,
+        "ten_percent_improvement": true,
+        "interpretation": "Prespecified held-out-seed descriptive comparison, no refitting or re-splitting."
+      }
+    }
+  },
+  "cell_summaries": [
+    {
+      "span": 2,
+      "start": 0,
+      "defense": "D0",
+      "mean_vmi_excess": 0.886015625,
+      "hierarchical_seed_token_window_interval": [
+        0.8796474609375,
+        0.8921513671874999
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 2,
+      "start": 0,
+      "defense": "D1",
+      "mean_vmi_excess": 0.0308984375,
+      "hierarchical_seed_token_window_interval": [
+        0.0260537109375,
+        0.036328125
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 2,
+      "start": 1,
+      "defense": "D0",
+      "mean_vmi_excess": 0.89953125,
+      "hierarchical_seed_token_window_interval": [
+        0.8939042968750001,
+        0.9045703125
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 2,
+      "start": 1,
+      "defense": "D1",
+      "mean_vmi_excess": 0.0203125,
+      "hierarchical_seed_token_window_interval": [
+        0.0160537109375,
+        0.025352539062499995
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 2,
+      "start": 2,
+      "defense": "D0",
+      "mean_vmi_excess": 0.4377734375,
+      "hierarchical_seed_token_window_interval": [
+        0.42363183593750003,
+        0.45148828124999996
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 2,
+      "start": 2,
+      "defense": "D1",
+      "mean_vmi_excess": 0.002734375,
+      "hierarchical_seed_token_window_interval": [
+        0.00171875,
+        0.003828125
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 2,
+      "start": 3,
+      "defense": "D0",
+      "mean_vmi_excess": 0.0470703125,
+      "hierarchical_seed_token_window_interval": [
+        0.0385537109375,
+        0.056370117187499985
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 2,
+      "start": 3,
+      "defense": "D1",
+      "mean_vmi_excess": 0.0,
+      "hierarchical_seed_token_window_interval": [
+        0.0,
+        0.0
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 4,
+      "start": 0,
+      "defense": "D0",
+      "mean_vmi_excess": 0.8859375,
+      "hierarchical_seed_token_window_interval": [
+        0.8798828125,
+        0.8922666015624999
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 4,
+      "start": 0,
+      "defense": "D1",
+      "mean_vmi_excess": 0.0340625,
+      "hierarchical_seed_token_window_interval": [
+        0.0309375,
+        0.037227539062499995
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 4,
+      "start": 1,
+      "defense": "D0",
+      "mean_vmi_excess": 0.89953125,
+      "hierarchical_seed_token_window_interval": [
+        0.89453125,
+        0.9044541015625
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 4,
+      "start": 1,
+      "defense": "D1",
+      "mean_vmi_excess": 0.0203125,
+      "hierarchical_seed_token_window_interval": [
+        0.0159765625,
+        0.025274414062499993
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 4,
+      "start": 2,
+      "defense": "D0",
+      "mean_vmi_excess": 0.4377734375,
+      "hierarchical_seed_token_window_interval": [
+        0.4232392578125,
+        0.452076171875
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 4,
+      "start": 2,
+      "defense": "D1",
+      "mean_vmi_excess": 0.002734375,
+      "hierarchical_seed_token_window_interval": [
+        0.0017578125,
+        0.0038671875
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 4,
+      "start": 3,
+      "defense": "D0",
+      "mean_vmi_excess": 0.0470703125,
+      "hierarchical_seed_token_window_interval": [
+        0.0382021484375,
+        0.056953125
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 4,
+      "start": 3,
+      "defense": "D1",
+      "mean_vmi_excess": 0.0,
+      "hierarchical_seed_token_window_interval": [
+        0.0,
+        0.0
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 6,
+      "start": 0,
+      "defense": "D0",
+      "mean_vmi_excess": 0.8876171875000001,
+      "hierarchical_seed_token_window_interval": [
+        0.880896484375,
+        0.89359375
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 6,
+      "start": 0,
+      "defense": "D1",
+      "mean_vmi_excess": 0.0343359375,
+      "hierarchical_seed_token_window_interval": [
+        0.0312109375,
+        0.038204101562499995
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 6,
+      "start": 1,
+      "defense": "D0",
+      "mean_vmi_excess": 0.89953125,
+      "hierarchical_seed_token_window_interval": [
+        0.8940976562499999,
+        0.9043378906249999
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 6,
+      "start": 1,
+      "defense": "D1",
+      "mean_vmi_excess": 0.0203125,
+      "hierarchical_seed_token_window_interval": [
+        0.01609375,
+        0.0255859375
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 6,
+      "start": 2,
+      "defense": "D0",
+      "mean_vmi_excess": 0.4377734375,
+      "hierarchical_seed_token_window_interval": [
+        0.42343652343750005,
+        0.45254003906249995
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 6,
+      "start": 2,
+      "defense": "D1",
+      "mean_vmi_excess": 0.002734375,
+      "hierarchical_seed_token_window_interval": [
+        0.0017568359375000002,
+        0.00390625
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 6,
+      "start": 3,
+      "defense": "D0",
+      "mean_vmi_excess": 0.0470703125,
+      "hierarchical_seed_token_window_interval": [
+        0.0384755859375,
+        0.0561728515625
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    },
+    {
+      "span": 6,
+      "start": 3,
+      "defense": "D1",
+      "mean_vmi_excess": 0.0,
+      "hierarchical_seed_token_window_interval": [
+        0.0,
+        0.0
+      ],
+      "limitation": "Truth-token-identical windows grouped; source article IDs unavailable, so this is not an article-clustered CI."
+    }
+  ],
+  "source_hashes": {
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D0_s11.json": "a4cb2f0cc2c40f54146e4a07e633af4c1675ba4bb0f0d787f789e87aaa0e7d31",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D1_s11.json": "8e23fa0d224660052d9ba217dc2f710baeea6bfc77f0dc2d36b71f1ef0b977bc",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D0_s11.json": "d6af4e9b05f393fdc9d307b3fea5f7d960534ba9f6fa7955131dbf1da8980dc2",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D1_s11.json": "1c9832e85b018665cc8b62452fa6ff2881648391d07dc11ac00881d529b13b76",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D0_s11.json": "1ec5273b29b67f8baaf755d718f176cb28d0619b0ea17eb791b2230c754161f6",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D1_s11.json": "a49b4145c887b1838351ce3027706b720766a32b58b7a89232d9e32a0caa20e0",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D0_s11.json": "b130de548ef3f37956bc1a3ed011c7e2bb27c54510cb2c657f7e3b4abd3782f6",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D1_s11.json": "c76610fb3f464c9688e22181a8e73d817cbb846a8b14d4cae971d5770f8a19d2",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D1_s22.json": "fcb299fe4b5efad4a2e1f6d0c732ad1ad418fdb36b85b4dd092beb9c0926b714",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D0_s22.json": "fbb530666837a6c445d557ef14e5aa4c448bd3e975c94db645fcc6ceb8c622da",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D1_s22.json": "4ddaa059ab628b1a55bea2b24f29805afec384fe3ba92db80dcaf94ccdf06445",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D0_s22.json": "8de1060d860a37e1f0dbf3cbf40b41d1e1db89e8b590408b6893304b8e0b9669",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D1_s22.json": "7c19613564fb0fe568ae5ec1225f669c7dff4f3579a4f6576ea69f8d76d37772",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D0_s22.json": "da3fd3cd79837d4f3888da41aceaddd5235b35626c230ad2bf89f307cc4fb3fe",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D1_s22.json": "d710b0081a8c5af280129b2d1e0408297ce72427f88b55078893c94f27f2263e",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D0_s22.json": "6f55f0cd8892440afbc53d5be5a1fdd54eab522cc6abf787d1ed321f2cd7b5ff",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D0_s33.json": "e344bf2e01b73a46248a389338713a2699a5206098666bcc94533cbbde8e2da5",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D1_s33.json": "3e0240c8c8520415271c6ce9287337d4a38a64a0dc15690a282bad88c59c1003",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D0_s33.json": "20e0d13a0bf15b2c39d81293b586f408a5744c7b3a26c661f7cd42f58872f5fa",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D1_s33.json": "5945ebf382ddcc553f148602b029c56649fbca9b3c87b8f10cb5052af0a60e25",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D0_s33.json": "10056e4cc9d3b97b30d621ae214e1967794cefaac0c2aaec5ac4d9d9c819667b",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D1_s33.json": "01fab5802d43c950ff477ae30d96961ca9523ec74f398b054cf0d30f0fa1ed46",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D0_s33.json": "bdf1b6305000ee9747b9ec4a90862ab43596dfa88ed2a0a00ec2a10c946c368e",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D1_s33.json": "a5eed4a8017f0c72d78fe30cf2b76f128f10cb7ec284a0985d1f4fb409d8d33c",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D1_s44.json": "1f7cbbca54c3ec3c44f3ebe2a927573ec93510c93b842e50c2fcbac41d35909c",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D0_s44.json": "fd8ee7d51c06a83bd0d06daa528cf8ce412bd089087df990090ae7e87644930f",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D1_s44.json": "6ab9ea7b1e7923e29934a60779f9aafd9e736c6c0ea8d1d9ad0910e6d68ae457",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D0_s44.json": "8d14791bbd1646703a10e4561864f87771814d5b0845aeffefcdec663f252ea4",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D1_s44.json": "b960221669e449e622faf7c6c4d333ae64e04935f87024457c0d8d8a40741322",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D0_s44.json": "53c2555e06a0cb45a72d1383a8ec460a39d523b6f12bc30914d9c4454012a01f",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D1_s44.json": "2fcb6c0971c8fa88c332b1416f3fe38e08d4cf1706ec6713670e7380c75df35d",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D0_s44.json": "47a3bbe17bc2c0985dc6a1719a6f0069c25145d3ba8842285339586c699bcc89",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D0_s55.json": "e436e0fc05cf18275a91ce118a6e108e17f4335184f1169d7a32fb23a51048f4",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D1_s55.json": "0ed00dfc9d766310a89183e7a624d7c7caf711df42feaea4b84d8efa0ee58a01",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D0_s55.json": "ba19b8e9f1f0b58f31c665ca22fa2df1f80f08d918a839026aef342e303dba0f",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D1_s55.json": "ad4e80828dbfe27758bb265fabc5e3a9a88dee7fca859a27e9ee7e7c6c7a6536",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D0_s55.json": "0842be2e3a286f634c5f87fb1f14d70a579bfa42feab8818846fe5bbc1c16ed8",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D1_s55.json": "a4dc52aaee88211587cc4f825f6be46a4798e4362c916668b859129487d30aa7",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D0_s55.json": "208cb9ef4e660a97359fc722ce800b76f6da6ce95881f345a508e128707a68ed",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D1_s55.json": "1267af89aa94d8f0223ea776d97a350bb3c6de7d88516c55cc68d57545c3be45",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D1_s66.json": "8808567f19a90796e482ebdd90b3a909a6f43d4bbab007de843fcfc68b4f410b",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D0_s66.json": "171dec4e9fb17e535a5603b00b30ccaf030e518f0824dee691620d8ca8d6a7f2",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D1_s66.json": "71fa756e975559eb7d669332c95c7c939199c05b5eb38fae735288698e6c9d33",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D0_s66.json": "711ce317e4b76a916f71da08d0c0bc7cfc5fd34ab5584501358385608e30de6e",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D1_s66.json": "a62ad6ee0288a3fd6bd9d87821ba4f8a9c8ef4d2d1b761cf54d38f465e9a65e4",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D0_s66.json": "1f3dd11e15a5b51a1dcc7a367034461aa052dbb6eb06c7cf99698ceaf712647e",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D1_s66.json": "3cde7b717d4e3d900858aae294edab9a1e09381d2d0d6f3ab21e4641c1bcca79",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D0_s66.json": "308a90d045bd810e6a18637b8489155b5dac1553005d005647ebd80bb96f4887",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D0_s77.json": "99fd9c67b6ea55449ff798e13693f160e87035ac0198ec3d9e0d214f9a12bd5c",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D1_s77.json": "ee2504791bddce6c7100e9cd24a1672b82b02d6a94339e22e2d723bf6cf7d099",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D0_s77.json": "82356954cb983184528d6d69350635a7855716e26bb2611a38bab95bd71056df",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D1_s77.json": "50c6dba52c272f7f6c8c5e1da21938d02da6802196017ca3b88eefd1e67069a6",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D0_s77.json": "cf42362e55096c3e98e39832a45dba660a15439d05422e09dcfc2b92081b82c0",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D1_s77.json": "af3f8545b84f84678b5b61fafe15b219fe8fe3b657c4fa0d9687cba45f8ae5ef",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D0_s77.json": "b8f4a4e344fc11bccc4393de510c7997275d680a7ccc5d13de410dee06f93219",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D1_s77.json": "834dc29eefa1975ad247b072b4a8c1b1da0813848a64082ecd1132ef1716e601",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D1_s88.json": "92592e7e2fa338ef6662be04cbae48ab16502e0d89bd03b86d89344b5e8e4afa",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b3_D0_s88.json": "6c08ae952a1a46ede7d18da9335b5e7c0c63f33efcc493474973fe6af5e1868b",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D1_s88.json": "8ec5dc9558ac7e704f356bf9d6014b8435c2426e4d87acf8ddb17c8ad01aa7de",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b0_D0_s88.json": "eb4f61ce2a4adcba4670aa083079eb944c65cfe1615d09fe2ebd71f8976fa33f",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D1_s88.json": "52834f83c3e557216567c2e2a35004e9e13848e284bc90fb693ab7f9f61b2a8d",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b1_D0_s88.json": "7ed9849ec3e2edef3d42e0fde645903edd25ea916f782e2b2742514caf191eb4",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D1_s88.json": "f9babefb50f0e42becdef69767a4589a627c998ec650185a0458d986a14e21b3",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s2-v1/artifacts/seam-inversion_vmi_span2_b2_D0_s88.json": "5955035f2eeb742a6cfede76aa221c2a559ea8f0319639a8f95d0f558a5e32b3",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D0_s11.json": "9137d623a924278119d0cd8622aab6c6110e7472277a147cb2e9481d0bd2d89f",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D1_s11.json": "3a251585a0819c53b5b927d18748c3c954d34ad6c1a4c93343bfedc0caad217d",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D0_s11.json": "4a3b2491028176d6fe5b76550b3bf57ad78f3f4ffbc7549e6d83b02bf3527294",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D1_s11.json": "d348b12aad0361bbe9210eb5c06bcf30655e8f7b90369bdff9249da985b6b832",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D0_s11.json": "dc4c89db8758c939f15828bbd80087a745952c305b3a6b90efb2c474161b2472",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D1_s11.json": "644931a8b326c9f3988be4ef0c0812266351397b72ec86db5c3a22002f35c20e",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D0_s11.json": "066957355a5d1cef3732a80474eda5a0fa2f260b4bc39729b983bbaec10b94a7",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D1_s11.json": "1f4e15574f595b7ff93987700cf4772d6ba363c266beb9d387d8498de8663773",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D1_s22.json": "8f62cec2e5c2c40ce5d59f00cf4acb9a701da9ed6019b9d1ebd7a9cf871fb875",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D0_s22.json": "a61d892f820cae89666697117b9616ca9392e6dea4b000cf4473e19f95468fc4",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D1_s22.json": "12155172a625fa75210bd5507a1f4cfa3483f08cdf3f6f079d27aea6cf71519b",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D0_s22.json": "24e8ca9d0a2336fb72f45309b1d6c59545e315c1004c48ba7ec2b381d045bd0c",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D1_s22.json": "f6e14a500976181ad6d1c127431bf74d744c1479a85767290341c02523209841",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D0_s22.json": "b5dfed3eba747fab5adeb551d6315bf09b70138ddd0221dae5de51f86ce40a98",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D1_s22.json": "49bb6b556a4e2b333a39f00098162e876ec6123886710c687c837c9436789fa9",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D0_s22.json": "0ef6480058bf6ba90550babae80df3d47a5a7629919305853809dbb9093bbd45",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D0_s33.json": "e8beae7eab47818e4e125bc9bea328b03228bf47118abd26de0d9598cc94ee21",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D1_s33.json": "ae13efd1c2285e37b0d2f02dcafd81ffbee748ededaf4f3e5f3b54c8f090bdc5",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D0_s33.json": "e9f04bfce1c28e051577d8446a95c8039fd096dba3a77162a5834881e57ec16e",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D1_s33.json": "429bdd81b5e922d3cfa835a4827a1399e81e21c8334c6b7e50aecbdd51c5bbb1",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D0_s33.json": "7153cc250a5b3a6c91476f5ddde55db9e4994cfa2467962d12fea1bf7c36c04f",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D1_s33.json": "2fb7cb7d62fc75e6072f6368c27b19673c8d558cf707093df0d0fa2c76132d0c",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D0_s33.json": "a90b585797cf99ca5585813b01d77ca086003f004b7f14bfd81dcdff0815d7bc",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D1_s33.json": "a8268feee9e8a6dc017144eb816f8b053b64d04bcd6514ee2f23b56539643f1f",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D1_s44.json": "830000e536d4b8cb30a52c178476281875942886212fb7651fb651e5587effba",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D0_s44.json": "3d3b07118e6697d7fa97f336f15c3da674c7a00fa0ad2088f261c67a2341bed3",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D1_s44.json": "14f7df3ed9f82ffc4a6f0f0e40e0a98147a9a6e03c58d92a09c7c6011939bc0a",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D0_s44.json": "0331acce1ecdb53b2820371ed6dc0fa932e4d04375ad64a351b8662ea17bff12",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D1_s44.json": "223ae59b64527e288be0adf6292028bdc6f2547550f1fe51651f30b2e26dee53",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D0_s44.json": "c8b19c0cf38c97ffd016e4f41f189595fd843bf40236a01ff56ac73c0e0306e5",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D1_s44.json": "ee37c1f146a9f366b47dd121f3791b8abd8a9ad214d0face122532d7bc3974f4",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D0_s44.json": "fd6138102f74175d9b64974d95fe3d5c9575b048526a31dbbe08c8417abd7b85",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D0_s55.json": "f2fe0a3d70dcfe375d402c8727a0e4c7dc6558cdc30ec0991276710681a66309",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D1_s55.json": "29ef95c9762c875ba809c813740758edcfda51ad61010b9f0ffa2af0247aa491",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D0_s55.json": "bacb6aac948195e1350d99ef4677e575fe43477f25f19701251a0b84c72f1797",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D1_s55.json": "20e17d2efd893ac4f6294d325022b82ff75d9e68913404079ab34552ec59c096",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D0_s55.json": "745fd5c0ec406e777f5971ae61ce2b3e55d24bb8ebff3443baf1d4ccfbf43fd1",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D1_s55.json": "ebc053f143df6db0295d75b549f2152a50d95d3b3838ad8ef769327647ec9729",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D0_s55.json": "65f32b11ae018ad3694b9bac973aa4134feaf32d30b9454398898b2dfd2096bb",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D1_s55.json": "f94db9ddd9aa85a7be38958bbf22803b80592377a64e85c5b768a18e72b21ce2",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D1_s66.json": "8f1d2a620140bad7766b6802dc41572f6b8307f6a28b0004baea9aa0cf5c3c1f",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D0_s66.json": "bd635910741d9a5c0ea32141c66c0287c5e64967db2bd9cfbc9fdf02ac91ec13",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D1_s66.json": "97ca552ad929b63a9a36da519746a1b4496863dc64ac3341f9a2ea6d9a0d198e",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D0_s66.json": "13e241796e693076e25f97d5c32e20a1f6619d043911dca4800064425550d032",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D1_s66.json": "8dbe7b4c0f691ac42e47edb1e950869102e120b7e660c4298721ad14c22b2e40",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D0_s66.json": "f9a8c4ec8898f607cef13a29983ed8f024f4d62a9291e84b27234d9f449f2167",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D1_s66.json": "e4d7c9d60e7875ed0002558a7dc4c113e6272e51dc9b2c44ccf4c569f9d3eff5",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D0_s66.json": "cd1cc50d5f33552a809c0a2ce1416d3493927c4a4739cf027be08b5d53f96448",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D0_s77.json": "3f634463693de96dc3b47d071df34fcbbd62c030f39f5690f30061591444fe92",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D1_s77.json": "ef70394b52b765c9d3271ff75cfa13693f3ae9a87ebc78985909abd682ab28d2",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D0_s77.json": "5745697e03fa09a939229946718728d3723b2f79633d5903d1c45b49dccc3e18",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D1_s77.json": "80c3b4cc61e3f8ce6b95320014f88bf1e23bd6e928b92a0116a933e43cb0f321",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D0_s77.json": "0a2687f9dc96f5c0fd78d531e810992173ae2bfc94e23d6fb278e42d4b7331d6",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D1_s77.json": "8c1d02bc409daca88a998fe6c49c6a0d65f78465867e2b84152cc019a2fbf46f",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D0_s77.json": "706253b7efc2d9c491c76ddb5e73ceacfd7a7460ba4489dd95f7a641e35104ee",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D1_s77.json": "6bc2ca155400c11396688bc4d89529a1d3f9f59a31ecf54a2d922050f1f4ffeb",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D1_s88.json": "552f96bc4c7e3a8a5dc73aa7800b53536a6e9ef98552b912b98c1153babba85d",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b3_D0_s88.json": "1c79bef3305d6e8b2824256724fe85390f3a085425c5adbba708acd7159bdcbd",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D1_s88.json": "39c21083bedd54c7d7cce894021d697e6113dffe2734e538f9aae125b342916f",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b0_D0_s88.json": "d5145722171618c621189303dec6405eb121767f839e3040902c95b7ddb45212",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D1_s88.json": "990a90530abec27857ad3251effa87e1067a34612b80d029027bf4e911c7681b",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b1_D0_s88.json": "45b4dfe355c1b7267608a27fc8173218f714fd493f931801bae96b2ab1b1c632",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D1_s88.json": "af753244ad0e7801eb505214b02e61a72c1a0d2238a196c0139f3cc2449f8055",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s4-v1/artifacts/seam-inversion_vmi_span4_b2_D0_s88.json": "c0638542dc0daa441b4eac2f7a9af7a8dd57f7d7b6219dc569b8563053142f32",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D0_s11.json": "109f393aa32f88eb611727ba112620f99e98e966ee30e7db88f4edc5cbd00242",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D1_s11.json": "f12ac28570e212724f3b3c7e169125703bd5b7ccec1623c033ccc116ce996c2b",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D0_s11.json": "f4623a7913c6ab5d5a7a57228cddd9ca23fc1aa736e10ec6f9d9743650178f85",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D1_s11.json": "21ce9fa16beb639ab7343c840d848918ada5da35fc9c86f43b731ddbc9bbb7dc",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D0_s11.json": "8db5fcc99b01088a507e3871d5dc44b4749356410820decaf342f999735e8760",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D1_s11.json": "d0b2e058ca1dd66778d580300f448d96b6d175daabb3ab1b44e3f2bc2a9713bd",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D0_s11.json": "f0c78f6922dd118ca65aa196d81b0659985626d1e932b924db46f5147ef87448",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D1_s11.json": "dccee458621b7b8b77b0e886185aff71a640dea712e02bc3743559102e9d603e",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D1_s22.json": "304c02b1411fc7088bfd3459ae075d859e0f899de84bc923f3b1771782952e13",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D0_s22.json": "6b939a0b9db2fe4982c22956a9367b325dfbb0bb664c4fb4ca4626ecb7f49a1a",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D1_s22.json": "c223c33c5b40f073c448ffda2433ab79274b2e4a05c875bb17b901948f7ef541",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D0_s22.json": "540a5bf0eea897da71380ef585bd42cbc64167264a5bbebc6160448b1655057c",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D1_s22.json": "029c2b29e764548af836176a667b469dba46d275086901e5e286f459a1ed4dd8",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D0_s22.json": "c7339089b36a409378252424b6e1e5aaa6ce1f09d1b78909474a14bb0b830bdc",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D1_s22.json": "4b2da64c620d50ee9076ad616a286835869b76303979e86b6d262dfd5afdf980",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D0_s22.json": "0281340567e70479364f924581905152d0f36e30a76913f34e06e8b033b4b6f8",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D0_s33.json": "97cb57ae893045bc684f6a7df6ab7f2c08ae939f98c2c16d3c70cb1be9196266",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D1_s33.json": "e0cdc74a66753815a50a9b4e25ccab743d71c6dfc33c365dc7c96588a5319198",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D0_s33.json": "49cd9c2c433f46c92d6eb4a262aa5142f010eed8b22b7cc373837e7ae5c37d78",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D1_s33.json": "54d8e0655985862dd9905fdefacc5779d22f32cc78dd9699b93ed69041fb075e",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D0_s33.json": "b1d69611a2ad8b89281944abe5bb48dcc51e0942571455703e6fa85e03a30e90",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D1_s33.json": "2d51a62b786cd3115657fedf9c8aedeed83e50673903a27f150308602ba33f73",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D0_s33.json": "ad844df5652de6783de4151345da1a49e0b9b329fc0eb3145236e2553f505ce2",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D1_s33.json": "172b43afbeb4bc21b60f7c1fbc93705677b0fc9fc77ceaa0a450594dbd6b8433",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D1_s44.json": "23243972274197350003d22c29b87b644273aa864477ea08080cc12aa0f150fa",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D0_s44.json": "ac568b2b026e100e7a64d2ccda633b006ecf001ab0726aa036d60aa42885c716",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D1_s44.json": "2530eda5eeaaba2a9c1b259d31fb28e185ce1d929331da453f2da73744c35125",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D0_s44.json": "cf37b5960e9fe346efbcda57caa6418fb2f5b81cb8d6f4eefe4a09dbaf21f7f7",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D1_s44.json": "53e217179dd7c404e91aa120c86bd3263cef551eb404cbbac213891aa37ccf69",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D0_s44.json": "9a63a827916043e894baa5e64b781b55ccc7a2878875e99fe27332194d306a7a",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D1_s44.json": "e8ddff82fa989d8a6470d400829e3bd14bdc5173166f361a98c2eb6277b9ed4b",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D0_s44.json": "8e8b30f75a2548f8917e2c3100b74f57c72c8b9cd1de7231b306e03008372bd5",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D0_s55.json": "a769ebe92c195a6d48a794e12fade02aa67f950bd05343328c95c95a8f2e7a3e",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D1_s55.json": "ef4f0ef7103acd8c1278f16ba546cb079c113e1f02b231ae5718f6938abe1162",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D0_s55.json": "2b54d0e78275d4130498fa0a9049358d936bef7fa1d02a2f77c8ca772b192cad",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D1_s55.json": "bc023e29725299e33e3925fef5bc267c8b71ae41c6808332edaa4094302441f3",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D0_s55.json": "797e11170ab6b0127e891a5cf8ca18010731cf30fb875b30671c95e4378ea853",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D1_s55.json": "ee56dddaabcddbfb77d75826e3a6ef3096bc8d9fef08903604a4eb4c4d317b49",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D0_s55.json": "a662745e59bd456f92950afa4c5c06cbd645a8db7d9659948436c52e92636e05",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D1_s55.json": "058e93bb670c53d38b62d1762b7c1b93c814148ac845673eabde6e1b6b62d312",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D1_s66.json": "d4641997d2b792149f553c5b559676120a1abae565d71fd36fd7392014fd4a37",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D0_s66.json": "b64841697fd34ef0da754ede0132864a56f409538224e8351fda08b73980bb7c",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D1_s66.json": "91d1937f00307d955f0876ea758a5fdcb08d063cab8fc5d39bb59ccde97cd997",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D0_s66.json": "31f6d8a6b75d0e491cc64770ae6a565c52a74263275662acd1b4ece4cd8acc46",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D1_s66.json": "2ac113f72d4c4c8be50c347d3027d0aec291cb7b2324335eed2d354e36984bb9",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D0_s66.json": "586fdb2970a378efd995f9833a5049768bc6898884169bc6f9bd43e9e79613bf",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D1_s66.json": "99da1e6a71ab2aa8f211a69799e6b384cf07b1b6b22b5b602f0e68ed280445e1",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D0_s66.json": "c317dc059b8c3d3fbb8b02f7534672c46ead0606d23a981e3b9d7db3f1e08f68",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D0_s77.json": "278cdfe7fdd3372a36a345aab49ac01c13be7285283cc5a70c86223c77b22773",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D1_s77.json": "4a22110438f423c872c7a54ab365cff6c8a9b8ce98ffd0b3c46784935924d8d5",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D0_s77.json": "a0d6970b5dcb867483f63786a169cb2d4d7b2f0da7500dec0a87446c48ad6ead",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D1_s77.json": "df63a56d6e0a7e3a974099402e000b68915148043039ef90806543a3dbd772bb",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D0_s77.json": "afb87169699d3e18fc3237b4154f957290b9506a35d4ab909ba2e3fbd555ad93",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D1_s77.json": "cfd9d2fe08187570d00b2c32946dd92c31d4372fa24422127e16d9edd7fab21b",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D0_s77.json": "2f45ea4da68c9d3f3a45d2ed0f542dd54bfde84af026f7ef14d350abb2c82a06",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D1_s77.json": "1aa446f69fec54d438be1f7ad169fbce208bd94b1e5e188c68f7b642c2e5e155",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D1_s88.json": "ff071a78d75b8c9709d26c10b2f6bdc960a8bd247e0d78c0f2c0a7c699a60489",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b3_D0_s88.json": "476c65852d069abfc4f2fe6e9313c96b6c9ec56f9328a3ef570ff8c2d1b54052",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D1_s88.json": "12dca3d4654f937d4a79d34703bead07856f3601614fc0d70fc1b529677881e4",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b0_D0_s88.json": "7fc5cf1dc9126aaac1809d9894ad1373c2ae03ce2987ea6bf77b7d3d1583c739",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D1_s88.json": "daa9d4f3279794b089920ddd89c13ac41b98bc89f712c762fb5ae9b4c0fecca0",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b1_D0_s88.json": "d75a719eb69e89e84f35d6f6d0698b62a8d116addb4a0052dc67e8e926bc1389",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D1_s88.json": "138826bc189e7e679d6bcd1134d1105da349e48424e17be9c25572b4a3e2532d",
+    "/Users/geo/LLM-Attacker/results/p6-grid-s6-v1/artifacts/seam-inversion_vmi_span6_b2_D0_s88.json": "a77140d797f4fe7ddd959ad9803a28664583005fd5c25cd5295922a97bc8803e"
+  }
+}

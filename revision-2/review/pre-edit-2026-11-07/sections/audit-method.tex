@@ -1,0 +1,85 @@
+\section{Scope and retrospective audit design}
+\label{sec:design}
+
+We conduct a retrospective evidence audit of four campaigns from one
+split-LLM research programme, followed by two checks on the scope of broader
+security claims. The unit of analysis is a claim together with its supporting
+records, rather than a token, a model, or a published paper. The campaigns
+were selected because they supplied the synthesis being audited; they are
+not a random sample of privacy evaluations. Consequently, their counts do
+not estimate the prevalence of evaluation defects in the field. The
+component results remain attributed to their original campaigns. Our
+contribution is the reproducible reconciliation of those results with the
+conclusions they admit.
+
+This audit was specified after the historical outcomes were available. We
+retain the distinction between a frozen exploratory protocol, a completed
+experiment, a proposed confirmation, and the present secondary analysis.
+Recomputing stored arithmetic does not make the underlying experiment
+independently replicated or prospectively confirmatory. We do not retrain
+victim models, collect new captures, fit stronger attackers, or infer
+unrecorded outcomes. The evaluation-contract and control machinery of the
+LLM-Attack Suite is relevant prior infrastructure\citep{suite2026}; this
+paper audits cross-campaign claim admission rather than presenting that
+machinery as a newly validated evaluation system.
+
+\paragraph{Evidence-admission contract.}
+For each claim we record the protocol and cohort; the adversary and its
+access to secrets and remote state; the observable channels; the protected
+target and its alignment with observations; the attack and training budget;
+the score, baseline, and acceptance rule; the qualification binding; and the
+independent unit and uncertainty calculation. A qualification binding
+identifies the target, channel, defence condition, and implementation to
+which positive and null controls apply. Passing a control elsewhere in the
+programme does not qualify a new binding. A recorded channel is also not
+automatically an evaluated attack surface.
+
+We prefer the matching generated records and current admitted manifests
+over narrative summaries. Where disposition changes, we retain the
+supersession history and the later record's limitations rather than choosing
+whichever account is more favourable. We distinguish quantities recomputed
+from supplied data from results read through an existing audit or manuscript.
+The accompanying source index and analysis bind each retained quantity to
+its artifact. Those bindings establish traceability within the supplied
+package; they do not certify the completeness of the original collection.
+
+\paragraph{Five claim-specific outcomes.}
+The following outcomes apply to a specified privacy claim and can coexist
+across different endpoints of the same configuration:
+\begin{description}
+  \item[Breach.] An admissible, qualified measurement exceeds its declared
+    privacy rule. The conclusion concerns that observer, target, attack, and
+    finite protocol; it need not quantify all information disclosed.
+  \item[Non-detection.] An admissible, qualified test does not exceed its
+    rule. This is a result for the tested attack and budget. It is not an
+    upper bound on leakage or a system-wide privacy guarantee.
+  \item[Undetermined.] Missing coverage, incomplete qualification, or
+    unavailable admissible observations prevents the required conclusion.
+    An undetermined endpoint contributes no privacy pass.
+  \item[Invalid.] A demonstrated defect breaks the connection between the
+    measurement and the claimed estimand, as when next-token labels are
+    used to claim current-token reconstruction resistance. The score may
+    still describe a different, explicitly named quantity.
+  \item[Out-of-scope.] The claim requires a different observer, secret
+    access, target, or protocol from the one evaluated. An accurate
+    measurement in the original setting cannot establish this claim.
+\end{description}
+
+Utility and remote-gain outcomes are recorded separately, and each
+campaign's recorded aggregation rule is retained. In R1, for example, a
+configuration can be rejected by a qualified privacy breach or an
+independent utility failure while other privacy endpoints remain
+undetermined. Missing qualification blocks a conjunctive pass; it does not
+erase an admissible negative result. Conversely, failure to meet an
+exploratory gain rule is not proof that the population gain is zero.
+
+\paragraph{Limits on lifting a claim.}
+We carry a conclusion to another setting only when the relevant protocol,
+observer access, observation set, target, and measurement binding match, or
+when a stated argument justifies the change. In particular, wire-observer
+results cannot silently become compromised-host results, and empirical
+non-detection cannot become an information-theoretic ceiling. Multiple
+correlated rows do not increase the number of independent training seeds.
+The four cases below illustrate these admission decisions; they do not
+constitute an independent diagnostic-validation cohort or establish a
+universal privacy decision procedure.

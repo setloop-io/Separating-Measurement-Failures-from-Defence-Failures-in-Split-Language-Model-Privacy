@@ -1,0 +1,67 @@
+{
+  "schema": "llm_attacker.defended_pilot.v1",
+  "tier": "development_pilot",
+  "measurement_version": 2,
+  "purpose": "development pilot over the trained splitbench defenders; the frozen 256-document evaluation corpus stays untouched",
+  "defenses": [
+    "none",
+    "trained-bottleneck"
+  ],
+  "splits": [
+    3
+  ],
+  "seeds": [
+    11
+  ],
+  "expected_cells": 2,
+  "corpus": {
+    "path": "results/pilot-gpt2-wikitext2/inputs/pilot-corpus.jsonl",
+    "sha256": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77"
+  },
+  "disjointness": {
+    "corpus_sha256": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77",
+    "articles": 96,
+    "frozen_manifest": "experiments/validation_corpus_manifest.json",
+    "excluded_pilot_sha256": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77",
+    "article_ids_disjoint_from_frozen": true,
+    "identity_checked": true
+  },
+  "access_spec_sha256": "963049d7f99f652a4e8d541c3f4a86097d52813391a3e19380b8e965748b1d48",
+  "budgets": {
+    "seq_len": 32,
+    "train_steps": 64,
+    "calibration_seqs": 32,
+    "forward_candidates": 8,
+    "beam_width": 2,
+    "sipit_steps": 4,
+    "attack_sequences": 4,
+    "lr": 5e-05,
+    "sigma": 0.1,
+    "data_seed": 2026,
+    "tb_minimax_steps": 200
+  },
+  "runner": "run_defended_pilot.py",
+  "runner_sha256": "c1c5afa6ae2164f79d09a1aa2febba746247e11909cfbc7f249ab16649800b6d",
+  "limits": [
+    "development pilot for effect sizes and plumbing; not a confirmatory security claim",
+    "three victim seeds; intervals are conditional on this fixed article sample",
+    "trained defenders are in-repo re-implementations, not the original defense projects' code or weights",
+    "the MINE reading in bottleneck provenance is a diagnostic, never a certificate",
+    "split depth and defense are confounded with cell ordering on a single host"
+  ],
+  "cells": [
+    {
+      "path": "split3/seed-11/none",
+      "split": 3,
+      "seed": 11,
+      "defense": "none"
+    },
+    {
+      "path": "split3/seed-11/trained-bottleneck",
+      "split": 3,
+      "seed": 11,
+      "defense": "trained-bottleneck"
+    }
+  ],
+  "status": "COMPLETE"
+}

@@ -1,0 +1,53 @@
+{
+  "backbone": {
+    "d_ff": 1024,
+    "d_model": 256,
+    "init_std": 0.02,
+    "max_seq_len": 128,
+    "n_heads": 8,
+    "n_layers": 8,
+    "vocab_size": 256
+  },
+  "cohort": "confirmatory",
+  "data": {
+    "batch_size": 32,
+    "corpus_sha256": "2d5bb2ad5f422765e714617e21fa31bbaf8958aa79682c86fca6660fcc5d1b2b",
+    "eval_batches": 64,
+    "path": "data/raw/war_and_peace.txt",
+    "seq_len": 128,
+    "train_fraction": 0.9
+  },
+  "device": "auto",
+  "logging": {
+    "ema_beta": 0.95,
+    "eval_batches": 64,
+    "eval_every": 100,
+    "probe_batch_size": 8,
+    "transcript_sample_every": 200
+  },
+  "mode": "frozen_random",
+  "optim": {
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "grad_clip": 1.0,
+    "lr": 0.0003,
+    "min_lr": 3e-05,
+    "steps": 2000,
+    "warmup_steps": 100,
+    "weight_decay": 0.1
+  },
+  "output_dir": "/Users/geo/Paper 3 - Privacy-Constrained Remote/outputs/replication/a1c2-frozen_random-s29",
+  "pairing_block_id": "pb-p3-29",
+  "protocol_version": "p3-replication-1.0",
+  "run_id": "a1c2-frozen_random-s29",
+  "seed": 29,
+  "split": {
+    "q_bits": 8,
+    "span": 4,
+    "start": 2,
+    "width": 256
+  },
+  "transcript_schema_version": "1.0.0"
+}

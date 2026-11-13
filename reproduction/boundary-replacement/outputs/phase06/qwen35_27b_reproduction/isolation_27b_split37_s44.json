@@ -1,0 +1,716 @@
+{
+ "schema": "dtraining.isolation_adaptive.v1",
+ "args": {
+  "model": "/home/geo/experiments/models/qwen36-27b",
+  "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+  "output": "/home/geo/experiments/results/training/phase06_27b/isolation_27b_split37_s44.json",
+  "cloud_url": "wss://koula:5000",
+  "cloud_tls_ca": "/home/geo/experiments/tls/ca.crt",
+  "cloud_kind": "monomial_moe_radial",
+  "cloud_experts": 8,
+  "cloud_layers": 2,
+  "cloud_hidden": 0,
+  "utility_reference": "full",
+  "latent_dim": 64,
+  "views": 1,
+  "mixup_lambda": 0.0,
+  "width_ladder": "64",
+  "noise_multiplier": 0.35,
+  "clip_norm": 1.0,
+  "split_after": 37,
+  "resume_after": 74,
+  "seq_len": 32,
+  "train_blocks": 256,
+  "eval_blocks": 256,
+  "steps": 10000,
+  "warmup_steps": 500,
+  "attack_steps": 256,
+  "postmortem_views": 128,
+  "inference_blocks": 0,
+  "inference_samples": 3,
+  "save_bundle": null,
+  "bundle_eval_blocks": 64,
+  "lr": 0.0003,
+  "adversary_strength": 1.0,
+  "chaff_tokens": 48,
+  "remote_grad_clip": 1.0,
+  "eval_interval": 500,
+  "tripwire_pct": 5.0,
+  "utility_gate": 100.0,
+  "utility_grace_steps": 0,
+  "mine_beta": 0.0,
+  "backward_probe": false,
+  "seed": 44,
+  "start_ungauged": false
+ },
+ "log": [
+  {
+   "event": "baseline_loss",
+   "time": 1787592071.3036854,
+   "value": 3.2462
+  },
+  {
+   "event": "split_plan",
+   "time": 1787592071.3217325,
+   "width": 64,
+   "views": 1,
+   "boundary_after_layer": 37,
+   "covered_layers": 36,
+   "n_layers": 64,
+   "active_frac": 1.0,
+   "toula_params": 17008021344,
+   "segment_params": 9887977120,
+   "gflop_token_toula": 102.048,
+   "gflop_token_segment": 59.328,
+   "gflop_token_cloud": 0.0,
+   "cloud_share_pct": 0.0
+  },
+  {
+   "event": "window",
+   "time": 1787592960.8627672,
+   "step": 500,
+   "width": 64,
+   "recovery_pct": 4.174,
+   "majority_pct": 5.664,
+   "excess_pp": -1.49,
+   "utility_delta": 3.3709,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787593841.9528494,
+   "step": 1000,
+   "width": 64,
+   "recovery_pct": 3.578,
+   "majority_pct": 5.664,
+   "excess_pp": -2.087,
+   "utility_delta": 3.0816,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787594724.8838692,
+   "step": 1500,
+   "width": 64,
+   "recovery_pct": 4.77,
+   "majority_pct": 5.664,
+   "excess_pp": -0.894,
+   "utility_delta": 2.9516,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787595611.1345017,
+   "step": 2000,
+   "width": 64,
+   "recovery_pct": 4.003,
+   "majority_pct": 5.664,
+   "excess_pp": -1.661,
+   "utility_delta": 2.7726,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787596494.7112846,
+   "step": 2500,
+   "width": 64,
+   "recovery_pct": 4.94,
+   "majority_pct": 5.664,
+   "excess_pp": -0.724,
+   "utility_delta": 2.8069,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787597377.7916856,
+   "step": 3000,
+   "width": 64,
+   "recovery_pct": 4.77,
+   "majority_pct": 5.664,
+   "excess_pp": -0.894,
+   "utility_delta": 2.9269,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787598263.253084,
+   "step": 3500,
+   "width": 64,
+   "recovery_pct": 5.792,
+   "majority_pct": 5.664,
+   "excess_pp": 0.128,
+   "utility_delta": 2.941,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787599145.9090567,
+   "step": 4000,
+   "width": 64,
+   "recovery_pct": 4.685,
+   "majority_pct": 5.664,
+   "excess_pp": -0.979,
+   "utility_delta": 2.9016,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787600033.7934275,
+   "step": 4500,
+   "width": 64,
+   "recovery_pct": 5.707,
+   "majority_pct": 5.664,
+   "excess_pp": 0.043,
+   "utility_delta": 2.8848,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787600921.8795838,
+   "step": 5000,
+   "width": 64,
+   "recovery_pct": 5.196,
+   "majority_pct": 5.664,
+   "excess_pp": -0.468,
+   "utility_delta": 3.2059,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787601809.5537825,
+   "step": 5500,
+   "width": 64,
+   "recovery_pct": 5.026,
+   "majority_pct": 5.664,
+   "excess_pp": -0.639,
+   "utility_delta": 3.0184,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787602693.2690158,
+   "step": 6000,
+   "width": 64,
+   "recovery_pct": 4.94,
+   "majority_pct": 5.664,
+   "excess_pp": -0.724,
+   "utility_delta": 3.075,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787603575.2045722,
+   "step": 6500,
+   "width": 64,
+   "recovery_pct": 3.918,
+   "majority_pct": 5.664,
+   "excess_pp": -1.746,
+   "utility_delta": 2.9046,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787604460.7118533,
+   "step": 7000,
+   "width": 64,
+   "recovery_pct": 4.6,
+   "majority_pct": 5.664,
+   "excess_pp": -1.064,
+   "utility_delta": 3.0168,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787605342.8750415,
+   "step": 7500,
+   "width": 64,
+   "recovery_pct": 4.259,
+   "majority_pct": 5.664,
+   "excess_pp": -1.405,
+   "utility_delta": 3.1019,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787606236.202063,
+   "step": 8000,
+   "width": 64,
+   "recovery_pct": 4.174,
+   "majority_pct": 5.664,
+   "excess_pp": -1.49,
+   "utility_delta": 2.9034,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787607130.1303153,
+   "step": 8500,
+   "width": 64,
+   "recovery_pct": 5.537,
+   "majority_pct": 5.664,
+   "excess_pp": -0.127,
+   "utility_delta": 2.9788,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787608021.034935,
+   "step": 9000,
+   "width": 64,
+   "recovery_pct": 4.855,
+   "majority_pct": 5.664,
+   "excess_pp": -0.809,
+   "utility_delta": 2.901,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787608917.41692,
+   "step": 9500,
+   "width": 64,
+   "recovery_pct": 4.344,
+   "majority_pct": 5.664,
+   "excess_pp": -1.32,
+   "utility_delta": 2.7273,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787609816.653772,
+   "step": 10000,
+   "width": 64,
+   "recovery_pct": 3.578,
+   "majority_pct": 5.664,
+   "excess_pp": -2.087,
+   "utility_delta": 2.6708,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.15,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "done",
+   "time": 1787609816.6552892,
+   "total_steps": 10000
+  },
+  {
+   "event": "postmortem_start",
+   "time": 1787609816.6638675
+  },
+  {
+   "event": "postmortem",
+   "time": 1787610096.8225353,
+   "attacker_token_accuracy_pct": 3.516,
+   "mean_levenshtein": 0.2685,
+   "interpretation": "token accuracy near the majority control and low string similarity mean the attacker's reads are wrong constructions (e.g. 'today' -> 'yadto'); high values would mean a real reconstruction"
+  }
+ ],
+ "postmortem": {
+  "attacker_token_accuracy_pct": 3.516,
+  "mean_levenshtein": 0.2685,
+  "samples": [
+   {
+    "block": 0,
+    "source_excerpt": " the National the Arkansas the Center Administration of Arts Museum of , arsenal . was listed Tower in now Fine builtThe",
+    "attacker_excerpt": " Valk . . , . , . . the of the . of . . the . the the , the . . . , of . , . . the Valk",
+    "word_pairs": [
+     [
+      "the",
+      "Valk"
+     ],
+     [
+      "National",
+      "."
+     ],
+     [
+      "the",
+      "."
+     ],
+     [
+      "Arkansas",
+      ","
+     ],
+     [
+      "the",
+      "."
+     ],
+     [
+      "Center",
+      ","
+     ],
+     [
+      "Administration",
+      "."
+     ],
+     [
+      "of",
+      "."
+     ],
+     [
+      "Arts",
+      "the"
+     ],
+     [
+      "Museum",
+      "of"
+     ],
+     [
+      "of",
+      "the"
+     ],
+     [
+      ",",
+      "."
+     ]
+    ],
+    "levenshtein": 0.269
+   },
+   {
+    "block": 1,
+    "source_excerpt": " arsenal7  Expedition41 be of08 to with , association6  Places may the the Camden . Due included91 Camden the Expedition",
+    "attacker_excerpt": " . , the the . the to the . . . . < the . the Valk the the , . to the . . , . . , the . ,",
+    "word_pairs": [
+     [
+      "arsenal7",
+      "."
+     ],
+     [
+      "Expedition41",
+      ","
+     ],
+     [
+      "be",
+      "the"
+     ],
+     [
+      "of08",
+      "the"
+     ],
+     [
+      "to",
+      "."
+     ],
+     [
+      "with",
+      "the"
+     ],
+     [
+      ",",
+      "to"
+     ],
+     [
+      "association6",
+      "the"
+     ],
+     [
+      "Places",
+      "."
+     ],
+     [
+      "may",
+      "."
+     ],
+     [
+      "the",
+      "."
+     ],
+     [
+      "the",
+      "."
+     ]
+    ],
+    "levenshtein": 0.2769
+   },
+   {
+    "block": 2,
+    "source_excerpt": " in949\n \ufffd 1 efforts  to , Historic Building was National the .mark due renovated1 the the2In Tower4 of9 Land designated",
+    "attacker_excerpt": " , theunk , < , of the . to the . . the . the < . the , .unk .unk the the . the . . . the",
+    "word_pairs": [
+     [
+      "in949",
+      ","
+     ],
+     [
+      "\ufffd",
+      "theunk"
+     ],
+     [
+      "1",
+      ","
+     ],
+     [
+      "efforts",
+      "<"
+     ],
+     [
+      "to",
+      ","
+     ],
+     [
+      ",",
+      "of"
+     ],
+     [
+      "Historic",
+      "the"
+     ],
+     [
+      "Building",
+      "."
+     ],
+     [
+      "was",
+      "to"
+     ],
+     [
+      "National",
+      "the"
+     ],
+     [
+      "the",
+      "."
+     ],
+     [
+      ".mark",
+      "."
+     ]
+    ],
+    "levenshtein": 0.2773
+   },
+   {
+    "block": 3,
+    "source_excerpt": " Rockrop> philanth W Little the Progress andunk Arkansas Works Museum , ofist < , Thest . It.hetic Administration home b",
+    "attacker_excerpt": " . , of . , the of < the the of the , the in the of . . the , the , the0 the the of the the the the",
+    "word_pairs": [
+     [
+      "Rockrop>",
+      "."
+     ],
+     [
+      "philanth",
+      ","
+     ],
+     [
+      "W",
+      "of"
+     ],
+     [
+      "Little",
+      "."
+     ],
+     [
+      "the",
+      ","
+     ],
+     [
+      "Progress",
+      "the"
+     ],
+     [
+      "andunk",
+      "of"
+     ],
+     [
+      "Arkansas",
+      "<"
+     ],
+     [
+      "Works",
+      "the"
+     ],
+     [
+      "Museum",
+      "the"
+     ],
+     [
+      ",",
+      "of"
+     ],
+     [
+      "ofist",
+      "the"
+     ]
+    ],
+    "levenshtein": 0.298
+   }
+  ],
+  "interpretation": "token accuracy near the majority control and low string similarity mean the attacker's reads are wrong constructions (e.g. 'today' -> 'yadto'); high values would mean a real reconstruction"
+ }
+}

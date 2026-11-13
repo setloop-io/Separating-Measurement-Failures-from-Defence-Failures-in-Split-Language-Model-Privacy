@@ -1,0 +1,167 @@
+{
+  "config": {
+    "model": "/workspace/experiments/models/qwen36-27b",
+    "n_layers": 64,
+    "depths": [
+      1
+    ],
+    "seeds": [
+      0
+    ],
+    "victim_docs": 2,
+    "seq_len": 16,
+    "max_pairs": 2000,
+    "epochs": 5,
+    "k_list": [
+      10,
+      100
+    ],
+    "d3_repetitions": 0,
+    "d3_probe_pool_size": 1000,
+    "leak_fracs": [
+      0.5,
+      0.9
+    ],
+    "sessions": 2,
+    "W_seed": 42,
+    "dtype": "bf16",
+    "device": "cuda",
+    "quick": true
+  },
+  "threat_model": "attacks 1/2/4: PASSIVE observer of h'=h@W with public text+model but no victim labels. attack 3: ORACLE / chosen-plaintext (K exact position-0 pairs) \u2014 strictly stronger than the E8 default; the K-curve is the honest security parameter, not a claim about the default model.",
+  "random_baseline_top1_pct": 0.0004,
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9989,
+      9990
+    ],
+    "container_image": "split-inference:spark-x86",
+    "hostname": "a4a86d52476d",
+    "victim_doc_sha256": {},
+    "dtraining_commit": "1543fe836e372b3cc45346fc75b8b0497ec5112c",
+    "model_manifest_sha256": "f8c3bc4bd8e650242cc38e534146672c60a932e92202cd4d5d47b29fde8a7d30",
+    "model_manifest_algo": "v2-sizes-no-cache",
+    "model_manifest_n_files": 29,
+    "model_path": "qwen36-27b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "oracle_k50": {
+    "1": {
+      "k50_interpolated": null,
+      "k50_bracket": null,
+      "k50_bracket_ratio": null,
+      "k50_method": "not_bracketed",
+      "k50_threshold_pct": 50.0,
+      "k50_max_sampled_k": 100,
+      "k50_n_points": 2
+    }
+  },
+  "d3_oracle_repeatability": [],
+  "verdict": "PASSIVE: label-free attacks (whiten-NN, moment alignment, session pooling) recover at most 0.00% top-1 (random 0.0004%) -> no label-free route past W. ORACLE: top-1 never reaches 50% at any sampled K (max sampled K=100, depth 1) (H=5120) -> chosen-plaintext queries are the real security parameter; rotate W per session to cap an oracle's accumulation. PARTIAL LEAK: 90% of rows leaked -> 34.38% top-1.",
+  "summary": [
+    {
+      "attack": "0_baseline_no_defense",
+      "depth": 1,
+      "setting": "plain_h",
+      "top1_mean": 34.38,
+      "top1_std": 0.0,
+      "top5_mean": 37.5,
+      "top5_std": 0.0,
+      "n_seeds": 1
+    },
+    {
+      "attack": "0_obfuscated_static_W",
+      "depth": 1,
+      "setting": "h@W",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.0,
+      "top5_std": 0.0,
+      "n_seeds": 1
+    },
+    {
+      "attack": "1a_whiten_nn",
+      "depth": 1,
+      "setting": "label-free",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.0,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "ref_token_coverage_pct": 37.5,
+      "note": "seed-independent; top5==top1 (NN decode)"
+    },
+    {
+      "attack": "1b_moment_align",
+      "depth": 1,
+      "setting": "label-free",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 3.12,
+      "top5_std": 0.0,
+      "n_seeds": 1
+    },
+    {
+      "attack": "2_session_rotation",
+      "depth": 1,
+      "setting": "2_sessions",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.0,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "per_session_top1": [
+        0.0,
+        0.0
+      ],
+      "marginal_info_per_session": "none: pooled ~= per-session ~= random"
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 1,
+      "setting": "K=10",
+      "top1_mean": 3.12,
+      "top1_std": 0.0,
+      "top5_mean": 6.25,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "K_effective": 10,
+      "W_recovery_rel_err": 1.4129
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 1,
+      "setting": "K=100",
+      "top1_mean": 18.75,
+      "top1_std": 0.0,
+      "top5_mean": 21.88,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "K_effective": 100,
+      "W_recovery_rel_err": 1.4003
+    },
+    {
+      "attack": "4_partial_leak",
+      "depth": 1,
+      "setting": "rows_leaked=50%",
+      "top1_mean": 28.12,
+      "top1_std": 0.0,
+      "top5_mean": 34.38,
+      "top5_std": 0.0,
+      "n_seeds": 1
+    },
+    {
+      "attack": "4_partial_leak",
+      "depth": 1,
+      "setting": "rows_leaked=90%",
+      "top1_mean": 34.38,
+      "top1_std": 0.0,
+      "top5_mean": 37.5,
+      "top5_std": 0.0,
+      "n_seeds": 1
+    }
+  ],
+  "results": []
+}

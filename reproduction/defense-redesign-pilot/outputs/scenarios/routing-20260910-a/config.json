@@ -1,0 +1,35 @@
+{
+  "backbone": {
+    "d_ff": 1024,
+    "d_model": 256,
+    "init_std": 0.02,
+    "max_seq_len": 128,
+    "n_heads": 8,
+    "n_layers": 8,
+    "vocab_size": 256
+  },
+  "backend": "plaintext_loopback",
+  "ciphertext_only": false,
+  "claim_scope": "Operator-placement correctness on a seeded untrained model; not Bifrost reproduction or a TEE/FHE performance/security result.",
+  "cohort": "engineering",
+  "cpu_threads": 2,
+  "hardware_attested": false,
+  "kind": "routing",
+  "kv_cache": "none_full_prefix_recompute",
+  "logit_atol": 1e-05,
+  "new_tokens": 3,
+  "policies": [
+    "local_reference",
+    "delegate_all_phases",
+    "local_prefill_delegate_decode"
+  ],
+  "prompt_lengths": [
+    8,
+    16
+  ],
+  "protocol_id": "p4-routing-engineering-0.1",
+  "seeds": [
+    410201
+  ],
+  "status": "engineering_ready"
+}

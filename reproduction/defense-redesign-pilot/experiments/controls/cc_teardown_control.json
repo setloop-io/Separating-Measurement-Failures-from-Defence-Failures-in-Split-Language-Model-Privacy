@@ -1,0 +1,22 @@
+{
+  "schema": "p4.cc_lifecycle_control.v1",
+  "control": "teardown",
+  "implementation": "p4d.cc_lifecycle",
+  "adapter_contract": "explicit-nonempty-json-string-array",
+  "shell": false,
+  "required_paths": [
+    "success",
+    "workload-failure",
+    "signal",
+    "ttl-timeout",
+    "deadman-timeout",
+    "budget-stop",
+    "workload-spawn-failure",
+    "supervisor-error"
+  ],
+  "teardown_failure_forces_nonzero": true,
+  "deployment_binds_resource_and_argv": true,
+  "successful_exit_is_not_deletion_evidence": true,
+  "post_teardown_absence_artifact_required": true,
+  "final_receipt_binds_workload_lifecycle_and_ledger": true
+}

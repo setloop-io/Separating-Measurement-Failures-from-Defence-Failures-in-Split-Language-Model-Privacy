@@ -1,0 +1,85 @@
+{
+ "probe": "accumulation_aligned",
+ "capture_dir": "results/long-horizon-v1/matrix/captures/none_s1234_h100",
+ "phase": "fwd",
+ "epochs_present": 1,
+ "rows_per_epoch": {
+  "0": 3200
+ },
+ "victim_rows": 512,
+ "note": "victim labels aligned to epoch 0 (framework attacks/accumulation.py misaligns them for multi-epoch real captures); solves use the framework's solve_w/recovery primitives verbatim.",
+ "results": [
+  {
+   "seed": 0,
+   "epoch_size": 64,
+   "n_epochs": 1,
+   "within_epoch_top1": 7.8776,
+   "pooled_cross_epoch_top1": 6.1849,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 0,
+   "epoch_size": 256,
+   "n_epochs": 1,
+   "within_epoch_top1": 38.15103333333334,
+   "pooled_cross_epoch_top1": 42.578133333333334,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 0,
+   "epoch_size": 768,
+   "n_epochs": 1,
+   "within_epoch_top1": 29.101533333333332,
+   "pooled_cross_epoch_top1": 29.296900000000004,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 1,
+   "epoch_size": 64,
+   "n_epochs": 1,
+   "within_epoch_top1": 8.072899999999999,
+   "pooled_cross_epoch_top1": 6.1849,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 1,
+   "epoch_size": 256,
+   "n_epochs": 1,
+   "within_epoch_top1": 38.08593333333334,
+   "pooled_cross_epoch_top1": 43.16406666666666,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 1,
+   "epoch_size": 768,
+   "n_epochs": 1,
+   "within_epoch_top1": 28.841099999999997,
+   "pooled_cross_epoch_top1": 29.296900000000004,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 2,
+   "epoch_size": 64,
+   "n_epochs": 1,
+   "within_epoch_top1": 8.072899999999999,
+   "pooled_cross_epoch_top1": 6.1849,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 2,
+   "epoch_size": 256,
+   "n_epochs": 1,
+   "within_epoch_top1": 38.86716666666667,
+   "pooled_cross_epoch_top1": 42.51303333333333,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 2,
+   "epoch_size": 768,
+   "n_epochs": 1,
+   "within_epoch_top1": 28.841099999999997,
+   "pooled_cross_epoch_top1": 29.296900000000004,
+   "label_free_band_top1": 0.0
+  }
+ ]
+}

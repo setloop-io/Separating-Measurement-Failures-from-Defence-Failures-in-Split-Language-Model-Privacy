@@ -1,0 +1,141 @@
+\section{Checking the scope of privacy claims}
+\label{sec:scopechecks}
+
+\subsection{Attack success under broader access}
+
+Observer privileges determine which attack results transfer. The following
+observation distinguishes an available successful attack from a tested
+attack that finds no signal.
+
+\begin{samepage}
+\begin{proposition}[Transfer under nested observations]
+Fix the target distribution, success measure and resource allowance.
+Suppose observer $B$ receives everything available to observer $A$, and
+$B$'s allowed attack class contains every admissible attack for $A$
+composed with projection to $A$'s view, within the stated resource
+allowance. Then $B$ can achieve at least the success of any particular
+attack available to $A$. Non-detection by a tested attack for $A$ supplies
+no upper bound on the success available to $B$.
+\end{proposition}
+\begin{proof}
+Observer $B$ projects its observations to $A$'s view and executes the same
+attack. Its output distribution and success remain unchanged. The
+construction shows that an attack is available. A particular implementation
+or optimiser may still fail to discover it, and failure by a tested attack
+supplies no upper bound.
+\end{proof}
+\end{samepage}
+
+The shared-key orthogonal-wrapper experiment illustrates this distinction.
+It protects against an evaluated passive wire decoder while an authorised
+cloud restores the original computation. For orthogonal $Q$,
+\begin{equation}
+ h'=hQ,\qquad h=h'Q^{\mathsf T}.
+ \label{eq:rotation}
+\end{equation}
+Key possession changes the observer's view. A cloud that holds or derives
+$Q$ falls outside the wire observer's no-key assumption, and a compromised
+host can inspect that key and invert the transform while remaining passive.
+The source account and later collection manifest expressly scope the
+restoration result to the wire and logged captures (\artifact{E8},
+\artifact{ER}). The measured result remains valid there, while
+confidentiality from the restoring host requires a different argument.
+
+Orthogonal wrapping also preserves norms and inner products. An invertible
+coordinate change leaves information recovery unresolved when a fixed
+decoder fails. The result describes the tested decoder. It provides
+no universal division between structure and statistics, or upper bound on
+information retained in the transcript. The robustness record itself
+includes stronger labelled-pair attackers and depth-dependent recovery
+(\artifact{E8}).
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}rrrr@{}}
+\toprule
+Depth & Estimated $K_{50}$ & Measured bracket & $K_{50}/5120$ \\
+\midrule
+1 & 258.32 & 200 to 300 & 0.05045 \\
+4 & 355.81 & 300 to 400 & 0.06949 \\
+8 & 617.93 & 600 to 700 & 0.12069 \\
+\bottomrule
+\end{tabular}
+\caption{Recovery crossings vary with depth at fixed width.
+The 27B/$H=5120$ artifact estimates absolute 50\% token-recovery crossings
+by interpolation between measured $K$ values. Uncertainty in these
+conditional crossing estimates was not quantified.
+The 2.39-fold depth spread at fixed width does not establish a common
+$0.09H$ coefficient. The source is \artifact{E8}.}
+\label{tab:k50}
+\end{table}
+
+The pooled depth-1 session-rotation score is $3.71\%$, while individual
+sessions include $5.73\%$, $3.65\%$ and $2.34\%$. The distinction changes
+what the score means. A pooled value describes the aggregate and cannot
+serve as a worst-session confidentiality bound. The empirical crossings in Table~\ref{tab:k50}
+depend on the attack. Useful partial recovery can occur below the absolute 50\%
+crossing, so these laboratory curves alone cannot determine a safe key
+lifetime (\artifact{E8}).
+
+\subsection{Comparing rotation cadences}
+
+The rotation deployment study separates a three-session Mistral-7B
+comparison from a later eight-run Mistral-NeMo-12B per-epoch matrix.
+Fixed and per-session rotated keys have negligible measured throughput
+differences in the first comparison. In the later matrix, identity is
+correct in 20 of 24 sessions and four of eight runs are admitted with known
+limitations. The N=256 setting advances no epochs. Its short request horizon makes
+it a no-rotation control. Wire attacks on rotated epochs
+record zero top-1 recovery within the tested decoder and capture scope
+(\artifact{ER}).
+
+The faster rotation carries a measured cost. For N=16, RTT=0 and session~1,
+the identity record contains $2.8$ tokens/s for the ratchet and $7.6$
+tokens/s for the static arm, a $63.16\%$ throughput reduction at the
+recorded precision. The ledger reports about $5.5$ to $5.6$ tokens/s for
+the evidence-triggered budget arm. We retain run and session
+timings separately. Their extraction adds no new paired runtime estimate,
+and models, cadences and RTT twins remain separate observations rather
+than independent pooled replications (\artifact{ER}).
+
+The historical records require the same care. An earlier narrative marks
+the deployed matrix invalid, whereas a later manifest admits supporting
+results after further analysis. The later disposition governs our reading.
+Its identity, runtime and observer limitations remain attached to those
+results, preserving both the revised assessment and the history from
+which it arose.
+
+\subsection{Reading mutual information estimates}
+
+The MI-estimator analysis records near-zero estimates on some defended
+boundaries (\artifact{MI}). At the population level, the variational
+objective of Donsker and Varadhan for a critic $T$ satisfies
+\begin{equation}
+ L_T=\mathbb E_{P_{XZ}}[T(X,Z)]-
+ \log\mathbb E_{P_XP_Z}[e^{T(X,Z)}]\le \operatorname{MI}(X,Z).
+ \label{eq:dv}
+\end{equation}
+Here $\operatorname{MI}(X,Z)$ denotes mutual information. The bound points
+in one direction. Finite-sample estimation can be difficult
+\cite{song2020,mcallester2020}, and the population inequality itself
+cannot supply an upper privacy budget.
+
+Let $X$ be uniform on $m$ symbols and let $Z=X$. A constant critic $T=0$
+has $L_T=0$, while $\operatorname{MI}(X,Z)=\log m$ nats. With $m=256$,
+the channel reveals eight bits despite the zero critic readout. The example
+is purely analytic. It demonstrates the inequality's direction, without
+constituting a synthetic benchmark or estimating the defended system's
+actual leakage. Even a valid zero lower bound leaves a small upper bound
+unestablished. A second weak lower-bound critic supplies the same limited
+inference, while an empirical plug-in estimate also needs statistical
+justification before it can be called a certified population bound. The
+source's own limitations state that neither estimator is an upper bound
+(\artifact{MI}).
+
+We therefore retain the estimator-specific observations while withholding
+a small-leakage certificate. The inequalities alone leave actual mutual
+information unresolved. They also cannot establish high leakage in every
+defended cell. Capacity claims need comparable care.
+Similar results across finitely tested architectures and schedules show
+empirical saturation. An information-theoretic ceiling requires a bound
+over all remote computations.

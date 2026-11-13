@@ -1,0 +1,96 @@
+{
+  "schema": "dtraining.er.rotation.v1",
+  "experiment": "E-R deployed ratcheted per-epoch rotation",
+  "config": {
+    "measurement_kind": "measured",
+    "run_id": "er_n16_rtt0_20260810T213415",
+    "model": "mistral-nemo-12b-instruct",
+    "ratchet_n": 16,
+    "budget_b": 0,
+    "rtt_ms": 0,
+    "sessions": 3,
+    "key_seed_base": 77000
+  },
+  "evidence_status": "invalid",
+  "known_limitations": [
+    "In shared-key mode the cloud derives W_t itself, so per-epoch freshness protects the wire and logged captures, not cloud RAM.",
+    "prefix channel activated synthetically"
+  ],
+  "sessions": [
+    {
+      "session": 1,
+      "A_tps": 7.4,
+      "ratchet_tps": 2.8,
+      "epochs_advanced": 9,
+      "B_identity": false,
+      "C_identity": true,
+      "key_sha256": {
+        "0": "1cd797573b35aa18",
+        "1": "157668fdb2992158",
+        "2": "3b2fad9a5ab3035c",
+        "3": "1f3bfc356cbea960",
+        "4": "8c473654ec35e89a",
+        "5": "e76026751574b085",
+        "6": "4f5ca3dd8d2bd0c6",
+        "7": "470e163b20b95bd5",
+        "8": "199224443214cd9f",
+        "9": "e2d1058d7124d3fb"
+      }
+    },
+    {
+      "session": 2,
+      "A_tps": null,
+      "ratchet_tps": 2.7,
+      "epochs_advanced": 10,
+      "B_identity": false,
+      "C_identity": false,
+      "key_sha256": {
+        "1": "157668fdb2992158",
+        "2": "3b2fad9a5ab3035c",
+        "3": "1f3bfc356cbea960",
+        "4": "8c473654ec35e89a",
+        "5": "e76026751574b085",
+        "6": "4f5ca3dd8d2bd0c6",
+        "7": "470e163b20b95bd5",
+        "8": "199224443214cd9f",
+        "9": "e2d1058d7124d3fb",
+        "10": "7052206b3dec58c4"
+      }
+    },
+    {
+      "session": 3,
+      "A_tps": null,
+      "ratchet_tps": 2.7,
+      "epochs_advanced": 10,
+      "B_identity": false,
+      "C_identity": true,
+      "key_sha256": {
+        "1": "157668fdb2992158",
+        "2": "3b2fad9a5ab3035c",
+        "3": "1f3bfc356cbea960",
+        "4": "8c473654ec35e89a",
+        "5": "e76026751574b085",
+        "6": "4f5ca3dd8d2bd0c6",
+        "7": "470e163b20b95bd5",
+        "8": "199224443214cd9f",
+        "9": "e2d1058d7124d3fb",
+        "10": "7052206b3dec58c4"
+      }
+    }
+  ],
+  "attacks": {
+    "1": [
+      "/home/geo/experiments/results/er/er_n16_rtt0_20260810T213415/session_1/wire_attack_ratchet_sess1.json",
+      "/home/geo/experiments/results/er/er_n16_rtt0_20260810T213415/session_1/wire_attack_base_sess1.json",
+      "/home/geo/experiments/results/er/er_n16_rtt0_20260810T213415/session_1/wire_attack_static_sess1.json"
+    ],
+    "2": [
+      "/home/geo/experiments/results/er/er_n16_rtt0_20260810T213415/session_2/wire_attack_ratchet_sess2.json",
+      "/home/geo/experiments/results/er/er_n16_rtt0_20260810T213415/session_2/wire_attack_static_sess2.json"
+    ],
+    "3": [
+      "/home/geo/experiments/results/er/er_n16_rtt0_20260810T213415/session_3/wire_attack_static_sess3.json",
+      "/home/geo/experiments/results/er/er_n16_rtt0_20260810T213415/session_3/wire_attack_ratchet_sess3.json"
+    ]
+  }
+}

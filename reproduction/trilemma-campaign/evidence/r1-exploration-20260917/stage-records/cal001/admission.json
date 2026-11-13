@@ -1,0 +1,82 @@
+{
+  "attack_spec_document": {
+    "origin": "built-in draft default for calibration",
+    "schema_version": "r1-attack-spec-1.0",
+    "specification": {
+      "null_band": 0.02,
+      "positive_doses": [
+        0.25,
+        0.5,
+        1.0,
+        2.0
+      ],
+      "positive_floor_accuracy": 0.1,
+      "positive_floor_correlation": 0.2,
+      "privacy_limit_accuracy": 0.02,
+      "privacy_limit_correlation": 0.1,
+      "ridge_lambda": 1.0
+    },
+    "status": "draft"
+  },
+  "attack_spec_sha256": "bf058183949f9ac6fb9fba290be39fba3fa51957cc6f63d25010f11d40b0ce86",
+  "attack_spec_source": null,
+  "attack_spec_status": "draft",
+  "budget": {
+    "approval_reference": "owner instruction 2026-09-16 (owned nodes) + approved plan forager-storm-rogue; scientific calibration under frozen protocol r1-exploration-1.0",
+    "bundle_sha256": "7987e7f95f03eff012e14f97f76fcfa50ab231e130ddc6994877f8cd067de9e3",
+    "hourly_usd": 0.5,
+    "max_runs": 76,
+    "max_total_usd": 8.0,
+    "max_wall_seconds": 28800,
+    "note": "Owned hardware (toula, NVIDIA GB10). USD 0.50/h nominal amortization+power rate; the binding constraint is the 28800 s (8 h) whole-stage wall-clock cap from the frozen matrix. Basis: Stage B measured ~0.13-0.15 s/step full-size; projected ~4-6 min/run x 76 runs = 5.1-7.6 h. A failure consumes this approval; a new attempt needs a new review.",
+    "reviewed_at_utc": "2026-09-16T09:44:06Z",
+    "reviewed_by": "Georgios Politis (owner)",
+    "schema_version": "r1-budget-1.0",
+    "stage": "calibration",
+    "status": "approved_for_scientific",
+    "study_id": "p3-r1-fresh-start"
+  },
+  "budget_sha256": "afe26d70d2c26c1c300318a7bd9211c24b60c3e4200aa99bbcb806fcae4374f8",
+  "bundle_sha256": "7987e7f95f03eff012e14f97f76fcfa50ab231e130ddc6994877f8cd067de9e3",
+  "created_at_utc": "2026-09-16T09:44:18.245956+00:00",
+  "environment": {
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "deterministic_algorithms": false,
+    "gpu_name": "NVIDIA GB10",
+    "pip_freeze": "attrs==26.1.0\ncontourpy==1.4.0\ncuda-bindings==13.4.1\ncuda-pathfinder==1.8.1\ncuda-toolkit==13.0.3.0\ncycler==0.12.1\nfilelock==3.32.6\nfonttools==4.65.0\nfsspec==2026.7.0\niniconfig==2.3.0\nJinja2==3.1.6\njsonschema==4.26.0\njsonschema-specifications==2025.9.1\nkiwisolver==1.5.1\nMarkupSafe==3.0.3\nmatplotlib==3.11.1\nmpmath==1.3.0\nnetworkx==3.6.1\nnumpy==2.5.2\nnvidia-cublas==13.1.1.3\nnvidia-cuda-cupti==13.0.85\nnvidia-cuda-nvrtc==13.0.88\nnvidia-cuda-runtime==13.0.96\nnvidia-cudnn-cu13==9.24.0.43\nnvidia-cufft==12.0.0.61\nnvidia-cufile==1.15.1.6\nnvidia-curand==10.4.0.35\nnvidia-cusolver==12.0.4.66\nnvidia-cusparse==12.6.3.3\nnvidia-cusparselt-cu13==0.8.1\nnvidia-nccl-cu13==2.30.7\nnvidia-nvjitlink==13.4.52\nnvidia-nvshmem-cu13==3.4.5\nnvidia-nvtx==13.0.85\npackaging==26.3\npillow==12.3.0\npluggy==1.6.0\nPygments==2.21.0\npyparsing==3.3.2\npytest==9.1.1\npython-dateutil==2.9.0.post0\nPyYAML==6.0.3\nreferencing==0.37.0\nrpds-py==2026.6.3\nsetuptools==84.0.0\nsix==1.17.0\nsympy==1.14.0\ntorch==2.14.0+cu130\ntriton==3.8.0\ntyping_extensions==4.16.0\n",
+    "platform": "Linux-6.17.0-1026-nvidia-aarch64-with-glibc2.36",
+    "python": "3.12.12 (main, Feb 24 2026, 20:41:46) [GCC 12.2.0]",
+    "torch_version": "2.14.0+cu130"
+  },
+  "environment_review": {
+    "approval_reference": "owner instruction 2026-09-16 (owned nodes) + approved plan forager-storm-rogue; scientific calibration under frozen protocol r1-exploration-1.0",
+    "bundle_sha256": "7987e7f95f03eff012e14f97f76fcfa50ab231e130ddc6994877f8cd067de9e3",
+    "container_image_digest": "sha256:4a53b1b4bb6bc25bd69d69467b4b47b61939f406b1c5586c9ffd85843a3c0357",
+    "environment_sha256": "f90239f3736d5afe838e1e3617cc0cdbda816e32fe1232b498ed7856c19adbde",
+    "note": "Node toula (owned, NVIDIA GB10, driver 580.159.03 / CUDA 13.0). Same accepted image and measured environment as the completed engineering stages (digests unchanged); re-inspection recorded at r1-acceptance/inspect-environment-toula.json. Operator-supplied local image identity; no registry digest. DEVIATION carried from engineering acceptance: dcgmi unavailable (no sudo); nvidia-smi is the GPU health evidence. Only the bundle hash and status differ from the engineering reviews.",
+    "pip_freeze_sha256": "37513847fb8e7ad5d15a981e77925683456cbcfb8bbeeca516f7fb34d8f1f0f4",
+    "reviewed_at_utc": "2026-09-16T09:44:06Z",
+    "reviewed_by": "Georgios Politis (owner)",
+    "schema_version": "r1-environment-review-1.0",
+    "status": "approved_for_scientific"
+  },
+  "environment_review_sha256": "3a6fede90a127213d432633c6a63321159bec1b3ef7a83e674bf29b36a38b0b0",
+  "environment_sha256": "f90239f3736d5afe838e1e3617cc0cdbda816e32fe1232b498ed7856c19adbde",
+  "execution_device": "cuda",
+  "limits": {
+    "output_bytes": 137438953472,
+    "wall_clock_seconds": 28800
+  },
+  "matrix_declared_device": "cuda",
+  "note": "Admits exactly one local execution of the bound scientific stage; a failure consumes the underlying budget approval.",
+  "protocol": "docs/PREREGISTRATION_R1.md",
+  "protocol_sha256": "071e18cc9a242e768caf0dd33c3fbcbc03498855cd0f484bf205bcab74ffec13",
+  "protocol_status_declared": "frozen_2026-09-16_scientific_admission_required",
+  "run_count": 76,
+  "schema_version": "r1-scientific-admission-1.0",
+  "scientific_evidence": true,
+  "scope": "Local pre-execution binding; no independently witnessed preregistration asserted.",
+  "stage": "calibration",
+  "study_id": "p3-r1-fresh-start"
+}

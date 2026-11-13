@@ -1,0 +1,411 @@
+{
+ "schema": "dtraining.isolation_adaptive.v1",
+ "args": {
+  "model": "/workspace/experiments/models/qwen36-27b",
+  "corpus": "/workspace/experiments/models/wikitext2_corpus.txt",
+  "output": "/workspace/experiments/results/training/isolation_bal_27b_e_s42.json",
+  "cloud_url": "wss://koula:5050",
+  "cloud_tls_ca": "/workspace/experiments/tls/ca.crt",
+  "cloud_kind": "invariant_mlp_deep",
+  "cloud_experts": 1,
+  "cloud_layers": 31,
+  "cloud_hidden": 12288,
+  "utility_reference": "full",
+  "latent_dim": 64,
+  "views": 1,
+  "mixup_lambda": 0.0,
+  "width_ladder": "64",
+  "noise_multiplier": 0.35,
+  "clip_norm": 1.0,
+  "split_after": 13,
+  "resume_after": 50,
+  "seq_len": 32,
+  "train_blocks": 256,
+  "eval_blocks": 64,
+  "steps": 500,
+  "warmup_steps": 200,
+  "attack_steps": 64,
+  "lr": 0.0003,
+  "adversary_strength": 1.0,
+  "chaff_tokens": 48,
+  "remote_grad_clip": 1.0,
+  "eval_interval": 100,
+  "tripwire_pct": 1.0,
+  "utility_gate": 0.35,
+  "utility_grace_steps": 500,
+  "mine_beta": 0.0,
+  "backward_probe": false,
+  "seed": 42,
+  "start_ungauged": false
+ },
+ "log": [
+  {
+   "event": "baseline_loss",
+   "time": 1787151879.1462557,
+   "value": 3.2464
+  },
+  {
+   "event": "split_plan",
+   "time": 1787151891.0215676,
+   "width": 64,
+   "views": 1,
+   "boundary_after_layer": 13,
+   "covered_layers": 36,
+   "n_layers": 64,
+   "active_frac": 1.0,
+   "toula_params": 13197325408,
+   "segment_params": 13698673056,
+   "gflop_token_toula": 79.184,
+   "gflop_token_segment": 82.192,
+   "gflop_token_cloud": 71.344,
+   "cloud_share_pct": 47.4
+  },
+  {
+   "event": "window",
+   "time": 1787152176.5673316,
+   "step": 100,
+   "width": 64,
+   "recovery_pct": 2.641,
+   "majority_pct": 5.664,
+   "excess_pp": -3.024,
+   "utility_delta": 0.9486,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.99,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787152445.8503394,
+   "step": 200,
+   "width": 64,
+   "recovery_pct": 1.789,
+   "majority_pct": 5.664,
+   "excess_pp": -3.875,
+   "utility_delta": 0.6293,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.99,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787152715.6725702,
+   "step": 300,
+   "width": 64,
+   "recovery_pct": 1.448,
+   "majority_pct": 5.664,
+   "excess_pp": -4.216,
+   "utility_delta": 0.4572,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 55.0,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787152985.3175354,
+   "step": 400,
+   "width": 64,
+   "recovery_pct": 1.107,
+   "majority_pct": 5.664,
+   "excess_pp": -4.557,
+   "utility_delta": 0.3491,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 55.0,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787153255.0501418,
+   "step": 500,
+   "width": 64,
+   "recovery_pct": 1.107,
+   "majority_pct": 5.664,
+   "excess_pp": -4.557,
+   "utility_delta": 0.3249,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 55.0,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "done",
+   "time": 1787153255.0759437,
+   "total_steps": 500
+  },
+  {
+   "event": "postmortem_start",
+   "time": 1787153255.077733
+  },
+  {
+   "event": "postmortem",
+   "time": 1787153332.827582,
+   "attacker_token_accuracy_pct": 5.469,
+   "mean_levenshtein": 0.2945,
+   "interpretation": "token accuracy near the majority control and low string similarity mean the attacker's reads are wrong constructions (e.g. 'today' -> 'yadto'); high values would mean a real reconstruction"
+  }
+ ],
+ "postmortem": {
+  "attacker_token_accuracy_pct": 5.469,
+  "mean_levenshtein": 0.2945,
+  "samples": [
+   {
+    "block": 0,
+    "source_excerpt": " now arsenal Administration\n the south Register the was listed of in , Center the just , . of of the called Tower Nation",
+    "attacker_excerpt": " the . of in the the the , the the the the as , the , the the the the , to the the , , as the the the the ,",
+    "word_pairs": [
+     [
+      "now",
+      "the"
+     ],
+     [
+      "arsenal",
+      "."
+     ],
+     [
+      "Administration",
+      "of"
+     ],
+     [
+      "the",
+      "in"
+     ],
+     [
+      "south",
+      "the"
+     ],
+     [
+      "Register",
+      "the"
+     ],
+     [
+      "the",
+      "the"
+     ],
+     [
+      "was",
+      ","
+     ],
+     [
+      "listed",
+      "the"
+     ],
+     [
+      "of",
+      "the"
+     ],
+     [
+      "in",
+      "the"
+     ],
+     [
+      ",",
+      "the"
+     ]
+    ],
+    "levenshtein": 0.3216
+   },
+   {
+    "block": 1,
+    "source_excerpt": " to ,98 the1 the Expedition be arsenal  with in the1 of its Due .7 Camden included in may association4  Expedition6 Plac",
+    "attacker_excerpt": " the the the , the . the , , , the the the , the the . the the the , the to , the , , the the the , the",
+    "word_pairs": [
+     [
+      "to",
+      "the"
+     ],
+     [
+      ",98",
+      "the"
+     ],
+     [
+      "the1",
+      "the"
+     ],
+     [
+      "the",
+      ","
+     ],
+     [
+      "Expedition",
+      "the"
+     ],
+     [
+      "be",
+      "."
+     ],
+     [
+      "arsenal",
+      "the"
+     ],
+     [
+      "with",
+      ","
+     ],
+     [
+      "in",
+      ","
+     ],
+     [
+      "the1",
+      ","
+     ],
+     [
+      "of",
+      "the"
+     ],
+     [
+      "its",
+      "the"
+     ]
+    ],
+    "levenshtein": 0.3308
+   },
+   {
+    "block": 2,
+    "source_excerpt": " to1 the2\n the4 effortsmark National . \ufffd in of  due9 Historic was49 designated19  renovated Land , the TowerIn Building",
+    "attacker_excerpt": " the the , the the the the to the the , the the , theunk , to the of the the the , the the theunk the the , ,",
+    "word_pairs": [
+     [
+      "to1",
+      "the"
+     ],
+     [
+      "the2",
+      "the"
+     ],
+     [
+      "the4",
+      ","
+     ],
+     [
+      "effortsmark",
+      "the"
+     ],
+     [
+      "National",
+      "the"
+     ],
+     [
+      ".",
+      "the"
+     ],
+     [
+      "\ufffd",
+      "the"
+     ],
+     [
+      "in",
+      "to"
+     ],
+     [
+      "of",
+      "the"
+     ],
+     [
+      "due9",
+      "the"
+     ],
+     [
+      "Historic",
+      ","
+     ],
+     [
+      "was49",
+      "the"
+     ]
+    ],
+    "levenshtein": 0.2521
+   },
+   {
+    "block": 3,
+    "source_excerpt": " Theunk philanth andhetic the the became Museum It Works of W of home Progress , Club Administration.rop Arkansasst <ist",
+    "attacker_excerpt": " to the in the the the the the the the the . the the , the , the the the the , the the , the the the the in , the",
+    "word_pairs": [
+     [
+      "Theunk",
+      "to"
+     ],
+     [
+      "philanth",
+      "the"
+     ],
+     [
+      "andhetic",
+      "in"
+     ],
+     [
+      "the",
+      "the"
+     ],
+     [
+      "the",
+      "the"
+     ],
+     [
+      "became",
+      "the"
+     ],
+     [
+      "Museum",
+      "the"
+     ],
+     [
+      "It",
+      "the"
+     ],
+     [
+      "Works",
+      "the"
+     ],
+     [
+      "of",
+      "the"
+     ],
+     [
+      "W",
+      "the"
+     ],
+     [
+      "of",
+      "."
+     ]
+    ],
+    "levenshtein": 0.2914
+   }
+  ],
+  "interpretation": "token accuracy near the majority control and low string similarity mean the attacker's reads are wrong constructions (e.g. 'today' -> 'yadto'); high values would mean a real reconstruction"
+ }
+}

@@ -1,0 +1,177 @@
+{
+  "limitations": [
+    "A scope-complete label means declared surfaces match; it does not validate Paper 1's evidence.",
+    "A missing actual remote FLOP measurement prevents Pareto membership.",
+    "Rows are seed-level coordinates; attach seed-level uncertainty before a headline claim."
+  ],
+  "required_observed_surfaces": [
+    "cloud_state_history",
+    "forward_wire",
+    "outbound_training_gradient",
+    "protocol_metadata"
+  ],
+  "rows": [
+    {
+      "actual_remote_flops": null,
+      "actual_remote_flops_status": "not_profiled",
+      "missing_observed_surfaces": [
+        "cloud_state_history",
+        "forward_wire",
+        "outbound_training_gradient",
+        "protocol_metadata"
+      ],
+      "nominal_covered_layer_share": 0.14285714285714285,
+      "pareto_status": "not_evaluable_with_current_coordinates",
+      "privacy_artifact": null,
+      "privacy_cell_id": "sha256:21eaa511ffe3e9f37132527dd256c88ffc7255f57feac3ac37264f0288c26e22",
+      "privacy_metric_field": "upper95_excess_over_majority_pp",
+      "privacy_metric_value": null,
+      "privacy_status": "not_measured",
+      "remote_compute_ms": 56080.34055418102,
+      "runner_artifact": "outputs/phase04/wikitext2_clean_split21_s42_runner.json",
+      "seed": 42,
+      "systems_profile": {
+        "command_exit_status": 0,
+        "limitations": [
+          "GPU utilization and power are two-second samples, not per-operation profiles.",
+          "Missing nvidia-smi fields are recorded as null rather than estimated."
+        ],
+        "name": "wikitext2_clean_split21_s42",
+        "raw_logs": {
+          "remote_cpu": "/home/geo/dtraining-phase04/outputs/wikitext2_clean_split21_s42_remote_cpu.log",
+          "remote_gpu": "/home/geo/dtraining-phase04/outputs/wikitext2_clean_split21_s42_remote_gpu.csv",
+          "trusted_cpu": "/home/geo/dtraining-phase04/outputs/wikitext2_clean_split21_s42_trusted_cpu.log",
+          "trusted_gpu": "/home/geo/dtraining-phase04/outputs/wikitext2_clean_split21_s42_trusted_gpu.csv"
+        },
+        "remote": {
+          "cpu": {
+            "sample_count": 679,
+            "utilization_mean_pct": 0.3048600883652455,
+            "utilization_peak_pct": 6.0
+          },
+          "energy": {
+            "measured_gpu_energy_joules": null,
+            "status": "unavailable"
+          },
+          "gpu": {
+            "memory_used_peak_mib": null,
+            "power_draw_mean_watts": 11.943976435935198,
+            "power_draw_peak_watts": 12.74,
+            "sample_count": 679,
+            "utilization_gpu_mean_pct": 0.6833578792341679,
+            "utilization_gpu_peak_pct": 4.0
+          }
+        },
+        "remote_host": "koula",
+        "schema": "dtraining.systems_profile.v1",
+        "trusted": {
+          "cpu": {
+            "sample_count": 680,
+            "utilization_mean_pct": 5.161764705882348,
+            "utilization_peak_pct": 9.0
+          },
+          "energy": {
+            "measured_gpu_energy_joules": null,
+            "status": "unavailable"
+          },
+          "gpu": {
+            "memory_used_peak_mib": null,
+            "power_draw_mean_watts": 24.210898379970548,
+            "power_draw_peak_watts": 39.94,
+            "sample_count": 679,
+            "utilization_gpu_mean_pct": 75.83505154639175,
+            "utilization_gpu_peak_pct": 94.0
+          }
+        },
+        "wall_seconds": 1358
+      },
+      "training_seconds": 596.8986738940002,
+      "utility_nll_delta": -0.04692386163515039,
+      "utility_nll_uncertainty": null,
+      "wire_bytes": 496891633
+    },
+    {
+      "actual_remote_flops": null,
+      "actual_remote_flops_status": "not_profiled",
+      "missing_observed_surfaces": [
+        "cloud_state_history",
+        "forward_wire",
+        "outbound_training_gradient",
+        "protocol_metadata"
+      ],
+      "nominal_covered_layer_share": 0.21428571428571427,
+      "pareto_status": "not_evaluable_with_current_coordinates",
+      "privacy_artifact": null,
+      "privacy_cell_id": "sha256:1e0169b9670a8cd737dfa24e33efaeb16277c9beccd1b28bcbec7189606e1825",
+      "privacy_metric_field": "upper95_excess_over_majority_pp",
+      "privacy_metric_value": null,
+      "privacy_status": "not_measured",
+      "remote_compute_ms": 94824.89630940836,
+      "runner_artifact": "outputs/phase04/wikitext2_failed_split19_s42_runner.json",
+      "seed": 42,
+      "systems_profile": {
+        "command_exit_status": 0,
+        "limitations": [
+          "GPU utilization and power are two-second samples, not per-operation profiles.",
+          "Missing nvidia-smi fields are recorded as null rather than estimated."
+        ],
+        "name": "wikitext2_failed_split19_s42",
+        "raw_logs": {
+          "remote_cpu": "/home/geo/dtraining-phase04/outputs/wikitext2_failed_split19_s42_remote_cpu.log",
+          "remote_gpu": "/home/geo/dtraining-phase04/outputs/wikitext2_failed_split19_s42_remote_gpu.csv",
+          "trusted_cpu": "/home/geo/dtraining-phase04/outputs/wikitext2_failed_split19_s42_trusted_cpu.log",
+          "trusted_gpu": "/home/geo/dtraining-phase04/outputs/wikitext2_failed_split19_s42_trusted_gpu.csv"
+        },
+        "remote": {
+          "cpu": {
+            "sample_count": 694,
+            "utilization_mean_pct": 0.4193083573486973,
+            "utilization_peak_pct": 3.0
+          },
+          "energy": {
+            "measured_gpu_energy_joules": null,
+            "status": "unavailable"
+          },
+          "gpu": {
+            "memory_used_peak_mib": null,
+            "power_draw_mean_watts": 11.985259365994237,
+            "power_draw_peak_watts": 12.59,
+            "sample_count": 694,
+            "utilization_gpu_mean_pct": 0.69164265129683,
+            "utilization_gpu_peak_pct": 3.0
+          }
+        },
+        "remote_host": "koula",
+        "schema": "dtraining.systems_profile.v1",
+        "trusted": {
+          "cpu": {
+            "sample_count": 695,
+            "utilization_mean_pct": 5.040287769784172,
+            "utilization_peak_pct": 9.0
+          },
+          "energy": {
+            "measured_gpu_energy_joules": null,
+            "status": "unavailable"
+          },
+          "gpu": {
+            "memory_used_peak_mib": null,
+            "power_draw_mean_watts": 23.738659942363114,
+            "power_draw_peak_watts": 39.75,
+            "sample_count": 694,
+            "utilization_gpu_mean_pct": 72.97406340057637,
+            "utilization_gpu_peak_pct": 94.0
+          }
+        },
+        "wall_seconds": 1388
+      },
+      "training_seconds": 650.879921521002,
+      "utility_nll_delta": 0.5096626855665818,
+      "utility_nll_uncertainty": null,
+      "wire_bytes": 496892174
+    }
+  ],
+  "schema": "dtraining.delegation_privacy_pareto.v1",
+  "scope_evidence": "docs/experiments/THREAT_MODEL_SCOPE_AUDIT.md",
+  "status": "completed",
+  "validated_scope_id": "paper1.latent-native.capture.v1"
+}

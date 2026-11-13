@@ -1,0 +1,35 @@
+{
+  "schema": "dtraining.evidence_collection.v1",
+  "collected_at": "2026-08-21",
+  "campaign": "phase03_qwen3_06b_wikitext2_layerwise_mechanisms",
+  "scope": "descriptive single-model mechanism measurement; not a causal depth comparison",
+  "runner_sha256": "7f1de156135913f66d02bc6d20b6e572937dd810c75bfe6775df29168ab31b3e",
+  "artifacts": {
+    "campaign.log": "001c35bd36e789c422ec7b09ac9811e97f84086d70ae92713e2e14410af51d8e",
+    "layerwise_mechanisms.json": "6aed4555d32db3d382a01f8ccd4a5dedae95972d1cf68a1b3762a442c01a4bc8"
+  },
+  "sources": [
+    {
+      "host": "toula",
+      "path": "/home/geo/dtraining-phase03/outputs/phase03_qwen3_06b_wikitext2",
+      "role": "trusted-node Phase 3 mechanism runner",
+      "result": "2 files collected and SHA-256 verified"
+    },
+    {
+      "host": "soula",
+      "role": "CPU node survey",
+      "result": "no Phase 3 artifacts found"
+    },
+    {
+      "host": "koula",
+      "role": "remote surrogate server",
+      "result": "no Phase 3 artifacts found; unrelated legacy and invalid captures excluded"
+    }
+  ],
+  "exclusions": [
+    "model checkpoints and caches",
+    "TLS keys and certificates",
+    "raw tensor bundles",
+    "unrelated legacy or explicitly invalid captures"
+  ]
+}

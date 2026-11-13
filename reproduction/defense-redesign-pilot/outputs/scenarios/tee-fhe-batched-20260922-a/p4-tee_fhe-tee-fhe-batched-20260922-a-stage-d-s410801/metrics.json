@@ -1,0 +1,101 @@
+{
+  "backend": "tenseal",
+  "backend_version": "0.3.18",
+  "binding": {
+    "checkpoint_manifest": "experiments/manifests/p4-qualification-20260922-a-d0-q8-trained-s419101.json",
+    "checkpoint_manifest_sha256": "cf19e8868f469d12c72b44f96c8956f298a0ec38525976edc6db840d3a11090f",
+    "checkpoint_run_id": "p4-qualification-20260922-a-d0-q8-trained-s419101",
+    "device": "cuda",
+    "input_window_sha256": "2ee63c0e4f424e2a0a3c9d0237684b97d8bc95c54c47194dfdaaa08627149ad7",
+    "panels_manifest": "experiments/manifests/p4-pilot-20260922-a-d0-q8-trained-s411101.json",
+    "panels_manifest_sha256": "06b2f537f4308fb07e11517c1f8fd0ed7f7ab076b0ac55af0cab985a9a300912",
+    "panels_sha256": "1e89b6cd49fd72c69a6f4d248da69ed74acb37c3ba8c048cc1bb3467e3e33a81",
+    "seed": 410801,
+    "selected_stages": [
+      "stage-c",
+      "stage-d"
+    ]
+  },
+  "ckks": {
+    "coeff_mod_bit_sizes": [
+      60,
+      40,
+      40,
+      60
+    ],
+    "global_scale": "2^40",
+    "poly_modulus_degree": 8192
+  },
+  "contract": {
+    "contract_windows": 512,
+    "operator_prefix": "blocks.2.remote.blocks.0",
+    "stage_a_run_id": "p4-tee_fhe-tee-fhe-20260922-a-stage-a-s410801",
+    "stage_a_scenario_manifest": "experiments/manifests/p4-tee_fhe-tee-fhe-20260922-a-stage-a-s410801.json",
+    "stage_a_scenario_manifest_sha256": "b9022b15f3986702a837e45194a30d88752555fe24d7b7ad8f16eae51d43ac7e"
+  },
+  "deployment_scope": "Plaintext-emulated boundary (stage A) and one real CKKS projection (stage B); no confidentiality, integrity, or attestation claim",
+  "hardware_attested": false,
+  "interactive_budget_seconds": 1.0,
+  "policy_scope": "Policy costs are measured per-operator and composed arithmetically; trusted-side plaintext work and network time are outside this table (transfer is recorded as bytes). Conceivability uses a declared 1.0 s interactive reference budget for one sequence; a reporting convention from these measurements only, not a gate",
+  "policy_table": [
+    {
+      "ciphertext_bytes": 0,
+      "conceivability_statement": "end-to-end 0s for one 128-token sequence at this scale against a declared 1.0s interactive reference budget; interactive-latency conceivable: True \u2014 from these measurements only, no extrapolation to other models, hardware, backends, or layouts",
+      "decryption_seconds": 0,
+      "encryption_seconds": 0,
+      "end_to_end_seconds": 0,
+      "homomorphic_seconds": 0,
+      "interactive_latency_conceivable": true,
+      "operators": [],
+      "policy": "none",
+      "ratio_to_plaintext_batched": 1.0,
+      "reference_plaintext_batched_seconds": 0,
+      "refresh_seconds": 0,
+      "traffic_bytes": 0.0
+    },
+    {
+      "ciphertext_bytes": 42423910.4,
+      "conceivability_statement": "end-to-end 14.99s for one 128-token sequence at this scale against a declared 1.0s interactive reference budget; interactive-latency conceivable: False \u2014 from these measurements only, no extrapolation to other models, hardware, backends, or layouts",
+      "decryption_seconds": 0.05793100893497467,
+      "encryption_seconds": 0.31364897191524505,
+      "end_to_end_seconds": 14.988187393546106,
+      "homomorphic_seconds": 14.317426431179047,
+      "interactive_latency_conceivable": false,
+      "operators": [
+        "blocks.2.remote.blocks.0.mlp_fc"
+      ],
+      "policy": "ffn-up-only",
+      "ratio_to_plaintext_batched": 11494.476373843736,
+      "reference_plaintext_batched_seconds": 0.0013039469486102462,
+      "refresh_seconds": 0.2991809815168381,
+      "traffic_bytes": 655363.28125
+    },
+    {
+      "ciphertext_bytes": 169725593.6,
+      "conceivability_statement": "end-to-end 102s for one 128-token sequence at this scale against a declared 1.0s interactive reference budget; interactive-latency conceivable: False \u2014 from these measurements only, no extrapolation to other models, hardware, backends, or layouts",
+      "decryption_seconds": 0.2244439095258713,
+      "encryption_seconds": 1.2644718825817107,
+      "end_to_end_seconds": 101.95710891485214,
+      "homomorphic_seconds": 99.27965685427189,
+      "interactive_latency_conceivable": false,
+      "operators": [
+        "blocks.2.remote.blocks.0.qkv",
+        "blocks.2.remote.blocks.0.proj",
+        "blocks.2.remote.blocks.0.mlp_fc",
+        "blocks.2.remote.blocks.0.mlp_proj"
+      ],
+      "policy": "all-remote-linears",
+      "ratio_to_plaintext_batched": 14304.331038588258,
+      "reference_plaintext_batched_seconds": 0.007127708988264203,
+      "refresh_seconds": 1.1885362684726715,
+      "traffic_bytes": 2097165.0625
+    }
+  ],
+  "privacy_outcome": "undetermined",
+  "qualified": false,
+  "scientific_evidence": false,
+  "seed": 410801,
+  "stage": "D_selective_split_policy",
+  "timing_scope": "in-process engineering timing on a research node; not a secure-serving latency (no TEE, no attestation, no network)",
+  "wall_seconds": 9.661537447012961
+}

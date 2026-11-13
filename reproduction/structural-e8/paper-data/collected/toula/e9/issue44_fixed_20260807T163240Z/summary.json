@@ -1,0 +1,41 @@
+{
+  "schema": "dtraining.e9.rotation.v1",
+  "experiment": "E9 deployed E8 rotation",
+  "config": {
+    "measurement_kind": "measured",
+    "run_id": "issue44_fixed_20260807T163240Z",
+    "rotate_each_session": false,
+    "key_seed_base": 44000,
+    "model": "mistral-7b-instruct"
+  },
+  "evidence_status": "supporting",
+  "known_limitations": [
+    "Local-only obfuscation is expected to break model semantics; shared-key identity changes the cloud trust model."
+  ],
+  "sessions": [
+    {
+      "session": 1,
+      "A_tps": 10.5,
+      "B_tps": 11.5,
+      "C_tps": 11.1,
+      "B_identity": false,
+      "C_identity": true
+    },
+    {
+      "session": 2,
+      "A_tps": 10.4,
+      "B_tps": 11.3,
+      "C_tps": 11.4,
+      "B_identity": false,
+      "C_identity": true
+    },
+    {
+      "session": 3,
+      "A_tps": 10.7,
+      "B_tps": 11.4,
+      "C_tps": 11.5,
+      "B_identity": false,
+      "C_identity": true
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "aggregation_rule": "coordinate_median",
+  "channel_seeds": [
+    5391686,
+    5391687,
+    5391684
+  ],
+  "config": {
+    "gauge": true,
+    "gauge_scale": 0.001,
+    "replica_count": 3,
+    "seed": 5391686,
+    "tolerance": 0.02
+  },
+  "config_sha256": "341eefe8006c019edd17beb5d5163885b39b1734e85bfb1aca7d6804c065f350",
+  "created_by": "attacker.trained_defenses (in-repo re-implementation of the K-redundant-channel + coordinate-median integrity defense family; NOT the original defense project's code)",
+  "deployment": "in-process channels (one host, one process); cross-host deployment remains open (attacker/remote.py + nodes.json)",
+  "gauge_ids": [
+    "channel-0-1ae900fc",
+    "channel-1-31985ac4",
+    "channel-2-c6396e8f"
+  ],
+  "honest_heterogeneity": {
+    "max_rel_dev": 0.00036020755142327773,
+    "mean_rel_dev": 0.0002486651586314911,
+    "n_rows": 16,
+    "note": "the independent channels' honest disagreement distribution; the attack-side tolerance must sit above this budget for a fair comparison",
+    "p95_rel_dev": 0.00034280544603875054,
+    "per_channel_mean_rel_dev": [
+      0.00023287519973132993,
+      0.00025846909071560527,
+      0.00025465118544753824
+    ],
+    "source": "calibration_pre_phase",
+    "tolerance": 0.02
+  },
+  "journal": {
+    "path": "results/pilot-defended-corrected-8574117/split6/seed-22/replica-median/captures/replica_median_journal.jsonl",
+    "sha256": "817c402dfd0f823fc3dcc9daaff5c28fb5108c3364b7a0ce260c066e596fc606"
+  },
+  "k2_policy": null,
+  "replica_count": 3,
+  "schema": "llm_attacker.replica_median_provenance.v1",
+  "tolerance": 0.02,
+  "utility": {
+    "utility_after": {
+      "cross_entropy": 4.124069452285767,
+      "perplexity": 61.81026507983589
+    },
+    "utility_before": {
+      "cross_entropy": 4.12406587600708,
+      "perplexity": 61.81004402949755
+    }
+  }
+}

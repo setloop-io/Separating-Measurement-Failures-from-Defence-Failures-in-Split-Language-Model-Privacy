@@ -1,0 +1,1009 @@
+{
+  "schema": "view_privacy.v1",
+  "config": {
+    "output": "results/defense-gap-audit-02d60d4/view-privacy-33.json",
+    "toy": true,
+    "hidden": 64,
+    "seed": 33,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "solve_seeds": [
+      0,
+      1,
+      2
+    ],
+    "quick": true,
+    "bundle": null,
+    "mode": "inference"
+  },
+  "threat_model": "Repeated-target mixup observer; coordinate-view collusion requires multiple servers; count-monitor observer accumulates within one key epoch only.",
+  "provenance": {
+    "hostname": "MacBookPro",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-08T20:53:27Z",
+    "dtraining_commit": "02d60d4986165c9251687f422a824147759adc25"
+  },
+  "results": [
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 1,
+      "assumed_lambda": 0.65,
+      "mse": 0.25512940556383146,
+      "conditional_mean_variance": null,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 64
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 1,
+      "assumed_lambda": 0.65,
+      "mse": 0.6799794489764521,
+      "conditional_mean_variance": null,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 1,
+      "assumed_lambda": 0.65,
+      "mse": 0.28725012608820594,
+      "conditional_mean_variance": null,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 1,
+      "assumed_lambda": 0.75,
+      "mse": 0.11351886465291842,
+      "conditional_mean_variance": null,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 64
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 1,
+      "assumed_lambda": 0.75,
+      "mse": 0.4713692335125434,
+      "conditional_mean_variance": null,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 1,
+      "assumed_lambda": 0.75,
+      "mse": 0.11583991766235223,
+      "conditional_mean_variance": null,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 1,
+      "assumed_lambda": 0.85,
+      "mse": 0.1306725466235421,
+      "conditional_mean_variance": null,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 64
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 1,
+      "assumed_lambda": 0.85,
+      "mse": 0.3585213974067812,
+      "conditional_mean_variance": null,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 1,
+      "assumed_lambda": 0.85,
+      "mse": 0.12479097711388913,
+      "conditional_mean_variance": null,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "no_observation_calibration_mean",
+      "releases": 1,
+      "mse": 3.7247183025847383
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "nonlinear_corrected_output",
+      "releases": 1,
+      "mse": 0.0655491116023637
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 4,
+      "assumed_lambda": 0.65,
+      "mse": 0.1385462913012475,
+      "conditional_mean_variance": 0.0363545020822046,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 64
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 4,
+      "assumed_lambda": 0.65,
+      "mse": 0.5686226989398688,
+      "conditional_mean_variance": 0.0363545020822046,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 4,
+      "assumed_lambda": 0.65,
+      "mse": 0.16809280379617392,
+      "conditional_mean_variance": 0.0363545020822046,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 4,
+      "assumed_lambda": 0.75,
+      "mse": 0.023522946776091163,
+      "conditional_mean_variance": 0.027306270452855903,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 64
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 4,
+      "assumed_lambda": 0.75,
+      "mse": 0.38417730152204665,
+      "conditional_mean_variance": 0.027306270452855903,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 4,
+      "assumed_lambda": 0.75,
+      "mse": 0.024462916747503637,
+      "conditional_mean_variance": 0.027306270452855903,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 4,
+      "assumed_lambda": 0.85,
+      "mse": 0.05871539529414564,
+      "conditional_mean_variance": 0.021259207099974323,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 64
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 4,
+      "assumed_lambda": 0.85,
+      "mse": 0.2878740664741135,
+      "conditional_mean_variance": 0.021259207099974323,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 4,
+      "assumed_lambda": 0.85,
+      "mse": 0.05218868318887717,
+      "conditional_mean_variance": 0.021259207099974323,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "no_observation_calibration_mean",
+      "releases": 4,
+      "mse": 3.7247183025847383
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "nonlinear_corrected_output",
+      "releases": 4,
+      "mse": 0.04900714384977772
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 16,
+      "assumed_lambda": 0.65,
+      "mse": 0.08104372600524927,
+      "conditional_mean_variance": 0.008204769785183969,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 64
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 16,
+      "assumed_lambda": 0.65,
+      "mse": 0.6128856402445021,
+      "conditional_mean_variance": 0.008204769785183969,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 16,
+      "assumed_lambda": 0.65,
+      "mse": 0.10714390314885806,
+      "conditional_mean_variance": 0.008204769785183969,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 16,
+      "assumed_lambda": 0.75,
+      "mse": 0.008135295384788412,
+      "conditional_mean_variance": 0.006162693749760404,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 64
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 16,
+      "assumed_lambda": 0.75,
+      "mse": 0.4233876520847335,
+      "conditional_mean_variance": 0.006162693749760404,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 16,
+      "assumed_lambda": 0.75,
+      "mse": 0.007226279088351101,
+      "conditional_mean_variance": 0.006162693749760404,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 16,
+      "assumed_lambda": 0.85,
+      "mse": 0.06838145207247595,
+      "conditional_mean_variance": 0.004797944960886129,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 64
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 16,
+      "assumed_lambda": 0.85,
+      "mse": 0.3230443802205704,
+      "conditional_mean_variance": 0.004797944960886129,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 16,
+      "assumed_lambda": 0.85,
+      "mse": 0.06099102665869634,
+      "conditional_mean_variance": 0.004797944960886129,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "no_observation_calibration_mean",
+      "releases": 16,
+      "mse": 3.7247183025847383
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "nonlinear_corrected_output",
+      "releases": 16,
+      "mse": 0.04980969470746008
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 32,
+      "assumed_lambda": 0.65,
+      "mse": 0.07428452658235643,
+      "conditional_mean_variance": 0.0038704147236409622,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 64
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 32,
+      "assumed_lambda": 0.65,
+      "mse": 0.6282380941885304,
+      "conditional_mean_variance": 0.0038704147236409622,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 32,
+      "assumed_lambda": 0.65,
+      "mse": 0.0989862476006455,
+      "conditional_mean_variance": 0.0038704147236409622,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 32,
+      "assumed_lambda": 0.75,
+      "mse": 0.00645355039411536,
+      "conditional_mean_variance": 0.0029071115035347677,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 64
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 32,
+      "assumed_lambda": 0.75,
+      "mse": 0.43356898461472615,
+      "conditional_mean_variance": 0.0029071115035347677,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 32,
+      "assumed_lambda": 0.75,
+      "mse": 0.004794251287585884,
+      "conditional_mean_variance": 0.0029071115035347677,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 32,
+      "assumed_lambda": 0.85,
+      "mse": 0.06971542943118189,
+      "conditional_mean_variance": 0.0022633221048281066,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 64
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 32,
+      "assumed_lambda": 0.85,
+      "mse": 0.3299199335837396,
+      "conditional_mean_variance": 0.0022633221048281066,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 32,
+      "assumed_lambda": 0.85,
+      "mse": 0.061974525888120476,
+      "conditional_mean_variance": 0.0022633221048281066,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "no_observation_calibration_mean",
+      "releases": 32,
+      "mse": 3.7247183025847383
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "nonlinear_corrected_output",
+      "releases": 32,
+      "mse": 0.050434401834758086
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 1,
+      "case": "views",
+      "arm": "no_observation",
+      "coalition": [],
+      "observed_fraction": 0,
+      "reconstruction_mse": 2.450169401062637,
+      "property_accuracy": 0.5,
+      "num_views": 2,
+      "view_coordinates": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "dimension": 4,
+      "minimum_coalition_full_coordinate_coverage": 2,
+      "layout": "disjoint_coordinate_fragments"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 1,
+      "case": "views",
+      "arm": "single_view",
+      "coalition": [
+        0
+      ],
+      "observed_fraction": 0.5,
+      "reconstruction_mse": 0.5303326854681961,
+      "property_accuracy": 1,
+      "property_excess_over_majority": 0.5,
+      "num_views": 2,
+      "view_coordinates": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "dimension": 4,
+      "minimum_coalition_full_coordinate_coverage": 2,
+      "layout": "disjoint_coordinate_fragments"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 1,
+      "case": "views",
+      "arm": "single_view",
+      "coalition": [
+        1
+      ],
+      "observed_fraction": 0.5,
+      "reconstruction_mse": 1.919836715594441,
+      "property_accuracy": 0.5833333333333334,
+      "property_excess_over_majority": 0.08333333333333337,
+      "num_views": 2,
+      "view_coordinates": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "dimension": 4,
+      "minimum_coalition_full_coordinate_coverage": 2,
+      "layout": "disjoint_coordinate_fragments"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 1,
+      "case": "views",
+      "arm": "colluding_union",
+      "coalition": [
+        0,
+        1
+      ],
+      "observed_fraction": 1.0,
+      "reconstruction_mse": 0.0,
+      "property_accuracy": 1,
+      "property_excess_over_majority": 0.5,
+      "num_views": 2,
+      "view_coordinates": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "dimension": 4,
+      "minimum_coalition_full_coordinate_coverage": 2,
+      "layout": "disjoint_coordinate_fragments"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 2,
+      "case": "views",
+      "arm": "no_observation",
+      "coalition": [],
+      "observed_fraction": 0,
+      "reconstruction_mse": 2.450169401062637,
+      "property_accuracy": 0.5,
+      "num_views": 3,
+      "view_coordinates": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3
+        ]
+      ],
+      "dimension": 4,
+      "minimum_coalition_full_coordinate_coverage": 2,
+      "layout": "overlapping_coordinate_views"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 2,
+      "case": "views",
+      "arm": "single_view",
+      "coalition": [
+        0
+      ],
+      "observed_fraction": 0.5,
+      "reconstruction_mse": 1.03676513230525,
+      "property_accuracy": 0.9166666666666666,
+      "property_excess_over_majority": 0.41666666666666663,
+      "num_views": 3,
+      "view_coordinates": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3
+        ]
+      ],
+      "dimension": 4,
+      "minimum_coalition_full_coordinate_coverage": 2,
+      "layout": "overlapping_coordinate_views"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 2,
+      "case": "views",
+      "arm": "single_view",
+      "coalition": [
+        1
+      ],
+      "observed_fraction": 0.75,
+      "reconstruction_mse": 1.1662643167680053,
+      "property_accuracy": 0.8333333333333334,
+      "property_excess_over_majority": 0.33333333333333337,
+      "num_views": 3,
+      "view_coordinates": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3
+        ]
+      ],
+      "dimension": 4,
+      "minimum_coalition_full_coordinate_coverage": 2,
+      "layout": "overlapping_coordinate_views"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 2,
+      "case": "views",
+      "arm": "single_view",
+      "coalition": [
+        2
+      ],
+      "observed_fraction": 0.75,
+      "reconstruction_mse": 0.24713995198938157,
+      "property_accuracy": 1,
+      "property_excess_over_majority": 0.5,
+      "num_views": 3,
+      "view_coordinates": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3
+        ]
+      ],
+      "dimension": 4,
+      "minimum_coalition_full_coordinate_coverage": 2,
+      "layout": "overlapping_coordinate_views"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 2,
+      "case": "views",
+      "arm": "colluding_union",
+      "coalition": [
+        0,
+        1
+      ],
+      "observed_fraction": 1.0,
+      "reconstruction_mse": 0.0,
+      "property_accuracy": 1,
+      "property_excess_over_majority": 0.5,
+      "num_views": 3,
+      "view_coordinates": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3
+        ]
+      ],
+      "dimension": 4,
+      "minimum_coalition_full_coordinate_coverage": 2,
+      "layout": "overlapping_coordinate_views"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 2,
+      "case": "views",
+      "arm": "colluding_union",
+      "coalition": [
+        0,
+        2
+      ],
+      "observed_fraction": 1.0,
+      "reconstruction_mse": 0.0,
+      "property_accuracy": 1,
+      "property_excess_over_majority": 0.5,
+      "num_views": 3,
+      "view_coordinates": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3
+        ]
+      ],
+      "dimension": 4,
+      "minimum_coalition_full_coordinate_coverage": 2,
+      "layout": "overlapping_coordinate_views"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 2,
+      "case": "views",
+      "arm": "colluding_union",
+      "coalition": [
+        1,
+        2
+      ],
+      "observed_fraction": 1.0,
+      "reconstruction_mse": 0.0,
+      "property_accuracy": 1,
+      "property_excess_over_majority": 0.5,
+      "num_views": 3,
+      "view_coordinates": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3
+        ]
+      ],
+      "dimension": 4,
+      "minimum_coalition_full_coordinate_coverage": 2,
+      "layout": "overlapping_coordinate_views"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 2,
+      "case": "views",
+      "arm": "colluding_union",
+      "coalition": [
+        0,
+        1,
+        2
+      ],
+      "observed_fraction": 1.0,
+      "reconstruction_mse": 0.0,
+      "property_accuracy": 1,
+      "property_excess_over_majority": 0.5,
+      "num_views": 3,
+      "view_coordinates": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3
+        ]
+      ],
+      "dimension": 4,
+      "minimum_coalition_full_coordinate_coverage": 2,
+      "layout": "overlapping_coordinate_views"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 3,
+      "case": "tripwire",
+      "monitor": "fixed",
+      "epoch": 0,
+      "accepted": 4,
+      "rejected": 28,
+      "no_observation_zero_mse": 2.1098247251653537,
+      "first_release_mse": 5.709880689407194,
+      "accumulated_mse": 0.3074382868959159,
+      "pooling_scope": "same_epoch_only"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 3,
+      "case": "tripwire",
+      "monitor": "fixed",
+      "epoch": 1,
+      "accepted": 0,
+      "rejected": 32,
+      "no_observation_zero_mse": 2.2989461125960005,
+      "first_release_mse": null,
+      "accumulated_mse": null,
+      "pooling_scope": "same_epoch_only"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 3,
+      "case": "tripwire",
+      "monitor": "sliding",
+      "epoch": 0,
+      "accepted": 4,
+      "rejected": 28,
+      "no_observation_zero_mse": 2.1098247251653537,
+      "first_release_mse": 5.709880689407194,
+      "accumulated_mse": 0.3074382868959159,
+      "pooling_scope": "same_epoch_only"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 3,
+      "case": "tripwire",
+      "monitor": "sliding",
+      "epoch": 1,
+      "accepted": 0,
+      "rejected": 32,
+      "no_observation_zero_mse": 2.2989461125960005,
+      "first_release_mse": null,
+      "accumulated_mse": null,
+      "pooling_scope": "same_epoch_only"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 4,
+      "case": "tripwire",
+      "monitor": "fixed",
+      "epoch": 0,
+      "accepted": 32,
+      "rejected": 0,
+      "no_observation_zero_mse": 2.1098247251653537,
+      "first_release_mse": 2.705256489151979,
+      "accumulated_mse": 0.06860207703379649,
+      "pooling_scope": "same_epoch_only"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 4,
+      "case": "tripwire",
+      "monitor": "fixed",
+      "epoch": 1,
+      "accepted": 32,
+      "rejected": 0,
+      "no_observation_zero_mse": 2.2989461125960005,
+      "first_release_mse": 3.621094088894672,
+      "accumulated_mse": 0.21113671169190198,
+      "pooling_scope": "same_epoch_only"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 4,
+      "case": "tripwire",
+      "monitor": "sliding",
+      "epoch": 0,
+      "accepted": 32,
+      "rejected": 0,
+      "no_observation_zero_mse": 2.1098247251653537,
+      "first_release_mse": 2.705256489151979,
+      "accumulated_mse": 0.06860207703379649,
+      "pooling_scope": "same_epoch_only"
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 4,
+      "case": "tripwire",
+      "monitor": "sliding",
+      "epoch": 1,
+      "accepted": 32,
+      "rejected": 0,
+      "no_observation_zero_mse": 2.2989461125960005,
+      "first_release_mse": 3.621094088894672,
+      "accumulated_mse": 0.21113671169190198,
+      "pooling_scope": "same_epoch_only"
+    }
+  ],
+  "summary": [],
+  "interpretation": "Synthetic machinery check or supplied-array evaluation; no trained-defense or cryptographic-security certificate. Mixup SEM is conditional on a fixed estimated mean and excludes calibration uncertainty; synthetic main calibration uses 64 independent pool draws, exact pool mean is a separately labeled oracle arm. Nonlinear correction uses supplied paired endpoint outputs.",
+  "source": {
+    "kind": "synthetic",
+    "seed": 33
+  }
+}

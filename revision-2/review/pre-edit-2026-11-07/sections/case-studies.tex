@@ -1,0 +1,133 @@
+\section{Four campaign case studies}
+\label{sec:cases}
+
+\subsection{F1: an omitted gradient channel}
+\label{sec:f1}
+
+The decoy-gradient protocol mixes real activation rows with decoys. The
+trusted client sends protected activations to the cloud; the cloud returns
+its output; and the client, which holds the private loss, returns the output
+gradient to the cloud. Because the loss ignores decoys, their gradient rows
+are exactly zero. The resulting support pattern identifies which rows bear
+the loss. This is a metadata disclosure of the real/decoy partition, not
+token-identity reconstruction by zeros alone\citep{paper1} (\artifact{E1}).
+
+The source reports exact partition recovery on 4,096 of 4,096 inspected
+frames \emph{per run} across nine seeds. Its frequent-token content probe
+has a separate effect of $+0.65$--$1.50$ percentage points over a
+constant-guess baseline. These quantities have different denominators and
+cannot be merged into a single recovery claim. In six utility-qualified
+gradient-open cells, comprising three seeds on each of two datasets,
+forward-only privacy and utility gates pass while the joint view exceeds
+the pre-set $+1.0$ percentage-point privacy gate (\artifact{E1}).
+
+The forward-only non-detection is therefore out-of-scope for the cloud's
+joint-view privacy claim. The audit preserves the forward result and the
+newly covered breach as separate findings.
+The same source reports that per-row clipping with Gaussian noise removes
+the scored partition disclosure: 0 of 1,024 inspected frames disclose the
+partition, with agreement 0.400 at a 32/80 base rate. Approximately
+$0.01$ nats is the associated held-out cross-entropy \emph{utility cost},
+not residual leakage. This is scoped mitigation evidence under the scored
+probes; attacks accumulating observations across training and other omitted
+families remain untested. The case supports checking the joint transcript
+and contradicts a universal dismissal of perturbation-based mitigation.
+
+\subsection{F2: a reconstruction claim scored as prediction}
+\label{sec:f2}
+
+The boundary-replacement audit found that a representation computed from
+\texttt{ids[:, :-1]} was scored against labels from \texttt{ids[:, 1:]}.
+Thus a row representing $x_t$ was evaluated against $x_{t+1}$. The recorded
+attack scores measure next-token predictive information, whereas the
+headline privacy claim concerned reconstruction of the represented input.
+A high positive-control score under this alignment cannot validate the
+different reconstruction target. The current-token privacy conclusion is
+invalid; the existing scores may be retained as next-token probe results
+(\artifact{B1}).
+
+The earlier independent artifact review also reports that separately
+trained zero-return controls match or outperform the trained remote model
+in all six clean corpus--seed comparisons. We retain this as a
+\emph{source-reported} result, not a new recomputation. It fails to
+demonstrate that learned remote computation is necessary for the observed
+utility endpoints. It does not show that removing a return from an
+already-trained model has literally no effect; that intervention differs
+from training a matched model without the return (\artifact{B1}).
+
+A further metric mismatch reinforces the need to name the estimand. In
+one matched checkpoint evaluation, NLL rises by approximately $0.034$
+nats and passes its utility rule, while teacher-forced answer-token top-1
+match falls from $34.79\%$ to $18.15\%$, a $16.64$ percentage-point drop.
+This is a specific answer-token metric, not standard multiple-choice task
+accuracy or a replicated deployed-protocol result. The audit narrows the
+quality and delegation claims without inventing corrected reconstruction
+results that the historical evaluator did not produce (\artifact{B1}).
+
+\subsection{F3: incomplete qualification and genuine rejections}
+\label{sec:f3}
+
+The trilemma campaign completed 232 exploratory runs and rejected all
+19 configurations under its frozen exploratory rules. Reconciliation of
+the cell table yields 13 qualified privacy breaches, five utility-gate
+failures, and seven learning-gain failures. These reasons overlap. Six
+configurations have undetermined privacy but are independently rejected
+on utility or gain; width-64 is rejected on gain alone (\artifact{R1}).
+
+Only four of 24 required instruments qualified: input-byte probes on
+inbound and outbound gradients in the two recorded defence categories.
+This missing coverage prevents a joint scoped privacy pass. It does not
+invalidate the breaches detected by applicable qualified probes, nor the
+independent utility or gain failures. The appropriate outcome is a finite
+empty feasible set under the recorded rules, with incomplete privacy
+coverage, rather than an explanation that all rejections arose from faulty
+instruments (\artifact{R1}).
+
+The span-6 cell illustrates why the inequality and rejection reasons must
+be checked together. Its four-seed mean utility cost is
+$0.0999705344$ nats and its upper 95\% Student-$t$ limit is
+$0.1195024415$. Both \emph{pass} the respective $0.10$ and $0.12$
+thresholds. The small $2.95\times10^{-5}$-nat mean margin lies on the
+passing side. Its rejection reasons are gain failure and qualified privacy
+breach, not utility failure. Four-seed intervals remain descriptive and
+unadjusted; they do not establish population-level impossibility
+(\artifact{R1}).
+
+The subsequent eight-seed confirmation packet was proposed, not frozen,
+admitted, or executed. Its $0.263772$ all-family power upper bound is a
+conditional planning calculation using exploratory means and standard
+deviations. It is not a probability that the 19 rejections are false.
+Its sensitivity to variance assumptions and its explicit planning status
+prevent its promotion into confirmatory outcome evidence (\artifact{R1}).
+
+\subsection{F4: a calibrated finite negative result}
+\label{sec:f4}
+
+The defence-redesign pilot completed a frozen, exploratory 66-run campaign
+covering seven cells with three paired seeds per cell and 16,384-window
+panels. No cell was pilot-eligible. All seven pass the remote-gain rule;
+five pass utility, while d3-q1 and d3-q2 fail it. The recorded composite
+privacy verdicts are four failed and three undetermined. We preserve this
+binding-based distinction rather than relabelling every missing
+qualification as either success or breach (\artifact{P4}).
+
+The pilot nevertheless supplies a substantive negative finding. Reported
+worst-seed punctuation-property advantages are $0.79$--$0.89$ where
+qualified, against the $0.02$ acceptance threshold; next-byte-class
+advantages are $0.097$--$0.112$. Punctuation uses correlation advantage,
+whereas next-byte structure uses classification-accuracy advantage.
+Here next-byte prediction is an explicitly declared target, unlike F2's
+use of that target to claim current-token reconstruction resistance.
+A large detected signal relative to the policy gate is evidence against
+the tested defence setting; its ratio alone does not demonstrate a broken
+instrument or an impossible gate (\artifact{P4}).
+
+Calibration constants have separate roles: the property positive-control
+floor is $0.10$, the structure floor is $0.02$, the null band is $0.02$,
+and privacy acceptance is $0.02$. A positive-control floor is not a
+calibrated upper limit on undetected leakage. The qualification record
+describes marginal null excursions as reliability evidence, not instrument
+breakage. We therefore retain the finite negative result for the tested
+mechanisms, strengths, budgets, and qualified targets, while withholding
+claims about untested attacks, general token privacy, or universal
+impossibility (\artifact{P4}).

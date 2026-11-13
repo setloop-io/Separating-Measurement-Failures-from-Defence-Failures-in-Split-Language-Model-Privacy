@@ -1,0 +1,229 @@
+{
+  "arm": "structured_b256_adaptive_32",
+  "run_json": "/workspace/experiments/poc06b_v4_b256_20260814T2145/results/rotation_b256.json",
+  "capture_dir": "/workspace/experiments/poc06b_v4_b256_20260814T2145/private/eval",
+  "config_echo": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "split_after": 15,
+    "resume_after": 26,
+    "seq_len": 64,
+    "micro_batch_size": 1,
+    "grad_accum": 16,
+    "steps": 1,
+    "seed": 42,
+    "lr": 0.0001,
+    "dtype": "bf16",
+    "obf": {
+      "mode": "wire_sandwich",
+      "transform_mode": "structured_hadamard",
+      "version": "v2",
+      "seed_base": "redacted",
+      "seed_delivery": "preprovisioned_on_cloud",
+      "ratchet_tokens": 0,
+      "budget_events": 256,
+      "count_all_training_directions": true,
+      "strict_budget": true,
+      "oversized_forwards": 0,
+      "served_tokens": 4480,
+      "served_observable_rows": 4480,
+      "final_epoch": 17,
+      "directional_accounting": {
+        "cadence": 256,
+        "served_observable_rows": 4480,
+        "evidence": 128,
+        "epoch": 17,
+        "oversized_exchanges": 0,
+        "by_direction": {
+          "forward": 0,
+          "return": 0,
+          "activation_request": 1216,
+          "activation_response": 1216,
+          "gradient_request": 1024,
+          "gradient_response": 1024,
+          "retry": 0,
+          "evaluation": 384
+        },
+        "open_exchanges": 0,
+        "completed_exchanges": 19
+      },
+      "privacy_scope": "capture_resistance_negative_control",
+      "compromised_cloud_privacy": false
+    }
+  },
+  "attacker": "known-plaintext replay (public weights + corpus + data order); solve_w=polar(lstsq) per epoch",
+  "decoder_public_pairs": 512,
+  "decoder_val_top1": 58.85,
+  "per_epoch": [
+    {
+      "epoch": 1,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 37.5,
+      "top1_fwd_bwd_pct": 43.75,
+      "undefended_top1_pct": 56.25
+    },
+    {
+      "epoch": 2,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 9.38,
+      "top1_fwd_bwd_pct": 6.25,
+      "undefended_top1_pct": 15.62
+    },
+    {
+      "epoch": 3,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 6.25,
+      "top1_fwd_bwd_pct": 9.38,
+      "undefended_top1_pct": 9.38
+    },
+    {
+      "epoch": 4,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 34.38,
+      "top1_fwd_bwd_pct": 43.75,
+      "undefended_top1_pct": 93.75
+    },
+    {
+      "epoch": 5,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 93.75,
+      "top1_fwd_bwd_pct": 93.75,
+      "undefended_top1_pct": 96.88
+    },
+    {
+      "epoch": 6,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 81.25,
+      "top1_fwd_bwd_pct": 78.12,
+      "undefended_top1_pct": 90.62
+    },
+    {
+      "epoch": 7,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 31.25,
+      "top1_fwd_bwd_pct": 37.5,
+      "undefended_top1_pct": 96.88
+    },
+    {
+      "epoch": 8,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 6.25,
+      "top1_fwd_bwd_pct": 9.38,
+      "undefended_top1_pct": 15.62
+    },
+    {
+      "epoch": 9,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 87.5,
+      "top1_fwd_bwd_pct": 87.5,
+      "undefended_top1_pct": 93.75
+    },
+    {
+      "epoch": 10,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 3.12,
+      "top1_fwd_bwd_pct": 6.25,
+      "undefended_top1_pct": 15.62
+    },
+    {
+      "epoch": 11,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 43.75,
+      "top1_fwd_bwd_pct": 46.88,
+      "undefended_top1_pct": 84.38
+    },
+    {
+      "epoch": 12,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 31.25,
+      "top1_fwd_bwd_pct": 28.12,
+      "undefended_top1_pct": 46.88
+    },
+    {
+      "epoch": 13,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 0.0,
+      "top1_fwd_bwd_pct": 0.0,
+      "undefended_top1_pct": 9.38
+    },
+    {
+      "epoch": 14,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 18.75,
+      "top1_fwd_bwd_pct": 21.88,
+      "undefended_top1_pct": 25.0
+    },
+    {
+      "epoch": 15,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 0.0,
+      "top1_fwd_bwd_pct": 3.12,
+      "undefended_top1_pct": 9.38
+    },
+    {
+      "epoch": 16,
+      "n_rows": 64,
+      "n_solve": 32,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 46.88,
+      "top1_fwd_bwd_pct": 56.25,
+      "undefended_top1_pct": 100.0
+    }
+  ],
+  "labelfree_band_top1_pct": 1.76,
+  "undefended_top1_pct": 53.71,
+  "pooled_cross_epoch": {
+    "n_epochs": 16,
+    "rows_per_epoch": 32,
+    "total_solve_rows": 512,
+    "solve_victim_disjoint": true,
+    "solver_tag": "lstsq+svd",
+    "top1_pct": 21.88
+  },
+  "note": "interpretation depends on --arm: rotated arm expect per-epoch ~= band (<= ~3.7%) and pooled in band; baseline arm (no rotation) expect per-epoch ~= undefended"
+}

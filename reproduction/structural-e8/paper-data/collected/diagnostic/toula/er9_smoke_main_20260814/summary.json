@@ -1,0 +1,39 @@
+{
+  "schema": "dtraining.er9_smoke_summary.v1",
+  "measurement_kind": "measured",
+  "evidence_status": "diagnostic",
+  "config": {
+    "measurement_kind": "measured",
+    "cells": ["plain", "full1"],
+    "rtt_ms": 0,
+    "budget_events": 64
+  },
+  "known_limitations": [
+    "Single smoke repetition at direct RTT.",
+    "Emulated TEE provides no hardware isolation from Koula host root.",
+    "Partial token recovery remained above the label-free band despite zero accepted E-R8 solved epochs.",
+    "Dense B=64 folding is operationally impractical at roughly 205-215 seconds per fold."
+  ],
+  "provenance": {
+    "dtraining_commit": "c5dfe00ab44a7ddae35a16ca587e7a8661257ec1",
+    "hostname": "toula",
+    "corpus_sha256": "7b01beb2cb0764fbeab36105ad35e40ae9b87127264f2b2e52c0a6597c6e1057",
+    "corpus_n_docs": 12,
+    "model_manifest_sha256": "f9e6bf6a6dd4daeb30770c2ada6495ba9803e325ed04d46c9cfd63af5af0f740",
+    "model_manifest_algo": "v2-sizes-no-cache",
+    "model_manifest_n_files": 15,
+    "container_image": "sha256:7370472a9000f6d726df3049eb9b75a6ef18f0b44d615306f444cbb857cd8576",
+    "hosts": ["toula", "koula"]
+  },
+  "results": {
+    "plain_eval_loss": 4.258039772510529,
+    "full1_eval_loss": 2.5259456895291805,
+    "full1_loss_delta_vs_plain": -1.7320940829813485,
+    "full1_label_free_band_top1_pct": 9.71,
+    "full1_per_epoch_known_plaintext_mean_top1_pct": 21.7376875,
+    "full1_pooled_cross_epoch_top1_pct": 29.69,
+    "approximate_alignment_mean_top1_pct": 15.21375,
+    "approximate_alignment_solved_epochs": 0,
+    "ratchet_epochs": 164
+  }
+}

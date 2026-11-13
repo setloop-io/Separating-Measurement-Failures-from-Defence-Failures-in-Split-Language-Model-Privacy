@@ -1,0 +1,284 @@
+{
+  "schema": "view_privacy.v1",
+  "config": {
+    "output": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/results-defended-v1/split3/seed-11/secret-mixup/view-privacy.json",
+    "toy": false,
+    "hidden": 64,
+    "seed": 11,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "solve_seeds": [
+      0,
+      1,
+      2
+    ],
+    "quick": false,
+    "bundle": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/results-defended-v1/split3/seed-11/secret-mixup/view-bundle.json"
+  },
+  "threat_model": "Repeated-target mixup observer; coordinate-view collusion requires multiple servers; count-monitor observer accumulates within one key epoch only.",
+  "provenance": {
+    "hostname": "toula",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-09T07:02:58Z",
+    "dtraining_commit": "b3ebea81d20cdf7290bd1870a2393b60302176fe"
+  },
+  "results": [
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 1,
+      "assumed_lambda": 0.65,
+      "mse": 51.844427296704296,
+      "conditional_mean_variance": null,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 63
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 1,
+      "assumed_lambda": 0.65,
+      "mse": 55.75741558230573,
+      "conditional_mean_variance": null,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 1,
+      "assumed_lambda": 0.65,
+      "mse": 52.775947729550296,
+      "conditional_mean_variance": null,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 1,
+      "assumed_lambda": 0.75,
+      "mse": 36.69492794253298,
+      "conditional_mean_variance": null,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 63
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 1,
+      "assumed_lambda": 0.75,
+      "mse": 37.74129535953435,
+      "conditional_mean_variance": null,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 1,
+      "assumed_lambda": 0.75,
+      "mse": 36.864323018640434,
+      "conditional_mean_variance": null,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 1,
+      "assumed_lambda": 0.85,
+      "mse": 33.65668161996239,
+      "conditional_mean_variance": null,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 63
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 1,
+      "assumed_lambda": 0.85,
+      "mse": 33.6535918311995,
+      "conditional_mean_variance": null,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 1,
+      "assumed_lambda": 0.85,
+      "mse": 33.581484306265,
+      "conditional_mean_variance": null,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "no_observation_calibration_mean",
+      "releases": 1,
+      "mse": 246.97145339653974
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "nonlinear_corrected_output",
+      "releases": 1,
+      "mse": 13.08712234517593
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 2,
+      "assumed_lambda": 0.65,
+      "mse": 24.591143156320644,
+      "conditional_mean_variance": 37.79431784998053,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 63
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 2,
+      "assumed_lambda": 0.65,
+      "mse": 30.623219655094964,
+      "conditional_mean_variance": 37.79431784998053,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 2,
+      "assumed_lambda": 0.65,
+      "mse": 25.963749826167927,
+      "conditional_mean_variance": 37.79431784998053,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 2,
+      "assumed_lambda": 0.75,
+      "mse": 13.95407328607031,
+      "conditional_mean_variance": 28.38773207398538,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 63
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 2,
+      "assumed_lambda": 0.75,
+      "mse": 16.137348347599353,
+      "conditional_mean_variance": 28.38773207398538,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 2,
+      "assumed_lambda": 0.75,
+      "mse": 14.360114629013376,
+      "conditional_mean_variance": 28.38773207398538,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "calibrated_mean",
+      "releases": 2,
+      "assumed_lambda": 0.85,
+      "mse": 14.1840879324767,
+      "conditional_mean_variance": 22.10117549012703,
+      "calibration_source": "finite_auxiliary_samples",
+      "calibration_sample_count": 63
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "naive_zero_mean",
+      "releases": 2,
+      "assumed_lambda": 0.85,
+      "mse": 14.712079569358222,
+      "conditional_mean_variance": 22.10117549012703,
+      "calibration_source": "zero_mean_assumption",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "oracle_pool_mean",
+      "releases": 2,
+      "assumed_lambda": 0.85,
+      "mse": 14.219434722664458,
+      "conditional_mean_variance": 22.10117549012703,
+      "calibration_source": "oracle_entire_pool",
+      "calibration_sample_count": null
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "no_observation_calibration_mean",
+      "releases": 2,
+      "mse": 246.97145339653974
+    },
+    {
+      "experiment": "view_privacy",
+      "bundle_index": 0,
+      "case": "mixup",
+      "arm": "nonlinear_corrected_output",
+      "releases": 2,
+      "mse": 0.0
+    }
+  ],
+  "summary": [],
+  "interpretation": "Synthetic machinery check or supplied-array evaluation; no trained-defense or cryptographic-security certificate. Mixup SEM is conditional on a fixed estimated mean and excludes calibration uncertainty; synthetic main calibration uses 64 independent pool draws, exact pool mean is a separately labeled oracle arm. Nonlinear correction uses supplied paired endpoint outputs.",
+  "source": {
+    "kind": "supplied_arrays",
+    "sha256": "cd26b43ca5cdef7534dcc166d538876ddc733c07871bf12759582a3306b41f23"
+  }
+}

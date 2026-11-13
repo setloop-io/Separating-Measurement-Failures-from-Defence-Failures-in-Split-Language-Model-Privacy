@@ -1,0 +1,158 @@
+{
+  "schema": "llm_attacker.bottleneck_sweep_cell.v1",
+  "status": "COMPLETE",
+  "measurement_version": 2,
+  "observation_location": "body_input_seam",
+  "baseline_scope": "public-head reconstruction; uses public cloud decoder when the defense exposes one; the defense-aware arm uses only the defense class, k and the public calibration partition",
+  "split": 6,
+  "seed": 33,
+  "method": "tb-cotrain",
+  "dim": 256,
+  "paired_control": "../../none/cell.json",
+  "wall_seconds": 15.931762559106573,
+  "attack_seconds": 399.179183376953,
+  "cuda_peak_allocated_bytes": 1777339392,
+  "resources_scope": "victim wall includes capture I/O and matched utility measurements; attack time is separate; cuda peak is process-wide",
+  "utility_before": {
+    "cross_entropy": 4.710250269982122,
+    "perplexity": 111.07995640594314,
+    "tokens": 992,
+    "documents": 32,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "before_victim_training"
+  },
+  "utility_after": {
+    "cross_entropy": 4.3091039196137455,
+    "perplexity": 74.37381415570763,
+    "tokens": 992,
+    "documents": 32,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "after_victim_training"
+  },
+  "training": {
+    "steps_run": 64,
+    "final_loss": 2.5809433460235596,
+    "mean_loss": 3.590705469250679
+  },
+  "access": {
+    "schema": "llm_attacker.bottleneck_sweep_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 32,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "public_defense_decoder": "granted when the defense exposes a cloud decoder (bottleneck v2 geometry, pca-compress basis)",
+    "defense_aware_arm": {
+      "knowledge": "defense CLASS and released width k only (no defense weights or randomness)",
+      "surrogate": "PCA encoder+inverse fit on the public calibration partition at the same k",
+      "use": "learned prior over the observed wire for the forward/beam/SIPIT kernels (BPDA-style straight-through approximation)"
+    },
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 32,
+        "beam_width": 4
+      },
+      "sipit": {
+        "steps_per_token": 128
+      },
+      "scored_sequences": 32
+    }
+  },
+  "provenance": {
+    "path": "captures/trained_bottleneck_provenance.json",
+    "sha256": "3782cd7fd892a6f1d8cd366e973c3d262b9a9d47e46f24423a683a29c8e41600"
+  },
+  "run_artifact": "run.json",
+  "evidence": "run.json.evidence.json",
+  "captures_dir": "captures",
+  "attacks": {
+    "forward": {
+      "accuracy": 0.826171875,
+      "n_tokens": 1024,
+      "n_sequences": 32,
+      "candidate_count": 32,
+      "beam_width": 4,
+      "work": {
+        "head_forward_calls": 32,
+        "head_forward_sequences": 128000,
+        "head_forward_token_positions": 2159616,
+        "head_backward_calls": 0,
+        "head_backward_token_positions": 0,
+        "vocabulary_dot_products": 51463168,
+        "wall_seconds": 40.56877274415456,
+        "cuda_seconds": 40.5687421875,
+        "peak_allocated_bytes": 10107184640,
+        "incremental_peak_allocated_bytes": 9053021184
+      },
+      "artifact": "forward-baseline.json"
+    },
+    "sipit": {
+      "accuracy": 0.8486328125,
+      "n_tokens": 1024,
+      "n_sequences": 32,
+      "steps_per_token": 128,
+      "work": {
+        "head_forward_calls": 8192,
+        "head_forward_sequences": 262144,
+        "head_forward_token_positions": 4325376,
+        "head_backward_calls": 4096,
+        "head_backward_token_positions": 2162688,
+        "vocabulary_dot_products": 6587285504,
+        "wall_seconds": 157.82048680703156,
+        "cuda_seconds": 157.82065625,
+        "peak_allocated_bytes": 1763868672,
+        "incremental_peak_allocated_bytes": 503557632
+      },
+      "artifact": "sipit-baseline.json"
+    },
+    "defense_aware": {
+      "defense_aware": true,
+      "defense_class": "tb-cotrain",
+      "k": 256,
+      "surrogate": "pca_encoder_inverse_on_public_calibration",
+      "surrogate_explained_variance_at_k": 0.9988855081826233,
+      "forward": {
+        "accuracy": 0.0009765625,
+        "n_tokens": 1024,
+        "n_sequences": 32,
+        "candidate_count": 32,
+        "beam_width": 4
+      },
+      "sipit": {
+        "accuracy": 0.001953125,
+        "n_tokens": 1024,
+        "n_sequences": 32,
+        "steps_per_token": 128
+      },
+      "artifact": "defense-aware-baseline.json"
+    }
+  },
+  "public_decoder": {
+    "path": "public-bottleneck-decoder.pt",
+    "sha256": "fd15b37f75441048b6d60ad6645f68cc163a29420c14694ef14480602ab93610"
+  },
+  "utility_gate": {
+    "ppl_after": 74.37381415570763,
+    "control_ppl_after": 48.11248657994797,
+    "ratio": 1.5458318503684385,
+    "pass_1_5x": false,
+    "pass_2x": true,
+    "thresholds": [
+      1.5,
+      2.0
+    ]
+  },
+  "artifact_hashes": {
+    "forward-baseline.json": "705d478fb365760a936a99a14cc8d32494bbdea1bc369534386f8538c9eee8e9",
+    "run.json": "a47d5b4365fd39470c6dd1468c1a554fbc0658be2cfc95c1ff840965b135cfee",
+    "defense-aware-baseline.json": "7c5100d2a45a5322e5bf9a2d600e9da62c916b02883b49e897911ffd6664a3ba",
+    "sipit-baseline.json": "803efdb83d9ab77208a9cc2c8b5eae680236f326845d5a9e2802c5552989aa40"
+  }
+}

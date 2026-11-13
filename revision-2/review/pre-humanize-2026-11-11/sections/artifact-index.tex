@@ -1,0 +1,118 @@
+\section{Sources and reproducibility}
+\label{app:artifacts}
+
+Paths below are relative to the repository root, the parent of
+\path{revision-2/}. The complete list of consumed files, byte lengths
+and SHA-256 values appears in \path{revision-2/data/source_manifest.json}.
+The flat index is \path{revision-2/data/source-index.csv}. The manifest
+binds 118 inputs to the secondary-analysis script. These records identify
+the evidence consumed here, alongside the original campaigns' collection
+and admission records, which retain their separate provenance role.
+
+\begin{description}
+\item[\hypertarget{artifact-E1}{Decoy-gradient experiment.}]
+\path{evidence/decoy-gradient/paper1-main.tex}, especially the abstract,
+mechanism section and mitigation results. The public preprint reports the
+frame counts, content-probe effect and utility cost \cite{paper1}.
+Those measurements are source-reported here, without a fresh count of
+all frames.
+
+\item[\hypertarget{artifact-B1}{Boundary-replacement audit.}]
+\path{evidence/boundary-replacement/independent_evidence_review_2026-09-09/VERDICTS.md}
+and its accompanying recomputed-evidence JSON. These records trace the
+target-alignment defect and utility/control comparisons to their original
+runner and outputs. Our analysis hashes those sources. Corrected attacker
+fitting and the prior audit's full set of checks remain outside this
+secondary analysis.
+
+\item[\hypertarget{artifact-R1}{Privacy, utility and gain exploration.}]
+\path{reproduction/trilemma-campaign/evidence/r1-exploration-20260917/analysis/exploratory_analysis.json},
+\path{reproduction/trilemma-campaign/evidence/r1-qualification-20260916/attack-spec-frozen.json}, and
+\path{evidence/trilemma-campaign/r1_cell_results.csv} and
+\path{evidence/trilemma-campaign/r1_seed_results.csv}.
+The script reconstructs 76 contrasts across configurations and seeds,
+per-binding privacy rules, utility/gain decisions and consistency with
+the saved tables.
+\path{reproduction/trilemma-campaign/evidence/r1-exploration-20260917/confirmation_power.json}
+provides conditional planning evidence for a confirmation that was never
+executed.
+
+\item[\hypertarget{artifact-P4}{Defence-redesign pilot.}]
+\path{reproduction/defense-redesign-pilot/outputs/runs/pilot-20260922-a/verification.json},
+the adjacent report and run-metrics records, and
+\path{evidence/defense-redesign-pilot/PILOT_DECISION.md}.
+The script recomputes paired utility/gain statistics, candidate advantages
+and recorded qualification/composite decisions from saved candidate arrays
+and qualification scores. Tensor captures remain outside this rescoring.
+
+\item[\hypertarget{artifact-E8}{Orthogonal-wrapper experiment.}]
+\path{reproduction/structural-e8/paper-data/collected/h100-2/issues/issue_e8_27b_20260807/e8_robustness_27b_bf16_densek_20260807T230529Z.json}
+and \path{evidence/structural-e8/EXPERIMENT_STORY.md}.
+The analysis extracts recorded baselines, crossings at each depth and
+pooled/session values. The known-pair curve comes from the original
+experiment and is retained at that evidential level.
+
+\item[\hypertarget{artifact-ER}{Rotation deployment study.}]
+\path{reproduction/structural-e8/paper-data/collected/toula/er_20260811/COLLECTION_MANIFEST.json},
+its admitted summaries and session identity records, and
+\path{evidence/structural-e8/EVIDENCE_EXECUTION_LEDGER.md}.
+The script extracts eight runs and 24 sessions. For N=16, RTT=0 and
+session~1, the identity record reports $2.8$ and $7.6$ tokens/s. Their
+ratio gives a $63.16\%$ throughput reduction at the source's recorded
+precision, with no additional hardware-measurement accuracy guarantee.
+
+\item[\hypertarget{artifact-MI}{MI-estimator analysis.}]
+\path{evidence/privacy-contract/privacy-contract-draft.tex} and
+\path{evidence/privacy-contract/KEY_NUMBERS.md}, with
+\path{evidence/structural-e8/LATENT_CAMPAIGN_REPORT_V7_V9.md} for the
+finite capacity ablations. The near-zero scores are source-reported.
+Equation~\eqref{eq:dv} and the constant-critic counterexample provide
+analytic arguments, separate from the recorded model measurements.
+\end{description}
+
+\section{Checking the derived records}
+\label{app:checks}
+
+From \path{revision-2/}, the analysis runs with
+\begin{quote}\small\ttfamily
+python3 analysis/recompute.py
+\end{quote}
+The script uses the Python standard library and writes derived records only
+under \path{revision-2/data/}, without loading checkpoints, tensor
+captures or secret keys. Its stored log reports 1,522 arithmetic and
+disposition checks on this input set. The checks reconstruct seed
+contrasts, confidence endpoints, per-binding rules and composite outcomes,
+then compare them with the previously generated tables. They test internal
+consistency. Independent experimental replication and accuracy on unseen
+studies require separate evidence.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+Rejection reason combination & Configurations \\
+\midrule
+Qualified privacy breach only & 10 \\
+Gain failure and qualified privacy breach & 3 \\
+Utility and gain failure & 3 \\
+Utility failure only & 2 \\
+Gain failure only & 1 \\
+\midrule
+Total & 19 \\
+\bottomrule
+\end{tabular}
+\caption{The reason intersections account for the full exploration.
+These disjoint categories explain the overlapping marginal counts in
+Figure~\ref{fig:campaigns}. The six configurations without a qualified
+privacy breach have independent utility or gain rejection reasons.
+The source is \artifact{R1}. Derived records appear in
+\texttt{data/audit\_results.json}.}
+\label{tab:intersections}
+\end{table}
+
+The derived JSON retains uncertainty conventions, denominators, source
+levels and unresolved historical limitations. Before writing vector PDFs,
+the figure script checks the generated CSVs against the original cell/seed
+tables and pilot report. The revision README gives the regeneration
+commands and dependencies. A separate preservation manifest checks the
+existing \path{paper/} files independently of this revision.

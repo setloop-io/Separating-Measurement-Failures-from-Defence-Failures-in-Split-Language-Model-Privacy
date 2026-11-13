@@ -1,0 +1,636 @@
+{
+  "schema": "dtraining.ed2.distributed_draft.v2",
+  "experiment": "E-D2 distributed draft speculation",
+  "config": {
+    "target": "/workspace/experiments/models/qwen36-35b-a3b",
+    "draft": "/workspace/experiments/models/qwen36-27b",
+    "cloud": "http://10.10.10.2:5000",
+    "split_after": 1,
+    "resume_at": 38,
+    "k": [
+      4
+    ],
+    "max_tokens": 32,
+    "output": "/workspace/experiments/results/paper2/p2d1_k4_correctness_diagnostic_20260807T195140Z.json",
+    "repetitions": 1,
+    "wan_profile": "direct_0ms",
+    "quick": false,
+    "self_test": false,
+    "diagnostic": true,
+    "prompt_category": "structured",
+    "prompt_index": 0,
+    "measurement_kind": "emulated"
+  },
+  "evidence_status": "diagnostic_only",
+  "timings_valid": false,
+  "known_limitations": [
+    "The WAN profile is externally applied; measured wire RTT is retained per run.",
+    "Fallback and optimized kernel paths require separate artifacts and must not be pooled."
+  ],
+  "provenance": {
+    "dtraining_commit": "unknown",
+    "hostname": "toula",
+    "platform": "Linux-6.17.0-1026-nvidia-aarch64-with-glibc2.39",
+    "container_image": "split-inference:spark"
+  },
+  "runs": [
+    {
+      "repetition": 0,
+      "category": "structured",
+      "prompt": "List the top 10 largest countries by area with their capitals and populations in a formatted table.",
+      "k": 4,
+      "baseline_time_s": 2.5734148025512695,
+      "baseline_tokens_per_second": 12.434839485758523,
+      "baseline_token_ids_sha256": "7b2b87849cdfac3f087f87575f5f7d85652b0293d32611b81e6267b0a174fbe7",
+      "draft_token_ids_sha256": "88f0e6f7813247e8150652bcf3c018d7924c317e5b987ac3c2681eb4355782d1",
+      "rounds": 7,
+      "accepted": 26,
+      "target_forward_calls": 8,
+      "target_replay_forwards": 2,
+      "tokens_per_target_forward": 4.0,
+      "tokens_per_round_trip": 3.2,
+      "partial_accept_rate": 0.2857,
+      "time_s": 11.158017873764038,
+      "tokens_per_second": 2.8678928786484494,
+      "wire_calls": 9,
+      "mean_wire_total_ms": 148.72666666666666,
+      "diagnostic_rounds": [
+        {
+          "round": 0,
+          "committed_before": 32,
+          "current_token_id": 8160,
+          "proposal_token_ids": [
+            513,
+            279,
+            1844,
+            220
+          ],
+          "target_prediction_token_ids": [
+            513,
+            279,
+            1844,
+            220,
+            16
+          ],
+          "accepted_prefix_len": 4,
+          "correction_token_id": 16,
+          "replay_required": false,
+          "before_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "82c4dce98341f4154c2cc29fd84bce0f6c5d354fe6547d44a3884a7f2a87597f",
+            "cloud": {
+              "cached_seq_len": 32,
+              "sampled_state_sha256": "33abf1d1374ff85ff8a64a85715eb0b883976a0bac32dcd644c858d6e8db4137"
+            }
+          },
+          "after_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "5238733c1a847e8ec6ac7b8662c2416f8a4cc0a39009085d0725cd6484b9e61e",
+            "cloud": {
+              "cached_seq_len": 37,
+              "sampled_state_sha256": "964ca5cfb237794d3820c20140e8b7905244268f99124194cd860b57d980b702"
+            }
+          },
+          "position_comparisons": [
+            {
+              "output_index": 1,
+              "same_context_as_sequential": true,
+              "block_token_id": 513,
+              "reference_token_id": 513,
+              "block_top2_margin": 1.96875,
+              "reference_top2_margin": 1.953125,
+              "block_vs_single_max_abs_logit_delta": 0.23046875,
+              "block_vs_single_rms_logit_delta": 0.04666220396757126
+            },
+            {
+              "output_index": 2,
+              "same_context_as_sequential": true,
+              "block_token_id": 279,
+              "reference_token_id": 279,
+              "block_top2_margin": 14.671875,
+              "reference_top2_margin": 14.640625,
+              "block_vs_single_max_abs_logit_delta": 0.0625,
+              "block_vs_single_rms_logit_delta": 0.009601244702935219
+            },
+            {
+              "output_index": 3,
+              "same_context_as_sequential": true,
+              "block_token_id": 1844,
+              "reference_token_id": 1844,
+              "block_top2_margin": 4.84375,
+              "reference_top2_margin": 4.796875,
+              "block_vs_single_max_abs_logit_delta": 0.046875,
+              "block_vs_single_rms_logit_delta": 0.010083303786814213
+            },
+            {
+              "output_index": 4,
+              "same_context_as_sequential": true,
+              "block_token_id": 220,
+              "reference_token_id": 220,
+              "block_top2_margin": 15.515625,
+              "reference_top2_margin": 15.3671875,
+              "block_vs_single_max_abs_logit_delta": 0.828125,
+              "block_vs_single_rms_logit_delta": 0.13362273573875427
+            },
+            {
+              "output_index": 5,
+              "same_context_as_sequential": true,
+              "block_token_id": 16,
+              "reference_token_id": 16,
+              "block_top2_margin": 13.21875,
+              "reference_top2_margin": 13.265625,
+              "block_vs_single_max_abs_logit_delta": 0.83984375,
+              "block_vs_single_rms_logit_delta": 0.15752193331718445
+            }
+          ]
+        },
+        {
+          "round": 1,
+          "committed_before": 37,
+          "current_token_id": 16,
+          "proposal_token_ids": [
+            15,
+            7526,
+            5656,
+            539
+          ],
+          "target_prediction_token_ids": [
+            15,
+            7526,
+            5656,
+            539,
+            2702
+          ],
+          "accepted_prefix_len": 4,
+          "correction_token_id": 2702,
+          "replay_required": false,
+          "before_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "5238733c1a847e8ec6ac7b8662c2416f8a4cc0a39009085d0725cd6484b9e61e",
+            "cloud": {
+              "cached_seq_len": 37,
+              "sampled_state_sha256": "964ca5cfb237794d3820c20140e8b7905244268f99124194cd860b57d980b702"
+            }
+          },
+          "after_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "3617bbef59902b22b3197afa0f87ba881495b354de2323e3eefc8a6444275193",
+            "cloud": {
+              "cached_seq_len": 42,
+              "sampled_state_sha256": "d580c573e6a810fb8134db1c0eb1c13156b554f37cd1fe0efaabf35541170dd6"
+            }
+          },
+          "position_comparisons": [
+            {
+              "output_index": 6,
+              "same_context_as_sequential": true,
+              "block_token_id": 15,
+              "reference_token_id": 15,
+              "block_top2_margin": 11.1875,
+              "reference_top2_margin": 10.953125,
+              "block_vs_single_max_abs_logit_delta": 1.5625,
+              "block_vs_single_rms_logit_delta": 0.2597396969795227
+            },
+            {
+              "output_index": 7,
+              "same_context_as_sequential": true,
+              "block_token_id": 7526,
+              "reference_token_id": 7526,
+              "block_top2_margin": 6.046875,
+              "reference_top2_margin": 5.9375,
+              "block_vs_single_max_abs_logit_delta": 0.169921875,
+              "block_vs_single_rms_logit_delta": 0.03257902339100838
+            },
+            {
+              "output_index": 8,
+              "same_context_as_sequential": true,
+              "block_token_id": 5656,
+              "reference_token_id": 5656,
+              "block_top2_margin": 12.953125,
+              "reference_top2_margin": 13.0,
+              "block_vs_single_max_abs_logit_delta": 0.1328125,
+              "block_vs_single_rms_logit_delta": 0.019269736483693123
+            },
+            {
+              "output_index": 9,
+              "same_context_as_sequential": true,
+              "block_token_id": 539,
+              "reference_token_id": 539,
+              "block_top2_margin": 3.953125,
+              "reference_top2_margin": 3.953125,
+              "block_vs_single_max_abs_logit_delta": 0.921875,
+              "block_vs_single_rms_logit_delta": 0.09382066875696182
+            },
+            {
+              "output_index": 10,
+              "same_context_as_sequential": true,
+              "block_token_id": 2702,
+              "reference_token_id": 2702,
+              "block_top2_margin": 3.78125,
+              "reference_top2_margin": 3.765625,
+              "block_vs_single_max_abs_logit_delta": 0.4609375,
+              "block_vs_single_rms_logit_delta": 0.027158137410879135
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "committed_before": 42,
+          "current_token_id": 2702,
+          "proposal_token_ids": [
+            2982,
+            11,
+            2583,
+            836
+          ],
+          "target_prediction_token_ids": [
+            2982,
+            11,
+            2583,
+            836,
+            89798
+          ],
+          "accepted_prefix_len": 4,
+          "correction_token_id": 89798,
+          "replay_required": false,
+          "before_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "3617bbef59902b22b3197afa0f87ba881495b354de2323e3eefc8a6444275193",
+            "cloud": {
+              "cached_seq_len": 42,
+              "sampled_state_sha256": "d580c573e6a810fb8134db1c0eb1c13156b554f37cd1fe0efaabf35541170dd6"
+            }
+          },
+          "after_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "59020ad13de07ece8426aeaecf0a354bca538b8616e09fabf200b9b8c9c52036",
+            "cloud": {
+              "cached_seq_len": 47,
+              "sampled_state_sha256": "068c559d580823e0dcc498ddd1e599f5f8f9c5c1dd6b5ea1496a4f54456ab567"
+            }
+          },
+          "position_comparisons": [
+            {
+              "output_index": 11,
+              "same_context_as_sequential": true,
+              "block_token_id": 2982,
+              "reference_token_id": 2982,
+              "block_top2_margin": 1.453125,
+              "reference_top2_margin": 1.4375,
+              "block_vs_single_max_abs_logit_delta": 0.11328125,
+              "block_vs_single_rms_logit_delta": 0.018900131806731224
+            },
+            {
+              "output_index": 12,
+              "same_context_as_sequential": true,
+              "block_token_id": 11,
+              "reference_token_id": 11,
+              "block_top2_margin": 0.890625,
+              "reference_top2_margin": 0.890625,
+              "block_vs_single_max_abs_logit_delta": 0.54052734375,
+              "block_vs_single_rms_logit_delta": 0.036535169929265976
+            },
+            {
+              "output_index": 13,
+              "same_context_as_sequential": true,
+              "block_token_id": 2583,
+              "reference_token_id": 2583,
+              "block_top2_margin": 0.515625,
+              "reference_top2_margin": 0.515625,
+              "block_vs_single_max_abs_logit_delta": 0.32470703125,
+              "block_vs_single_rms_logit_delta": 0.0364987775683403
+            },
+            {
+              "output_index": 14,
+              "same_context_as_sequential": true,
+              "block_token_id": 836,
+              "reference_token_id": 836,
+              "block_top2_margin": 12.515625,
+              "reference_top2_margin": 12.515625,
+              "block_vs_single_max_abs_logit_delta": 0.67333984375,
+              "block_vs_single_rms_logit_delta": 0.036293622106313705
+            },
+            {
+              "output_index": 15,
+              "same_context_as_sequential": true,
+              "block_token_id": 89798,
+              "reference_token_id": 89798,
+              "block_top2_margin": 2.015625,
+              "reference_top2_margin": 1.96875,
+              "block_vs_single_max_abs_logit_delta": 0.36083984375,
+              "block_vs_single_rms_logit_delta": 0.04963609203696251
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "committed_before": 47,
+          "current_token_id": 89798,
+          "proposal_token_ids": [
+            321,
+            43374,
+            21234,
+            13
+          ],
+          "target_prediction_token_ids": [
+            321,
+            43374,
+            21234,
+            318,
+            271
+          ],
+          "accepted_prefix_len": 3,
+          "correction_token_id": 318,
+          "replay_required": true,
+          "before_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "59020ad13de07ece8426aeaecf0a354bca538b8616e09fabf200b9b8c9c52036",
+            "cloud": {
+              "cached_seq_len": 47,
+              "sampled_state_sha256": "068c559d580823e0dcc498ddd1e599f5f8f9c5c1dd6b5ea1496a4f54456ab567"
+            }
+          },
+          "after_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "35be3b9e20596854b64a863c574492eb88109fdefdb1791808dddb2ebdfea72c",
+            "cloud": {
+              "cached_seq_len": 52,
+              "sampled_state_sha256": "ae002442858163dd81b1692c5fccbec23512b7e84bbbbfa805065a3d42f29436"
+            }
+          },
+          "position_comparisons": [
+            {
+              "output_index": 16,
+              "same_context_as_sequential": true,
+              "block_token_id": 321,
+              "reference_token_id": 321,
+              "block_top2_margin": 8.640625,
+              "reference_top2_margin": 8.59375,
+              "block_vs_single_max_abs_logit_delta": 0.27294921875,
+              "block_vs_single_rms_logit_delta": 0.05003882199525833
+            },
+            {
+              "output_index": 17,
+              "same_context_as_sequential": true,
+              "block_token_id": 43374,
+              "reference_token_id": 43374,
+              "block_top2_margin": 1.375,
+              "reference_top2_margin": 1.203125,
+              "block_vs_single_max_abs_logit_delta": 0.390625,
+              "block_vs_single_rms_logit_delta": 0.08126131445169449
+            },
+            {
+              "output_index": 18,
+              "same_context_as_sequential": true,
+              "block_token_id": 21234,
+              "reference_token_id": 21234,
+              "block_top2_margin": 4.0625,
+              "reference_top2_margin": 4.03125,
+              "block_vs_single_max_abs_logit_delta": 0.212890625,
+              "block_vs_single_rms_logit_delta": 0.032378751784563065
+            },
+            {
+              "output_index": 19,
+              "same_context_as_sequential": true,
+              "block_token_id": 318,
+              "reference_token_id": 318,
+              "block_top2_margin": 0.03125,
+              "reference_top2_margin": 0.0,
+              "block_vs_single_max_abs_logit_delta": 0.5,
+              "block_vs_single_rms_logit_delta": 0.09696511924266815
+            },
+            {
+              "output_index": 20,
+              "same_context_as_sequential": true,
+              "block_token_id": 271,
+              "reference_token_id": 271,
+              "block_top2_margin": 2.9375,
+              "reference_top2_margin": 3.1875,
+              "block_vs_single_max_abs_logit_delta": 0.611328125,
+              "block_vs_single_rms_logit_delta": 0.07175731658935547
+            }
+          ],
+          "after_replay": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "27eceb7985112e7ef53076da92bbf87fca091442f686196d6bc41391fbfb7116",
+            "cloud": {
+              "cached_seq_len": 51,
+              "sampled_state_sha256": "cd9731a5730acda36f3db10a55afdb32f1f90b7afbc491efb519c40572a8ad28"
+            }
+          }
+        },
+        {
+          "round": 4,
+          "committed_before": 51,
+          "current_token_id": 318,
+          "proposal_token_ids": [
+            28962,
+            383,
+            3110,
+            17009
+          ],
+          "target_prediction_token_ids": [
+            28962,
+            383,
+            3110,
+            3516,
+            494
+          ],
+          "accepted_prefix_len": 3,
+          "correction_token_id": 3516,
+          "replay_required": true,
+          "before_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "27eceb7985112e7ef53076da92bbf87fca091442f686196d6bc41391fbfb7116",
+            "cloud": {
+              "cached_seq_len": 51,
+              "sampled_state_sha256": "cd9731a5730acda36f3db10a55afdb32f1f90b7afbc491efb519c40572a8ad28"
+            }
+          },
+          "after_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "91704bb55a8df517df8e5dd806377aca5354ca7ed22120eeb3800261d2daae31",
+            "cloud": {
+              "cached_seq_len": 56,
+              "sampled_state_sha256": "392882b0e5a06900701de8f009a92ab26589c9dda3f2446bff828019420d0292"
+            }
+          },
+          "position_comparisons": [
+            {
+              "output_index": 20,
+              "same_context_as_sequential": false,
+              "block_token_id": 28962,
+              "reference_token_id": 271
+            },
+            {
+              "output_index": 21,
+              "same_context_as_sequential": false,
+              "block_token_id": 383,
+              "reference_token_id": 9
+            },
+            {
+              "output_index": 22,
+              "same_context_as_sequential": false,
+              "block_token_id": 3110,
+              "reference_token_id": 8839
+            },
+            {
+              "output_index": 23,
+              "same_context_as_sequential": false,
+              "block_token_id": 3516,
+              "reference_token_id": 25
+            },
+            {
+              "output_index": 24,
+              "same_context_as_sequential": false,
+              "block_token_id": 494,
+              "reference_token_id": 38220
+            }
+          ],
+          "after_replay": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "ed682c824348bb5b218ed6411719f321d0096f2e6682af8501fb6fa3b2412d3b",
+            "cloud": {
+              "cached_seq_len": 55,
+              "sampled_state_sha256": "c0565e3d8eb95395a3a2c03b335596494c57573a89c3f29fe6f967bd6abae657"
+            }
+          }
+        },
+        {
+          "round": 5,
+          "committed_before": 55,
+          "current_token_id": 3516,
+          "proposal_token_ids": [
+            18561,
+            321,
+            4196,
+            8285
+          ],
+          "target_prediction_token_ids": [
+            18561,
+            321,
+            4196,
+            8285,
+            17009
+          ],
+          "accepted_prefix_len": 4,
+          "correction_token_id": 17009,
+          "replay_required": false,
+          "before_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "ed682c824348bb5b218ed6411719f321d0096f2e6682af8501fb6fa3b2412d3b",
+            "cloud": {
+              "cached_seq_len": 55,
+              "sampled_state_sha256": "c0565e3d8eb95395a3a2c03b335596494c57573a89c3f29fe6f967bd6abae657"
+            }
+          },
+          "after_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "bbc331571c881e197512313ce5549be3cdadf01536b010db2c72030ae51537f3",
+            "cloud": {
+              "cached_seq_len": 60,
+              "sampled_state_sha256": "199beb83be4b98f35950e37a0a8e504ceb9428a8b739f6d799830bc365b48138"
+            }
+          },
+          "position_comparisons": [
+            {
+              "output_index": 24,
+              "same_context_as_sequential": false,
+              "block_token_id": 18561,
+              "reference_token_id": 38220
+            },
+            {
+              "output_index": 25,
+              "same_context_as_sequential": false,
+              "block_token_id": 321,
+              "reference_token_id": 12041
+            },
+            {
+              "output_index": 26,
+              "same_context_as_sequential": false,
+              "block_token_id": 4196,
+              "reference_token_id": 513
+            },
+            {
+              "output_index": 27,
+              "same_context_as_sequential": false,
+              "block_token_id": 8285,
+              "reference_token_id": 17009
+            },
+            {
+              "output_index": 28,
+              "same_context_as_sequential": false,
+              "block_token_id": 17009,
+              "reference_token_id": 3018
+            }
+          ]
+        },
+        {
+          "round": 6,
+          "committed_before": 60,
+          "current_token_id": 17009,
+          "proposal_token_ids": [
+            553,
+            271,
+            91,
+            18715
+          ],
+          "target_prediction_token_ids": [
+            553,
+            271,
+            91,
+            18715,
+            735
+          ],
+          "accepted_prefix_len": 4,
+          "correction_token_id": 735,
+          "replay_required": false,
+          "before_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "bbc331571c881e197512313ce5549be3cdadf01536b010db2c72030ae51537f3",
+            "cloud": {
+              "cached_seq_len": 60,
+              "sampled_state_sha256": "199beb83be4b98f35950e37a0a8e504ceb9428a8b739f6d799830bc365b48138"
+            }
+          },
+          "after_block": {
+            "local_cache_len": 0,
+            "local_sampled_state_sha256": "774cae58aa79ff3f6e64842fa35f028e0ae45896dec63fc6eb14bfeaa56cc6b8",
+            "cloud": {
+              "cached_seq_len": 65,
+              "sampled_state_sha256": "7769779fb6b1d8d30e55dab7745582bf1228a574425b29b20081340e88e089a7"
+            }
+          },
+          "position_comparisons": [
+            {
+              "output_index": 29,
+              "same_context_as_sequential": false,
+              "block_token_id": 553,
+              "reference_token_id": 383
+            },
+            {
+              "output_index": 30,
+              "same_context_as_sequential": false,
+              "block_token_id": 271,
+              "reference_token_id": 3110
+            },
+            {
+              "output_index": 31,
+              "same_context_as_sequential": false,
+              "block_token_id": 91,
+              "reference_token_id": 795
+            }
+          ]
+        }
+      ],
+      "identity": false,
+      "identical_prefix_len": 19,
+      "first_mismatch": {
+        "output_index": 19,
+        "baseline_token_id": 13,
+        "draft_path_token_id": 318
+      }
+    }
+  ],
+  "all_identity": false
+}

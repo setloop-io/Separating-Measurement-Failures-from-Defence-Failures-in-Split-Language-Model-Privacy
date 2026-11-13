@@ -1,0 +1,209 @@
+{
+  "schema": "dtraining.isolation_replication_summary.v1",
+  "model": "Qwen3.5-27B",
+  "corpus": "wikitext2",
+  "protocol": {
+    "steps": 10000,
+    "train_blocks": 256,
+    "eval_blocks": 256,
+    "latent_dim": 64,
+    "noise_multiplier": 0.35,
+    "chaff": 48,
+    "cloud": "monomial_moe_radial 8 experts / 2 layers",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "note": "exploratory early-stop flags active; harness is run_isolation_adaptive.py, not the frozen phase06 grid"
+  },
+  "cells": [
+    {
+      "cell": "isolation_27b_split33_s42",
+      "split_after": 33,
+      "seed": 42,
+      "steps_completed": 10000,
+      "early_stop": false,
+      "utility_delta_final": 2.9851,
+      "privacy_excess_pp_final": -0.639,
+      "recovery_pct": 5.026,
+      "majority_pct": 5.664,
+      "attacker_token_accuracy_pct": 5.078,
+      "mean_levenshtein": 0.2642
+    },
+    {
+      "cell": "isolation_27b_split33_s43",
+      "split_after": 33,
+      "seed": 43,
+      "steps_completed": 3500,
+      "early_stop": true,
+      "utility_delta_final": 3.0998,
+      "privacy_excess_pp_final": -0.894,
+      "recovery_pct": 4.77,
+      "majority_pct": 5.664,
+      "attacker_token_accuracy_pct": 4.688,
+      "mean_levenshtein": 0.2329
+    },
+    {
+      "cell": "isolation_27b_split33_s44",
+      "split_after": 33,
+      "seed": 44,
+      "steps_completed": 3500,
+      "early_stop": true,
+      "utility_delta_final": 3.0439,
+      "privacy_excess_pp_final": 0.554,
+      "recovery_pct": 6.218,
+      "majority_pct": 5.664,
+      "attacker_token_accuracy_pct": 4.297,
+      "mean_levenshtein": 0.2718
+    },
+    {
+      "cell": "isolation_27b_split37_s42",
+      "split_after": 37,
+      "seed": 42,
+      "steps_completed": 10000,
+      "early_stop": false,
+      "utility_delta_final": 2.7709,
+      "privacy_excess_pp_final": -0.042,
+      "recovery_pct": 5.622,
+      "majority_pct": 5.664,
+      "attacker_token_accuracy_pct": 5.078,
+      "mean_levenshtein": 0.265
+    },
+    {
+      "cell": "isolation_27b_split37_s43",
+      "split_after": 37,
+      "seed": 43,
+      "steps_completed": 10000,
+      "early_stop": false,
+      "utility_delta_final": 2.6899,
+      "privacy_excess_pp_final": -1.746,
+      "recovery_pct": 3.918,
+      "majority_pct": 5.664,
+      "attacker_token_accuracy_pct": 7.031,
+      "mean_levenshtein": 0.2505
+    },
+    {
+      "cell": "isolation_27b_split37_s44",
+      "split_after": 37,
+      "seed": 44,
+      "steps_completed": 10000,
+      "early_stop": false,
+      "utility_delta_final": 2.6708,
+      "privacy_excess_pp_final": -2.087,
+      "recovery_pct": 3.578,
+      "majority_pct": 5.664,
+      "attacker_token_accuracy_pct": 3.516,
+      "mean_levenshtein": 0.2685
+    },
+    {
+      "cell": "isolation_27b_split41_s42",
+      "split_after": 41,
+      "seed": 42,
+      "steps_completed": 10000,
+      "early_stop": false,
+      "utility_delta_final": 2.652,
+      "privacy_excess_pp_final": -1.746,
+      "recovery_pct": 3.918,
+      "majority_pct": 5.664,
+      "attacker_token_accuracy_pct": 5.859,
+      "mean_levenshtein": 0.2682
+    },
+    {
+      "cell": "isolation_27b_split41_s43",
+      "split_after": 41,
+      "seed": 43,
+      "steps_completed": 10000,
+      "early_stop": false,
+      "utility_delta_final": 2.5293,
+      "privacy_excess_pp_final": -1.49,
+      "recovery_pct": 4.174,
+      "majority_pct": 5.664,
+      "attacker_token_accuracy_pct": 5.078,
+      "mean_levenshtein": 0.248
+    },
+    {
+      "cell": "isolation_27b_split41_s44",
+      "split_after": 41,
+      "seed": 44,
+      "steps_completed": 10000,
+      "early_stop": false,
+      "utility_delta_final": 2.6116,
+      "privacy_excess_pp_final": -1.831,
+      "recovery_pct": 3.833,
+      "majority_pct": 5.664,
+      "attacker_token_accuracy_pct": 4.297,
+      "mean_levenshtein": 0.2696
+    },
+    {
+      "cell": "isolation_27b_split75_s42",
+      "split_after": 75,
+      "seed": 42,
+      "steps_completed": 10000,
+      "early_stop": false,
+      "utility_delta_final": -0.4133,
+      "privacy_excess_pp_final": -0.127,
+      "recovery_pct": 5.537,
+      "majority_pct": 5.664,
+      "attacker_token_accuracy_pct": 5.078,
+      "mean_levenshtein": 0.2641
+    },
+    {
+      "cell": "isolation_27b_split75_s43",
+      "split_after": 75,
+      "seed": 43,
+      "steps_completed": 10000,
+      "early_stop": false,
+      "utility_delta_final": -0.3481,
+      "privacy_excess_pp_final": -0.809,
+      "recovery_pct": 4.855,
+      "majority_pct": 5.664,
+      "attacker_token_accuracy_pct": 4.688,
+      "mean_levenshtein": 0.2625
+    },
+    {
+      "cell": "isolation_27b_split75_s44",
+      "split_after": 75,
+      "seed": 44,
+      "steps_completed": 10000,
+      "early_stop": false,
+      "utility_delta_final": -0.3078,
+      "privacy_excess_pp_final": -2.427,
+      "recovery_pct": 3.237,
+      "majority_pct": 5.664,
+      "attacker_token_accuracy_pct": 5.078,
+      "mean_levenshtein": 0.2849
+    }
+  ],
+  "by_split": {
+    "33": {
+      "n_seeds": 3,
+      "utility_delta_mean": 3.0429,
+      "utility_delta_sd": 0.0574,
+      "privacy_excess_pp_max": 0.554,
+      "any_early_stop": true
+    },
+    "37": {
+      "n_seeds": 3,
+      "utility_delta_mean": 2.7105,
+      "utility_delta_sd": 0.0531,
+      "privacy_excess_pp_max": -0.042,
+      "any_early_stop": false
+    },
+    "41": {
+      "n_seeds": 3,
+      "utility_delta_mean": 2.5976,
+      "utility_delta_sd": 0.0625,
+      "privacy_excess_pp_max": -1.49,
+      "any_early_stop": false
+    },
+    "75": {
+      "n_seeds": 3,
+      "utility_delta_mean": -0.3564,
+      "utility_delta_sd": 0.0532,
+      "privacy_excess_pp_max": -0.127,
+      "any_early_stop": false
+    }
+  },
+  "headline": "Archived 500-step exploratory claim that 27B delegates 42.2% cleanly does NOT replicate at 10,000 steps: all delegated splits (41/37/33 = 42.2%/47.4%/52.6%) finish at +2.5..+3.1 nats while the intact control (split75) improves by -0.31..-0.41. Privacy stays at or below the majority floor in every cell."
+}

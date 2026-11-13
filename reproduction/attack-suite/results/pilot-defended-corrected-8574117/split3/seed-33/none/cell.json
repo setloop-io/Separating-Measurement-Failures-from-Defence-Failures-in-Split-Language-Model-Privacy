@@ -1,0 +1,116 @@
+{
+  "schema": "llm_attacker.defended_pilot_cell.v1",
+  "status": "COMPLETE",
+  "measurement_version": 2,
+  "observation_location": "body_input_seam",
+  "baseline_scope": "unadapted public-head reconstruction; bottleneck mismatch is not a privacy certificate",
+  "split": 3,
+  "seed": 33,
+  "defense": "none",
+  "paired_control": null,
+  "wall_seconds": 0.16026804223656654,
+  "attack_seconds": 0.06691587530076504,
+  "cuda_peak_allocated_bytes": null,
+  "resources_scope": "victim wall includes capture I/O and matched utility measurements; attack time is separate; cuda peak is process-wide (experiment.json convention)",
+  "utility_before": {
+    "cross_entropy": 4.160611970084054,
+    "perplexity": 64.11074445508451,
+    "tokens": 42,
+    "documents": 6,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "before_victim_training"
+  },
+  "utility_after": {
+    "cross_entropy": 4.152913774762835,
+    "perplexity": 63.61910222900416,
+    "tokens": 42,
+    "documents": 6,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "after_victim_training"
+  },
+  "training": {
+    "steps_run": 12,
+    "final_loss": 4.239755630493164,
+    "mean_loss": 4.156396508216858
+  },
+  "access": {
+    "schema": "llm_attacker.defended_pilot_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 6,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 4,
+        "beam_width": 2
+      },
+      "sipit": {
+        "steps_per_token": 4
+      },
+      "scored_sequences": 4
+    }
+  },
+  "provenance": {
+    "path": "run.json",
+    "sha256": "5c2ebc557899649b5f0afe3940472b8e8ab3d6905e8c663a37e9d0a3d68d71f6"
+  },
+  "run_artifact": "run.json",
+  "evidence": "run.json.evidence.json",
+  "captures_dir": "captures",
+  "attacks": {
+    "forward": {
+      "accuracy": 1.0,
+      "n_tokens": 32,
+      "n_sequences": 4,
+      "candidate_count": 4,
+      "beam_width": 2,
+      "work": {
+        "head_forward_calls": 8,
+        "head_forward_sequences": 240,
+        "head_forward_token_positions": 1136,
+        "head_backward_calls": 0,
+        "head_backward_token_positions": 0,
+        "vocabulary_dot_products": 2048,
+        "wall_seconds": 0.007076917216181755,
+        "cuda_seconds": null,
+        "peak_allocated_bytes": null,
+        "incremental_peak_allocated_bytes": null
+      },
+      "artifact": "forward-baseline.json"
+    },
+    "sipit": {
+      "accuracy": 0.03125,
+      "n_tokens": 32,
+      "n_sequences": 4,
+      "steps_per_token": 4,
+      "work": {
+        "head_forward_calls": 64,
+        "head_forward_sequences": 256,
+        "head_forward_token_positions": 1152,
+        "head_backward_calls": 32,
+        "head_backward_token_positions": 576,
+        "vocabulary_dot_products": 8192,
+        "wall_seconds": 0.044953458942472935,
+        "cuda_seconds": null,
+        "peak_allocated_bytes": null,
+        "incremental_peak_allocated_bytes": null
+      },
+      "artifact": "sipit-baseline.json"
+    }
+  },
+  "artifact_hashes": {
+    "sipit-baseline.json": "5eb6b756be9ccc860110128665032d13edf1464f7554018afdfc28927def8cf3",
+    "forward-baseline.json": "2c22a1cf673f259d825e85f09651cfae02dc8360afa1660c5488aec760610aa5",
+    "sipit-predictions.json": "f17a7cb0a0a1a393f8fcdd065349b016996e2e7cdad08b01f560262a9f23321e",
+    "run.json": "5c2ebc557899649b5f0afe3940472b8e8ab3d6905e8c663a37e9d0a3d68d71f6",
+    "forward-predictions.json": "190cf83d6a203db9d7bf993f9e558b4e7801ee20ee6ac73570d9db5af110a62c"
+  }
+}

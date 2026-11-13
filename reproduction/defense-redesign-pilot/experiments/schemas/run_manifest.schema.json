@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Paper 4 run manifest",
+  "type": "object",
+  "required": ["schema_version"],
+  "properties": {
+    "schema_version": {"enum": ["p4-run-0.1", "p4-run-0.2"]}
+  },
+  "allOf": [
+    {"if": {"properties": {"schema_version": {"const": "p4-run-0.1"}}, "required": ["schema_version"]},
+     "then": {"$ref": "#/$defs/run_0_1"},
+     "else": {"$ref": "#/$defs/run_0_2"}}
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "artifacts": {"type": "array", "items": {
+      "type": "object", "required": ["path", "sha256"],
+      "properties": {"path": {"type": "string"}, "sha256": {"$ref": "#/$defs/sha256"}},
+      "additionalProperties": false
+    }},
+    "base": {
+      "type": "object",
+      "properties": {
+        "run_id": {"type": "string", "pattern": "^p4-"},
+        "protocol_id": {"type": "string", "pattern": "^p4-"},
+        "seed": {"type": "integer", "minimum": 0},
+        "mode": {"enum": ["all_local", "trained", "frozen_random", "removed_remote"]},
+        "cell": {"type": "string", "minLength": 1},
+        "git_commit": {"type": ["string", "null"]},
+        "source_tree_sha256": {"$ref": "#/$defs/sha256"},
+        "corpus_sha256": {"$ref": "#/$defs/sha256"},
+        "matrix_sha256": {"$ref": "#/$defs/sha256"},
+        "source_record": {"type": "string"},
+        "started_at": {"type": "string"},
+        "finished_at": {"type": "string"},
+        "status": {"enum": ["completed", "failed"]},
+        "error": {"type": "string"},
+        "artifacts": {"$ref": "#/$defs/artifacts"}
+      }
+    },
+    "run_0_1": {
+      "type": "object",
+      "allOf": [{"$ref": "#/$defs/base"}],
+      "required": ["schema_version", "run_id", "protocol_id", "cohort", "scientific_evidence", "seed", "mode", "cell", "git_commit", "source_tree_sha256", "source_record", "corpus_sha256", "matrix_sha256", "started_at", "finished_at", "status", "artifacts"],
+      "properties": {
+        "schema_version": {"const": "p4-run-0.1"},
+        "cohort": {"const": "engineering"},
+        "scientific_evidence": {"const": false}
+      },
+      "unevaluatedProperties": false
+    },
+    "run_0_2": {
+      "type": "object",
+      "allOf": [{"$ref": "#/$defs/base"}],
+      "required": ["schema_version", "run_id", "protocol_id", "cohort", "scientific_evidence", "seed", "mode", "cell", "git_commit", "source_tree_sha256", "source_record", "corpus_sha256", "matrix_sha256", "started_at", "finished_at", "status", "artifacts", "freeze_record", "inputs"],
+      "properties": {
+        "schema_version": {"const": "p4-run-0.2"},
+        "cohort": {"enum": ["calibration", "exploratory"]},
+        "scientific_evidence": {"const": true},
+        "freeze_record": {"type": ["string", "null"]},
+        "inputs": {"type": "object"}
+      },
+      "unevaluatedProperties": false
+    }
+  }
+}

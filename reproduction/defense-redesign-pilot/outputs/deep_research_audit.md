@@ -1,0 +1,62 @@
+# Paper 4: audit of the supplied research narrative
+
+Prepared 2026-09-10. Status: source audit and prospective design guidance, not experimental evidence. The supplied `Deep-research.md` is preserved unchanged. Provenance is recorded in `deep_research_audit.provenance.md`.
+
+## Decision
+
+Use the document to generate candidate mechanisms and evaluation questions. Do not use its conclusions as inherited findings: it describes unrun Paper 4 defenses as exhaustively tested, converts finite Paper 3 failures into universal impossibility, and contains several incorrect theoretical and methodological claims. Paper 3's finalized claim-evidence ledger takes precedence over the narrative and historical overstatements in earlier decision records.
+
+The viable research question is whether a **specified, finite set of redesigned boundaries** passes independently qualified attacks on its declared views while meeting utility and causal remote-learning criteria. A negative study would concern that tested set. Neither success against probes nor failure across candidates settles security against all attackers.
+
+## Corrections that affect the protocol
+
+| Narrative claim | Audit finding | Required change |
+|---|---|---|
+| Paper 3 proved structural features are necessary for utility. | No selective feature-removal intervention or task-specific converse established this. Paper 3 rejected tested configurations under qualified forward probes. | Treat structural entanglement as a hypothesis; retain candidate defenses and matched controls. |
+| Token inversion did not reconstruct inputs, therefore identity is protected. | The inherited probe showed setting-specific nondetection, with cross-model transfer limitations. | No identity-protection claim. Use independent target-coordinate attack evaluation. |
+| Property privacy threshold is 0.10. | Inherited calibration distinguishes a positive-control qualification floor from the P5 privacy acceptance threshold of 0.02. | Store qualification criteria and candidate acceptance thresholds as separate fields. |
+| Punctuation, vowel, and newline targets were all qualified. | Punctuation qualified cleanly; vowel/newline calibration nulls failed their band. | Make punctuation primary; secondary targets need their own qualification before supporting privacy decisions. |
+| H1–H5 and D1–D5 have already failed. | These are proposals, not Paper 4 results. | Remove outcome language from planning documents; label all experiments prospective or exploratory until run. |
+| A shuffled latent passes the property gate. | For a fixed set of vectors, permutation leaves the mean exactly unchanged: `mean(Pz) = mean(z)`. | D5 is a positional diagnostic, not an established defense against the inherited mean-pooled property probe. Check causality if shuffled positions enter a causal remote module. |
+
+These inherited boundaries follow [Paper 3's finalized ledger](../../Paper%203%20-%20Privacy-Constrained%20Remote/docs/CLAIM_EVIDENCE_LEDGER.md), especially its manuscript clarification and reviewer-response revision. A family-level qualification label does not qualify every target or every defense.
+
+## Theory does not establish the claimed impossibility
+
+**Privacy funnel.** The original framework optimizes disclosure through a stochastic mapping for a specified joint distribution and utility constraint. It does not prove that punctuation is indispensable to a language model's remote gain. Our task loss, correlation advantages, and gain over a frozen module are not automatically mutual information. A necessary-leakage claim would require a justified relation between those quantities and the actual trusted/remote computation. [Makhdoumi et al., Privacy Funnel](https://arxiv.org/abs/1402.1774)
+
+**Fano's inequality.** For a finite sensitive alphabet of size `m`, with base-two entropy, `H(S | Z) ≤ h₂(Pe) + Pe log₂(m−1)`. Large conditional entropy can force estimation error; poor performance by a particular trained probe does not prove large conditional entropy or small mutual information. The supplied narrative reverses this implication. Correlation differences for continuous property fractions are also not the discrete error probability in this inequality. [MIT information-theory notes, Theorem 5.3](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/5d8f16adc3385c9ff2975b121bd620e4_MIT6_441S16_course_notes.pdf)
+
+**Our design inference, not a literature result:** take independent variables `Y` and `S`, input `X=(Y,S)`, and release `Z=Y`. Utility for predicting `Y` is preserved while `I(S;Z)=0`. This elementary counterexample shows why no universal claim follows without specifying the dependence structure. It is not a claim that language-model structure and utility are independent. Likewise, a higher required communication rate does not by itself prove greater leakage of a particular sensitive target. The document supplies no task-specific rate–distortion–perception reduction or lower bound; its asserted application remains unestablished.
+
+## Correct attack and defense scopes
+
+**FSHA is an active training intervention.** A malicious server trains a public-data autoencoder and discriminator and redirects the client's learned representation toward the attacker's decodable feature space. The attacker changes the learning signals sent to the client. An offline probe with more capacity is therefore insufficient evidence of FSHA or active-attacker coverage. A Paper 4 adaptation must specify its auxiliary data, gradient intervention, attack budget, matched nonmalicious run, and qualification controls. The original work's demonstrated attacks do not prove all future stochastic defenses fail. [Pasquini et al., Unleashing the Tiger, §3](https://arxiv.org/pdf/2012.02670)
+
+**BiSR and PIDI address different observations.** BiSR attacks fine-tuning using pretrained client-weight priors, auxiliary data, activations, and gradients. Its assumptions are not automatically satisfied by Paper 4's inherited models trained from initialization. [Chen et al., BiSR, §§2–3](https://arxiv.org/html/2409.00960v1)
+
+PIDI assumes an honest-but-curious model party during inference. It combines head/body activations across autoregressive generation to reconstruct prompts and responses; the threat model explicitly lacks gradients. KV caching explains how subsequent tokens enter these forward passes. Describing PIDI simply as a KV-cache attack or an active training attack is inaccurate. An implementation here would need a generation experiment and explicit model-prior access. [Gu et al., PIDI/ADMI, §3](https://arxiv.org/html/2606.14210v1)
+
+**External defenses remain untested under our instrument.** MIXGUARD combines token and representation obfuscation with gradient perturbation and reports reconstruction-attack evaluations, including adaptive settings. DualGuard uses local parameter transformation and subsequent retention, evaluating reconstruction from both directions. InfoDecom addresses honest-but-curious split inference and input reconstruction, with visual recognizability as its vision privacy target. Their mechanisms and evaluation scopes do not establish their outcomes against our punctuation or next-byte probes. Assertions that these systems fail, or that an unspecified audit proved missing controls, must be removed unless a traceable audit or matched experiment supports them. [MIXGUARD](https://arxiv.org/abs/2606.16801), [DualGuard, ACL 2025](https://aclanthology.org/2025.acl-long.835.pdf), [InfoDecom, AAAI proceedings](https://ojs.aaai.org/index.php/AAAI/article/download/39212/43173)
+
+**DPO and GRPO are not restricted to the final softmax.** Their objectives optimize a parameterized language-model policy; trainable parameters depend on the implementation. Updates can change intermediate representations. This corrects the narrative without establishing either method as a boundary defense: output-level preference alignment alone supplies no certificate for the actual released transcript. [Rafailov et al., DPO](https://proceedings.neurips.cc/paper_files/paper/2023/file/a85b405ed65c6477a4fe8302b5e06ce7-Paper-Conference.pdf), [Shao et al., DeepSeekMath, §4.1 and Algorithm 1](https://arxiv.org/html/2402.03300v3)
+
+## Cryptographic alternatives are a separate architectural track
+
+FHE provides computation on encrypted data under a concrete scheme's correctness and computational-security assumptions. This is not automatically information-theoretic secrecy, arbitrary active-execution integrity, or ciphertext indistinguishability from uniformly random bits. Gentry's construction does not support the narrative's blanket claim of inevitable exponential deployment latency. Concrete circuits, approximations, parameters, and measurements are needed. [Gentry's thesis, §§2.2 and 4.2](https://crypto.stanford.edu/craig/craig-thesis.pdf)
+
+TEEs change whom the client trusts and which plaintext the host can inspect. Intel's documentation defines confidentiality/integrity objectives and a hardware/software trusted computing base; its security guidance also discusses memory-access side channels. A complete design must bind attestation, code identity, secure channels, accelerator access, and outputs to a stated threat model. No universal or perfect-security claim follows from merely naming TDX, SEV, TLS, or a hybrid. [Intel TDX assurance](https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/tdx-security-research-and-assurance.html), [Intel TDX side-channel guidance](https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/best-practices/mktme-side-channel-impact-on-intel-tdx.html)
+
+**Our utility-accounting inference:** executing the same surrogate exactly inside a TEE could preserve that surrogate's outputs; it does not erase its replacement penalty relative to the original all-local segment. Thus `Δ_U=0` is not automatic. A hybrid TEE/FHE/LoRA path changes assumptions and engineering costs and needs its own protocol. It is not the only possible architecture, and should not replace the current defense experiments on the premise of a nonexistent impossibility theorem.
+
+## Practical experiment consequences
+
+1. Start with mechanism and capture checks, then an exploratory D1/D3 anchor pilot. D1's learned directions are associations, not exact sensitive/semantic subspaces. Fit in the actual encoder coordinates with a declared update/freeze rule; compare shared sequence noise with independent per-position noise, whose mean variance decreases with sequence length.
+2. Train defenses while active on the exact released values; capture forward values, returned values, and both backward boundaries before any analysis-only transforms. Separate training, defense, and capture randomness so recording does not change the intervention.
+3. For D2, separate the adversarial training heads from independent evaluation attacks. Define optimizer ownership and gradient-reversal signs explicitly. Probe failure is not a mutual-information estimate.
+4. Report every family/target/channel/defense as qualified, unqualified, or unevaluated before applying its acceptance gate. Qualify actual active manipulations separately from passive adaptive probes; no positive defense claim until the repository's active-evaluation requirement is met.
+5. Use fresh calibration and confirmatory seeds and independent text panels. Preserve seed-level inference, trained/frozen/removed/all-local controls, fixed selection rules, and explicit amended-protocol dates. No retrospective confirmation or rerun of Paper 3 is required.
+
+For inherited Paper 3 privacy statements, explicitly retain these exclusions: timing; optimizer state beyond the remote module; full evolving remote state; active/adaptive attackers; within-run joint tensor and cross-run joint attacks; natural-sequence membership; semantics beyond byte-structure classes; returned values; full-precision inbound/outbound gradients. History-accumulation and canary-membership instruments, undefended gradient property/token probes, and all defended gradient probes were unqualified. Listing these in a new capture inventory does not create evaluated coverage.
+
+SafeSplit, SynIB, and the proposed hybrid's performance were not independently validated in this bounded audit. They remain research leads, not established comparative baselines or evidence that another architecture is necessary.

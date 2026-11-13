@@ -1,0 +1,964 @@
+{
+  "cases": [
+    {
+      "arm": "valid",
+      "canary_id": null,
+      "case_id": "attestation-key-release:valid:external_attacker",
+      "category": "attestation-key-release",
+      "expected": "allow-release",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0000",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-000",
+      "step_id": 0,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "wrong-measurement",
+      "canary_id": null,
+      "case_id": "attestation-key-release:wrong-measurement:external_attacker",
+      "category": "attestation-key-release",
+      "expected": "deny-release",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0001",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-000",
+      "step_id": 1,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "modified-quote",
+      "canary_id": null,
+      "case_id": "attestation-key-release:modified-quote:external_attacker",
+      "category": "attestation-key-release",
+      "expected": "deny-release",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0002",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-000",
+      "step_id": 2,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "stale-collateral",
+      "canary_id": null,
+      "case_id": "attestation-key-release:stale-collateral:external_attacker",
+      "category": "attestation-key-release",
+      "expected": "deny-release",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0003",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-000",
+      "step_id": 3,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "replayed-nonce",
+      "canary_id": null,
+      "case_id": "attestation-key-release:replayed-nonce:external_attacker",
+      "category": "attestation-key-release",
+      "expected": "deny-release",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0004",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-000",
+      "step_id": 4,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "wrong-machine-relay",
+      "canary_id": null,
+      "case_id": "attestation-key-release:wrong-machine-relay:external_attacker",
+      "category": "attestation-key-release",
+      "expected": "deny-release",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0005",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-000",
+      "step_id": 5,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "endpoint-key-substitution",
+      "canary_id": null,
+      "case_id": "attestation-key-release:endpoint-key-substitution:external_attacker",
+      "category": "attestation-key-release",
+      "expected": "deny-release",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0006",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-000",
+      "step_id": 6,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "channel-binding-mismatch",
+      "canary_id": null,
+      "case_id": "attestation-key-release:channel-binding-mismatch:external_attacker",
+      "category": "attestation-key-release",
+      "expected": "deny-release",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0007",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-000",
+      "step_id": 7,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "clean-control",
+      "canary_id": null,
+      "case_id": "protocol-integrity:clean-control:external_attacker",
+      "category": "protocol-integrity",
+      "expected": "accept",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0008",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-001",
+      "step_id": 8,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "replay",
+      "canary_id": null,
+      "case_id": "protocol-integrity:replay:external_attacker",
+      "category": "protocol-integrity",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0009",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-001",
+      "step_id": 9,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "reorder",
+      "canary_id": null,
+      "case_id": "protocol-integrity:reorder:external_attacker",
+      "category": "protocol-integrity",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0010",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-001",
+      "step_id": 10,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "duplicate",
+      "canary_id": null,
+      "case_id": "protocol-integrity:duplicate:external_attacker",
+      "category": "protocol-integrity",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0011",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-001",
+      "step_id": 11,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "truncate",
+      "canary_id": null,
+      "case_id": "protocol-integrity:truncate:external_attacker",
+      "category": "protocol-integrity",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0012",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-001",
+      "step_id": 12,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "cross-session-swap",
+      "canary_id": null,
+      "case_id": "protocol-integrity:cross-session-swap:external_attacker",
+      "category": "protocol-integrity",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0013",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-001",
+      "step_id": 13,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "downgrade",
+      "canary_id": null,
+      "case_id": "protocol-integrity:downgrade:external_attacker",
+      "category": "protocol-integrity",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0014",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-001",
+      "step_id": 14,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "tamper",
+      "canary_id": null,
+      "case_id": "protocol-integrity:tamper:external_attacker",
+      "category": "protocol-integrity",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0015",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-001",
+      "step_id": 15,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "stale-step-result",
+      "canary_id": null,
+      "case_id": "protocol-integrity:stale-step-result:external_attacker",
+      "category": "protocol-integrity",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0016",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-002",
+      "step_id": 16,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "request-result-substitution",
+      "canary_id": null,
+      "case_id": "protocol-integrity:request-result-substitution:external_attacker",
+      "category": "protocol-integrity",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0017",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-002",
+      "step_id": 17,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "correct-result-control",
+      "canary_id": null,
+      "case_id": "malicious-computation:correct-result-control:external_attacker",
+      "category": "malicious-computation",
+      "expected": "accept",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0018",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-002",
+      "step_id": 18,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "stale-weights",
+      "canary_id": null,
+      "case_id": "malicious-computation:stale-weights:external_attacker",
+      "category": "malicious-computation",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0019",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-002",
+      "step_id": 19,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "substituted-weights",
+      "canary_id": null,
+      "case_id": "malicious-computation:substituted-weights:external_attacker",
+      "category": "malicious-computation",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0020",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-002",
+      "step_id": 20,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "skipped-operator",
+      "canary_id": null,
+      "case_id": "malicious-computation:skipped-operator:external_attacker",
+      "category": "malicious-computation",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0021",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-002",
+      "step_id": 21,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "scaled-gradient",
+      "canary_id": null,
+      "case_id": "malicious-computation:scaled-gradient:external_attacker",
+      "category": "malicious-computation",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0022",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-002",
+      "step_id": 22,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "zeroed-gradient",
+      "canary_id": null,
+      "case_id": "malicious-computation:zeroed-gradient:external_attacker",
+      "category": "malicious-computation",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0023",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-002",
+      "step_id": 23,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "replayed-output",
+      "canary_id": null,
+      "case_id": "malicious-computation:replayed-output:external_attacker",
+      "category": "malicious-computation",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0024",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-003",
+      "step_id": 24,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "incorrect-result",
+      "canary_id": null,
+      "case_id": "malicious-computation:incorrect-result:external_attacker",
+      "category": "malicious-computation",
+      "expected": "reject",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0025",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-003",
+      "step_id": 25,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "forward",
+      "canary_id": "canary-forward",
+      "case_id": "boundary-canary:forward:external_attacker",
+      "category": "boundary-canary",
+      "expected": "no-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0026",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-003",
+      "step_id": 26,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "forward",
+      "canary_id": "canary-forward",
+      "case_id": "boundary-canary:forward:trusted_diagnostic",
+      "category": "boundary-canary",
+      "expected": "observe-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0027",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-003",
+      "step_id": 27,
+      "view": "trusted_diagnostic"
+    },
+    {
+      "arm": "backward",
+      "canary_id": "canary-backward",
+      "case_id": "boundary-canary:backward:external_attacker",
+      "category": "boundary-canary",
+      "expected": "no-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0028",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-003",
+      "step_id": 28,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "backward",
+      "canary_id": "canary-backward",
+      "case_id": "boundary-canary:backward:trusted_diagnostic",
+      "category": "boundary-canary",
+      "expected": "observe-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0029",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-003",
+      "step_id": 29,
+      "view": "trusted_diagnostic"
+    },
+    {
+      "arm": "update",
+      "canary_id": "canary-update",
+      "case_id": "boundary-canary:update:external_attacker",
+      "category": "boundary-canary",
+      "expected": "no-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0030",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-003",
+      "step_id": 30,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "update",
+      "canary_id": "canary-update",
+      "case_id": "boundary-canary:update:trusted_diagnostic",
+      "category": "boundary-canary",
+      "expected": "observe-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0031",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-003",
+      "step_id": 31,
+      "view": "trusted_diagnostic"
+    },
+    {
+      "arm": "cpu-gpu-staging",
+      "canary_id": "canary-cpu-gpu-staging",
+      "case_id": "boundary-canary:cpu-gpu-staging:external_attacker",
+      "category": "boundary-canary",
+      "expected": "no-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0032",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-004",
+      "step_id": 32,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "cpu-gpu-staging",
+      "canary_id": "canary-cpu-gpu-staging",
+      "case_id": "boundary-canary:cpu-gpu-staging:trusted_diagnostic",
+      "category": "boundary-canary",
+      "expected": "observe-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0033",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-004",
+      "step_id": 33,
+      "view": "trusted_diagnostic"
+    },
+    {
+      "arm": "ipc",
+      "canary_id": "canary-ipc",
+      "case_id": "boundary-canary:ipc:external_attacker",
+      "category": "boundary-canary",
+      "expected": "no-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0034",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-004",
+      "step_id": 34,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "ipc",
+      "canary_id": "canary-ipc",
+      "case_id": "boundary-canary:ipc:trusted_diagnostic",
+      "category": "boundary-canary",
+      "expected": "observe-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0035",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-004",
+      "step_id": 35,
+      "view": "trusted_diagnostic"
+    },
+    {
+      "arm": "vram",
+      "canary_id": "canary-vram",
+      "case_id": "boundary-canary:vram:external_attacker",
+      "category": "boundary-canary",
+      "expected": "no-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0036",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-004",
+      "step_id": 36,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "vram",
+      "canary_id": "canary-vram",
+      "case_id": "boundary-canary:vram:trusted_diagnostic",
+      "category": "boundary-canary",
+      "expected": "observe-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0037",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-004",
+      "step_id": 37,
+      "view": "trusted_diagnostic"
+    },
+    {
+      "arm": "logs",
+      "canary_id": "canary-logs",
+      "case_id": "boundary-canary:logs:external_attacker",
+      "category": "boundary-canary",
+      "expected": "no-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0038",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-004",
+      "step_id": 38,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "logs",
+      "canary_id": "canary-logs",
+      "case_id": "boundary-canary:logs:trusted_diagnostic",
+      "category": "boundary-canary",
+      "expected": "observe-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0039",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-004",
+      "step_id": 39,
+      "view": "trusted_diagnostic"
+    },
+    {
+      "arm": "checkpoints",
+      "canary_id": "canary-checkpoints",
+      "case_id": "boundary-canary:checkpoints:external_attacker",
+      "category": "boundary-canary",
+      "expected": "no-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0040",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-005",
+      "step_id": 40,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "checkpoints",
+      "canary_id": "canary-checkpoints",
+      "case_id": "boundary-canary:checkpoints:trusted_diagnostic",
+      "category": "boundary-canary",
+      "expected": "observe-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0041",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-005",
+      "step_id": 41,
+      "view": "trusted_diagnostic"
+    },
+    {
+      "arm": "dumps",
+      "canary_id": "canary-dumps",
+      "case_id": "boundary-canary:dumps:external_attacker",
+      "category": "boundary-canary",
+      "expected": "no-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0042",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-005",
+      "step_id": 42,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "dumps",
+      "canary_id": "canary-dumps",
+      "case_id": "boundary-canary:dumps:trusted_diagnostic",
+      "category": "boundary-canary",
+      "expected": "observe-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0043",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-005",
+      "step_id": 43,
+      "view": "trusted_diagnostic"
+    },
+    {
+      "arm": "environment",
+      "canary_id": "canary-environment",
+      "case_id": "boundary-canary:environment:external_attacker",
+      "category": "boundary-canary",
+      "expected": "no-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0044",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-005",
+      "step_id": 44,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "environment",
+      "canary_id": "canary-environment",
+      "case_id": "boundary-canary:environment:trusted_diagnostic",
+      "category": "boundary-canary",
+      "expected": "observe-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0045",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-005",
+      "step_id": 45,
+      "view": "trusted_diagnostic"
+    },
+    {
+      "arm": "telemetry",
+      "canary_id": "canary-telemetry",
+      "case_id": "boundary-canary:telemetry:external_attacker",
+      "category": "boundary-canary",
+      "expected": "no-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0046",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-005",
+      "step_id": 46,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "telemetry",
+      "canary_id": "canary-telemetry",
+      "case_id": "boundary-canary:telemetry:trusted_diagnostic",
+      "category": "boundary-canary",
+      "expected": "observe-canary",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0047",
+      "required": true,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-005",
+      "step_id": 47,
+      "view": "trusted_diagnostic"
+    },
+    {
+      "arm": "packet-shape",
+      "canary_id": null,
+      "case_id": "confidential-host-trace:packet-shape:external_attacker",
+      "category": "confidential-host-trace",
+      "expected": "observe-or-declare",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0048",
+      "required": false,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-006",
+      "step_id": 48,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "timing",
+      "canary_id": null,
+      "case_id": "confidential-host-trace:timing:external_attacker",
+      "category": "confidential-host-trace",
+      "expected": "observe-or-declare",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0049",
+      "required": false,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-006",
+      "step_id": 49,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "performance-counters",
+      "canary_id": null,
+      "case_id": "confidential-host-trace:performance-counters:external_attacker",
+      "category": "confidential-host-trace",
+      "expected": "observe-or-declare",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0050",
+      "required": false,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-006",
+      "step_id": 50,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "access-trace",
+      "canary_id": null,
+      "case_id": "confidential-host-trace:access-trace:external_attacker",
+      "category": "confidential-host-trace",
+      "expected": "observe-or-declare",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0051",
+      "required": false,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-006",
+      "step_id": 51,
+      "view": "external_attacker"
+    },
+    {
+      "arm": "crash-restart",
+      "canary_id": null,
+      "case_id": "confidential-host-trace:crash-restart:external_attacker",
+      "category": "confidential-host-trace",
+      "expected": "observe-or-declare",
+      "payload": {
+        "deployment_manifest_sha256": null
+      },
+      "plan_sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200",
+      "profile": "tee",
+      "request_id": "req-0052",
+      "required": false,
+      "schema": "llm_attacker.secure_compute_case.v1",
+      "session_id": "session-006",
+      "step_id": 52,
+      "view": "external_attacker"
+    }
+  ],
+  "deployment_manifest_sha256": null,
+  "gate_schema": "llm_attacker.secure_compute_gate.v1",
+  "profile": "tee",
+  "require_host_traces": false,
+  "schema": "llm_attacker.secure_compute_plan.v1",
+  "sha256": "b9aa052bf47b2fc4d6fc8393ada07dff6ebb7f800535c0840d9183592b0e0200"
+}

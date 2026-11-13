@@ -1,0 +1,11 @@
+--- outputs/adversarial_review_2026-09-08/within_run_probe.py
++++ outputs/revision_validation_20260910/within_run_probe.py
+@@ -6,7 +6,7 @@
+ import sys,json,hashlib
+ import numpy as np
+ import torch
+-ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'src'))
++ROOT=Path('/Users/geo/Paper 3 - Privacy-Constrained Remote');sys.path.insert(0,str(ROOT/'src'))
+ from pcr.data import load_corpus,split_corpus,make_probe_batch
+ _,region=split_corpus(load_corpus(ROOT/'data/raw/tinyshakespeare.txt'))
+ y=make_probe_batch(region,8,128)[0].numpy()

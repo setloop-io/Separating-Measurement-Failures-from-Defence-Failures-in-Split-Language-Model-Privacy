@@ -1,0 +1,116 @@
+{
+  "schema": "llm_attacker.defended_pilot_cell.v1",
+  "status": "COMPLETE",
+  "measurement_version": 2,
+  "observation_location": "body_input_seam",
+  "baseline_scope": "unadapted public-head reconstruction; bottleneck mismatch is not a privacy certificate",
+  "split": 6,
+  "seed": 11,
+  "defense": "gaussian",
+  "paired_control": "../none/cell.json",
+  "wall_seconds": 0.16105145867913961,
+  "attack_seconds": 0.11558850016444921,
+  "cuda_peak_allocated_bytes": null,
+  "resources_scope": "victim wall includes capture I/O and matched utility measurements; attack time is separate; cuda peak is process-wide (experiment.json convention)",
+  "utility_before": {
+    "cross_entropy": 4.192761512029739,
+    "perplexity": 66.20536566698284,
+    "tokens": 42,
+    "documents": 6,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "before_victim_training"
+  },
+  "utility_after": {
+    "cross_entropy": 4.196047601245699,
+    "perplexity": 66.42328025243071,
+    "tokens": 42,
+    "documents": 6,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "after_victim_training"
+  },
+  "training": {
+    "steps_run": 12,
+    "final_loss": 4.204873561859131,
+    "mean_loss": 4.171982765197754
+  },
+  "access": {
+    "schema": "llm_attacker.defended_pilot_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 6,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 4,
+        "beam_width": 2
+      },
+      "sipit": {
+        "steps_per_token": 4
+      },
+      "scored_sequences": 4
+    }
+  },
+  "provenance": {
+    "path": "run.json",
+    "sha256": "3427d104ad665b99215688bca03f849ff5b29ba815e66b2dcebeb8c9c66255f3"
+  },
+  "run_artifact": "run.json",
+  "evidence": "run.json.evidence.json",
+  "captures_dir": "captures",
+  "attacks": {
+    "forward": {
+      "accuracy": 0.0625,
+      "n_tokens": 32,
+      "n_sequences": 4,
+      "candidate_count": 4,
+      "beam_width": 2,
+      "work": {
+        "head_forward_calls": 8,
+        "head_forward_sequences": 240,
+        "head_forward_token_positions": 1136,
+        "head_backward_calls": 0,
+        "head_backward_token_positions": 0,
+        "vocabulary_dot_products": 2048,
+        "wall_seconds": 0.012490833178162575,
+        "cuda_seconds": null,
+        "peak_allocated_bytes": null,
+        "incremental_peak_allocated_bytes": null
+      },
+      "artifact": "forward-baseline.json"
+    },
+    "sipit": {
+      "accuracy": 0.0625,
+      "n_tokens": 32,
+      "n_sequences": 4,
+      "steps_per_token": 4,
+      "work": {
+        "head_forward_calls": 64,
+        "head_forward_sequences": 256,
+        "head_forward_token_positions": 1152,
+        "head_backward_calls": 32,
+        "head_backward_token_positions": 576,
+        "vocabulary_dot_products": 8192,
+        "wall_seconds": 0.08590804226696491,
+        "cuda_seconds": null,
+        "peak_allocated_bytes": null,
+        "incremental_peak_allocated_bytes": null
+      },
+      "artifact": "sipit-baseline.json"
+    }
+  },
+  "artifact_hashes": {
+    "sipit-baseline.json": "85f28cf7e4f5fdfac937ed665a45c91d94c43f4f57be69011e73491496a87a7f",
+    "forward-baseline.json": "39adc8a155182f0dc4b0e5178cd2838c269884a833566bdc5467dab08ee56408",
+    "sipit-predictions.json": "f66ad2c5192ab181267fad4bb0b847f1cd74d690450cb5caf2e013ac69b0a126",
+    "run.json": "3427d104ad665b99215688bca03f849ff5b29ba815e66b2dcebeb8c9c66255f3",
+    "forward-predictions.json": "a8b7450080ec0def0ced37cc5ed05b6edb1de01609b02dd29246505ec3f21649"
+  }
+}

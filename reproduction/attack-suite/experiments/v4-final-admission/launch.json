@@ -1,0 +1,881 @@
+{
+  "schema": "v4.admitted_execution.v1",
+  "scope": "Single-seam GPT-2 adaptation; not original published-setting reproduction",
+  "status": "FROZEN_PENDING_HOST_ASSET_VERIFICATION",
+  "approved_gpu_hours": 50,
+  "prior_checks_reserved_gpu_hours": 1,
+  "completed_preparation_reserved_gpu_hours": 2,
+  "per_host_limit_seconds": 84600,
+  "capture_attention": "sdpa",
+  "attack_attention": "eager",
+  "gradient_multiplier": 256,
+  "arms": [
+    "sip",
+    "bf"
+  ],
+  "gm_intermediate": "b retained diagnostically; no f arm",
+  "cells": {
+    "v101-d3-a17-public": {
+      "manifest_sha256": "9094fbf072490bee7a8036b370d26fc6eb7fe65d9a172868e7e37ebe0f20bb41",
+      "host": "toula",
+      "trained_gate_sha256": "e82c1916a41d509a803dd6280e7dafbc78b4a4d00a114ee85935ec9d5154de1e"
+    },
+    "v101-d3-a17-exact": {
+      "manifest_sha256": "c17d158433abd237aa23b7c81cd448d53606d04d7f63996def21706096b39bc7",
+      "host": "toula",
+      "trained_gate_sha256": "5f2b505de9c5bea5e51b85ede0b1fcdc8e1e8667eb36351b108e3e979022f841"
+    },
+    "v101-d3-a29-public": {
+      "manifest_sha256": "64aaac1b93b5bbb3a435701bee5da63b4cd6c2c837a273dc04c08dbc8525ce6f",
+      "host": "toula",
+      "trained_gate_sha256": "a0c6ecba55e7c07815ae8a4e4fdcb74670f91e0d6ecc82e1940698ba30421ee6"
+    },
+    "v101-d3-a29-exact": {
+      "manifest_sha256": "d095048fd9a46f12f5927df2655905dc4ca7f2d4b32d4ca6f77cebc40c701ab8",
+      "host": "toula",
+      "trained_gate_sha256": "4ffbf1cfda1d510b56f08afd47f134d2bd528e12e2e1716373fd32d1ccf74649"
+    },
+    "v101-d6-a17-public": {
+      "manifest_sha256": "3154f442d544519321e201f9755e65a968e3f2e6f07439ac1bfd6d4bece4c2d7",
+      "host": "toula",
+      "trained_gate_sha256": "805b76a9f20e217bb8ea5eaad6ee2cfa32183a88591758cc6d3f3ce5acf266a8"
+    },
+    "v101-d6-a17-exact": {
+      "manifest_sha256": "04670bee823df6b609df3dbf23009b39fad4091b50eb0d3b188e2890adb60112",
+      "host": "toula",
+      "trained_gate_sha256": "49f52d4b12679e4e389dd7b961ab12fab0120cadaa55ccb22741257870d32006"
+    },
+    "v101-d6-a29-public": {
+      "manifest_sha256": "4228508e04070cb1a572dd3ecf526e4be721fa4b5edbf0685727c904bea6dde2",
+      "host": "toula",
+      "trained_gate_sha256": "aef126b7e5131c425fad0a14816edefd2aa33e12792a6819b1562cd131bcf723"
+    },
+    "v101-d6-a29-exact": {
+      "manifest_sha256": "a7f92922cd6c4d58456ef5f7b24c12c192f1f0ab0e52a6ccb85254c667c7b347",
+      "host": "toula",
+      "trained_gate_sha256": "ceb9a039b7a53fc34ec0e4f492b3897fa0535ba312384b4636bbfd1e3c5e4ceb"
+    },
+    "v202-d3-a17-public": {
+      "manifest_sha256": "a7cd408daafea043bf63a10ca4d7bc4e3a6d953425c2ae3652c82cbca393b40c",
+      "host": "toula",
+      "trained_gate_sha256": "909023f5c783f6a0d52431b26375de14a23f2bfbf3f0aaa584477fbe09cb16bc"
+    },
+    "v202-d3-a17-exact": {
+      "manifest_sha256": "f61e52cd7cfcf814f4a18ad8db2836e4e958e9e1026d43e818828f4c4d3f6474",
+      "host": "toula",
+      "trained_gate_sha256": "6970e2fcde3347357015b95d95af4df0c06f09fa7c9346ebd3e52cc8e4c649ea"
+    },
+    "v202-d3-a29-public": {
+      "manifest_sha256": "fb3a9e43fcb6f58fdf4c2ea558fdbb566e835d20892e08400489f4cc9d994cbc",
+      "host": "toula",
+      "trained_gate_sha256": "198ebdb7184427faf4f02c0ac3e11be16c894b0c1f2bad296430309585c1608b"
+    },
+    "v202-d3-a29-exact": {
+      "manifest_sha256": "064d77f091998be66e26722293d5fece7a28a18f9cbe7fc4a30e54a967cfce1c",
+      "host": "toula",
+      "trained_gate_sha256": "276944bd26e53cc4764df1720144f3cf1dcae68ab0f13132dd7cfc18076bea7e"
+    },
+    "v202-d6-a17-public": {
+      "manifest_sha256": "91eef707debb9651bc296073348737de70465b401feb5cb110e2978e3ec72748",
+      "host": "toula",
+      "trained_gate_sha256": "797eef53b3ecf57c7ca5aaf738282f36ad127f030fbe64af3b87192b6f816754"
+    },
+    "v202-d6-a17-exact": {
+      "manifest_sha256": "2925dea34de1865d5c14850a97047bf44d60e134960a3f03476412b543d94b95",
+      "host": "toula",
+      "trained_gate_sha256": "41a2c813d17a698c7efa7a18fe1e0fc2f14d123295220d2edfc53c857094e5b2"
+    },
+    "v202-d6-a29-public": {
+      "manifest_sha256": "8c3cea98657e72efa19832b84c94f0d4abb908ca452a0f85fde0393de0e4f5d0",
+      "host": "toula",
+      "trained_gate_sha256": "c0441473a4976bae8d422af5e20d6570bd942585ce1ed133547fbaad20899d7b"
+    },
+    "v202-d6-a29-exact": {
+      "manifest_sha256": "12a6ab44d636175ed4e84385b300715c7893debbf801824f8b303597a12428b5",
+      "host": "toula",
+      "trained_gate_sha256": "6ba6f8275861df38d245df85cdbee46d3ccf1b5e51cd04493b49ce17289605c3"
+    },
+    "v303-d3-a17-public": {
+      "manifest_sha256": "733e0315e6c6a9a65d0d06dffb18b0526fbcd6964f3b6fcf3760ec04c3ea64b7",
+      "host": "toula",
+      "trained_gate_sha256": "36b34c4a1df268ecdd6a3cacf728c9d30442613898b75b82bc83862a5d7ececd"
+    },
+    "v303-d3-a17-exact": {
+      "manifest_sha256": "5b0b2bfd3d4f239633168b50d652914d9f2e11298b94b939c2fcf022df57caf9",
+      "host": "toula",
+      "trained_gate_sha256": "b1638316e0498c337b26d3da4f43f99a4d7b2882d59faa5224fe03d44878db88"
+    },
+    "v303-d3-a29-public": {
+      "manifest_sha256": "2ff8de76a4d3ff4dca8847406d76440eb371a5b29258d0938487cdbeb18a3b4a",
+      "host": "toula",
+      "trained_gate_sha256": "ab3cf17a1a133bdc056ac5c49aa42d573fc25907c1da8b5521115b457b9a38fa"
+    },
+    "v303-d3-a29-exact": {
+      "manifest_sha256": "436c46b6306ca3d94e79655209bff71d8fb61ec8bb96279e98e8bcc50712171e",
+      "host": "toula",
+      "trained_gate_sha256": "a13cdb816d9c6daddb92046962b787934c4c9932032f45460c8581f7c90943b6"
+    },
+    "v303-d6-a17-public": {
+      "manifest_sha256": "145db2b0d57a8d8c290d05178cbbeab467092f1fcc033da34a2e3690196cc07e",
+      "host": "toula",
+      "trained_gate_sha256": "5fe510eb649cc10fdb20efb0760e7d950214b9693093e8ae9d420fe6f1fa69bf"
+    },
+    "v303-d6-a17-exact": {
+      "manifest_sha256": "0d3e2d00b6a08015378402c7e0f17cab7e5f28050431c3dbe2eec94bb362fef8",
+      "host": "toula",
+      "trained_gate_sha256": "c8975af0834e0aefb6975644b994f3f6d0eb76fe791f1f62f532adff6a088d1e"
+    },
+    "v303-d6-a29-public": {
+      "manifest_sha256": "717dd0da7b662ed66cc83da8abccb24491bb3ffa3f7f588034b4d5c0be7ec7ed",
+      "host": "toula",
+      "trained_gate_sha256": "cf1eb7896e5f292cafc023872b1e938281b6a530bcb0ef95a522532ca13b758c"
+    },
+    "v303-d6-a29-exact": {
+      "manifest_sha256": "67d491dbbd89a08e1d0d2f5b3b04046639240993ff1842125389fb9a7c3e6450",
+      "host": "toula",
+      "trained_gate_sha256": "bd65074c41a8d678de7cb580afe4fe585a989b9716fd92dad95c3a8876d0c657"
+    },
+    "v404-d3-a17-public": {
+      "manifest_sha256": "8c667287e3fa4c391ac2c5c55ab4defd121fb9a00a5187484c7a36f27c0a72d8",
+      "host": "toula",
+      "trained_gate_sha256": "2b0fe06fbff2f8543a30e55dac9fd06ec6c42818119783a55700b5702c528b24"
+    },
+    "v404-d3-a17-exact": {
+      "manifest_sha256": "2885f0eddf42e2f89a6bc59cbb3cc5a14bbf7cb820d70acd1e593ed2334d4f3b",
+      "host": "toula",
+      "trained_gate_sha256": "f7350b4fb2710ec5eb9e52df415586f3ec171cc39b7926595acacbccc2a8153e"
+    },
+    "v404-d3-a29-public": {
+      "manifest_sha256": "da034caebbf2f1582c63011d0d473bf2b10474339eded72d43862d4545a0ed5c",
+      "host": "toula",
+      "trained_gate_sha256": "6ebf58c6ee553cd05f6d2437977ed1379634793c32698433ae72fac5b8fdd49e"
+    },
+    "v404-d3-a29-exact": {
+      "manifest_sha256": "11d1e415d144280c370d434fbd5d6349f710e9d9af1cbf1334891ad4e41acad2",
+      "host": "toula",
+      "trained_gate_sha256": "169d11c547b05d76c300c291c6e71178812a5a15e28dfa1025e7d33c63eb6776"
+    },
+    "v404-d6-a17-public": {
+      "manifest_sha256": "2157d7432e149d1b59758982f908c9c81eb371a8b553a0f3e5980063f224c959",
+      "host": "toula",
+      "trained_gate_sha256": "05e7f8bd6e9b0c812723da8e95a57b3f32d907cad84b8be1fd9ee3d9e15442b6"
+    },
+    "v404-d6-a17-exact": {
+      "manifest_sha256": "a14029b5b0adbe24fff815c5009d907a74648b1ab53b4ece2e891fad5337c8f4",
+      "host": "toula",
+      "trained_gate_sha256": "825d18fd2ee9cd4731de74e6d0d1e1f0db120b9c977f8bac78db8dcbacd1d7ec"
+    },
+    "v404-d6-a29-public": {
+      "manifest_sha256": "719acbcbb202f83802f5efd3e13bd584110f5dc6bc5b982e98dd09e759abaccd",
+      "host": "toula",
+      "trained_gate_sha256": "a35ee27cd3f035307c2210a0ec597a1adab8b983a8d3df7dbd06e454ee7bdb5d"
+    },
+    "v404-d6-a29-exact": {
+      "manifest_sha256": "325848554ef4f321724e2766cbcdb8dce48ecb91a000c00d4b7f5772d24c8cee",
+      "host": "toula",
+      "trained_gate_sha256": "683f1135e4b677750c1771dacbb1dbd094cf6772ce5692b6bb5fc91bfeaba468"
+    },
+    "v505-d3-a17-public": {
+      "manifest_sha256": "863e26fc7778479bec6b31a71192def4cf9260da2e89c1f2e0dd9b2cac15ac48",
+      "host": "toula",
+      "trained_gate_sha256": "8307213f61fb2c0f7d8d1f1ffefe4fad56949ab3bd11bd6f4600472fe6cf24ec"
+    },
+    "v505-d3-a17-exact": {
+      "manifest_sha256": "f16217b5c22e06c682714dcf3d228c4a6a0f318b18622102051fafa8a2ce425a",
+      "host": "toula",
+      "trained_gate_sha256": "f22385a123dc68541fcc7fb0a19a6fff359212ba847b288a82c4fec4758262e1"
+    },
+    "v505-d3-a29-public": {
+      "manifest_sha256": "fbd480731c039c6e3a60a19ecf66a49e1d8fb666a754838b14a5c0a4b153231e",
+      "host": "toula",
+      "trained_gate_sha256": "a6512c4aa4c94a9464bf9b40a3b90235dafb5da93584554e51c4a7de48db2b50"
+    },
+    "v505-d3-a29-exact": {
+      "manifest_sha256": "3c40dfe3636d2ff9b4ff17a8027aa8fda41f239bd9f5d171b6282a8b30e7fa19",
+      "host": "toula",
+      "trained_gate_sha256": "9877f224e2133bc7256b786e448ff4d46449b38b67fe8a3e31c50fdf2d070485"
+    },
+    "v505-d6-a17-public": {
+      "manifest_sha256": "fa2245d01b417a9dabbd6a26d11f54eb548aef095fe30ae7227c486b105ace3d",
+      "host": "toula",
+      "trained_gate_sha256": "ac81e0fa10e62bc8e2201a6ff34fb05e2fd61c09a582545500eb6e9750baea57"
+    },
+    "v505-d6-a17-exact": {
+      "manifest_sha256": "b681fd75a22d3ab7a3bf7d1c5b03adf6273a2ec8882f4b728bb2c042acb3601a",
+      "host": "toula",
+      "trained_gate_sha256": "caa774a6c5cb346bcf778ae313673932a6aa65a5abe3a9e06ca75955966cc5e8"
+    },
+    "v505-d6-a29-public": {
+      "manifest_sha256": "309dc34bb23dc63f5fa6cc2e6fac32436af97f4d34ee84a1a16432d4cf567212",
+      "host": "toula",
+      "trained_gate_sha256": "017035d945271aaeafc1c298561102a025b1bcc68da872a0799f84a3597c2780"
+    },
+    "v505-d6-a29-exact": {
+      "manifest_sha256": "08a7ba96ca699e4aebf200cae2f5905ff415299afbffcef9aaef8d338c263f57",
+      "host": "toula",
+      "trained_gate_sha256": "aa6fb97397ed63b7d0355de705c4ebe905c4d5a8ba57bc2092124f2e1a74c2a9"
+    },
+    "v606-d3-a17-public": {
+      "manifest_sha256": "1f7ca3929d73465b7bbacf8727fccecb9e536adfe13957d34ee22455cd149eac",
+      "host": "koula",
+      "trained_gate_sha256": "34db6a4ebc1503dfa4f87d1d61c8f971bf290c1d33dbfc4c50c953e874d29937"
+    },
+    "v606-d3-a17-exact": {
+      "manifest_sha256": "ad4fbadeb36adab7347caa061187b9b42619f1a9546caba195c7294ce925948e",
+      "host": "koula",
+      "trained_gate_sha256": "0e60e16f9bc1e7a94d270048e191b2b937a4e2c66825d5cc45e409cd709316d9"
+    },
+    "v606-d3-a29-public": {
+      "manifest_sha256": "9aa1771bcd19effeea1ef81eafc4c790e185f99c4457f3afa46d764c7b16508c",
+      "host": "koula",
+      "trained_gate_sha256": "a33ae3da1827a09e0927965a55a3dd51625167d56edf59c0c2395403886a252d"
+    },
+    "v606-d3-a29-exact": {
+      "manifest_sha256": "e2424cd35447f9ea8e9150e0d36c2442675c3c86a4ca327b2ce843226bdff1dc",
+      "host": "koula",
+      "trained_gate_sha256": "ee1925de34cf89e81114d572187f5771e8b2e52bd34e9f1e5d7a2e02a05044b7"
+    },
+    "v606-d6-a17-public": {
+      "manifest_sha256": "da15d7de5fdd6c71c0e75e1c8b0e1c57bfadb52de05538b95ec2cd6be9ed10ee",
+      "host": "koula",
+      "trained_gate_sha256": "bfffe60e62cc8a8d9fc8ab11ffedd8435a72bce75e68218bde0913c7bf5bae5e"
+    },
+    "v606-d6-a17-exact": {
+      "manifest_sha256": "10c1cd6210975e830aa4e90307149f1c2d38c82828ddc666f12ecef4ddf43e50",
+      "host": "koula",
+      "trained_gate_sha256": "b22346b21aa2f54ef1bdd6efcb2c7a9677c4c0541d217fdc60e280a4c8dc0645"
+    },
+    "v606-d6-a29-public": {
+      "manifest_sha256": "93fa8daf9edbc0b659246d7a48234b75fd08e72e63b8be8788f87a05c2038b2a",
+      "host": "koula",
+      "trained_gate_sha256": "1222802307b5040c398948f88485f4a39af41b8d65300b6851813422cd13db15"
+    },
+    "v606-d6-a29-exact": {
+      "manifest_sha256": "62beab218ab5a02b2d34ef1caee657e8c462c10b2c5a5934a3bcc663d5d9320c",
+      "host": "koula",
+      "trained_gate_sha256": "9b6112422f4049cf5130c9dee20c006101f949d6749d3dd9f7bc2491c72fc450"
+    },
+    "v707-d3-a17-public": {
+      "manifest_sha256": "a7401f7102db37345fa3b7960434cf53fc114d9f26e4c1df5ac372a21740e449",
+      "host": "koula",
+      "trained_gate_sha256": "97a906470b4f8e09211f60516831dec0ceda6aa8e160a110034e5ca97f2d71ff"
+    },
+    "v707-d3-a17-exact": {
+      "manifest_sha256": "48223b709caf4296e162f5f67f11c31e41d97b1d0b581c0c1f20b862f9655a68",
+      "host": "koula",
+      "trained_gate_sha256": "e902f19940b729e5322f8d049855eabec1b0112568ec473dcb1e0629e5ea6ba2"
+    },
+    "v707-d3-a29-public": {
+      "manifest_sha256": "5d2bffb448980d68b964b5adcc6f952e4ad97dded20616a352c6c4862c768971",
+      "host": "koula",
+      "trained_gate_sha256": "8a3fad662c2d7d8cab23f86b7d9ec776ec666c0fbd708ee4125a0c12fa5adc68"
+    },
+    "v707-d3-a29-exact": {
+      "manifest_sha256": "5049c91e93239cad2abde09763dd7af091a42ed09288a508309355ae9b4f6761",
+      "host": "koula",
+      "trained_gate_sha256": "8356ccbbe300861c6e70b30e85430d45f41473fff5601926b9f547a4834f7b03"
+    },
+    "v707-d6-a17-public": {
+      "manifest_sha256": "e9be6a8349f06430c7915a9a07d8f63bf00c58de2d398e2af79a3e28410d9e82",
+      "host": "koula",
+      "trained_gate_sha256": "65a20136d3c266559f885650ff1754c25530a7afd67d83f6118e249b75873ba8"
+    },
+    "v707-d6-a17-exact": {
+      "manifest_sha256": "680b92224c86acaa44924a8a46de15702ad3ec129358f9fba1cf2ad51e0e2562",
+      "host": "koula",
+      "trained_gate_sha256": "1ad517e2eb199c41bc3f88296c798e48b5cb43c70457fd66ae130ed3eacfef1a"
+    },
+    "v707-d6-a29-public": {
+      "manifest_sha256": "b416e2bc96528235d57ba1f885610319b147c762e8a13d606ae07c92f4412a66",
+      "host": "koula",
+      "trained_gate_sha256": "9e2c88c84fddc52402cbaa6d9ee6a5f1c3a41fbe0f0f145b046c13ac3690e528"
+    },
+    "v707-d6-a29-exact": {
+      "manifest_sha256": "ab57d5894dacda8ff182bc866d944686dffd5c903502e2f449d53d2c6340b0c0",
+      "host": "koula",
+      "trained_gate_sha256": "22f4304c0d7d87f7765b293c7a6a8bca12c06b6b6bee39a461e26708fd86c7d4"
+    },
+    "v808-d3-a17-public": {
+      "manifest_sha256": "b039351e12807d6319c6888cd74a84a49e9288bcc6ec1a5e5db72356c8ff618c",
+      "host": "koula",
+      "trained_gate_sha256": "8a020abeced2fa50c4e3087db4542462422c7f4dc35ae0d62be98d3e3089df19"
+    },
+    "v808-d3-a17-exact": {
+      "manifest_sha256": "b7e8cdfb56034c459e0c58169496b86cae8e8f8d9c0a315603936dd904940b24",
+      "host": "koula",
+      "trained_gate_sha256": "bedff0d8dbe830012a821e315d29a426cf29a3bb7614f701276e2206956490c2"
+    },
+    "v808-d3-a29-public": {
+      "manifest_sha256": "058740ddf462fc1429fce1be282bb8520c9013df15c97584ff457e17eb453fcf",
+      "host": "koula",
+      "trained_gate_sha256": "0bc2c598d984cf90cbb76f1815cdfb80ab867d7abe1fbe8dd80483f68cb3ea5b"
+    },
+    "v808-d3-a29-exact": {
+      "manifest_sha256": "e504d1f7812abbd58b0626863d31f4ac37f8f849f0eedd5976b5c030d0773dd2",
+      "host": "koula",
+      "trained_gate_sha256": "46ac4d2d2608e54a0743c0d280dd3b955350dde8a522a45fce489aeb80283edb"
+    },
+    "v808-d6-a17-public": {
+      "manifest_sha256": "1422cc4736e25652999bb227575956afb6c6fe52e703fd6a813d3e04b3a2fb75",
+      "host": "koula",
+      "trained_gate_sha256": "fe1c51eb28d839639df4751082b566cdf01dad366d6615972641a731ee334108"
+    },
+    "v808-d6-a17-exact": {
+      "manifest_sha256": "9fcf10f2f11182f5049e99e515d9f8c7f51b2f3e4076f6056958cd3ae91167ad",
+      "host": "koula",
+      "trained_gate_sha256": "73a674e5435946fac3c9c218f280bbdc97983c39cbd1a13b7c0f2a92cfb39e3d"
+    },
+    "v808-d6-a29-public": {
+      "manifest_sha256": "ea1dda5cc2ecdc20ed31227da11d66971541eab7f75c9afc7a2c6ecf6f48f825",
+      "host": "koula",
+      "trained_gate_sha256": "b0159ebc13ed918406dd9fd2487b4270381cac0e91efa160e1819a20317b5c0a"
+    },
+    "v808-d6-a29-exact": {
+      "manifest_sha256": "9caed003a9c495753cc344091b16761707bff27612064a79f634ee88db4d79ac",
+      "host": "koula",
+      "trained_gate_sha256": "b14e4fe35a466530ec8b52200963909667c28de264e36e7d4e7c7ba9275c6ad0"
+    },
+    "v909-d3-a17-public": {
+      "manifest_sha256": "8c59e62a6dc7fb857227076be35931a6ea140eb363f161d7b76c06d7d2d86868",
+      "host": "koula",
+      "trained_gate_sha256": "b0c28b0eabd1c3b8acc44a5de43e8277f5496029b548aa713ae07a206154fc80"
+    },
+    "v909-d3-a17-exact": {
+      "manifest_sha256": "f6fdfc6ef0931a5299259b348ffc6fceee4e348005cb4030eeafa66fdc5b9bb1",
+      "host": "koula",
+      "trained_gate_sha256": "cee5fc4ffd8dc919e12945296d036ee3c74463d7c8b93713c2b7be86ec116140"
+    },
+    "v909-d3-a29-public": {
+      "manifest_sha256": "2ab22d43c3f0419d36b49b102d9f85ca9673d35a189f02f0744057fe1d57c89d",
+      "host": "koula",
+      "trained_gate_sha256": "48ccf0388de18c7a0878d04c4cf12df500b74c12ac3df7fd84c3f3f83121ae2c"
+    },
+    "v909-d3-a29-exact": {
+      "manifest_sha256": "894774a6c2fbab68ca7ea08da73090ccd64f771e6efc534833dd803828a86e8a",
+      "host": "koula",
+      "trained_gate_sha256": "39190117049c4b2125f5d53c5f927ded276bd14d0508df2fb464f789a4f00563"
+    },
+    "v909-d6-a17-public": {
+      "manifest_sha256": "a0770a2279a36596108ae8ff466a542b8ca017461a6f87aebd9b7549aa728ec2",
+      "host": "koula",
+      "trained_gate_sha256": "b5a175eb2ea4f92c6fc5aa18fdd4e5adff33692fd052ece301c7c696d38381b9"
+    },
+    "v909-d6-a17-exact": {
+      "manifest_sha256": "aad4e6d34772aca29dc0b5f2f8bbf227c6a827f740814716ae47ccdad6dce8c1",
+      "host": "koula",
+      "trained_gate_sha256": "2db822ca03abe64acf7c7e6b809d619172529e144db0acc169c1c7a728659eeb"
+    },
+    "v909-d6-a29-public": {
+      "manifest_sha256": "ed95c43b89a2c7c7a6041e276b4eb9282dbbf0751f259b5f410fdc02b356ac84",
+      "host": "koula",
+      "trained_gate_sha256": "939eef6f4f65cf2bbb4d763527eb922e9701049f5bc443a51ff0c26de807f502"
+    },
+    "v909-d6-a29-exact": {
+      "manifest_sha256": "69fc25d565f5b85d9561c615b99e41daf98f9b85793fbf43a405508dd239a962",
+      "host": "koula",
+      "trained_gate_sha256": "3cf3c3c61cc75960f8e5fe3c055becf10945c412e2c8ec45a95583049336ce4f"
+    },
+    "v1010-d3-a17-public": {
+      "manifest_sha256": "32e5d8fa0b7603fc9d6a02b6290217e4b3ff89a3f7ad878c310325a567c998a2",
+      "host": "koula",
+      "trained_gate_sha256": "2849582c97c37e5d8a000c42ee091d20004f2e19a207bd214db001e32bf5a8bf"
+    },
+    "v1010-d3-a17-exact": {
+      "manifest_sha256": "6d8dec27df70b534f8e8f0dcb0b2950cbc9d42d2c081c2481f7e08c0f492816f",
+      "host": "koula",
+      "trained_gate_sha256": "c5fd93e9d369fbd2b27e5c4350282b8c04d70f76cb858210bdc9b4104aff4ded"
+    },
+    "v1010-d3-a29-public": {
+      "manifest_sha256": "da36a82aca2c67948c5a4cd41e4d40d5117aa01f420a69007637311cda06896d",
+      "host": "koula",
+      "trained_gate_sha256": "4806a38e9f137ad2aaefe765f4c093d63b5ed0c1cb638f793ad17b79585926ed"
+    },
+    "v1010-d3-a29-exact": {
+      "manifest_sha256": "b175643214f76ee1fe1090cb2fd0f57e1326a9bd48ae448f68c034c0e0103758",
+      "host": "koula",
+      "trained_gate_sha256": "3531cb6250c1e7e1609a0f1c89da79f7637fa6ae4f3bd0763236856bf5fdede4"
+    },
+    "v1010-d6-a17-public": {
+      "manifest_sha256": "d06c1dab795b78a9b063f5d44a23f894b313ae6d0d52a387042b4b12cc8e4c4d",
+      "host": "koula",
+      "trained_gate_sha256": "2fb9d62487e71e47c7e13450f95efb9b4e0032e1b34b9b2fb65717a44272a3ab"
+    },
+    "v1010-d6-a17-exact": {
+      "manifest_sha256": "aad5d330c75d5cc55049feb5274eb050274e58ab303a2e364e407d9993f0e834",
+      "host": "koula",
+      "trained_gate_sha256": "8a289ad961fbe4d3c37cab2ca03bb724751f17653b892ad82a571aba7ddf61c5"
+    },
+    "v1010-d6-a29-public": {
+      "manifest_sha256": "ed2b94221266a40e6d4f00c87dd0c459232aad1f42158c3a140e73f4bf8a51dc",
+      "host": "koula",
+      "trained_gate_sha256": "8f2818e9f1f171b4445687f62c1622872d382d6d651657c01371a7a56a646a84"
+    },
+    "v1010-d6-a29-exact": {
+      "manifest_sha256": "53f7a6dd58e3932e358fec590035837e8706ab52beb9fc669fdd5df9939dea02",
+      "host": "koula",
+      "trained_gate_sha256": "2a359e292154482fb0d980d8c9f62a4898456e92589e8ffbce39d8e10194c738"
+    }
+  },
+  "assets": {
+    "public.pt": {
+      "source": "/home/geo/llm-attacker-bisr-fidelity-20260918/run-v1/checkpoints/public.pt",
+      "sha256": "7f60d54025e06beaf8adc130cfe7611c3bd3c5546fdea8258ed1f0170514b5c2"
+    },
+    "sip-s17-d3.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/sip-s17-d3.pt",
+      "sha256": "ffe74147850ad7a467964a43e0ced5d4180998a3a8558a3ad207b8142cc43100"
+    },
+    "observations-101-3.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-101-3.pt",
+      "sha256": "9255927f32540bca81f34745b29b483d957c8a2ae2fa9471964fee58db6e8147"
+    },
+    "dlg.py": {
+      "source": "/home/geo/llm-attacker-bisr-fidelity-20260918/campaign-v1/reference-sources/dlg.py",
+      "sha256": "01f8c6766a75a2556bec5243bdbb0cdabbd179fc8c0c20ee8be5c6ce8fa590a9"
+    },
+    "model.py": {
+      "source": "/home/geo/llm-attacker-bisr-fidelity-20260918/campaign-v1/reference-sources/model.py",
+      "sha256": "77aef15b9187c964049e1ef42363c45c00fb204d9520161f97c31c72a620e67d"
+    },
+    "sip.py": {
+      "source": "/home/geo/llm-attacker-bisr-fidelity-20260918/campaign-v1/reference-sources/sip.py",
+      "sha256": "454dea1fb51e55222a0459883eec8412355dcc83f2e8c3dd46c7e3ac98c63442"
+    },
+    "sma.py": {
+      "source": "/home/geo/llm-attacker-bisr-fidelity-20260918/campaign-v1/reference-sources/sma.py",
+      "sha256": "65f3c17803c3657714f58c217282e17cdc1c09aebcb23cc81b83d3ebef14ea3a"
+    },
+    "exact-101-3.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-101-3.pt",
+      "sha256": "0d60b5af21fd3e2c39805bfcb4ff2123abb58e5797abe648b4e6297b5d5d359e"
+    },
+    "sip-s29-d3.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/sip-s29-d3.pt",
+      "sha256": "2f29e1784f10253ca74f545bee175f1031a8d541209c0f820eeb60970fc6f3dc"
+    },
+    "sip-s17-d6.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/sip-s17-d6.pt",
+      "sha256": "89c2bc3185e7312395731418f580091008139e04b842b40085a306ac594799d6"
+    },
+    "observations-101-6.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-101-6.pt",
+      "sha256": "020e266a9898aedeb9d4dde23d238c1914e04eadf8ea47100d8f92d27cfe84d2"
+    },
+    "exact-101-6.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-101-6.pt",
+      "sha256": "a32a43e710188eb79cbee2724a10e8b127e6db0069627d4845cffdf2a4175da5"
+    },
+    "sip-s29-d6.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/sip-s29-d6.pt",
+      "sha256": "f3edd2faf3efef25dfce3ce02d228baee68c58e9fd5515f14b3ea5abddcdbe79"
+    },
+    "observations-202-3.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-202-3.pt",
+      "sha256": "9df1948fe01ab474808f384a1b97d5a016bbd8df4d3ff1e01eb7f571c55fa2c3"
+    },
+    "exact-202-3.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-202-3.pt",
+      "sha256": "8a0c2549d868b9b8abaef97ab5ad8f8b987ff7b13a3584a0cc2548d3a34525e0"
+    },
+    "observations-202-6.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-202-6.pt",
+      "sha256": "fa0d3935a2ed44963526fa01cf69c412147b1856282c35b2f3aa165ce874f8a2"
+    },
+    "exact-202-6.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-202-6.pt",
+      "sha256": "eeb51e85743a6fce75326a768d3caacaeaf8068b3fe7fb72760b13380c6c3d2c"
+    },
+    "observations-303-3.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-303-3.pt",
+      "sha256": "f659084d128324b7aa3f1f460176bf9aaa2e6bccebbe414d1778bfb9c6333b33"
+    },
+    "exact-303-3.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-303-3.pt",
+      "sha256": "c21f7cc92b04aaa13969d88b4bc5571dfd3382b481d464abcfc936f2e918c8f0"
+    },
+    "observations-303-6.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-303-6.pt",
+      "sha256": "aca95d5af441023b7d298b7bbb941e62dde3066e70e90567d90536925d486173"
+    },
+    "exact-303-6.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-303-6.pt",
+      "sha256": "3e4a44c0cf8950f988f43be0b6eca4ac8a91da843400159b6caba1cb02abb4b9"
+    },
+    "observations-404-3.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-404-3.pt",
+      "sha256": "384e9a0852010d47ca48000d4306c7675451c1cced5a3dcc37d5d9e87d3089c1"
+    },
+    "exact-404-3.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-404-3.pt",
+      "sha256": "6e1f069e9cde54bf95264771ba54b5b59aa3c468853070c2c86fd35e7953900e"
+    },
+    "observations-404-6.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-404-6.pt",
+      "sha256": "6418f46681849bb54aaa9b75207367f23f6dff1af916584f0dcd9ae5bfaf5641"
+    },
+    "exact-404-6.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-404-6.pt",
+      "sha256": "eb8a2a6e56d81ba1d78f17b162f40e47e6973d1782645d1ca283cb33dbea4fab"
+    },
+    "observations-505-3.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-505-3.pt",
+      "sha256": "f283b24ae0e440b1558f9c9a4fe13b33b2e27de4143e00a48e876524722a3790"
+    },
+    "exact-505-3.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-505-3.pt",
+      "sha256": "20689cf45f6e850f19015083752127d96191b4dea51b5f62b89a1cdb9af37104"
+    },
+    "observations-505-6.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-505-6.pt",
+      "sha256": "4b42b441ef6e9729d3be5d340e5bd2ba1a84f507d7538ccabbe84c608d76288f"
+    },
+    "exact-505-6.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-505-6.pt",
+      "sha256": "425ae95a1782cd9990c25ca07bd9f920f38265896c6aa70a4b6c30aa36bed338"
+    },
+    "observations-606-3.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-606-3.pt",
+      "sha256": "35f5d3e5a9398acdf35539ca262672ba10070c2949c6a9db95fb97d52d50ef99"
+    },
+    "exact-606-3.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-606-3.pt",
+      "sha256": "d494d6263dac08bc72474c0453bab749bda3df79b18dd12e308834b0d54e197f"
+    },
+    "observations-606-6.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-606-6.pt",
+      "sha256": "c737f175239e9cb0a701645803d9c5a2f6aeb061b5a8b2e50f3892e2aa7e0cf8"
+    },
+    "exact-606-6.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-606-6.pt",
+      "sha256": "fe17daa17d41bf6f89aa0aa47fbd9a58a2e23d38c57c8d87fa9bdaf2a727752d"
+    },
+    "observations-707-3.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-707-3.pt",
+      "sha256": "6605fdb08db7ed80693137560213db5db7f6412d1554afbb8a7b6cf29b28f0a3"
+    },
+    "exact-707-3.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-707-3.pt",
+      "sha256": "2a194d4b412fdc0500237f874e4aab4a7b2ad9d023079d8eefbd0555bba51415"
+    },
+    "observations-707-6.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-707-6.pt",
+      "sha256": "17b1510fdd9988ba79a0c200659770e82fe99439250a00e6e4aea9e379d21972"
+    },
+    "exact-707-6.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-707-6.pt",
+      "sha256": "3a06b6ea5c29d520553399ee7dbbb8bfb07eb427e34ed5275d09a030f8a6089b"
+    },
+    "observations-808-3.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-808-3.pt",
+      "sha256": "e7cbb9b8b49390ff0ef1d86d1287fe364ab44c2f09bd6e5a3ddc5d2bebc3866b"
+    },
+    "exact-808-3.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-808-3.pt",
+      "sha256": "0c9843ee66e4f689fd50c9bd87f01af1f9b4130fb62fc686399b5c4ebd252818"
+    },
+    "observations-808-6.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-808-6.pt",
+      "sha256": "2e2d9cc881031cbe2b7d7274bfe3b60058821c39c34165934af74359a3288e6b"
+    },
+    "exact-808-6.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-808-6.pt",
+      "sha256": "da4cde6641276620c02169694656992507e1c6ec077ba0ff32f6779c6ab64b5a"
+    },
+    "observations-909-3.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-909-3.pt",
+      "sha256": "7d355043aeb79d63c00578f62e524483258efef08d32553b1d1d2ac621a13e49"
+    },
+    "exact-909-3.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-909-3.pt",
+      "sha256": "ef8d1bc2040606538beb96beec4f1dbf0dd6362381af603436393a57fe677420"
+    },
+    "observations-909-6.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-909-6.pt",
+      "sha256": "527b4a4a2a31bedbe73512c5de938e173ae5e74773a0fb220e0e8e9c2743e8f8"
+    },
+    "exact-909-6.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-909-6.pt",
+      "sha256": "8d74821f14ca78dbf1f9385097418947015443eee09fb904a4a73380a06de563"
+    },
+    "observations-1010-3.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-1010-3.pt",
+      "sha256": "18a84e695c276dd9592459ddc93fb2207e6fa4ce01fec7df6b4eea6a19aaefc1"
+    },
+    "exact-1010-3.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-1010-3.pt",
+      "sha256": "fd828e09c4bf85f062ff51a776bbdf2e5daf8a0193fbae06f64dedde0531e03e"
+    },
+    "observations-1010-6.pt": {
+      "source": "/home/geo/.orx/runs/91effbd8-9efb-4489-9299-9611380b67ac/repo/sip-preparation/observations-1010-6.pt",
+      "sha256": "9866df9730f72cc8d4ec3338a031b5fc7b13450315fde30499919811ce822e15"
+    },
+    "exact-1010-6.pt": {
+      "source": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/validation-heldout-v3-r3-shard8/exact-1010-6.pt",
+      "sha256": "f06ca361772bd49305dd485f3818b0b0cfdc950cfe4414c37ef10109a48a7839"
+    }
+  },
+  "preparation_result_sha256": "e244a8937a35b17e7ecba9b858e1ce9eeb834a4e9b3ca9c70a446185c98add8b",
+  "environment": {
+    "torch": "2.11.0+cu128",
+    "transformers": "5.15.0",
+    "cuda": "12.8",
+    "device": "NVIDIA GB10",
+    "tf32": false,
+    "deterministic": true,
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+  },
+  "evidence_files": {
+    "records/v909-d3-a17-exact.json": "f6fdfc6ef0931a5299259b348ffc6fceee4e348005cb4030eeafa66fdc5b9bb1",
+    "records/v606-d6-a29-public.json": "93fa8daf9edbc0b659246d7a48234b75fd08e72e63b8be8788f87a05c2038b2a",
+    "records/v202-d3-a29-public.json": "fb3a9e43fcb6f58fdf4c2ea558fdbb566e835d20892e08400489f4cc9d994cbc",
+    "records/v101-d3-a29-exact.json": "d095048fd9a46f12f5927df2655905dc4ca7f2d4b32d4ca6f77cebc40c701ab8",
+    "records/v606-d6-a29-exact.json": "62beab218ab5a02b2d34ef1caee657e8c462c10b2c5a5934a3bcc663d5d9320c",
+    "records/v202-d6-a29-exact.json": "12a6ab44d636175ed4e84385b300715c7893debbf801824f8b303597a12428b5",
+    "records/v909-d3-a17-public.json": "8c59e62a6dc7fb857227076be35931a6ea140eb363f161d7b76c06d7d2d86868",
+    "records/v101-d6-a17-public.json": "3154f442d544519321e201f9755e65a968e3f2e6f07439ac1bfd6d4bece4c2d7",
+    "records/v505-d3-a29-exact.json": "3c40dfe3636d2ff9b4ff17a8027aa8fda41f239bd9f5d171b6282a8b30e7fa19",
+    "records/v505-d3-a17-public.json": "863e26fc7778479bec6b31a71192def4cf9260da2e89c1f2e0dd9b2cac15ac48",
+    "records/v707-d6-a29-exact.json": "ab57d5894dacda8ff182bc866d944686dffd5c903502e2f449d53d2c6340b0c0",
+    "records/v202-d3-a17-public.json": "a7cd408daafea043bf63a10ca4d7bc4e3a6d953425c2ae3652c82cbca393b40c",
+    "records/v1010-d3-a17-exact.json": "6d8dec27df70b534f8e8f0dcb0b2950cbc9d42d2c081c2481f7e08c0f492816f",
+    "records/v606-d6-a17-public.json": "da15d7de5fdd6c71c0e75e1c8b0e1c57bfadb52de05538b95ec2cd6be9ed10ee",
+    "records/v808-d3-a17-exact.json": "b7e8cdfb56034c459e0c58169496b86cae8e8f8d9c0a315603936dd904940b24",
+    "records/v505-d3-a29-public.json": "fbd480731c039c6e3a60a19ecf66a49e1d8fb666a754838b14a5c0a4b153231e",
+    "records/v303-d6-a29-exact.json": "67d491dbbd89a08e1d0d2f5b3b04046639240993ff1842125389fb9a7c3e6450",
+    "records/v404-d3-a29-exact.json": "11d1e415d144280c370d434fbd5d6349f710e9d9af1cbf1334891ad4e41acad2",
+    "records/v101-d6-a29-public.json": "4228508e04070cb1a572dd3ecf526e4be721fa4b5edbf0685727c904bea6dde2",
+    "records/v909-d3-a29-public.json": "2ab22d43c3f0419d36b49b102d9f85ca9673d35a189f02f0744057fe1d57c89d",
+    "records/v303-d6-a29-public.json": "717dd0da7b662ed66cc83da8abccb24491bb3ffa3f7f588034b4d5c0be7ec7ed",
+    "records/v707-d3-a29-exact.json": "5049c91e93239cad2abde09763dd7af091a42ed09288a508309355ae9b4f6761",
+    "records/v707-d3-a29-public.json": "5d2bffb448980d68b964b5adcc6f952e4ad97dded20616a352c6c4862c768971",
+    "records/v1010-d6-a17-exact.json": "aad5d330c75d5cc55049feb5274eb050274e58ab303a2e364e407d9993f0e834",
+    "records/v808-d6-a17-exact.json": "9fcf10f2f11182f5049e99e515d9f8c7f51b2f3e4076f6056958cd3ae91167ad",
+    "records/v404-d6-a17-public.json": "2157d7432e149d1b59758982f908c9c81eb371a8b553a0f3e5980063f224c959",
+    "records/v1010-d6-a17-public.json": "d06c1dab795b78a9b063f5d44a23f894b313ae6d0d52a387042b4b12cc8e4c4d",
+    "records/v404-d6-a29-exact.json": "325848554ef4f321724e2766cbcdb8dce48ecb91a000c00d4b7f5772d24c8cee",
+    "records/v808-d6-a17-public.json": "1422cc4736e25652999bb227575956afb6c6fe52e703fd6a813d3e04b3a2fb75",
+    "records/v303-d3-a29-exact.json": "436c46b6306ca3d94e79655209bff71d8fb61ec8bb96279e98e8bcc50712171e",
+    "records/v707-d3-a17-public.json": "a7401f7102db37345fa3b7960434cf53fc114d9f26e4c1df5ac372a21740e449",
+    "records/v909-d6-a17-exact.json": "aad4e6d34772aca29dc0b5f2f8bbf227c6a827f740814716ae47ccdad6dce8c1",
+    "records/v606-d3-a29-exact.json": "e2424cd35447f9ea8e9150e0d36c2442675c3c86a4ca327b2ce843226bdff1dc",
+    "records/v101-d6-a29-exact.json": "a7f92922cd6c4d58456ef5f7b24c12c192f1f0ab0e52a6ccb85254c667c7b347",
+    "records/v303-d6-a17-public.json": "145db2b0d57a8d8c290d05178cbbeab467092f1fcc033da34a2e3690196cc07e",
+    "records/v505-d6-a29-exact.json": "08a7ba96ca699e4aebf200cae2f5905ff415299afbffcef9aaef8d338c263f57",
+    "records/v202-d3-a29-exact.json": "064d77f091998be66e26722293d5fece7a28a18f9cbe7fc4a30e54a967cfce1c",
+    "records/v1010-d6-a29-public.json": "ed2b94221266a40e6d4f00c87dd0c459232aad1f42158c3a140e73f4bf8a51dc",
+    "records/v808-d6-a29-public.json": "ea1dda5cc2ecdc20ed31227da11d66971541eab7f75c9afc7a2c6ecf6f48f825",
+    "records/v404-d6-a29-public.json": "719acbcbb202f83802f5efd3e13bd584110f5dc6bc5b982e98dd09e759abaccd",
+    "records/v1010-d3-a29-public.json": "da36a82aca2c67948c5a4cd41e4d40d5117aa01f420a69007637311cda06896d",
+    "records/v808-d3-a29-public.json": "058740ddf462fc1429fce1be282bb8520c9013df15c97584ff457e17eb453fcf",
+    "records/v909-d3-a29-exact.json": "894774a6c2fbab68ca7ea08da73090ccd64f771e6efc534833dd803828a86e8a",
+    "records/v606-d6-a17-exact.json": "10c1cd6210975e830aa4e90307149f1c2d38c82828ddc666f12ecef4ddf43e50",
+    "records/v101-d3-a17-exact.json": "c17d158433abd237aa23b7c81cd448d53606d04d7f63996def21706096b39bc7",
+    "records/v404-d3-a29-public.json": "da034caebbf2f1582c63011d0d473bf2b10474339eded72d43862d4545a0ed5c",
+    "records/v505-d3-a17-exact.json": "f16217b5c22e06c682714dcf3d228c4a6a0f318b18622102051fafa8a2ce425a",
+    "records/v707-d6-a17-public.json": "e9be6a8349f06430c7915a9a07d8f63bf00c58de2d398e2af79a3e28410d9e82",
+    "records/v202-d6-a17-exact.json": "2925dea34de1865d5c14850a97047bf44d60e134960a3f03476412b543d94b95",
+    "records/v303-d3-a17-public.json": "733e0315e6c6a9a65d0d06dffb18b0526fbcd6964f3b6fcf3760ec04c3ea64b7",
+    "records/v404-d3-a17-public.json": "8c667287e3fa4c391ac2c5c55ab4defd121fb9a00a5187484c7a36f27c0a72d8",
+    "records/v707-d6-a17-exact.json": "680b92224c86acaa44924a8a46de15702ad3ec129358f9fba1cf2ad51e0e2562",
+    "records/v808-d3-a29-exact.json": "e504d1f7812abbd58b0626863d31f4ac37f8f849f0eedd5976b5c030d0773dd2",
+    "records/v1010-d3-a29-exact.json": "b175643214f76ee1fe1090cb2fd0f57e1326a9bd48ae448f68c034c0e0103758",
+    "records/v1010-d3-a17-public.json": "32e5d8fa0b7603fc9d6a02b6290217e4b3ff89a3f7ad878c310325a567c998a2",
+    "records/v808-d3-a17-public.json": "b039351e12807d6319c6888cd74a84a49e9288bcc6ec1a5e5db72356c8ff618c",
+    "records/v303-d3-a29-public.json": "2ff8de76a4d3ff4dca8847406d76440eb371a5b29258d0938487cdbeb18a3b4a",
+    "records/v707-d6-a29-public.json": "b416e2bc96528235d57ba1f885610319b147c762e8a13d606ae07c92f4412a66",
+    "records/v404-d3-a17-exact.json": "2885f0eddf42e2f89a6bc59cbb3cc5a14bbf7cb820d70acd1e593ed2334d4f3b",
+    "records/v303-d6-a17-exact.json": "0d3e2d00b6a08015378402c7e0f17cab7e5f28050431c3dbe2eec94bb362fef8",
+    "records/v707-d3-a17-exact.json": "48223b709caf4296e162f5f67f11c31e41d97b1d0b581c0c1f20b862f9655a68",
+    "records/v505-d6-a29-public.json": "309dc34bb23dc63f5fa6cc2e6fac32436af97f4d34ee84a1a16432d4cf567212",
+    "records/v808-d6-a29-exact.json": "9caed003a9c495753cc344091b16761707bff27612064a79f634ee88db4d79ac",
+    "records/v909-d6-a29-public.json": "ed95c43b89a2c7c7a6041e276b4eb9282dbbf0751f259b5f410fdc02b356ac84",
+    "records/v1010-d6-a29-exact.json": "53f7a6dd58e3932e358fec590035837e8706ab52beb9fc669fdd5df9939dea02",
+    "records/v101-d3-a29-public.json": "64aaac1b93b5bbb3a435701bee5da63b4cd6c2c837a273dc04c08dbc8525ce6f",
+    "records/v202-d6-a17-public.json": "91eef707debb9651bc296073348737de70465b401feb5cb110e2978e3ec72748",
+    "records/v303-d3-a17-exact.json": "5b0b2bfd3d4f239633168b50d652914d9f2e11298b94b939c2fcf022df57caf9",
+    "records/v606-d3-a17-public.json": "1f7ca3929d73465b7bbacf8727fccecb9e536adfe13957d34ee22455cd149eac",
+    "records/v404-d6-a17-exact.json": "a14029b5b0adbe24fff815c5009d907a74648b1ab53b4ece2e891fad5337c8f4",
+    "records/v909-d6-a29-exact.json": "69fc25d565f5b85d9561c615b99e41daf98f9b85793fbf43a405508dd239a962",
+    "records/v101-d3-a17-public.json": "9094fbf072490bee7a8036b370d26fc6eb7fe65d9a172868e7e37ebe0f20bb41",
+    "records/v909-d6-a17-public.json": "a0770a2279a36596108ae8ff466a542b8ca017461a6f87aebd9b7549aa728ec2",
+    "records/v505-d6-a17-public.json": "fa2245d01b417a9dabbd6a26d11f54eb548aef095fe30ae7227c486b105ace3d",
+    "records/v101-d6-a17-exact.json": "04670bee823df6b609df3dbf23009b39fad4091b50eb0d3b188e2890adb60112",
+    "records/v606-d3-a17-exact.json": "ad4fbadeb36adab7347caa061187b9b42619f1a9546caba195c7294ce925948e",
+    "records/v202-d3-a17-exact.json": "f61e52cd7cfcf814f4a18ad8db2836e4e958e9e1026d43e818828f4c4d3f6474",
+    "records/v606-d3-a29-public.json": "9aa1771bcd19effeea1ef81eafc4c790e185f99c4457f3afa46d764c7b16508c",
+    "records/v505-d6-a17-exact.json": "b681fd75a22d3ab7a3bf7d1c5b03adf6273a2ec8882f4b728bb2c042acb3601a",
+    "records/v202-d6-a29-public.json": "8c3cea98657e72efa19832b84c94f0d4abb908ca452a0f85fde0393de0e4f5d0",
+    "cpu-audits/summary.json": "3667918a6bee1c5e5aed90797fc666c8d487c6f8721c5ff83d28685ae1b56438",
+    "cpu-audits/soula.log": "ca65017fb741f549e0f8cc7e499f5ac573e29fdc0946df73a37630de7a59ed85",
+    "cpu-audits/soula.json": "81662266d21e5e8029d0e4fb56045c9b7603b75abfc261291e7e73f22da04dc9",
+    "cpu-audits/sasa.json": "049dc41c64d06dc0b4b5131f6d720cdee544d38c6a9f8497e0cb962f6dbac6df",
+    "cpu-audits/voula.json": "cd49398f3184daa8f2635200517b67e521626d87177d0d2165e7da79bb1765f4",
+    "cpu-audits/sasa.log": "54d142ab147429b8a3b623d96ad046d86d63404a17a9a4b0de48afb823f10cf2",
+    "cpu-audits/voula.log": "0a16d20780c1c773fa3ff6cfe737717649921a1bcae071c3105e0a1fd7388fc9",
+    "preparation/result.json": "e244a8937a35b17e7ecba9b858e1ce9eeb834a4e9b3ca9c70a446185c98add8b",
+    "preparation/resource.json": "6d607f7e466ccd955f4a5e620fda0a8ad165b767603c1f72cf0923d80a761c10",
+    "preparation/environment.json": "71e1723f12bf5712ca5625278346f303384bb4a2beacb34bcd7fdf3cc1d57446",
+    "preparation/records/v909-d3-a17-exact.json": "3f8e548bfe98c51470c2c91eb70e0156449edbd5e70cb298dff1c6106b607917",
+    "preparation/records/v606-d6-a29-public.json": "07d4701ac8943f17783d185637ffda73cd8aba64ec0147f81a6b14e67d2175f2",
+    "preparation/records/v202-d3-a29-public.json": "3c95d89b374418e62e004a4bc58b5b42c3c9206f8675f1dc7360caaed2563c67",
+    "preparation/records/v101-d3-a29-exact.json": "ca3eb15c1641572364d24529677bbb7ddefd8bd92048b99197b05b329450739b",
+    "preparation/records/v606-d6-a29-exact.json": "839d6683afe2d71d82d45e78a85cef64223cbdbaad14ce9770ca808db8dfcb08",
+    "preparation/records/v202-d6-a29-exact.json": "1fcb7b36a1d6595af132ce3534e6667f4977f398f2b2afde75e15c6ef4bf0d0e",
+    "preparation/records/v909-d3-a17-public.json": "fb3675729e645a3ecb112571ce988b970407e1e9f7d6a7d503c4bbda18f7cf4f",
+    "preparation/records/v101-d6-a17-public.json": "82518df6af7747f9666c487b4f347250c3e856ecfc08888fd42d94f1af6f0574",
+    "preparation/records/v505-d3-a29-exact.json": "09031cfc1d0443bfce184d64cae865b7a71e2c3f6a657f54892ad6025e98cacb",
+    "preparation/records/v505-d3-a17-public.json": "b3c647b4c7d30c4d9db5a2145bb1bce90a71f48963b348e6f6ad05ece3833569",
+    "preparation/records/v707-d6-a29-exact.json": "dc836344bf65b2f67023fc69d762148c685e2e83f34f006bce30ca0a43192c71",
+    "preparation/records/v202-d3-a17-public.json": "68f069355a03fb8a912f3261315cbaf377160c312a50efb48cd9e521382e855e",
+    "preparation/records/v1010-d3-a17-exact.json": "ebba5c6264325594f99dddd50a56751066ae94c881c3553d73c8ddf5294e3555",
+    "preparation/records/v606-d6-a17-public.json": "a86455721bdcec44f8c8f1bf84994b9337792f5b5ae09cee80bd74066c6ebd78",
+    "preparation/records/v808-d3-a17-exact.json": "0a54c6cac05df2115813617c1e2c5ced8392f1066786b804a6bc1f9d5debffe8",
+    "preparation/records/v505-d3-a29-public.json": "a564d485a89eea90fb942952307aff8a686fb5e28d96ace931e1d4507a1fd023",
+    "preparation/records/v303-d6-a29-exact.json": "3e41b2ceb2cec9d393d180847014cdbde5d63dd23124c8567b0b820318d706b9",
+    "preparation/records/v404-d3-a29-exact.json": "90e350544b405ef1af60a55f86180b527f32bd68cef46c0cdf68654b2ea29c36",
+    "preparation/records/v101-d6-a29-public.json": "044d933f7ffc6112c0d8b67166b12fed890ca2cfd0969f1a8a9fd0061e195c3c",
+    "preparation/records/v909-d3-a29-public.json": "1fde8106e8e1f87f408cd73d06674845be342ffdd81ea5509051159048e7782f",
+    "preparation/records/v303-d6-a29-public.json": "8d158a84804826a81db3a0de07d108777dfd0dd91e0e4972f829187831c82a1a",
+    "preparation/records/v707-d3-a29-exact.json": "3bfa4e2d0b204b1c375f821a108c476b56396f5daa4aae735931cc85bc417f3f",
+    "preparation/records/v707-d3-a29-public.json": "f7f28421be688428d698c43db32fa67117e6a2942edcdc10e313f3a4b7703452",
+    "preparation/records/v1010-d6-a17-exact.json": "8a70ed2bcc30c354651a0741d5ff1b00984d9eb8bbface0458704c21158676af",
+    "preparation/records/v808-d6-a17-exact.json": "4ea7c62f54ee356745d61ea8e9f218e2b411ffdccbf1d92274b8caf99ad1b6e0",
+    "preparation/records/v404-d6-a17-public.json": "1c4e0af86dfdd976c7bb4e3880bf88b17ac9f52956113baf7a3b3ee96d48bc48",
+    "preparation/records/v1010-d6-a17-public.json": "07f3fc7a5a44f8e112edabe555ec59a26c648bdcb3e50e21fb8a4bb1dc8e16d8",
+    "preparation/records/v404-d6-a29-exact.json": "31fcf1a5348268679508c0d80d0a876c1284de30623ab33f46eb4228b7cc1c43",
+    "preparation/records/v808-d6-a17-public.json": "a254a02a032cf701a383936489904796d9b369a332effc9922c89162e4f555a1",
+    "preparation/records/v303-d3-a29-exact.json": "466baff1138bdc81c867528dfe15c5791b396219e4470374b53f82a6a3985827",
+    "preparation/records/v707-d3-a17-public.json": "e84244559af9dc0d03dcc3c4f1399335fb3c800c4585908be7d958ccfd5d9fdf",
+    "preparation/records/v909-d6-a17-exact.json": "47b047f6967cd20e2b9d8e62bd96895fa02f7d553ac205017ae82f63fa6fe196",
+    "preparation/records/v606-d3-a29-exact.json": "2a3ba31ceaa49c40e04a2b522cd3a78e6f4d08a3ac31738db0a3195f43d6caf0",
+    "preparation/records/v101-d6-a29-exact.json": "fd73f4f2337e6a2677764bc740d4747ce66de6f5bcb57118282b338c9064794a",
+    "preparation/records/v303-d6-a17-public.json": "49b5ca41a1b7fd8ddc8a768f10088d8a5dad17f65f41bda6c7db537c478cad0b",
+    "preparation/records/v505-d6-a29-exact.json": "cbd579763be4544f8b8a71a77879dd1e466b11ccb0c9da3fa421109c4a5d3320",
+    "preparation/records/v202-d3-a29-exact.json": "3fe6ad74f858a8c7662747ff04821d32feeb39addb63bc11608c7313392ea863",
+    "preparation/records/v1010-d6-a29-public.json": "116578ed542e9f376b046711b2b8170b3f91b95c414ff16b88d4109424e2a51a",
+    "preparation/records/v808-d6-a29-public.json": "1faf21d9b563e7191de88ced468615d322537c56c65758a4e307095ca69eec51",
+    "preparation/records/v404-d6-a29-public.json": "49b11b7756f5fd9147d928bf08266a3522483af41523420f03dd95cc013caeea",
+    "preparation/records/v1010-d3-a29-public.json": "684751ff7048158df190be028e3838fb1655079e5865c0f676daaa6269d462d7",
+    "preparation/records/v808-d3-a29-public.json": "7bf91bccfaba77c80dda5ff8b38e6da4d92241cf9ebf060ec507241e9ba8e6ad",
+    "preparation/records/v909-d3-a29-exact.json": "aa0fe40ffd3dfa74d4d2c71b9d40b77a03ca3b59d5f5133ff3d7af28b7c581d1",
+    "preparation/records/v606-d6-a17-exact.json": "3fab2b5fd6d27f309946ff27d9fab2dd8345f95e7b427f98b0b5941f519c30ee",
+    "preparation/records/v101-d3-a17-exact.json": "c6b4b452a7c8a5a8799aa43190a2f3510211c3f86efa4db8fa0eeebbfd602a45",
+    "preparation/records/v404-d3-a29-public.json": "3c7f0c7951524e492dac01060dd018f750995681f3db056c9e3550990e38be0b",
+    "preparation/records/v505-d3-a17-exact.json": "e126b68f1de5d6f1093f25f5f07f3dc653a48cb355d1c61ffe18b10a1163f96b",
+    "preparation/records/v707-d6-a17-public.json": "26421bf136ca2919f7f198e66588711c4c3daa21b94e0d897ad92a0e030cdea0",
+    "preparation/records/v202-d6-a17-exact.json": "5594eebfc068a5a21085358e7f6909bfb7eef91b5229e182b072f370c1e5e793",
+    "preparation/records/v303-d3-a17-public.json": "f059c9e03be3bb9131f202aae0e3f55688070a103eeaf1b4aee23c6972e9d7ea",
+    "preparation/records/v404-d3-a17-public.json": "47a522ca64cc2173b4241fa474391e06efcae7140c738889f22c71e86fcae806",
+    "preparation/records/v707-d6-a17-exact.json": "5185dcdbb36baf46ce1d1ab1e08d5a69bd76096d3ca9dd91da50d02100c2ba2a",
+    "preparation/records/v808-d3-a29-exact.json": "f4878dc08a575f9d8f71516d6242fe5201f32a29d0983eeb8064b84ab5dc2594",
+    "preparation/records/v1010-d3-a29-exact.json": "7d07e71e63cd99de6d7bd2134a313fe3d642a71c64ac65d0cc63ca9dbd37c4b6",
+    "preparation/records/v1010-d3-a17-public.json": "65393aaf76dd42a95e53741e7f2322b7ea869781ff57eea26cf6e563f45e1d1e",
+    "preparation/records/v808-d3-a17-public.json": "c7ef12556dd26908ff7132102377c300670986b5fb4014ee5567e199120445fe",
+    "preparation/records/v303-d3-a29-public.json": "51969a39e27e6359b929c09b2e19937d9c5333d4bd42d5405ef46cacb94677c1",
+    "preparation/records/v707-d6-a29-public.json": "3b592d88ef3271008cd37ba8295ada62fac358d3142cf86076dfc2e95689c0c1",
+    "preparation/records/v404-d3-a17-exact.json": "c9c23aa8ba74978cd3093a399fc0e83a4f6928a407b54e6dfefd882878c1dbb3",
+    "preparation/records/v303-d6-a17-exact.json": "a58bd6db28aa511ccd7285c0e7628dc77ee84255080bbe131dda4c9c951b27cc",
+    "preparation/records/v707-d3-a17-exact.json": "bb801a7cd0a9c5843e02cd582da56c511bd439addd2b532ed686759579b1933d",
+    "preparation/records/v505-d6-a29-public.json": "93af2bf4349e60372724e09bcc0660ffee9ece75a54b10f1fe057b64e3ffea49",
+    "preparation/records/v808-d6-a29-exact.json": "31b4690e979e64b8d8afa30e6dbd1437bc88e12c845075b3c3c20b274db31e7c",
+    "preparation/records/v909-d6-a29-public.json": "9aa42f1f7fa041f7f30808e058ebfc4660bb2e1ff78ee7b0b3fc2aad2f224e62",
+    "preparation/records/v1010-d6-a29-exact.json": "18f3f1e40d4e6d280b223d28524b3b75848e5e268b7eae81a0955fa47a3d1783",
+    "preparation/records/v101-d3-a29-public.json": "8422cd4fdee38c5289bd56956717224a6509718da6c005920636621fdbc22506",
+    "preparation/records/v202-d6-a17-public.json": "baf672b9d5fcf04cc9f5150befb456dfc0dd550f79733f14bac339bc5168b814",
+    "preparation/records/v303-d3-a17-exact.json": "3eef540b3ebebe1905a8317d4da8fa08b7b4b18393d3782a7348d0e1cd8a8227",
+    "preparation/records/v606-d3-a17-public.json": "f2146a775132c5817bb071748bbb735bef7ae2efbb3d1b40c6a43bd800efff9f",
+    "preparation/records/v404-d6-a17-exact.json": "82e72b5189e59a221699aeb1e3edb04e3306e4e2838c7e137f97722c48c085b5",
+    "preparation/records/v909-d6-a29-exact.json": "ac505c68611356362a8bfc32d860bee53fd0bd23f3e4d37d9b35002fa2051539",
+    "preparation/records/v101-d3-a17-public.json": "3d0ba36cb72c1ce86ffac7226f6d7cac68d1aefe95bca24232d10a36d9743397",
+    "preparation/records/v909-d6-a17-public.json": "f9f3c6021e885342ad8b74a083c6cdd8cd6b86d0f6eeaebbf63a3bccb52ad948",
+    "preparation/records/v505-d6-a17-public.json": "d3390037a49e258f4816e04bc7600949cde255318d8928da922263680919072e",
+    "preparation/records/v101-d6-a17-exact.json": "a47fe3f17e7e40775b9a122b4bd1e0d2ff0fe1ac99a4ae2907251ff24030c0ac",
+    "preparation/records/v606-d3-a17-exact.json": "f32f1f4926fb2b4a670c2a4ca4fa2f0f8450ad7a6633a1938e3fb3035173f000",
+    "preparation/records/v202-d3-a17-exact.json": "0d943e970312fa029310e6b7a129e86b42c50f4f3ef198b2b838243edd64c068",
+    "preparation/records/v606-d3-a29-public.json": "089607ca88153c31422c826de6c61a170d5126668523263f1d192d8e595d7e33",
+    "preparation/records/v505-d6-a17-exact.json": "d58d5981196327e43a456528400c29daa2776be5482fe52c131c9ec911866610",
+    "preparation/records/v202-d6-a29-public.json": "47fa6d8f0e0f57055b65933af0e0cbc70051ed451a125421b78a0418dc72b24d",
+    "preparation/gates/v303-d6-a29-public/result.json": "cf1eb7896e5f292cafc023872b1e938281b6a530bcb0ef95a522532ca13b758c",
+    "preparation/gates/v404-d6-a29-public/result.json": "a35ee27cd3f035307c2210a0ec597a1adab8b983a8d3df7dbd06e454ee7bdb5d",
+    "preparation/gates/v606-d3-a29-exact/result.json": "ee1925de34cf89e81114d572187f5771e8b2e52bd34e9f1e5d7a2e02a05044b7",
+    "preparation/gates/v606-d6-a29-public/result.json": "1222802307b5040c398948f88485f4a39af41b8d65300b6851813422cd13db15",
+    "preparation/gates/v707-d3-a29-exact/result.json": "8356ccbbe300861c6e70b30e85430d45f41473fff5601926b9f547a4834f7b03",
+    "preparation/gates/v101-d6-a29-public/result.json": "aef126b7e5131c425fad0a14816edefd2aa33e12792a6819b1562cd131bcf723",
+    "preparation/gates/v101-d3-a29-exact/result.json": "4ffbf1cfda1d510b56f08afd47f134d2bd528e12e2e1716373fd32d1ccf74649",
+    "preparation/gates/v808-d6-a29-public/result.json": "b0159ebc13ed918406dd9fd2487b4270381cac0e91efa160e1819a20317b5c0a",
+    "preparation/gates/v101-d3-a29-public/result.json": "a0c6ecba55e7c07815ae8a4e4fdcb74670f91e0d6ecc82e1940698ba30421ee6",
+    "preparation/gates/v606-d3-a29-public/result.json": "a33ae3da1827a09e0927965a55a3dd51625167d56edf59c0c2395403886a252d",
+    "preparation/gates/v808-d3-a29-public/result.json": "0bc2c598d984cf90cbb76f1815cdfb80ab867d7abe1fbe8dd80483f68cb3ea5b",
+    "preparation/gates/v303-d6-a17-exact/result.json": "c8975af0834e0aefb6975644b994f3f6d0eb76fe791f1f62f532adff6a088d1e",
+    "preparation/gates/v505-d6-a17-exact/result.json": "caa774a6c5cb346bcf778ae313673932a6aa65a5abe3a9e06ca75955966cc5e8",
+    "preparation/gates/v909-d6-a17-exact/result.json": "2db822ca03abe64acf7c7e6b809d619172529e144db0acc169c1c7a728659eeb",
+    "preparation/gates/v404-d3-a29-public/result.json": "6ebf58c6ee553cd05f6d2437977ed1379634793c32698433ae72fac5b8fdd49e",
+    "preparation/gates/v303-d3-a29-public/result.json": "ab3cf17a1a133bdc056ac5c49aa42d573fc25907c1da8b5521115b457b9a38fa",
+    "preparation/gates/v1010-d6-a17-exact/result.json": "8a289ad961fbe4d3c37cab2ca03bb724751f17653b892ad82a571aba7ddf61c5",
+    "preparation/gates/v202-d6-a17-exact/result.json": "41a2c813d17a698c7efa7a18fe1e0fc2f14d123295220d2edfc53c857094e5b2",
+    "preparation/gates/v404-d6-a17-exact/result.json": "825d18fd2ee9cd4731de74e6d0d1e1f0db120b9c977f8bac78db8dcbacd1d7ec",
+    "preparation/gates/v808-d6-a17-exact/result.json": "73a674e5435946fac3c9c218f280bbdc97983c39cbd1a13b7c0f2a92cfb39e3d",
+    "preparation/gates/v606-d3-a17-public/result.json": "34db6a4ebc1503dfa4f87d1d61c8f971bf290c1d33dbfc4c50c953e874d29937",
+    "preparation/gates/v101-d3-a17-public/result.json": "e82c1916a41d509a803dd6280e7dafbc78b4a4d00a114ee85935ec9d5154de1e",
+    "preparation/gates/v606-d3-a17-exact/result.json": "0e60e16f9bc1e7a94d270048e191b2b937a4e2c66825d5cc45e409cd709316d9",
+    "preparation/gates/v808-d3-a17-public/result.json": "8a020abeced2fa50c4e3087db4542462422c7f4dc35ae0d62be98d3e3089df19",
+    "preparation/gates/v303-d3-a17-public/result.json": "36b34c4a1df268ecdd6a3cacf728c9d30442613898b75b82bc83862a5d7ececd",
+    "preparation/gates/v404-d3-a17-public/result.json": "2b0fe06fbff2f8543a30e55dac9fd06ec6c42818119783a55700b5702c528b24",
+    "preparation/gates/v707-d3-a17-exact/result.json": "e902f19940b729e5322f8d049855eabec1b0112568ec473dcb1e0629e5ea6ba2",
+    "preparation/gates/v101-d3-a17-exact/result.json": "5f2b505de9c5bea5e51b85ede0b1fcdc8e1e8667eb36351b108e3e979022f841",
+    "preparation/gates/v303-d6-a29-exact/result.json": "bd65074c41a8d678de7cb580afe4fe585a989b9716fd92dad95c3a8876d0c657",
+    "preparation/gates/v505-d6-a29-exact/result.json": "aa6fb97397ed63b7d0355de705c4ebe905c4d5a8ba57bc2092124f2e1a74c2a9",
+    "preparation/gates/v909-d6-a29-exact/result.json": "3cf3c3c61cc75960f8e5fe3c055becf10945c412e2c8ec45a95583049336ce4f",
+    "preparation/gates/v404-d6-a17-public/result.json": "05e7f8bd6e9b0c812723da8e95a57b3f32d907cad84b8be1fd9ee3d9e15442b6",
+    "preparation/gates/v303-d6-a17-public/result.json": "5fe510eb649cc10fdb20efb0760e7d950214b9693093e8ae9d420fe6f1fa69bf",
+    "preparation/gates/v101-d6-a17-public/result.json": "805b76a9f20e217bb8ea5eaad6ee2cfa32183a88591758cc6d3f3ce5acf266a8",
+    "preparation/gates/v202-d6-a29-exact/result.json": "6ba6f8275861df38d245df85cdbee46d3ccf1b5e51cd04493b49ce17289605c3",
+    "preparation/gates/v1010-d6-a29-exact/result.json": "2a359e292154482fb0d980d8c9f62a4898456e92589e8ffbce39d8e10194c738",
+    "preparation/gates/v404-d6-a29-exact/result.json": "683f1135e4b677750c1771dacbb1dbd094cf6772ce5692b6bb5fc91bfeaba468",
+    "preparation/gates/v808-d6-a29-exact/result.json": "b14e4fe35a466530ec8b52200963909667c28de264e36e7d4e7c7ba9275c6ad0",
+    "preparation/gates/v606-d6-a17-public/result.json": "bfffe60e62cc8a8d9fc8ab11ffedd8435a72bce75e68218bde0913c7bf5bae5e",
+    "preparation/gates/v808-d6-a17-public/result.json": "fe1c51eb28d839639df4751082b566cdf01dad366d6615972641a731ee334108",
+    "preparation/gates/v909-d3-a29-exact/result.json": "39190117049c4b2125f5d53c5f927ded276bd14d0508df2fb464f789a4f00563",
+    "preparation/gates/v505-d3-a29-exact/result.json": "9877f224e2133bc7256b786e448ff4d46449b38b67fe8a3e31c50fdf2d070485",
+    "preparation/gates/v303-d3-a29-exact/result.json": "a13cdb816d9c6daddb92046962b787934c4c9932032f45460c8581f7c90943b6",
+    "preparation/gates/v202-d6-a29-public/result.json": "c0441473a4976bae8d422af5e20d6570bd942585ce1ed133547fbaad20899d7b",
+    "preparation/gates/v505-d6-a29-public/result.json": "017035d945271aaeafc1c298561102a025b1bcc68da872a0799f84a3597c2780",
+    "preparation/gates/v808-d3-a29-exact/result.json": "46ac4d2d2608e54a0743c0d280dd3b955350dde8a522a45fce489aeb80283edb",
+    "preparation/gates/v909-d6-a29-public/result.json": "939eef6f4f65cf2bbb4d763527eb922e9701049f5bc443a51ff0c26de807f502",
+    "preparation/gates/v404-d3-a29-exact/result.json": "169d11c547b05d76c300c291c6e71178812a5a15e28dfa1025e7d33c63eb6776",
+    "preparation/gates/v1010-d3-a17-public/result.json": "2849582c97c37e5d8a000c42ee091d20004f2e19a207bd214db001e32bf5a8bf",
+    "preparation/gates/v202-d3-a29-exact/result.json": "276944bd26e53cc4764df1720144f3cf1dcae68ab0f13132dd7cfc18076bea7e",
+    "preparation/gates/v1010-d3-a29-exact/result.json": "3531cb6250c1e7e1609a0f1c89da79f7637fa6ae4f3bd0763236856bf5fdede4",
+    "preparation/gates/v707-d6-a29-public/result.json": "9e2c88c84fddc52402cbaa6d9ee6a5f1c3a41fbe0f0f145b046c13ac3690e528",
+    "preparation/gates/v909-d3-a29-public/result.json": "48ccf0388de18c7a0878d04c4cf12df500b74c12ac3df7fd84c3f3f83121ae2c",
+    "preparation/gates/v1010-d6-a17-public/result.json": "2fb9d62487e71e47c7e13450f95efb9b4e0032e1b34b9b2fb65717a44272a3ab",
+    "preparation/gates/v606-d6-a17-exact/result.json": "b22346b21aa2f54ef1bdd6efcb2c7a9677c4c0541d217fdc60e280a4c8dc0645",
+    "preparation/gates/v707-d3-a29-public/result.json": "8a3fad662c2d7d8cab23f86b7d9ec776ec666c0fbd708ee4125a0c12fa5adc68",
+    "preparation/gates/v505-d3-a29-public/result.json": "a6512c4aa4c94a9464bf9b40a3b90235dafb5da93584554e51c4a7de48db2b50",
+    "preparation/gates/v101-d6-a17-exact/result.json": "49f52d4b12679e4e389dd7b961ab12fab0120cadaa55ccb22741257870d32006",
+    "preparation/gates/v202-d3-a29-public/result.json": "198ebdb7184427faf4f02c0ac3e11be16c894b0c1f2bad296430309585c1608b",
+    "preparation/gates/v707-d6-a17-exact/result.json": "1ad517e2eb199c41bc3f88296c798e48b5cb43c70457fd66ae130ed3eacfef1a",
+    "preparation/gates/v1010-d6-a29-public/result.json": "8f2818e9f1f171b4445687f62c1622872d382d6d651657c01371a7a56a646a84",
+    "preparation/gates/v909-d3-a17-public/result.json": "b0c28b0eabd1c3b8acc44a5de43e8277f5496029b548aa713ae07a206154fc80",
+    "preparation/gates/v909-d3-a17-exact/result.json": "cee5fc4ffd8dc919e12945296d036ee3c74463d7c8b93713c2b7be86ec116140",
+    "preparation/gates/v707-d3-a17-public/result.json": "97a906470b4f8e09211f60516831dec0ceda6aa8e160a110034e5ca97f2d71ff",
+    "preparation/gates/v505-d3-a17-exact/result.json": "f22385a123dc68541fcc7fb0a19a6fff359212ba847b288a82c4fec4758262e1",
+    "preparation/gates/v303-d3-a17-exact/result.json": "b1638316e0498c337b26d3da4f43f99a4d7b2882d59faa5224fe03d44878db88",
+    "preparation/gates/v808-d3-a17-exact/result.json": "bedff0d8dbe830012a821e315d29a426cf29a3bb7614f701276e2206956490c2",
+    "preparation/gates/v404-d3-a17-exact/result.json": "f7350b4fb2710ec5eb9e52df415586f3ec171cc39b7926595acacbccc2a8153e",
+    "preparation/gates/v1010-d3-a17-exact/result.json": "c5fd93e9d369fbd2b27e5c4350282b8c04d70f76cb858210bdc9b4104aff4ded",
+    "preparation/gates/v202-d3-a17-public/result.json": "909023f5c783f6a0d52431b26375de14a23f2bfbf3f0aaa584477fbe09cb16bc",
+    "preparation/gates/v202-d3-a17-exact/result.json": "6970e2fcde3347357015b95d95af4df0c06f09fa7c9346ebd3e52cc8e4c649ea",
+    "preparation/gates/v505-d3-a17-public/result.json": "8307213f61fb2c0f7d8d1f1ffefe4fad56949ab3bd11bd6f4600472fe6cf24ec",
+    "preparation/gates/v606-d6-a29-exact/result.json": "9b6112422f4049cf5130c9dee20c006101f949d6749d3dd9f7bc2491c72fc450",
+    "preparation/gates/v505-d6-a17-public/result.json": "ac81e0fa10e62bc8e2201a6ff34fb05e2fd61c09a582545500eb6e9750baea57",
+    "preparation/gates/v202-d6-a17-public/result.json": "797eef53b3ecf57c7ca5aaf738282f36ad127f030fbe64af3b87192b6f816754",
+    "preparation/gates/v1010-d3-a29-public/result.json": "4806a38e9f137ad2aaefe765f4c093d63b5ed0c1cb638f793ad17b79585926ed",
+    "preparation/gates/v101-d6-a29-exact/result.json": "ceb9a039b7a53fc34ec0e4f492b3897fa0535ba312384b4636bbfd1e3c5e4ceb",
+    "preparation/gates/v707-d6-a29-exact/result.json": "22f4304c0d7d87f7765b293c7a6a8bca12c06b6b6bee39a461e26708fd86c7d4",
+    "preparation/gates/v909-d6-a17-public/result.json": "b5a175eb2ea4f92c6fc5aa18fdd4e5adff33692fd052ece301c7c696d38381b9",
+    "preparation/gates/v707-d6-a17-public/result.json": "65a20136d3c266559f885650ff1754c25530a7afd67d83f6118e249b75873ba8"
+  },
+  "no_scoring_until_complete": true,
+  "no_automatic_retry": true
+}

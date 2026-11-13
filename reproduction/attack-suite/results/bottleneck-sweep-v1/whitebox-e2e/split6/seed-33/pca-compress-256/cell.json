@@ -1,0 +1,110 @@
+{
+  "schema": "llm_attacker.whitebox_sweep_e2e_cell.v1",
+  "status": "COMPLETE",
+  "tier": "whitebox-e2e",
+  "access_condition": "adaptive white-box-aware (true encoder granted, differentiated through end-to-end) \u2014 strictly stronger than the base matrix's matched access; NOT comparable as a matched-access row",
+  "split": 6,
+  "seed": 33,
+  "method": "pca-compress",
+  "dim": 256,
+  "base_cell": "split6/seed-33/dim-256/pca-compress",
+  "defense_checkpoint": {
+    "path": "split6/seed-33/dim-256/pca-compress/captures/pca_compress_encoder.pt",
+    "sha256": "370a753f606d06eb5ba7f8d360c49cba53ceb7c39eaa1fc43a46e01a79c5eead"
+  },
+  "wall_seconds": 1.7332972220610827,
+  "attack_seconds": 1.7332977980840951,
+  "cuda_peak_allocated_bytes": 1163527168,
+  "utility_after": {
+    "cross_entropy": 4.4007551208619144,
+    "perplexity": 81.51239714291307,
+    "tokens": 992,
+    "documents": 32,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "after_victim_training"
+  },
+  "utility_gate": {
+    "ppl_after": 81.51239714291307,
+    "control_ppl_after": 48.11248657994797,
+    "ratio": 1.6942046220675968,
+    "pass_1_5x": false,
+    "pass_2x": true,
+    "thresholds": [
+      1.5,
+      2.0
+    ]
+  },
+  "utility_source": "carried verbatim from the base cell; the attack cannot change training-time utility",
+  "access": {
+    "schema": "llm_attacker.whitebox_sweep_e2e_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 32,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "public_defense_decoder": "granted when the defense exposes a cloud decoder (bottleneck v2 geometry, pca-compress basis)",
+    "defense_aware_arm": {
+      "knowledge": "defense CLASS and released width k only (no defense weights or randomness)",
+      "surrogate": "PCA encoder+inverse fit on the public calibration partition at the same k",
+      "use": "learned prior over the observed wire for the forward/beam/SIPIT kernels (BPDA-style straight-through approximation)"
+    },
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 32,
+        "beam_width": 4
+      },
+      "sipit": {
+        "steps_per_token": 128
+      },
+      "scored_sequences": 32
+    },
+    "tier": "whitebox-e2e",
+    "whitebox_extension": {
+      "granted": "the defended cell's ACTUAL trained defense checkpoint and provenance sidecar (encoder weights for tb-*, fitted PCA basis for pca-compress), used as the exact training-phase transform the attack differentiates through, in addition to everything the defense-aware surrogate arm holds",
+      "strength": "strictly stronger than the surrogate arm's defense-class + k + public-calibration knowledge, and adaptive where the whitebox pipeline arms are not: the attack is customized end-to-end against the true transform",
+      "rationale": "mirrors the defense framework's assumption that the current transform is necessarily visible to the executor, and evaluates the adaptive adversary who optimizes straight through it",
+      "base_cell": "split6/seed-33/dim-256/pca-compress",
+      "defense_checkpoint": "split6/seed-33/dim-256/pca-compress/captures/pca_compress_encoder.pt",
+      "arms": {
+        "adaptive_e2e": "joint Adam optimization of each wire's full continuous token sequence straight through the TRUE encoder against the released z (minimize ||encoder(x) - z_released||), snapped to the vocabulary by a single Euclidean nearest-embedding readout; no inverter, ridge map, beam or SIPIT stages"
+      },
+      "budget_mapping": "steps_per_wire = the sweep's SIPIT step count (128 at the raised budgets): exactly sipit_steps joint full-sequence Adam steps through the true encoder per wire, vs SIPIT's steps-per-TOKEN head-side budget; the single terminal snap costs n_sequences * seq_len * vocab vocabulary dot products and no head forward calls",
+      "caveat": "adaptive white-box recovery is measured under strictly stronger access; it does not constrain black-box recovery of the same wire, nor the surrogate arm or any defense-internals-hidden adversary"
+    }
+  },
+  "attacks": {
+    "adaptive_e2e": {
+      "true_encoder_granted": true,
+      "adaptive": true,
+      "objective": "minimize ||encoder(x) - z_released|| over the wire's full continuous token sequence, straight through the TRUE defense transform (Adam); no intermediate decode stages",
+      "init": "uniform random vocabulary embeddings (seeded per-cell stream under fork_rng + manual_seed)",
+      "steps_per_wire": 128,
+      "budget_match": "one joint full-sequence optimization budget equal to the sweep's SIPIT step count, vs SIPIT's steps-per-token head-side budget",
+      "final_encoder_mse": 1202.3251953125,
+      "snap": {
+        "accuracy": 0.01953125,
+        "n_tokens": 1024,
+        "n_sequences": 32,
+        "work": {
+          "head_forward_calls": 0,
+          "head_forward_sequences": 0,
+          "head_forward_token_positions": 0,
+          "head_backward_calls": 0,
+          "head_backward_token_positions": 0,
+          "vocabulary_dot_products": 51463168,
+          "wall_seconds": 0.03752319305203855,
+          "cuda_seconds": 0.03745180892944336,
+          "peak_allocated_bytes": 1163527168,
+          "incremental_peak_allocated_bytes": 617759232
+        }
+      }
+    }
+  },
+  "evidence": "cell.json.evidence.json"
+}

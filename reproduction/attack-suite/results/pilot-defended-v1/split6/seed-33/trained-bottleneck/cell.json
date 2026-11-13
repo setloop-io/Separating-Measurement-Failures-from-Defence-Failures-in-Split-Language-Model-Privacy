@@ -1,0 +1,108 @@
+{
+  "schema": "llm_attacker.defended_pilot_cell.v1",
+  "status": "COMPLETE",
+  "split": 6,
+  "seed": 33,
+  "defense": "trained-bottleneck",
+  "paired_control": "../none/cell.json",
+  "wall_seconds": 15.469927381025627,
+  "attack_seconds": 89.50552953896113,
+  "cuda_peak_allocated_bytes": 1759721472,
+  "resources_scope": "cell wall includes capture I/O; cuda peak is process-wide (experiment.json convention)",
+  "utility_before": {
+    "cross_entropy": 4.900414228439331,
+    "perplexity": 134.34541785345277
+  },
+  "utility_after": {
+    "cross_entropy": 19.377901077270508,
+    "perplexity": 260444690.8108242
+  },
+  "training": {
+    "steps_run": 64,
+    "final_loss": 17.804250717163086,
+    "mean_loss": 19.177084267139435
+  },
+  "access": {
+    "schema": "llm_attacker.defended_pilot_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 32,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 8,
+        "beam_width": 2
+      },
+      "sipit": {
+        "steps_per_token": 64
+      },
+      "scored_sequences": 32
+    }
+  },
+  "provenance": {
+    "path": "captures/trained_bottleneck_provenance.json",
+    "sha256": "369e9dc1f05fee06b5b66342cebe9e5026a71c17bda06f5e6cbb8075c7b22605"
+  },
+  "run_artifact": "run.json",
+  "evidence": "run.json.evidence.json",
+  "captures_dir": "captures",
+  "attacks": {
+    "forward": {
+      "accuracy": 0.0,
+      "n_tokens": 1024,
+      "n_sequences": 32,
+      "candidate_count": 8,
+      "beam_width": 2,
+      "work": {
+        "head_forward_calls": 32,
+        "head_forward_sequences": 16128,
+        "head_forward_token_positions": 270080,
+        "head_backward_calls": 0,
+        "head_backward_token_positions": 0,
+        "vocabulary_dot_products": 51463168,
+        "wall_seconds": 6.980949485907331,
+        "cuda_seconds": 6.98079541015625,
+        "peak_allocated_bytes": 2362026496,
+        "incremental_peak_allocated_bytes": 1311798272
+      },
+      "artifact": "forward-baseline.json"
+    },
+    "sipit": {
+      "accuracy": 0.0,
+      "n_tokens": 1024,
+      "n_sequences": 32,
+      "steps_per_token": 64,
+      "work": {
+        "head_forward_calls": 4096,
+        "head_forward_sequences": 131072,
+        "head_forward_token_positions": 2162688,
+        "head_backward_calls": 2048,
+        "head_backward_token_positions": 1081344,
+        "vocabulary_dot_products": 3293642752,
+        "wall_seconds": 80.72847078391351,
+        "cuda_seconds": 80.728171875,
+        "peak_allocated_bytes": 1759721472,
+        "incremental_peak_allocated_bytes": 503557632
+      },
+      "artifact": "sipit-baseline.json"
+    },
+    "representation-privacy": {
+      "bundle": "representation-bundle.json",
+      "artifact": "representation-privacy.json",
+      "arms": {
+        "bottleneck": {
+          "label_accuracy": null
+        },
+        "gram_flattening": {
+          "label_accuracy": null
+        }
+      }
+    }
+  }
+}

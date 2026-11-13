@@ -1,0 +1,77 @@
+{
+ "driver": "run_long_horizon.py",
+ "target": {
+  "model": "gpt2",
+  "split": "6",
+  "mode": "finetune",
+  "corpus_file": "/Users/geo/LLM-Attacker/results/long-horizon-v1/inputs/pilot-corpus.txt",
+  "device": "cpu",
+  "dtype": "fp32",
+  "seq_len": 32,
+  "batch_size": 1,
+  "lr": 5e-05,
+  "seed": 1234,
+  "property_token": 220
+ },
+ "arms": {
+  "none": {
+   "defense": "none",
+   "knobs": []
+  },
+  "gaussian-s15": {
+   "defense": "gaussian",
+   "knobs": [
+    "--sigma",
+    "15.0"
+   ]
+  },
+  "sparsify-10": {
+   "defense": "sparsify",
+   "knobs": []
+  },
+  "mid-lite-k64": {
+   "defense": "mid-lite",
+   "knobs": [
+    "--bottleneck-dim",
+    "64"
+   ]
+  },
+  "santext-30": {
+   "defense": "santext",
+   "knobs": [
+    "--santext-p",
+    "0.3"
+   ]
+  },
+  "at-lite-e15": {
+   "defense": "at-lite",
+   "knobs": [
+    "--at-eps",
+    "15.0"
+   ]
+  }
+ },
+ "seeds": [
+  1234,
+  2026,
+  7
+ ],
+ "horizons": [
+  20,
+  100
+ ],
+ "wrap_corpus": "results/long-horizon-v1/inputs/pilot-corpus-epochwrap.txt",
+ "wrap_arms": [
+  "none",
+  "mid-lite-k64"
+ ],
+ "timeouts": {
+  "capture": 1800,
+  "attack": 900,
+  "synthetic": 900,
+  "replay": 900,
+  "probe": 900
+ },
+ "threads": 4,
+ "note": "benchmark.v1-style cells pinned to the paper's defense operating points (mid-lite k=64, santext p=0.3, at-lite eps=15); not the battery defaults."
+}

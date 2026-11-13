@@ -1,0 +1,356 @@
+{
+  "schema": "dtraining.attacker.benchmark.v1",
+  "battery_version": "benchmark.v1",
+  "tier": "quick",
+  "target": {
+    "model": "gpt2",
+    "split": "6",
+    "mode": "finetune",
+    "corpus_file": "/Users/geo/LLM-Attacker/results/long-horizon-v1/inputs/pilot-corpus.txt",
+    "device": "cpu",
+    "dtype": "fp32",
+    "seq_len": 32,
+    "batch_size": 1,
+    "lr": 5e-05,
+    "seed": 1234,
+    "property_token": 220
+  },
+  "gate": {
+    "alpha": 0.05,
+    "n_trials": 9,
+    "gate_pp": 1.0,
+    "n_seeds_required": 3,
+    "control": "label_free_majority",
+    "version": "frozen-gate.v2",
+    "z": 2.5391848136513127
+  },
+  "grading": "UNMEASURED: no gated cell; OPEN: FAILs and no PASS; AT-RISK: FAIL and PASS cells; CLOSED: all PASS with complete supplied cells. Overall CLOSED additionally requires all axes; incomplete coverage is reported separately.",
+  "axes": {
+    "S1": {
+      "axis": "S1",
+      "surface": "seam activations, forward (h* crossing to the body)",
+      "grade": "OPEN",
+      "n_cells": 2,
+      "n_pass": 0,
+      "n_fail": 2,
+      "n_info": 0,
+      "n_error": 0,
+      "worst_cell": {
+        "cell_id": "S1:none:seam-inversion",
+        "kind": "attack",
+        "axis": "S1",
+        "defense": "none",
+        "attack": "seam-inversion",
+        "arm": "vmi",
+        "status": "ok",
+        "artifact": "results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_none.json",
+        "verdict": "FAIL",
+        "excess_pp": 89.02861629205515,
+        "headline_metric": "seq_accuracy",
+        "headline_value": 0.75,
+        "error": null,
+        "warnings": [
+          "n_seeds=None < required 3",
+          "n_seeds=None < required 3",
+          "n_seeds=None < required 3",
+          "n_seeds=None < required 3",
+          "n_seeds=None < required 3",
+          "n_seeds=None < required 3",
+          "n_seeds=None < required 3",
+          "n_seeds=None < required 3",
+          "n_seeds=None < required 3"
+        ]
+      },
+      "best_defense": null,
+      "cells": [
+        {
+          "cell_id": "S1:none:seam-inversion",
+          "kind": "attack",
+          "axis": "S1",
+          "defense": "none",
+          "attack": "seam-inversion",
+          "arm": "vmi",
+          "status": "ok",
+          "artifact": "results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_none.json",
+          "verdict": "FAIL",
+          "excess_pp": 89.02861629205515,
+          "headline_metric": "seq_accuracy",
+          "headline_value": 0.75,
+          "error": null,
+          "warnings": [
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3"
+          ]
+        },
+        {
+          "cell_id": "S1:mid-lite:seam-inversion",
+          "kind": "attack",
+          "axis": "S1",
+          "defense": "mid-lite",
+          "attack": "seam-inversion",
+          "arm": "vmi",
+          "status": "ok",
+          "artifact": "results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_mid-lite.json",
+          "verdict": "FAIL",
+          "excess_pp": 16.76953327665118,
+          "headline_metric": "seq_accuracy",
+          "headline_value": 0.0,
+          "error": null,
+          "warnings": [
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3",
+            "n_seeds=None < required 3"
+          ]
+        }
+      ]
+    },
+    "S2": {
+      "axis": "S2",
+      "surface": "seam gradients, backward (dL/dh* returned by the body)",
+      "grade": "UNMEASURED",
+      "n_cells": 0,
+      "n_pass": 0,
+      "n_fail": 0,
+      "n_info": 0,
+      "n_error": 0,
+      "worst_cell": null,
+      "best_defense": null,
+      "cells": []
+    },
+    "S5": {
+      "axis": "S5",
+      "surface": "GPU memory residue (freed buffers, allocator state)",
+      "grade": "UNMEASURED",
+      "n_cells": 1,
+      "n_pass": 0,
+      "n_fail": 0,
+      "n_info": 0,
+      "n_error": 1,
+      "worst_cell": null,
+      "best_defense": null,
+      "cells": [
+        {
+          "cell_id": "S5:env:gpu-memory",
+          "kind": "attack",
+          "axis": "S5",
+          "defense": null,
+          "attack": "gpu-memory",
+          "arm": "scrub-check",
+          "status": "error",
+          "artifact": "results/long-horizon-v1/pilot-quick/artifacts/gpu-memory_scrub-check.json",
+          "verdict": null,
+          "excess_pp": null,
+          "headline_metric": null,
+          "headline_value": null,
+          "error": "cell rc=1: [gpu_memory_residue] no hardware probe tier available on this host (need pynvml or torch+CUDA; see attacker/hwprobe.py). Use --toy for the pure-python simulation tier."
+        }
+      ]
+    },
+    "S9": {
+      "axis": "S9",
+      "surface": "labels / properties (property inference over seam signals)",
+      "grade": "UNMEASURED",
+      "n_cells": 2,
+      "n_pass": 0,
+      "n_fail": 0,
+      "n_info": 2,
+      "n_error": 0,
+      "worst_cell": null,
+      "best_defense": null,
+      "cells": [
+        {
+          "cell_id": "S9:none:label-scoring",
+          "kind": "attack",
+          "axis": "S9",
+          "defense": "none",
+          "attack": "label-scoring",
+          "arm": "norm",
+          "status": "ok",
+          "artifact": "results/long-horizon-v1/pilot-quick/artifacts/label-scoring_norm_none.json",
+          "verdict": "INFO",
+          "excess_pp": null,
+          "headline_metric": "n_info_cells",
+          "headline_value": 20,
+          "error": null
+        },
+        {
+          "cell_id": "S9:mid-lite:label-scoring",
+          "kind": "attack",
+          "axis": "S9",
+          "defense": "mid-lite",
+          "attack": "label-scoring",
+          "arm": "norm",
+          "status": "ok",
+          "artifact": "results/long-horizon-v1/pilot-quick/artifacts/label-scoring_norm_mid-lite.json",
+          "verdict": "INFO",
+          "excess_pp": null,
+          "headline_metric": "n_info_cells",
+          "headline_value": 20,
+          "error": null
+        }
+      ]
+    }
+  },
+  "utility": {
+    "none": {
+      "final_loss": 5.214787006378174,
+      "mean_loss": 4.938379657268524
+    },
+    "mid-lite": {
+      "final_loss": 8.573921203613281,
+      "mean_loss": 9.466389036178589
+    }
+  },
+  "overall": "OPEN",
+  "observed_overall": "OPEN",
+  "complete": false,
+  "provenance": {
+    "hostname": "MacBookPro",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-16T00:55:10Z",
+    "dtraining_commit": "ec08486849760f2233f7036d44f580412976088f"
+  },
+  "config": {
+    "battery_version": "benchmark.v1",
+    "axes": {
+      "S1": "seam activations, forward (h* crossing to the body)",
+      "S2": "seam gradients, backward (dL/dh* returned by the body)",
+      "S5": "GPU memory residue (freed buffers, allocator state)",
+      "S9": "labels / properties (property inference over seam signals)"
+    },
+    "grade_severity": {
+      "OPEN": 3,
+      "AT-RISK": 2,
+      "CLOSED": 1,
+      "INCOMPLETE": 0,
+      "UNMEASURED": 0
+    },
+    "defenses": [
+      {
+        "name": "none",
+        "knobs": [],
+        "quick": true
+      },
+      {
+        "name": "gaussian",
+        "knobs": [
+          [
+            "sigma",
+            15.0
+          ]
+        ],
+        "quick": false
+      },
+      {
+        "name": "sparsify",
+        "knobs": [],
+        "quick": false
+      },
+      {
+        "name": "mid-lite",
+        "knobs": [],
+        "quick": true
+      },
+      {
+        "name": "at-lite",
+        "knobs": [],
+        "quick": false
+      },
+      {
+        "name": "santext",
+        "knobs": [],
+        "quick": false
+      },
+      {
+        "name": "custext",
+        "knobs": [],
+        "quick": false
+      },
+      {
+        "name": "snd-lite",
+        "knobs": [],
+        "quick": false
+      }
+    ],
+    "attacks": [
+      {
+        "attack": "seam-inversion",
+        "arm": "vmi",
+        "axis": "S1",
+        "per_defense": true,
+        "quick": true,
+        "args": [
+          "--arm",
+          "vmi",
+          "--model",
+          "{model}",
+          "--split",
+          "{split}"
+        ]
+      },
+      {
+        "attack": "label-scoring",
+        "arm": "norm",
+        "axis": "S9",
+        "per_defense": true,
+        "quick": true,
+        "args": [
+          "--property",
+          "contains-token:{property_token}"
+        ]
+      },
+      {
+        "attack": "gradient-inversion",
+        "arm": "tag",
+        "axis": "S2",
+        "per_defense": true,
+        "quick": false,
+        "args": [
+          "--arm",
+          "tag",
+          "--model",
+          "{model}",
+          "--split",
+          "{split}"
+        ]
+      },
+      {
+        "attack": "gpu-memory",
+        "arm": "scrub-check",
+        "axis": "S5",
+        "per_defense": false,
+        "quick": true,
+        "args": [
+          "--arm",
+          "scrub-check"
+        ]
+      }
+    ],
+    "tier_budgets": {
+      "quick": {
+        "steps_cap": 20,
+        "attack_quick": true,
+        "cell_timeout_s": 1800
+      },
+      "full": {
+        "steps_cap": 100,
+        "attack_quick": false,
+        "cell_timeout_s": 7200
+      }
+    }
+  },
+  "workdir": "/Users/geo/LLM-Attacker/results/long-horizon-v1/pilot-quick"
+}

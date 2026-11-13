@@ -1,0 +1,222 @@
+{
+  "active_cloud_delta": 0.0,
+  "adversary_strength": 0.25,
+  "analysis_stage": "exploratory",
+  "attack_steps": 256,
+  "attacker_bundle": null,
+  "attacker_updates": 3,
+  "baseline_eval_loss": 4.9303168374462985,
+  "baseline_eval_seconds": 308.3466159570962,
+  "bundle_canonical_fraction": 0.0,
+  "byzantine_flagged_frames": 0,
+  "byzantine_max_relative_deviation": 0.0,
+  "byzantine_threshold": null,
+  "byzantine_verified_frames": 0,
+  "byzantine_verify": false,
+  "candidate_eval_loss": 5.472230110201053,
+  "candidate_eval_seconds": 371.52700275182724,
+  "chaff_tokens": 48,
+  "clip_norm": 1.0,
+  "cloud_channels": 1,
+  "cloud_correction_loss_improvement": 3.1367419082671404,
+  "cloud_experts": 8,
+  "cloud_kind": "monomial_moe_radial",
+  "cloud_layers": 2,
+  "cloud_state_contains_hidden_width": false,
+  "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+  "decoder_zero_eval_loss": 5.474486661492847,
+  "delegate_sublayer": "full",
+  "device": "cuda",
+  "dp": {
+    "adjacency": "replace_one",
+    "delta": 1e-06,
+    "epsilon": {
+      "composed": 16253550.603372738,
+      "forward": 4646985.18742484,
+      "outbound_gradient": 5239911.544333644,
+      "return": 6388459.689318926
+    },
+    "method": "zcdp_gaussian_replace_one",
+    "parameters": {
+      "forward_clip": 1.0,
+      "forward_noise_multiplier": 0.35,
+      "outbound_gradient_clip": 1.0,
+      "outbound_gradient_noise_multiplier": 0.35,
+      "return_clip": 1.0,
+      "return_noise_multiplier": 0.35
+    },
+    "releases": {
+      "forward": 283648,
+      "outbound_gradient": 319904,
+      "return": 390144
+    },
+    "rho": {
+      "forward": 4630987.755102818,
+      "outbound_gradient": 5222922.448979587,
+      "return": 6369697.95918483
+    }
+  },
+  "eval_blocks": 4096,
+  "eval_loss_delta": 0.5419132727547549,
+  "eval_time_ratio": 1.204900535712453,
+  "exact_capture_label_bundle": "/home/geo/experiments/results/training/phase09_energy_reprofile/failed19/captures/failed19_exactwire.pt",
+  "fragment_channels": 1,
+  "frozen_grid_cell_id": null,
+  "frozen_grid_id": null,
+  "gates": {
+    "cloud_correction_improves_loss": true,
+    "cloud_latent_only": true,
+    "eval_time_ratio_le_3": true,
+    "privacy_above_band_le_1pct": true,
+    "secret_coordinates_hidden_from_koula": true,
+    "token_norm_and_sign_gauged": false,
+    "token_order_hidden_from_koula": true,
+    "utility_delta_le_0_35": false
+  },
+  "gram_flatten": 0.0,
+  "hidden_dim": 1024,
+  "label_free_majority_pct": 4.16717529296875,
+  "latent_dim": 64,
+  "limitations": [
+    "two-node latent protocol exercised",
+    "short training run; not convergence or paper evidence",
+    "fresh probe is a diagnostic subset, not the complete /attacker suite"
+  ],
+  "lr": 0.0003,
+  "mean_step_seconds": 0.42063216939754783,
+  "mine_mi_nats_held_out": null,
+  "mine_penalty": 0.0,
+  "model": "/home/geo/experiments/models/qwen3-0.6b",
+  "noise_multiplier": 0.35,
+  "nominal_covered_layer_share": 0.21428571428571427,
+  "privacy_evaluation": {
+    "cell_id": "sha256:1e0169b9670a8cd737dfa24e33efaeb16277c9beccd1b28bcbec7189606e1825",
+    "claim_status": "not_a_full_compromised_cloud_evaluation",
+    "current_bundle_scope": "actual_execution_forward_wire_only",
+    "required_observed_surfaces": [
+      "forward_wire",
+      "outbound_training_gradient",
+      "cloud_state_history",
+      "protocol_metadata"
+    ]
+  },
+  "probe_recovery_pct": [
+    4.40826416015625,
+    4.00848388671875,
+    4.30572509765625
+  ],
+  "probe_restarts": 3,
+  "public_steps": 0,
+  "recovery_above_label_free_pct": 0.2410888671875,
+  "remote_capture_sessions": [
+    {
+      "privacy_cell_id": "sha256:1e0169b9670a8cd737dfa24e33efaeb16277c9beccd1b28bcbec7189606e1825",
+      "session_id": "779f27d0-cb6d-41f1-988e-c4519b2065b0"
+    }
+  ],
+  "remote_grad_clip": 1.0,
+  "remote_protocol": {
+    "cloud_experts": 8,
+    "cloud_hidden": 0,
+    "cloud_kind": "monomial_moe_radial",
+    "cloud_layers": 2,
+    "cloud_seed": 15506276940393031267,
+    "latent_dim": 64,
+    "latent_only_audit": true,
+    "max_parameter_dimension": 8,
+    "op": "hello_ack",
+    "session_id": "779f27d0-cb6d-41f1-988e-c4519b2065b0",
+    "state_shape_digest": "db573d04caa3eb69ceab368412149b0ba83b72453c329591fcb5c342ff5905d1"
+  },
+  "remote_tampered_frames": 0,
+  "resume_after": 26,
+  "schema": "dtraining.latent_native_v5_06b.v1",
+  "secret_token_gauge": false,
+  "secret_token_permutation": true,
+  "secret_wire_rotation": true,
+  "seed": 42,
+  "sequence_length": 32,
+  "split_after": 19,
+  "status": "completed",
+  "steps": 4000,
+  "surrogate_mode": "trained",
+  "surrogate_placement": "remote",
+  "surrogate_return_loss_improvement": 0.002256551291793585,
+  "surrogate_total_parameters": 161,
+  "surrogate_trainable_parameters": 161,
+  "token_recovery_pct": 4.40826416015625,
+  "token_scale_sigma": 0.75,
+  "toula_peak_cuda_memory_mb": 4193.5,
+  "train_blocks": 4096,
+  "train_seconds": 1682.5286775901914,
+  "training_tail": [
+    {
+      "attacker_loss": 8.006385803222656,
+      "distill_loss": 0.3015313744544983,
+      "gram_flatten_loss": -0.0,
+      "language_loss": 5.687192916870117,
+      "phase_step": 3997,
+      "step": 3997
+    },
+    {
+      "attacker_loss": 8.615397453308105,
+      "distill_loss": 0.41412171721458435,
+      "gram_flatten_loss": -0.0,
+      "language_loss": 6.730173110961914,
+      "phase_step": 3998,
+      "step": 3998
+    },
+    {
+      "attacker_loss": 7.543106555938721,
+      "distill_loss": 0.33818212151527405,
+      "gram_flatten_loss": -0.0,
+      "language_loss": 4.043091297149658,
+      "phase_step": 3999,
+      "step": 3999
+    }
+  ],
+  "transport": {
+    "actual_remote_flops": 243698924128,
+    "actual_remote_flops_status": "pytorch_profiler_operator_count",
+    "backward_inbound_wire_bytes": 82341119,
+    "backward_outbound_wire_bytes": 82102314,
+    "control_inbound_wire_bytes": 188489,
+    "control_outbound_wire_bytes": 96374,
+    "forward_inbound_wire_bytes": 166297972,
+    "forward_outbound_wire_bytes": 166052810,
+    "remote_backward_compute_ms": 700881.7149656825,
+    "remote_forward_compute_ms": 240534.5901811961,
+    "total_wire_bytes": 497079078,
+    "trusted_flops_breakdown": {
+      "decoder_tail_forward": 12271934088,
+      "encoder_forward": 9578528,
+      "prefix_teacher_forward": 26188738176,
+      "trusted_backward": 12320751186
+    },
+    "trusted_flops_per_step": 50791001978,
+    "trusted_flops_profiled_step": 2000,
+    "trusted_flops_profiler": "torch.profiler with_flops",
+    "trusted_flops_scope": "one representative mid-training step (post-warmup); in-runner attacker phases excluded"
+  },
+  "transport_tls": true,
+  "utility": {
+    "candidate": {
+      "mean_token_nll": 5.472230110201053,
+      "nll_delta_vs_no_replacement": 0.5419132727547549,
+      "perplexity": 237.99034608983908
+    },
+    "decoder_zero_output": {
+      "mean_token_nll": 5.474486661492847,
+      "nll_delta_vs_no_replacement": 0.5441698240465485,
+      "perplexity": 238.52798989501284
+    },
+    "no_replacement": {
+      "mean_token_nll": 4.9303168374462985,
+      "nll_delta_vs_no_replacement": 0.0,
+      "perplexity": 138.42336309768467
+    }
+  },
+  "warmup_steps": 400,
+  "wire_quant": "none",
+  "zero_cloud_eval_loss": 8.608972018468194
+}

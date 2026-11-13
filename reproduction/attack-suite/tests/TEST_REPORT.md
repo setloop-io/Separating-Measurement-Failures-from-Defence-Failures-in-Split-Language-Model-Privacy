@@ -1,0 +1,77 @@
+# Test report (multi-env)
+
+- TDD (torch-free): RED (1 failing)
+- TORCH TIER: covered in torch:primary, torch:sbvenv
+- BDD/gaps: 1 acknowledged, 34 UNACKNOWLEDGED
+-   - NEVER RAN: tests/test_accumulation.py::test_cli_fails_closed_without_torch
+-   - NEVER RAN: tests/test_accumulation.py::test_run_fails_closed_without_torch
+-   - NEVER RAN: tests/test_active_cloud.py::test_requires_torch_guard
+-   - NEVER RAN: tests/test_alignment_search.py::test_requires_torch_guard
+-   - NEVER RAN: tests/test_body_extraction.py::test_real_tier_requires_torch
+-   - NEVER RAN: tests/test_captures.py::test_load_epoch_rows_fails_closed_without_torch
+-   - NEVER RAN: tests/test_captures.py::test_load_tensor_requires_torch
+-   - NEVER RAN: tests/test_checkpoint.py::test_non_json_state_without_torch_is_a_descriptive_error
+-   - NEVER RAN: tests/test_checkpoint.py::test_pt_checkpoint_without_torch_is_a_descriptive_error
+-   - NEVER RAN: tests/test_coverage.py::test_lane_c_dropping_one_cell_bites[artifact_telemetry_leak]
+-   - NEVER RAN: tests/test_coverage.py::test_lane_c_dropping_one_cell_bites[seam_inversion]
+-   - NEVER RAN: tests/test_defenses.py::test_torchfree_host_behavior_is_explicit
+-   - NEVER RAN: tests/test_ica.py::test_module_imports_torch_less
+-   - NEVER RAN: tests/test_ica.py::test_self_test_reports_torch_checks_skipped_and_passes
+-   - NEVER RAN: tests/test_ica_bss.py::test_requires_torch_guard
+-   - NEVER RAN: tests/test_known_prefix.py::test_cli_fails_closed_without_torch
+-   - NEVER RAN: tests/test_known_prefix.py::test_run_fails_closed_without_torch
+-   - NEVER RAN: tests/test_latent_matching.py::test_run_fails_closed_without_torch
+-   - NEVER RAN: tests/test_leak_accumulation.py::test_cli_fails_closed_without_torch
+-   - NEVER RAN: tests/test_leak_accumulation.py::test_run_fails_closed_without_torch
+-   - NEVER RAN: tests/test_max_effort.py::test_requires_torch_guard
+-   - NEVER RAN: tests/test_output_inversion.py::test_toy_path_requires_torch
+-   - NEVER RAN: tests/test_seed_disclosure.py::test_pt_bundle_fails_closed_without_torch
+-   - NEVER RAN: tests/test_sharded.py::test_cli_fails_closed_without_torch
+-   - NEVER RAN: tests/test_sharded.py::test_run_fails_closed_without_torch
+-   - NEVER RAN: tests/test_stale_key.py::test_cli_fails_closed_without_torch
+-   - NEVER RAN: tests/test_stale_key.py::test_run_fails_closed_without_torch
+-   - NEVER RAN: tests/test_subspace_joint.py::test_cli_fails_closed_without_torch
+-   - NEVER RAN: tests/test_subspace_joint.py::test_run_fails_closed_without_torch
+-   - NEVER RAN: tests/test_synthetic.py::test_make_toy_world_requires_torch
+-   - NEVER RAN: tests/test_synthetic.py::test_module_imports_torch_less
+-   - NEVER RAN: tests/test_synthetic.py::test_write_toy_captures_fails_closed_without_torch
+-   - NEVER RAN: tests/test_wire_eval.py::test_cli_fails_closed_without_torch
+-   - NEVER RAN: tests/test_wire_eval.py::test_run_fails_closed_without_torch
+
+## Never ran in any env
+
+- `tests/test_accumulation.py::test_cli_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_accumulation.py::test_run_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_active_cloud.py::test_requires_torch_guard` **UNACKNOWLEDGED**
+- `tests/test_alignment_search.py::test_requires_torch_guard` **UNACKNOWLEDGED**
+- `tests/test_body_extraction.py::test_real_tier_requires_torch` **UNACKNOWLEDGED**
+- `tests/test_captures.py::test_load_epoch_rows_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_captures.py::test_load_tensor_requires_torch` **UNACKNOWLEDGED**
+- `tests/test_checkpoint.py::test_non_json_state_without_torch_is_a_descriptive_error` **UNACKNOWLEDGED**
+- `tests/test_checkpoint.py::test_pt_checkpoint_without_torch_is_a_descriptive_error` **UNACKNOWLEDGED**
+- `tests/test_coverage.py::test_lane_c_dropping_one_cell_bites[artifact_telemetry_leak]` **UNACKNOWLEDGED**
+- `tests/test_coverage.py::test_lane_c_dropping_one_cell_bites[seam_inversion]` **UNACKNOWLEDGED**
+- `tests/test_defenses.py::test_run_scenarios_end_to_end` (acknowledged)
+- `tests/test_defenses.py::test_torchfree_host_behavior_is_explicit` **UNACKNOWLEDGED**
+- `tests/test_ica.py::test_module_imports_torch_less` **UNACKNOWLEDGED**
+- `tests/test_ica.py::test_self_test_reports_torch_checks_skipped_and_passes` **UNACKNOWLEDGED**
+- `tests/test_ica_bss.py::test_requires_torch_guard` **UNACKNOWLEDGED**
+- `tests/test_known_prefix.py::test_cli_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_known_prefix.py::test_run_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_latent_matching.py::test_run_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_leak_accumulation.py::test_cli_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_leak_accumulation.py::test_run_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_max_effort.py::test_requires_torch_guard` **UNACKNOWLEDGED**
+- `tests/test_output_inversion.py::test_toy_path_requires_torch` **UNACKNOWLEDGED**
+- `tests/test_seed_disclosure.py::test_pt_bundle_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_sharded.py::test_cli_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_sharded.py::test_run_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_stale_key.py::test_cli_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_stale_key.py::test_run_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_subspace_joint.py::test_cli_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_subspace_joint.py::test_run_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_synthetic.py::test_make_toy_world_requires_torch` **UNACKNOWLEDGED**
+- `tests/test_synthetic.py::test_module_imports_torch_less` **UNACKNOWLEDGED**
+- `tests/test_synthetic.py::test_write_toy_captures_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_wire_eval.py::test_cli_fails_closed_without_torch` **UNACKNOWLEDGED**
+- `tests/test_wire_eval.py::test_run_fails_closed_without_torch` **UNACKNOWLEDGED**

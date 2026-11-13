@@ -1,0 +1,22 @@
+{
+  "schema": "dtraining.attacker.benchmark.v1",
+  "config": {
+    "attack": "gpu-memory",
+    "benchmark_cell": "S5:env:gpu-memory",
+    "tier_cell": true
+  },
+  "threat_model": "benchmark cell placeholder: the cell failed before writing its artifact; the error is the record",
+  "provenance": {
+    "hostname": "MacBookPro",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-16T00:54:20Z",
+    "dtraining_commit": "ec08486849760f2233f7036d44f580412976088f"
+  },
+  "results": [
+    {
+      "experiment": "gpu-memory",
+      "error": "cell rc=1: [gpu_memory_residue] no hardware probe tier available on this host (need pynvml or torch+CUDA; see attacker/hwprobe.py). Use --toy for the pure-python simulation tier."
+    }
+  ],
+  "summary": []
+}

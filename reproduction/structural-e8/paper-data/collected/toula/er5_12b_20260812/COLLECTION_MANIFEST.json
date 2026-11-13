@@ -1,0 +1,30 @@
+{
+  "schema": "dtraining.collection_manifest.v1",
+  "collected_at": "2026-08-13",
+  "source_host": "toula",
+  "experiment": "E-R5 12B static sharding and staggered rotation",
+  "evidence_status": "primary_negative_control",
+  "validation": {
+    "files": 9,
+    "cells": 27,
+    "depths": [1, 4, 8],
+    "seeds": [0, 1, 2],
+    "block_counts": [1, 4, 16],
+    "json_schema": "dtraining.rotation_lifetime.v1",
+    "finite_range_checks": "passed",
+    "excluded": ["raw .pt captures", "checkpoints", "prompts", "raw tensors", "keys and secrets"],
+    "sanitization": "Removed config.master_seed_base=42 from each collected derivative. This was the public laboratory reproducibility seed, but is excluded under the repository's strict no-key-material rule."
+  },
+  "files": [
+    {"file": "rotation_lifetime_12b_er5_d1_seed0_bf16_20260812_toula.json", "source_sha256": "2d1711ed511048aa98135357e4c69cb65d56e227e1d811b7cd7ce931285775a4", "collected_sha256": "88af631d465167a25ce5ae1fbf5aece69c733db4476c2a3e360b8456daeea7a1"},
+    {"file": "rotation_lifetime_12b_er5_d1_seed1_bf16_20260812_toula.json", "source_sha256": "d346da0d165177bb24d73ad58b9242c85df8aa4a97f2b6a279e94e91399a6339", "collected_sha256": "31bb811961e8c58f902969898219f435b80c508335c80cfeb3418022defab3f2"},
+    {"file": "rotation_lifetime_12b_er5_d1_seed2_bf16_20260812_toula.json", "source_sha256": "b283a69f908ad55c781e60325a2732762e0019e7aabf9753b0f04f073c53fcc7", "collected_sha256": "4e52becf71f95b38de88ea90564dd72cabafebfec37eba838f2b0df5c5892f29"},
+    {"file": "rotation_lifetime_12b_er5_d4_seed0_bf16_20260812_toula.json", "source_sha256": "373c2d497854a5e020d406a581a180137168303a5b49bd7c87bff62265f24467", "collected_sha256": "9d7512803b9fdea523783ca853ee66576b0ebb4687ca5f4618f2f6ae3f9a7ab1"},
+    {"file": "rotation_lifetime_12b_er5_d4_seed1_bf16_20260812_toula.json", "source_sha256": "4267fa4d8e1a5f59b301aa4e00036ed3317aad48b177912281c77e59c2f9471f", "collected_sha256": "d5efe9134171f0de5ae6b80957acd7949492f4441d4f1b364957a1c5cf4a0e7d"},
+    {"file": "rotation_lifetime_12b_er5_d4_seed2_bf16_20260812_toula.json", "source_sha256": "9496cb581884d357a240c1772282af5bfbcb81e23b4c87da33d0ab77b2ada058", "collected_sha256": "68804ca8a8eb8ba9cd7918ed92ee20bdff22c32d246bd4e6ef30f06d1c8c787b"},
+    {"file": "rotation_lifetime_12b_er5_d8_seed0_bf16_20260812_toula.json", "source_sha256": "16321bf3da84f67b1b35c7e18dd330fb36b2997fffd3c499fb55d9b08b643ab6", "collected_sha256": "fa024a5bb94ce064b7c824596f864f8be5e146024e741523e72b5b9943d1a887"},
+    {"file": "rotation_lifetime_12b_er5_d8_seed1_bf16_20260812_toula.json", "source_sha256": "b74f0f3dda9c016b22092edbb1af82449eea73922cc9ce79944049b38f28b078", "collected_sha256": "c640b283e12753c4e5eb7c57db3e26ea6ce587bcb837399249972fdad288a525"},
+    {"file": "rotation_lifetime_12b_er5_d8_seed2_bf16_20260812_toula.json", "source_sha256": "68ebeaf0d07f01b9b17d882205cdc8e62ed1929b57bb809cb7b7824d34c159de", "collected_sha256": "1a843ce23202833169cfd3b7e06fd2ece11a3530c5bf742fb024d291da45b9e9"}
+  ],
+  "aggregate_result": "Static recovery 58.54-65.68%; staggered recovery 54.95-65.13%; label-free band 0.16-0.89%. Sharding and the tested staggered schedule are rejected as privacy defenses."
+}

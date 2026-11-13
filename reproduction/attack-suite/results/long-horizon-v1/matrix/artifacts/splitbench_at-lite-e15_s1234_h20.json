@@ -1,0 +1,93 @@
+{
+  "schema": "llm_attacker.splitbench.v1",
+  "config": {
+    "model": "gpt2",
+    "split": "6",
+    "mode": "finetune",
+    "steps": 20,
+    "seq_len": 32,
+    "batch_size": 1,
+    "lr": 5e-05,
+    "capture_every": 1,
+    "defense": "at-lite",
+    "sigma": 0.0,
+    "sparsity": 0.1,
+    "bottleneck_dim": 8,
+    "at_eps": 15.0,
+    "santext_p": 0.1,
+    "santext_k": 8,
+    "snd_sigma": 1.0,
+    "tb_dim": 64,
+    "tb_hidden": 256,
+    "tb_probe_hidden": 128,
+    "tb_minimax_steps": 200,
+    "tb_mi_weight": 0.1,
+    "tb_allow_cpu": false,
+    "tb_cotrain": false,
+    "tb_cotrain_interval": 8,
+    "pca_dim": 64,
+    "tb_checkpoint": null,
+    "mixup_lambda": 0.75,
+    "mixup_pool": 256,
+    "mixup_correction": true,
+    "replica_count": 3,
+    "replica_tolerance": 0.02,
+    "replica_gauge": true,
+    "replica_gauge_scale": 0.001,
+    "lora_r": 0,
+    "lora_alpha": 16.0,
+    "device": "cpu",
+    "dtype": "fp32",
+    "corpus_file": "/Users/geo/LLM-Attacker/results/long-horizon-v1/inputs/pilot-corpus.txt",
+    "dataset": "wikitext",
+    "capture_dir": "/Users/geo/LLM-Attacker/results/long-horizon-v1/matrix/captures/at-lite-e15_s1234_h20",
+    "output": "/Users/geo/LLM-Attacker/results/long-horizon-v1/matrix/artifacts/splitbench_at-lite-e15_s1234_h20.json",
+    "save_canonical": true,
+    "body_grad_capture": false,
+    "server_attack": "none",
+    "server_attack_alpha": 8.0,
+    "seed": 1234
+  },
+  "threat_model": "honest-but-curious wire observer on the split seam (local harness stand-in for the cloud side of a split deployment): captures record exactly what the server-side body receives (post-defense) and the gradients it returns; labeled local data, per the calibration attacks that consume wire captures",
+  "provenance": {
+    "hostname": "MacBookPro",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-16T01:10:02Z",
+    "dtraining_commit": "ec08486849760f2233f7036d44f580412976088f"
+  },
+  "results": [
+    {
+      "captures_written": 40,
+      "steps_run": 20,
+      "defense": "at-lite",
+      "sigma": 0.0,
+      "defense_config": {
+        "name": "at-lite",
+        "at_eps": 15.0
+      },
+      "server_attack": "none",
+      "split": "6",
+      "plan": "2-slice split over 12 layers: head[0:6] | body+tail[6:12] (+ ln_f + lm_head behind the last slice)",
+      "final_loss": 5.2471537590026855,
+      "mean_loss": 4.972380411624909
+    }
+  ],
+  "summary": [
+    {
+      "captures_written": 40,
+      "steps_run": 20,
+      "defense": "at-lite",
+      "sigma": 0.0,
+      "defense_config": {
+        "name": "at-lite",
+        "at_eps": 15.0
+      },
+      "server_attack": "none",
+      "split": "6",
+      "plan": "2-slice split over 12 layers: head[0:6] | body+tail[6:12] (+ ln_f + lm_head behind the last slice)",
+      "final_loss": 5.2471537590026855,
+      "mean_loss": 4.972380411624909
+    }
+  ],
+  "interpretation": "results[0]: captures_written / steps_run / final_loss (finetune) / defense; captures land in config.capture_dir in the wire-capture schema and feed every attack module via attacker.captures"
+}

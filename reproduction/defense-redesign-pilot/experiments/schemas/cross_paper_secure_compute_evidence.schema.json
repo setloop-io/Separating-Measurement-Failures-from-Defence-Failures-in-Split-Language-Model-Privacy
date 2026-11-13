@@ -1,0 +1,485 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paper3.local/schemas/cross_paper_secure_compute_evidence.schema.json",
+  "title": "Digest-only cross-paper secure-compute engineering evidence envelope",
+  "type": "object",
+  "required": [
+    "schema",
+    "protocol_id",
+    "envelope_id",
+    "stage",
+    "scientific_evidence",
+    "claim_status",
+    "sources",
+    "shared_bindings",
+    "paper4_evidence_index",
+    "required_views",
+    "identity_field_map",
+    "identity_mappings",
+    "phase_crosswalks",
+    "assessment",
+    "envelope_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "cross-paper.secure-compute-evidence.v1"},
+    "protocol_id": {"const": "cross-paper-secure-compute-d0q8-1.0"},
+    "envelope_id": {"$ref": "#/$defs/identifier"},
+    "stage": {"const": "engineering"},
+    "scientific_evidence": {"const": false},
+    "claim_status": {"const": "UNDETERMINED_ENGINEERING_ONLY"},
+    "sources": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {"$ref": "#/$defs/source"}
+    },
+    "shared_bindings": {
+      "type": "object",
+      "required": [
+        "paper4_source_tree_sha256",
+        "paper4_config_sha256",
+        "paper4_admission_sha256",
+        "paper4_session_id",
+        "paper4_journal_public_key_sha256",
+        "paper4_environment_lock_sha256",
+        "paper4_runtime_environment_sha256",
+        "paper4_trusted_store_manifest_sha256",
+        "paper4_trusted_store_protection_evidence_sha256",
+        "paper4_workload_measurement_sha256",
+        "paper4_challenge_nonce_sha256",
+        "paper4_hardware_packet_sha256",
+        "paper4_collector_manifest_sha256",
+        "paper4_collector_executable_sha256",
+        "paper4_collector_public_key_sha256",
+        "paper4_admission_verifier_id",
+        "paper4_admission_adapter_measurement_sha256",
+        "paper4_admission_public_key_sha256",
+        "paper4_admission_deployment_binding_sha256",
+        "paper4_admission_signature_sha256",
+        "paper4_lifecycle_receipt_sha256",
+        "paper4_event_pair_chain_sha256",
+        "llm_attack_plan_sha256",
+        "deployment_manifest_sha256"
+      ],
+      "properties": {
+        "paper4_source_tree_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_config_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_admission_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_session_id": {"$ref": "#/$defs/identifier"},
+        "paper4_journal_public_key_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_environment_lock_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_runtime_environment_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_trusted_store_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_trusted_store_protection_evidence_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_workload_measurement_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_challenge_nonce_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_hardware_packet_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_collector_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_collector_executable_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_collector_public_key_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_admission_verifier_id": {"$ref": "#/$defs/identifier"},
+        "paper4_admission_adapter_measurement_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_admission_public_key_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_admission_deployment_binding_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_admission_signature_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_lifecycle_receipt_sha256": {"$ref": "#/$defs/sha256"},
+        "paper4_event_pair_chain_sha256": {"$ref": "#/$defs/sha256"},
+        "llm_attack_plan_sha256": {"$ref": "#/$defs/sha256"},
+        "deployment_manifest_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "additionalProperties": false
+    },
+    "paper4_evidence_index": {"$ref": "#/$defs/paper4EvidenceIndex"},
+    "required_views": {
+      "type": "array",
+      "prefixItems": [
+        {"const": "external_attacker"},
+        {"const": "trusted_diagnostic"}
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "identity_field_map": {
+      "type": "object",
+      "required": ["paper4_workload_bundle", "llm_attacker_audit"],
+      "properties": {
+        "paper4_workload_bundle": {
+          "const": {
+            "session_id": "session_id",
+            "event_identity": "not_embedded_digest_only",
+            "journal_identity": "sha256_and_event_count"
+          }
+        },
+        "llm_attacker_audit": {
+          "const": {
+            "request_id": "request_id",
+            "session_id": "session_id",
+            "step_id": "step_id"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "identity_mappings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/identityMapping"}
+    },
+    "phase_crosswalks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/phaseCrosswalk"}
+    },
+    "assessment": {
+      "type": "object",
+      "required": [
+        "paper4_admitted",
+        "hardware_attested",
+        "paper4_collection_status",
+        "paper4_unassessed_phases",
+        "llm_attacker_gate",
+        "unassessed_case_ids",
+        "overall"
+      ],
+      "properties": {
+        "paper4_admitted": {"type": "boolean"},
+        "hardware_attested": {"type": "boolean"},
+        "paper4_collection_status": {
+          "enum": ["collected-not-a-verdict", "unassessed"]
+        },
+        "paper4_unassessed_phases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/canonicalPhase"}
+        },
+        "llm_attacker_gate": {"$ref": "#/$defs/verdict"},
+        "unassessed_case_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "overall": {"$ref": "#/$defs/verdict"}
+      },
+      "additionalProperties": false
+    },
+    "envelope_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.:-]+$"
+    },
+    "verdict": {
+      "enum": ["PASS", "FAIL", "UNASSESSED"]
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "source_id",
+        "role",
+        "repository",
+        "repository_revision",
+        "path",
+        "sha256",
+        "schema_field",
+        "source_schema"
+      ],
+      "properties": {
+        "source_id": {"$ref": "#/$defs/identifier"},
+        "role": {
+          "enum": [
+            "paper4_sealed_repetition_set",
+            "paper4_execution_manifest_authentication",
+            "paper4_admission_bundle",
+            "paper4_lifecycle_receipt",
+            "llm_attacker_audit"
+          ]
+        },
+        "repository": {"enum": ["paper4", "llm_attacker"]},
+        "repository_revision": {"$ref": "#/$defs/revision"},
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "schema_field": {"enum": ["schema", "schema_version"]},
+        "source_schema": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "identityMapping": {
+      "type": "object",
+      "required": [
+        "source_role",
+        "source_event_id",
+        "source_request_id",
+        "source_session_id",
+        "source_step_field",
+        "source_step",
+        "canonical_request_id",
+        "canonical_session_id",
+        "canonical_step_id"
+      ],
+      "properties": {
+        "source_role": {
+          "const": "llm_attacker_audit"
+        },
+        "source_event_id": {"type": "string", "minLength": 1},
+        "source_request_id": {"type": "string", "minLength": 1},
+        "source_session_id": {"type": "string", "minLength": 1},
+        "source_step_field": {"const": "step_id"},
+        "source_step": {"type": "integer", "minimum": 0},
+        "canonical_request_id": {"type": "string", "minLength": 1},
+        "canonical_session_id": {"type": "string", "minLength": 1},
+        "canonical_step_id": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "phaseCrosswalk": {
+      "type": "object",
+      "required": [
+        "source_role",
+        "source_phase",
+        "canonical_phases",
+        "relation",
+        "rationale"
+      ],
+      "properties": {
+        "source_role": {
+          "enum": ["paper4_workload_bundle", "llm_attacker_audit"]
+        },
+        "source_phase": {"type": "string", "minLength": 1},
+        "canonical_phases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/canonicalPhase"
+          }
+        },
+        "relation": {"enum": ["exact", "renamed", "source_only"]},
+        "rationale": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "canonicalPhase": {
+      "enum": [
+        "ingress",
+        "tokenisation",
+        "forward",
+        "return",
+        "backward",
+        "update",
+        "optimizer",
+        "cpu-gpu-staging",
+        "ipc",
+        "vram",
+        "checkpointing",
+        "logging",
+        "crash-restart",
+        "egress"
+      ]
+    },
+    "paper4EvidenceIndex": {
+      "type": "object",
+      "required": [
+        "session_id",
+        "admission_id",
+        "protection_mode",
+        "repetitions",
+        "collector",
+        "admission_authentication",
+        "lifecycle",
+        "artifacts",
+        "phases"
+      ],
+      "properties": {
+        "session_id": {"$ref": "#/$defs/identifier"},
+        "admission_id": {"$ref": "#/$defs/identifier"},
+        "protection_mode": {"const": "cc-on"},
+        "repetitions": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "repetition",
+              "bundle_sha256",
+              "event_pair_chain_sha256",
+              "journals"
+            ],
+            "properties": {
+              "repetition": {"type": "integer", "minimum": 0, "maximum": 2},
+              "bundle_sha256": {"$ref": "#/$defs/sha256"},
+              "event_pair_chain_sha256": {"$ref": "#/$defs/sha256"},
+              "journals": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 4,
+                "items": {
+                  "type": "object",
+                  "required": ["view", "sha256", "events"],
+                  "properties": {
+                    "view": {
+                      "enum": [
+                        "external_attacker",
+                        "trusted_diagnostic",
+                        "trusted_authentication",
+                        "external_authentication"
+                      ]
+                    },
+                    "sha256": {"$ref": "#/$defs/sha256"},
+                    "payload_sha256": {"$ref": "#/$defs/sha256"},
+                    "chain_head_sha256": {"$ref": "#/$defs/sha256"},
+                    "journal_id": {"$ref": "#/$defs/identifier"},
+                    "signature_algorithm": {"const": "Ed25519"},
+                    "events": {
+                      "type": ["integer", "null"],
+                      "minimum": 1
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "collector": {
+          "type": "object",
+          "required": [
+            "collector_id",
+            "manifest_sha256",
+            "executable_sha256",
+            "public_key_sha256"
+          ],
+          "properties": {
+            "collector_id": {"$ref": "#/$defs/identifier"},
+            "manifest_sha256": {"$ref": "#/$defs/sha256"},
+            "executable_sha256": {"$ref": "#/$defs/sha256"},
+            "public_key_sha256": {"$ref": "#/$defs/sha256"}
+          },
+          "additionalProperties": false
+        },
+        "admission_authentication": {
+          "type": "object",
+          "required": [
+            "schema",
+            "verifier_id",
+            "adapter_kind",
+            "adapter_measurement_sha256",
+            "public_key_sha256",
+            "decision_sha256",
+            "workload_binding_sha256",
+            "evidence_index_sha256",
+            "deployment_binding_sha256",
+            "signature_algorithm",
+            "signature_sha256"
+          ],
+          "properties": {
+            "schema": {"const": "p4.cc_admission_authentication.v1"},
+            "verifier_id": {"$ref": "#/$defs/identifier"},
+            "adapter_kind": {"const": "vendor_attestation_adapter"},
+            "adapter_measurement_sha256": {"$ref": "#/$defs/sha256"},
+            "public_key_sha256": {"$ref": "#/$defs/sha256"},
+            "decision_sha256": {"$ref": "#/$defs/sha256"},
+            "workload_binding_sha256": {"$ref": "#/$defs/sha256"},
+            "evidence_index_sha256": {"$ref": "#/$defs/sha256"},
+            "deployment_binding_sha256": {"$ref": "#/$defs/sha256"},
+            "signature_algorithm": {"const": "Ed25519"},
+            "signature_sha256": {"$ref": "#/$defs/sha256"}
+          },
+          "additionalProperties": false
+        },
+        "lifecycle": {
+          "type": "object",
+          "required": [
+            "source_sha256",
+            "receipt_sha256",
+            "run_id",
+            "arm_id",
+            "exit_code",
+            "resource_identity_sha256",
+            "lifecycle_launch_sha256",
+            "campaign_root_sha256",
+            "pair_declaration_sha256",
+            "runtime_binding_sha256",
+            "active_security_manifest_sha256",
+            "launch_context_sha256",
+            "lifecycle_record_sha256",
+            "lifecycle_chain_head_sha256",
+            "campaign_ledger_state_sha256",
+            "campaign_ledger_entry_sha256",
+            "execution_summary_sha256",
+            "artifact_manifest_sha256",
+            "resource_absence_sha256",
+            "provider_response_sha256"
+          ],
+          "properties": {
+            "source_sha256": {"$ref": "#/$defs/sha256"},
+            "receipt_sha256": {"$ref": "#/$defs/sha256"},
+            "run_id": {"$ref": "#/$defs/identifier"},
+            "arm_id": {"const": "cc-on"},
+            "exit_code": {"const": 0},
+            "resource_identity_sha256": {"$ref": "#/$defs/sha256"},
+            "lifecycle_launch_sha256": {"$ref": "#/$defs/sha256"},
+            "campaign_root_sha256": {"$ref": "#/$defs/sha256"},
+            "pair_declaration_sha256": {"$ref": "#/$defs/sha256"},
+            "runtime_binding_sha256": {"$ref": "#/$defs/sha256"},
+            "active_security_manifest_sha256": {"$ref": "#/$defs/sha256"},
+            "launch_context_sha256": {"$ref": "#/$defs/sha256"},
+            "lifecycle_record_sha256": {"$ref": "#/$defs/sha256"},
+            "lifecycle_chain_head_sha256": {"$ref": "#/$defs/sha256"},
+            "campaign_ledger_state_sha256": {"$ref": "#/$defs/sha256"},
+            "campaign_ledger_entry_sha256": {"$ref": "#/$defs/sha256"},
+            "execution_summary_sha256": {"$ref": "#/$defs/sha256"},
+            "artifact_manifest_sha256": {"$ref": "#/$defs/sha256"},
+            "resource_absence_sha256": {"$ref": "#/$defs/sha256"},
+            "provider_response_sha256": {"$ref": "#/$defs/sha256"}
+          },
+          "additionalProperties": false
+        },
+        "artifacts": {
+          "type": "array",
+          "minItems": 17,
+          "items": {
+            "type": "object",
+            "required": ["role", "sha256", "bytes", "sensitivity"],
+            "properties": {
+              "role": {"type": "string", "minLength": 1},
+              "sha256": {"$ref": "#/$defs/sha256"},
+              "bytes": {"type": "integer", "minimum": 0},
+              "sensitivity": {
+                "enum": ["public-metadata", "trusted-sensitive"]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "phases": {
+          "type": "array",
+          "minItems": 14,
+          "maxItems": 14,
+          "items": {
+            "type": "object",
+            "required": ["phase", "status", "event_count"],
+            "properties": {
+              "phase": {"$ref": "#/$defs/canonicalPhase"},
+              "status": {"enum": ["observed", "unavailable"]},
+              "event_count": {"type": "integer", "minimum": 1}
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

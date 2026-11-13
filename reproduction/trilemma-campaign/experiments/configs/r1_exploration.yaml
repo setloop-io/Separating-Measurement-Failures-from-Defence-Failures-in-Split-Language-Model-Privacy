@@ -1,0 +1,322 @@
+schema_version: r1-exploration-1.0
+study_id: p3-r1-fresh-start
+protocol_version: r1-exploration-1.0
+protocol: docs/PREREGISTRATION_R1.md
+protocol_status: frozen_2026-09-16_scientific_admission_required
+stage: engineering
+scientific_evidence: false
+scientific_execution_enabled: false
+legacy_evidence_admissible: false
+execution_environment: owned_nodes_toula_koula_gb10
+freeze_note: >
+  Frozen 2026-09-16 for scientific execution under bound single-use scientific
+  admissions (r1-scientific-admission-1.0). Engineering stages remain
+  non-scientific and cannot be promoted. No legacy output, checkpoint,
+  calibration, fitted attack, statistic or figure is admissible as an input to
+  a new R1 scientific result. Raw corpus bytes and source code may be reused
+  only as declared, reviewed and freshly hash-bound inputs. Attack thresholds
+  remain draft until the calibration-qualified frozen attack specification;
+  any amendment is recorded before exploratory scores are inspected.
+
+seeds: [61001, 61002]
+modes: [trained, frozen_random, removed_remote]
+include_all_local: true
+engineering_limits:
+  wall_clock_seconds: 300
+  output_bytes: 268435456
+  budget_approved: false
+  note: Hard planned limits; enforcement and GPU budget binding must be verified before execution.
+base:
+  device: cuda
+  dtype: float32
+  backbone:
+    vocab_size: 256
+    d_model: 32
+    n_heads: 4
+    n_layers: 4
+    d_ff: 128
+    max_seq_len: 32
+    init_std: 0.02
+  data:
+    path: data/raw/tinyshakespeare.txt
+    corpus_sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+    train_fraction: 0.9
+    batch_size: 2
+    seq_len: 32
+    eval_batches: 2
+  optim:
+    lr: 3.0e-4
+    min_lr: 3.0e-5
+    betas: [0.9, 0.95]
+    weight_decay: 0.1
+    warmup_steps: 2
+    grad_clip: 1.0
+    steps: 8
+  logging:
+    eval_every: 4
+    eval_batches: 2
+    transcript_sample_every: 4
+    probe_batch_size: 2
+    ema_beta: 0.95
+  transcript_schema_version: "1.0.0"
+cells:
+  - {id: smoke-base, start: 1, span: 2, latent_width: 32, q_bits: 8, remote_depth: 1, grad_defense: null}
+  - {id: smoke-gradient-noise, start: 1, span: 2, latent_width: 32, q_bits: 8, remote_depth: 1, grad_defense: {clip_norm: 1.0, noise_std: 0.1}}
+
+local_validation:
+  stage: local_validation
+  scientific_evidence: false
+  purpose: real_two_process_cpu_training_transport_capture_attack_and_evidence_validation
+  seeds: [65001, 65002]
+  modes: [trained, frozen_random, removed_remote]
+  include_all_local: true
+  panel:
+    selection_seed: 65000
+    windows_per_region: 8
+  base:
+    device: cpu
+    dtype: float32
+    backbone:
+      vocab_size: 256
+      d_model: 32
+      n_heads: 4
+      n_layers: 4
+      d_ff: 128
+      max_seq_len: 16
+      init_std: 0.02
+    data:
+      path: data/raw/tinyshakespeare.txt
+      corpus_sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+      train_fraction: 0.8
+      batch_size: 2
+      seq_len: 16
+      eval_batches: 2
+    optim:
+      lr: 3.0e-4
+      min_lr: 3.0e-5
+      betas: [0.9, 0.95]
+      weight_decay: 0.1
+      warmup_steps: 1
+      grad_clip: 1.0
+      steps: 2
+    logging:
+      eval_every: 1
+      eval_batches: 2
+      transcript_sample_every: 1
+      probe_batch_size: 4
+      ema_beta: 0.95
+    transcript_schema_version: "1.0.0"
+  cells:
+    - {id: loopback-base, start: 1, span: 2, latent_width: 32, q_bits: 8, remote_depth: 1, grad_defense: null}
+    - {id: loopback-gradient-noise, start: 1, span: 2, latent_width: 32, q_bits: 8, remote_depth: 1, grad_defense: {clip_norm: 1.0, noise_std: 0.1}}
+
+performance_calibration:
+  stage: engineering
+  scientific_evidence: false
+  purpose: full_size_gpu_runtime_memory_capture_and_storage_measurement
+  execution_requires_separate_budget_binding: true
+  limits:
+    wall_clock_seconds: 1800
+    output_bytes: 2147483648
+    budget_approved: false
+  seeds: [61103]
+  modes: [trained, frozen_random, removed_remote]
+  include_all_local: true
+  base:
+    device: cuda
+    dtype: float32
+    backbone:
+      vocab_size: 256
+      d_model: 256
+      n_heads: 8
+      n_layers: 8
+      d_ff: 1024
+      max_seq_len: 128
+      init_std: 0.02
+    data:
+      path: data/raw/tinyshakespeare.txt
+      corpus_sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+      train_fraction: 0.9
+      batch_size: 32
+      seq_len: 128
+      eval_batches: 8
+    optim:
+      lr: 3.0e-4
+      min_lr: 3.0e-5
+      betas: [0.9, 0.95]
+      weight_decay: 0.1
+      warmup_steps: 10
+      grad_clip: 1.0
+      steps: 100
+    logging:
+      eval_every: 50
+      eval_batches: 8
+      transcript_sample_every: 50
+      probe_batch_size: 8
+      ema_beta: 0.95
+    transcript_schema_version: "1.0.0"
+  cells:
+    - {id: speed-base, start: 2, span: 4, latent_width: 256, q_bits: 8, remote_depth: 1, grad_defense: null}
+
+proposed_scientific_matrix:
+  stage: exploratory
+  executable: only_via_r1_scientific_admission
+  scientific_evidence: false
+  admission_status: admittable_via_frozen_attack_spec_and_scientific_admission
+  admission_enabled: true
+  execution_device: cuda
+  seeds: [63013, 63029, 63043, 63059]
+  modes: [trained, frozen_random, removed_remote]
+  include_all_local: true
+  planned_runs: 232
+  capture_budget:
+    training_capture_every_steps: 200
+    include_initial_and_final: true
+    maximum_training_capture_frames_per_run: 11
+    maximum_examples_per_frame: 8
+    maximum_sequence_length: 128
+    full_precision_tensor_views: [forward_values, returned_values, inbound_gradients, outbound_gradients]
+    remote_parameter_snapshots: initial_and_final_only
+    full_optimizer_checkpoint: final_only
+    attack_panel_capture_budget: not_yet_measured_scientific_admission_blocker
+    total_storage_budget_approved: false
+  base:
+    device: cuda
+    dtype: float32
+    backbone:
+      vocab_size: 256
+      d_model: 256
+      n_heads: 8
+      n_layers: 8
+      d_ff: 1024
+      max_seq_len: 128
+      init_std: 0.02
+    data:
+      path: data/raw/tinyshakespeare.txt
+      corpus_sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+      train_fraction: 0.8
+      batch_size: 32
+      seq_len: 128
+      eval_batches: 64
+      panel_specification: PREREGISTRATION_R1_section_Data_and_attack_panels
+      scientific_panel_loader_implemented: false
+    optim:
+      lr: 3.0e-4
+      min_lr: 3.0e-5
+      betas: [0.9, 0.95]
+      weight_decay: 0.1
+      warmup_steps: 100
+      grad_clip: 1.0
+      steps: 2000
+    logging:
+      eval_every: 100
+      eval_batches: 64
+      transcript_sample_every: 200
+      probe_batch_size: 8
+      ema_beta: 0.95
+    transcript_schema_version: "1.0.0"
+  cells: &scientific_cells
+    - {id: base, factor: reference, start: 2, span: 4, latent_width: 256, q_bits: 8, remote_depth: 1, grad_defense: null}
+    - {id: precision-q4, factor: precision, start: 2, span: 4, latent_width: 256, q_bits: 4, remote_depth: 1, grad_defense: null}
+    - {id: precision-q16, factor: precision, start: 2, span: 4, latent_width: 256, q_bits: 16, remote_depth: 1, grad_defense: null}
+    - {id: precision-q32, factor: precision, start: 2, span: 4, latent_width: 256, q_bits: 32, remote_depth: 1, grad_defense: null}
+    - {id: width-64, factor: width, start: 2, span: 4, latent_width: 64, q_bits: 8, remote_depth: 1, grad_defense: null}
+    - {id: width-128, factor: width, start: 2, span: 4, latent_width: 128, q_bits: 8, remote_depth: 1, grad_defense: null}
+    - {id: depth-2, factor: remote_capacity, start: 2, span: 4, latent_width: 256, q_bits: 8, remote_depth: 2, grad_defense: null}
+    - {id: depth-4, factor: remote_capacity, start: 2, span: 4, latent_width: 256, q_bits: 8, remote_depth: 4, grad_defense: null}
+    - {id: span-2, factor: centered_span, start: 3, span: 2, latent_width: 256, q_bits: 8, remote_depth: 1, grad_defense: null}
+    - {id: span-6, factor: centered_span, start: 1, span: 6, latent_width: 256, q_bits: 8, remote_depth: 1, grad_defense: null}
+    - {id: position-early, factor: segment_position, start: 0, span: 4, latent_width: 256, q_bits: 8, remote_depth: 1, grad_defense: null}
+    - {id: position-late, factor: segment_position, start: 4, span: 4, latent_width: 256, q_bits: 8, remote_depth: 1, grad_defense: null}
+    - {id: clipping-only, factor: gradient_clipping, start: 2, span: 4, latent_width: 256, q_bits: 8, remote_depth: 1, grad_defense: {clip_norm: 1.0, noise_std: 0.0}}
+    - {id: noise-001, factor: gradient_noise_at_fixed_clip, start: 2, span: 4, latent_width: 256, q_bits: 8, remote_depth: 1, grad_defense: {clip_norm: 1.0, noise_std: 0.01}}
+    - {id: noise-003, factor: gradient_noise_at_fixed_clip, start: 2, span: 4, latent_width: 256, q_bits: 8, remote_depth: 1, grad_defense: {clip_norm: 1.0, noise_std: 0.03}}
+    - {id: noise-010, factor: gradient_noise_at_fixed_clip, start: 2, span: 4, latent_width: 256, q_bits: 8, remote_depth: 1, grad_defense: {clip_norm: 1.0, noise_std: 0.1}}
+    - {id: noise-030, factor: gradient_noise_at_fixed_clip, start: 2, span: 4, latent_width: 256, q_bits: 8, remote_depth: 1, grad_defense: {clip_norm: 1.0, noise_std: 0.3}}
+    - {id: q4-clipping-only, factor: precision_noise_interaction, start: 2, span: 4, latent_width: 256, q_bits: 4, remote_depth: 1, grad_defense: {clip_norm: 1.0, noise_std: 0.0}}
+    - {id: q4-noise-010, factor: precision_noise_interaction, start: 2, span: 4, latent_width: 256, q_bits: 4, remote_depth: 1, grad_defense: {clip_norm: 1.0, noise_std: 0.1}}
+  calibration:
+    stage: calibration
+    executable: only_via_r1_scientific_admission
+    scientific_evidence: false
+    admission_enabled: true
+    execution_device: cuda
+    seeds: [62011, 62023, 62039, 62047]
+    modes: [trained]
+    include_all_local: false
+    base: same_as_proposed_scientific_matrix_base
+    steps: 2000
+    cells: *scientific_cells
+    planned_runs: 76
+    note: >
+      Endpoint training budget matches exploratory training. Attack hyperparameters
+      and qualification rules are set only on calibration data, then frozen.
+      Every evaluated target/channel/defense must independently qualify. Models
+      have distinct coordinates: refit declared known-plaintext attacks within
+      each target model using disjoint auxiliary windows; never assume transfer.
+  reserved_confirmation:
+    executable: false
+    protocol_status: no_confirmatory_protocol_yet
+    seeds: [64007, 64019, 64037, 64051, 64067, 64079, 64091, 64109]
+    note: >
+      Reserved only. Cell selection, power, endpoints, multiplicity and any
+      external-corpus test require a separate timestamped protocol before use.
+      No outcome from an exploratory or calibration seed becomes confirmatory.
+
+scientific_panels:
+  calibration:
+    selection_seed: 62007
+    windows_per_region: 64
+    batch_size: 8
+  exploratory:
+    selection_seed: 63001
+    windows_per_region: 64
+    batch_size: 8
+
+scientific_limits:
+  calibration:
+    wall_clock_seconds: 28800
+    output_bytes: 137438953472
+  exploratory:
+    wall_clock_seconds: 86400
+    output_bytes: 4398046511104
+
+traceability:
+  outputs_root: outputs/p3-r1-fresh-start
+  manifests_root: experiments/manifests/p3-r1-fresh-start
+  require_source_archive_and_inventory: true
+  require_separate_trusted_and_corpus_free_remote_packets: true
+  require_authenticated_framed_transport: true
+  require_fail_stop_uncertain_step_and_coordinated_checkpoint: true
+  require_semantic_artifact_validation: true
+  require_clean_committed_execution_source: true
+  require_environment_lock_and_container_digest: true
+  require_data_and_panel_digests: true
+  require_bound_command_and_hardware_identity: true
+  require_rng_stream_and_initialization_inventory: true
+  require_append_only_attempt_log: true
+  require_artifact_verification_before_resume: true
+  no_checkpoint_or_probe_reuse_from_legacy: true
+  no_scientific_admission_from_engineering: true
+  output_overwrite: forbidden
+
+privacy_gate_draft:
+  status: provisional_not_calibrated_not_executable
+  positive_control_floor_correlation_advantage: 0.20
+  positive_control_floor_accuracy_advantage: 0.10
+  null_absolute_advantage_band: 0.02
+  property_correlation_advantage_limit: 0.10
+  class_or_byte_accuracy_advantage_limit: 0.02
+  required_target_channel_defense_qualification: true
+  missing_or_unqualified: undetermined
+  any_qualified_breach: rejected
+  all_required_qualified_within_gates: scoped_probe_pass_only
+  full_transcript_privacy_claim_permitted: false
+
+seed_audit:
+  checked_on: "2026-09-10"
+  historical_manifest_count_checked: 768
+  source: experiments/manifests/*.json
+  purpose: exclusion_only_no_legacy_outcomes_used
+  overlap_with_proposed_seeds: []
+  legacy_observed_seed_union: [3, 7, 9, 11, 13, 17, 19, 21, 22, 23, 27, 29, 31, 33, 37, 39, 41, 43, 44, 47, 49, 51, 53, 55, 57, 59, 61, 63, 66, 67, 69, 71, 77, 81, 83, 87, 88, 89, 91, 101, 202, 303, 909, 919, 929, 939, 949, 959, 969, 9390, 9391, 9490, 9491, 9590, 9690]

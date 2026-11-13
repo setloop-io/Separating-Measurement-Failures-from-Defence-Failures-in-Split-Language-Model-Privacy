@@ -1,0 +1,54 @@
+{
+  "schema": "dtraining.collection_manifest.v1",
+  "experiment": "E-R9 two-node smoke",
+  "collected_at": "2026-08-13",
+  "evidence_status": "diagnostic",
+  "measurement_kind": "measured",
+  "execution_commit": "11a8844",
+  "hosts": ["toula", "koula"],
+  "container_image_id": "sha256:7370472a9000f6d726df3049eb9b75a6ef18f0b44d615306f444cbb857cd8576",
+  "corpora": {
+    "fixed": {
+      "sha256": "317a41afe823d8111772a7638c37e2a7d5c660bd66c755b23e433ad43c25c6f2",
+      "n_lines": 12
+    },
+    "jitter_rep1": {
+      "sha256": "7b01beb2cb0764fbeab36105ad35e40ae9b87127264f2b2e52c0a6597c6e1057",
+      "n_lines": 12
+    }
+  },
+  "disposition": "failed_validation",
+  "known_limitations": [
+    "The required E-R8 approximate-alignment attacker crashed before emitting its artifact because alignment_search.run_real constructed seq_len in a nested class namespace.",
+    "This is one smoke repetition at direct RTT and cannot support repeatability or WAN claims.",
+    "TEE mode was emulated and provides no protection from Koula host root.",
+    "Activation noise is empirical and is not a formal activation-DP mechanism."
+  ],
+  "results": {
+    "plain_eval_loss": 4.258039772510529,
+    "full1_eval_loss": 2.5960347279906273,
+    "full1_loss_delta_vs_plain": -1.6620050445199017,
+    "plain_known_plaintext_top1_pct": 5.57,
+    "plain_label_free_band_top1_pct": 6.84,
+    "full1_per_epoch_known_plaintext_mean_top1_pct": 21.5226875,
+    "full1_pooled_cross_epoch_top1_pct": 39.06,
+    "full1_label_free_band_top1_pct": 9.22,
+    "full1_undefended_top1_pct": 73.26,
+    "full1_final_epoch": 164,
+    "approximate_alignment": null
+  },
+  "files": [
+    "er9_plain_0ms_rep1.json",
+    "er9_plain_0ms_rep1_attack_eval.json",
+    "er9_full1_0ms_rep1.json",
+    "er9_full1_0ms_rep1_attack_eval.json",
+    "er9_smoke_11a8844.log",
+    "er9_cloud_last.log"
+  ],
+  "excluded": [
+    "raw .pt captures",
+    "seed files and seed values",
+    "checkpoints",
+    "private corpus text"
+  ]
+}

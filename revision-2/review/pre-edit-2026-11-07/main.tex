@@ -1,0 +1,104 @@
+% Paper 9, revision 2. Build here; existing ../paper/ is preserved.
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,tabularx,array,longtable}
+\usepackage{graphicx}
+\usepackage{placeins}
+\usepackage[round]{natbib}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Auditing Privacy Claims in Split Language-Model Training: Channels, Targets, Calibration, and Scope},pdfauthor={Georgios Politis and Evangelos Pappas},pdfsubject={Retrospective artifact-backed audit; Paper 9 revision 2}}
+\usepackage[font=small,labelfont=bf]{caption}
+\newtheorem{proposition}{Proposition}
+\DeclareRobustCommand{\artifact}[1]{\hyperlink{artifact-#1}{\textsf{#1}}}
+\newcommand{\pp}{\,\mathrm{pp}}
+\setlength{\emergencystretch}{2em}
+\input{data/results_macros}
+\title{Auditing Privacy Claims in Split Language-Model Training:\\
+Channels, Targets, Calibration, and Scope}
+\author{Georgios Politis\\{\small\texttt{geo.politis@gmail.com}}
+\and Evangelos Pappas\\{\small\texttt{evanz.pappas@gmail.com}}}
+\date{Revision 2 --- 6 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Privacy evaluations can mislead through omitted observations, misaligned
+targets, unqualified instruments, or conclusions drawn for a different
+adversary. These failures must be distinguished from a valid test rejecting
+an ineffective defense. We present a retrospective, artifact-backed audit
+of four campaigns in one split-language-model research program, with two
+additional checks on security scope and information-theoretic interpretation.
+The audit reconstructs recorded decisions and distinguishes breaches,
+non-detection, incomplete evidence, invalid measurements, and out-of-scope
+claims. In a 19-configuration exploratory campaign, only four of 24
+required instruments qualified, yet 13 configurations had qualified privacy
+breaches; the six privacy-undetermined configurations were independently
+rejected on utility or gain. A subsequent seven-cell pilot yielded no
+eligible defense, with two utility failures and four failed versus three
+undetermined composite privacy assessments. These outcomes preserve genuine
+negative evidence rather than attributing every rejection to measurement.
+The scope checks separate shared-key wire obfuscation from compromised-host
+protection and show why a near-zero mutual-information lower bound cannot
+certify a small leakage budget. We provide rerunnable secondary analysis,
+source-hash bindings, and campaign-specific uncertainty. The contribution
+is a cross-case audit of admissible conclusions, not a new defense, a
+privacy certificate, or an independently validated universal evaluator.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+Split language-model systems keep part of a computation on a client and
+exchange intermediate tensors with a remote provider. A privacy claim
+depends on more than an attack's recovery score: it depends on which
+tensors the attacker observes, which model and secret state it knows,
+what target is reconstructed, and whether the evaluator can distinguish
+signal from its controls. A low score under the wrong target or an
+incomplete view does not establish confidentiality. Equally, a correctly
+qualified attack finding a large signal is not an instrument failure merely
+because a defense was expected to succeed.
+
+Prior work supplies complementary parts of this problem. An omitted
+returned-gradient channel can defeat a passing forward-only check
+\citep{paper1}. Adding gradients can have different effects on token-level
+and exact-document recovery \citep{gradients2026}. The LLM-Attack Suite
+records observation contracts, controls, saved predictions, and untested
+attacks \citep{suite2026}. Evaluator and attack choices also affect
+measured image-inversion leakage \citep{mia2026}. The question here is
+how these distinctions constrain a synthesis of several campaigns: which
+conclusions survive an audit, which require narrowing, and which are not
+supported by the recorded experiment?
+
+We address that question through a retrospective secondary analysis of
+one research program. Four campaign cases concern channel coverage,
+target alignment, instrument qualification, and a calibrated defense pilot.
+Two further checks concern promoting a wire-observer result to a
+compromised-host claim and treating a near-zero lower-bound estimate as a
+privacy ceiling. The cases are not independent replications of one
+hypothesis, and we do not combine their heterogeneous recovery measures
+into a common effect size.
+
+Our contribution has three parts. First, we state a claim-specific audit
+contract separating admissible negative evidence from non-detection,
+incomplete qualification, invalid measurements, and changes of threat model.
+Second, we provide executable reconciliation of the R1 cell and seed tables
+and the Paper 4 pilot records, retaining their frozen rules and composite
+verdicts. Third, we examine the limits of broader structural and
+information-theoretic interpretations using the archived attack, key,
+identity, and runtime evidence. The result is a reproducible correction of
+what the program establishes. It does not introduce a new attack or claim
+that existing controls are novel.
+
+\input{sections/audit-method}
+\input{sections/case-studies}
+\input{sections/results}
+\input{sections/scope-checks}
+\input{sections/discussion}
+\input{references}
+\appendix
+\input{sections/artifact-index}
+\end{document}

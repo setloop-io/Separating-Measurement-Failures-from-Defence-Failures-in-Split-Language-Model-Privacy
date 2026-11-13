@@ -1,0 +1,564 @@
+{
+  "schema": "dtraining.rotation_lifetime.v1",
+  "config": {
+    "model": "/workspace/experiments/models/mistral-nemo-12b-instruct",
+    "n_layers": 40,
+    "experiment": "er5",
+    "depths": [
+      1
+    ],
+    "seeds": [
+      1
+    ],
+    "solve_seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 10,
+    "seq_len": 64,
+    "epoch_sizes": [
+      64,
+      256,
+      1024,
+      4096
+    ],
+    "prefix_len": 64,
+    "sessions": 16,
+    "stale_epoch_sizes": [
+      256,
+      1024
+    ],
+    "shards": [
+      1,
+      4,
+      16
+    ],
+    "rotation_period": 8,
+    "shard_epoch_pairs": 1024,
+    "dtype": "bf16",
+    "device": "cuda",
+    "quick": false
+  },
+  "threat_model": "honest-but-curious cloud under PER-EPOCH rotation of the E8 boundary secret W (fresh ratchet-derived W each epoch). Attacker capabilities under test: (E-R1a) E labeled (h, hW) pairs from WITHIN one epoch (oracle serving/self-labeled traffic); (E-R3) knowledge of a fixed system-prompt prefix, static W, with/without scaffold jitter; (E-R4) an insider HANDED stale keys W_1..W_3 plus the derivation rule but not master_seed; (E-R5) labeled pairs against block-diagonal sharded secrets with a 2-epoch sliding window. W itself is never leaked in the current epoch.",
+  "interpretation": "E-R1a: recovery below 50% at epoch size E => the per-epoch budget is safe at E; max_safe_epoch is compared against the static-W K50 prior {1: 258, 4: 356, 8: 618} (depths 1/4/8, 27B bf16, e8_robustness_27b_bf16_densek_20260807T230529Z.json). The pooled-cross-epoch control must sit in the label-free band (<=3.7% on real models): accumulation does not cross rotation boundaries. E-R3: fixed_scaffold reproduces the known break (~4 sessions at S=64, K90 ~= 232-240 pairs); jittered_scaffold must show no K90 crossing within 16 sessions. E-R4: stale-only recovery ~= band with W rel_err ~= sqrt(2) (random); fresh-pair cells must match E-R1a at the same E (stale keys give zero bootstrap). E-R5: static sharding is the NEGATIVE CONTROL \u2014 per-block budgets shrink to 0.1*h_b, so s=16 is easier to break than s=1; staggering restores the defense because no 2-epoch window has all blocks on one key.",
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9981,
+      9982,
+      9983,
+      9984,
+      9985,
+      9986,
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "split-inference:spark",
+    "hostname": "toula",
+    "victim_doc_sha256": {},
+    "dtraining_commit": "5c9832c44e3025bf2116971c3e9ee07c2b572dc5",
+    "model_manifest_sha256": "d91562afebdfbaa334b14be3f2584573b986b6ef4a2b0d47d11ecc3e1a74da95",
+    "model_manifest_algo": "v2-sizes-no-cache",
+    "model_manifest_n_files": 18,
+    "model_path": "mistral-nemo-12b-instruct",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "random_baseline_top1_pct": 0.0008,
+  "measurement_kind": "lab-harness simulation: attacks executed in-process against collected boundary activations; no live wire",
+  "evidence_status": "primary",
+  "known_limitations": [
+    "labeled-pair attacker is an upper bound (oracle serving); real self-labeled traffic yields noisier pairs",
+    "rotation cadence is per-epoch; sub-epoch accumulation is the binding constraint, so epoch sizes must stay below max_safe_epoch with margin",
+    "E-R3 jitter models pad-insertion + slot permutation only; a stronger attacker with approximate alignment search is not covered",
+    "E-R5 sharding WITHOUT staggering strictly weakens per-block budgets (negative control) \u2014 shard counts must not be deployed without the staggered schedule",
+    "historical artifacts are immutable; the K50 prior quoted here comes from e8_robustness_27b_bf16_densek_20260807T230529Z.json"
+  ],
+  "summary": [
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "n_blocks": 1,
+      "static_sharded_composed_mean": 63.59,
+      "staggered_composed_mean": 57.775,
+      "labelfree_band_mean": 0.47,
+      "n_seeds": 1
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "n_blocks": 4,
+      "static_sharded_composed_mean": 66.09,
+      "staggered_composed_mean": 65.4675,
+      "labelfree_band_mean": 0.47,
+      "n_seeds": 1
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "n_blocks": 16,
+      "static_sharded_composed_mean": 65.94,
+      "staggered_composed_mean": 65.4712,
+      "labelfree_band_mean": 0.47,
+      "n_seeds": 1
+    }
+  ],
+  "results": [
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "seed": 1,
+      "n_blocks": 1,
+      "block_size": 5120,
+      "epoch_pairs": 1024,
+      "window_epochs": 2,
+      "rotation_period": 8,
+      "static_sharded": {
+        "composed_top1": 63.59,
+        "per_block_rel_err": [
+          1.09619
+        ],
+        "per_block_budget_pairs": 512.0,
+        "pairs_in_window": 2048
+      },
+      "staggered": {
+        "per_epoch": [
+          {
+            "epoch": 1,
+            "composed_top1": 58.91,
+            "per_block_rel_err": [
+              1.265012
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 2,
+            "composed_top1": 57.81,
+            "per_block_rel_err": [
+              1.265166
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 3,
+            "composed_top1": 58.91,
+            "per_block_rel_err": [
+              1.265012
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 4,
+            "composed_top1": 58.91,
+            "per_block_rel_err": [
+              1.265012
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 5,
+            "composed_top1": 58.91,
+            "per_block_rel_err": [
+              1.265012
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 6,
+            "composed_top1": 57.81,
+            "per_block_rel_err": [
+              1.265166
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 7,
+            "composed_top1": 58.91,
+            "per_block_rel_err": [
+              1.265012
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 8,
+            "composed_top1": 52.03,
+            "per_block_rel_err": [
+              1.312061
+            ],
+            "blocks_rotated_in_window": [
+              0
+            ]
+          }
+        ],
+        "composed_top1_mean": 57.775
+      },
+      "labelfree_band_top1": 0.47
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "seed": 1,
+      "n_blocks": 4,
+      "block_size": 1280,
+      "epoch_pairs": 1024,
+      "window_epochs": 2,
+      "rotation_period": 8,
+      "static_sharded": {
+        "composed_top1": 66.09,
+        "per_block_rel_err": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "per_block_budget_pairs": 128.0,
+        "pairs_in_window": 2048
+      },
+      "staggered": {
+        "per_epoch": [
+          {
+            "epoch": 1,
+            "composed_top1": 65.94,
+            "per_block_rel_err": [
+              0.635254,
+              0.633612,
+              0.632904,
+              0.635012
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 2,
+            "composed_top1": 65.16,
+            "per_block_rel_err": [
+              0.635254,
+              0.633612,
+              0.632904,
+              0.974664
+            ],
+            "blocks_rotated_in_window": [
+              3
+            ]
+          },
+          {
+            "epoch": 3,
+            "composed_top1": 65.62,
+            "per_block_rel_err": [
+              0.635254,
+              0.633612,
+              0.632904,
+              0.632451
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 4,
+            "composed_top1": 65.31,
+            "per_block_rel_err": [
+              0.635254,
+              0.633612,
+              0.973834,
+              0.632451
+            ],
+            "blocks_rotated_in_window": [
+              2
+            ]
+          },
+          {
+            "epoch": 5,
+            "composed_top1": 65.78,
+            "per_block_rel_err": [
+              0.635254,
+              0.633612,
+              0.631681,
+              0.632451
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 6,
+            "composed_top1": 65.62,
+            "per_block_rel_err": [
+              0.635254,
+              0.974277,
+              0.631681,
+              0.632451
+            ],
+            "blocks_rotated_in_window": [
+              1
+            ]
+          },
+          {
+            "epoch": 7,
+            "composed_top1": 65.47,
+            "per_block_rel_err": [
+              0.635254,
+              0.635129,
+              0.631681,
+              0.632451
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 8,
+            "composed_top1": 64.84,
+            "per_block_rel_err": [
+              0.973263,
+              0.635129,
+              0.631681,
+              0.632451
+            ],
+            "blocks_rotated_in_window": [
+              0
+            ]
+          }
+        ],
+        "composed_top1_mean": 65.4675
+      },
+      "labelfree_band_top1": 0.47
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "seed": 1,
+      "n_blocks": 16,
+      "block_size": 320,
+      "epoch_pairs": 1024,
+      "window_epochs": 2,
+      "rotation_period": 8,
+      "static_sharded": {
+        "composed_top1": 65.94,
+        "per_block_rel_err": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "per_block_budget_pairs": 32.0,
+        "pairs_in_window": 2048
+      },
+      "staggered": {
+        "per_epoch": [
+          {
+            "epoch": 1,
+            "composed_top1": 65.94,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 2,
+            "composed_top1": 65.94,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 3,
+            "composed_top1": 65.94,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 4,
+            "composed_top1": 65.94,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 5,
+            "composed_top1": 65.94,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 6,
+            "composed_top1": 65.94,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 7,
+            "composed_top1": 65.94,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 8,
+            "composed_top1": 62.19,
+            "per_block_rel_err": [
+              0.851861,
+              0.850936,
+              0.853012,
+              0.851497,
+              0.853598,
+              0.851445,
+              0.853761,
+              0.855506,
+              0.851135,
+              0.855637,
+              0.851235,
+              0.854209,
+              0.852633,
+              0.854107,
+              0.852656,
+              0.854799
+            ],
+            "blocks_rotated_in_window": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15
+            ]
+          }
+        ],
+        "composed_top1_mean": 65.4712
+      },
+      "labelfree_band_top1": 0.47
+    }
+  ]
+}

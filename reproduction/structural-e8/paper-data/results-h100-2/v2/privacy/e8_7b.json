@@ -1,0 +1,348 @@
+{
+  "config": {
+    "model": "/workspace/experiments/models/mistral-7b-instruct",
+    "n_layers": 32,
+    "depths": [
+      1,
+      4,
+      8
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 8,
+    "seq_len": 64,
+    "max_pairs": 20000,
+    "epochs": 30,
+    "gen_tokens": 64,
+    "dtype": "bf16",
+    "device": "cuda",
+    "W_seed": 42,
+    "W_ortho_err": 7.486343383789062e-05,
+    "quick": false
+  },
+  "threat_model": "default: attacker has public text + public base weights, NOT W; decoder trained on plain h* and evaluated on h'=h*@W. 'breach_W_leaked' is a MEASUREMENT of the insider-leak case (h'@W^T=h), not the default assumption. Unsupervised adaptation from unlabeled h' is out of scope (future work).",
+  "interpretation": "obfuscated ~= random baseline => defense works while W stays secret; breach ~= baseline_no_defense => security rests entirely on W's secrecy. Utility: token_identity should be 1.0 (fp32 round-trip; bf16 model cast may flip greedy ties \u2014 rerun --dtype fp32 to verify exactness).",
+  "random_baseline_top1_pct": 0.0031,
+  "utility": [
+    {
+      "depth": 1,
+      "prompt_idx": 0,
+      "token_identity": 1.0,
+      "tokens_compared": 64,
+      "max_roundtrip_deviation": 0.0152587890625
+    },
+    {
+      "depth": 1,
+      "prompt_idx": 1,
+      "token_identity": 1.0,
+      "tokens_compared": 64,
+      "max_roundtrip_deviation": 0.0004215240478515625
+    },
+    {
+      "depth": 4,
+      "prompt_idx": 0,
+      "token_identity": 1.0,
+      "tokens_compared": 64,
+      "max_roundtrip_deviation": 0.01141357421875
+    },
+    {
+      "depth": 4,
+      "prompt_idx": 1,
+      "token_identity": 1.0,
+      "tokens_compared": 64,
+      "max_roundtrip_deviation": 0.000370025634765625
+    },
+    {
+      "depth": 8,
+      "prompt_idx": 0,
+      "token_identity": 1.0,
+      "tokens_compared": 64,
+      "max_roundtrip_deviation": 0.013641357421875
+    },
+    {
+      "depth": 8,
+      "prompt_idx": 1,
+      "token_identity": 1.0,
+      "tokens_compared": 64,
+      "max_roundtrip_deviation": 0.0005731582641601562
+    }
+  ],
+  "overhead_ms_per_matmul": 0.0279,
+  "summary": [
+    {
+      "depth": 1,
+      "setting": "baseline_no_defense",
+      "top1_mean": 64.19,
+      "top1_std": 0.2252,
+      "top5_mean": 66.34,
+      "top5_std": 0.5957,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "setting": "obfuscated",
+      "top1_mean": 0.5867,
+      "top1_std": 0.3406,
+      "top5_mean": 1.3667,
+      "top5_std": 0.5178,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "setting": "breach_W_leaked",
+      "top1_mean": 64.19,
+      "top1_std": 0.2252,
+      "top5_mean": 66.34,
+      "top5_std": 0.5957,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "setting": "baseline_no_defense",
+      "top1_mean": 60.8733,
+      "top1_std": 0.2957,
+      "top5_mean": 63.9333,
+      "top5_std": 0.6279,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "setting": "obfuscated",
+      "top1_mean": 0.2633,
+      "top1_std": 0.3001,
+      "top5_mean": 1.5633,
+      "top5_std": 0.8958,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "setting": "breach_W_leaked",
+      "top1_mean": 60.8733,
+      "top1_std": 0.2957,
+      "top5_mean": 63.9333,
+      "top5_std": 0.6279,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "setting": "baseline_no_defense",
+      "top1_mean": 56.38,
+      "top1_std": 0.3012,
+      "top5_mean": 61.33,
+      "top5_std": 0.6755,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "setting": "obfuscated",
+      "top1_mean": 0.2633,
+      "top1_std": 0.1097,
+      "top5_mean": 1.9567,
+      "top5_std": 1.6916,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "setting": "breach_W_leaked",
+      "top1_mean": 56.38,
+      "top1_std": 0.3012,
+      "top5_mean": 61.33,
+      "top5_std": 0.6755,
+      "n_seeds": 3
+    }
+  ],
+  "results": [
+    {
+      "depth": 1,
+      "setting": "baseline_no_defense",
+      "seed": 0,
+      "top1": 64.06,
+      "top5": 66.99
+    },
+    {
+      "depth": 1,
+      "setting": "obfuscated",
+      "seed": 0,
+      "top1": 0.39,
+      "top5": 0.78
+    },
+    {
+      "depth": 1,
+      "setting": "breach_W_leaked",
+      "seed": 0,
+      "top1": 64.06,
+      "top5": 66.99
+    },
+    {
+      "depth": 1,
+      "setting": "baseline_no_defense",
+      "seed": 1,
+      "top1": 64.45,
+      "top5": 66.21
+    },
+    {
+      "depth": 1,
+      "setting": "obfuscated",
+      "seed": 1,
+      "top1": 0.98,
+      "top5": 1.76
+    },
+    {
+      "depth": 1,
+      "setting": "breach_W_leaked",
+      "seed": 1,
+      "top1": 64.45,
+      "top5": 66.21
+    },
+    {
+      "depth": 1,
+      "setting": "baseline_no_defense",
+      "seed": 2,
+      "top1": 64.06,
+      "top5": 65.82
+    },
+    {
+      "depth": 1,
+      "setting": "obfuscated",
+      "seed": 2,
+      "top1": 0.39,
+      "top5": 1.56
+    },
+    {
+      "depth": 1,
+      "setting": "breach_W_leaked",
+      "seed": 2,
+      "top1": 64.06,
+      "top5": 65.82
+    },
+    {
+      "depth": 4,
+      "setting": "baseline_no_defense",
+      "seed": 0,
+      "top1": 61.13,
+      "top5": 64.65
+    },
+    {
+      "depth": 4,
+      "setting": "obfuscated",
+      "seed": 0,
+      "top1": 0.59,
+      "top5": 2.54
+    },
+    {
+      "depth": 4,
+      "setting": "breach_W_leaked",
+      "seed": 0,
+      "top1": 61.13,
+      "top5": 64.65
+    },
+    {
+      "depth": 4,
+      "setting": "baseline_no_defense",
+      "seed": 1,
+      "top1": 60.94,
+      "top5": 63.48
+    },
+    {
+      "depth": 4,
+      "setting": "obfuscated",
+      "seed": 1,
+      "top1": 0.2,
+      "top5": 1.37
+    },
+    {
+      "depth": 4,
+      "setting": "breach_W_leaked",
+      "seed": 1,
+      "top1": 60.94,
+      "top5": 63.48
+    },
+    {
+      "depth": 4,
+      "setting": "baseline_no_defense",
+      "seed": 2,
+      "top1": 60.55,
+      "top5": 63.67
+    },
+    {
+      "depth": 4,
+      "setting": "obfuscated",
+      "seed": 2,
+      "top1": 0.0,
+      "top5": 0.78
+    },
+    {
+      "depth": 4,
+      "setting": "breach_W_leaked",
+      "seed": 2,
+      "top1": 60.55,
+      "top5": 63.67
+    },
+    {
+      "depth": 8,
+      "setting": "baseline_no_defense",
+      "seed": 0,
+      "top1": 56.64,
+      "top5": 60.55
+    },
+    {
+      "depth": 8,
+      "setting": "obfuscated",
+      "seed": 0,
+      "top1": 0.2,
+      "top5": 0.98
+    },
+    {
+      "depth": 8,
+      "setting": "breach_W_leaked",
+      "seed": 0,
+      "top1": 56.64,
+      "top5": 60.55
+    },
+    {
+      "depth": 8,
+      "setting": "baseline_no_defense",
+      "seed": 1,
+      "top1": 56.05,
+      "top5": 61.72
+    },
+    {
+      "depth": 8,
+      "setting": "obfuscated",
+      "seed": 1,
+      "top1": 0.39,
+      "top5": 3.91
+    },
+    {
+      "depth": 8,
+      "setting": "breach_W_leaked",
+      "seed": 1,
+      "top1": 56.05,
+      "top5": 61.72
+    },
+    {
+      "depth": 8,
+      "setting": "baseline_no_defense",
+      "seed": 2,
+      "top1": 56.45,
+      "top5": 61.72
+    },
+    {
+      "depth": 8,
+      "setting": "obfuscated",
+      "seed": 2,
+      "top1": 0.2,
+      "top5": 0.98
+    },
+    {
+      "depth": 8,
+      "setting": "breach_W_leaked",
+      "seed": 2,
+      "top1": 56.45,
+      "top5": 61.72
+    }
+  ]
+}

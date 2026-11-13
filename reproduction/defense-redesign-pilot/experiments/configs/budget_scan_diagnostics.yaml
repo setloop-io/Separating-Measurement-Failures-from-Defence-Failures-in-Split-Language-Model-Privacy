@@ -1,0 +1,39 @@
+protocol_id: p4-budget-scan-0.1
+kind: warmup_budget
+cohort: engineering
+status: engineering_ready
+full_budget: true
+device: cpu
+cpu_threads: 2
+sources:
+- control_seed: 410503
+  setup_manifest: experiments/manifests/p4-warmup_budget-warmup-budget-20260918-a-setup-s410501.json
+  trained_manifest: experiments/manifests/p4-warmup_budget-warmup-budget-20260918-a-d0-trained-s410501.json
+- control_seed: 410504
+  setup_manifest: experiments/manifests/p4-warmup_budget-warmup-budget-20260918-a-setup-s410502.json
+  trained_manifest: experiments/manifests/p4-warmup_budget-warmup-budget-20260918-a-d0-trained-s410502.json
+warmup_steps: 500
+reference_branch_steps: 1500
+data:
+  path: data/raw/gutenberg_p4.txt
+  sha256: af3d0245c0ec27d7021f5fd29256bc845bb20cf9c562b37bbe23663b6ebe7436
+  documents: data/gutenberg_p4.manifest.json
+  sequence_length: 128
+  batch_size: 32
+optimizer:
+  lr: 0.0003
+  min_lr: 0.00003
+  warmup_steps: 100
+  weight_decay: 0.1
+  grad_clip: 1.0
+  betas: [0.9, 0.95]
+branches:
+- {branch: d0, mode: trained, budget: 4000}
+- {branch: d0, mode: frozen_random, budget: 4000}
+- {branch: all_local, mode: all_local, budget: 4000}
+- {branch: d0, mode: trained, budget: 8000}
+- {branch: d0, mode: frozen_random, budget: 8000}
+- {branch: all_local, mode: all_local, budget: 8000}
+claim_scope: Engineering diagnostics only; no cell selection, qualification, or
+  privacy claim. All records keep scientific_evidence false, qualified false,
+  privacy undetermined.

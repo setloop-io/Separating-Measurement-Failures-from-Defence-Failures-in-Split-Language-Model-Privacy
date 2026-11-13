@@ -1,0 +1,53 @@
+{
+  "schema": "bisr.upstream_mechanical_diagnostic.v1",
+  "scope": "CPU FP32 one-step synthetic fixture, shared public downstream and observations; not full C",
+  "upstream_commit": "c376590227f9718077765824af4088665bb78687",
+  "source_hashes": {
+    "dlg_attacker.py": "01f8c6766a75a2556bec5243bdbb0cdabbd179fc8c0c20ee8be5c6ce8fa590a9",
+    "sma_attacker.py": "65f3c17803c3657714f58c217282e17cdc1c09aebcb23cc81b83d3ebef14ea3a",
+    "model.py": "77aef15b9187c964049e1ef42363c45c00fb204d9520161f97c31c72a620e67d"
+  },
+  "script_sha256": "92594f21bb4fa50e460378cd4bdea560c95cdae9112b35a1b1da22c022a128bc",
+  "torch_version": "2.11.0+cu128",
+  "candidate_sha256": "3511a294c3b8fbef7084b08a3e66959dbe5275cf74a09246cdb3f82d34c2dac7",
+  "tensor_file": "results/mechanical.pt",
+  "tensor_sha256": "d35c59f0d08f6fab16b6e3641beeefca70f26a0484f799e9921d0209441da142",
+  "checks": {
+    "before": {
+      "max_abs_difference": 3.5610404014587402,
+      "within_tolerance": false
+    },
+    "gradient": {
+      "max_abs_difference": 0.1262200027704239,
+      "within_tolerance": false
+    },
+    "after": {
+      "max_abs_difference": 3.561432123184204,
+      "within_tolerance": false
+    }
+  },
+  "optimizers": {
+    "upstream": {
+      "eps": 1e-06,
+      "weight_decay": 0.01
+    },
+    "candidate": {
+      "eps": 1e-08,
+      "weight_decay": 0.0
+    }
+  },
+  "decode_counterexample": {
+    "upstream": [
+      [
+        1
+      ]
+    ],
+    "candidate": [
+      [
+        0
+      ]
+    ]
+  },
+  "status": "CONFORMANCE_FAILED",
+  "launch_admitted": false
+}

@@ -1,0 +1,131 @@
+{
+  "inputs": [
+    {
+      "path": "revision-2/data/r1_cells.csv",
+      "sha256": "82f16d09d7db332a7cd699527c6791af78b1b83fda674a8e50e54c8428147118"
+    },
+    {
+      "path": "revision-2/data/p4_cells.csv",
+      "sha256": "8647bb951c3f0b53106dfec6e01dcea50c1dfee70b5d70e75fc5c1119c766f5f"
+    },
+    {
+      "path": "evidence/trilemma-campaign/r1_cell_results.csv",
+      "sha256": "34c6a1b136ced4e8fc6a2a47ab5037e64dcaf18b1af386ad49ab327c00e9de0c"
+    },
+    {
+      "path": "evidence/trilemma-campaign/r1_seed_results.csv",
+      "sha256": "7b5df70faa949d53eaa43d0392c6db64aa8f7dabbe9413ab2418617ded141491"
+    },
+    {
+      "path": "reproduction/defense-redesign-pilot/outputs/runs/pilot-20260922-a/report.md",
+      "sha256": "d2ad125b227d00949bd3680c9978448bdc190245b7bf5d1c012d4dc713b15326"
+    }
+  ],
+  "figures": {
+    "campaign-gates": {
+      "r1_reason_counts": {
+        "privacy_qualified_breach": 13,
+        "utility_gate": 5,
+        "gain_gate": 7
+      },
+      "r1_cells": 19,
+      "p4_outcomes": [
+        {
+          "cell": "d0-q8",
+          "states": [
+            "P",
+            "P",
+            "U"
+          ]
+        },
+        {
+          "cell": "d1-s0.1-q8",
+          "states": [
+            "P",
+            "P",
+            "F"
+          ]
+        },
+        {
+          "cell": "d1-s0.5-q8",
+          "states": [
+            "P",
+            "P",
+            "U"
+          ]
+        },
+        {
+          "cell": "d1-s1.0-q8",
+          "states": [
+            "P",
+            "P",
+            "F"
+          ]
+        },
+        {
+          "cell": "d3-q1",
+          "states": [
+            "F",
+            "P",
+            "U"
+          ]
+        },
+        {
+          "cell": "d3-q2",
+          "states": [
+            "F",
+            "P",
+            "F"
+          ]
+        },
+        {
+          "cell": "d3-q3",
+          "states": [
+            "P",
+            "P",
+            "F"
+          ]
+        }
+      ],
+      "uncertainty": "None: complete enumeration of saved exploratory campaign cells."
+    },
+    "r1-utility-boundary": {
+      "cells": [
+        {
+          "cell": "base",
+          "n_seeds": 4,
+          "mean": 0.03481948375701904,
+          "lower_two_sided_95_t": 0.019839807178776647,
+          "upper_two_sided_95_t": 0.04979916033526144,
+          "utility_pass": true
+        },
+        {
+          "cell": "depth-4",
+          "n_seeds": 4,
+          "mean": 0.009087398648262024,
+          "lower_two_sided_95_t": -0.013911750194139802,
+          "upper_two_sided_95_t": 0.03208654749066385,
+          "utility_pass": true
+        },
+        {
+          "cell": "span-6",
+          "n_seeds": 4,
+          "mean": 0.09997053444385529,
+          "lower_two_sided_95_t": 0.08043862741306726,
+          "upper_two_sided_95_t": 0.11950244147464331,
+          "utility_pass": true
+        }
+      ],
+      "interval_definition": "two-sided 95% t-interval over four saved seeds; df=3",
+      "mean_gate_nats": 0.1,
+      "upper_endpoint_gate_nats": 0.12,
+      "meaning": "P is utility pass only; these three cells remain rejected for privacy and/or gain."
+    }
+  },
+  "rendering": {
+    "width_inches": 6.5,
+    "minimum_font_points": 8,
+    "matplotlib_version": "3.11.2",
+    "numpy_version": "2.5.4"
+  }
+}

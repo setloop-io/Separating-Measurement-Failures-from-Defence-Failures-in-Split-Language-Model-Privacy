@@ -1,0 +1,55 @@
+{
+  "aggregation_rule": "coordinate_median",
+  "channel_seeds": [
+    5391729,
+    5391728,
+    5391731
+  ],
+  "config": {
+    "gauge": true,
+    "gauge_scale": 0.001,
+    "replica_count": 3,
+    "seed": 5391729,
+    "tolerance": 0.02
+  },
+  "config_sha256": "91ed1d875cfb6dc3b33fd40b1eee0ab835e4f78b2c0bafcb31332171db337d65",
+  "created_by": "attacker.trained_defenses (in-repo re-implementation of the K-redundant-channel + coordinate-median integrity defense family; NOT the original defense project's code)",
+  "deployment": "in-process channels (one host, one process); cross-host deployment remains open (attacker/remote.py + nodes.json)",
+  "gauge_ids": [
+    "channel-0-e34b4889",
+    "channel-1-38ce9373",
+    "channel-2-56a56a12"
+  ],
+  "honest_heterogeneity": {
+    "max_rel_dev": 1.8575304574287903,
+    "mean_rel_dev": 0.20571558639067392,
+    "n_rows": 64,
+    "note": "the independent channels' honest disagreement distribution; the attack-side tolerance must sit above this budget for a fair comparison",
+    "p95_rel_dev": 0.3166289490613024,
+    "per_channel_mean_rel_dev": [
+      0.1987552189503312,
+      0.19791181697040555,
+      0.22047972325128506
+    ],
+    "source": "calibration_pre_phase",
+    "tolerance": 0.02
+  },
+  "journal": {
+    "path": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/results-defended-v1/split3/seed-33/replica-median/captures/replica_median_journal.jsonl",
+    "sha256": "6d31e9715d5c431e2d73d900ba03219bc29d698c1fd0ab4ace1944cb17b38b0c"
+  },
+  "k2_policy": null,
+  "replica_count": 3,
+  "schema": "llm_attacker.replica_median_provenance.v1",
+  "tolerance": 0.02,
+  "utility": {
+    "utility_after": {
+      "cross_entropy": 4.979861259460449,
+      "perplexity": 145.45419985945742
+    },
+    "utility_before": {
+      "cross_entropy": 4.900414228439331,
+      "perplexity": 134.34541785345277
+    }
+  }
+}

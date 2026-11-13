@@ -1,0 +1,25 @@
+{
+  "archive_sha256": "f3515e8312c21eb294ef91d36a0576b568663812668ac813c5252377188c1d30",
+  "bundle_sha256": "45d7682eaf0ef8a3c2445901df8c521fa9f9dbcbff3ed1d04cfd982a33ac041d",
+  "restore_check": "archive extracted to disposable /Users/geo/r1-bundle-eng-20260916-restore and verify-bundle executed from the restored copy",
+  "schema_version": "r1-preparation-validation-1.0",
+  "scientific_evidence": false,
+  "scope": "Preparation and byte-recovery evidence only. No training, no GPU execution, no scientific admission.",
+  "source_commit": "592ef40",
+  "transport_correction": "The first archive (sha256 7ad4abe6...) carried macOS xattr PAX records that materialized as 218 AppleDouble ._ files on GNU-tar extraction, and the Linux verify-bundle correctly refused the polluted copy. The archive was rebuilt with COPYFILE_DISABLE=1; extraction on toula/koula now yields zero ._ files and the in-container verify-bundle reports status verified (koula, 2026-09-16).",
+  "validated_at_utc": "2026-09-16",
+  "verify_bundle_output": {
+    "files": 183,
+    "scientific_execution_admitted": false,
+    "status": "verified",
+    "study_id": "p3-r1-fresh-start"
+  },
+  "verify_bundle_output_linux": {
+    "files": 183,
+    "scientific_execution_admitted": false,
+    "status": "verified",
+    "study_id": "p3-r1-fresh-start",
+    "where": "koula, r1-cuda-runtime:20260916 container"
+  },
+  "working_tree_clean_at_prepare": true
+}

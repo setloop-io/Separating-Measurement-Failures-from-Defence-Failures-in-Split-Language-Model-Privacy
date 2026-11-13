@@ -1,0 +1,363 @@
+{
+  "param_digest": null,
+  "eval_loss": 3.9632426102956138,
+  "eval_loss_std": 0.8736500144004822,
+  "eval_blocks": 3,
+  "final_train_loss": 3.576666548848152,
+  "config": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "n_layers": 28,
+    "split_after": 15,
+    "resume_after": 26,
+    "local_params": 438740480,
+    "cloud_params": 157309440,
+    "cloud_trainable_params": 0,
+    "cloud": "ws://10.10.10.2:5003",
+    "wire_dtype": "bf16",
+    "pipeline": "sync",
+    "max_inflight": null,
+    "lora_rank": 0,
+    "lr": 0.0001,
+    "seq_len": 64,
+    "micro_batch_size": 1,
+    "grad_accum": 16,
+    "steps": 1,
+    "dtype": "bf16",
+    "device": "cuda",
+    "seed": 42,
+    "corpus_file": "/workspace/experiments/private/er9/corpus.jitter.txt.1",
+    "act_noise_sigma": 0.0,
+    "tee": {
+      "requested": false,
+      "mode": "none",
+      "note": null
+    },
+    "act_noise": null,
+    "dp_sgd": null,
+    "boundary_dp": null,
+    "obf": {
+      "mode": "wire_sandwich",
+      "transform_mode": "structured_hadamard",
+      "version": "v2",
+      "seed_base": "redacted",
+      "seed_delivery": "preprovisioned_on_cloud",
+      "ratchet_tokens": 0,
+      "budget_events": 256,
+      "count_all_training_directions": true,
+      "strict_budget": true,
+      "oversized_forwards": 0,
+      "served_tokens": 4480,
+      "served_observable_rows": 4480,
+      "final_epoch": 17,
+      "directional_accounting": {
+        "cadence": 256,
+        "served_observable_rows": 4480,
+        "evidence": 128,
+        "epoch": 17,
+        "oversized_exchanges": 0,
+        "by_direction": {
+          "forward": 0,
+          "return": 0,
+          "activation_request": 1216,
+          "activation_response": 1216,
+          "gradient_request": 1024,
+          "gradient_response": 1024,
+          "retry": 0,
+          "evaluation": 384
+        },
+        "open_exchanges": 0,
+        "completed_exchanges": 19
+      },
+      "privacy_scope": "capture_resistance_negative_control",
+      "compromised_cloud_privacy": false
+    }
+  },
+  "steps": [
+    {
+      "step": 0,
+      "loss": 3.576666548848152,
+      "t_step": 3.5634845179738477,
+      "t_blocked_cloud": 0.0,
+      "overlap_savings_s": 0.0
+    }
+  ],
+  "microbatch_timing": [
+    {
+      "step": 0,
+      "microbatch": 0,
+      "block_indices": [
+        20
+      ],
+      "t_local_fwd": 0.5653207380091771,
+      "t_cloud_fwd": 0.5151139469817281,
+      "t_wait_cloud_fwd": 0.5151139469817281,
+      "loss": 6.233283042907715,
+      "t_tail_fwd": 0.03018775803502649,
+      "t_local_bwd": 0.06109932891558856,
+      "t_cloud_bwd": 0.11299315898213536,
+      "t_wait_cloud_bwd": 0.11299315898213536,
+      "bytes_crossed": 262144,
+      "t_total": 1.3390079840319231
+    },
+    {
+      "step": 0,
+      "microbatch": 1,
+      "block_indices": [
+        3
+      ],
+      "t_local_fwd": 0.03506144694983959,
+      "t_cloud_fwd": 0.035245209001004696,
+      "t_wait_cloud_fwd": 0.035245209001004696,
+      "loss": 3.4423632621765137,
+      "t_tail_fwd": 0.007039860938675702,
+      "t_local_bwd": 0.01750922796782106,
+      "t_cloud_bwd": 0.03835256991442293,
+      "t_wait_cloud_bwd": 0.03835256991442293,
+      "bytes_crossed": 262144,
+      "t_total": 0.15216259099543095
+    },
+    {
+      "step": 0,
+      "microbatch": 2,
+      "block_indices": [
+        0
+      ],
+      "t_local_fwd": 0.033748498070053756,
+      "t_cloud_fwd": 0.027989155962131917,
+      "t_wait_cloud_fwd": 0.027989155962131917,
+      "loss": 1.9552253484725952,
+      "t_tail_fwd": 0.0037535239243879914,
+      "t_local_bwd": 0.002982767065986991,
+      "t_cloud_bwd": 0.03757610102184117,
+      "t_wait_cloud_bwd": 0.03757610102184117,
+      "bytes_crossed": 262144,
+      "t_total": 0.12931124004535377
+    },
+    {
+      "step": 0,
+      "microbatch": 3,
+      "block_indices": [
+        8
+      ],
+      "t_local_fwd": 0.0066159870475530624,
+      "t_cloud_fwd": 0.025321846012957394,
+      "t_wait_cloud_fwd": 0.025321846012957394,
+      "loss": 3.4953694343566895,
+      "t_tail_fwd": 0.0036321149673312902,
+      "t_local_bwd": 0.002806990989483893,
+      "t_cloud_bwd": 0.03733139601536095,
+      "t_wait_cloud_bwd": 0.03733139601536095,
+      "bytes_crossed": 262144,
+      "t_total": 0.09949676296673715
+    },
+    {
+      "step": 0,
+      "microbatch": 4,
+      "block_indices": [
+        7
+      ],
+      "t_local_fwd": 0.0065031059784814715,
+      "t_cloud_fwd": 0.025476390030235052,
+      "t_wait_cloud_fwd": 0.025476390030235052,
+      "loss": 1.819803237915039,
+      "t_tail_fwd": 0.0071515729650855064,
+      "t_local_bwd": 0.0037563879741355777,
+      "t_cloud_bwd": 0.07063238800037652,
+      "t_wait_cloud_bwd": 0.07063238800037652,
+      "bytes_crossed": 262144,
+      "t_total": 0.13851452199742198
+    },
+    {
+      "step": 0,
+      "microbatch": 5,
+      "block_indices": [
+        7
+      ],
+      "t_local_fwd": 0.0343949330272153,
+      "t_cloud_fwd": 0.028260532999411225,
+      "t_wait_cloud_fwd": 0.028260532999411225,
+      "loss": 1.8185358047485352,
+      "t_tail_fwd": 0.003704898990690708,
+      "t_local_bwd": 0.004015765036456287,
+      "t_cloud_bwd": 0.06600989901926368,
+      "t_wait_cloud_bwd": 0.06600989901926368,
+      "bytes_crossed": 262144,
+      "t_total": 0.16065172490198165
+    },
+    {
+      "step": 0,
+      "microbatch": 6,
+      "block_indices": [
+        4
+      ],
+      "t_local_fwd": 0.007415895001031458,
+      "t_cloud_fwd": 0.02674830099567771,
+      "t_wait_cloud_fwd": 0.02674830099567771,
+      "loss": 6.202834606170654,
+      "t_tail_fwd": 0.0037740039406344295,
+      "t_local_bwd": 0.00415448599960655,
+      "t_cloud_bwd": 0.06528749503195286,
+      "t_wait_cloud_bwd": 0.06528749503195286,
+      "bytes_crossed": 262144,
+      "t_total": 0.13190147804562002
+    },
+    {
+      "step": 0,
+      "microbatch": 7,
+      "block_indices": [
+        3
+      ],
+      "t_local_fwd": 0.007311127032153308,
+      "t_cloud_fwd": 0.025310084922239184,
+      "t_wait_cloud_fwd": 0.025310084922239184,
+      "loss": 3.454226493835449,
+      "t_tail_fwd": 0.00367035495582968,
+      "t_local_bwd": 0.004084966029040515,
+      "t_cloud_bwd": 0.06402644899208099,
+      "t_wait_cloud_bwd": 0.06402644899208099,
+      "bytes_crossed": 262144,
+      "t_total": 0.12917498406022787
+    },
+    {
+      "step": 0,
+      "microbatch": 8,
+      "block_indices": [
+        17
+      ],
+      "t_local_fwd": 0.007334791007451713,
+      "t_cloud_fwd": 0.025826632045209408,
+      "t_wait_cloud_fwd": 0.025826632045209408,
+      "loss": 0.5546883344650269,
+      "t_tail_fwd": 0.0036627709632739425,
+      "t_local_bwd": 0.003617124049924314,
+      "t_cloud_bwd": 0.06462181289680302,
+      "t_wait_cloud_bwd": 0.06462181289680302,
+      "bytes_crossed": 262144,
+      "t_total": 0.12931234494317323
+    },
+    {
+      "step": 0,
+      "microbatch": 9,
+      "block_indices": [
+        2
+      ],
+      "t_local_fwd": 0.008848366909660399,
+      "t_cloud_fwd": 0.025024403003044426,
+      "t_wait_cloud_fwd": 0.025024403003044426,
+      "loss": 3.2348456382751465,
+      "t_tail_fwd": 0.003672691062092781,
+      "t_local_bwd": 0.0039064689772203565,
+      "t_cloud_bwd": 0.06512960698455572,
+      "t_wait_cloud_bwd": 0.06512960698455572,
+      "bytes_crossed": 262144,
+      "t_total": 0.13159102702047676
+    },
+    {
+      "step": 0,
+      "microbatch": 10,
+      "block_indices": [
+        18
+      ],
+      "t_local_fwd": 0.03412075596861541,
+      "t_cloud_fwd": 0.028092035907320678,
+      "t_wait_cloud_fwd": 0.028092035907320678,
+      "loss": 5.7801313400268555,
+      "t_tail_fwd": 0.0036076990654692054,
+      "t_local_bwd": 0.0029180949786677957,
+      "t_cloud_bwd": 0.06217458297032863,
+      "t_wait_cloud_bwd": 0.06217458297032863,
+      "bytes_crossed": 262144,
+      "t_total": 0.15380890492815524
+    },
+    {
+      "step": 0,
+      "microbatch": 11,
+      "block_indices": [
+        13
+      ],
+      "t_local_fwd": 0.0065530260326340795,
+      "t_cloud_fwd": 0.02212344401050359,
+      "t_wait_cloud_fwd": 0.02212344401050359,
+      "loss": 7.909627914428711,
+      "t_tail_fwd": 0.007167172967456281,
+      "t_local_bwd": 0.004642680054530501,
+      "t_cloud_bwd": 0.07022129709366709,
+      "t_wait_cloud_bwd": 0.07022129709366709,
+      "bytes_crossed": 262144,
+      "t_total": 0.136789487907663
+    },
+    {
+      "step": 0,
+      "microbatch": 12,
+      "block_indices": [
+        1
+      ],
+      "t_local_fwd": 0.03445075801573694,
+      "t_cloud_fwd": 0.027915009995922446,
+      "t_wait_cloud_fwd": 0.027915009995922446,
+      "loss": 1.2182159423828125,
+      "t_tail_fwd": 0.0036884199362248182,
+      "t_local_bwd": 0.0033805619459599257,
+      "t_cloud_bwd": 0.0649965819902718,
+      "t_wait_cloud_bwd": 0.0649965819902718,
+      "bytes_crossed": 262144,
+      "t_total": 0.15846214501652867
+    },
+    {
+      "step": 0,
+      "microbatch": 13,
+      "block_indices": [
+        0
+      ],
+      "t_local_fwd": 0.0073533980175852776,
+      "t_cloud_fwd": 0.024936467059887946,
+      "t_wait_cloud_fwd": 0.024936467059887946,
+      "loss": 1.9554903507232666,
+      "t_tail_fwd": 0.0036719710333272815,
+      "t_local_bwd": 0.0037870119558647275,
+      "t_cloud_bwd": 0.06485907698515803,
+      "t_wait_cloud_bwd": 0.06485907698515803,
+      "bytes_crossed": 262144,
+      "t_total": 0.1278645449783653
+    },
+    {
+      "step": 0,
+      "microbatch": 14,
+      "block_indices": [
+        2
+      ],
+      "t_local_fwd": 0.007364054908975959,
+      "t_cloud_fwd": 0.0259135760134086,
+      "t_wait_cloud_fwd": 0.0259135760134086,
+      "loss": 3.222447156906128,
+      "t_tail_fwd": 0.0037344199372455478,
+      "t_local_bwd": 0.0038077639183029532,
+      "t_cloud_bwd": 0.0653759459964931,
+      "t_wait_cloud_bwd": 0.0653759459964931,
+      "bytes_crossed": 262144,
+      "t_total": 0.13209495192859322
+    },
+    {
+      "step": 0,
+      "microbatch": 15,
+      "block_indices": [
+        6
+      ],
+      "t_local_fwd": 0.007379927090369165,
+      "t_cloud_fwd": 0.028571221977472305,
+      "t_wait_cloud_fwd": 0.028571221977472305,
+      "loss": 4.929576873779297,
+      "t_tail_fwd": 0.0037893479457125068,
+      "t_local_bwd": 0.0038769799284636974,
+      "t_cloud_bwd": 0.06432470597792417,
+      "t_wait_cloud_bwd": 0.06432470597792417,
+      "bytes_crossed": 262144,
+      "t_total": 0.13168126693926752
+    }
+  ],
+  "bytes_crossed_total": {
+    "activations": 2097152,
+    "grads": 2097152
+  },
+  "note": "remote cloud: t_cloud_* includes network round-trip"
+}

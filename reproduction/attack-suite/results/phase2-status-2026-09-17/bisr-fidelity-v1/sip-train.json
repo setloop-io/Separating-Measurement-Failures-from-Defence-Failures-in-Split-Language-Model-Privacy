@@ -1,0 +1,123 @@
+{
+  "schema": "dtraining.attacker.bisr_baseline.v1",
+  "config": {
+    "attack": "bisr_baseline",
+    "mode": "training",
+    "toy": false,
+    "adaptation": true,
+    "phase": "train",
+    "model": "/home/geo/splitllm-ref/data/sfl/models/gpt2-large",
+    "split": "6",
+    "inverter_pt": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/bisr-fidelity-v1/sip-inverter-gpt2large-split6.pt",
+    "aux_file": "/home/geo/splitllm-ref/data/sfl/datasets/sensi/aux-cnndm-19665.jsonl",
+    "aux_seqs": 127000,
+    "aux_chunk_seqs": 4096,
+    "train_steps": 20000,
+    "batch_size": 32,
+    "lr": 0.001,
+    "device": "cuda",
+    "namoe": false,
+    "namoe_sigmas": null,
+    "gating_steps": null,
+    "vocab": 50257,
+    "seam_dim": 1280,
+    "seq_len": 128,
+    "d_model": 128
+  },
+  "threat_model": "honest-but-curious seam observer of fwd seam activations h* and (in training mode) the bwd seam gradients dL/dh*, granted the victim's PUBLIC base weights (--model: embedding E + public head at --split) for auxiliary training forwards and beam verification \u2014 the BiSR/SIP white-box forward-inversion grant; the victim's finetuned head is never assumed (mismatch is part of the measurement). Canonical tokens are evaluation truth, never an attack input (label-free attack). The auxiliary training corpus is asserted article-id disjoint from the frozen validation corpus and the pilot victim corpus. Train phase: the SIP-style inverter is fit on AUXILIARY text (asserted article-disjoint from the frozen and pilot corpora) through the PUBLIC head; the victim is never queried. Aux-scale streaming path (shard cache, resume-safe).",
+  "provenance": {
+    "hostname": "koula",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-16T20:43:36Z",
+    "dtraining_commit": "ae37fe7f7d1dd1c6815d76286f4f6fea65204827"
+  },
+  "results": [
+    {
+      "experiment": "bisr_baseline",
+      "phase": "train",
+      "inverter_pt": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/bisr-fidelity-v1/sip-inverter-gpt2large-split6.pt",
+      "arch": {
+        "vocab": 50257,
+        "seam_dim": 1280,
+        "seq_len": 128,
+        "d_model": 128
+      },
+      "control_token": 262,
+      "disjointness": {
+        "aux_corpus": "/home/geo/splitllm-ref/data/sfl/datasets/sensi/aux-cnndm-19665.jsonl",
+        "aux_sha256": "9335ef70c76d020a5ea240c99840a7c8bb62e196f41060078c7bb4fe250d441b",
+        "aux_articles": 19665,
+        "checked_against": [
+          "frozen_validation_manifest",
+          "pilot_corpus"
+        ],
+        "skipped_missing": [],
+        "disjoint": true
+      },
+      "namoe": false,
+      "aux_stream": {
+        "cache_dir": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/bisr-fidelity-v1/sip-inverter-gpt2large-split6.pt.auxcache",
+        "shards": 32,
+        "windows": 127000,
+        "chunk_seqs": 4096,
+        "articles_streamed": 19584,
+        "resumed": false,
+        "wall_s": 1127.456
+      },
+      "n_aux_seqs": 127000,
+      "seq_len": 128,
+      "seam_dim": 1280,
+      "vocab": 50257,
+      "final_loss": {
+        "step": 19999,
+        "loss": 7.7e-05
+      },
+      "wall_s": 1437.218
+    }
+  ],
+  "summary": [
+    {
+      "experiment": "bisr_baseline",
+      "phase": "train",
+      "inverter_pt": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/bisr-fidelity-v1/sip-inverter-gpt2large-split6.pt",
+      "arch": {
+        "vocab": 50257,
+        "seam_dim": 1280,
+        "seq_len": 128,
+        "d_model": 128
+      },
+      "control_token": 262,
+      "disjointness": {
+        "aux_corpus": "/home/geo/splitllm-ref/data/sfl/datasets/sensi/aux-cnndm-19665.jsonl",
+        "aux_sha256": "9335ef70c76d020a5ea240c99840a7c8bb62e196f41060078c7bb4fe250d441b",
+        "aux_articles": 19665,
+        "checked_against": [
+          "frozen_validation_manifest",
+          "pilot_corpus"
+        ],
+        "skipped_missing": [],
+        "disjoint": true
+      },
+      "namoe": false,
+      "aux_stream": {
+        "cache_dir": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/bisr-fidelity-v1/sip-inverter-gpt2large-split6.pt.auxcache",
+        "shards": 32,
+        "windows": 127000,
+        "chunk_seqs": 4096,
+        "articles_streamed": 19584,
+        "resumed": false,
+        "wall_s": 1127.456
+      },
+      "n_aux_seqs": 127000,
+      "seq_len": 128,
+      "seam_dim": 1280,
+      "vocab": 50257,
+      "final_loss": {
+        "step": 19999,
+        "loss": 7.7e-05
+      },
+      "wall_s": 1437.218
+    }
+  ],
+  "interpretation": "seq_accuracy is position-aligned vs canonical, pooled per token; bleu is smoothed corpus BLEU-4 (add-one smoothing on n>=2); token-set precision/recall are orderless per-sequence set overlaps (VFLAIR convention); the control decodes the auxiliary-corpus majority token at every position (attacker-computable; stored in the checkpoint); the gate verdict is the frozen-gate Bonferroni-Wilson excess over that control with n = scored tokens. Arm 'bisr' unions learned forward proposals with backward direction proposals and verifies by forward consistency through the public head; arm 'sip-fwd-only' is the same learned forward scores without the backward channel (the paired diagnostic); 'baseline_nn' is the position-independent cosine-NN decode over E. With --opt-arm, 'bisr_opt' is the paper's BRE second stage (SS3.2): 'b' gradient matching against the observed bwd seam gradient (Eq. 9, beta*L2+(1-beta)*L1, dummy soft labels y'=softmax(z/tau) initialized from the SIP softmax, h* fixed), 'f' smashed-data matching in the continuous embedding space (Eq. 7, cosine objective; Eq. 8 nearest-row decode), 'bf' the paper's sequential BiSR(b+f); position 0 of 'b'/'bf' comes from the SIP decode (no label gradient identifies it). A NaMoE checkpoint (--namoe, paper SS3.3) replaces the single inverter with a gating-weighted mixture of noise-aware experts; its mixture scores feed every downstream arm. This remains a PILOT-SCALE adaptation: the paper's SIP decoder is a GRU-256 trained on a substantial auxiliary corpus and NaMoE perturbs with d_XP/DP mechanisms (here: Gaussian seam noise); numbers are not comparable cell-for-cell with the paper's. Toy tier is a machinery check on synthetic seams, not a security claim."
+}

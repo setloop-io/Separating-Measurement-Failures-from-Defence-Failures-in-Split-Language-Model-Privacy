@@ -1,0 +1,57 @@
+{
+  "approximation": null,
+  "config": {
+    "checkpoint": "/workspace/experiments/results/training/economics/clean21_checkpoint.pt",
+    "cloud_state": "/workspace/experiments/results/training/economics/cloud_state_clean21.pt",
+    "max_new_tokens": 40,
+    "mode": "composed",
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "num_generations": 3,
+    "qa_file": "/workspace/experiments/datasets/hellaswag_eval_500.jsonl",
+    "seed": 42,
+    "seq_len": 32,
+    "text": "/workspace/experiments/models/wikitext2_corpus.txt",
+    "text_blocks": 512,
+    "text_offset_blocks": 10000
+  },
+  "limitations": [
+    "token-NLL and teacher-forced top-1 only; no human or judge evaluation",
+    "composed mode bypasses the wire defenses (training-time protocol) by construction",
+    "evaluation window selected by caller; disjointness from the training window is the caller's responsibility",
+    "composed mode with server cloud_state: exact offline surrogate path without the wire defenses"
+  ],
+  "provenance": {
+    "dtraining_commit": "efbcba9489a7cdff5efabec625e890effdcbac0b",
+    "hostname": "toula",
+    "model_path": "/workspace/experiments/models/qwen3-0.6b",
+    "timestamp_utc": "2026-09-03T21:10:32Z"
+  },
+  "results": {
+    "answer_top1": {
+      "answer_tokens": 6849,
+      "exact_row_rate": 0.0,
+      "rows": 500,
+      "token_match_rate": 0.18148634837202512
+    },
+    "generations": [
+      {
+        "completion": " has a <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk",
+        "prompt": "A man is sitting on a roof. he"
+      },
+      {
+        "completion": " was 100 < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < <",
+        "prompt": "A lady walks to a barbell. She bends down and grabs the pole. the lady"
+      },
+      {
+        "completion": " were <unk> in the scene . <unk> was the <unk> of the scene . <unk> was the <unk> of the scene . <unk> was the <unk>",
+        "prompt": "Two women in a child are shown in a canoe while a man pulls the canoe while standing in the water, with other individuals visible in the background. the child and a different man"
+      }
+    ],
+    "utility": {
+      "blocks": 512,
+      "mean_nll": 5.302835177164525,
+      "perplexity": 200.90560626175846
+    }
+  },
+  "schema": "dtraining.composed_quality.v1"
+}

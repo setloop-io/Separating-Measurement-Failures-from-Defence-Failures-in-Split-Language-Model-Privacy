@@ -1,0 +1,258 @@
+{
+  "schema": "dtraining.attacker.latent_probe.v1",
+  "config": {
+    "attack": "latent_probe",
+    "mode": "training",
+    "bundle_schema": "dtraining.latent_release_bundle.v1",
+    "latent_dim": 64,
+    "train_blocks": 256,
+    "eval_blocks": 256,
+    "sequence_length": 80,
+    "epochs": 60,
+    "batch_size": 512,
+    "restarts": 8,
+    "models": [
+      "coordinate_plus_invariants",
+      "invariant_only",
+      "invariant_graph"
+    ]
+  },
+  "threat_model": "Known-plaintext evaluator with labels confined to trusted Toula. Each block preserves exactly the released Koula view, including fresh coordinate rotation and token permutation. The invariant-only arm uses norms, sorted Gram similarities and observed row position; the graph arm attacks the complete sign-invariant Gram structure.",
+  "provenance": {
+    "hostname": "toula",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-08-18T09:51:18Z",
+    "dtraining_commit": "unknown"
+  },
+  "results": [
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 0,
+      "correct": 332,
+      "total": 20480,
+      "top1_pct": 1.62109375,
+      "bonferroni_upper95_pct": 1.8940158138493164
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 1,
+      "correct": 342,
+      "total": 20480,
+      "top1_pct": 1.669921875,
+      "bonferroni_upper95_pct": 1.946527397619993
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 2,
+      "correct": 320,
+      "total": 20480,
+      "top1_pct": 1.5625,
+      "bonferroni_upper95_pct": 1.8309241754757992
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 3,
+      "correct": 293,
+      "total": 20480,
+      "top1_pct": 1.4306640625,
+      "bonferroni_upper95_pct": 1.688633761370497
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 4,
+      "correct": 353,
+      "total": 20480,
+      "top1_pct": 1.7236328125,
+      "bonferroni_upper95_pct": 2.0042253021271463
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 5,
+      "correct": 289,
+      "total": 20480,
+      "top1_pct": 1.4111328125,
+      "bonferroni_upper95_pct": 1.6675115708170647
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 6,
+      "correct": 285,
+      "total": 20480,
+      "top1_pct": 1.3916015625,
+      "bonferroni_upper95_pct": 1.6463778681543564
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 7,
+      "correct": 283,
+      "total": 20480,
+      "top1_pct": 1.3818359375,
+      "bonferroni_upper95_pct": 1.635806625733544
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 0,
+      "correct": 1042,
+      "total": 20480,
+      "top1_pct": 5.087890625,
+      "bonferroni_upper95_pct": 5.546142728249961
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 1,
+      "correct": 1042,
+      "total": 20480,
+      "top1_pct": 5.087890625,
+      "bonferroni_upper95_pct": 5.546142728249961
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 2,
+      "correct": 999,
+      "total": 20480,
+      "top1_pct": 4.8779296875,
+      "bonferroni_upper95_pct": 5.327580999164277
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 3,
+      "correct": 1027,
+      "total": 20480,
+      "top1_pct": 5.0146484375,
+      "bonferroni_upper95_pct": 5.4699244440184405
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 4,
+      "correct": 1038,
+      "total": 20480,
+      "top1_pct": 5.068359375,
+      "bonferroni_upper95_pct": 5.525820340286408
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 5,
+      "correct": 1021,
+      "total": 20480,
+      "top1_pct": 4.9853515625,
+      "bonferroni_upper95_pct": 5.439429950350841
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 6,
+      "correct": 1056,
+      "total": 20480,
+      "top1_pct": 5.15625,
+      "bonferroni_upper95_pct": 5.6172570238453154
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 7,
+      "correct": 1054,
+      "total": 20480,
+      "top1_pct": 5.146484375,
+      "bonferroni_upper95_pct": 5.607099168395833
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 0,
+      "correct": 845,
+      "total": 20480,
+      "top1_pct": 4.1259765625,
+      "bonferroni_upper95_pct": 4.542913546297755
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 1,
+      "correct": 932,
+      "total": 20480,
+      "top1_pct": 4.55078125,
+      "bonferroni_upper95_pct": 4.9865873146276325
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 2,
+      "correct": 792,
+      "total": 20480,
+      "top1_pct": 3.8671875,
+      "bonferroni_upper95_pct": 4.27207840281806
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 3,
+      "correct": 856,
+      "total": 20480,
+      "top1_pct": 4.1796875,
+      "bonferroni_upper95_pct": 4.599070107763801
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 4,
+      "correct": 834,
+      "total": 20480,
+      "top1_pct": 4.072265625,
+      "bonferroni_upper95_pct": 4.486738699769078
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 5,
+      "correct": 767,
+      "total": 20480,
+      "top1_pct": 3.7451171875,
+      "bonferroni_upper95_pct": 4.144166887029835
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 6,
+      "correct": 953,
+      "total": 20480,
+      "top1_pct": 4.6533203125,
+      "bonferroni_upper95_pct": 5.09352666638193
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 7,
+      "correct": 800,
+      "total": 20480,
+      "top1_pct": 3.90625,
+      "bonferroni_upper95_pct": 4.312987970207526
+    }
+  ],
+  "summary": [
+    {
+      "experiment": "latent_probe",
+      "best_probe_top1_pct": 5.15625,
+      "best_probe_model": "invariant_only",
+      "best_probe_restart": 6,
+      "worst_bonferroni_upper95_pct": 5.6172570238453154,
+      "label_free_majority_pct": 5.21484375,
+      "upper95_excess_over_majority_pp": 0.40241327384531544,
+      "known_eval_fraction": 0.8814941644668579
+    }
+  ],
+  "interpretation": "Production privacy fails if the Bonferroni-adjusted upper confidence recovery exceeds the exact matched majority control by more than the declared margin."
+}

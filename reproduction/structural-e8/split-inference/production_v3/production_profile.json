@@ -1,0 +1,50 @@
+{
+  "schema": "distributed-privacy.production-profile.v3",
+  "mode": "inference",
+  "launchable": false,
+  "reason": "The two-server linear sharing prototype is implemented; audited nonlinear MPC and real multi-node validation are still required.",
+  "topology": {
+    "trusted_node": "toula",
+    "untrusted_nodes": ["koula", "second_non_colluding_peer_required"],
+    "minimum_local_layers": 16,
+    "split_after_depth": 16,
+    "non_collusion_assumption": true
+  },
+  "privacy_boundary": {
+    "learned_bottleneck": true,
+    "dimension_ratio_max": 0.125,
+    "formal_forward_and_response_dp": true,
+    "composed_epsilon_target_max": 3.0,
+    "delta": 1e-6
+  },
+  "traffic_accounting": {
+    "reserve_before_send": true,
+    "directions": ["activation_request", "activation_response"],
+    "count_retries": true,
+    "count_evaluation": true
+  },
+  "request_randomization": {
+    "csprng": true,
+    "slot_permutation": true,
+    "variable_padding": true,
+    "dummy_sequences": true,
+    "nonce_replay_refusal": true
+  },
+  "two_server_sharing": {
+    "linear_operations": "implemented",
+    "nonlinear_operations": "blocked_until_audited_mpc"
+  },
+  "evaluation": {
+    "fixed_K3_512": "removed",
+    "known_plaintext": "adaptive_until_saturation",
+    "all_attacker_framework_modes_required": true
+  },
+  "required_before_launch": [
+    "audited_nonlinear_two_server_mpc",
+    "second_independently_administered_untrusted_peer",
+    "trained_inference_bottleneck",
+    "calibrated_epsilon_at_declared_request_horizon",
+    "real_multi_node_runtime_validation",
+    "all_attacker_gates_pass"
+  ]
+}

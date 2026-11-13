@@ -1,0 +1,159 @@
+{
+  "active_cloud_delta": 0.0,
+  "adversary_strength": 0.25,
+  "attacker_updates": 3,
+  "baseline_eval_loss": 4.976320003159344,
+  "baseline_eval_seconds": 19.46009006300301,
+  "bundle_canonical_fraction": 0.0,
+  "byzantine_flagged_frames": 0,
+  "byzantine_max_relative_deviation": 0.0,
+  "byzantine_threshold": null,
+  "byzantine_verified_frames": 0,
+  "byzantine_verify": false,
+  "candidate_eval_loss": 6.949167488142848,
+  "candidate_eval_seconds": 19.16824548599834,
+  "chaff_tokens": 48,
+  "clip_norm": 1.0,
+  "cloud_channels": 1,
+  "cloud_correction_loss_improvement": 7.232271755114198,
+  "cloud_experts": 8,
+  "cloud_kind": "monomial_moe_radial",
+  "cloud_layers": 2,
+  "cloud_state_contains_hidden_width": false,
+  "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+  "decoder_zero_eval_loss": 6.934501577168703,
+  "device": "cuda",
+  "dp": {
+    "adjacency": "replace_one",
+    "delta": 1e-06,
+    "epsilon": {
+      "composed": 2904920.0651760222,
+      "forward": 1589229.5738237451,
+      "return": 1320908.0244444194
+    },
+    "method": "zcdp_gaussian_replace_one",
+    "parameters": {
+      "forward_clip": 1.0,
+      "forward_noise_multiplier": 0.35,
+      "return_clip": 1.0,
+      "return_noise_multiplier": 0.35
+    },
+    "releases": {
+      "forward": 96768,
+      "return": 80384
+    },
+    "rho": {
+      "forward": 1579885.7142858256,
+      "return": 1312391.8367347468
+    }
+  },
+  "eval_blocks": 256,
+  "eval_loss_delta": 1.9728474849835038,
+  "eval_time_ratio": 0.9850029174551708,
+  "fragment_channels": 1,
+  "gates": {
+    "cloud_correction_improves_loss": true,
+    "cloud_latent_only": true,
+    "eval_time_ratio_le_3": true,
+    "privacy_above_band_le_1pct": true,
+    "secret_coordinates_hidden_from_koula": true,
+    "token_norm_and_sign_gauged": false,
+    "token_order_hidden_from_koula": true,
+    "utility_delta_le_0_35": false
+  },
+  "gram_flatten": 0.0,
+  "hidden_dim": 1024,
+  "label_free_majority_pct": 5.0732421875,
+  "latent_dim": 64,
+  "limitations": [
+    "single-process pilot; two-node protocol not exercised",
+    "short training run; not convergence or paper evidence",
+    "fresh probe is a diagnostic subset, not the complete /attacker suite"
+  ],
+  "lr": 0.0003,
+  "mean_step_seconds": 0.12042109450999851,
+  "mine_mi_nats_held_out": null,
+  "mine_penalty": 0.0,
+  "model": "/home/geo/experiments/models/qwen3-0.6b",
+  "noise_multiplier": 0.35,
+  "nominal_covered_layer_share": 0.39285714285714285,
+  "probe_recovery_pct": [
+    4.6484375,
+    4.6875,
+    4.345703125
+  ],
+  "probe_restarts": 3,
+  "public_steps": 0,
+  "recovery_above_label_free_pct": -0.3857421875,
+  "remote_grad_clip": 1.0,
+  "remote_protocol": null,
+  "remote_tampered_frames": 0,
+  "resume_after": 26,
+  "schema": "dtraining.latent_native_v5_06b.v1",
+  "secret_token_gauge": false,
+  "secret_token_permutation": true,
+  "secret_wire_rotation": true,
+  "seed": 43,
+  "sequence_length": 32,
+  "split_after": 14,
+  "status": "completed",
+  "steps": 2000,
+  "surrogate_mode": "zero_output",
+  "surrogate_placement": "local",
+  "surrogate_return_loss_improvement": -0.014665910974144936,
+  "surrogate_total_parameters": 161,
+  "surrogate_trainable_parameters": 0,
+  "token_recovery_pct": 4.6875,
+  "token_scale_sigma": 0.75,
+  "toula_peak_cuda_memory_mb": 1463.2,
+  "train_blocks": 256,
+  "train_seconds": 240.84218901999702,
+  "training_tail": [
+    {
+      "attacker_loss": 7.316965103149414,
+      "distill_loss": 0.7108355760574341,
+      "gram_flatten_loss": 0.0,
+      "language_loss": 6.616009712219238,
+      "phase_step": 1997,
+      "step": 1997
+    },
+    {
+      "attacker_loss": 7.225162506103516,
+      "distill_loss": 0.7445833086967468,
+      "gram_flatten_loss": 0.0,
+      "language_loss": 5.817048072814941,
+      "phase_step": 1998,
+      "step": 1998
+    },
+    {
+      "attacker_loss": 7.797663688659668,
+      "distill_loss": 0.6929359436035156,
+      "gram_flatten_loss": 0.0,
+      "language_loss": 6.033243179321289,
+      "phase_step": 1999,
+      "step": 1999
+    }
+  ],
+  "transport": null,
+  "transport_tls": false,
+  "utility": {
+    "candidate": {
+      "mean_token_nll": 6.949167488142848,
+      "nll_delta_vs_no_replacement": 1.9728474849835038,
+      "perplexity": 1042.2816550535301
+    },
+    "decoder_zero_output": {
+      "mean_token_nll": 6.934501577168703,
+      "nll_delta_vs_no_replacement": 1.9581815740093589,
+      "perplexity": 1027.1071907491328
+    },
+    "no_replacement": {
+      "mean_token_nll": 4.976320003159344,
+      "nll_delta_vs_no_replacement": 0.0,
+      "perplexity": 144.940020215973
+    }
+  },
+  "warmup_steps": 200,
+  "wire_quant": "none",
+  "zero_cloud_eval_loss": 14.181439243257046
+}

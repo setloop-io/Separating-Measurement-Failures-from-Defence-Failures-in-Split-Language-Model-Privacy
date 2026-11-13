@@ -1,0 +1,114 @@
+\section{Scope and retrospective audit design}
+\label{sec:design}
+
+A stated privacy claim paired with its supporting experimental records forms
+our basic unit of analysis. Scope covers four training campaigns and two
+security-transfer arguments. Because we selected these episodes from an
+earlier programme synthesis whose outcomes were already known, the resulting
+archive traces how local measurements grew into sweeping claims while leaving
+field-wide error rates unestimated. Component results remain credited to
+their originating studies, and Table~\ref{tab:master-audit} summarises how
+each recorded headline maps onto its audited disposition.
+
+All historical runs finished before we specified this reconciliation.
+Throughout the text, frozen exploratory protocols, completed pilot
+executions, unexecuted confirmation proposals, and secondary consistency
+checks remain explicitly separated. Our analysis recomputes stored loss
+contrasts, probe advantages, and decision thresholds directly from archived
+tables without retraining victim models or fitting stronger attackers.
+Prospective validation requires an independent cohort. Where LLM-Attack
+Suite defines observation contracts and control conventions
+\cite{suite2026}, we apply its reporting structure to compare cross-campaign
+claims under their original experimental budgets.
+
+\paragraph{Evidence required for a claim.}
+Auditing any candidate claim begins by logging the split protocol, victim
+cohort, secret-key custody, remote host state, and observable tensor
+channels. Target indexing and control bindings come next. Specifically, each
+record pairs the protected token or property target with its exact tensor
+index, training horizon, baseline guesser, acceptance gate, and independent
+resampling unit. A qualification binding ties positive canary floors and
+permutation-null bands to one concrete target, channel, defence family, and
+probe implementation. Passing controls on one channel leaves unmeasured
+channels unqualified.
+
+Primary generated CSV and JSON outputs alongside active collection manifests
+supersede informal narrative summaries. Whenever a subsequent technical
+audit revises an earlier disposition, we report both the updated status and
+every attached operational caveat regardless of which reading looks more
+favourable. Every retained number carries explicit provenance.
+Appendix~\ref{app:artifacts} binds each quantity to its hashed file path and
+marks whether our scripts recomputed the statistic from raw seed records or
+extracted it from a cited study.
+
+\paragraph{Five outcomes for a specified claim.}
+Individual endpoints within a single split configuration often merit
+distinct evidentiary labels.
+\begin{description}
+  \item[Breach.] An admissible, calibrated probe exceeds its frozen
+    acceptance threshold and establishes leakage for the specified observer,
+    target, and finite protocol. Unprobed disclosures may still coexist
+    alongside it.
+  \item[Non-detection.] A calibrated attack stays within its acceptance rule
+    under the tested architecture, dataset, and optimisation budget.
+    Consistent with empirical differential-privacy auditing
+    \cite{jagielski2020}, staying below an attack threshold leaves
+    worst-case mutual information and adaptive recovery unbounded from above.
+  \item[Undetermined.] Missing coverage or failed controls block privacy
+    passes.
+  \item[Invalid.] A verified implementation defect severs the recorded score
+    from the claimed estimand, as occurs when next-token predictions are
+    misread as current-token reconstructions. Properly relabelled, the
+    underlying number may remain informative.
+  \item[Out-of-scope.] Transferring a measurement to a stronger observer,
+    altered key-custody regime, or untested protocol exceeds what the
+    original experiment can support.
+\end{description}
+
+Utility loss and causal remote-learning gain are tracked alongside privacy
+under each campaign's original conjunctive decision rule. Conjunctive gating
+acts asymmetrically across endpoints. Within the 19-cell exploration, one
+qualified breach or one utility failure suffices to reject a candidate even
+when companion probes remain undetermined, whereas incomplete qualification
+alone blocks any joint privacy pass. Failing an exploratory remote-gain
+threshold similarly leaves population learning benefit unconfirmed on that
+split.
+
+\paragraph{Transferring a conclusion.}
+Carrying an empirical privacy result into a new deployment setting requires
+matching protocols, secret-key custody, observed tensors, target alignments,
+and calibrated probe bindings. Wire confidentiality differs sharply from
+host confidentiality. When an authorised server holds a shared orthogonal
+key to restore activations in memory, passive wire non-detection says
+nothing about a compromised host reading its own RAM \cite{permattack2025}.
+Correlated token positions within fixed evaluation panels likewise add zero
+independent training seeds and restrict how far finite exploratory
+intervals generalise.
+
+\begin{table}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}p{0.20\linewidth}>{\raggedright\arraybackslash}p{0.16\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Investigation & Evaluated view & Unaudited claim & Audited state & Retained quantitative basis \\
+\midrule
+Decoy gradients (\artifact{E1}) & Forward activations vs.\ joint gradient view & Passing forward check implies boundary privacy & Out-of-scope and Breach & Exact real/decoy row recovery on 4,096/4,096 frames per run (9 seeds), $+0.65$ to $+1.50\pp$ token gain, $0.01$-nat clip/noise utility cost \\
+\addlinespace[3pt]
+Boundary audit (\artifact{B1}) & Representations $(x_1,\ldots,x_{T-1})$ vs.\ $(x_2,\ldots,x_T)$ & Trained boundary resists input reconstruction & Invalid for current token & Shifted label scores prediction, 6/6 zero-return controls match or beat remote, answer match drops $34.79\%$ to $18.15\%$ \\
+\addlinespace[3pt]
+19-cell exploration (\artifact{R1}) & Inbound/outbound byte probes across 4 seeds & 19 rejections stem from 20/24 uncalibrated probes & Breach (13) and Undetermined (6) & 4/24 probes qualify, \RoneQualifiedBreaches\ breaches, \RoneUtilityFailures\ utility and \RoneGainFailures\ gain failures, \texttt{span-6} passes utility ($\Delta U=0.099971$) \\
+\addlinespace[3pt]
+Defence pilot (\artifact{P4}) & Structure and property probes across 3 paired seeds & $40\times$ excess implies broken gate or probe & Breach (4) and Undetermined (3) & \PfourUtilityFailures/\PfourCells\ fail utility, 7/7 pass gain, punctuation advantage $0.79$ to $0.89$ vs.\ $0.02$ gate \\
+\addlinespace[3pt]
+Wrapper and ratchet (\artifact{E8}, \artifact{ER}) & Passive wire capture under shared cloud key $Q$ & Zero-cost protection against compromised cloud & Non-detection (wire) and Out-of-scope (host) & $3.71\%$ pooled d1 wire score ($5.73\%$ max session), cloud holds $Q$, N=16 ratchet cuts tok/s by $63.16\%$ (20/24 identity) \\
+\addlinespace[3pt]
+Variational MI (\artifact{MI}) & DV critic readout $L_T$ on defended boundary & Near-zero MINE certifies small leak budget & Out-of-scope for upper ceiling & $L_T \le \operatorname{MI}(X,Z)$ bounds leakage from below only, $T=0$ yields $L_T=0$ when $Z=X$ leaks 8 bits ($m=256$) \\
+\bottomrule
+\end{tabularx}
+\caption{Cross-campaign admissibility summary across all six audited
+investigations. Each row pairs the evaluated observation surface and initial
+reading with the primary audit finding and resulting evidentiary state from
+Section~\ref{sec:design}. Hyperlinked record names point to the hashed
+provenance entries in Appendix~\ref{app:artifacts}.}
+\label{tab:master-audit}
+\end{table}

@@ -1,0 +1,382 @@
+{
+  "backend": "tenseal",
+  "backend_version": "0.3.18",
+  "ckks": {
+    "coeff_mod_bit_sizes": [
+      60,
+      40,
+      40,
+      60
+    ],
+    "global_scale": "2^40",
+    "poly_modulus_degree": 8192
+  },
+  "contract": {
+    "contract_windows": 512,
+    "operator_prefix": "blocks.2.remote.blocks.0",
+    "stage_a_run_id": "p4-tee_fhe-tee-fhe-20260922-a-stage-a-s410801",
+    "stage_a_scenario_manifest": "experiments/manifests/p4-tee_fhe-tee-fhe-20260922-a-stage-a-s410801.json",
+    "stage_a_scenario_manifest_sha256": "b9022b15f3986702a837e45194a30d88752555fe24d7b7ad8f16eae51d43ac7e"
+  },
+  "interactive_budget_seconds": 1.0,
+  "policy_scope": "Policy costs are measured per-operator and composed arithmetically; trusted-side plaintext work and network time are outside this table (transfer is recorded as bytes). Conceivability uses a declared 1.0 s interactive reference budget for one sequence; a reporting convention from these measurements only, not a gate",
+  "policy_table": [
+    {
+      "ciphertext_bytes": 0,
+      "conceivability_statement": "end-to-end 0s for one 128-token sequence at this scale against a declared 1.0s interactive reference budget; interactive-latency conceivable: True \u2014 from these measurements only, no extrapolation to other models, hardware, backends, or layouts",
+      "decryption_seconds": 0,
+      "encryption_seconds": 0,
+      "end_to_end_seconds": 0,
+      "homomorphic_seconds": 0,
+      "interactive_latency_conceivable": true,
+      "operators": [],
+      "policy": "none",
+      "ratio_to_plaintext_batched": 1.0,
+      "reference_plaintext_batched_seconds": 0,
+      "refresh_seconds": 0,
+      "traffic_bytes": 0.0
+    },
+    {
+      "ciphertext_bytes": 42423910.4,
+      "conceivability_statement": "end-to-end 14.99s for one 128-token sequence at this scale against a declared 1.0s interactive reference budget; interactive-latency conceivable: False \u2014 from these measurements only, no extrapolation to other models, hardware, backends, or layouts",
+      "decryption_seconds": 0.05793100893497467,
+      "encryption_seconds": 0.31364897191524505,
+      "end_to_end_seconds": 14.988187393546106,
+      "homomorphic_seconds": 14.317426431179047,
+      "interactive_latency_conceivable": false,
+      "operators": [
+        "blocks.2.remote.blocks.0.mlp_fc"
+      ],
+      "policy": "ffn-up-only",
+      "ratio_to_plaintext_batched": 11494.476373843736,
+      "reference_plaintext_batched_seconds": 0.0013039469486102462,
+      "refresh_seconds": 0.2991809815168381,
+      "traffic_bytes": 655363.28125
+    },
+    {
+      "ciphertext_bytes": 169725593.6,
+      "conceivability_statement": "end-to-end 102s for one 128-token sequence at this scale against a declared 1.0s interactive reference budget; interactive-latency conceivable: False \u2014 from these measurements only, no extrapolation to other models, hardware, backends, or layouts",
+      "decryption_seconds": 0.2244439095258713,
+      "encryption_seconds": 1.2644718825817107,
+      "end_to_end_seconds": 101.95710891485214,
+      "homomorphic_seconds": 99.27965685427189,
+      "interactive_latency_conceivable": false,
+      "operators": [
+        "blocks.2.remote.blocks.0.qkv",
+        "blocks.2.remote.blocks.0.proj",
+        "blocks.2.remote.blocks.0.mlp_fc",
+        "blocks.2.remote.blocks.0.mlp_proj"
+      ],
+      "policy": "all-remote-linears",
+      "ratio_to_plaintext_batched": 14304.331038588258,
+      "reference_plaintext_batched_seconds": 0.007127708988264203,
+      "refresh_seconds": 1.1885362684726715,
+      "traffic_bytes": 2097165.0625
+    }
+  ],
+  "shapes": {
+    "mlp_fc": {
+      "input_sha256": "2ee63c0e4f424e2a0a3c9d0237684b97d8bc95c54c47194dfdaaa08627149ad7",
+      "mean_per_token": {
+        "context_keygen_seconds": 0.08913349765352904,
+        "decrypt_reencrypt_refresh_seconds": 0.0023373514181002975,
+        "decryption_seconds": 0.00045258600730448963,
+        "encryption_seconds": 0.002450382593087852,
+        "homomorphic_matmul_seconds": 0.11185489399358631,
+        "serialized_ciphertext_bytes": 331436.8
+      },
+      "reference_batched_seconds": 0.0013039469486102462,
+      "reference_sha256": "301f9d175c8d3b0a7e20d58046317d3d28480b2aef8cf8088b58782089329b87",
+      "repetitions": [
+        {
+          "context_keygen_seconds": 0.08846183505374938,
+          "decrypt_reencrypt_refresh_seconds": 0.0022756679682061076,
+          "decryption_seconds": 0.0004574910271912813,
+          "encryption_seconds": 0.002446261001750827,
+          "homomorphic_matmul_seconds": 0.11265577201265842,
+          "max_abs_error": 4.120164167620288e-07,
+          "mean_abs_error": 4.277316491344864e-08,
+          "repetition": 0,
+          "serialized_ciphertext_bytes": 331465
+        },
+        {
+          "context_keygen_seconds": 0.08748741005547345,
+          "decrypt_reencrypt_refresh_seconds": 0.0023625640897080302,
+          "decryption_seconds": 0.00044744403567165136,
+          "encryption_seconds": 0.0025444859638810158,
+          "homomorphic_matmul_seconds": 0.11509126401506364,
+          "max_abs_error": 4.098106266559043e-07,
+          "mean_abs_error": 4.279081540801373e-08,
+          "repetition": 1,
+          "serialized_ciphertext_bytes": 331569
+        },
+        {
+          "context_keygen_seconds": 0.09000812005251646,
+          "decrypt_reencrypt_refresh_seconds": 0.002350948052480817,
+          "decryption_seconds": 0.0004581479588523507,
+          "encryption_seconds": 0.0024557169526815414,
+          "homomorphic_matmul_seconds": 0.10846877505537122,
+          "max_abs_error": 4.1023204366830157e-07,
+          "mean_abs_error": 4.275575220434174e-08,
+          "repetition": 2,
+          "serialized_ciphertext_bytes": 331520
+        },
+        {
+          "context_keygen_seconds": 0.09000271104741842,
+          "decrypt_reencrypt_refresh_seconds": 0.0023446439299732447,
+          "decryption_seconds": 0.00044986000284552574,
+          "encryption_seconds": 0.0023845320101827383,
+          "homomorphic_matmul_seconds": 0.11462109989952296,
+          "max_abs_error": 4.1123700722511813e-07,
+          "mean_abs_error": 4.277109262535264e-08,
+          "repetition": 3,
+          "serialized_ciphertext_bytes": 331610
+        },
+        {
+          "context_keygen_seconds": 0.08970741205848753,
+          "decrypt_reencrypt_refresh_seconds": 0.002352933050133288,
+          "decryption_seconds": 0.00044998701196163893,
+          "encryption_seconds": 0.0024209170369431376,
+          "homomorphic_matmul_seconds": 0.10843755898531526,
+          "max_abs_error": 4.1003508544079637e-07,
+          "mean_abs_error": 4.2628099655824065e-08,
+          "repetition": 4,
+          "serialized_ciphertext_bytes": 331020
+        }
+      ]
+    },
+    "mlp_proj": {
+      "input_sha256": "301f9d175c8d3b0a7e20d58046317d3d28480b2aef8cf8088b58782089329b87",
+      "mean_per_token": {
+        "context_keygen_seconds": 0.08965364822652191,
+        "decrypt_reencrypt_refresh_seconds": 0.002279987814836204,
+        "decryption_seconds": 0.0004349027993157506,
+        "encryption_seconds": 0.0025171670131385326,
+        "homomorphic_matmul_seconds": 0.45082147801294925,
+        "serialized_ciphertext_bytes": 331564.0
+      },
+      "reference_batched_seconds": 0.0032110029133036733,
+      "reference_sha256": "29faab80363f0932ef5bf16333a28cc63b5efa94a1f1ebec12d14066b93c2b0d",
+      "repetitions": [
+        {
+          "context_keygen_seconds": 0.09030527400318533,
+          "decrypt_reencrypt_refresh_seconds": 0.0023121320409700274,
+          "decryption_seconds": 0.00043894792906939983,
+          "encryption_seconds": 0.002509221085347235,
+          "homomorphic_matmul_seconds": 0.4359357859939337,
+          "max_abs_error": 2.0060405409028093e-07,
+          "mean_abs_error": 4.2786792829703697e-08,
+          "repetition": 0,
+          "serialized_ciphertext_bytes": 331497
+        },
+        {
+          "context_keygen_seconds": 0.08984592510387301,
+          "decrypt_reencrypt_refresh_seconds": 0.002286980045028031,
+          "decryption_seconds": 0.0004337950376793742,
+          "encryption_seconds": 0.0024757490027695894,
+          "homomorphic_matmul_seconds": 0.45691905298735946,
+          "max_abs_error": 2.018219247279518e-07,
+          "mean_abs_error": 4.271883173357865e-08,
+          "repetition": 1,
+          "serialized_ciphertext_bytes": 331538
+        },
+        {
+          "context_keygen_seconds": 0.08971248404122889,
+          "decrypt_reencrypt_refresh_seconds": 0.0022468840470537543,
+          "decryption_seconds": 0.0004278590204194188,
+          "encryption_seconds": 0.0025418619625270367,
+          "homomorphic_matmul_seconds": 0.4568480580346659,
+          "max_abs_error": 2.0211411422277337e-07,
+          "mean_abs_error": 4.2850115175223625e-08,
+          "repetition": 2,
+          "serialized_ciphertext_bytes": 331565
+        },
+        {
+          "context_keygen_seconds": 0.08818143093958497,
+          "decrypt_reencrypt_refresh_seconds": 0.002308883937075734,
+          "decryption_seconds": 0.00043720402754843235,
+          "encryption_seconds": 0.0025339890271425247,
+          "homomorphic_matmul_seconds": 0.4400829679798335,
+          "max_abs_error": 2.0457826177544547e-07,
+          "mean_abs_error": 4.254707078188159e-08,
+          "repetition": 3,
+          "serialized_ciphertext_bytes": 331669
+        },
+        {
+          "context_keygen_seconds": 0.09022312704473734,
+          "decrypt_reencrypt_refresh_seconds": 0.0022450590040534735,
+          "decryption_seconds": 0.0004367079818621278,
+          "encryption_seconds": 0.002525013987906277,
+          "homomorphic_matmul_seconds": 0.46432152506895363,
+          "max_abs_error": 2.0212484319603874e-07,
+          "mean_abs_error": 4.2713423854470445e-08,
+          "repetition": 4,
+          "serialized_ciphertext_bytes": 331551
+        }
+      ]
+    },
+    "proj": {
+      "input_sha256": "2ee63c0e4f424e2a0a3c9d0237684b97d8bc95c54c47194dfdaaa08627149ad7",
+      "mean_per_token": {
+        "context_keygen_seconds": 0.08958481457084418,
+        "decrypt_reencrypt_refresh_seconds": 0.002295005181804299,
+        "decryption_seconds": 0.00043499281164258716,
+        "encryption_seconds": 0.0024608691921457647,
+        "homomorphic_matmul_seconds": 0.1014753940049559,
+        "serialized_ciphertext_bytes": 331593.4
+      },
+      "reference_batched_seconds": 0.0005676050204783678,
+      "reference_sha256": "b97aa580d51bfa3f35d9d2e0e22bcd5a0bff110b69178b4f11459b2bf337fd58",
+      "repetitions": [
+        {
+          "context_keygen_seconds": 0.08810667996294796,
+          "decrypt_reencrypt_refresh_seconds": 0.002304531983099878,
+          "decryption_seconds": 0.0004340840969234705,
+          "encryption_seconds": 0.002394565031863749,
+          "homomorphic_matmul_seconds": 0.10170510201714933,
+          "max_abs_error": 1.4585359561780642e-07,
+          "mean_abs_error": 2.601035882231222e-08,
+          "repetition": 0,
+          "serialized_ciphertext_bytes": 331694
+        },
+        {
+          "context_keygen_seconds": 0.09000301698688418,
+          "decrypt_reencrypt_refresh_seconds": 0.0023025149712339044,
+          "decryption_seconds": 0.0004300039727240801,
+          "encryption_seconds": 0.0025390619412064552,
+          "homomorphic_matmul_seconds": 0.10119626601226628,
+          "max_abs_error": 1.4630998929066052e-07,
+          "mean_abs_error": 2.6244023781285387e-08,
+          "repetition": 1,
+          "serialized_ciphertext_bytes": 331595
+        },
+        {
+          "context_keygen_seconds": 0.08984269492793828,
+          "decrypt_reencrypt_refresh_seconds": 0.0023086760193109512,
+          "decryption_seconds": 0.00043144403025507927,
+          "encryption_seconds": 0.0024868849432095885,
+          "homomorphic_matmul_seconds": 0.10060104401782155,
+          "max_abs_error": 1.483277397851257e-07,
+          "mean_abs_error": 2.6152051167680424e-08,
+          "repetition": 2,
+          "serialized_ciphertext_bytes": 331444
+        },
+        {
+          "context_keygen_seconds": 0.09011893800925463,
+          "decrypt_reencrypt_refresh_seconds": 0.002302435925230384,
+          "decryption_seconds": 0.0004402119666337967,
+          "encryption_seconds": 0.0024359090020880103,
+          "homomorphic_matmul_seconds": 0.10171591700054705,
+          "max_abs_error": 1.454895937058609e-07,
+          "mean_abs_error": 2.5994855410042845e-08,
+          "repetition": 3,
+          "serialized_ciphertext_bytes": 331646
+        },
+        {
+          "context_keygen_seconds": 0.08985274296719581,
+          "decrypt_reencrypt_refresh_seconds": 0.0022568670101463795,
+          "decryption_seconds": 0.0004392199916765094,
+          "encryption_seconds": 0.002447925042361021,
+          "homomorphic_matmul_seconds": 0.10215864097699523,
+          "max_abs_error": 1.4624599423140872e-07,
+          "mean_abs_error": 2.6035677524430896e-08,
+          "repetition": 4,
+          "serialized_ciphertext_bytes": 331588
+        }
+      ]
+    },
+    "qkv": {
+      "input_sha256": "2ee63c0e4f424e2a0a3c9d0237684b97d8bc95c54c47194dfdaaa08627149ad7",
+      "mean_per_token": {
+        "context_keygen_seconds": 0.08922801539301872,
+        "decrypt_reencrypt_refresh_seconds": 0.002373095182701945,
+        "decryption_seconds": 0.000430986424908042,
+        "encryption_seconds": 0.0024502677842974663,
+        "homomorphic_matmul_seconds": 0.11147055316250772,
+        "serialized_ciphertext_bytes": 331387.0
+      },
+      "reference_batched_seconds": 0.002045154105871916,
+      "reference_sha256": "b4bd955727e7cc8356d3b83df45fb48eb9ffd995218aa79860a054ff74c35f6b",
+      "repetitions": [
+        {
+          "context_keygen_seconds": 0.08968283899594098,
+          "decrypt_reencrypt_refresh_seconds": 0.0024000039556995034,
+          "decryption_seconds": 0.00043320399709045887,
+          "encryption_seconds": 0.0024068369530141354,
+          "homomorphic_matmul_seconds": 0.11180568591225892,
+          "max_abs_error": 9.026091400965441e-07,
+          "mean_abs_error": 8.780244156843798e-08,
+          "repetition": 0,
+          "serialized_ciphertext_bytes": 331535
+        },
+        {
+          "context_keygen_seconds": 0.08974952797871083,
+          "decrypt_reencrypt_refresh_seconds": 0.002411268069408834,
+          "decryption_seconds": 0.00042974797543138266,
+          "encryption_seconds": 0.0024382929550483823,
+          "homomorphic_matmul_seconds": 0.10767182696145028,
+          "max_abs_error": 8.995597338135042e-07,
+          "mean_abs_error": 8.785522824890767e-08,
+          "repetition": 1,
+          "serialized_ciphertext_bytes": 331587
+        },
+        {
+          "context_keygen_seconds": 0.08986306400038302,
+          "decrypt_reencrypt_refresh_seconds": 0.002363411942496896,
+          "decryption_seconds": 0.000429332023486495,
+          "encryption_seconds": 0.002499734051525593,
+          "homomorphic_matmul_seconds": 0.11034632904920727,
+          "max_abs_error": 8.98902485779729e-07,
+          "mean_abs_error": 8.782322898347521e-08,
+          "repetition": 2,
+          "serialized_ciphertext_bytes": 331623
+        },
+        {
+          "context_keygen_seconds": 0.08829704998061061,
+          "decrypt_reencrypt_refresh_seconds": 0.0023463399847969413,
+          "decryption_seconds": 0.0004266280448064208,
+          "encryption_seconds": 0.002474021981470287,
+          "homomorphic_matmul_seconds": 0.11314219294581562,
+          "max_abs_error": 9.012372952366121e-07,
+          "mean_abs_error": 8.785532066984032e-08,
+          "repetition": 3,
+          "serialized_ciphertext_bytes": 331085
+        },
+        {
+          "context_keygen_seconds": 0.08854759600944817,
+          "decrypt_reencrypt_refresh_seconds": 0.002344451961107552,
+          "decryption_seconds": 0.0004360200837254524,
+          "encryption_seconds": 0.002432452980428934,
+          "homomorphic_matmul_seconds": 0.11438673094380647,
+          "max_abs_error": 8.98476219646227e-07,
+          "mean_abs_error": 8.77638063440881e-08,
+          "repetition": 4,
+          "serialized_ciphertext_bytes": 331105
+        }
+      ]
+    }
+  },
+  "timing_scope": "in-process engineering timing on a research node; not a secure-serving latency (no TEE, no attestation, no network)",
+  "weights": {
+    "mlp_fc": {
+      "in_features": 256,
+      "out_features": 1024,
+      "weight_sha256": "357668f6709bf79bf2b71fea0deea118bf008d94a6c33584bd3f5cc04c6c1384"
+    },
+    "mlp_proj": {
+      "in_features": 1024,
+      "out_features": 256,
+      "weight_sha256": "24de84b5b57ac6a654ea34d2f3e807fc63a9f620f6d33aea6f1ffe564c1dc1f0"
+    },
+    "proj": {
+      "in_features": 256,
+      "out_features": 256,
+      "weight_sha256": "a2f33506994bf8ca597b25c28405de001d5cf4831816fc482cccb95e99b77867"
+    },
+    "qkv": {
+      "in_features": 256,
+      "out_features": 768,
+      "weight_sha256": "500286f72b0db312941e41d8eae4453cf7fc54aae34d18ec99537ca6ea09d429"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+protocol_id: p4-routing-engineering-0.1
+kind: routing
+status: engineering_ready
+cohort: engineering
+seeds:
+- 410201
+backend: plaintext_loopback
+hardware_attested: false
+ciphertext_only: false
+kv_cache: none_full_prefix_recompute
+backbone:
+  vocab_size: 256
+  d_model: 256
+  n_heads: 8
+  n_layers: 8
+  d_ff: 1024
+  max_seq_len: 128
+  init_std: 0.02
+prompt_lengths:
+- 8
+- 16
+new_tokens: 3
+policies:
+- local_reference
+- delegate_all_phases
+- local_prefill_delegate_decode
+logit_atol: 1.0e-05
+cpu_threads: 2
+claim_scope: Operator-placement correctness on a seeded untrained model; not Bifrost
+  reproduction or a TEE/FHE performance/security result.

@@ -1,0 +1,977 @@
+{
+  "config": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "n_layers": 28,
+    "depths": [
+      1,
+      4,
+      8
+    ],
+    "train_steps_list": [
+      0,
+      10,
+      100,
+      1000
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 4,
+    "private_shard_frac": 0.2,
+    "private_shard_docs": 1998,
+    "ft_lr": 1e-05,
+    "ft_seq_len": 256,
+    "seq_len": 64,
+    "max_pairs": 20000,
+    "epochs": 30,
+    "dtype": "bf16",
+    "device": "cuda",
+    "quick": false
+  },
+  "threat_model": "base attacker = public text + public base weights only; adaptive attacker = knows the victim's adapted local-stage weights (upper bound). Private shard is the last 20% of the corpus, never used for attack training; capture docs held out from its end.",
+  "interpretation": "headline curve recovery(T) per depth: base attacker falling with T => private local-stage drift defends; flat => even 1000 private steps do not protect. adaptive ~= flat/high confirms the ceiling is weight secrecy, not the attack.",
+  "random_baseline_top1_pct": 0.0007,
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "split-inference:spark-x86",
+    "hostname": "97982aedcf41",
+    "dtraining_commit": "c0b3a584e581188b572b769719711c320858f1c0",
+    "model_manifest_sha256": "bbb298585268cc09bcef40664004922c189e0ef0bf70d30c5609a2693c07ee76",
+    "model_path": "qwen3-0.6b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "summary": [
+    {
+      "depth": 1,
+      "T": 0,
+      "attacker": "base",
+      "top1_mean": 78.2533,
+      "top1_std": 0.2309,
+      "top5_mean": 78.3833,
+      "top5_std": 0.4561,
+      "utility_loss": 4.1009754339853925,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "T": 0,
+      "attacker": "adaptive",
+      "top1_mean": 78.2533,
+      "top1_std": 0.2309,
+      "top5_mean": 78.3833,
+      "top5_std": 0.4561,
+      "utility_loss": 4.1009754339853925,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "T": 10,
+      "attacker": "base",
+      "top1_mean": 78.2533,
+      "top1_std": 0.2309,
+      "top5_mean": 78.3833,
+      "top5_std": 0.4561,
+      "utility_loss": 4.038132031758626,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "T": 10,
+      "attacker": "adaptive",
+      "top1_mean": 78.12,
+      "top1_std": 0.0,
+      "top5_mean": 78.3833,
+      "top5_std": 0.4561,
+      "utility_loss": 4.038132031758626,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "T": 100,
+      "attacker": "base",
+      "top1_mean": 78.2533,
+      "top1_std": 0.2309,
+      "top5_mean": 78.3833,
+      "top5_std": 0.4561,
+      "utility_loss": 3.8587315877278647,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "T": 100,
+      "attacker": "adaptive",
+      "top1_mean": 78.12,
+      "top1_std": 0.0,
+      "top5_mean": 78.3833,
+      "top5_std": 0.4561,
+      "utility_loss": 3.8587315877278647,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "T": 1000,
+      "attacker": "base",
+      "top1_mean": 78.2533,
+      "top1_std": 0.2309,
+      "top5_mean": 78.3833,
+      "top5_std": 0.4561,
+      "utility_loss": 3.5138774712880454,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "T": 1000,
+      "attacker": "adaptive",
+      "top1_mean": 78.12,
+      "top1_std": 0.0,
+      "top5_mean": 78.3833,
+      "top5_std": 0.4561,
+      "utility_loss": 3.5138774712880454,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "T": 0,
+      "attacker": "base",
+      "top1_mean": 76.04,
+      "top1_std": 0.5957,
+      "top5_mean": 77.47,
+      "top5_std": 0.5957,
+      "utility_loss": 4.1009754339853925,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "T": 0,
+      "attacker": "adaptive",
+      "top1_mean": 76.04,
+      "top1_std": 0.5957,
+      "top5_mean": 77.47,
+      "top5_std": 0.5957,
+      "utility_loss": 4.1009754339853925,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "T": 10,
+      "attacker": "base",
+      "top1_mean": 76.04,
+      "top1_std": 0.5957,
+      "top5_mean": 77.47,
+      "top5_std": 0.5957,
+      "utility_loss": 3.9856244723002114,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "T": 10,
+      "attacker": "adaptive",
+      "top1_mean": 76.04,
+      "top1_std": 0.8118,
+      "top5_mean": 77.34,
+      "top5_std": 0.6755,
+      "utility_loss": 3.9856244723002114,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "T": 100,
+      "attacker": "base",
+      "top1_mean": 75.78,
+      "top1_std": 0.39,
+      "top5_mean": 77.47,
+      "top5_std": 0.5957,
+      "utility_loss": 3.724975347518921,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "T": 100,
+      "attacker": "adaptive",
+      "top1_mean": 76.04,
+      "top1_std": 0.8118,
+      "top5_mean": 77.34,
+      "top5_std": 0.6755,
+      "utility_loss": 3.724975347518921,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "T": 1000,
+      "attacker": "base",
+      "top1_mean": 75.78,
+      "top1_std": 0.39,
+      "top5_mean": 77.34,
+      "top5_std": 0.78,
+      "utility_loss": 3.296159267425537,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "T": 1000,
+      "attacker": "adaptive",
+      "top1_mean": 75.78,
+      "top1_std": 0.78,
+      "top5_mean": 77.34,
+      "top5_std": 0.6755,
+      "utility_loss": 3.296159267425537,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "T": 0,
+      "attacker": "base",
+      "top1_mean": 73.57,
+      "top1_std": 0.5957,
+      "top5_mean": 75.91,
+      "top5_std": 0.5957,
+      "utility_loss": 4.1009754339853925,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "T": 0,
+      "attacker": "adaptive",
+      "top1_mean": 73.57,
+      "top1_std": 0.5957,
+      "top5_mean": 75.91,
+      "top5_std": 0.5957,
+      "utility_loss": 4.1009754339853925,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "T": 10,
+      "attacker": "base",
+      "top1_mean": 73.44,
+      "top1_std": 0.6755,
+      "top5_mean": 75.91,
+      "top5_std": 0.5957,
+      "utility_loss": 3.970152219136556,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "T": 10,
+      "attacker": "adaptive",
+      "top1_mean": 73.7,
+      "top1_std": 0.5957,
+      "top5_mean": 75.78,
+      "top5_std": 0.39,
+      "utility_loss": 3.970152219136556,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "T": 100,
+      "attacker": "base",
+      "top1_mean": 73.44,
+      "top1_std": 0.6755,
+      "top5_mean": 75.91,
+      "top5_std": 0.5957,
+      "utility_loss": 3.704294522603353,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "T": 100,
+      "attacker": "adaptive",
+      "top1_mean": 73.83,
+      "top1_std": 0.78,
+      "top5_mean": 75.78,
+      "top5_std": 0.39,
+      "utility_loss": 3.704294522603353,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "T": 1000,
+      "attacker": "base",
+      "top1_mean": 73.44,
+      "top1_std": 0.78,
+      "top5_mean": 75.91,
+      "top5_std": 0.2252,
+      "utility_loss": 3.2632031440734863,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "T": 1000,
+      "attacker": "adaptive",
+      "top1_mean": 73.83,
+      "top1_std": 0.78,
+      "top5_mean": 75.65,
+      "top5_std": 0.5957,
+      "utility_loss": 3.2632031440734863,
+      "n_seeds": 3
+    }
+  ],
+  "results": [
+    {
+      "depth": 1,
+      "T": 0,
+      "attacker": "base",
+      "seed": 0,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 4.1009754339853925
+    },
+    {
+      "depth": 1,
+      "T": 0,
+      "attacker": "base",
+      "seed": 1,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 4.1009754339853925
+    },
+    {
+      "depth": 1,
+      "T": 0,
+      "attacker": "base",
+      "seed": 2,
+      "top1": 78.52,
+      "top5": 78.91,
+      "utility_loss": 4.1009754339853925
+    },
+    {
+      "depth": 1,
+      "T": 0,
+      "attacker": "adaptive",
+      "seed": 0,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 4.1009754339853925,
+      "note": "T=0: identical to base"
+    },
+    {
+      "depth": 1,
+      "T": 0,
+      "attacker": "adaptive",
+      "seed": 1,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 4.1009754339853925,
+      "note": "T=0: identical to base"
+    },
+    {
+      "depth": 1,
+      "T": 0,
+      "attacker": "adaptive",
+      "seed": 2,
+      "top1": 78.52,
+      "top5": 78.91,
+      "utility_loss": 4.1009754339853925,
+      "note": "T=0: identical to base"
+    },
+    {
+      "depth": 1,
+      "T": 10,
+      "attacker": "base",
+      "seed": 0,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 4.038132031758626
+    },
+    {
+      "depth": 1,
+      "T": 10,
+      "attacker": "base",
+      "seed": 1,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 4.038132031758626
+    },
+    {
+      "depth": 1,
+      "T": 10,
+      "attacker": "base",
+      "seed": 2,
+      "top1": 78.52,
+      "top5": 78.91,
+      "utility_loss": 4.038132031758626
+    },
+    {
+      "depth": 1,
+      "T": 10,
+      "attacker": "adaptive",
+      "seed": 0,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 4.038132031758626
+    },
+    {
+      "depth": 1,
+      "T": 10,
+      "attacker": "adaptive",
+      "seed": 1,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 4.038132031758626
+    },
+    {
+      "depth": 1,
+      "T": 10,
+      "attacker": "adaptive",
+      "seed": 2,
+      "top1": 78.12,
+      "top5": 78.91,
+      "utility_loss": 4.038132031758626
+    },
+    {
+      "depth": 1,
+      "T": 100,
+      "attacker": "base",
+      "seed": 0,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 3.8587315877278647
+    },
+    {
+      "depth": 1,
+      "T": 100,
+      "attacker": "base",
+      "seed": 1,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 3.8587315877278647
+    },
+    {
+      "depth": 1,
+      "T": 100,
+      "attacker": "base",
+      "seed": 2,
+      "top1": 78.52,
+      "top5": 78.91,
+      "utility_loss": 3.8587315877278647
+    },
+    {
+      "depth": 1,
+      "T": 100,
+      "attacker": "adaptive",
+      "seed": 0,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 3.8587315877278647
+    },
+    {
+      "depth": 1,
+      "T": 100,
+      "attacker": "adaptive",
+      "seed": 1,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 3.8587315877278647
+    },
+    {
+      "depth": 1,
+      "T": 100,
+      "attacker": "adaptive",
+      "seed": 2,
+      "top1": 78.12,
+      "top5": 78.91,
+      "utility_loss": 3.8587315877278647
+    },
+    {
+      "depth": 1,
+      "T": 1000,
+      "attacker": "base",
+      "seed": 0,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 3.5138774712880454
+    },
+    {
+      "depth": 1,
+      "T": 1000,
+      "attacker": "base",
+      "seed": 1,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 3.5138774712880454
+    },
+    {
+      "depth": 1,
+      "T": 1000,
+      "attacker": "base",
+      "seed": 2,
+      "top1": 78.52,
+      "top5": 78.91,
+      "utility_loss": 3.5138774712880454
+    },
+    {
+      "depth": 1,
+      "T": 1000,
+      "attacker": "adaptive",
+      "seed": 0,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 3.5138774712880454
+    },
+    {
+      "depth": 1,
+      "T": 1000,
+      "attacker": "adaptive",
+      "seed": 1,
+      "top1": 78.12,
+      "top5": 78.12,
+      "utility_loss": 3.5138774712880454
+    },
+    {
+      "depth": 1,
+      "T": 1000,
+      "attacker": "adaptive",
+      "seed": 2,
+      "top1": 78.12,
+      "top5": 78.91,
+      "utility_loss": 3.5138774712880454
+    },
+    {
+      "depth": 4,
+      "T": 0,
+      "attacker": "base",
+      "seed": 0,
+      "top1": 76.56,
+      "top5": 78.12,
+      "utility_loss": 4.1009754339853925
+    },
+    {
+      "depth": 4,
+      "T": 0,
+      "attacker": "base",
+      "seed": 1,
+      "top1": 75.39,
+      "top5": 76.95,
+      "utility_loss": 4.1009754339853925
+    },
+    {
+      "depth": 4,
+      "T": 0,
+      "attacker": "base",
+      "seed": 2,
+      "top1": 76.17,
+      "top5": 77.34,
+      "utility_loss": 4.1009754339853925
+    },
+    {
+      "depth": 4,
+      "T": 0,
+      "attacker": "adaptive",
+      "seed": 0,
+      "top1": 76.56,
+      "top5": 78.12,
+      "utility_loss": 4.1009754339853925,
+      "note": "T=0: identical to base"
+    },
+    {
+      "depth": 4,
+      "T": 0,
+      "attacker": "adaptive",
+      "seed": 1,
+      "top1": 75.39,
+      "top5": 76.95,
+      "utility_loss": 4.1009754339853925,
+      "note": "T=0: identical to base"
+    },
+    {
+      "depth": 4,
+      "T": 0,
+      "attacker": "adaptive",
+      "seed": 2,
+      "top1": 76.17,
+      "top5": 77.34,
+      "utility_loss": 4.1009754339853925,
+      "note": "T=0: identical to base"
+    },
+    {
+      "depth": 4,
+      "T": 10,
+      "attacker": "base",
+      "seed": 0,
+      "top1": 76.56,
+      "top5": 78.12,
+      "utility_loss": 3.9856244723002114
+    },
+    {
+      "depth": 4,
+      "T": 10,
+      "attacker": "base",
+      "seed": 1,
+      "top1": 75.39,
+      "top5": 76.95,
+      "utility_loss": 3.9856244723002114
+    },
+    {
+      "depth": 4,
+      "T": 10,
+      "attacker": "base",
+      "seed": 2,
+      "top1": 76.17,
+      "top5": 77.34,
+      "utility_loss": 3.9856244723002114
+    },
+    {
+      "depth": 4,
+      "T": 10,
+      "attacker": "adaptive",
+      "seed": 0,
+      "top1": 75.78,
+      "top5": 77.73,
+      "utility_loss": 3.9856244723002114
+    },
+    {
+      "depth": 4,
+      "T": 10,
+      "attacker": "adaptive",
+      "seed": 1,
+      "top1": 75.39,
+      "top5": 76.56,
+      "utility_loss": 3.9856244723002114
+    },
+    {
+      "depth": 4,
+      "T": 10,
+      "attacker": "adaptive",
+      "seed": 2,
+      "top1": 76.95,
+      "top5": 77.73,
+      "utility_loss": 3.9856244723002114
+    },
+    {
+      "depth": 4,
+      "T": 100,
+      "attacker": "base",
+      "seed": 0,
+      "top1": 76.17,
+      "top5": 78.12,
+      "utility_loss": 3.724975347518921
+    },
+    {
+      "depth": 4,
+      "T": 100,
+      "attacker": "base",
+      "seed": 1,
+      "top1": 75.39,
+      "top5": 76.95,
+      "utility_loss": 3.724975347518921
+    },
+    {
+      "depth": 4,
+      "T": 100,
+      "attacker": "base",
+      "seed": 2,
+      "top1": 75.78,
+      "top5": 77.34,
+      "utility_loss": 3.724975347518921
+    },
+    {
+      "depth": 4,
+      "T": 100,
+      "attacker": "adaptive",
+      "seed": 0,
+      "top1": 75.78,
+      "top5": 77.73,
+      "utility_loss": 3.724975347518921
+    },
+    {
+      "depth": 4,
+      "T": 100,
+      "attacker": "adaptive",
+      "seed": 1,
+      "top1": 75.39,
+      "top5": 76.56,
+      "utility_loss": 3.724975347518921
+    },
+    {
+      "depth": 4,
+      "T": 100,
+      "attacker": "adaptive",
+      "seed": 2,
+      "top1": 76.95,
+      "top5": 77.73,
+      "utility_loss": 3.724975347518921
+    },
+    {
+      "depth": 4,
+      "T": 1000,
+      "attacker": "base",
+      "seed": 0,
+      "top1": 76.17,
+      "top5": 78.12,
+      "utility_loss": 3.296159267425537
+    },
+    {
+      "depth": 4,
+      "T": 1000,
+      "attacker": "base",
+      "seed": 1,
+      "top1": 75.39,
+      "top5": 76.56,
+      "utility_loss": 3.296159267425537
+    },
+    {
+      "depth": 4,
+      "T": 1000,
+      "attacker": "base",
+      "seed": 2,
+      "top1": 75.78,
+      "top5": 77.34,
+      "utility_loss": 3.296159267425537
+    },
+    {
+      "depth": 4,
+      "T": 1000,
+      "attacker": "adaptive",
+      "seed": 0,
+      "top1": 75.78,
+      "top5": 77.73,
+      "utility_loss": 3.296159267425537
+    },
+    {
+      "depth": 4,
+      "T": 1000,
+      "attacker": "adaptive",
+      "seed": 1,
+      "top1": 75.0,
+      "top5": 76.56,
+      "utility_loss": 3.296159267425537
+    },
+    {
+      "depth": 4,
+      "T": 1000,
+      "attacker": "adaptive",
+      "seed": 2,
+      "top1": 76.56,
+      "top5": 77.73,
+      "utility_loss": 3.296159267425537
+    },
+    {
+      "depth": 8,
+      "T": 0,
+      "attacker": "base",
+      "seed": 0,
+      "top1": 74.22,
+      "top5": 76.56,
+      "utility_loss": 4.1009754339853925
+    },
+    {
+      "depth": 8,
+      "T": 0,
+      "attacker": "base",
+      "seed": 1,
+      "top1": 73.05,
+      "top5": 75.39,
+      "utility_loss": 4.1009754339853925
+    },
+    {
+      "depth": 8,
+      "T": 0,
+      "attacker": "base",
+      "seed": 2,
+      "top1": 73.44,
+      "top5": 75.78,
+      "utility_loss": 4.1009754339853925
+    },
+    {
+      "depth": 8,
+      "T": 0,
+      "attacker": "adaptive",
+      "seed": 0,
+      "top1": 74.22,
+      "top5": 76.56,
+      "utility_loss": 4.1009754339853925,
+      "note": "T=0: identical to base"
+    },
+    {
+      "depth": 8,
+      "T": 0,
+      "attacker": "adaptive",
+      "seed": 1,
+      "top1": 73.05,
+      "top5": 75.39,
+      "utility_loss": 4.1009754339853925,
+      "note": "T=0: identical to base"
+    },
+    {
+      "depth": 8,
+      "T": 0,
+      "attacker": "adaptive",
+      "seed": 2,
+      "top1": 73.44,
+      "top5": 75.78,
+      "utility_loss": 4.1009754339853925,
+      "note": "T=0: identical to base"
+    },
+    {
+      "depth": 8,
+      "T": 10,
+      "attacker": "base",
+      "seed": 0,
+      "top1": 74.22,
+      "top5": 76.56,
+      "utility_loss": 3.970152219136556
+    },
+    {
+      "depth": 8,
+      "T": 10,
+      "attacker": "base",
+      "seed": 1,
+      "top1": 73.05,
+      "top5": 75.39,
+      "utility_loss": 3.970152219136556
+    },
+    {
+      "depth": 8,
+      "T": 10,
+      "attacker": "base",
+      "seed": 2,
+      "top1": 73.05,
+      "top5": 75.78,
+      "utility_loss": 3.970152219136556
+    },
+    {
+      "depth": 8,
+      "T": 10,
+      "attacker": "adaptive",
+      "seed": 0,
+      "top1": 74.22,
+      "top5": 76.17,
+      "utility_loss": 3.970152219136556
+    },
+    {
+      "depth": 8,
+      "T": 10,
+      "attacker": "adaptive",
+      "seed": 1,
+      "top1": 73.05,
+      "top5": 75.39,
+      "utility_loss": 3.970152219136556
+    },
+    {
+      "depth": 8,
+      "T": 10,
+      "attacker": "adaptive",
+      "seed": 2,
+      "top1": 73.83,
+      "top5": 75.78,
+      "utility_loss": 3.970152219136556
+    },
+    {
+      "depth": 8,
+      "T": 100,
+      "attacker": "base",
+      "seed": 0,
+      "top1": 74.22,
+      "top5": 76.56,
+      "utility_loss": 3.704294522603353
+    },
+    {
+      "depth": 8,
+      "T": 100,
+      "attacker": "base",
+      "seed": 1,
+      "top1": 73.05,
+      "top5": 75.39,
+      "utility_loss": 3.704294522603353
+    },
+    {
+      "depth": 8,
+      "T": 100,
+      "attacker": "base",
+      "seed": 2,
+      "top1": 73.05,
+      "top5": 75.78,
+      "utility_loss": 3.704294522603353
+    },
+    {
+      "depth": 8,
+      "T": 100,
+      "attacker": "adaptive",
+      "seed": 0,
+      "top1": 73.83,
+      "top5": 76.17,
+      "utility_loss": 3.704294522603353
+    },
+    {
+      "depth": 8,
+      "T": 100,
+      "attacker": "adaptive",
+      "seed": 1,
+      "top1": 73.05,
+      "top5": 75.39,
+      "utility_loss": 3.704294522603353
+    },
+    {
+      "depth": 8,
+      "T": 100,
+      "attacker": "adaptive",
+      "seed": 2,
+      "top1": 74.61,
+      "top5": 75.78,
+      "utility_loss": 3.704294522603353
+    },
+    {
+      "depth": 8,
+      "T": 1000,
+      "attacker": "base",
+      "seed": 0,
+      "top1": 74.22,
+      "top5": 76.17,
+      "utility_loss": 3.2632031440734863
+    },
+    {
+      "depth": 8,
+      "T": 1000,
+      "attacker": "base",
+      "seed": 1,
+      "top1": 72.66,
+      "top5": 75.78,
+      "utility_loss": 3.2632031440734863
+    },
+    {
+      "depth": 8,
+      "T": 1000,
+      "attacker": "base",
+      "seed": 2,
+      "top1": 73.44,
+      "top5": 75.78,
+      "utility_loss": 3.2632031440734863
+    },
+    {
+      "depth": 8,
+      "T": 1000,
+      "attacker": "adaptive",
+      "seed": 0,
+      "top1": 73.83,
+      "top5": 76.17,
+      "utility_loss": 3.2632031440734863
+    },
+    {
+      "depth": 8,
+      "T": 1000,
+      "attacker": "adaptive",
+      "seed": 1,
+      "top1": 73.05,
+      "top5": 75.0,
+      "utility_loss": 3.2632031440734863
+    },
+    {
+      "depth": 8,
+      "T": 1000,
+      "attacker": "adaptive",
+      "seed": 2,
+      "top1": 74.61,
+      "top5": 75.78,
+      "utility_loss": 3.2632031440734863
+    }
+  ]
+}

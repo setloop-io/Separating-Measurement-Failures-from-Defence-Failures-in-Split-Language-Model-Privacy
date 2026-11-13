@@ -1,0 +1,74 @@
+{
+  "schema_version": "r1-cpu-validation-summary-1.0",
+  "status": "verified_engineering_only",
+  "scientific_evidence": false,
+  "execution_id": "cpu-final-20260913",
+  "source": {
+    "git_commit": "fd4b0148771a6fd392e69da7bf2388917feb4e43",
+    "working_tree_clean": false,
+    "working_tree_patch_sha256": "087b4c147e0a0288e6677b5c637f6a7b0856ebe072b5149a32be08f4d9f97659",
+    "source_inventory_sha256": "e2307616a302269a7904185936ee1f7ddc1fb942688c3430030f56fee1090afc",
+    "environment_digest": "ddd933efa5d4181090b7c52e76061758177eeb3ca91750e0568c53154c1af688",
+    "note": "Every run retains the exact source archive and patch. A clean committed revision is still required before GPU admission."
+  },
+  "execution": {
+    "planned_runs": 14,
+    "completed_runs": 14,
+    "failures": 0,
+    "interrupted_runs": 0,
+    "not_started_runs": 0,
+    "semantic_validation_records": 14,
+    "attack_reports": 4,
+    "attack_target_channel_results": 48,
+    "committed_remote_steps": 24,
+    "client_remote_wire_total_mismatches": 0,
+    "remote_packet_inventory_digests": 1,
+    "source_inventory_digests": 1,
+    "environment_digests": 1,
+    "output_bytes_before_packaging": 35821074,
+    "recorded_run_wall_seconds_total": 66.96055550314486,
+    "recorded_run_wall_seconds_range": [0.32503153197467327, 7.532658556476235],
+    "split_wire_bytes_total": 2995681,
+    "split_wire_bytes_range": [249203, 250032],
+    "privacy_status": "ENGINEERING_ONLY"
+  },
+  "verification": {
+    "locked_full_suite": {
+      "passed": 312,
+      "subtests_passed": 12,
+      "seconds": 835.70,
+      "log": "full-test-suite.log"
+    },
+    "r1_targeted_suite": {
+      "passed": 71,
+      "seconds": 185.40,
+      "log": "r1-targeted-tests.log"
+    },
+    "container_systems_suite": {
+      "passed": 57,
+      "seconds": 245.54,
+      "image_id": "sha256:bb2ad51c5f130b7d30c36aa81700a7fddb83e624d0b21b47a98571194a27ac95",
+      "image_size_bytes": 1992461254,
+      "registry_digest": null,
+      "log": "container-validation.log"
+    },
+    "relocated_evidence_replay": {
+      "completed_runs": 14,
+      "failures": 0,
+      "interrupted_runs": 0,
+      "not_started_runs": 0
+    },
+    "paper": {
+      "pages": 6,
+      "latex_warnings": 0
+    }
+  },
+  "boundaries": {
+    "gpu_validated": false,
+    "two_host_validated": false,
+    "paid_execution_authorized": false,
+    "scientific_calibration_authorized": false,
+    "scientific_exploration_authorized": false,
+    "claims_admitted": 0
+  }
+}

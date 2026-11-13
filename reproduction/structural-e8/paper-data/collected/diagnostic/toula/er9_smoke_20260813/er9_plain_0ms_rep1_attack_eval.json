@@ -1,0 +1,37 @@
+{
+  "arm": "plain",
+  "run_json": "/workspace/experiments/results/training/er9_smoke/er9_plain_0ms_rep1.json",
+  "capture_dir": "/workspace/experiments/tmp_captures_plain_0ms_rep1",
+  "config_echo": {
+    "model": "/workspace/experiments/models/mistral-7b-instruct",
+    "split_after": 7,
+    "resume_after": 24,
+    "seq_len": 64,
+    "micro_batch_size": 1,
+    "grad_accum": 8,
+    "steps": 20,
+    "seed": 42,
+    "lr": 0.0001,
+    "dtype": "bf16",
+    "obf": null
+  },
+  "attacker": "known-plaintext replay (public weights + corpus + data order); solve_w=polar(lstsq) per epoch",
+  "decoder_public_pairs": 1024,
+  "decoder_val_top1": 71.61,
+  "per_epoch": [
+    {
+      "epoch": null,
+      "n_rows": 10240,
+      "n_solve": 4096,
+      "n_victim": 2048,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 6.2,
+      "top1_fwd_bwd_pct": 5.57,
+      "undefended_top1_pct": 71.39
+    }
+  ],
+  "labelfree_band_top1_pct": 6.84,
+  "undefended_top1_pct": 71.39,
+  "pooled_cross_epoch": null,
+  "note": "interpretation depends on --arm: rotated arm expect per-epoch ~= band (<= ~3.7%) and pooled in band; baseline arm (no rotation) expect per-epoch ~= undefended"
+}

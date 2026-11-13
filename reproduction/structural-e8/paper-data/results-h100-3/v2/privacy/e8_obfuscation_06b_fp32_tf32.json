@@ -1,0 +1,398 @@
+{
+  "config": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "n_layers": 28,
+    "depths": [
+      1,
+      4,
+      8
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 8,
+    "seq_len": 64,
+    "max_pairs": 20000,
+    "epochs": 30,
+    "gen_tokens": 64,
+    "dtype": "fp32",
+    "device": "cuda",
+    "W_seed": 42,
+    "W_ortho_err": 6.955862045288086e-05,
+    "quick": false,
+    "matmul_precision_requested": null,
+    "matmul_precision_effective": "high",
+    "cuda_matmul_allow_tf32": true,
+    "cudnn_allow_tf32": true,
+    "cudnn_deterministic": false,
+    "deterministic_algorithms": false,
+    "cublas_workspace_config": ":4096:8",
+    "torch_version": "2.11.0a0+eb65b36914.nv26.02"
+  },
+  "threat_model": "default: attacker has public text + public base weights, NOT W; decoder trained on plain h* and evaluated on h'=h*@W. 'breach_W_leaked' is a MEASUREMENT of the insider-leak case (h'@W^T=h), not the default assumption. Unsupervised adaptation from unlabeled h' is out of scope (future work).",
+  "interpretation": "obfuscated ~= random baseline => defense works while W stays secret; breach ~= baseline_no_defense => security rests entirely on W's secrecy. Utility: token_identity should be 1.0 (fp32 round-trip; bf16 model cast may flip greedy ties \u2014 rerun --dtype fp32 to verify exactness).",
+  "random_baseline_top1_pct": 0.0007,
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9983,
+      9984,
+      9985,
+      9986,
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "split-inference:spark-x86",
+    "hostname": "12284146c6a5",
+    "victim_doc_sha256": {},
+    "dtraining_commit": "c0fed2f1facf14b2fc8379193ae235ab273788a8",
+    "model_manifest_sha256": "d3ad538fab96c0c1ada1a6356e9a23ecd1760958f7b87e84a339a397c67f8003",
+    "model_manifest_algo": "v2-sizes-no-cache",
+    "model_manifest_n_files": 10,
+    "model_path": "qwen3-0.6b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "utility": [
+    {
+      "depth": 1,
+      "prompt_idx": 0,
+      "token_identity": 1.0,
+      "tokens_compared": 64,
+      "max_roundtrip_deviation": 0.0023221969604492188,
+      "max_abs_h": 7.840439796447754,
+      "max_roundtrip_deviation_relative": 0.00029618197712599363
+    },
+    {
+      "depth": 1,
+      "prompt_idx": 1,
+      "token_identity": 1.0,
+      "tokens_compared": 64,
+      "max_roundtrip_deviation": 0.0028057098388671875,
+      "max_abs_h": 9.951099395751953,
+      "max_roundtrip_deviation_relative": 0.0002819497351282536
+    },
+    {
+      "depth": 4,
+      "prompt_idx": 0,
+      "token_identity": 1.0,
+      "tokens_compared": 64,
+      "max_roundtrip_deviation": 2.17822265625,
+      "max_abs_h": 6541.90966796875,
+      "max_roundtrip_deviation_relative": 0.0003329643432582483
+    },
+    {
+      "depth": 4,
+      "prompt_idx": 1,
+      "token_identity": 1.0,
+      "tokens_compared": 64,
+      "max_roundtrip_deviation": 1.033203125,
+      "max_abs_h": 5751.046875,
+      "max_roundtrip_deviation_relative": 0.0001796547911114009
+    },
+    {
+      "depth": 8,
+      "prompt_idx": 0,
+      "token_identity": 1.0,
+      "tokens_compared": 64,
+      "max_roundtrip_deviation": 1.38134765625,
+      "max_abs_h": 6534.3662109375,
+      "max_roundtrip_deviation_relative": 0.00021139734316357134
+    },
+    {
+      "depth": 8,
+      "prompt_idx": 1,
+      "token_identity": 1.0,
+      "tokens_compared": 64,
+      "max_roundtrip_deviation": 0.53662109375,
+      "max_abs_h": 5743.51220703125,
+      "max_roundtrip_deviation_relative": 9.343082671489137e-05
+    }
+  ],
+  "overhead_ms_per_matmul": 0.051,
+  "overhead_ms_per_matmul_by_precision": {
+    "highest": 0.0529,
+    "high": 0.0512,
+    "medium": 0.052
+  },
+  "overhead_matmul_hidden_dim": 1024,
+  "overhead_matmul_seq_len": 64,
+  "summary": [
+    {
+      "depth": 1,
+      "setting": "baseline_no_defense",
+      "top1_mean": 69.9233,
+      "top1_std": 0.7059,
+      "top5_mean": 70.6367,
+      "top5_std": 0.1097,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "setting": "obfuscated",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.0,
+      "top5_std": 0.0,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "setting": "breach_W_leaked",
+      "top1_mean": 69.9233,
+      "top1_std": 0.7059,
+      "top5_mean": 70.6367,
+      "top5_std": 0.1097,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "setting": "baseline_no_defense",
+      "top1_mean": 67.3167,
+      "top1_std": 0.1097,
+      "top5_mean": 68.2933,
+      "top5_std": 0.1155,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "setting": "obfuscated",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.1967,
+      "top5_std": 0.195,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "setting": "breach_W_leaked",
+      "top1_mean": 67.3167,
+      "top1_std": 0.1097,
+      "top5_mean": 68.2933,
+      "top5_std": 0.1155,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "setting": "baseline_no_defense",
+      "top1_mean": 66.15,
+      "top1_std": 0.2252,
+      "top5_mean": 68.1,
+      "top5_std": 0.4503,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "setting": "obfuscated",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.1967,
+      "top5_std": 0.195,
+      "n_seeds": 3
+    },
+    {
+      "depth": 8,
+      "setting": "breach_W_leaked",
+      "top1_mean": 66.15,
+      "top1_std": 0.2252,
+      "top5_mean": 68.1,
+      "top5_std": 0.4503,
+      "n_seeds": 3
+    }
+  ],
+  "results": [
+    {
+      "depth": 1,
+      "setting": "baseline_no_defense",
+      "seed": 0,
+      "top1": 70.51,
+      "top5": 70.7
+    },
+    {
+      "depth": 1,
+      "setting": "obfuscated",
+      "seed": 0,
+      "top1": 0.0,
+      "top5": 0.0
+    },
+    {
+      "depth": 1,
+      "setting": "breach_W_leaked",
+      "seed": 0,
+      "top1": 70.51,
+      "top5": 70.7
+    },
+    {
+      "depth": 1,
+      "setting": "baseline_no_defense",
+      "seed": 1,
+      "top1": 69.14,
+      "top5": 70.51
+    },
+    {
+      "depth": 1,
+      "setting": "obfuscated",
+      "seed": 1,
+      "top1": 0.0,
+      "top5": 0.0
+    },
+    {
+      "depth": 1,
+      "setting": "breach_W_leaked",
+      "seed": 1,
+      "top1": 69.14,
+      "top5": 70.51
+    },
+    {
+      "depth": 1,
+      "setting": "baseline_no_defense",
+      "seed": 2,
+      "top1": 70.12,
+      "top5": 70.7
+    },
+    {
+      "depth": 1,
+      "setting": "obfuscated",
+      "seed": 2,
+      "top1": 0.0,
+      "top5": 0.0
+    },
+    {
+      "depth": 1,
+      "setting": "breach_W_leaked",
+      "seed": 2,
+      "top1": 70.12,
+      "top5": 70.7
+    },
+    {
+      "depth": 4,
+      "setting": "baseline_no_defense",
+      "seed": 0,
+      "top1": 67.38,
+      "top5": 68.36
+    },
+    {
+      "depth": 4,
+      "setting": "obfuscated",
+      "seed": 0,
+      "top1": 0.0,
+      "top5": 0.2
+    },
+    {
+      "depth": 4,
+      "setting": "breach_W_leaked",
+      "seed": 0,
+      "top1": 67.38,
+      "top5": 68.36
+    },
+    {
+      "depth": 4,
+      "setting": "baseline_no_defense",
+      "seed": 1,
+      "top1": 67.38,
+      "top5": 68.16
+    },
+    {
+      "depth": 4,
+      "setting": "obfuscated",
+      "seed": 1,
+      "top1": 0.0,
+      "top5": 0.39
+    },
+    {
+      "depth": 4,
+      "setting": "breach_W_leaked",
+      "seed": 1,
+      "top1": 67.38,
+      "top5": 68.16
+    },
+    {
+      "depth": 4,
+      "setting": "baseline_no_defense",
+      "seed": 2,
+      "top1": 67.19,
+      "top5": 68.36
+    },
+    {
+      "depth": 4,
+      "setting": "obfuscated",
+      "seed": 2,
+      "top1": 0.0,
+      "top5": 0.0
+    },
+    {
+      "depth": 4,
+      "setting": "breach_W_leaked",
+      "seed": 2,
+      "top1": 67.19,
+      "top5": 68.36
+    },
+    {
+      "depth": 8,
+      "setting": "baseline_no_defense",
+      "seed": 0,
+      "top1": 66.02,
+      "top5": 68.36
+    },
+    {
+      "depth": 8,
+      "setting": "obfuscated",
+      "seed": 0,
+      "top1": 0.0,
+      "top5": 0.2
+    },
+    {
+      "depth": 8,
+      "setting": "breach_W_leaked",
+      "seed": 0,
+      "top1": 66.02,
+      "top5": 68.36
+    },
+    {
+      "depth": 8,
+      "setting": "baseline_no_defense",
+      "seed": 1,
+      "top1": 66.02,
+      "top5": 67.58
+    },
+    {
+      "depth": 8,
+      "setting": "obfuscated",
+      "seed": 1,
+      "top1": 0.0,
+      "top5": 0.39
+    },
+    {
+      "depth": 8,
+      "setting": "breach_W_leaked",
+      "seed": 1,
+      "top1": 66.02,
+      "top5": 67.58
+    },
+    {
+      "depth": 8,
+      "setting": "baseline_no_defense",
+      "seed": 2,
+      "top1": 66.41,
+      "top5": 68.36
+    },
+    {
+      "depth": 8,
+      "setting": "obfuscated",
+      "seed": 2,
+      "top1": 0.0,
+      "top5": 0.0
+    },
+    {
+      "depth": 8,
+      "setting": "breach_W_leaked",
+      "seed": 2,
+      "top1": 66.41,
+      "top5": 68.36
+    }
+  ]
+}

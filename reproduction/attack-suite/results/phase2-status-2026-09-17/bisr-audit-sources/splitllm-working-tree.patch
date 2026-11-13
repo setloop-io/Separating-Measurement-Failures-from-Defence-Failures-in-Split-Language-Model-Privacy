@@ -1,0 +1,185 @@
+diff --git a/sfl/config.py b/sfl/config.py
+index 9d81de1..fd104bc 100644
+--- a/sfl/config.py
++++ b/sfl/config.py
+@@ -1,4 +1,4 @@
+-data_root = '/data/stupidtree/data'
++data_root = '/home/geo/splitllm-ref/data'  # B1: README-sanctioned local path
+ 
+ dataset_cache_dir = f'{data_root}/sfl/datasets/'
+ model_download_dir = f'{data_root}/sfl/models/'
+diff --git a/sfl/model/attacker/sip/inversion_training.py b/sfl/model/attacker/sip/inversion_training.py
+index e5bca7e..02b25db 100644
+--- a/sfl/model/attacker/sip/inversion_training.py
++++ b/sfl/model/attacker/sip/inversion_training.py
+@@ -349,8 +349,12 @@ def train_inversion_model(model, tokenizer, sip_args: SIPAttackerArguments, b2tr
+                 loss = calc_unshift_loss(logits, input_ids)
+                 loss.backward()
+                 optimizer.step()
+-                res, _, _ = evaluate_attacker_rouge(tokenizer, logits, batch)
+-                rouge_l_f += res['rouge-l']['f']
++                # B1 instrumentation (P6): throttle the progress-bar ROUGE
++                # display to every 50 steps — display-only; loss/backward/
++                # optimizer are untouched, so training is bit-identical.
++                if step % 50 == 0:
++                    res, _, _ = evaluate_attacker_rouge(tokenizer, logits, batch)
++                    rouge_l_f = res['rouge-l']['f'] * (step + 1)
+ 
+                 pbar.set_description(
+                     f'Epoch {epc} Loss {loss.item():.5f}, Rouge_Lf1 {rouge_l_f / (step + 1):.4f}')
+diff --git a/sfl/simulator/simulator.py b/sfl/simulator/simulator.py
+index 3865d05..0cdbdc2 100644
+--- a/sfl/simulator/simulator.py
++++ b/sfl/simulator/simulator.py
+@@ -1,4 +1,6 @@
+ import abc
++import json
++import os
+ import random
+ from abc import ABC
+ from copy import deepcopy
+@@ -366,6 +368,15 @@ class SFLSimulator(object):
+             self.strategy.client_evaluate(self.current_global_round, client_id, logs)
+         for k, v in logs.items():
+             report[f'client{client_id}_{k}'] = v
++        # B1 instrumentation: env-gated JSONL journal (no algorithmic effect)
++        _jp = os.environ.get('SFL_JOURNAL_PATH')
++        if _jp:
++            try:
++                with open(_jp, 'a') as _jf:
++                    _jf.write(json.dumps({'type': 'report', 'report': report},
++                                         default=str) + '\n')
++            except Exception as _e:
++                print('journal error', _e)
+         if self.args and not self.args.log_to_wandb:
+             return
+         wandb.log(report)
+diff --git a/sfl/strategies/sl_strategy_with_attacker.py b/sfl/strategies/sl_strategy_with_attacker.py
+index 5bc547f..c8e3c11 100644
+--- a/sfl/strategies/sl_strategy_with_attacker.py
++++ b/sfl/strategies/sl_strategy_with_attacker.py
+@@ -1,10 +1,13 @@
+ from typing import Any
+ 
++import json
++import os
++
+ import wandb
+ 
+ from sfl.utils.args import FLConfig
+ from sfl.strategies.basic import BaseSFLStrategy
+-from sfl.utils.model import FLConfigHolder, Intermediate, evaluate_attacker_rouge
++from sfl.utils.model import FLConfigHolder, Intermediate, evaluate_attacker_rouge, decode_with_extra_space
+ 
+ 
+ class SLStrategyWithAttacker(BaseSFLStrategy):
+@@ -70,6 +73,33 @@ class SLStrategyWithAttacker(BaseSFLStrategy):
+                             data=[[txt, gt] for txt, gt in zip(texts, batch['input_text'])])
+         return table
+ 
++    def _b1_journal_attack(self, global_round, client_id, local_epoch, local_step,
++                           batch, name, key, logits, eval_res):
++        # B1 instrumentation: env-gated per-attack JSONL journal (no algorithmic effect)
++        jp = os.environ.get('SFL_ATTACK_JOURNAL_PATH')
++        if not jp:
++            return
++        try:
++            rouge_res, meteor_res, token_acc = eval_res
++            atk_texts = [decode_with_extra_space(self.tokenizer, s) for s in logits.argmax(dim=-1)]
++            gt_texts = [decode_with_extra_space(self.tokenizer, s) for s in batch['input_ids']]
++            rec = {
++                'type': 'attack', 'name': name, 'key': key,
++                'global_round': global_round, 'client_id': client_id,
++                'local_epoch': local_epoch, 'local_step': local_step,
++                'rouge_1_f': rouge_res['rouge-1']['f'],
++                'rouge_2_f': rouge_res['rouge-2']['f'],
++                'rouge_l_f': rouge_res['rouge-l']['f'],
++                'meteor': meteor_res, 'tokacc': token_acc,
++                'attacked_texts': atk_texts, 'true_texts': gt_texts,
++                'attacked_ids': [t.argmax(-1).tolist() for t in logits],
++                'true_ids': batch['input_ids'].tolist(),
++            }
++            with open(jp, 'a') as jf:
++                jf.write(json.dumps(rec, default=str) + '\n')
++        except Exception as e:
++            print('attack journal error', e)
++
+     def sample_attacker_triggered(self, global_round, client_id, local_epoch, local_step,
+                                   b2tr_inter: Intermediate, tr2t_inter: Intermediate,
+                                   all_inter: dict[Any, Intermediate],
+@@ -84,8 +114,12 @@ class SLStrategyWithAttacker(BaseSFLStrategy):
+                 for key, logits in attack_res.items():
+                     init_map[f"{name}_{key}"] = logits
+                     eval_res = evaluate_attacker_rouge(self.tokenizer, logits, batch)
++                    self._b1_journal_attack(global_round, client_id, local_epoch, local_step,
++                                            batch, name, key, logits, eval_res)
+                     self.__log_atk_res(eval_res, client_id, f"{name}_{key}")
+             else:
+                 eval_res = evaluate_attacker_rouge(self.tokenizer, attack_res, batch)
++                self._b1_journal_attack(global_round, client_id, local_epoch, local_step,
++                                        batch, name, None, attack_res, eval_res)
+                 self.__log_atk_res(eval_res, client_id, name)
+                 init_map[name] = attack_res
+\ No newline at end of file
+diff --git a/sfl/utils/args.py b/sfl/utils/args.py
+index 7a5a17b..659499d 100644
+--- a/sfl/utils/args.py
++++ b/sfl/utils/args.py
+@@ -234,3 +234,8 @@ class PrefixArgumentParser(HfArgumentParser):
+                 raise ValueError(f"Some specified arguments are not used by the HfArgumentParser: {remaining_args}")
+ 
+             return (*outputs,)
++
++
++# B1 repair: names imported by sfl/model/attacker/sip/inversion_training.py but
++# missing from this module in the published tree (they live in sfl.config).
++from sfl.config import dxp_moe_range, gaussian_moe_range, dc_moe_range, lora_path  # noqa: E402
+diff --git a/sfl/utils/model.py b/sfl/utils/model.py
+index a9ad47d..d3622cf 100644
+--- a/sfl/utils/model.py
++++ b/sfl/utils/model.py
+@@ -241,8 +241,13 @@ def get_best_gpu():
+     deviceMemory = []
+     for i in cuda_devices:
+         handle = pynvml.nvmlDeviceGetHandleByIndex(i)
+-        mem_info = pynvml.nvmlDeviceGetMemoryInfo(handle)
+-        deviceMemory.append(mem_info.free)
++        try:
++            mem_info = pynvml.nvmlDeviceGetMemoryInfo(handle)
++            deviceMemory.append(mem_info.free)
++        except pynvml.NVMLError:
++            # B1 repair: GB10 reports no memory info via NVML ([N/A] in
++            # nvidia-smi); fall back to cuda:0 (single-GPU node).
++            deviceMemory.append(0)
+     deviceMemory = np.array(deviceMemory, dtype=np.int64)
+     best_device_index = np.argmax(deviceMemory)
+     return torch.device("cuda:%d" % (best_device_index))
+diff --git a/sfl/model/noise/fdp.py b/sfl/model/noise/fdp.py
+new file mode 100644
+index 0000000..e4cf545
+--- /dev/null
++++ b/sfl/model/noise/fdp.py
+@@ -0,0 +1,23 @@
++"""REPAIR (koula B1 fidelity run): this file is missing from the published
++SplitLLM repository (https://github.com/StupidTrees/SplitLLM @ c376590) —
++`sfl/model/llm/split_model.py` imports `GaussianPerturber` from
++`sfl.model.noise.fdp`, so the published tree cannot be imported at all.
++Reconstructed from the Perturber interface (sfl/model/noise/base.py) and the
++paper's smashed-data Gaussian perturbation description (CCS'24 paper SS2.3,
++Eq. 5 family). It is only exercised when noise_mode == 'gaussian'; the B1
++reference run uses noise_mode='none', so this class is never invoked — the
++repair exists solely to make the import graph loadable.
++"""
++
++import torch
++
++from sfl.model.noise.base import Perturber
++
++
++class GaussianPerturber(Perturber):
++
++    def forward(self, hidden_states):
++        if self.scale == 0:
++            return hidden_states
++        noise = torch.randn_like(hidden_states) * self.scale
++        return hidden_states + noise

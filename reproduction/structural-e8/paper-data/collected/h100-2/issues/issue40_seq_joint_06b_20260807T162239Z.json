@@ -1,0 +1,741 @@
+{
+  "config": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "n_layers": 28,
+    "depths": [
+      1,
+      4,
+      8
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 10,
+    "val_frac": 0.15,
+    "seq_len": 64,
+    "max_pairs": 20000,
+    "epochs": 30,
+    "batch_size": 256,
+    "joint_batch_size": 8,
+    "top_k": 8,
+    "beam": 8,
+    "lm_weight": 1.0,
+    "min_span": 3,
+    "joint": true,
+    "dtype": "bf16",
+    "device": "cuda",
+    "quick": false
+  },
+  "threat_model": "semi-honest cloud observes the boundary activation sequence h* per microbatch; attacker trains a per-position MLP on PUBLIC text through the PUBLIC base model (document-disjoint; victim docs held out from the END of the corpus) and rescores the top-k lattice with the base model itself as LM prior",
+  "interpretation": "uplift = sequence-aware (top-k lattice + beam + base-model LM rescore) minus position-independent MLP argmax, same decoder and same data. Positive uplift quantifies how much sequence context adds to the trained-inversion attack.",
+  "random_baseline_top1_pct": 0.0007,
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9981,
+      9982,
+      9983,
+      9984,
+      9985,
+      9986,
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "unknown",
+    "hostname": "8d8912c3afc5",
+    "victim_doc_sha256": {},
+    "dtraining_commit": "13cce0fe4f7ddedf6b501e862d6bc9da7a44034f",
+    "model_manifest_sha256": "d3ad538fab96c0c1ada1a6356e9a23ecd1760958f7b87e84a339a397c67f8003",
+    "model_manifest_algo": "v2-sizes-no-cache",
+    "model_manifest_n_files": 10,
+    "model_path": "qwen3-0.6b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "summary": [
+    {
+      "depth": 1,
+      "attacker": "mlp",
+      "n_seeds": 3,
+      "baseline_token_acc_mean": 73.1647,
+      "baseline_token_acc_std": 0.7453,
+      "baseline_span_acc_mean": 57.9861,
+      "baseline_span_acc_std": 0.3745,
+      "baseline_longest_run_frac_mean": 0.2014,
+      "baseline_longest_run_frac_std": 0.0028,
+      "baseline_exact_mean": 0.0,
+      "baseline_exact_std": 0.0,
+      "rescored_token_acc_mean": 73.1647,
+      "rescored_token_acc_std": 0.7453,
+      "rescored_span_acc_mean": 58.0357,
+      "rescored_span_acc_std": 0.2976,
+      "rescored_longest_run_frac_mean": 0.2016,
+      "rescored_longest_run_frac_std": 0.0027,
+      "rescored_exact_mean": 0.0,
+      "rescored_exact_std": 0.0,
+      "uplift_token_acc_mean": 0.0,
+      "uplift_token_acc_std": 0.0,
+      "uplift_span_acc_mean": 0.0496,
+      "uplift_span_acc_std": 0.0859,
+      "uplift_longest_run_frac_mean": 0.0003,
+      "uplift_longest_run_frac_std": 0.0005,
+      "uplift_exact_mean": 0.0,
+      "uplift_exact_std": 0.0
+    },
+    {
+      "depth": 1,
+      "attacker": "joint",
+      "n_seeds": 3,
+      "baseline_token_acc_mean": 65.5754,
+      "baseline_token_acc_std": 0.5584,
+      "baseline_span_acc_mean": 44.9901,
+      "baseline_span_acc_std": 0.6501,
+      "baseline_longest_run_frac_mean": 0.1567,
+      "baseline_longest_run_frac_std": 0.0022,
+      "baseline_exact_mean": 0.0,
+      "baseline_exact_std": 0.0,
+      "rescored_token_acc_mean": 65.8234,
+      "rescored_token_acc_std": 0.6196,
+      "rescored_span_acc_mean": 45.4613,
+      "rescored_span_acc_std": 0.8581,
+      "rescored_longest_run_frac_mean": 0.159,
+      "rescored_longest_run_frac_std": 0.0004,
+      "rescored_exact_mean": 0.0,
+      "rescored_exact_std": 0.0,
+      "uplift_token_acc_mean": 0.248,
+      "uplift_token_acc_std": 0.1549,
+      "uplift_span_acc_mean": 0.4713,
+      "uplift_span_acc_std": 0.4485,
+      "uplift_longest_run_frac_mean": 0.0022,
+      "uplift_longest_run_frac_std": 0.002,
+      "uplift_exact_mean": 0.0,
+      "uplift_exact_std": 0.0
+    },
+    {
+      "depth": 4,
+      "attacker": "mlp",
+      "n_seeds": 3,
+      "baseline_token_acc_mean": 70.3869,
+      "baseline_token_acc_std": 0.1488,
+      "baseline_span_acc_mean": 55.1587,
+      "baseline_span_acc_std": 0.4841,
+      "baseline_longest_run_frac_mean": 0.1942,
+      "baseline_longest_run_frac_std": 0.0022,
+      "baseline_exact_mean": 0.0,
+      "baseline_exact_std": 0.0,
+      "rescored_token_acc_mean": 70.5357,
+      "rescored_token_acc_std": 0.2976,
+      "rescored_span_acc_mean": 55.5804,
+      "rescored_span_acc_std": 0.8929,
+      "rescored_longest_run_frac_mean": 0.1952,
+      "rescored_longest_run_frac_std": 0.0028,
+      "rescored_exact_mean": 0.0,
+      "rescored_exact_std": 0.0,
+      "uplift_token_acc_mean": 0.1488,
+      "uplift_token_acc_std": 0.1488,
+      "uplift_span_acc_mean": 0.4216,
+      "uplift_span_acc_std": 0.4098,
+      "uplift_longest_run_frac_mean": 0.001,
+      "uplift_longest_run_frac_std": 0.0017,
+      "uplift_exact_mean": 0.0,
+      "uplift_exact_std": 0.0
+    },
+    {
+      "depth": 4,
+      "attacker": "joint",
+      "n_seeds": 3,
+      "baseline_token_acc_mean": 64.2857,
+      "baseline_token_acc_std": 0.6486,
+      "baseline_span_acc_mean": 43.5764,
+      "baseline_span_acc_std": 1.0156,
+      "baseline_longest_run_frac_mean": 0.1572,
+      "baseline_longest_run_frac_std": 0.0068,
+      "baseline_exact_mean": 0.0,
+      "baseline_exact_std": 0.0,
+      "rescored_token_acc_mean": 64.5089,
+      "rescored_token_acc_std": 0.7175,
+      "rescored_span_acc_mean": 43.998,
+      "rescored_span_acc_std": 1.2028,
+      "rescored_longest_run_frac_mean": 0.1582,
+      "rescored_longest_run_frac_std": 0.0079,
+      "rescored_exact_mean": 0.0,
+      "rescored_exact_std": 0.0,
+      "uplift_token_acc_mean": 0.2232,
+      "uplift_token_acc_std": 0.0745,
+      "uplift_span_acc_mean": 0.4216,
+      "uplift_span_acc_std": 0.5683,
+      "uplift_longest_run_frac_mean": 0.001,
+      "uplift_longest_run_frac_std": 0.0012,
+      "uplift_exact_mean": 0.0,
+      "uplift_exact_std": 0.0
+    },
+    {
+      "depth": 8,
+      "attacker": "mlp",
+      "n_seeds": 3,
+      "baseline_token_acc_mean": 69.122,
+      "baseline_token_acc_std": 0.5365,
+      "baseline_span_acc_mean": 52.9514,
+      "baseline_span_acc_std": 1.2678,
+      "baseline_longest_run_frac_mean": 0.1838,
+      "baseline_longest_run_frac_std": 0.0059,
+      "baseline_exact_mean": 0.0,
+      "baseline_exact_std": 0.0,
+      "rescored_token_acc_mean": 69.122,
+      "rescored_token_acc_std": 0.4646,
+      "rescored_span_acc_mean": 52.9018,
+      "rescored_span_acc_std": 1.0496,
+      "rescored_longest_run_frac_mean": 0.1855,
+      "rescored_longest_run_frac_std": 0.003,
+      "rescored_exact_mean": 0.0,
+      "rescored_exact_std": 0.0,
+      "uplift_token_acc_mean": -0.0,
+      "uplift_token_acc_std": 0.0745,
+      "uplift_span_acc_mean": -0.0496,
+      "uplift_span_acc_std": 0.2274,
+      "uplift_longest_run_frac_mean": 0.0017,
+      "uplift_longest_run_frac_std": 0.003,
+      "uplift_exact_mean": 0.0,
+      "uplift_exact_std": 0.0
+    },
+    {
+      "depth": 8,
+      "attacker": "joint",
+      "n_seeds": 3,
+      "baseline_token_acc_mean": 62.8224,
+      "baseline_token_acc_std": 0.6195,
+      "baseline_span_acc_mean": 41.1707,
+      "baseline_span_acc_std": 0.9421,
+      "baseline_longest_run_frac_mean": 0.1456,
+      "baseline_longest_run_frac_std": 0.0023,
+      "baseline_exact_mean": 0.0,
+      "baseline_exact_std": 0.0,
+      "rescored_token_acc_mean": 62.8968,
+      "rescored_token_acc_std": 0.5683,
+      "rescored_span_acc_mean": 41.3691,
+      "rescored_span_acc_std": 0.7175,
+      "rescored_longest_run_frac_mean": 0.1458,
+      "rescored_longest_run_frac_std": 0.0027,
+      "rescored_exact_mean": 0.0,
+      "rescored_exact_std": 0.0,
+      "uplift_token_acc_mean": 0.0744,
+      "uplift_token_acc_std": 0.0744,
+      "uplift_span_acc_mean": 0.1984,
+      "uplift_span_acc_std": 0.367,
+      "uplift_longest_run_frac_mean": 0.0002,
+      "uplift_longest_run_frac_std": 0.0004,
+      "uplift_exact_mean": 0.0,
+      "uplift_exact_std": 0.0
+    }
+  ],
+  "results": [
+    {
+      "phase": "attack_train",
+      "depth": 1,
+      "attacker": "mlp",
+      "seed": 0,
+      "val_top1": 76.27,
+      "val_top5": 76.56
+    },
+    {
+      "phase": "attack_train",
+      "depth": 1,
+      "attacker": "mlp",
+      "seed": 1,
+      "val_top1": 76.27,
+      "val_top5": 76.53
+    },
+    {
+      "phase": "attack_train",
+      "depth": 1,
+      "attacker": "mlp",
+      "seed": 2,
+      "val_top1": 76.23,
+      "val_top5": 76.5
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "attacker": "mlp",
+      "seed": 0,
+      "baseline": {
+        "token_acc": 73.7351,
+        "span_acc": 58.3333,
+        "longest_run_frac": 0.2046,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 73.7351,
+        "span_acc": 58.3333,
+        "longest_run_frac": 0.2046,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.0,
+        "span_acc": 0.0,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "attacker": "mlp",
+      "seed": 1,
+      "baseline": {
+        "token_acc": 72.3214,
+        "span_acc": 57.5893,
+        "longest_run_frac": 0.2001,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 72.3214,
+        "span_acc": 57.7381,
+        "longest_run_frac": 0.2009,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.0,
+        "span_acc": 0.1488,
+        "longest_run_frac": 0.0008,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "attacker": "mlp",
+      "seed": 2,
+      "baseline": {
+        "token_acc": 73.4375,
+        "span_acc": 58.0357,
+        "longest_run_frac": 0.1994,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 73.4375,
+        "span_acc": 58.0357,
+        "longest_run_frac": 0.1994,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.0,
+        "span_acc": 0.0,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "attacker": "joint",
+      "seed": 0,
+      "baseline": {
+        "token_acc": 65.0298,
+        "span_acc": 44.2708,
+        "longest_run_frac": 0.1548,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 65.3274,
+        "span_acc": 44.7917,
+        "longest_run_frac": 0.1585,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.2976,
+        "span_acc": 0.5209,
+        "longest_run_frac": 0.0037,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "attacker": "joint",
+      "seed": 1,
+      "baseline": {
+        "token_acc": 66.1458,
+        "span_acc": 45.5357,
+        "longest_run_frac": 0.1562,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 66.5179,
+        "span_acc": 46.4286,
+        "longest_run_frac": 0.1592,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.3721,
+        "span_acc": 0.8929,
+        "longest_run_frac": 0.003,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "attacker": "joint",
+      "seed": 2,
+      "baseline": {
+        "token_acc": 65.5506,
+        "span_acc": 45.1637,
+        "longest_run_frac": 0.1592,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 65.625,
+        "span_acc": 45.1637,
+        "longest_run_frac": 0.1592,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.0744,
+        "span_acc": 0.0,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_train",
+      "depth": 4,
+      "attacker": "mlp",
+      "seed": 0,
+      "val_top1": 73.93,
+      "val_top5": 75.15
+    },
+    {
+      "phase": "attack_train",
+      "depth": 4,
+      "attacker": "mlp",
+      "seed": 1,
+      "val_top1": 74.08,
+      "val_top5": 75.29
+    },
+    {
+      "phase": "attack_train",
+      "depth": 4,
+      "attacker": "mlp",
+      "seed": 2,
+      "val_top1": 73.99,
+      "val_top5": 75.23
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "attacker": "mlp",
+      "seed": 0,
+      "baseline": {
+        "token_acc": 70.2381,
+        "span_acc": 54.6875,
+        "longest_run_frac": 0.192,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 70.2381,
+        "span_acc": 54.6875,
+        "longest_run_frac": 0.192,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.0,
+        "span_acc": 0.0,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "attacker": "mlp",
+      "seed": 1,
+      "baseline": {
+        "token_acc": 70.5357,
+        "span_acc": 55.6548,
+        "longest_run_frac": 0.1942,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 70.8333,
+        "span_acc": 56.4732,
+        "longest_run_frac": 0.1972,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.2976,
+        "span_acc": 0.8184,
+        "longest_run_frac": 0.003,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "attacker": "mlp",
+      "seed": 2,
+      "baseline": {
+        "token_acc": 70.3869,
+        "span_acc": 55.1339,
+        "longest_run_frac": 0.1964,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 70.5357,
+        "span_acc": 55.5804,
+        "longest_run_frac": 0.1964,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.1488,
+        "span_acc": 0.4465,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "attacker": "joint",
+      "seed": 0,
+      "baseline": {
+        "token_acc": 63.5417,
+        "span_acc": 42.4107,
+        "longest_run_frac": 0.151,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 63.6905,
+        "span_acc": 42.7083,
+        "longest_run_frac": 0.151,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.1488,
+        "span_acc": 0.2976,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "attacker": "joint",
+      "seed": 1,
+      "baseline": {
+        "token_acc": 64.7321,
+        "span_acc": 44.0476,
+        "longest_run_frac": 0.1562,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 65.0298,
+        "span_acc": 45.0893,
+        "longest_run_frac": 0.157,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.2977,
+        "span_acc": 1.0417,
+        "longest_run_frac": 0.0008,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "attacker": "joint",
+      "seed": 2,
+      "baseline": {
+        "token_acc": 64.5833,
+        "span_acc": 44.2708,
+        "longest_run_frac": 0.1644,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 64.8065,
+        "span_acc": 44.1964,
+        "longest_run_frac": 0.1667,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.2232,
+        "span_acc": -0.0744,
+        "longest_run_frac": 0.0023,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_train",
+      "depth": 8,
+      "attacker": "mlp",
+      "seed": 0,
+      "val_top1": 72.25,
+      "val_top5": 74.51
+    },
+    {
+      "phase": "attack_train",
+      "depth": 8,
+      "attacker": "mlp",
+      "seed": 1,
+      "val_top1": 72.17,
+      "val_top5": 74.36
+    },
+    {
+      "phase": "attack_train",
+      "depth": 8,
+      "attacker": "mlp",
+      "seed": 2,
+      "val_top1": 72.37,
+      "val_top5": 74.57
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 8,
+      "attacker": "mlp",
+      "seed": 0,
+      "baseline": {
+        "token_acc": 68.5268,
+        "span_acc": 51.6369,
+        "longest_run_frac": 0.1771,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 68.6012,
+        "span_acc": 51.7857,
+        "longest_run_frac": 0.1823,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.0744,
+        "span_acc": 0.1488,
+        "longest_run_frac": 0.0052,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 8,
+      "attacker": "mlp",
+      "seed": 1,
+      "baseline": {
+        "token_acc": 69.2708,
+        "span_acc": 53.0506,
+        "longest_run_frac": 0.186,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 69.2708,
+        "span_acc": 53.0506,
+        "longest_run_frac": 0.186,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.0,
+        "span_acc": 0.0,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 8,
+      "attacker": "mlp",
+      "seed": 2,
+      "baseline": {
+        "token_acc": 69.5685,
+        "span_acc": 54.1667,
+        "longest_run_frac": 0.1882,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 69.494,
+        "span_acc": 53.869,
+        "longest_run_frac": 0.1882,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": -0.0745,
+        "span_acc": -0.2977,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 8,
+      "attacker": "joint",
+      "seed": 0,
+      "baseline": {
+        "token_acc": 62.128,
+        "span_acc": 40.1042,
+        "longest_run_frac": 0.1451,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 62.2768,
+        "span_acc": 40.5506,
+        "longest_run_frac": 0.1451,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.1488,
+        "span_acc": 0.4464,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 8,
+      "attacker": "joint",
+      "seed": 1,
+      "baseline": {
+        "token_acc": 63.0208,
+        "span_acc": 41.8899,
+        "longest_run_frac": 0.1436,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 63.0208,
+        "span_acc": 41.6667,
+        "longest_run_frac": 0.1436,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.0,
+        "span_acc": -0.2232,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 8,
+      "attacker": "joint",
+      "seed": 2,
+      "baseline": {
+        "token_acc": 63.3185,
+        "span_acc": 41.5179,
+        "longest_run_frac": 0.1481,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 63.3929,
+        "span_acc": 41.8899,
+        "longest_run_frac": 0.1488,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.0744,
+        "span_acc": 0.372,
+        "longest_run_frac": 0.0007,
+        "exact": 0.0
+      }
+    }
+  ]
+}

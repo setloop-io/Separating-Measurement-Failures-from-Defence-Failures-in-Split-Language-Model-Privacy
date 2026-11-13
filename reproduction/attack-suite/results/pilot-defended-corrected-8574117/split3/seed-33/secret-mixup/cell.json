@@ -1,0 +1,212 @@
+{
+  "schema": "llm_attacker.defended_pilot_cell.v1",
+  "status": "COMPLETE",
+  "measurement_version": 2,
+  "observation_location": "body_input_seam",
+  "baseline_scope": "unadapted public-head reconstruction; bottleneck mismatch is not a privacy certificate",
+  "split": 3,
+  "seed": 33,
+  "defense": "secret-mixup",
+  "paired_control": "../none/cell.json",
+  "wall_seconds": 0.19390833284705877,
+  "attack_seconds": 0.5833732085302472,
+  "cuda_peak_allocated_bytes": null,
+  "resources_scope": "victim wall includes capture I/O and matched utility measurements; attack time is separate; cuda peak is process-wide (experiment.json convention)",
+  "utility_before": {
+    "cross_entropy": 4.164264270237514,
+    "perplexity": 64.34532425405342,
+    "tokens": 42,
+    "documents": 6,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "before_victim_training"
+  },
+  "utility_after": {
+    "cross_entropy": 4.154899233863468,
+    "perplexity": 63.74554083230102,
+    "tokens": 42,
+    "documents": 6,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "after_victim_training"
+  },
+  "training": {
+    "steps_run": 12,
+    "final_loss": 4.238977909088135,
+    "mean_loss": 4.153360923131307
+  },
+  "access": {
+    "schema": "llm_attacker.defended_pilot_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 6,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 4,
+        "beam_width": 2
+      },
+      "sipit": {
+        "steps_per_token": 4
+      },
+      "scored_sequences": 4
+    }
+  },
+  "provenance": {
+    "path": "captures/secret_mixup_provenance.json",
+    "sha256": "8b1f83adeb2261d55a96ced0da38d2bfe3e63abc5648e4e78cdd4d0247ea021e"
+  },
+  "run_artifact": "run.json",
+  "evidence": "run.json.evidence.json",
+  "captures_dir": "captures",
+  "attacks": {
+    "forward": {
+      "accuracy": 1.0,
+      "n_tokens": 32,
+      "n_sequences": 4,
+      "candidate_count": 4,
+      "beam_width": 2,
+      "work": {
+        "head_forward_calls": 8,
+        "head_forward_sequences": 240,
+        "head_forward_token_positions": 1136,
+        "head_backward_calls": 0,
+        "head_backward_token_positions": 0,
+        "vocabulary_dot_products": 2048,
+        "wall_seconds": 0.00665916595607996,
+        "cuda_seconds": null,
+        "peak_allocated_bytes": null,
+        "incremental_peak_allocated_bytes": null
+      },
+      "artifact": "forward-baseline.json"
+    },
+    "sipit": {
+      "accuracy": 0.03125,
+      "n_tokens": 32,
+      "n_sequences": 4,
+      "steps_per_token": 4,
+      "work": {
+        "head_forward_calls": 64,
+        "head_forward_sequences": 256,
+        "head_forward_token_positions": 1152,
+        "head_backward_calls": 32,
+        "head_backward_token_positions": 576,
+        "vocabulary_dot_products": 8192,
+        "wall_seconds": 0.04528795834630728,
+        "cuda_seconds": null,
+        "peak_allocated_bytes": null,
+        "incremental_peak_allocated_bytes": null
+      },
+      "artifact": "sipit-baseline.json"
+    },
+    "view-privacy": {
+      "bundle": "view-bundle.json",
+      "artifact": "view-privacy.json",
+      "rows": [
+        {
+          "arm": "calibrated_mean",
+          "mse": 0.00012940794993128985
+        },
+        {
+          "arm": "naive_zero_mean",
+          "mse": 0.0001601426991848992
+        },
+        {
+          "arm": "oracle_pool_mean",
+          "mse": 0.0001362691055962166
+        },
+        {
+          "arm": "calibrated_mean",
+          "mse": 8.223463454988148e-05
+        },
+        {
+          "arm": "naive_zero_mean",
+          "mse": 9.75202593221456e-05
+        },
+        {
+          "arm": "oracle_pool_mean",
+          "mse": 8.754312311010388e-05
+        },
+        {
+          "arm": "calibrated_mean",
+          "mse": 7.57445126107701e-05
+        },
+        {
+          "arm": "naive_zero_mean",
+          "mse": 8.232252197705742e-05
+        },
+        {
+          "arm": "oracle_pool_mean",
+          "mse": 7.898447180834919e-05
+        },
+        {
+          "arm": "no_observation_calibration_mean",
+          "mse": 0.0008443152669317353
+        },
+        {
+          "arm": "nonlinear_corrected_output",
+          "mse": 8.495983692389838e-07
+        },
+        {
+          "arm": "calibrated_mean",
+          "mse": 6.925114548662602e-05
+        },
+        {
+          "arm": "naive_zero_mean",
+          "mse": 0.00010368587964581529
+        },
+        {
+          "arm": "oracle_pool_mean",
+          "mse": 7.635834992207557e-05
+        },
+        {
+          "arm": "calibrated_mean",
+          "mse": 3.7658111964464844e-05
+        },
+        {
+          "arm": "naive_zero_mean",
+          "mse": 5.4928808003532145e-05
+        },
+        {
+          "arm": "oracle_pool_mean",
+          "mse": 4.3098607642840754e-05
+        },
+        {
+          "arm": "calibrated_mean",
+          "mse": 4.151290287966527e-05
+        },
+        {
+          "arm": "naive_zero_mean",
+          "mse": 4.9018194671621885e-05
+        },
+        {
+          "arm": "oracle_pool_mean",
+          "mse": 4.481452630198734e-05
+        },
+        {
+          "arm": "no_observation_calibration_mean",
+          "mse": 0.0008443152669317353
+        },
+        {
+          "arm": "nonlinear_corrected_output",
+          "mse": 0.0
+        }
+      ]
+    }
+  },
+  "artifact_hashes": {
+    "view-privacy.json": "b70426a248c28a4392757fcde096bba5a3177c3e8effaf53c97420511540b58a",
+    "sipit-baseline.json": "ea82fc1bfe8bf93df1f4e388e2a7ef5dc8adddca99fe28da2ae5615a4473fb91",
+    "forward-baseline.json": "7fa19b550dd456f533412dc6104b89bdbc46a8c6e8cc11e60657eac0ffef7eab",
+    "view-bundle.json": "8eedf6fc68342dd34c3596a54875750497961b9af0ea4e163ab3c68414c882c0",
+    "sipit-predictions.json": "83b4b85773094c9177ca9f408a0791ed6556ec6e2f35689f7c20ee9425f89b5a",
+    "run.json": "369c25c44647de72b9b3d1b5ad675587bf3557b9d3b94019c3b69782045c5a7c",
+    "forward-predictions.json": "190cf83d6a203db9d7bf993f9e558b4e7801ee20ee6ac73570d9db5af110a62c"
+  }
+}

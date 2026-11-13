@@ -1,0 +1,3179 @@
+{
+  "schema": "dtraining.rotation_lifetime.v1",
+  "config": {
+    "model": "/workspace/experiments/models/qwen36-27b",
+    "n_layers": 64,
+    "experiment": "er3",
+    "depths": [
+      1,
+      4,
+      8
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "solve_seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 10,
+    "seq_len": 64,
+    "epoch_sizes": [
+      64,
+      256,
+      1024,
+      4096
+    ],
+    "prefix_len": 64,
+    "sessions": 16,
+    "stale_epoch_sizes": [
+      256,
+      1024
+    ],
+    "shards": [
+      1,
+      4,
+      16
+    ],
+    "rotation_period": 8,
+    "shard_epoch_pairs": 1024,
+    "dtype": "bf16",
+    "device": "cuda",
+    "master_seed_base": 42,
+    "quick": false
+  },
+  "threat_model": "honest-but-curious cloud under PER-EPOCH rotation of the E8 boundary secret W (fresh ratchet-derived W each epoch). Attacker capabilities under test: (E-R1a) E labeled (h, hW) pairs from WITHIN one epoch (oracle serving/self-labeled traffic); (E-R3) knowledge of a fixed system-prompt prefix, static W, with/without scaffold jitter; (E-R4) an insider HANDED stale keys W_1..W_3 plus the derivation rule but not master_seed; (E-R5) labeled pairs against block-diagonal sharded secrets with a 2-epoch sliding window. W itself is never leaked in the current epoch.",
+  "interpretation": "E-R1a: recovery below 50% at epoch size E => the per-epoch budget is safe at E; max_safe_epoch is compared against the static-W K50 prior {1: 258, 4: 356, 8: 618} (depths 1/4/8, 27B bf16, e8_robustness_27b_bf16_densek_20260807T230529Z.json). The pooled-cross-epoch control must sit in the label-free band (<=3.7% on real models): accumulation does not cross rotation boundaries. E-R3: fixed_scaffold reproduces the known break (~4 sessions at S=64, K90 ~= 232-240 pairs); jittered_scaffold must show no K90 crossing within 16 sessions. E-R4: stale-only recovery ~= band with W rel_err ~= sqrt(2) (random); fresh-pair cells must match E-R1a at the same E (stale keys give zero bootstrap). E-R5: static sharding is the NEGATIVE CONTROL \u2014 per-block budgets shrink to 0.1*h_b, so s=16 is easier to break than s=1; staggering restores the defense because no 2-epoch window has all blocks on one key.",
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9981,
+      9982,
+      9983,
+      9984,
+      9985,
+      9986,
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "split-inference:spark",
+    "hostname": "koula",
+    "victim_doc_sha256": {},
+    "dtraining_commit": "05228d268a0f4af8ee9d93cc475740d2c63143f6",
+    "model_manifest_sha256": "f8c3bc4bd8e650242cc38e534146672c60a932e92202cd4d5d47b29fde8a7d30",
+    "model_manifest_algo": "v2-sizes-no-cache",
+    "model_manifest_n_files": 29,
+    "model_path": "qwen36-27b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "random_baseline_top1_pct": 0.0004,
+  "measurement_kind": "lab-harness simulation: attacks executed in-process against collected boundary activations; no live wire",
+  "evidence_status": "primary",
+  "known_limitations": [
+    "labeled-pair attacker is an upper bound (oracle serving); real self-labeled traffic yields noisier pairs",
+    "rotation cadence is per-epoch; sub-epoch accumulation is the binding constraint, so epoch sizes must stay below max_safe_epoch with margin",
+    "E-R3 jitter models pad-insertion + slot permutation only; a stronger attacker with approximate alignment search is not covered",
+    "E-R5 sharding WITHOUT staggering strictly weakens per-block budgets (negative control) \u2014 shard counts must not be deployed without the staggered schedule",
+    "historical artifacts are immutable; the K50 prior quoted here comes from e8_robustness_27b_bf16_densek_20260807T230529Z.json"
+  ],
+  "summary": [
+    {
+      "experiment": "er3",
+      "depth": 1,
+      "arm": "fixed_scaffold",
+      "prefix_len": 64,
+      "n_sessions": 16,
+      "labelable_pairs_per_session": 64,
+      "sessions_to_k90_mean": 14.3333,
+      "sessions_to_k90_per_seed": [
+        {
+          "seed": 0,
+          "baseline_top1": 70.31,
+          "k90_threshold": 63.279,
+          "sessions_to_k90": 15,
+          "crossing": {
+            "k50_interpolated": 933.986,
+            "k50_bracket": [
+              896,
+              960
+            ],
+            "k50_bracket_ratio": 1.0714,
+            "k50_method": "linear_in_K",
+            "k50_threshold_pct": 63.279,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 33.28
+            },
+            {
+              "K": 128,
+              "top1_mean": 39.6367
+            },
+            {
+              "K": 192,
+              "top1_mean": 43.3333
+            },
+            {
+              "K": 256,
+              "top1_mean": 46.72
+            },
+            {
+              "K": 320,
+              "top1_mean": 48.5433
+            },
+            {
+              "K": 384,
+              "top1_mean": 51.4567
+            },
+            {
+              "K": 448,
+              "top1_mean": 53.9067
+            },
+            {
+              "K": 512,
+              "top1_mean": 56.6133
+            },
+            {
+              "K": 576,
+              "top1_mean": 57.29
+            },
+            {
+              "K": 640,
+              "top1_mean": 58.5933
+            },
+            {
+              "K": 704,
+              "top1_mean": 59.4267
+            },
+            {
+              "K": 768,
+              "top1_mean": 62.6033
+            },
+            {
+              "K": 832,
+              "top1_mean": 62.6567
+            },
+            {
+              "K": 896,
+              "top1_mean": 63.1267
+            },
+            {
+              "K": 960,
+              "top1_mean": 63.3833
+            },
+            {
+              "K": 1024,
+              "top1_mean": 65.0
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "baseline_top1": 70.31,
+          "k90_threshold": 63.279,
+          "sessions_to_k90": 16,
+          "crossing": {
+            "k50_interpolated": 990.742,
+            "k50_bracket": [
+              960,
+              1024
+            ],
+            "k50_bracket_ratio": 1.0667,
+            "k50_method": "linear_in_K",
+            "k50_threshold_pct": 63.279,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 33.1233
+            },
+            {
+              "K": 128,
+              "top1_mean": 40.26
+            },
+            {
+              "K": 192,
+              "top1_mean": 44.48
+            },
+            {
+              "K": 256,
+              "top1_mean": 47.1367
+            },
+            {
+              "K": 320,
+              "top1_mean": 49.6367
+            },
+            {
+              "K": 384,
+              "top1_mean": 52.45
+            },
+            {
+              "K": 448,
+              "top1_mean": 55.1567
+            },
+            {
+              "K": 512,
+              "top1_mean": 55.57
+            },
+            {
+              "K": 576,
+              "top1_mean": 58.3867
+            },
+            {
+              "K": 640,
+              "top1_mean": 58.9067
+            },
+            {
+              "K": 704,
+              "top1_mean": 60.57
+            },
+            {
+              "K": 768,
+              "top1_mean": 61.04
+            },
+            {
+              "K": 832,
+              "top1_mean": 62.6533
+            },
+            {
+              "K": 896,
+              "top1_mean": 62.97
+            },
+            {
+              "K": 960,
+              "top1_mean": 62.6033
+            },
+            {
+              "K": 1024,
+              "top1_mean": 64.01
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "baseline_top1": 69.06,
+          "k90_threshold": 62.154,
+          "sessions_to_k90": 12,
+          "crossing": {
+            "k50_interpolated": 765.5465,
+            "k50_bracket": [
+              704,
+              768
+            ],
+            "k50_bracket_ratio": 1.0909,
+            "k50_method": "linear_in_K",
+            "k50_threshold_pct": 62.154,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 33.6967
+            },
+            {
+              "K": 128,
+              "top1_mean": 41.04
+            },
+            {
+              "K": 192,
+              "top1_mean": 44.79
+            },
+            {
+              "K": 256,
+              "top1_mean": 48.6433
+            },
+            {
+              "K": 320,
+              "top1_mean": 51.1467
+            },
+            {
+              "K": 384,
+              "top1_mean": 53.0767
+            },
+            {
+              "K": 448,
+              "top1_mean": 56.4567
+            },
+            {
+              "K": 512,
+              "top1_mean": 55.8867
+            },
+            {
+              "K": 576,
+              "top1_mean": 57.76
+            },
+            {
+              "K": 640,
+              "top1_mean": 58.8033
+            },
+            {
+              "K": 704,
+              "top1_mean": 59.9967
+            },
+            {
+              "K": 768,
+              "top1_mean": 62.24
+            },
+            {
+              "K": 832,
+              "top1_mean": 62.71
+            },
+            {
+              "K": 896,
+              "top1_mean": 64.22
+            },
+            {
+              "K": 960,
+              "top1_mean": 63.9067
+            },
+            {
+              "K": 1024,
+              "top1_mean": 64.95
+            }
+          ]
+        }
+      ],
+      "final_top1_mean": 64.6533
+    },
+    {
+      "experiment": "er3",
+      "depth": 1,
+      "arm": "jittered_scaffold",
+      "prefix_len": 64,
+      "n_sessions": 16,
+      "labelable_pairs_per_session": 0,
+      "sessions_to_k90_mean": null,
+      "sessions_to_k90_per_seed": [
+        {
+          "seed": 0,
+          "baseline_top1": 70.31,
+          "k90_threshold": 63.279,
+          "sessions_to_k90": null,
+          "crossing": {
+            "k50_interpolated": null,
+            "k50_bracket": null,
+            "k50_bracket_ratio": null,
+            "k50_method": "not_bracketed",
+            "k50_threshold_pct": 63.279,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 3.12
+            },
+            {
+              "K": 128,
+              "top1_mean": 3.12
+            },
+            {
+              "K": 192,
+              "top1_mean": 3.12
+            },
+            {
+              "K": 256,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 320,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 384,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 448,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 512,
+              "top1_mean": 0.0533
+            },
+            {
+              "K": 576,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 640,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 704,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 768,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 832,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 896,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 960,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 1024,
+              "top1_mean": 0.0
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "baseline_top1": 70.31,
+          "k90_threshold": 63.279,
+          "sessions_to_k90": null,
+          "crossing": {
+            "k50_interpolated": null,
+            "k50_bracket": null,
+            "k50_bracket_ratio": null,
+            "k50_method": "not_bracketed",
+            "k50_threshold_pct": 63.279,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 5.3667
+            },
+            {
+              "K": 128,
+              "top1_mean": 4.79
+            },
+            {
+              "K": 192,
+              "top1_mean": 3.12
+            },
+            {
+              "K": 256,
+              "top1_mean": 0.2067
+            },
+            {
+              "K": 320,
+              "top1_mean": 0.2633
+            },
+            {
+              "K": 384,
+              "top1_mean": 0.0533
+            },
+            {
+              "K": 448,
+              "top1_mean": 0.7267
+            },
+            {
+              "K": 512,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 576,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 640,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 704,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 768,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 832,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 896,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 960,
+              "top1_mean": 0.26
+            },
+            {
+              "K": 1024,
+              "top1_mean": 2.3933
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "baseline_top1": 69.06,
+          "k90_threshold": 62.154,
+          "sessions_to_k90": null,
+          "crossing": {
+            "k50_interpolated": null,
+            "k50_bracket": null,
+            "k50_bracket_ratio": null,
+            "k50_method": "not_bracketed",
+            "k50_threshold_pct": 62.154,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 5.47
+            },
+            {
+              "K": 128,
+              "top1_mean": 1.88
+            },
+            {
+              "K": 192,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 256,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 320,
+              "top1_mean": 0.0533
+            },
+            {
+              "K": 384,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 448,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 512,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 576,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 640,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 704,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 768,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 832,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 896,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 960,
+              "top1_mean": 0.52
+            },
+            {
+              "K": 1024,
+              "top1_mean": 0.0
+            }
+          ]
+        }
+      ],
+      "final_top1_mean": 0.7978
+    },
+    {
+      "experiment": "er3",
+      "depth": 4,
+      "arm": "fixed_scaffold",
+      "prefix_len": 64,
+      "n_sessions": 16,
+      "labelable_pairs_per_session": 64,
+      "sessions_to_k90_mean": 14.5,
+      "sessions_to_k90_per_seed": [
+        {
+          "seed": 0,
+          "baseline_top1": 67.81,
+          "k90_threshold": 61.029,
+          "sessions_to_k90": null,
+          "crossing": {
+            "k50_interpolated": null,
+            "k50_bracket": null,
+            "k50_bracket_ratio": null,
+            "k50_method": "not_bracketed",
+            "k50_threshold_pct": 61.029,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 32.81
+            },
+            {
+              "K": 128,
+              "top1_mean": 38.8033
+            },
+            {
+              "K": 192,
+              "top1_mean": 42.5
+            },
+            {
+              "K": 256,
+              "top1_mean": 45.8867
+            },
+            {
+              "K": 320,
+              "top1_mean": 48.6967
+            },
+            {
+              "K": 384,
+              "top1_mean": 50.1567
+            },
+            {
+              "K": 448,
+              "top1_mean": 52.7633
+            },
+            {
+              "K": 512,
+              "top1_mean": 54.3733
+            },
+            {
+              "K": 576,
+              "top1_mean": 55.26
+            },
+            {
+              "K": 640,
+              "top1_mean": 57.03
+            },
+            {
+              "K": 704,
+              "top1_mean": 57.71
+            },
+            {
+              "K": 768,
+              "top1_mean": 58.3333
+            },
+            {
+              "K": 832,
+              "top1_mean": 59.1667
+            },
+            {
+              "K": 896,
+              "top1_mean": 60.4667
+            },
+            {
+              "K": 960,
+              "top1_mean": 60.3133
+            },
+            {
+              "K": 1024,
+              "top1_mean": 60.9933
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "baseline_top1": 68.12,
+          "k90_threshold": 61.308,
+          "sessions_to_k90": 15,
+          "crossing": {
+            "k50_interpolated": 906.6032,
+            "k50_bracket": [
+              896,
+              960
+            ],
+            "k50_bracket_ratio": 1.0714,
+            "k50_method": "linear_in_K",
+            "k50_threshold_pct": 61.30800000000001,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 33.1767
+            },
+            {
+              "K": 128,
+              "top1_mean": 39.3767
+            },
+            {
+              "K": 192,
+              "top1_mean": 43.1767
+            },
+            {
+              "K": 256,
+              "top1_mean": 45.4167
+            },
+            {
+              "K": 320,
+              "top1_mean": 47.3933
+            },
+            {
+              "K": 384,
+              "top1_mean": 48.5967
+            },
+            {
+              "K": 448,
+              "top1_mean": 51.98
+            },
+            {
+              "K": 512,
+              "top1_mean": 53.3333
+            },
+            {
+              "K": 576,
+              "top1_mean": 55.3633
+            },
+            {
+              "K": 640,
+              "top1_mean": 56.6167
+            },
+            {
+              "K": 704,
+              "top1_mean": 56.51
+            },
+            {
+              "K": 768,
+              "top1_mean": 58.4367
+            },
+            {
+              "K": 832,
+              "top1_mean": 59.69
+            },
+            {
+              "K": 896,
+              "top1_mean": 61.2467
+            },
+            {
+              "K": 960,
+              "top1_mean": 61.6167
+            },
+            {
+              "K": 1024,
+              "top1_mean": 62.1867
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "baseline_top1": 67.66,
+          "k90_threshold": 60.894,
+          "sessions_to_k90": 14,
+          "crossing": {
+            "k50_interpolated": 883.0618,
+            "k50_bracket": [
+              832,
+              896
+            ],
+            "k50_bracket_ratio": 1.0769,
+            "k50_method": "linear_in_K",
+            "k50_threshold_pct": 60.894,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 33.02
+            },
+            {
+              "K": 128,
+              "top1_mean": 39.2733
+            },
+            {
+              "K": 192,
+              "top1_mean": 42.2933
+            },
+            {
+              "K": 256,
+              "top1_mean": 45.6733
+            },
+            {
+              "K": 320,
+              "top1_mean": 47.8633
+            },
+            {
+              "K": 384,
+              "top1_mean": 50.3633
+            },
+            {
+              "K": 448,
+              "top1_mean": 53.1233
+            },
+            {
+              "K": 512,
+              "top1_mean": 54.4267
+            },
+            {
+              "K": 576,
+              "top1_mean": 54.7933
+            },
+            {
+              "K": 640,
+              "top1_mean": 56.9267
+            },
+            {
+              "K": 704,
+              "top1_mean": 58.6433
+            },
+            {
+              "K": 768,
+              "top1_mean": 59.53
+            },
+            {
+              "K": 832,
+              "top1_mean": 59.8967
+            },
+            {
+              "K": 896,
+              "top1_mean": 61.1467
+            },
+            {
+              "K": 960,
+              "top1_mean": 61.1967
+            },
+            {
+              "K": 1024,
+              "top1_mean": 62.5
+            }
+          ]
+        }
+      ],
+      "final_top1_mean": 61.8933
+    },
+    {
+      "experiment": "er3",
+      "depth": 4,
+      "arm": "jittered_scaffold",
+      "prefix_len": 64,
+      "n_sessions": 16,
+      "labelable_pairs_per_session": 0,
+      "sessions_to_k90_mean": null,
+      "sessions_to_k90_per_seed": [
+        {
+          "seed": 0,
+          "baseline_top1": 67.81,
+          "k90_threshold": 61.029,
+          "sessions_to_k90": null,
+          "crossing": {
+            "k50_interpolated": null,
+            "k50_bracket": null,
+            "k50_bracket_ratio": null,
+            "k50_method": "not_bracketed",
+            "k50_threshold_pct": 61.029,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 5.47
+            },
+            {
+              "K": 128,
+              "top1_mean": 1.56
+            },
+            {
+              "K": 192,
+              "top1_mean": 2.6033
+            },
+            {
+              "K": 256,
+              "top1_mean": 0.6267
+            },
+            {
+              "K": 320,
+              "top1_mean": 0.3633
+            },
+            {
+              "K": 384,
+              "top1_mean": 0.99
+            },
+            {
+              "K": 448,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 512,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 576,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 640,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 704,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 768,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 832,
+              "top1_mean": 0.21
+            },
+            {
+              "K": 896,
+              "top1_mean": 0.2633
+            },
+            {
+              "K": 960,
+              "top1_mean": 4.7367
+            },
+            {
+              "K": 1024,
+              "top1_mean": 2.29
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "baseline_top1": 68.12,
+          "k90_threshold": 61.308,
+          "sessions_to_k90": null,
+          "crossing": {
+            "k50_interpolated": null,
+            "k50_bracket": null,
+            "k50_bracket_ratio": null,
+            "k50_method": "not_bracketed",
+            "k50_threshold_pct": 61.30800000000001,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 128,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 192,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 256,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 320,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 384,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 448,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 512,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 576,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 640,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 704,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 768,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 832,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 896,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 960,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 1024,
+              "top1_mean": 0.0
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "baseline_top1": 67.66,
+          "k90_threshold": 60.894,
+          "sessions_to_k90": null,
+          "crossing": {
+            "k50_interpolated": null,
+            "k50_bracket": null,
+            "k50_bracket_ratio": null,
+            "k50_method": "not_bracketed",
+            "k50_threshold_pct": 60.894,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 5.4167
+            },
+            {
+              "K": 128,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 192,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 256,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 320,
+              "top1_mean": 0.52
+            },
+            {
+              "K": 384,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 448,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 512,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 576,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 640,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 704,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 768,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 832,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 896,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 960,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 1024,
+              "top1_mean": 0.0
+            }
+          ]
+        }
+      ],
+      "final_top1_mean": 0.7633
+    },
+    {
+      "experiment": "er3",
+      "depth": 8,
+      "arm": "fixed_scaffold",
+      "prefix_len": 64,
+      "n_sessions": 16,
+      "labelable_pairs_per_session": 64,
+      "sessions_to_k90_mean": 14.6667,
+      "sessions_to_k90_per_seed": [
+        {
+          "seed": 0,
+          "baseline_top1": 65.31,
+          "k90_threshold": 58.779,
+          "sessions_to_k90": 15,
+          "crossing": {
+            "k50_interpolated": 938.4075,
+            "k50_bracket": [
+              896,
+              960
+            ],
+            "k50_bracket_ratio": 1.0714,
+            "k50_method": "linear_in_K",
+            "k50_threshold_pct": 58.779,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 29.8967
+            },
+            {
+              "K": 128,
+              "top1_mean": 37.29
+            },
+            {
+              "K": 192,
+              "top1_mean": 41.04
+            },
+            {
+              "K": 256,
+              "top1_mean": 44.06
+            },
+            {
+              "K": 320,
+              "top1_mean": 46.2533
+            },
+            {
+              "K": 384,
+              "top1_mean": 48.0233
+            },
+            {
+              "K": 448,
+              "top1_mean": 50.6233
+            },
+            {
+              "K": 512,
+              "top1_mean": 52.3433
+            },
+            {
+              "K": 576,
+              "top1_mean": 53.5433
+            },
+            {
+              "K": 640,
+              "top1_mean": 55.5233
+            },
+            {
+              "K": 704,
+              "top1_mean": 55.2067
+            },
+            {
+              "K": 768,
+              "top1_mean": 56.7167
+            },
+            {
+              "K": 832,
+              "top1_mean": 57.55
+            },
+            {
+              "K": 896,
+              "top1_mean": 57.71
+            },
+            {
+              "K": 960,
+              "top1_mean": 59.3233
+            },
+            {
+              "K": 1024,
+              "top1_mean": 59.5833
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "baseline_top1": 66.56,
+          "k90_threshold": 59.904,
+          "sessions_to_k90": 14,
+          "crossing": {
+            "k50_interpolated": 893.7411,
+            "k50_bracket": [
+              832,
+              896
+            ],
+            "k50_bracket_ratio": 1.0769,
+            "k50_method": "linear_in_K",
+            "k50_threshold_pct": 59.904,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 30.21
+            },
+            {
+              "K": 128,
+              "top1_mean": 37.1333
+            },
+            {
+              "K": 192,
+              "top1_mean": 41.1967
+            },
+            {
+              "K": 256,
+              "top1_mean": 44.27
+            },
+            {
+              "K": 320,
+              "top1_mean": 46.4567
+            },
+            {
+              "K": 384,
+              "top1_mean": 48.8533
+            },
+            {
+              "K": 448,
+              "top1_mean": 50.99
+            },
+            {
+              "K": 512,
+              "top1_mean": 52.2367
+            },
+            {
+              "K": 576,
+              "top1_mean": 53.6967
+            },
+            {
+              "K": 640,
+              "top1_mean": 55.8833
+            },
+            {
+              "K": 704,
+              "top1_mean": 57.7567
+            },
+            {
+              "K": 768,
+              "top1_mean": 58.3333
+            },
+            {
+              "K": 832,
+              "top1_mean": 58.6467
+            },
+            {
+              "K": 896,
+              "top1_mean": 59.95
+            },
+            {
+              "K": 960,
+              "top1_mean": 60.3133
+            },
+            {
+              "K": 1024,
+              "top1_mean": 60.3133
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "baseline_top1": 65.78,
+          "k90_threshold": 59.202,
+          "sessions_to_k90": 15,
+          "crossing": {
+            "k50_interpolated": 917.3165,
+            "k50_bracket": [
+              896,
+              960
+            ],
+            "k50_bracket_ratio": 1.0714,
+            "k50_method": "linear_in_K",
+            "k50_threshold_pct": 59.202000000000005,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 29.69
+            },
+            {
+              "K": 128,
+              "top1_mean": 36.8767
+            },
+            {
+              "K": 192,
+              "top1_mean": 41.77
+            },
+            {
+              "K": 256,
+              "top1_mean": 45.3133
+            },
+            {
+              "K": 320,
+              "top1_mean": 46.3567
+            },
+            {
+              "K": 384,
+              "top1_mean": 48.1233
+            },
+            {
+              "K": 448,
+              "top1_mean": 50.99
+            },
+            {
+              "K": 512,
+              "top1_mean": 52.5533
+            },
+            {
+              "K": 576,
+              "top1_mean": 54.27
+            },
+            {
+              "K": 640,
+              "top1_mean": 55.7267
+            },
+            {
+              "K": 704,
+              "top1_mean": 56.3033
+            },
+            {
+              "K": 768,
+              "top1_mean": 57.5533
+            },
+            {
+              "K": 832,
+              "top1_mean": 57.9667
+            },
+            {
+              "K": 896,
+              "top1_mean": 58.9067
+            },
+            {
+              "K": 960,
+              "top1_mean": 59.7933
+            },
+            {
+              "K": 1024,
+              "top1_mean": 60.8333
+            }
+          ]
+        }
+      ],
+      "final_top1_mean": 60.2433
+    },
+    {
+      "experiment": "er3",
+      "depth": 8,
+      "arm": "jittered_scaffold",
+      "prefix_len": 64,
+      "n_sessions": 16,
+      "labelable_pairs_per_session": 0,
+      "sessions_to_k90_mean": null,
+      "sessions_to_k90_per_seed": [
+        {
+          "seed": 0,
+          "baseline_top1": 65.31,
+          "k90_threshold": 58.779,
+          "sessions_to_k90": null,
+          "crossing": {
+            "k50_interpolated": null,
+            "k50_bracket": null,
+            "k50_bracket_ratio": null,
+            "k50_method": "not_bracketed",
+            "k50_threshold_pct": 58.779,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 2.8133
+            },
+            {
+              "K": 128,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 192,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 256,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 320,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 384,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 448,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 512,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 576,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 640,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 704,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 768,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 832,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 896,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 960,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 1024,
+              "top1_mean": 0.0
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "baseline_top1": 66.56,
+          "k90_threshold": 59.904,
+          "sessions_to_k90": null,
+          "crossing": {
+            "k50_interpolated": null,
+            "k50_bracket": null,
+            "k50_bracket_ratio": null,
+            "k50_method": "not_bracketed",
+            "k50_threshold_pct": 59.904,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 128,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 192,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 256,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 320,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 384,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 448,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 512,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 576,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 640,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 704,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 768,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 832,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 896,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 960,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 1024,
+              "top1_mean": 0.0
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "baseline_top1": 65.78,
+          "k90_threshold": 59.202,
+          "sessions_to_k90": null,
+          "crossing": {
+            "k50_interpolated": null,
+            "k50_bracket": null,
+            "k50_bracket_ratio": null,
+            "k50_method": "not_bracketed",
+            "k50_threshold_pct": 59.202000000000005,
+            "k50_max_sampled_k": 1024,
+            "k50_n_points": 16
+          },
+          "curve": [
+            {
+              "K": 64,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 128,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 192,
+              "top1_mean": 0.21
+            },
+            {
+              "K": 256,
+              "top1_mean": 0.5733
+            },
+            {
+              "K": 320,
+              "top1_mean": 2.0333
+            },
+            {
+              "K": 384,
+              "top1_mean": 1.25
+            },
+            {
+              "K": 448,
+              "top1_mean": 0.7833
+            },
+            {
+              "K": 512,
+              "top1_mean": 0.8867
+            },
+            {
+              "K": 576,
+              "top1_mean": 0.0533
+            },
+            {
+              "K": 640,
+              "top1_mean": 0.47
+            },
+            {
+              "K": 704,
+              "top1_mean": 0.0533
+            },
+            {
+              "K": 768,
+              "top1_mean": 0.0533
+            },
+            {
+              "K": 832,
+              "top1_mean": 0.0533
+            },
+            {
+              "K": 896,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 960,
+              "top1_mean": 0.0
+            },
+            {
+              "K": 1024,
+              "top1_mean": 0.0
+            }
+          ]
+        }
+      ],
+      "final_top1_mean": 0.0
+    }
+  ],
+  "results": [
+    {
+      "experiment": "er3",
+      "depth": 1,
+      "arm": "fixed_scaffold",
+      "seed": 0,
+      "baseline_top1": 70.31,
+      "k90_threshold": 63.279,
+      "sessions_to_k90": 15,
+      "crossing": {
+        "k50_interpolated": 933.986,
+        "k50_bracket": [
+          896,
+          960
+        ],
+        "k50_bracket_ratio": 1.0714,
+        "k50_method": "linear_in_K",
+        "k50_threshold_pct": 63.279,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 33.28
+        },
+        {
+          "K": 128,
+          "top1_mean": 39.6367
+        },
+        {
+          "K": 192,
+          "top1_mean": 43.3333
+        },
+        {
+          "K": 256,
+          "top1_mean": 46.72
+        },
+        {
+          "K": 320,
+          "top1_mean": 48.5433
+        },
+        {
+          "K": 384,
+          "top1_mean": 51.4567
+        },
+        {
+          "K": 448,
+          "top1_mean": 53.9067
+        },
+        {
+          "K": 512,
+          "top1_mean": 56.6133
+        },
+        {
+          "K": 576,
+          "top1_mean": 57.29
+        },
+        {
+          "K": 640,
+          "top1_mean": 58.5933
+        },
+        {
+          "K": 704,
+          "top1_mean": 59.4267
+        },
+        {
+          "K": 768,
+          "top1_mean": 62.6033
+        },
+        {
+          "K": 832,
+          "top1_mean": 62.6567
+        },
+        {
+          "K": 896,
+          "top1_mean": 63.1267
+        },
+        {
+          "K": 960,
+          "top1_mean": 63.3833
+        },
+        {
+          "K": 1024,
+          "top1_mean": 65.0
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 1,
+      "arm": "fixed_scaffold",
+      "seed": 1,
+      "baseline_top1": 70.31,
+      "k90_threshold": 63.279,
+      "sessions_to_k90": 16,
+      "crossing": {
+        "k50_interpolated": 990.742,
+        "k50_bracket": [
+          960,
+          1024
+        ],
+        "k50_bracket_ratio": 1.0667,
+        "k50_method": "linear_in_K",
+        "k50_threshold_pct": 63.279,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 33.1233
+        },
+        {
+          "K": 128,
+          "top1_mean": 40.26
+        },
+        {
+          "K": 192,
+          "top1_mean": 44.48
+        },
+        {
+          "K": 256,
+          "top1_mean": 47.1367
+        },
+        {
+          "K": 320,
+          "top1_mean": 49.6367
+        },
+        {
+          "K": 384,
+          "top1_mean": 52.45
+        },
+        {
+          "K": 448,
+          "top1_mean": 55.1567
+        },
+        {
+          "K": 512,
+          "top1_mean": 55.57
+        },
+        {
+          "K": 576,
+          "top1_mean": 58.3867
+        },
+        {
+          "K": 640,
+          "top1_mean": 58.9067
+        },
+        {
+          "K": 704,
+          "top1_mean": 60.57
+        },
+        {
+          "K": 768,
+          "top1_mean": 61.04
+        },
+        {
+          "K": 832,
+          "top1_mean": 62.6533
+        },
+        {
+          "K": 896,
+          "top1_mean": 62.97
+        },
+        {
+          "K": 960,
+          "top1_mean": 62.6033
+        },
+        {
+          "K": 1024,
+          "top1_mean": 64.01
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 1,
+      "arm": "fixed_scaffold",
+      "seed": 2,
+      "baseline_top1": 69.06,
+      "k90_threshold": 62.154,
+      "sessions_to_k90": 12,
+      "crossing": {
+        "k50_interpolated": 765.5465,
+        "k50_bracket": [
+          704,
+          768
+        ],
+        "k50_bracket_ratio": 1.0909,
+        "k50_method": "linear_in_K",
+        "k50_threshold_pct": 62.154,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 33.6967
+        },
+        {
+          "K": 128,
+          "top1_mean": 41.04
+        },
+        {
+          "K": 192,
+          "top1_mean": 44.79
+        },
+        {
+          "K": 256,
+          "top1_mean": 48.6433
+        },
+        {
+          "K": 320,
+          "top1_mean": 51.1467
+        },
+        {
+          "K": 384,
+          "top1_mean": 53.0767
+        },
+        {
+          "K": 448,
+          "top1_mean": 56.4567
+        },
+        {
+          "K": 512,
+          "top1_mean": 55.8867
+        },
+        {
+          "K": 576,
+          "top1_mean": 57.76
+        },
+        {
+          "K": 640,
+          "top1_mean": 58.8033
+        },
+        {
+          "K": 704,
+          "top1_mean": 59.9967
+        },
+        {
+          "K": 768,
+          "top1_mean": 62.24
+        },
+        {
+          "K": 832,
+          "top1_mean": 62.71
+        },
+        {
+          "K": 896,
+          "top1_mean": 64.22
+        },
+        {
+          "K": 960,
+          "top1_mean": 63.9067
+        },
+        {
+          "K": 1024,
+          "top1_mean": 64.95
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 1,
+      "arm": "jittered_scaffold",
+      "seed": 0,
+      "baseline_top1": 70.31,
+      "k90_threshold": 63.279,
+      "sessions_to_k90": null,
+      "crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": null,
+        "k50_bracket_ratio": null,
+        "k50_method": "not_bracketed",
+        "k50_threshold_pct": 63.279,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 3.12
+        },
+        {
+          "K": 128,
+          "top1_mean": 3.12
+        },
+        {
+          "K": 192,
+          "top1_mean": 3.12
+        },
+        {
+          "K": 256,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 320,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 384,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 448,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 512,
+          "top1_mean": 0.0533
+        },
+        {
+          "K": 576,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 640,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 704,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 768,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 832,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 896,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 960,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 1024,
+          "top1_mean": 0.0
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 1,
+      "arm": "jittered_scaffold",
+      "seed": 1,
+      "baseline_top1": 70.31,
+      "k90_threshold": 63.279,
+      "sessions_to_k90": null,
+      "crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": null,
+        "k50_bracket_ratio": null,
+        "k50_method": "not_bracketed",
+        "k50_threshold_pct": 63.279,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 5.3667
+        },
+        {
+          "K": 128,
+          "top1_mean": 4.79
+        },
+        {
+          "K": 192,
+          "top1_mean": 3.12
+        },
+        {
+          "K": 256,
+          "top1_mean": 0.2067
+        },
+        {
+          "K": 320,
+          "top1_mean": 0.2633
+        },
+        {
+          "K": 384,
+          "top1_mean": 0.0533
+        },
+        {
+          "K": 448,
+          "top1_mean": 0.7267
+        },
+        {
+          "K": 512,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 576,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 640,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 704,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 768,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 832,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 896,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 960,
+          "top1_mean": 0.26
+        },
+        {
+          "K": 1024,
+          "top1_mean": 2.3933
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 1,
+      "arm": "jittered_scaffold",
+      "seed": 2,
+      "baseline_top1": 69.06,
+      "k90_threshold": 62.154,
+      "sessions_to_k90": null,
+      "crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": null,
+        "k50_bracket_ratio": null,
+        "k50_method": "not_bracketed",
+        "k50_threshold_pct": 62.154,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 5.47
+        },
+        {
+          "K": 128,
+          "top1_mean": 1.88
+        },
+        {
+          "K": 192,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 256,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 320,
+          "top1_mean": 0.0533
+        },
+        {
+          "K": 384,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 448,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 512,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 576,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 640,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 704,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 768,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 832,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 896,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 960,
+          "top1_mean": 0.52
+        },
+        {
+          "K": 1024,
+          "top1_mean": 0.0
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 4,
+      "arm": "fixed_scaffold",
+      "seed": 0,
+      "baseline_top1": 67.81,
+      "k90_threshold": 61.029,
+      "sessions_to_k90": null,
+      "crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": null,
+        "k50_bracket_ratio": null,
+        "k50_method": "not_bracketed",
+        "k50_threshold_pct": 61.029,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 32.81
+        },
+        {
+          "K": 128,
+          "top1_mean": 38.8033
+        },
+        {
+          "K": 192,
+          "top1_mean": 42.5
+        },
+        {
+          "K": 256,
+          "top1_mean": 45.8867
+        },
+        {
+          "K": 320,
+          "top1_mean": 48.6967
+        },
+        {
+          "K": 384,
+          "top1_mean": 50.1567
+        },
+        {
+          "K": 448,
+          "top1_mean": 52.7633
+        },
+        {
+          "K": 512,
+          "top1_mean": 54.3733
+        },
+        {
+          "K": 576,
+          "top1_mean": 55.26
+        },
+        {
+          "K": 640,
+          "top1_mean": 57.03
+        },
+        {
+          "K": 704,
+          "top1_mean": 57.71
+        },
+        {
+          "K": 768,
+          "top1_mean": 58.3333
+        },
+        {
+          "K": 832,
+          "top1_mean": 59.1667
+        },
+        {
+          "K": 896,
+          "top1_mean": 60.4667
+        },
+        {
+          "K": 960,
+          "top1_mean": 60.3133
+        },
+        {
+          "K": 1024,
+          "top1_mean": 60.9933
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 4,
+      "arm": "fixed_scaffold",
+      "seed": 1,
+      "baseline_top1": 68.12,
+      "k90_threshold": 61.308,
+      "sessions_to_k90": 15,
+      "crossing": {
+        "k50_interpolated": 906.6032,
+        "k50_bracket": [
+          896,
+          960
+        ],
+        "k50_bracket_ratio": 1.0714,
+        "k50_method": "linear_in_K",
+        "k50_threshold_pct": 61.30800000000001,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 33.1767
+        },
+        {
+          "K": 128,
+          "top1_mean": 39.3767
+        },
+        {
+          "K": 192,
+          "top1_mean": 43.1767
+        },
+        {
+          "K": 256,
+          "top1_mean": 45.4167
+        },
+        {
+          "K": 320,
+          "top1_mean": 47.3933
+        },
+        {
+          "K": 384,
+          "top1_mean": 48.5967
+        },
+        {
+          "K": 448,
+          "top1_mean": 51.98
+        },
+        {
+          "K": 512,
+          "top1_mean": 53.3333
+        },
+        {
+          "K": 576,
+          "top1_mean": 55.3633
+        },
+        {
+          "K": 640,
+          "top1_mean": 56.6167
+        },
+        {
+          "K": 704,
+          "top1_mean": 56.51
+        },
+        {
+          "K": 768,
+          "top1_mean": 58.4367
+        },
+        {
+          "K": 832,
+          "top1_mean": 59.69
+        },
+        {
+          "K": 896,
+          "top1_mean": 61.2467
+        },
+        {
+          "K": 960,
+          "top1_mean": 61.6167
+        },
+        {
+          "K": 1024,
+          "top1_mean": 62.1867
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 4,
+      "arm": "fixed_scaffold",
+      "seed": 2,
+      "baseline_top1": 67.66,
+      "k90_threshold": 60.894,
+      "sessions_to_k90": 14,
+      "crossing": {
+        "k50_interpolated": 883.0618,
+        "k50_bracket": [
+          832,
+          896
+        ],
+        "k50_bracket_ratio": 1.0769,
+        "k50_method": "linear_in_K",
+        "k50_threshold_pct": 60.894,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 33.02
+        },
+        {
+          "K": 128,
+          "top1_mean": 39.2733
+        },
+        {
+          "K": 192,
+          "top1_mean": 42.2933
+        },
+        {
+          "K": 256,
+          "top1_mean": 45.6733
+        },
+        {
+          "K": 320,
+          "top1_mean": 47.8633
+        },
+        {
+          "K": 384,
+          "top1_mean": 50.3633
+        },
+        {
+          "K": 448,
+          "top1_mean": 53.1233
+        },
+        {
+          "K": 512,
+          "top1_mean": 54.4267
+        },
+        {
+          "K": 576,
+          "top1_mean": 54.7933
+        },
+        {
+          "K": 640,
+          "top1_mean": 56.9267
+        },
+        {
+          "K": 704,
+          "top1_mean": 58.6433
+        },
+        {
+          "K": 768,
+          "top1_mean": 59.53
+        },
+        {
+          "K": 832,
+          "top1_mean": 59.8967
+        },
+        {
+          "K": 896,
+          "top1_mean": 61.1467
+        },
+        {
+          "K": 960,
+          "top1_mean": 61.1967
+        },
+        {
+          "K": 1024,
+          "top1_mean": 62.5
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 4,
+      "arm": "jittered_scaffold",
+      "seed": 0,
+      "baseline_top1": 67.81,
+      "k90_threshold": 61.029,
+      "sessions_to_k90": null,
+      "crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": null,
+        "k50_bracket_ratio": null,
+        "k50_method": "not_bracketed",
+        "k50_threshold_pct": 61.029,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 5.47
+        },
+        {
+          "K": 128,
+          "top1_mean": 1.56
+        },
+        {
+          "K": 192,
+          "top1_mean": 2.6033
+        },
+        {
+          "K": 256,
+          "top1_mean": 0.6267
+        },
+        {
+          "K": 320,
+          "top1_mean": 0.3633
+        },
+        {
+          "K": 384,
+          "top1_mean": 0.99
+        },
+        {
+          "K": 448,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 512,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 576,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 640,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 704,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 768,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 832,
+          "top1_mean": 0.21
+        },
+        {
+          "K": 896,
+          "top1_mean": 0.2633
+        },
+        {
+          "K": 960,
+          "top1_mean": 4.7367
+        },
+        {
+          "K": 1024,
+          "top1_mean": 2.29
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 4,
+      "arm": "jittered_scaffold",
+      "seed": 1,
+      "baseline_top1": 68.12,
+      "k90_threshold": 61.308,
+      "sessions_to_k90": null,
+      "crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": null,
+        "k50_bracket_ratio": null,
+        "k50_method": "not_bracketed",
+        "k50_threshold_pct": 61.30800000000001,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 128,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 192,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 256,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 320,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 384,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 448,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 512,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 576,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 640,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 704,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 768,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 832,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 896,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 960,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 1024,
+          "top1_mean": 0.0
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 4,
+      "arm": "jittered_scaffold",
+      "seed": 2,
+      "baseline_top1": 67.66,
+      "k90_threshold": 60.894,
+      "sessions_to_k90": null,
+      "crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": null,
+        "k50_bracket_ratio": null,
+        "k50_method": "not_bracketed",
+        "k50_threshold_pct": 60.894,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 5.4167
+        },
+        {
+          "K": 128,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 192,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 256,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 320,
+          "top1_mean": 0.52
+        },
+        {
+          "K": 384,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 448,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 512,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 576,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 640,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 704,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 768,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 832,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 896,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 960,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 1024,
+          "top1_mean": 0.0
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 8,
+      "arm": "fixed_scaffold",
+      "seed": 0,
+      "baseline_top1": 65.31,
+      "k90_threshold": 58.779,
+      "sessions_to_k90": 15,
+      "crossing": {
+        "k50_interpolated": 938.4075,
+        "k50_bracket": [
+          896,
+          960
+        ],
+        "k50_bracket_ratio": 1.0714,
+        "k50_method": "linear_in_K",
+        "k50_threshold_pct": 58.779,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 29.8967
+        },
+        {
+          "K": 128,
+          "top1_mean": 37.29
+        },
+        {
+          "K": 192,
+          "top1_mean": 41.04
+        },
+        {
+          "K": 256,
+          "top1_mean": 44.06
+        },
+        {
+          "K": 320,
+          "top1_mean": 46.2533
+        },
+        {
+          "K": 384,
+          "top1_mean": 48.0233
+        },
+        {
+          "K": 448,
+          "top1_mean": 50.6233
+        },
+        {
+          "K": 512,
+          "top1_mean": 52.3433
+        },
+        {
+          "K": 576,
+          "top1_mean": 53.5433
+        },
+        {
+          "K": 640,
+          "top1_mean": 55.5233
+        },
+        {
+          "K": 704,
+          "top1_mean": 55.2067
+        },
+        {
+          "K": 768,
+          "top1_mean": 56.7167
+        },
+        {
+          "K": 832,
+          "top1_mean": 57.55
+        },
+        {
+          "K": 896,
+          "top1_mean": 57.71
+        },
+        {
+          "K": 960,
+          "top1_mean": 59.3233
+        },
+        {
+          "K": 1024,
+          "top1_mean": 59.5833
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 8,
+      "arm": "fixed_scaffold",
+      "seed": 1,
+      "baseline_top1": 66.56,
+      "k90_threshold": 59.904,
+      "sessions_to_k90": 14,
+      "crossing": {
+        "k50_interpolated": 893.7411,
+        "k50_bracket": [
+          832,
+          896
+        ],
+        "k50_bracket_ratio": 1.0769,
+        "k50_method": "linear_in_K",
+        "k50_threshold_pct": 59.904,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 30.21
+        },
+        {
+          "K": 128,
+          "top1_mean": 37.1333
+        },
+        {
+          "K": 192,
+          "top1_mean": 41.1967
+        },
+        {
+          "K": 256,
+          "top1_mean": 44.27
+        },
+        {
+          "K": 320,
+          "top1_mean": 46.4567
+        },
+        {
+          "K": 384,
+          "top1_mean": 48.8533
+        },
+        {
+          "K": 448,
+          "top1_mean": 50.99
+        },
+        {
+          "K": 512,
+          "top1_mean": 52.2367
+        },
+        {
+          "K": 576,
+          "top1_mean": 53.6967
+        },
+        {
+          "K": 640,
+          "top1_mean": 55.8833
+        },
+        {
+          "K": 704,
+          "top1_mean": 57.7567
+        },
+        {
+          "K": 768,
+          "top1_mean": 58.3333
+        },
+        {
+          "K": 832,
+          "top1_mean": 58.6467
+        },
+        {
+          "K": 896,
+          "top1_mean": 59.95
+        },
+        {
+          "K": 960,
+          "top1_mean": 60.3133
+        },
+        {
+          "K": 1024,
+          "top1_mean": 60.3133
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 8,
+      "arm": "fixed_scaffold",
+      "seed": 2,
+      "baseline_top1": 65.78,
+      "k90_threshold": 59.202,
+      "sessions_to_k90": 15,
+      "crossing": {
+        "k50_interpolated": 917.3165,
+        "k50_bracket": [
+          896,
+          960
+        ],
+        "k50_bracket_ratio": 1.0714,
+        "k50_method": "linear_in_K",
+        "k50_threshold_pct": 59.202000000000005,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 29.69
+        },
+        {
+          "K": 128,
+          "top1_mean": 36.8767
+        },
+        {
+          "K": 192,
+          "top1_mean": 41.77
+        },
+        {
+          "K": 256,
+          "top1_mean": 45.3133
+        },
+        {
+          "K": 320,
+          "top1_mean": 46.3567
+        },
+        {
+          "K": 384,
+          "top1_mean": 48.1233
+        },
+        {
+          "K": 448,
+          "top1_mean": 50.99
+        },
+        {
+          "K": 512,
+          "top1_mean": 52.5533
+        },
+        {
+          "K": 576,
+          "top1_mean": 54.27
+        },
+        {
+          "K": 640,
+          "top1_mean": 55.7267
+        },
+        {
+          "K": 704,
+          "top1_mean": 56.3033
+        },
+        {
+          "K": 768,
+          "top1_mean": 57.5533
+        },
+        {
+          "K": 832,
+          "top1_mean": 57.9667
+        },
+        {
+          "K": 896,
+          "top1_mean": 58.9067
+        },
+        {
+          "K": 960,
+          "top1_mean": 59.7933
+        },
+        {
+          "K": 1024,
+          "top1_mean": 60.8333
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 8,
+      "arm": "jittered_scaffold",
+      "seed": 0,
+      "baseline_top1": 65.31,
+      "k90_threshold": 58.779,
+      "sessions_to_k90": null,
+      "crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": null,
+        "k50_bracket_ratio": null,
+        "k50_method": "not_bracketed",
+        "k50_threshold_pct": 58.779,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 2.8133
+        },
+        {
+          "K": 128,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 192,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 256,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 320,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 384,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 448,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 512,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 576,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 640,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 704,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 768,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 832,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 896,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 960,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 1024,
+          "top1_mean": 0.0
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 8,
+      "arm": "jittered_scaffold",
+      "seed": 1,
+      "baseline_top1": 66.56,
+      "k90_threshold": 59.904,
+      "sessions_to_k90": null,
+      "crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": null,
+        "k50_bracket_ratio": null,
+        "k50_method": "not_bracketed",
+        "k50_threshold_pct": 59.904,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 128,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 192,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 256,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 320,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 384,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 448,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 512,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 576,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 640,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 704,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 768,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 832,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 896,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 960,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 1024,
+          "top1_mean": 0.0
+        }
+      ]
+    },
+    {
+      "experiment": "er3",
+      "depth": 8,
+      "arm": "jittered_scaffold",
+      "seed": 2,
+      "baseline_top1": 65.78,
+      "k90_threshold": 59.202,
+      "sessions_to_k90": null,
+      "crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": null,
+        "k50_bracket_ratio": null,
+        "k50_method": "not_bracketed",
+        "k50_threshold_pct": 59.202000000000005,
+        "k50_max_sampled_k": 1024,
+        "k50_n_points": 16
+      },
+      "curve": [
+        {
+          "K": 64,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 128,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 192,
+          "top1_mean": 0.21
+        },
+        {
+          "K": 256,
+          "top1_mean": 0.5733
+        },
+        {
+          "K": 320,
+          "top1_mean": 2.0333
+        },
+        {
+          "K": 384,
+          "top1_mean": 1.25
+        },
+        {
+          "K": 448,
+          "top1_mean": 0.7833
+        },
+        {
+          "K": 512,
+          "top1_mean": 0.8867
+        },
+        {
+          "K": 576,
+          "top1_mean": 0.0533
+        },
+        {
+          "K": 640,
+          "top1_mean": 0.47
+        },
+        {
+          "K": 704,
+          "top1_mean": 0.0533
+        },
+        {
+          "K": 768,
+          "top1_mean": 0.0533
+        },
+        {
+          "K": 832,
+          "top1_mean": 0.0533
+        },
+        {
+          "K": 896,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 960,
+          "top1_mean": 0.0
+        },
+        {
+          "K": 1024,
+          "top1_mean": 0.0
+        }
+      ]
+    }
+  ]
+}

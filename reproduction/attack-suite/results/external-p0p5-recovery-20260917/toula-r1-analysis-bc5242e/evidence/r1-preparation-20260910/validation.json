@@ -1,0 +1,43 @@
+{
+  "checked_at_utc": "2026-09-10T14:19:05.155833+00:00",
+  "source_commit": "9b45323c2068229cacfd07a49b9e08bba0fb13ef",
+  "source_working_tree_clean": true,
+  "archive": {
+    "path": "workload.tar.gz",
+    "bytes": 609624,
+    "sha256": "b0c201d1aa8d20610a19036f14b9e2fdd08555a4a0deb4d96fe3a0b029923b10"
+  },
+  "bundle_manifest_sha256": "85865a532f36c096b14208b9413b8b4f04e5167086c9363dffa3bbdcbfba3a1b",
+  "restoration": {
+    "method": "Extract all bounded archive files to a new directory and invoke that copy of scripts/run_r1.py verify-bundle",
+    "result": {
+      "files": 65,
+      "scientific_execution_admitted": false,
+      "status": "verified",
+      "study_id": "p3-r1-fresh-start"
+    }
+  },
+  "tests": {
+    "full_suite_before_final_metadata_fix": {
+      "command": ".venv/bin/python -m pytest -q",
+      "passed": 259,
+      "subtests_passed": 12
+    },
+    "final_targeted_suite": {
+      "command": ".venv/bin/python -m pytest -q tests/test_r1.py tests/test_manifest_resume.py",
+      "passed": 69
+    }
+  },
+  "pdf": {
+    "path": "paper/main.pdf",
+    "sha256": "7f73dbcb7d79ec39710348872e80062dd3a98705092be7635a2ce325c5989211",
+    "pages": 5,
+    "visual_review": "All pages inspected as contact sheet; LaTeX final build has no reported layout warnings."
+  },
+  "scientific_evidence": false,
+  "engineering_training_executed": false,
+  "scientific_training_executed": false,
+  "cloud_resources_provisioned": false,
+  "spending_approved": false,
+  "independent_preregistration_established": false
+}

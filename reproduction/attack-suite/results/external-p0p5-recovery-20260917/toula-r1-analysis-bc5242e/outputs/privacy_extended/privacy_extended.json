@@ -1,0 +1,354 @@
+{
+  "families": {
+    "canary_membership": {
+      "family": "canary_membership",
+      "floors": {
+        "null_auc_band": 0.02,
+        "positive_control_auc": 0.9
+      },
+      "per_q": {
+        "32": {
+          "max_abs_null_auc_minus_half": 0.09375,
+          "mean_auc": 0.53515625,
+          "min_auc": 0.50390625,
+          "per_seed": {
+            "959": {
+              "canary": {
+                "auc": 0.50390625,
+                "mean_confidence_members": 0.6916240453720093,
+                "mean_confidence_non_members": 0.6923540830612183
+              },
+              "null_nocanary": {
+                "auc": 0.515625,
+                "mean_confidence_members": 0.6345813274383545,
+                "mean_confidence_non_members": 0.6374614834785461
+              }
+            },
+            "969": {
+              "canary": {
+                "auc": 0.56640625,
+                "mean_confidence_members": 0.7078941464424133,
+                "mean_confidence_non_members": 0.6952958703041077
+              },
+              "null_nocanary": {
+                "auc": 0.40625,
+                "mean_confidence_members": 0.8855768442153931,
+                "mean_confidence_non_members": 0.8945133686065674
+              }
+            }
+          }
+        },
+        "4": {
+          "max_abs_null_auc_minus_half": 0.0859375,
+          "mean_auc": 0.638671875,
+          "min_auc": 0.609375,
+          "per_seed": {
+            "959": {
+              "canary": {
+                "auc": 0.66796875,
+                "mean_confidence_members": 0.7686875462532043,
+                "mean_confidence_non_members": 0.7418109178543091
+              },
+              "null_nocanary": {
+                "auc": 0.4140625,
+                "mean_confidence_members": 0.7036296725273132,
+                "mean_confidence_non_members": 0.7199143171310425
+              }
+            },
+            "969": {
+              "canary": {
+                "auc": 0.609375,
+                "mean_confidence_members": 0.7723592519760132,
+                "mean_confidence_non_members": 0.7545817494392395
+              },
+              "null_nocanary": {
+                "auc": 0.51953125,
+                "mean_confidence_members": 0.7981141805648804,
+                "mean_confidence_non_members": 0.7978049516677856
+              }
+            }
+          }
+        }
+      },
+      "qualified": false
+    },
+    "history_accumulation": {
+      "qualification": {
+        "family": "history_accumulation",
+        "floor": 0.02,
+        "k": 5,
+        "max_abs_null_advantage": 8.192624998959452e-06,
+        "min_advantage": 0.0,
+        "null_band": 0.02,
+        "per_run": {
+          "p4a-dense-q32-s939": {
+            "accuracy_history": 1.0,
+            "accuracy_null_shuffled": 1.0,
+            "accuracy_single": 1.0,
+            "advantage": 0.0,
+            "null_advantage": 0.0
+          },
+          "p4a-dense-q32-s949": {
+            "accuracy_history": 1.0,
+            "accuracy_null_shuffled": 1.0,
+            "accuracy_single": 0.999991807375001,
+            "advantage": 8.192624998959452e-06,
+            "null_advantage": 8.192624998959452e-06
+          }
+        },
+        "qualified": false
+      }
+    },
+    "sequence_property": {
+      "qualification": {
+        "family": "sequence_property",
+        "floor": 0.05,
+        "null_band": 0.02,
+        "per_property": {
+          "digit_presence": {
+            "accuracy": 1.0,
+            "advantage": 0.0,
+            "majority_rate": 0.998046875,
+            "null_accuracy": 1.0,
+            "null_pipeline_advantage": 0.0,
+            "null_within_band": true,
+            "passes_floor": false
+          },
+          "vowel_fraction_bucket": {
+            "accuracy": 0.9658536585365853,
+            "advantage": -0.004878048780487809,
+            "majority_rate": 0.9599609375,
+            "null_accuracy": 0.9707317073170731,
+            "null_pipeline_advantage": 0.0,
+            "null_within_band": true,
+            "passes_floor": false
+          }
+        },
+        "qualification_rule": "at least one sub-property passes floor and null band",
+        "qualified": false
+      }
+    },
+    "structure_semantic": {
+      "qualification": {
+        "accuracy": 0.8048064085447263,
+        "advantage": 0.03555216479115009,
+        "family": "structure_semantic",
+        "floor": 0.05,
+        "null_accuracy": 0.7692542437535762,
+        "null_band": 0.02,
+        "null_pipeline_advantage": 0.0,
+        "null_within_band": true,
+        "passes_floor": false,
+        "qualified": false
+      }
+    }
+  },
+  "frontier_survival": {
+    "medium-high-q16": {
+      "note": "no qualified family evaluable at this cell",
+      "qualified_family_checks": {},
+      "survives": null
+    },
+    "medium-high-q32": {
+      "note": "no qualified family evaluable at this cell",
+      "qualified_family_checks": {},
+      "survives": null
+    },
+    "medium-high-q4": {
+      "note": "no qualified family evaluable at this cell",
+      "qualified_family_checks": {},
+      "survives": null
+    },
+    "medium-high-q8": {
+      "note": "no qualified family evaluable at this cell",
+      "qualified_family_checks": {},
+      "survives": null
+    }
+  },
+  "note": "P4a privacy-instrument broadening; exploratory calibration scoring per docs/PREREGISTRATION_P4A.md; floors frozen.",
+  "omissions": [
+    "timing channels",
+    "attacks on optimizer state beyond the remote module",
+    "active/adaptive attackers that modify queries",
+    "semantic attacks beyond byte-structure classes",
+    "membership inference of natural (non-canary) sequences",
+    "joint cross-run attacks",
+    "families 3-4 (history accumulation, canary membership) evaluated on calibration captures only: confirmatory runs lack dense transcripts"
+  ],
+  "protocol_version": "p4a-privacy-broadening-1.0",
+  "scores": {
+    "families_1_2_frontier_cells": {
+      "medium-high-q16": {
+        "per_seed": {
+          "17": {},
+          "27": {},
+          "37": {},
+          "47": {},
+          "57": {},
+          "67": {},
+          "7": {},
+          "87": {}
+        },
+        "summary": {
+          "sequence_property": {
+            "reason": "family disqualified",
+            "scored": false
+          },
+          "structure_semantic": {
+            "reason": "family disqualified",
+            "scored": false
+          }
+        }
+      },
+      "medium-high-q32": {
+        "per_seed": {
+          "17": {},
+          "27": {},
+          "37": {},
+          "47": {},
+          "57": {},
+          "67": {},
+          "7": {},
+          "87": {}
+        },
+        "summary": {
+          "sequence_property": {
+            "reason": "family disqualified",
+            "scored": false
+          },
+          "structure_semantic": {
+            "reason": "family disqualified",
+            "scored": false
+          }
+        }
+      },
+      "medium-high-q4": {
+        "per_seed": {
+          "17": {},
+          "27": {},
+          "37": {},
+          "47": {},
+          "57": {},
+          "67": {},
+          "7": {},
+          "87": {}
+        },
+        "summary": {
+          "sequence_property": {
+            "reason": "family disqualified",
+            "scored": false
+          },
+          "structure_semantic": {
+            "reason": "family disqualified",
+            "scored": false
+          }
+        }
+      },
+      "medium-high-q8": {
+        "per_seed": {
+          "17": {},
+          "27": {},
+          "37": {},
+          "47": {},
+          "57": {},
+          "67": {},
+          "7": {},
+          "87": {}
+        },
+        "summary": {
+          "sequence_property": {
+            "reason": "family disqualified",
+            "scored": false
+          },
+          "structure_semantic": {
+            "reason": "family disqualified",
+            "scored": false
+          }
+        }
+      }
+    },
+    "family_3_dense": {
+      "q32": {
+        "max_advantage": 8.192624998959452e-06,
+        "pass": null,
+        "per_run": {
+          "p4a-dense-q32-s939": {
+            "accuracy_history": 1.0,
+            "accuracy_null_shuffled": 1.0,
+            "accuracy_single": 1.0,
+            "advantage": 0.0,
+            "null_advantage": 0.0
+          },
+          "p4a-dense-q32-s949": {
+            "accuracy_history": 1.0,
+            "accuracy_null_shuffled": 1.0,
+            "accuracy_single": 0.999991807375001,
+            "advantage": 8.192624998959452e-06,
+            "null_advantage": 8.192624998959452e-06
+          }
+        },
+        "scored": false
+      },
+      "q4": {
+        "max_advantage": 8.192624998959452e-06,
+        "pass": null,
+        "per_run": {
+          "p4a-dense-q4-s939": {
+            "accuracy_history": 1.0,
+            "accuracy_null_shuffled": 1.0,
+            "accuracy_single": 0.999991807375001,
+            "advantage": 8.192624998959452e-06,
+            "null_advantage": 8.192624998959452e-06
+          },
+          "p4a-dense-q4-s949": {
+            "accuracy_history": 1.0,
+            "accuracy_null_shuffled": 1.0,
+            "accuracy_single": 1.0,
+            "advantage": 0.0,
+            "null_advantage": 0.0
+          }
+        },
+        "scored": false
+      }
+    },
+    "family_4_canary": {
+      "q32": {
+        "auc_advantage_per_seed": {
+          "959": 0.00390625,
+          "969": 0.06640625
+        },
+        "max_auc_advantage": 0.06640625,
+        "pass": null,
+        "scored": false
+      },
+      "q4": {
+        "auc_advantage_per_seed": {
+          "959": 0.16796875,
+          "969": 0.109375
+        },
+        "max_auc_advantage": 0.16796875,
+        "pass": null,
+        "scored": false
+      }
+    }
+  },
+  "threshold_advantage": 0.02,
+  "threshold_auc_advantage": 0.02,
+  "verdicts": {
+    "disqualified_families": [
+      "sequence_property",
+      "structure_semantic",
+      "history_accumulation",
+      "canary_membership"
+    ],
+    "qualified_families": [],
+    "shrunk_cells": [],
+    "surviving_cells": [],
+    "undetermined_cells": [
+      "medium-high-q4",
+      "medium-high-q8",
+      "medium-high-q16",
+      "medium-high-q32"
+    ]
+  }
+}

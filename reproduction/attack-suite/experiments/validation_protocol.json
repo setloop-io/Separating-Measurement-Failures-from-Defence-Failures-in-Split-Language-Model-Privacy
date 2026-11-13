@@ -1,0 +1,129 @@
+{
+  "schema": "llm_attacker.validation.v1",
+  "status": "frozen",
+  "model": "openai-community/gpt2",
+  "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "depths": [
+    3,
+    6
+  ],
+  "victim_seeds": [
+    101,
+    202,
+    303,
+    404,
+    505,
+    606,
+    707,
+    808,
+    909,
+    1010
+  ],
+  "attack_seeds": [
+    17,
+    29
+  ],
+  "sequence_length": 32,
+  "minimum_documents": 256,
+  "train_steps": 128,
+  "learning_rate": 5e-05,
+  "candidate_counts": [
+    8,
+    16,
+    32
+  ],
+  "beam_width": 2,
+  "sipit_steps": [
+    32,
+    64,
+    128
+  ],
+  "gradient_conditions": [
+    "true",
+    "shuffled",
+    "noise_0.1",
+    "noise_1.0",
+    "bits_8",
+    "bits_4"
+  ],
+  "knowledge": [
+    "public",
+    "exact"
+  ],
+  "probe": "Same held-out documents and fixed post-training victim state, dropout disabled. Training probe exposes next-token-loss seam gradient; inference exposes activations only. No probe updates. This is not an online training trajectory.",
+  "primary": {
+    "depth": 6,
+    "knowledge": "public",
+    "mode": "training",
+    "left": "joint_true_k32",
+    "right": "forward_k32",
+    "metric": "token_accuracy",
+    "practical_margin": 0.02
+  },
+  "statistics": {
+    "alpha": 0.05,
+    "bootstrap_replicates": 100000,
+    "bootstrap_seed": 93281,
+    "unit": "crossed document and independently trained victim run; average attack seeds first",
+    "secondary_correction": "Bonferroni percentile bootstrap intervals across all prespecified secondary contrasts",
+    "missing": "No complete-case deletion. Any missing/failed cell blocks comparative analysis; retain failure and rerun entire run in a fresh directory with same protocol.",
+    "stopping": "Exactly 256 fixed evaluation documents,128 fixed victim-training documents,32 fixed calibration documents and10 independent training seeds; no outcome-driven sample extension. Report achieved precision; no power guarantee.",
+    "generalization": "Crossed bootstrap accounts for evaluation documents and victim training randomness, conditional on this single fixed128-document training corpus. It does not estimate variation across independently sampled training corpora."
+  },
+  "metrics": [
+    "token_accuracy",
+    "sequence_exact",
+    "contiguous_2",
+    "contiguous_4",
+    "contiguous_8",
+    "longest_exact_run",
+    "annotated_name",
+    "annotated_number",
+    "annotated_identifier"
+  ],
+  "data": "Disjoint calibration, victim-training and untouched evaluation documents; pinned tokenized input and annotations hash required. Names annotated before predictions. Evaluation text is public benchmark text, not evidence of actual sensitive-data harm.",
+  "compute": "Measured per-arm online work plus applicable model loading, public calibration, and exact-head export cost. Report cold and amortized costs; victim training is separate. No equal-cost claim across SIPIT and beam. Randomized arm order.",
+  "baseline_gap": "Backward direction remains heuristic; SIPIT is existing budgeted independent implementation. BiSR is not included or claimed reproduced.",
+  "attack_batch_size": 8,
+  "minimum_calibration_documents": 32,
+  "minimum_training_documents": 128,
+  "execution": {
+    "reuse_identical_activation_modes": true,
+    "meaning": "Inference forward/SIPIT rows reference the corresponding measured training-probe execution because h, head, calibration, attack seed and budget are identical. Reused rows are not additional runtime measurements.",
+    "checkpoint": "Per-cell hash-chained measurement events and immutable predictions; report checkpoint after each victim run and at completion/failure. No outcome-based retries."
+  },
+  "frozen_inputs": {
+    "tokenized_sha256": "d79ef4fc3b27dbac21fd731f80873a5afc38481bc7a03acb0ee9fec1587bc21a",
+    "name_annotations_sha256": "e61fa87ff33cfbbb3f786600071effc5ec181e94cd39d2dc945257cd109d045a",
+    "curation_manifest_sha256": "3de17039af6430dba91ddf7935a9382c9474a18213ebf6bfd8f85c9221176930",
+    "partition_counts": {
+      "calibration": 32,
+      "train": 128,
+      "evaluation": 256
+    },
+    "manifest": "experiments/validation_corpus_manifest.json",
+    "name_annotations": "experiments/validation_annotations.json"
+  },
+  "annotations": {
+    "source": "AI-assisted pre-outcome semantic names; deterministic lexical number/identifier proxies",
+    "span_counts": {
+      "number": 297,
+      "name": 716,
+      "identifier": 2
+    },
+    "documents_with_spans": {
+      "number": 142,
+      "name": 249,
+      "identifier": 2
+    },
+    "limitation": "Name metric is descriptive and requires independent human adjudication for gold-label claims. Only2 identifier spans; identifier recovery is a case report, not a population estimate."
+  },
+  "budget_review": {
+    "source_summary_sha256": "37e4273622b63e21bc4e0d143b37b3e4189ecb9ce1cdbe7a6c55d4bc3af4ca66",
+    "logical_cells": 2720,
+    "physical_executions": 2240,
+    "estimated_online_gb10_gpu_hours": 106.43115847547573,
+    "planning_contingency": "25\u201350% scenario, about133\u2013160GB10 GPU-hours; excludes training/setup/capture/scoring/I/O/analysis. Not a guaranteed bound.",
+    "review_script": "experiments/review_validation_budget.py"
+  }
+}

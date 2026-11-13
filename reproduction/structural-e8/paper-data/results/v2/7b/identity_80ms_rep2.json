@@ -1,0 +1,75 @@
+{
+  "config": {
+    "model": "/workspace/experiments/models/mistral-7b-instruct",
+    "cloud_url": "http://10.10.10.2:5000",
+    "max_new_tokens": 200
+  },
+  "comparisons": [
+    {
+      "prompt_preview": "Write a Python function to implement binary search on a sort...",
+      "tokens_identical": true,
+      "mismatch_position": null,
+      "seq_num_tokens": 200,
+      "la_num_tokens": 200,
+      "sequential_perplexity": 1.0799,
+      "lookahead_perplexity": 1.0798,
+      "perplexity_diff": 0.000145,
+      "max_logit_diff": 0.035156,
+      "sequential_tok_s": 6.1,
+      "lookahead_tok_s": 8.3,
+      "category": "code"
+    },
+    {
+      "prompt_preview": "List the top 10 largest countries by area with their capital...",
+      "tokens_identical": true,
+      "mismatch_position": null,
+      "seq_num_tokens": 200,
+      "la_num_tokens": 200,
+      "sequential_perplexity": 1.0821,
+      "lookahead_perplexity": 1.0824,
+      "perplexity_diff": 0.000283,
+      "max_logit_diff": 0.06543,
+      "sequential_tok_s": 6.3,
+      "lookahead_tok_s": 7.5,
+      "category": "structured"
+    },
+    {
+      "prompt_preview": "Write a short story about a robot that discovers it can drea...",
+      "tokens_identical": true,
+      "mismatch_position": null,
+      "seq_num_tokens": 200,
+      "la_num_tokens": 200,
+      "sequential_perplexity": 1.5067,
+      "lookahead_perplexity": 1.5065,
+      "perplexity_diff": 0.000157,
+      "max_logit_diff": 0.050781,
+      "sequential_tok_s": 6.3,
+      "lookahead_tok_s": 6.4,
+      "category": "creative"
+    },
+    {
+      "prompt_preview": "What are the main differences between Python and Rust? When ...",
+      "tokens_identical": true,
+      "mismatch_position": null,
+      "seq_num_tokens": 200,
+      "la_num_tokens": 200,
+      "sequential_perplexity": 1.2229,
+      "lookahead_perplexity": 1.2227,
+      "perplexity_diff": 0.000282,
+      "max_logit_diff": 0.035156,
+      "sequential_tok_s": 6.3,
+      "lookahead_tok_s": 6.9,
+      "category": "conversational"
+    }
+  ],
+  "summary": {
+    "all_tokens_identical": true,
+    "num_prompts": 4,
+    "avg_sequential_perplexity": 1.2229,
+    "avg_lookahead_perplexity": 1.2228,
+    "avg_perplexity_diff": 0.000217,
+    "max_logit_diff_overall": 0.06543,
+    "avg_sequential_tok_s": 6.2,
+    "avg_lookahead_tok_s": 7.3
+  }
+}

@@ -1,0 +1,88 @@
+{
+ "probe": "accumulation_aligned",
+ "capture_dir": "results/long-horizon-v1/matrix/captures/mid-lite-k64_s1234_h100_epochwrap",
+ "phase": "fwd",
+ "epochs_present": 4,
+ "rows_per_epoch": {
+  "0": 800,
+  "1": 800,
+  "2": 800,
+  "3": 800
+ },
+ "victim_rows": 200,
+ "note": "victim labels aligned to epoch 0 (framework attacks/accumulation.py misaligns them for multi-epoch real captures); solves use the framework's solve_w/recovery primitives verbatim.",
+ "results": [
+  {
+   "seed": 0,
+   "epoch_size": 64,
+   "n_epochs": 4,
+   "within_epoch_top1": 0.0,
+   "pooled_cross_epoch_top1": 0.0,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 0,
+   "epoch_size": 256,
+   "n_epochs": 4,
+   "within_epoch_top1": 0.0,
+   "pooled_cross_epoch_top1": 0.0,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 0,
+   "epoch_size": 768,
+   "n_epochs": 4,
+   "within_epoch_top1": 0.0,
+   "pooled_cross_epoch_top1": 0.5,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 1,
+   "epoch_size": 64,
+   "n_epochs": 4,
+   "within_epoch_top1": 0.0,
+   "pooled_cross_epoch_top1": 0.0,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 1,
+   "epoch_size": 256,
+   "n_epochs": 4,
+   "within_epoch_top1": 0.0,
+   "pooled_cross_epoch_top1": 0.0,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 1,
+   "epoch_size": 768,
+   "n_epochs": 4,
+   "within_epoch_top1": 0.0,
+   "pooled_cross_epoch_top1": 0.5,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 2,
+   "epoch_size": 64,
+   "n_epochs": 4,
+   "within_epoch_top1": 0.0,
+   "pooled_cross_epoch_top1": 0.0,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 2,
+   "epoch_size": 256,
+   "n_epochs": 4,
+   "within_epoch_top1": 0.0,
+   "pooled_cross_epoch_top1": 0.0,
+   "label_free_band_top1": 0.0
+  },
+  {
+   "seed": 2,
+   "epoch_size": 768,
+   "n_epochs": 4,
+   "within_epoch_top1": 0.0,
+   "pooled_cross_epoch_top1": 0.5,
+   "label_free_band_top1": 0.0
+  }
+ ]
+}

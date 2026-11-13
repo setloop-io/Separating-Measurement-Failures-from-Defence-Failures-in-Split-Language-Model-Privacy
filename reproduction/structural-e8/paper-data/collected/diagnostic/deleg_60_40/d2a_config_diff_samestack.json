@@ -1,0 +1,199 @@
+{
+  "schema": "dtraining.deleg6040.config_diff.v1",
+  "baseline_file": "paper-data/collected/diagnostic/deleg_60_40/deleg_6040_ctrl_split21.json",
+  "cell_file": "paper-data/collected/diagnostic/deleg_60_40/deleg_6040_split14.json",
+  "n_fields": 93,
+  "intended_changes": [
+    {
+      "field": "split_after",
+      "class": "INTENDED",
+      "baseline": 21,
+      "cell": 14,
+      "same": false
+    }
+  ],
+  "config_violations": [],
+  "invariant_violations": [],
+  "outcome_changes": [
+    {
+      "field": "baseline_eval_seconds",
+      "class": "OUTCOME",
+      "baseline": 3.2880842610029504,
+      "cell": 3.3085621249920223,
+      "same": false
+    },
+    {
+      "field": "candidate_eval_loss",
+      "class": "OUTCOME",
+      "baseline": 5.043200611136854,
+      "cell": 6.836146326735616,
+      "same": false
+    },
+    {
+      "field": "candidate_eval_seconds",
+      "class": "OUTCOME",
+      "baseline": 5.890739589987788,
+      "cell": 5.297668710001744,
+      "same": false
+    },
+    {
+      "field": "cloud_correction_loss_improvement",
+      "class": "OUTCOME",
+      "baseline": 1.4840733520686626,
+      "cell": 7.346852319315076,
+      "same": false
+    },
+    {
+      "field": "eval_loss_delta",
+      "class": "OUTCOME",
+      "baseline": 0.06552719883620739,
+      "cell": 1.8584729144349694,
+      "same": false
+    },
+    {
+      "field": "eval_time_ratio",
+      "class": "OUTCOME",
+      "baseline": 1.7915415550181069,
+      "cell": 1.601199708472912,
+      "same": false
+    },
+    {
+      "field": "gates/utility_delta_le_0_35",
+      "class": "OUTCOME",
+      "baseline": true,
+      "cell": false,
+      "same": false
+    },
+    {
+      "field": "label_free_majority_pct",
+      "class": "OUTCOME",
+      "baseline": 5.2490234375,
+      "cell": 4.9755859375,
+      "same": false
+    },
+    {
+      "field": "mean_step_seconds",
+      "class": "OUTCOME",
+      "baseline": 0.08952236215749872,
+      "cell": 0.09885362698299287,
+      "same": false
+    },
+    {
+      "field": "mine_mi_nats_held_out",
+      "class": "OUTCOME",
+      "baseline": -0.0005428586155176163,
+      "cell": -1.5091150999069214e-05,
+      "same": false
+    },
+    {
+      "field": "probe_recovery_pct",
+      "class": "OUTCOME",
+      "baseline": "[3.1640625, 4.8388671875, 4.8828125]",
+      "cell": "[3.0224609375, 4.3603515625, 4.8046875]",
+      "same": false
+    },
+    {
+      "field": "recovery_above_label_free_pct",
+      "class": "OUTCOME",
+      "baseline": -0.3662109375,
+      "cell": -0.1708984375,
+      "same": false
+    },
+    {
+      "field": "remote_protocol/session_id",
+      "class": "OUTCOME",
+      "baseline": "e66cf8a4-467d-4bdc-92c0-1d7275f83ab6",
+      "cell": "a634b4ba-8743-49c1-be12-a931f0f2ac77",
+      "same": false
+    },
+    {
+      "field": "token_recovery_pct",
+      "class": "OUTCOME",
+      "baseline": 4.8828125,
+      "cell": 4.8046875,
+      "same": false
+    },
+    {
+      "field": "train_seconds",
+      "class": "OUTCOME",
+      "baseline": 179.04472431499744,
+      "cell": 197.70725396598573,
+      "same": false
+    },
+    {
+      "field": "training_tail",
+      "class": "OUTCOME",
+      "baseline": "[{\"attacker_loss\": 7.142917633056641, \"distill_loss\": 0.2678624093532562, \"gram_flatten_loss\": 0.0, \"language_loss\": 4.672311782836914, \"phase_step\": 1997, \"step\": 1997}, {\"attacker_loss\": 7.171245098114014, \"distill_loss\": 0.31573861837387085, \"gram_flatten_loss\": 0.0, \"language_loss\": 4.506000518798828, \"phase_step\": 1998, \"step\": 1998}, {\"attacker_loss\": 7.663710117340088, \"distill_loss\": 0.2697455883026123, \"gram_flatten_loss\": -0.0, \"language_loss\": 4.616881370544434, \"phase_step\": 1999, \"step\": 1999}]",
+      "cell": "[{\"attacker_loss\": 7.4295573234558105, \"distill_loss\": 0.5889971256256104, \"gram_flatten_loss\": 0.0, \"language_loss\": 6.27566385269165, \"phase_step\": 1997, \"step\": 1997}, {\"attacker_loss\": 6.855835437774658, \"distill_loss\": 0.6243188381195068, \"gram_flatten_loss\": 0.0, \"language_loss\": 5.76436185836792, \"phase_step\": 1998, \"step\": 1998}, {\"attacker_loss\": 7.349795818328857, \"distill_loss\": 0.5921701788902283, \"gram_flatten_loss\": 0.0, \"language_loss\": 5.908815860748291, \"phase_step\": 1999, \"step\": 1999}]",
+      "same": false
+    },
+    {
+      "field": "zero_cloud_eval_loss",
+      "class": "OUTCOME",
+      "baseline": 6.527273963205516,
+      "cell": 14.182998646050692,
+      "same": false
+    }
+  ],
+  "unchanged_config_fields": [
+    "active_cloud_delta",
+    "adversary_strength",
+    "attacker_updates",
+    "bundle_canonical_fraction",
+    "byzantine_threshold",
+    "byzantine_verify",
+    "chaff_tokens",
+    "cloud_channels",
+    "cloud_experts",
+    "cloud_kind",
+    "cloud_layers",
+    "cloud_state_contains_hidden_width",
+    "device",
+    "dp/adjacency",
+    "dp/delta",
+    "dp/epsilon/composed",
+    "dp/epsilon/forward",
+    "dp/epsilon/return",
+    "dp/method",
+    "dp/parameters/forward_clip",
+    "dp/parameters/forward_noise_multiplier",
+    "dp/parameters/return_clip",
+    "dp/parameters/return_noise_multiplier",
+    "dp/releases/forward",
+    "dp/releases/return",
+    "dp/rho/forward",
+    "dp/rho/return",
+    "eval_blocks",
+    "fragment_channels",
+    "gram_flatten",
+    "latent_dim",
+    "mine_penalty",
+    "noise_multiplier",
+    "probe_restarts",
+    "public_steps",
+    "remote_grad_clip",
+    "remote_protocol/cloud_experts",
+    "remote_protocol/cloud_kind",
+    "remote_protocol/cloud_layers",
+    "remote_protocol/cloud_seed",
+    "remote_protocol/latent_dim",
+    "remote_protocol/latent_only_audit",
+    "remote_protocol/max_parameter_dimension",
+    "remote_protocol/op",
+    "remote_protocol/state_shape_digest",
+    "resume_after",
+    "schema",
+    "secret_token_gauge",
+    "secret_token_permutation",
+    "secret_wire_rotation",
+    "seed",
+    "sequence_length",
+    "steps",
+    "token_scale_sigma",
+    "train_blocks",
+    "transport_tls",
+    "warmup_steps",
+    "wire_quant"
+  ],
+  "ac1_2_pass": true
+}

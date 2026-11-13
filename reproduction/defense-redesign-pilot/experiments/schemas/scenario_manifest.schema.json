@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schema_version", "run_id", "kind", "protocol_id", "cohort", "scientific_evidence", "source_tree_sha256", "git_commit", "source_record", "config_sha256", "inputs", "started_at", "finished_at", "status", "artifacts"],
+  "properties": {
+    "schema_version": {"const": "p4-scenario-0.1"},
+    "run_id": {"type": "string", "pattern": "^p4-"},
+    "kind": {"enum": ["calibration", "routing", "warmup", "null_precision", "warmup_budget", "null_precision_128", "structure_precision", "tee_fhe"]},
+    "protocol_id": {"type": "string", "pattern": "^p4-"},
+    "cohort": {"const": "engineering"},
+    "scientific_evidence": {"const": false},
+    "source_tree_sha256": {"$ref": "#/$defs/sha"},
+    "git_commit": {"type": ["string", "null"]},
+    "source_record": {"type": "string"},
+    "config_sha256": {"$ref": "#/$defs/sha"},
+    "inputs": {"type": "object"},
+    "started_at": {"type": "string"},
+    "finished_at": {"type": "string"},
+    "status": {"enum": ["completed", "failed"]},
+    "error": {"type": "string"},
+    "artifacts": {"type": "array", "items": {
+      "type": "object", "required": ["path", "sha256"],
+      "properties": {"path": {"type": "string"}, "sha256": {"$ref": "#/$defs/sha"}},
+      "additionalProperties": false
+    }}
+  },
+  "additionalProperties": false,
+  "$defs": {"sha": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+}

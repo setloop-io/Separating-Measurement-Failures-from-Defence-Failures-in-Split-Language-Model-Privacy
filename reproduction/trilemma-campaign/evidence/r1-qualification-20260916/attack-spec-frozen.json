@@ -1,0 +1,23 @@
+{
+  "approval_reference": "owner instruction 2026-09-16 + approved plan forager-storm-rogue; freeze review of cal001 qualification proposal",
+  "note": "Frozen after owner review of the calibration proposal (status proposal_ready_for_freeze_review). Thresholds UNCHANGED from the draft; the amendment path was evaluated and rejected: qualifying more combinations would require null_band >= 0.041, admitting instruments whose matched nulls show 0.045-0.56 spurious advantage, which would invalidate the privacy instrument's credibility. Qualification verdicts from calibration (strict, every seed): QUALIFIED = input_byte@inbound_gradients@{none,gradient-defense}, input_byte@outbound_gradients@{none,gradient-defense} (4 of 24). UNQUALIFIED = all forward_values and returned_values channels for every target, and all next_byte_class and punctuation_fraction combinations (20 of 24), predominantly on the null criterion. Consequence per protocol: exploratory privacy is UNDETERMINED for every cell unless a qualified gradient-channel breach rejects it; no scoped PASS is available under this instrument suite, and unqualified channels must be named in every report.",
+  "origin": "calibration execution cal001 (76/76 runs, execution root on toula) analyzed at commit bc5242e: analysis_sha256 0468611f7d45c65a6d6bc1c250930778db46d578af55c3fdc09f7fb2450179a2, proposal_sha256 e59a00464f73d55252bc517b107d8d4c46ae906e38063051c242cbe8e97b5888",
+  "reviewed_at_utc": "2026-09-16T17:17:35Z",
+  "reviewed_by": "Georgios Politis (owner)",
+  "schema_version": "r1-attack-spec-1.0",
+  "specification": {
+    "null_band": 0.02,
+    "positive_doses": [
+      0.25,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "positive_floor_accuracy": 0.1,
+    "positive_floor_correlation": 0.2,
+    "privacy_limit_accuracy": 0.02,
+    "privacy_limit_correlation": 0.1,
+    "ridge_lambda": 1.0
+  },
+  "status": "frozen"
+}

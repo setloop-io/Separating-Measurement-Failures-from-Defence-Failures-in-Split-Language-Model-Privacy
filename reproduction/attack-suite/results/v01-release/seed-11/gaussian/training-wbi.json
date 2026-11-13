@@ -1,0 +1,270 @@
+{
+  "schema": "dtraining.attacker.seam_inversion.v1",
+  "config": {
+    "attack": "seam_inversion",
+    "mode": "training",
+    "toy": false,
+    "arm": "wbi",
+    "submode": "wbi-map+noise-whitening",
+    "capture_dir": "/Users/geo/LLM-Attacker/results/v01-release/seed-11/gaussian/training",
+    "canonical_pt": "/Users/geo/LLM-Attacker/results/v01-release/seed-11/gaussian/training/canonical.pt",
+    "model": null,
+    "embedding_pt": null,
+    "head_pt": "/Users/geo/LLM-Attacker/results/v01-release/public-head-11.pt",
+    "split": "6",
+    "linearization_forced": true,
+    "steps": 10,
+    "samples": 3,
+    "lr": 0.1,
+    "temperature": 1.0,
+    "ridge_lambda": 0.0,
+    "ridge_lambda_used": 0.00429779577255249,
+    "calibration_seqs": 6,
+    "calibration_file": null,
+    "device": "cpu",
+    "resume": null,
+    "checkpoint_every": 50,
+    "adaptive": "noise-whitening",
+    "noise_samples": 8,
+    "defense_sigma": 0.1,
+    "joint_candidates": 4,
+    "joint_beam": 2
+  },
+  "threat_model": "honest-but-curious seam observer of fwd seam activations h* (training: the tensor the body receives; inference: prefill seam rows), granted the victim's token embedding matrix E (public base weights \u2014 the VFLAIR-LLM VMI white-box assumption); --head-pt additionally grants the victim head transform. With --model alone, calibration forwards use the PUBLIC head \u2014 the victim's finetuned head is not assumed and the mismatch is part of the measurement. Canonical tokens are evaluation truth, never an attack input (label-free attack).",
+  "provenance": {
+    "hostname": "MacBookPro",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-08T16:06:31Z",
+    "dtraining_commit": "660eee31eb7f9eeee8efe4497855613a2e5753b0"
+  },
+  "results": [
+    {
+      "experiment": "seam_inversion",
+      "arm": "wbi",
+      "submode": "wbi-map+noise-whitening",
+      "mode": "training",
+      "step": 0,
+      "epoch": 0,
+      "surface": "head-pt:/Users/geo/LLM-Attacker/results/v01-release/public-head-11.pt",
+      "n_seq": 1,
+      "n_tokens": 8,
+      "token_set_precision": 0.166667,
+      "token_set_recall": 0.142857,
+      "seq_accuracy": 0.125,
+      "n_correct": 1,
+      "control_token": 1,
+      "control_accuracy": 0.0,
+      "n_control_correct": 0,
+      "gate": {
+        "gate": "frozen-gate.v2",
+        "z": 2.5391848136513127,
+        "n": 8,
+        "recovery_pct": 12.5,
+        "control_pct": 0.0,
+        "upper95_pct": 56.95099943459548,
+        "excess_pp": 56.95099943459548,
+        "gate_pp": 1.0,
+        "floor_pp": 44.62694295768257,
+        "at_floor": false,
+        "control_definition": "label_free_majority",
+        "n_seeds_required": 3,
+        "n_seeds": null,
+        "seeds_sufficient": null,
+        "verdict": "FAIL"
+      },
+      "per_sequence": [
+        {
+          "index": 0,
+          "prediction": [
+            22,
+            1,
+            60,
+            1,
+            1,
+            13,
+            3,
+            34
+          ],
+          "truth": [
+            9,
+            46,
+            46,
+            6,
+            15,
+            39,
+            3,
+            24
+          ],
+          "n_tokens": 8,
+          "correct": 1,
+          "control_correct": 0
+        }
+      ],
+      "final_objective": 0.0201761
+    },
+    {
+      "experiment": "seam_inversion",
+      "arm": "wbi",
+      "submode": "wbi-map+noise-whitening",
+      "mode": "training",
+      "step": 1,
+      "epoch": 0,
+      "surface": "head-pt:/Users/geo/LLM-Attacker/results/v01-release/public-head-11.pt",
+      "n_seq": 1,
+      "n_tokens": 8,
+      "token_set_precision": 0.166667,
+      "token_set_recall": 0.142857,
+      "seq_accuracy": 0.0,
+      "n_correct": 0,
+      "control_token": 1,
+      "control_accuracy": 0.0,
+      "n_control_correct": 0,
+      "gate": {
+        "gate": "frozen-gate.v2",
+        "z": 2.5391848136513127,
+        "n": 8,
+        "recovery_pct": 0.0,
+        "control_pct": 0.0,
+        "upper95_pct": 44.62694295768257,
+        "excess_pp": 44.62694295768257,
+        "gate_pp": 1.0,
+        "floor_pp": 44.62694295768257,
+        "at_floor": true,
+        "control_definition": "label_free_majority",
+        "n_seeds_required": 3,
+        "n_seeds": null,
+        "seeds_sufficient": null,
+        "verdict": "FAIL"
+      },
+      "per_sequence": [
+        {
+          "index": 1,
+          "prediction": [
+            1,
+            9,
+            58,
+            56,
+            1,
+            40,
+            25,
+            25
+          ],
+          "truth": [
+            63,
+            61,
+            22,
+            22,
+            52,
+            17,
+            36,
+            40
+          ],
+          "n_tokens": 8,
+          "correct": 0,
+          "control_correct": 0
+        }
+      ],
+      "final_objective": 0.01689731
+    },
+    {
+      "experiment": "seam_inversion",
+      "arm": "wbi",
+      "submode": "wbi-map+noise-whitening",
+      "mode": "training",
+      "step": 2,
+      "epoch": 0,
+      "surface": "head-pt:/Users/geo/LLM-Attacker/results/v01-release/public-head-11.pt",
+      "n_seq": 1,
+      "n_tokens": 8,
+      "token_set_precision": 0.0,
+      "token_set_recall": 0.0,
+      "seq_accuracy": 0.0,
+      "n_correct": 0,
+      "control_token": 1,
+      "control_accuracy": 0.0,
+      "n_control_correct": 0,
+      "gate": {
+        "gate": "frozen-gate.v2",
+        "z": 2.5391848136513127,
+        "n": 8,
+        "recovery_pct": 0.0,
+        "control_pct": 0.0,
+        "upper95_pct": 44.62694295768257,
+        "excess_pp": 44.62694295768257,
+        "gate_pp": 1.0,
+        "floor_pp": 44.62694295768257,
+        "at_floor": true,
+        "control_definition": "label_free_majority",
+        "n_seeds_required": 3,
+        "n_seeds": null,
+        "seeds_sufficient": null,
+        "verdict": "FAIL"
+      },
+      "per_sequence": [
+        {
+          "index": 2,
+          "prediction": [
+            56,
+            35,
+            56,
+            2,
+            40,
+            28,
+            56,
+            23
+          ],
+          "truth": [
+            5,
+            57,
+            39,
+            16,
+            58,
+            31,
+            10,
+            17
+          ],
+          "n_tokens": 8,
+          "correct": 0,
+          "control_correct": 0
+        }
+      ],
+      "final_objective": 0.01872119
+    }
+  ],
+  "summary": [
+    {
+      "experiment": "seam_inversion",
+      "arm": "wbi",
+      "submode": "wbi-map+noise-whitening",
+      "n_cells": 3,
+      "n_tokens": 24,
+      "token_set_precision_mean": 0.11111133333333334,
+      "token_set_recall_mean": 0.095238,
+      "seq_accuracy": 0.041667,
+      "control_accuracy": 0.0,
+      "gate": {
+        "gate": "frozen-gate.v2",
+        "z": 2.5391848136513127,
+        "n": 24,
+        "recovery_pct": 4.166666666666666,
+        "control_pct": 0.0,
+        "upper95_pct": 27.24204180704646,
+        "excess_pp": 27.24204180704646,
+        "gate_pp": 1.0,
+        "floor_pp": 21.17568959765519,
+        "at_floor": false,
+        "control_definition": "label_free_majority",
+        "n_seeds_required": 3,
+        "n_seeds": null,
+        "seeds_sufficient": null,
+        "verdict": "FAIL"
+      },
+      "gate_verdicts": [
+        "FAIL",
+        "FAIL",
+        "FAIL"
+      ]
+    }
+  ],
+  "interpretation": "token-set precision/recall are orderless per-sequence set overlaps (VFLAIR convention); seq_accuracy is position-aligned vs canonical, pooled per token; the control decodes the calibration-corpus majority token at every position (attacker-computable without canonical); the gate verdict is the frozen-gate Bonferroni-Wilson excess over that control with n = scored tokens. Toy tier is a machinery check of the shared ridge/decode/scoring/gate plumbing on a synthetic KNOWN-map seam, not a security claim; real numbers come from --capture-dir runs."
+}

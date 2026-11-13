@@ -1,0 +1,135 @@
+% Revision 2, formatted from the user-supplied arXiv source archive.
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\renewcommand{\ttdefault}{cmtt}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{flafter}
+\usepackage{float}
+\usepackage{placeins}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.7}
+\renewcommand{\textfraction}{0.08}
+\renewcommand{\floatpagefraction}{0.8}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{12pt plus 1fil}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+\setlength{\textfloatsep}{14pt plus 2pt minus 4pt}
+\setlength{\floatsep}{12pt plus 2pt minus 2pt}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\hypersetup{pdftitle={Auditing Privacy Claims in Split Language-Model Training},pdfauthor={Georgios Politis and Evangelos Pappas},pdfsubject={Retrospective audit of split-model privacy experiments}}
+\newtheorem{proposition}{Proposition}
+\captionsetup{font=small,labelfont=bf,labelsep=period}
+\expandafter\newcommand\csname artifactnameE1\endcsname{decoy-gradient records}
+\expandafter\newcommand\csname artifactnameB1\endcsname{boundary-audit records}
+\expandafter\newcommand\csname artifactnameR1\endcsname{exploration records}
+\expandafter\newcommand\csname artifactnameP4\endcsname{pilot records}
+\expandafter\newcommand\csname artifactnameE8\endcsname{wrapper records}
+\expandafter\newcommand\csname artifactnameER\endcsname{deployment records}
+\expandafter\newcommand\csname artifactnameMI\endcsname{MI-analysis records}
+\DeclareRobustCommand{\artifact}[1]{\hyperlink{artifact-#1}{\csname artifactname#1\endcsname}}
+\newcommand{\pp}{\,\mathrm{pp}}
+\input{data/results_macros}
+\title{\textbf{Auditing Privacy Claims in Split Language-Model Training}}
+\author{Georgios Politis\\ {\small\texttt{geo.politis@gmail.com}} \and
+Evangelos Pappas\\ {\small\texttt{evanz.pappas@gmail.com}}}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+Privacy evaluations can fail for several reasons. An attack may miss a
+visible message, score the wrong target or lack the controls needed to
+support its verdict. A defence can also fail a sound test. We distinguish
+these outcomes in a retrospective audit of four split-language-model
+campaigns from one research programme, with two further analyses of
+security scope and mutual information. The audit separates measured
+breaches, qualified non-detection, incomplete evidence, invalid
+measurements and claims made outside the tested threat model. In an
+exploration of 19 configurations, only four of 24 required instruments
+qualified, yet 13 configurations had qualified privacy breaches.
+The six configurations with undetermined privacy outcomes independently
+failed utility or gain requirements. A subsequent seven-cell pilot
+produced no eligible defence, with two utility failures and four failed
+versus three undetermined composite privacy assessments. These results
+retain valid evidence against the tested defences. The scope analyses
+show why shared-key wire obfuscation does not protect against a
+compromised restoring host, and why a near-zero mutual-information lower
+bound cannot certify a small leakage budget. We provide rerunnable
+secondary analysis, hashed source records and each campaign's uncertainty
+conventions. The resulting cross-case audit identifies the conclusions
+supported by the recorded experiments. Its scope remains retrospective,
+with no new defence or independently validated general evaluator.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+A split language model runs some layers on a client and others on a
+remote provider. The client keeps its text locally, but the activations
+and gradients exchanged during training can still reveal information
+about it. Recovery scores need a clear context. Their meaning depends on
+the messages the attacker sees, the model weights and secrets it knows,
+the target it tries to recover and the controls used to assess its
+performance. An evaluation can therefore report low leakage while testing
+the wrong target or overlooking an available channel. Conversely, a
+qualified attack that detects substantial leakage can provide sound
+evidence against a defence.
+
+Existing studies illustrate several parts of this problem. An omitted
+returned-gradient channel can overturn a passing forward-only check
+\cite{paper1}. Access to gradients also affects token recovery and
+exact-document recovery by different amounts \cite{gradients2026}.
+The scoring unit changes the result. LLM-Attack Suite records attacker
+observations, controls, saved predictions and untested attacks
+\cite{suite2026}, while work on image inversion shows how the evaluator
+and attack influence measured leakage \cite{mia2026}. Together, these
+findings motivate a closer account of which conclusions follow from
+an experiment and which require evidence it never collected.
+
+We examine four experimental campaigns within one research programme.
+The cases cover an omitted gradient channel, a reconstruction test that
+scored next-token prediction, incomplete instrument qualification and a
+calibrated defence-redesign pilot. Their outcomes differ. Two further
+analyses examine shared-key wire protection under a stronger observer
+and the use of a near-zero mutual-information lower bound as a privacy
+ceiling. Each case retains its own target, repetition unit and recovery
+measure. Shared data and research decisions prevent treating them as
+independent replications of one hypothesis or pooling their scores into
+a common effect size.
+
+The audit follows each privacy claim from the attacker's observations to
+the recorded decision. We distinguish valid negative evidence from
+non-detection, incomplete qualification, a broken measurement and a
+change of threat model. The distinction has practical consequences.
+Our executable analysis reconstructs the exploration's cell and seed
+results and the defence pilot's saved losses and probe scores, preserving
+their frozen rules and composite verdicts. Archived key, identity and
+runtime records then delimit the broader security interpretations.
+This reconciliation makes the existing evidence easier to inspect and
+reproduce, without presenting the controls or attack infrastructure as
+new methods.
+
+\input{sections/audit-method}
+\input{sections/case-studies}
+\input{sections/results}
+\input{sections/scope-checks}
+\input{sections/discussion}
+\appendix
+\input{sections/artifact-index}
+\FloatBarrier
+\bibliographystyle{plain}
+\bibliography{refs}
+\end{document}

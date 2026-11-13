@@ -1,0 +1,154 @@
+{
+  "schema": "llm_attacker.defended_pilot_cell.v1",
+  "status": "COMPLETE",
+  "measurement_version": 2,
+  "observation_location": "body_input_seam",
+  "baseline_scope": "unadapted public-head reconstruction; bottleneck mismatch is not a privacy certificate",
+  "split": 6,
+  "seed": 11,
+  "defense": "replica-median",
+  "paired_control": "../none/cell.json",
+  "wall_seconds": 0.23316295817494392,
+  "attack_seconds": 0.2366456249728799,
+  "cuda_peak_allocated_bytes": null,
+  "resources_scope": "victim wall includes capture I/O and matched utility measurements; attack time is separate; cuda peak is process-wide (experiment.json convention)",
+  "utility_before": {
+    "cross_entropy": 4.219489824204218,
+    "perplexity": 67.9987841047823,
+    "tokens": 42,
+    "documents": 6,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "before_victim_training"
+  },
+  "utility_after": {
+    "cross_entropy": 4.216033935546875,
+    "perplexity": 67.764193471116,
+    "tokens": 42,
+    "documents": 6,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "after_victim_training"
+  },
+  "training": {
+    "steps_run": 12,
+    "final_loss": 4.151480197906494,
+    "mean_loss": 4.159520824750264
+  },
+  "access": {
+    "schema": "llm_attacker.defended_pilot_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 6,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 4,
+        "beam_width": 2
+      },
+      "sipit": {
+        "steps_per_token": 4
+      },
+      "scored_sequences": 4
+    }
+  },
+  "provenance": {
+    "path": "captures/replica_median_provenance.json",
+    "sha256": "ed41574bede197e7e28991c7701a1686b36979b6c2b030b5115049a4364f25a2"
+  },
+  "run_artifact": "run.json",
+  "evidence": "run.json.evidence.json",
+  "captures_dir": "captures",
+  "attacks": {
+    "forward": {
+      "accuracy": 1.0,
+      "n_tokens": 32,
+      "n_sequences": 4,
+      "candidate_count": 4,
+      "beam_width": 2,
+      "work": {
+        "head_forward_calls": 8,
+        "head_forward_sequences": 240,
+        "head_forward_token_positions": 1136,
+        "head_backward_calls": 0,
+        "head_backward_token_positions": 0,
+        "vocabulary_dot_products": 2048,
+        "wall_seconds": 0.013060417026281357,
+        "cuda_seconds": null,
+        "peak_allocated_bytes": null,
+        "incremental_peak_allocated_bytes": null
+      },
+      "artifact": "forward-baseline.json"
+    },
+    "sipit": {
+      "accuracy": 0.21875,
+      "n_tokens": 32,
+      "n_sequences": 4,
+      "steps_per_token": 4,
+      "work": {
+        "head_forward_calls": 64,
+        "head_forward_sequences": 256,
+        "head_forward_token_positions": 1152,
+        "head_backward_calls": 32,
+        "head_backward_token_positions": 576,
+        "vocabulary_dot_products": 8192,
+        "wall_seconds": 0.08374345768243074,
+        "cuda_seconds": null,
+        "peak_allocated_bytes": null,
+        "incremental_peak_allocated_bytes": null
+      },
+      "artifact": "sipit-baseline.json"
+    },
+    "replica-integrity": {
+      "observations": "replica-observations.json",
+      "truth": "replica-truth.json",
+      "artifact": "replica-integrity.json",
+      "arms": [
+        {
+          "arm": "clean",
+          "samples": 4,
+          "accepted_error_rate": 0.0,
+          "availability_abort_rate": 0.0,
+          "alarm_rate": 0.0,
+          "false_positive_rate": 0.0,
+          "false_abort_rate": 0.0
+        },
+        {
+          "arm": "one-malicious",
+          "samples": 4,
+          "accepted_error_rate": 0.0,
+          "availability_abort_rate": 0.0,
+          "alarm_rate": 1.0,
+          "false_positive_rate": null,
+          "false_abort_rate": null
+        },
+        {
+          "arm": "two-colluding",
+          "samples": 4,
+          "accepted_error_rate": 1.0,
+          "availability_abort_rate": 0.0,
+          "alarm_rate": 1.0,
+          "false_positive_rate": null,
+          "false_abort_rate": null
+        }
+      ],
+      "perturbation_point": "channel outputs replaced before the coordinate-median aggregation point (replica_integrity.perturb)"
+    }
+  },
+  "artifact_hashes": {
+    "sipit-baseline.json": "513699ee20060fc61ae5e6a6f6955154d48eeba5265652fbf1c39843e50c8210",
+    "forward-baseline.json": "9ee4a60a9d28463283669cf68ef6027d1939fd73d656c77111ece5e260a97626",
+    "replica-truth.json": "c9dd27ff9041405ae7dee58c25430b9c5e4812e9e019288b3c6729c31d81dbd2",
+    "replica-observations.json": "a8daea6f71b41dd048987135de04be84c2d02f5da423abd92fa0cc9abe864acb",
+    "sipit-predictions.json": "122117be62076fb0e6daa59a729c9134275f40ca38c06422521bca2116c24cd9",
+    "run.json": "0b8d580744b9c6a998b460f944e01e289b8da60a2e99a642f8bbee6d7759f84d",
+    "forward-predictions.json": "2422316c02c1e93eae709f39cef8d0ae0f16ee5d97caae43d5d76a6e895070d1",
+    "replica-integrity.json": "486d33f0365856c3fb41a48cfed523206a45af1e9cb9592eadab3d9e5a115764"
+  }
+}

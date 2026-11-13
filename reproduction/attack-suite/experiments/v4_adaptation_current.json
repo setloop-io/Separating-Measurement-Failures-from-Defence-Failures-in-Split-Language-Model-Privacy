@@ -1,0 +1,122 @@
+{
+  "status": "ADAPTED_COMPARISON_COMPLETE_REPRODUCED_AND_HF_VERIFIED",
+  "checked_utc": "2026-09-20T08:54:25.401988+00:00",
+  "source_commit": "2d0f58b9d6912206d1070679e31853f9a344cefc",
+  "launch_sha256": "6f0dc502ff275be21bba73d5b29f291356bb60ab8a1f0e82d16febea58564d63",
+  "experiment_id": "9e651bf4-b540-4116-8279-e72df5556d53",
+  "runs": {
+    "toula": "b831a06d-ecaf-4d9c-bbd1-b2d2a0ad0270",
+    "koula": "ae607e15-41e2-440e-8d25-82d199d9f8f9"
+  },
+  "assigned_joint_cells_per_host": 40,
+  "total_joint_cells": 80,
+  "reported_arms": [
+    "sip",
+    "bf"
+  ],
+  "intermediate_diagnostic_arm": "b",
+  "documents_per_cell": 256,
+  "approved_total_gpu_hours": 50,
+  "hard_ceiling_per_host_hours": 23.5,
+  "earlier_checks_reserved_gpu_hours": 1,
+  "preparation_reserved_gpu_hours": 2,
+  "all80_trained_gates_passed": true,
+  "both_host_assets_verified": true,
+  "first_predictions_observed_on_both": true,
+  "scoring_performed": true,
+  "scope": "Single-seam adaptation; original published-setting reproduction remains unestablished",
+  "next": "The adapted release and separate 500-step descriptive trajectory audit are complete. Original published-setting B1 remains unmet. A paired public-head activation-versus-gradient study on retained training wires would be a new, as-yet-unperformed attack experiment; it is not supplied by the existing activation-only trajectory audit.",
+  "completed_joint_cells": 80,
+  "analysis_source_commit": "8ec09babf38adf9c9fbb597b853a2ee62b190a20",
+  "analysis_run_id": "ec83b6d5-d0c8-4765-838c-c903eb5204f4",
+  "cpu_reproduction_passed": true,
+  "raw_internal_files_verified": 21154,
+  "primary_difference_pp": -4.168701171875,
+  "primary_95ci_pp": [
+    -4.7894287109375,
+    -3.529052734375
+  ],
+  "prediction_host_hours": 29.70010263428278,
+  "paper_review": "No scientific blockers; protocol interpretation erratum added",
+  "hf_upload": "COMPLETE",
+  "raw_hf": {
+    "status": "RAW_ARCHIVE_VERIFIED_ON_HF",
+    "revision": "d2d11c2de083be5b43ad502f310d3e8d4a250868",
+    "files": [
+      "raw-evidence.tar.zst",
+      "RAW-FILES.sha256.json",
+      "RAW-ARCHIVE-VERIFIED.json"
+    ],
+    "analysis_pending": true,
+    "ok": true
+  },
+  "evidence_hf": {
+    "repo": "Setloop/llm-attacker-paper-b",
+    "revision": "d415492614cb1eb760926bf2e01a33b7fb024124",
+    "private": false,
+    "tier": "evidence",
+    "prefix": "v4-adaptation-20260920/evidence",
+    "files": 27,
+    "bytes": 3186252756,
+    "ok": true,
+    "errors": [],
+    "manifest_sha256": "881bdf02d6777e29449ac3bbef9f2112725fd75dda78052757e18baf0d221e42"
+  },
+  "manuscript_hf": {
+    "repo": "Setloop/llm-attacker-paper-b",
+    "revision": "93f45488e86ee73d595976b524144336b21dc370",
+    "private": false,
+    "tier": "manuscript",
+    "prefix": "v4-adaptation-20260920/manuscript",
+    "files": 19,
+    "bytes": 662011,
+    "ok": true,
+    "errors": [],
+    "manifest_sha256": "450bb72c3c0c4c9def71fb6bab692419dfc5fab841a818eaa6513a14d139218b"
+  },
+  "status_reconciliation": {
+    "checked_date": "2026-10-20",
+    "scope": "Local existing-evidence status and hash reconciliation; no new model, attack, audit experiment or remote publication verification.",
+    "original_adapted_release_checked_utc": "2026-09-20T08:54:25.401988+00:00",
+    "superseded_next_statement": "No further work is required for this adapted release. Original published-setting B1 remains unmet; the separate 500-step extension still requires collection, verification and analysis.",
+    "sasa_500_step_extension": {
+      "status": "DESCRIPTIVE_AUDIT_COMPLETE_CPU_REPRODUCED_RELEASE_RECORDED",
+      "local_release_path": "build/sasa-extension-20260920/release",
+      "reproduction_record": "build/sasa-extension-20260920/release/REPRODUCTION.json",
+      "reproduction_record_sha256": "db55bde89cd40154590ebd445dfafb2558d6f16d9451f24f08d1d822d448f22a",
+      "source_record": "build/sasa-extension-20260920/release/SOURCE.json",
+      "scope": "Six GPT-2 depth-six training trajectories, none/mid-lite x seeds 11/22/33, clean public-surrogate linear decoder; descriptive activation inversion only.",
+      "trajectories": 6,
+      "steps_per_trajectory": 500,
+      "saved_sequence_predictions": 3000,
+      "tokens_per_sequence": 32,
+      "raw_files_verified_by_prior_audit": 12443,
+      "journals_verified_by_prior_audit": 13,
+      "today_rehashed_report_files": 4,
+      "today_all_report_hashes_match": true,
+      "public_calibration_windows": 64,
+      "calibration_exact_row_overlap_by_seed": {
+        "11": 1,
+        "22": 4,
+        "33": 4
+      },
+      "heldout_convergence_established": false,
+      "exact_head_replay_established": false,
+      "paired_gradient_benefit_measured": false,
+      "adaptive_projection_attack_evaluated": false,
+      "privacy_gate_reissued": false,
+      "retained_forward_backward_pairs": 3000,
+      "capture_time_victim_checkpoints_saved": false,
+      "new_paired_public_head_attack_status": "UNPERFORMED; retained observations can support a prospectively specified comparison without victim retraining, subject to source/access/precision/gradient-scale checks.",
+      "recorded_hf_release": {
+        "repo": "Setloop/llm-attacker-paper-b",
+        "revision": "f1488fbde74726635f1e8616092ca187ac051270",
+        "prefix": "sasa-500step-20260920/evidence",
+        "local_record": "docs/hf-paper-b/sasa-500step-20260920/manuscript/README.md",
+        "remote_verification_repeated_today": false
+      }
+    },
+    "status_audit": "artifacts/paper-a-review-round2-20261020/existing-evidence-status.md",
+    "immutable_protocols_and_releases_changed": false
+  }
+}

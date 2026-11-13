@@ -1,0 +1,70 @@
+{
+  "command_exit_status": 0,
+  "limitations": [
+    "GPU utilization and power are two-second samples, not per-operation profiles.",
+    "Hardware energy counters are preferred; otherwise energy is estimated from sampled power times profiled wall time.",
+    "Estimated energy is operational and is not equivalent to a hardware energy-counter measurement."
+  ],
+  "name": "clean21_energy_retry",
+  "raw_logs": {
+    "remote_cpu": "/home/geo/experiments/results/training/phase09_energy_reprofile/clean21_retry/economics/clean21_energy_retry_remote_cpu.log",
+    "remote_gpu": "/home/geo/experiments/results/training/phase09_energy_reprofile/clean21_retry/economics/clean21_energy_retry_remote_gpu.csv",
+    "trusted_cpu": "/home/geo/experiments/results/training/phase09_energy_reprofile/clean21_retry/economics/clean21_energy_retry_trusted_cpu.log",
+    "trusted_gpu": "/home/geo/experiments/results/training/phase09_energy_reprofile/clean21_retry/economics/clean21_energy_retry_trusted_gpu.csv"
+  },
+  "remote": {
+    "cpu": {
+      "sample_count": 1162,
+      "utilization_mean_pct": 2.216867469879517,
+      "utilization_peak_pct": 4.0
+    },
+    "energy": {
+      "coverage_seconds": 2322,
+      "estimated_gpu_energy_joules": 28819.094018932876,
+      "measured_gpu_energy_joules": null,
+      "method": "sampled_power_mean_times_wall_time",
+      "note": "Operational estimate from two-second nvidia-smi power.draw samples; not a hardware energy counter.",
+      "sample_count": 1162,
+      "sampling_interval_seconds": 2,
+      "status": "estimated",
+      "wall_seconds": 2323
+    },
+    "gpu": {
+      "memory_used_peak_mib": null,
+      "power_draw_mean_watts": 12.405981067125646,
+      "power_draw_peak_watts": 12.89,
+      "sample_count": 1162,
+      "utilization_gpu_mean_pct": 0.5137693631669535,
+      "utilization_gpu_peak_pct": 4.0
+    }
+  },
+  "remote_host": "koula",
+  "schema": "dtraining.systems_profile.v1",
+  "trusted": {
+    "cpu": {
+      "sample_count": 1162,
+      "utilization_mean_pct": 3.1462994836488747,
+      "utilization_peak_pct": 8.0
+    },
+    "energy": {
+      "coverage_seconds": 2322,
+      "estimated_gpu_energy_joules": 44984.63511187607,
+      "measured_gpu_energy_joules": null,
+      "method": "sampled_power_mean_times_wall_time",
+      "note": "Operational estimate from two-second nvidia-smi power.draw samples; not a hardware energy counter.",
+      "sample_count": 1162,
+      "sampling_interval_seconds": 2,
+      "status": "estimated",
+      "wall_seconds": 2323
+    },
+    "gpu": {
+      "memory_used_peak_mib": null,
+      "power_draw_mean_watts": 19.364888123924267,
+      "power_draw_peak_watts": 40.46,
+      "sample_count": 1162,
+      "utilization_gpu_mean_pct": 45.126506024096386,
+      "utilization_gpu_peak_pct": 94.0
+    }
+  },
+  "wall_seconds": 2323
+}

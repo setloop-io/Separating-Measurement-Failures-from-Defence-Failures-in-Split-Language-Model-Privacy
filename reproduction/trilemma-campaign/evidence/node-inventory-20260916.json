@@ -1,0 +1,80 @@
+{
+  "schema_version": "r1-node-inventory-1.0",
+  "scientific_evidence": false,
+  "scope": "Owned-hardware inventory for R1 engineering execution. Measured over SSH from the macOS orchestrator on 2026-09-16. No run, training, or scientific observation is recorded here. Owner authorized use of these nodes for R1 on 2026-09-16 (approved execution plan); this authorization covers owned hardware only, not metered cloud.",
+  "measured_at_utc": "2026-09-16",
+  "orchestrator": "macOS workstation, repository checkout at commit d2bc48e",
+  "nodes": {
+    "toula": {
+      "role": "gpu",
+      "hostname": "toula",
+      "arch": "aarch64",
+      "os": "Ubuntu 24.04.4 LTS",
+      "cpu_cores": 20,
+      "ram_gib": 121,
+      "root_disk": {"size": "3.7T", "free": "1.6T", "use_percent": 55},
+      "gpu": {"name": "NVIDIA GB10", "driver_version": "580.159.03", "cuda_version": "13.0", "memory": "unified (nvidia-smi reports N/A)"},
+      "python3": "3.12.3",
+      "docker": "29.2.1",
+      "docker_runtimes": ["runc", "nvidia"],
+      "sudo": "unavailable (no passwordless sudo)",
+      "dcgmi": "not installed; no sudo to install. DEVIATION: environment acceptance uses nvidia-smi health evidence instead of dcgmi health/diag; recorded in the environment review note.",
+      "notes": "NVIDIA container toolkit apt repo present; nvidia runtime registered in dockerd."
+    },
+    "koula": {
+      "role": "gpu",
+      "hostname": "koula",
+      "arch": "aarch64",
+      "os": "Ubuntu 24.04.4 LTS",
+      "cpu_cores": 20,
+      "ram_gib": 121,
+      "root_disk": {"size": "3.7T", "free": "2.2T", "use_percent": 40},
+      "gpu": {"name": "NVIDIA GB10", "driver_version": "580.159.03", "cuda_version": "13.0", "memory": "unified (nvidia-smi reports N/A)"},
+      "python3": "3.12.3",
+      "docker": "29.2.1",
+      "docker_runtimes": ["runc", "nvidia"],
+      "sudo": "unavailable (no passwordless sudo)",
+      "dcgmi": "not installed; no sudo to install. DEVIATION: environment acceptance uses nvidia-smi health evidence instead of dcgmi health/diag; recorded in the environment review note.",
+      "notes": "NVIDIA container toolkit apt repo present; nvidia runtime registered in dockerd."
+    },
+    "Soula": {
+      "role": "cpu",
+      "hostname": "Soula",
+      "arch": "aarch64",
+      "os": "Debian GNU/Linux 13 (trixie)",
+      "cpu_cores": 4,
+      "ram_gib": 7,
+      "root_disk": {"size": "117G", "free": "105G", "use_percent": 7},
+      "python3": "3.13.5",
+      "docker": "26.1.5",
+      "sudo": "passwordless",
+      "notes": "Test/verification worker. 7 GiB RAM is pytest-OOM-prone: serialize and cap threads."
+    },
+    "Voula": {
+      "role": "cpu",
+      "hostname": "Voula",
+      "arch": "aarch64",
+      "os": "Debian GNU/Linux 13 (trixie)",
+      "cpu_cores": 4,
+      "ram_gib": 15,
+      "root_disk": {"size": "117G", "free": "103G", "use_percent": 9},
+      "python3": "3.13.5",
+      "docker": "26.1.5",
+      "sudo": "passwordless",
+      "notes": "Preferred CPU test worker (largest RAM). Evidence replica target."
+    },
+    "Sasa": {
+      "role": "cpu",
+      "hostname": "Sasa",
+      "arch": "aarch64",
+      "os": "Debian GNU/Linux 13 (trixie)",
+      "cpu_cores": 4,
+      "ram_gib": 7,
+      "root_disk": {"size": "29G", "free": "18G", "use_percent": 35},
+      "python3": "3.13.5",
+      "docker": "26.1.5",
+      "sudo": "passwordless",
+      "notes": "Light duties only: bundle restore/verify replica. Disk too small for run artifacts."
+    }
+  }
+}

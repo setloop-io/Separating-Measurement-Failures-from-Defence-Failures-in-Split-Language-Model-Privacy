@@ -1,0 +1,269 @@
+{
+  "schema": "dtraining.deleg6040.paper_control.v1",
+  "corpus": {
+    "path": "/tmp/user/1000/claude-1000/-home-epappas-workspace-spacejar-dtraining/68f710d2-b91d-401d-9cbc-492e6d91ff9c/scratchpad/corpus/wikitext2_corpus.txt",
+    "sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe",
+    "bytes": 10316588,
+    "manifest": "paper-data/corpus_manifest_original.json"
+  },
+  "model": "/tmp/user/1000/claude-1000/-home-epappas-workspace-spacejar-dtraining/68f710d2-b91d-401d-9cbc-492e6d91ff9c/scratchpad/corpus/qwen3-0.6b-tok",
+  "seq_len": 32,
+  "train_blocks": 256,
+  "eval_blocks": 256,
+  "eval_rows": 8192,
+  "known_eval_rows": 5765,
+  "code_control": {
+    "token_id": 279,
+    "correct": 397,
+    "pct": 4.84619140625,
+    "estimator": "mode(train labels), scored on eval rows",
+    "source": "attacker/attacks/latent_probe.py:215-217"
+  },
+  "paper_control": {
+    "token_id": 279,
+    "correct": 397,
+    "pct": 4.84619140625,
+    "estimator": "argmax over eval-row label counts",
+    "source": "papers/arxiv-draft/main.tex:153"
+  },
+  "control_shift_rows": 0,
+  "control_shift_pp": 0.0,
+  "excess_shift_pp": -0.0,
+  "estimators_agree": true,
+  "top_eval_labels": [
+    {
+      "token_id": 279,
+      "count": 397,
+      "decoded": " the"
+    },
+    {
+      "token_id": 1154,
+      "count": 309,
+      "decoded": " ,"
+    },
+    {
+      "token_id": 220,
+      "count": 250,
+      "decoded": " "
+    },
+    {
+      "token_id": 659,
+      "count": 235,
+      "decoded": " ."
+    },
+    {
+      "token_id": 323,
+      "count": 187,
+      "decoded": " and"
+    },
+    {
+      "token_id": 16,
+      "count": 169,
+      "decoded": "1"
+    },
+    {
+      "token_id": 304,
+      "count": 166,
+      "decoded": " in"
+    },
+    {
+      "token_id": 315,
+      "count": 153,
+      "decoded": " of"
+    },
+    {
+      "token_id": 311,
+      "count": 128,
+      "decoded": " to"
+    },
+    {
+      "token_id": 3122,
+      "count": 127,
+      "decoded": "unk"
+    }
+  ],
+  "top_train_labels": [
+    {
+      "token_id": 279,
+      "count": 451,
+      "decoded": " the"
+    },
+    {
+      "token_id": 1154,
+      "count": 361,
+      "decoded": " ,"
+    },
+    {
+      "token_id": 659,
+      "count": 207,
+      "decoded": " ."
+    },
+    {
+      "token_id": 315,
+      "count": 204,
+      "decoded": " of"
+    },
+    {
+      "token_id": 366,
+      "count": 189,
+      "decoded": " <"
+    },
+    {
+      "token_id": 29,
+      "count": 188,
+      "decoded": ">"
+    },
+    {
+      "token_id": 3122,
+      "count": 186,
+      "decoded": "unk"
+    },
+    {
+      "token_id": 323,
+      "count": 160,
+      "decoded": " and"
+    },
+    {
+      "token_id": 311,
+      "count": 157,
+      "decoded": " to"
+    },
+    {
+      "token_id": 220,
+      "count": 140,
+      "decoded": " "
+    }
+  ],
+  "cells_cross_checked": [
+    {
+      "file": "paper-data/collected/diagnostic/latent_v6_remote/accepted/latent_v6_split21_active_seed42_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v6_remote/accepted/latent_v6_split21_seed42_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v6_remote/accepted/latent_v6_split21_seed43_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v6_remote/accepted/latent_v6_split21_seed44_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_A_n045_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_B_n055_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_C_n045_s125_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_D_n045_c050_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_E_chaff16_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_F2_int8row_s43_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_F3_int8row_s44_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_F_int8_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_G_chaff16_int8_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_H_chaff16_n045_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_I2_int8fixed_s42_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_base_n035_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_base_n035_s43_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/diagnostic/latent_v7_defense/latent_v7_base_n035_s44_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/invalid/latent_v6_rejected/latent_v6_active_d050_seed42_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/invalid/latent_v6_rejected/latent_v6_defgraph_seed43_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/invalid/latent_v6_rejected/latent_v6_graph_seed45_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/invalid/latent_v6_rejected/latent_v6_iso_seed42_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/invalid/latent_v6_rejected/latent_v6_iso_seed43_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/invalid/latent_v6_rejected/latent_v6_remote_batch_seed42_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/invalid/latent_v6_rejected/latent_v6_remote_batch_seed43_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    },
+    {
+      "file": "paper-data/collected/invalid/latent_v6_rejected/latent_v6_remote_batch_seed44_attacker.json",
+      "control_correct": 397,
+      "known_rows": 5765
+    }
+  ]
+}

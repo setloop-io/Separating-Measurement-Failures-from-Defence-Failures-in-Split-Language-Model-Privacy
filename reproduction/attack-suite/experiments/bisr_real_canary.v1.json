@@ -1,0 +1,47 @@
+{
+  "schema": "bisr.real_model_canary.v1",
+  "route": "C-A",
+  "upstream_commit": "c376590227f9718077765824af4088665bb78687",
+  "model": "openai-community/gpt2",
+  "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "source_sha256": {
+    "attacker/bisr_upstream.py": "cb98fa762efe9ebb4e6c7885fe0fd04f468a51252d8e191396a6978a1ffaf365",
+    "experiments/bisr_real_canary.py": "23cd5fcf3eee8b409f42b32d848076e9f67df6dc9cc8ba3b77c19240de9a9215",
+    "attacker/bisr_fidelity.py": "e514d75fe68d36a35bc5a2ed2aa520498d0f6d794348fdc151805b67ff4791a0",
+    "attacker/attacks/bisr_baseline.py": "4e1254f5961ac24a690b48aca85a60ebd4ad48b4f807d31fd0779609fdb84b0b",
+    "experiments/bisr_frozen_inputs.v3.json": "4a4f5b76a3e86bf67eba48a35907c9381eddf34ed9e6c1ccf10662320486fe8d"
+  },
+  "seed": 81273,
+  "sample": "first frozen auxiliary window; excluded from validation",
+  "depths": [
+    3,
+    6
+  ],
+  "knowledge": [
+    "public",
+    "exact"
+  ],
+  "exact_canary": "pretrained head plus 0.001 to first layernorm weight; not trained victim evidence",
+  "dtype": "FP32",
+  "attention": "eager",
+  "tf32": false,
+  "budgets": {
+    "GM": 32,
+    "SM_f": 800,
+    "SM_bf": 800
+  },
+  "comparison": [
+    "upstream GRU logits",
+    "exact wire replay",
+    "GM and SM initial variables, gradients, AdamW update"
+  ],
+  "tolerance": {
+    "atol": 1e-06,
+    "rtol": 1e-05
+  },
+  "resource_rule": "project measured full-budget online time over 3 seeds * 256 documents and both depths/grants/engines, multiply by 1.5; add training/preparation before admission",
+  "total_gpu_hours_ceiling": 30,
+  "canary_wall_limit_hours": 1,
+  "fresh_output": "koula:~/llm-attacker-bisr-fidelity-20260918/canary-v1",
+  "full_launch_admitted": false
+}

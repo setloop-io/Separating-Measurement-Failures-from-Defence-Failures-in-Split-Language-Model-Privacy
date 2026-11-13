@@ -1,0 +1,81 @@
+{
+  "schema": "dtraining.ed2.distributed_draft.v2",
+  "experiment": "E-D2 distributed draft speculation",
+  "config": {
+    "target": "/workspace/experiments/models/qwen36-35b-a3b",
+    "draft": "/workspace/experiments/models/qwen36-27b",
+    "cloud": "http://10.10.10.2:5000",
+    "split_after": 1,
+    "resume_at": 38,
+    "k": [
+      4
+    ],
+    "max_tokens": 16,
+    "output": "/workspace/experiments/results/paper2/p2d0_distributed_draft_smoke_35b_target_27b_draft_20260807T175544Z.json",
+    "repetitions": 1,
+    "wan_profile": "direct_0ms_protocol_smoke",
+    "quick": true,
+    "self_test": false,
+    "measurement_kind": "emulated"
+  },
+  "evidence_status": "supporting",
+  "known_limitations": [
+    "The WAN profile is externally applied; measured wire RTT is retained per run.",
+    "Fallback and optimized kernel paths require separate artifacts and must not be pooled."
+  ],
+  "provenance": {
+    "dtraining_commit": "unknown",
+    "hostname": "toula",
+    "platform": "Linux-6.17.0-1026-nvidia-aarch64-with-glibc2.39",
+    "container_image": "split-inference:spark"
+  },
+  "runs": [
+    {
+      "repetition": 0,
+      "category": "code",
+      "prompt": "Write a Python function to implement binary search on a sorted array. Include docstring and type hints.",
+      "k": 4,
+      "baseline_time_s": 1.2352778911590576,
+      "baseline_tokens_per_second": 12.952551093573971,
+      "baseline_token_ids_sha256": "f7d08543462d09dd3ad448450e15a29dbeca75beb5afa6074bea4377ce9d5e5e",
+      "draft_token_ids_sha256": "f7d08543462d09dd3ad448450e15a29dbeca75beb5afa6074bea4377ce9d5e5e",
+      "rounds": 3,
+      "accepted": 12,
+      "target_forward_calls": 4,
+      "target_replay_forwards": 0,
+      "tokens_per_target_forward": 4.0,
+      "tokens_per_round_trip": 4.0,
+      "partial_accept_rate": 0.0,
+      "time_s": 4.858362436294556,
+      "tokens_per_second": 3.2932907352632803,
+      "wire_calls": 3,
+      "mean_wire_total_ms": 153.98666666666668,
+      "identity": true,
+      "identical_prefix_len": 16
+    },
+    {
+      "repetition": 0,
+      "category": "code",
+      "prompt": "Write a Python class for a linked list with insert, delete, and search methods.",
+      "k": 4,
+      "baseline_time_s": 1.0653204917907715,
+      "baseline_tokens_per_second": 15.018954505516442,
+      "baseline_token_ids_sha256": "8d4ed509b19dabc9e8a90424d614f588614d40e4a350e77b9b124fefb9726725",
+      "draft_token_ids_sha256": "8d4ed509b19dabc9e8a90424d614f588614d40e4a350e77b9b124fefb9726725",
+      "rounds": 4,
+      "accepted": 14,
+      "target_forward_calls": 5,
+      "target_replay_forwards": 2,
+      "tokens_per_target_forward": 3.2,
+      "tokens_per_round_trip": 2.286,
+      "partial_accept_rate": 0.5,
+      "time_s": 6.189245939254761,
+      "tokens_per_second": 2.5851291347983727,
+      "wire_calls": 6,
+      "mean_wire_total_ms": 137.4283333333333,
+      "identity": true,
+      "identical_prefix_len": 16
+    }
+  ],
+  "all_identity": true
+}

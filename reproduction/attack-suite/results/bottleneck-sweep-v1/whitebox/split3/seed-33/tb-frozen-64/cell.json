@@ -1,0 +1,161 @@
+{
+  "schema": "llm_attacker.whitebox_sweep_cell.v1",
+  "status": "COMPLETE",
+  "tier": "whitebox",
+  "access_condition": "white-box-aware (true encoder granted) \u2014 strictly stronger than the base matrix's matched access; NOT comparable as a matched-access row",
+  "split": 3,
+  "seed": 33,
+  "method": "tb-frozen",
+  "dim": 64,
+  "base_cell": "split3/seed-33/dim-64/tb-frozen",
+  "defense_checkpoint": {
+    "path": "split3/seed-33/dim-64/tb-frozen/captures/trained_bottleneck_encoder.pt",
+    "sha256": "8e5067b3e574d53f9826c799a970a8c64fce9fb450177374691da03f8f3e5355"
+  },
+  "wall_seconds": 125.58964395313524,
+  "attack_seconds": 125.58964436897077,
+  "cuda_peak_allocated_bytes": 9828142592,
+  "utility_after": {
+    "cross_entropy": 5.251056271214639,
+    "perplexity": 190.76766446816293,
+    "tokens": 992,
+    "documents": 32,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "after_victim_training"
+  },
+  "utility_gate": {
+    "ppl_after": 190.76766446816293,
+    "control_ppl_after": 48.11248657994797,
+    "ratio": 3.9650344022682447,
+    "pass_1_5x": false,
+    "pass_2x": false,
+    "thresholds": [
+      1.5,
+      2.0
+    ]
+  },
+  "utility_source": "carried verbatim from the base cell; the attack cannot change training-time utility",
+  "access": {
+    "schema": "llm_attacker.whitebox_sweep_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 32,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "public_defense_decoder": "granted when the defense exposes a cloud decoder (bottleneck v2 geometry, pca-compress basis)",
+    "defense_aware_arm": {
+      "knowledge": "defense CLASS and released width k only (no defense weights or randomness)",
+      "surrogate": "PCA encoder+inverse fit on the public calibration partition at the same k",
+      "use": "learned prior over the observed wire for the forward/beam/SIPIT kernels (BPDA-style straight-through approximation)"
+    },
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 32,
+        "beam_width": 4
+      },
+      "sipit": {
+        "steps_per_token": 128
+      },
+      "scored_sequences": 32
+    },
+    "tier": "whitebox",
+    "whitebox_extension": {
+      "granted": "the defended cell's ACTUAL trained defense checkpoint and provenance sidecar (encoder weights for tb-*, fitted PCA basis for pca-compress), in addition to everything the defense-aware surrogate arm holds",
+      "strength": "strictly stronger than the surrogate arm's defense-class + k + public-calibration knowledge",
+      "rationale": "mirrors the defense framework's assumption that the current transform is necessarily visible to the executor",
+      "base_cell": "split3/seed-33/dim-64/tb-frozen",
+      "defense_checkpoint": "split3/seed-33/dim-64/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "arms": {
+        "whitebox_inverter": "MLP inverse of the TRUE defense map trained on public-calibration activations pushed through the true encoder; forward-beam + SIPIT on the reconstruction",
+        "whitebox_optimization": "Adam input optimization against the frozen true encoder's input-output map (steps_per_wire = the sweep's SIPIT steps budget), decoded via the public head"
+      },
+      "caveat": "white-box recovery is measured under strictly stronger access; it does not constrain black-box recovery of the same wire, nor the surrogate arm or any defense-internals-hidden adversary"
+    }
+  },
+  "attacks": {
+    "whitebox_inverter": {
+      "true_encoder_granted": true,
+      "inverter": {
+        "architecture": "mlp 64->256->768 gelu",
+        "trained_on": "public calibration pushed through the TRUE defense map",
+        "steps": 512,
+        "final_mse": 0.8560873866081238
+      },
+      "forward": {
+        "accuracy": 0.6015625,
+        "n_tokens": 1024,
+        "n_sequences": 32,
+        "candidate_count": 32,
+        "beam_width": 4,
+        "work": {
+          "head_forward_calls": 32,
+          "head_forward_sequences": 128000,
+          "head_forward_token_positions": 2159616,
+          "head_backward_calls": 0,
+          "head_backward_token_positions": 0,
+          "vocabulary_dot_products": 51463168,
+          "wall_seconds": 20.180894307093695,
+          "cuda_seconds": 20.18069140625,
+          "peak_allocated_bytes": 9606343168,
+          "incremental_peak_allocated_bytes": 9053021184
+        }
+      },
+      "sipit": {
+        "accuracy": 0.482421875,
+        "n_tokens": 1024,
+        "n_sequences": 32,
+        "steps_per_token": 128,
+        "work": {
+          "head_forward_calls": 8192,
+          "head_forward_sequences": 262144,
+          "head_forward_token_positions": 4325376,
+          "head_backward_calls": 4096,
+          "head_backward_token_positions": 2162688,
+          "vocabulary_dot_products": 6587285504,
+          "wall_seconds": 82.55071267602034,
+          "cuda_seconds": 82.550390625,
+          "peak_allocated_bytes": 1054597120,
+          "incremental_peak_allocated_bytes": 295127552
+        }
+      }
+    },
+    "whitebox_optimization": {
+      "true_encoder_granted": true,
+      "objective": "match the released z by optimizing continuous seam inputs through the frozen true encoder (Adam)",
+      "steps_per_wire": 128,
+      "budget_match": "one encoder-side optimization budget equal to the sweep's SIPIT step count, replacing per-token head optimization",
+      "final_encoder_mse": 1.2681933725389172e-08,
+      "snap": {
+        "accuracy": 0.01171875,
+        "n_tokens": 1024,
+        "n_sequences": 32
+      },
+      "forward": {
+        "accuracy": 0.5869140625,
+        "n_tokens": 1024,
+        "n_sequences": 32,
+        "candidate_count": 32,
+        "beam_width": 4,
+        "work": {
+          "head_forward_calls": 32,
+          "head_forward_sequences": 128000,
+          "head_forward_token_positions": 2159616,
+          "head_backward_calls": 0,
+          "head_backward_token_positions": 0,
+          "vocabulary_dot_products": 102926336,
+          "wall_seconds": 20.1709722999949,
+          "cuda_seconds": 20.170771484375,
+          "peak_allocated_bytes": 9828142592,
+          "incremental_peak_allocated_bytes": 9052968448
+        }
+      }
+    }
+  },
+  "evidence": "cell.json.evidence.json"
+}

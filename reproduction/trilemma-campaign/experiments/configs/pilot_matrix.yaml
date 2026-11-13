@@ -1,0 +1,136 @@
+protocol_status: frozen_for_pilot
+protocol_version: p1-pilot-0.1
+study: remote_substitutability_pilot
+purpose: go_no_go_causal_remote_learning
+cohort: exploratory
+freeze_note: >
+  Frozen for the P1 exploratory pilot on 2026-09-03. This freeze covers the
+  exploratory cohort only; any confirmatory study requires a separate freeze
+  with fresh seeds per docs/PREREGISTRATION.md. Numbers produced under this
+  config are hypothesis-generating and are not validated evidence.
+
+fixed:
+  backbone:
+    vocab_size: 256
+    d_model: 256
+    n_heads: 8
+    n_layers: 8
+    d_ff: 1024
+    max_seq_len: 128
+    init_std: 0.02
+  checkpoint_digest: none_seeded_init_per_run
+  tokenizer: byte_level_identity_vocab_256
+  tokenizer_digest: afba54bc5a1634ee9b070fe918bf9c9a2e15b3cfcbdc6bf24bce941dcb785585
+  corpus: data/raw/tinyshakespeare.txt
+  corpus_sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+  corpus_split:
+    rule: first_90_percent_train_last_10_percent_heldout_by_byte_offset
+    train_fraction: 0.9
+  corpus_split_digest: 6cd31100b2979ed8770cb5b68f9d67759ace427d926197dac604023ef195fb66
+  sequence_length: 128
+  batch_size: 32
+  optimizer:
+    name: adamw
+    lr: 3.0e-4
+    min_lr: 3.0e-5
+    betas: [0.9, 0.95]
+    weight_decay: 0.1
+    no_decay: [layer_norm_weights, biases]
+    grad_clip: 1.0
+  scheduler:
+    warmup_steps: 100
+    decay: cosine_to_min_lr
+  steps: 2000
+  eval_every: 100
+  eval_batches: 64
+  convergence_rule: fixed_2000_steps_no_early_stop
+  boundary_defense:
+    type: uniform_per_tensor_affine_quantization
+    q_bits: 8
+    ste_in_training: true
+    serialization: true_quantized_packed_codes_plus_8_byte_affine_metadata
+  surrogate_family:
+    type: single_preln_transformer_block_plus_final_layernorm
+    head_dim: 32
+    d_ff_multiplier: 4
+  transcript_schema_version: "1.0.0"
+  transcript_sample_every: 200
+  probe_batch_size: 8
+  ema_beta: 0.95
+  device: auto
+  dtype: float32
+
+factors:
+  segment_span:
+    short: {start: 3, span: 2}
+    medium: {start: 2, span: 4}
+    long: {start: 1, span: 6}
+  latent_width: {low: 64, high: 256}
+  remote_mode: [trained, frozen_random]
+  seed: [101, 202, 303]
+
+controls:
+  all_local: {}
+  removed_remote:
+    width: low
+    q_bits: 8
+
+pairing:
+  block_id: "pb-{seed}"
+  shared_encoder_decoder_initialization: true
+  shared_minibatch_order: true
+  shared_trusted_random_streams: true
+  only_remote_parameter_updates_differ: true
+
+operational_rate:
+  unit: bits_per_token
+  measurement_stage: serialized_remote_transcript
+  includes_repeated_releases: true
+
+matched_controls:
+  - all_local
+  - removed_remote
+
+primary_outcomes:
+  - heldout_replacement_penalty
+  - causal_remote_learning_gain
+  - per_family_attack_advantage_and_threshold_ratio
+  - measured_remote_flops
+  - communication_bytes
+  - wall_time
+
+calibration:
+  cohort: calibration
+  seed: 909
+  steps: 500
+  mode: trained
+  span: medium
+  width: low
+  capture_every: 5
+  capture_max_pairs: 131072
+
+go_rule:
+  cell_qualifies: >
+    trained-minus-frozen-remote eval-loss gain (L_frozen - L_trained) > 0 at
+    step 2000 for all three seeds (101, 202, 303) in that span x width cell.
+  go: proceed to confirmatory design only if >= 2 of the 6 span x width cells qualify.
+
+failure_policy:
+  operational_failure_classes: [device_error, out_of_memory, io_error, schema_validation_error]
+  max_retries: 0
+  rule: >
+    A failed cell is recorded with manifest status operational_failure and any
+    partial artifacts; it is not retried by the pilot driver and is never
+    excluded based on its outcome. Ambiguous failures remain in the audit log
+    and are handled by the frozen analysis.
+
+notes:
+  - Frozen for the exploratory pilot; must not be relabelled confirmatory.
+  - A later confirmatory matrix must use at least five seeds at headline cells
+    and fresh seeds disjoint from [101, 202, 303] and calibration seed 909.
+  - removed_remote controls are run at width low (64) per seed x span; width is
+    recorded in each resolved config.
+  - The calibration run is representation-matched to width-low cells; privacy
+    scoring of width-high cells requires an additional width-matched
+    calibration run before any privacy claim is made about those cells.
+  - Timing is logged for systems accounting only and enters no privacy claim.

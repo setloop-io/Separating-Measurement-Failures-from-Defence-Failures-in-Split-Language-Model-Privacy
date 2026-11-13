@@ -1,0 +1,497 @@
+{
+  "schema": "dtraining.transport.aggregate.v1",
+  "repetitions": 3,
+  "ci_method": "10,000-replicate percentile bootstrap over run means",
+  "inputs": [
+    {
+      "path": "paper-data/collected/toula/transport/transport_direct_0ms_rep1.json",
+      "sha256": "69d79984156c37d1dfd342d96f467b080ef5c320f9365e0dff56eaca4abc7f99"
+    },
+    {
+      "path": "paper-data/collected/toula/transport/transport_direct_0ms_rep2.json",
+      "sha256": "a534079cf613fe0e80e0727febe972e089ab039eb4c0b517a8af1f1dc5c464fc"
+    },
+    {
+      "path": "paper-data/collected/toula/transport/transport_direct_0ms_rep3.json",
+      "sha256": "53d665b7dbe034c002a171987de578d068bbb469217ee0a9e118e3be178c8a6b"
+    },
+    {
+      "path": "paper-data/collected/toula/transport/transport_direct_80ms_rep1.json",
+      "sha256": "c63367c634d422d1cfe4e7cc1077ff11ce5a0ab7cfef5e48d9f3d783b4f138ea"
+    },
+    {
+      "path": "paper-data/collected/toula/transport/transport_direct_80ms_rep2.json",
+      "sha256": "6fd8c6a9cc1470e8da276199efdc8d27f7865598876895a6979a60fc766e1101"
+    },
+    {
+      "path": "paper-data/collected/toula/transport/transport_direct_80ms_rep3.json",
+      "sha256": "a91ef702d79fbe23c6489f08eb28b3a768f6b5c68d53dde19ef38e564ecbbe34"
+    },
+    {
+      "path": "paper-data/collected/toula/transport/transport_tunnel_0ms_rep1.json",
+      "sha256": "83ac9d42064a40233f087a87824a124773810dc26aa3a199a458f03fd5eb16bf"
+    },
+    {
+      "path": "paper-data/collected/toula/transport/transport_tunnel_0ms_rep2.json",
+      "sha256": "95539a618efe401db5984b63af9996bc9efeaea9911d636ddd0942adde4ab1dc"
+    },
+    {
+      "path": "paper-data/collected/toula/transport/transport_tunnel_0ms_rep3.json",
+      "sha256": "7940979c7640176166d592b89a5f153ae733019f79dfceb3e7063a015144f412"
+    },
+    {
+      "path": "paper-data/collected/toula/transport/transport_tunnel_80ms_rep1.json",
+      "sha256": "12eb811927f25c5824dae23c9adac9a50472ead26cd20bc84bed7ef068df025e"
+    },
+    {
+      "path": "paper-data/collected/toula/transport/transport_tunnel_80ms_rep2.json",
+      "sha256": "a204692e94fecaacdde73e3e8cf8d9e2829b0c49607f73b0e18d658fae2ed7e1"
+    },
+    {
+      "path": "paper-data/collected/toula/transport/transport_tunnel_80ms_rep3.json",
+      "sha256": "d59ecf3821f9482edb7a64046ae1dfceb4b6a07c178a2bd41d1f847f42410f0a"
+    }
+  ],
+  "cells": {
+    "direct_0ms": {
+      "sequential": {
+        "avg_measured_tok_s": {
+          "values": [
+            12.8,
+            12.8,
+            13.2
+          ],
+          "mean": 12.933333333333332,
+          "sample_std": 0.2309401076758495,
+          "bootstrap_mean_95ci": [
+            12.800000000000002,
+            13.199999999999998
+          ]
+        },
+        "avg_measured_rtt_ms": {
+          "values": [
+            2.5,
+            2.9,
+            2.6
+          ],
+          "mean": 2.6666666666666665,
+          "sample_std": 0.2081665999466132,
+          "bootstrap_mean_95ci": [
+            2.5,
+            2.9
+          ]
+        },
+        "avg_per_step_wall_ms": {
+          "values": [
+            78.1,
+            78.2,
+            76.0
+          ],
+          "mean": 77.43333333333334,
+          "sample_std": 1.2423096769056143,
+          "bootstrap_mean_95ci": [
+            76.0,
+            78.2
+          ]
+        },
+        "avg_acceptance_rate": {
+          "values": [
+            1,
+            1,
+            1
+          ],
+          "mean": 1.0,
+          "sample_std": 0.0,
+          "bootstrap_mean_95ci": [
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "lookahead": {
+        "avg_measured_tok_s": {
+          "values": [
+            14.4,
+            14.4,
+            15.1
+          ],
+          "mean": 14.633333333333333,
+          "sample_std": 0.4041451884327376,
+          "bootstrap_mean_95ci": [
+            14.4,
+            15.1
+          ]
+        },
+        "avg_measured_rtt_ms": {
+          "values": [
+            6.0,
+            5.8,
+            5.1
+          ],
+          "mean": 5.633333333333333,
+          "sample_std": 0.472581562625261,
+          "bootstrap_mean_95ci": [
+            5.1,
+            6.0
+          ]
+        },
+        "avg_per_step_wall_ms": {
+          "values": [
+            82.7,
+            82.9,
+            79.3
+          ],
+          "mean": 81.63333333333334,
+          "sample_std": 2.02319878739914,
+          "bootstrap_mean_95ci": [
+            79.3,
+            82.9
+          ]
+        },
+        "avg_acceptance_rate": {
+          "values": [
+            1.195,
+            1.195,
+            1.195
+          ],
+          "mean": 1.195,
+          "sample_std": 0.0,
+          "bootstrap_mean_95ci": [
+            1.195,
+            1.195
+          ]
+        }
+      }
+    },
+    "direct_80ms": {
+      "sequential": {
+        "avg_measured_tok_s": {
+          "values": [
+            6.2,
+            6.2,
+            6.2
+          ],
+          "mean": 6.2,
+          "sample_std": 0.0,
+          "bootstrap_mean_95ci": [
+            6.2,
+            6.2
+          ]
+        },
+        "avg_measured_rtt_ms": {
+          "values": [
+            83.4,
+            83.5,
+            83.3
+          ],
+          "mean": 83.39999999999999,
+          "sample_std": 0.10000000000000142,
+          "bootstrap_mean_95ci": [
+            83.3,
+            83.5
+          ]
+        },
+        "avg_per_step_wall_ms": {
+          "values": [
+            162.8,
+            162.5,
+            161.9
+          ],
+          "mean": 162.4,
+          "sample_std": 0.4582575694955859,
+          "bootstrap_mean_95ci": [
+            161.9,
+            162.8
+          ]
+        },
+        "avg_acceptance_rate": {
+          "values": [
+            1,
+            1,
+            1
+          ],
+          "mean": 1.0,
+          "sample_std": 0.0,
+          "bootstrap_mean_95ci": [
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "lookahead": {
+        "avg_measured_tok_s": {
+          "values": [
+            7.1,
+            7.1,
+            7.2
+          ],
+          "mean": 7.133333333333333,
+          "sample_std": 0.05773502691896289,
+          "bootstrap_mean_95ci": [
+            7.099999999999999,
+            7.2
+          ]
+        },
+        "avg_measured_rtt_ms": {
+          "values": [
+            87.0,
+            87.0,
+            86.4
+          ],
+          "mean": 86.8,
+          "sample_std": 0.3464101615137722,
+          "bootstrap_mean_95ci": [
+            86.40000000000002,
+            87.0
+          ]
+        },
+        "avg_per_step_wall_ms": {
+          "values": [
+            167.9,
+            167.9,
+            166.8
+          ],
+          "mean": 167.53333333333333,
+          "sample_std": 0.6350852961085851,
+          "bootstrap_mean_95ci": [
+            166.8,
+            167.9
+          ]
+        },
+        "avg_acceptance_rate": {
+          "values": [
+            1.195,
+            1.195,
+            1.195
+          ],
+          "mean": 1.195,
+          "sample_std": 0.0,
+          "bootstrap_mean_95ci": [
+            1.195,
+            1.195
+          ]
+        }
+      }
+    },
+    "tunnel_0ms": {
+      "sequential": {
+        "avg_measured_tok_s": {
+          "values": [
+            12.6,
+            12.6,
+            12.9
+          ],
+          "mean": 12.700000000000001,
+          "sample_std": 0.17320508075688815,
+          "bootstrap_mean_95ci": [
+            12.6,
+            12.9
+          ]
+        },
+        "avg_measured_rtt_ms": {
+          "values": [
+            4.1,
+            4.1,
+            3.6
+          ],
+          "mean": 3.933333333333333,
+          "sample_std": 0.28867513459481264,
+          "bootstrap_mean_95ci": [
+            3.6,
+            4.1
+          ]
+        },
+        "avg_per_step_wall_ms": {
+          "values": [
+            79.6,
+            79.2,
+            77.2
+          ],
+          "mean": 78.66666666666667,
+          "sample_std": 1.2858201014657242,
+          "bootstrap_mean_95ci": [
+            77.2,
+            79.6
+          ]
+        },
+        "avg_acceptance_rate": {
+          "values": [
+            1,
+            1,
+            1
+          ],
+          "mean": 1.0,
+          "sample_std": 0.0,
+          "bootstrap_mean_95ci": [
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "lookahead": {
+        "avg_measured_tok_s": {
+          "values": [
+            13.9,
+            14.1,
+            14.5
+          ],
+          "mean": 14.166666666666666,
+          "sample_std": 0.3055050463303892,
+          "bootstrap_mean_95ci": [
+            13.9,
+            14.5
+          ]
+        },
+        "avg_measured_rtt_ms": {
+          "values": [
+            8.8,
+            8.3,
+            7.8
+          ],
+          "mean": 8.3,
+          "sample_std": 0.5000000000000004,
+          "bootstrap_mean_95ci": [
+            7.8,
+            8.8
+          ]
+        },
+        "avg_per_step_wall_ms": {
+          "values": [
+            86.0,
+            84.8,
+            82.2
+          ],
+          "mean": 84.33333333333333,
+          "sample_std": 1.9425069712444603,
+          "bootstrap_mean_95ci": [
+            82.2,
+            86.0
+          ]
+        },
+        "avg_acceptance_rate": {
+          "values": [
+            1.195,
+            1.195,
+            1.195
+          ],
+          "mean": 1.195,
+          "sample_std": 0.0,
+          "bootstrap_mean_95ci": [
+            1.195,
+            1.195
+          ]
+        }
+      }
+    },
+    "tunnel_80ms": {
+      "sequential": {
+        "avg_measured_tok_s": {
+          "values": [
+            6.0,
+            6.0,
+            6.0
+          ],
+          "mean": 6.0,
+          "sample_std": 0.0,
+          "bootstrap_mean_95ci": [
+            6.0,
+            6.0
+          ]
+        },
+        "avg_measured_rtt_ms": {
+          "values": [
+            89.7,
+            89.6,
+            89.3
+          ],
+          "mean": 89.53333333333335,
+          "sample_std": 0.2081665999466151,
+          "bootstrap_mean_95ci": [
+            89.3,
+            89.7
+          ]
+        },
+        "avg_per_step_wall_ms": {
+          "values": [
+            167.8,
+            167.5,
+            166.7
+          ],
+          "mean": 167.33333333333334,
+          "sample_std": 0.5686240703077436,
+          "bootstrap_mean_95ci": [
+            166.7,
+            167.8
+          ]
+        },
+        "avg_acceptance_rate": {
+          "values": [
+            1,
+            1,
+            1
+          ],
+          "mean": 1.0,
+          "sample_std": 0.0,
+          "bootstrap_mean_95ci": [
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "lookahead": {
+        "avg_measured_tok_s": {
+          "values": [
+            5.6,
+            5.6,
+            5.6
+          ],
+          "mean": 5.599999999999999,
+          "sample_std": 0.0,
+          "bootstrap_mean_95ci": [
+            5.599999999999999,
+            5.599999999999999
+          ]
+        },
+        "avg_measured_rtt_ms": {
+          "values": [
+            134.0,
+            134.2,
+            133.2
+          ],
+          "mean": 133.79999999999998,
+          "sample_std": 0.5291502622129203,
+          "bootstrap_mean_95ci": [
+            133.2,
+            134.2
+          ]
+        },
+        "avg_per_step_wall_ms": {
+          "values": [
+            213.9,
+            213.6,
+            212.3
+          ],
+          "mean": 213.26666666666665,
+          "sample_std": 0.8504900548115328,
+          "bootstrap_mean_95ci": [
+            212.30000000000004,
+            213.9
+          ]
+        },
+        "avg_acceptance_rate": {
+          "values": [
+            1.195,
+            1.195,
+            1.195
+          ],
+          "mean": 1.195,
+          "sample_std": 0.0,
+          "bootstrap_mean_95ci": [
+            1.195,
+            1.195
+          ]
+        }
+      }
+    }
+  }
+}

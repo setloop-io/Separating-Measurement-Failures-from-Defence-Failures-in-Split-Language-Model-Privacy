@@ -1,0 +1,59 @@
+{
+  "controls": {
+    "frozen_random_remote": {
+      "mean_token_nll": 5.7272196163539775,
+      "nll_delta_vs_no_replacement": 0.00047509348951280117,
+      "perplexity": 307.1141849409923
+    },
+    "trained_local": {
+      "mean_token_nll": 5.679985991620924,
+      "nll_delta_vs_no_replacement": -0.04675853124354035,
+      "perplexity": 292.94532620462945
+    },
+    "trained_remote": {
+      "mean_token_nll": 5.726869471545797,
+      "nll_delta_vs_no_replacement": 0.00012494868133217096,
+      "perplexity": 307.0066693277319
+    },
+    "zero_output_with_decoder": {
+      "mean_token_nll": 5.716255786479451,
+      "nll_delta_vs_no_replacement": -0.010488736385013908,
+      "perplexity": 303.7654284085656
+    }
+  },
+  "estimands": {
+    "decoder_retained_zero_output_nll": 5.716255786479451,
+    "remote_learning_effect_nll": 0.0003501448081806302,
+    "remote_placement_effect_nll": 0.04688347992487252,
+    "remote_return_effect_nll": -0.010613685066346079
+  },
+  "limitations": [
+    "Nominal covered-layer share is not measured remote workload.",
+    "Remote FLOPs remain unreported until profiled on the target device.",
+    "Interpret effects only with seed-level replication and held-out evaluation."
+  ],
+  "reference": {
+    "no_replacement": {
+      "mean_token_nll": 5.726744522864465,
+      "nll_delta_vs_no_replacement": 0.0,
+      "perplexity": 306.96831164566004
+    },
+    "nominal_covered_layer_share": 0.2857142857142857,
+    "surrogate_total_parameters": 161
+  },
+  "schema": "dtraining.delegation_controls.v1",
+  "status": "completed",
+  "transport": {
+    "actual_remote_flops": null,
+    "actual_remote_flops_status": "not_profiled",
+    "backward_inbound_wire_bytes": 82324753,
+    "backward_outbound_wire_bytes": 82102314,
+    "control_inbound_wire_bytes": 188488,
+    "control_outbound_wire_bytes": 96373,
+    "forward_inbound_wire_bytes": 166281368,
+    "forward_outbound_wire_bytes": 166052810,
+    "remote_backward_compute_ms": 109850.58369766921,
+    "remote_forward_compute_ms": 20440.31918141991,
+    "total_wire_bytes": 497046106
+  }
+}

@@ -1,0 +1,456 @@
+{
+  "frontiers": [
+    {
+      "configuration": {
+        "adversary_strength": 0.25,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+        "delegate_sublayer": null,
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "steps": 4000,
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      },
+      "frontier_interval_nominal_covered_share": {
+        "clean_lower_bound": 0.14285714285714285,
+        "failed_upper_bound": 0.21428571428571427
+      },
+      "minimum_seed_count": 3,
+      "points": [
+        {
+          "cells": [
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 4.888108546205331,
+              "nominal_covered_layer_share": 0.14285714285714285,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split21_s42.json",
+              "remote_compute_ms": 104346.54368142947,
+              "seed": 42,
+              "split_after": 21,
+              "utility_nll_delta": -0.04220829124096781,
+              "wire_bytes": 496891785
+            },
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 4.879980055615306,
+              "nominal_covered_layer_share": 0.14285714285714285,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split21_s43.json",
+              "remote_compute_ms": 106049.37391649582,
+              "seed": 43,
+              "split_after": 21,
+              "utility_nll_delta": -0.05033678183099255,
+              "wire_bytes": 496891750
+            },
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 4.883665785600897,
+              "nominal_covered_layer_share": 0.14285714285714285,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split21_s44.json",
+              "remote_compute_ms": 128172.51064012817,
+              "seed": 44,
+              "split_after": 21,
+              "utility_nll_delta": -0.046651051845401525,
+              "wire_bytes": 496892944
+            }
+          ],
+          "classification": "clean",
+          "nominal_covered_layer_percent": 14.285714285714285,
+          "nominal_covered_layer_share": 0.14285714285714285,
+          "remote_compute_ms": {
+            "ci95": 33020.98124299813,
+            "ci95_high": 145877.12398901596,
+            "ci95_low": 79835.16150301968,
+            "mean": 112856.14274601782,
+            "n": 3,
+            "sd": 13291.660987369663
+          },
+          "split_after": [
+            21
+          ],
+          "utility_nll_delta": {
+            "ci95": 0.010111545762656835,
+            "ci95_high": -0.03628716254313046,
+            "ci95_low": -0.05651025406844413,
+            "mean": -0.046398708305787295,
+            "n": 3,
+            "sd": 0.0040701164313222005
+          },
+          "wire_bytes": {
+            "ci95": 1688.0531221051008,
+            "ci95_high": 496893847.7197888,
+            "ci95_low": 496890471.6135446,
+            "mean": 496892159.6666667,
+            "n": 3,
+            "sd": 679.4779859078095
+          }
+        },
+        {
+          "cells": [
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 5.44806778797647,
+              "nominal_covered_layer_share": 0.21428571428571427,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split19_s42.json",
+              "remote_compute_ms": 129677.20102901512,
+              "seed": 42,
+              "split_after": 19,
+              "utility_nll_delta": 0.5177509505301714,
+              "wire_bytes": 496893314
+            },
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 5.45204088720493,
+              "nominal_covered_layer_share": 0.21428571428571427,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split19_s43.json",
+              "remote_compute_ms": 116271.90926916956,
+              "seed": 43,
+              "split_after": 19,
+              "utility_nll_delta": 0.5217240497586317,
+              "wire_bytes": 496894621
+            },
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 5.439723024144769,
+              "nominal_covered_layer_share": 0.21428571428571427,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split19_s44.json",
+              "remote_compute_ms": 119161.41640613205,
+              "seed": 44,
+              "split_after": 19,
+              "utility_nll_delta": 0.5094061866984703,
+              "wire_bytes": 496894079
+            }
+          ],
+          "classification": "failed",
+          "nominal_covered_layer_percent": 21.428571428571427,
+          "nominal_covered_layer_share": 0.21428571428571427,
+          "remote_compute_ms": {
+            "ci95": 17526.84979444216,
+            "ci95_high": 139230.35869588106,
+            "ci95_low": 104176.65910699675,
+            "mean": 121703.50890143891,
+            "n": 3,
+            "sd": 7054.937099837777
+          },
+          "split_after": [
+            19
+          ],
+          "utility_nll_delta": {
+            "ci95": 0.015618775396795083,
+            "ci95_high": 0.5319125043925529,
+            "ci95_low": 0.5006749535989626,
+            "mean": 0.5162937289957578,
+            "n": 3,
+            "sd": 0.006286895779515648
+          },
+          "wire_bytes": {
+            "ci95": 1631.37305232845,
+            "ci95_high": 496895636.039719,
+            "ci95_low": 496892373.2936144,
+            "mean": 496894004.6666667,
+            "n": 3,
+            "sd": 656.6630287547284
+          }
+        },
+        {
+          "cells": [
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 5.883426384651102,
+              "nominal_covered_layer_share": 0.2857142857142857,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split17_s42.json",
+              "remote_compute_ms": 132820.46425882436,
+              "seed": 42,
+              "split_after": 17,
+              "utility_nll_delta": 0.9531095472048037,
+              "wire_bytes": 496892374
+            },
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 5.879617817001417,
+              "nominal_covered_layer_share": 0.2857142857142857,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split17_s43.json",
+              "remote_compute_ms": 132874.8503127572,
+              "seed": 43,
+              "split_after": 17,
+              "utility_nll_delta": 0.9493009795551188,
+              "wire_bytes": 496892984
+            },
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 5.87198378512403,
+              "nominal_covered_layer_share": 0.2857142857142857,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split17_s44.json",
+              "remote_compute_ms": 123659.33662488533,
+              "seed": 44,
+              "split_after": 17,
+              "utility_nll_delta": 0.9416669476777315,
+              "wire_bytes": 496893541
+            }
+          ],
+          "classification": "failed",
+          "nominal_covered_layer_percent": 28.57142857142857,
+          "nominal_covered_layer_share": 0.2857142857142857,
+          "remote_compute_ms": {
+            "ci95": 13179.287749284742,
+            "ci95_high": 142964.17148144037,
+            "ci95_low": 116605.59598287087,
+            "mean": 129784.88373215562,
+            "n": 3,
+            "sd": 5304.949102796014
+          },
+          "split_after": [
+            17
+          ],
+          "utility_nll_delta": {
+            "ci95": 0.014475995014623337,
+            "ci95_high": 0.9625018198271748,
+            "ci95_low": 0.933549829797928,
+            "mean": 0.9480258248125514,
+            "n": 3,
+            "sd": 0.005826901895291981
+          },
+          "wire_bytes": {
+            "ci95": 1450.1095812719734,
+            "ci95_high": 496894416.4429146,
+            "ci95_low": 496891516.223752,
+            "mean": 496892966.3333333,
+            "n": 3,
+            "sd": 583.7005510819167
+          }
+        },
+        {
+          "cells": [
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 6.286795555264689,
+              "nominal_covered_layer_share": 0.35714285714285715,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split15_s42.json",
+              "remote_compute_ms": 125152.8499246051,
+              "seed": 42,
+              "split_after": 15,
+              "utility_nll_delta": 1.3564787178183906,
+              "wire_bytes": 496893036
+            },
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 6.286916627781466,
+              "nominal_covered_layer_share": 0.35714285714285715,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split15_s43.json",
+              "remote_compute_ms": 129478.5120797751,
+              "seed": 43,
+              "split_after": 15,
+              "utility_nll_delta": 1.3565997903351672,
+              "wire_bytes": 496892915
+            },
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 6.2992519831168465,
+              "nominal_covered_layer_share": 0.35714285714285715,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split15_s44.json",
+              "remote_compute_ms": 129480.21938742022,
+              "seed": 44,
+              "split_after": 15,
+              "utility_nll_delta": 1.368935145670548,
+              "wire_bytes": 496892979
+            }
+          ],
+          "classification": "failed",
+          "nominal_covered_layer_percent": 35.714285714285715,
+          "nominal_covered_layer_share": 0.35714285714285715,
+          "remote_compute_ms": {
+            "ci95": 6205.6662044136565,
+            "ci95_high": 134242.86000168047,
+            "ci95_low": 121831.52759285315,
+            "mean": 128037.19379726681,
+            "n": 3,
+            "sd": 2497.9152128416367
+          },
+          "split_after": [
+            15
+          ],
+          "utility_nll_delta": {
+            "ci95": 0.01778047655303976,
+            "ci95_high": 1.3784516944944085,
+            "ci95_low": 1.3428907413883289,
+            "mean": 1.3606712179413687,
+            "n": 3,
+            "sd": 0.007157027369893563
+          },
+          "wire_bytes": {
+            "ci95": 150.38627609407862,
+            "ci95_high": 496893127.05294275,
+            "ci95_low": 496892826.2803906,
+            "mean": 496892976.6666667,
+            "n": 3,
+            "sd": 60.53373714990124
+          }
+        },
+        {
+          "cells": [
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 6.3955010189674795,
+              "nominal_covered_layer_share": 0.39285714285714285,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split14_s42.json",
+              "remote_compute_ms": 122570.51547933952,
+              "seed": 42,
+              "split_after": 14,
+              "utility_nll_delta": 1.465184181521181,
+              "wire_bytes": 496893642
+            },
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 6.382450726989191,
+              "nominal_covered_layer_share": 0.39285714285714285,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split14_s43.json",
+              "remote_compute_ms": 124251.68002242572,
+              "seed": 43,
+              "split_after": 14,
+              "utility_nll_delta": 1.4521338895428926,
+              "wire_bytes": 496893708
+            },
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 6.417782210803125,
+              "nominal_covered_layer_share": 0.39285714285714285,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split14_s44.json",
+              "remote_compute_ms": 122100.92657108908,
+              "seed": 44,
+              "split_after": 14,
+              "utility_nll_delta": 1.4874653733568266,
+              "wire_bytes": 496893673
+            }
+          ],
+          "classification": "failed",
+          "nominal_covered_layer_percent": 39.285714285714285,
+          "nominal_covered_layer_share": 0.39285714285714285,
+          "remote_compute_ms": {
+            "ci95": 2809.3475964436593,
+            "ci95_high": 125783.72162072844,
+            "ci95_low": 120165.0264278411,
+            "mean": 122974.37402428477,
+            "n": 3,
+            "sd": 1130.8233263216184
+          },
+          "split_after": [
+            14
+          ],
+          "utility_nll_delta": {
+            "ci95": 0.04438416255015433,
+            "ci95_high": 1.5126453106904545,
+            "ci95_low": 1.4238769855901456,
+            "mean": 1.4682611481403,
+            "n": 3,
+            "sd": 0.01786558786620105
+          },
+          "wire_bytes": {
+            "ci95": 82.03333417242314,
+            "ci95_high": 496893756.3666675,
+            "ci95_low": 496893592.2999991,
+            "mean": 496893674.3333333,
+            "n": 3,
+            "sd": 33.020195840323744
+          }
+        },
+        {
+          "cells": [
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 6.531705359404441,
+              "nominal_covered_layer_share": 0.42857142857142855,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split13_s42.json",
+              "remote_compute_ms": 132548.64954933873,
+              "seed": 42,
+              "split_after": 13,
+              "utility_nll_delta": 1.6013885219581425,
+              "wire_bytes": 496891262
+            },
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 6.525175336399116,
+              "nominal_covered_layer_share": 0.42857142857142855,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split13_s43.json",
+              "remote_compute_ms": 61165.02950619906,
+              "seed": 43,
+              "split_after": 13,
+              "utility_nll_delta": 1.5948584989528172,
+              "wire_bytes": 496888783
+            },
+            {
+              "baseline_nll": 4.9303168374462985,
+              "candidate_nll": 6.55461718456354,
+              "nominal_covered_layer_share": 0.42857142857142855,
+              "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split13_s44.json",
+              "remote_compute_ms": 71202.02193813748,
+              "seed": 44,
+              "split_after": 13,
+              "utility_nll_delta": 1.6243003471172415,
+              "wire_bytes": 496889155
+            }
+          ],
+          "classification": "failed",
+          "nominal_covered_layer_percent": 42.857142857142854,
+          "nominal_covered_layer_share": 0.42857142857142855,
+          "remote_compute_ms": {
+            "ci95": 96002.72312053214,
+            "ci95_high": 184307.95678509056,
+            "ci95_low": -7697.489455973715,
+            "mean": 88305.23366455843,
+            "n": 3,
+            "sd": 38643.17780844272
+          },
+          "split_after": [
+            13
+          ],
+          "utility_nll_delta": {
+            "ci95": 0.03841249851333366,
+            "ci95_high": 1.6452616211894007,
+            "ci95_low": 1.5684366241627334,
+            "mean": 1.606849122676067,
+            "n": 3,
+            "sd": 0.015461863599990206
+          },
+          "wire_bytes": {
+            "ci95": 3321.228799026265,
+            "ci95_high": 496893054.56213236,
+            "ci95_low": 496886412.10453427,
+            "mean": 496889733.3333333,
+            "n": 3,
+            "sd": 1336.8666101497686
+          }
+        }
+      ],
+      "utility_gate_nll_delta": 0.35
+    }
+  ],
+  "schema": "dtraining.delegation_frontier.v1",
+  "selection": {
+    "minimum_seed_count": 3,
+    "mode": "trained_remote_only",
+    "utility_gate_nll_delta": 0.35
+  },
+  "skipped": [],
+  "status": "completed"
+}

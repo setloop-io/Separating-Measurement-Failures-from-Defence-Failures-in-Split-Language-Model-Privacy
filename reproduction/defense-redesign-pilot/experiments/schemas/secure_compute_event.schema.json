@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paper4.local/schemas/secure_compute_event.schema.json",
+  "title": "Paper 4 secure-compute two-view event",
+  "oneOf": [
+    {"$ref": "#/$defs/externalEvent"},
+    {"$ref": "#/$defs/trustedEvent"}
+  ],
+  "$defs": {
+    "sha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "shape": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "integer", "minimum": 1}
+    },
+    "phases": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "forward",
+          "backward",
+          "update",
+          "optimizer",
+          "staging",
+          "log",
+          "checkpoint",
+          "crash"
+        ]
+      }
+    },
+    "externalObservation": {
+      "type": "object",
+      "required": [
+        "payload_state",
+        "serialized_bytes",
+        "packet_sha256",
+        "shape",
+        "dtype",
+        "metadata_visible"
+      ],
+      "properties": {
+        "payload_state": {"const": "plaintext_unprotected"},
+        "serialized_bytes": {"type": "integer", "minimum": 1},
+        "packet_sha256": {"$ref": "#/$defs/sha"},
+        "shape": {"$ref": "#/$defs/shape"},
+        "dtype": {"type": "string", "minLength": 1},
+        "metadata_visible": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "session_id",
+              "request_id",
+              "step",
+              "phase",
+              "direction",
+              "operator",
+              "shape",
+              "dtype",
+              "serialized_bytes",
+              "packet_bytes"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "trustedObservation": {
+      "type": "object",
+      "required": [
+        "payload_state",
+        "serialized_bytes",
+        "packet_sha256",
+        "tensor_sha256",
+        "shape",
+        "dtype",
+        "finite"
+      ],
+      "properties": {
+        "payload_state": {"const": "plaintext_trusted_diagnostic"},
+        "serialized_bytes": {"type": "integer", "minimum": 1},
+        "packet_sha256": {"$ref": "#/$defs/sha"},
+        "tensor_sha256": {"$ref": "#/$defs/sha"},
+        "shape": {"$ref": "#/$defs/shape"},
+        "dtype": {"type": "string", "minLength": 1},
+        "finite": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "externalEvent": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "event_id",
+        "correlation_id",
+        "sequence",
+        "view",
+        "session_id",
+        "request_id",
+        "step",
+        "phases",
+        "direction",
+        "operation",
+        "operator",
+        "artifact_ids",
+        "external_observation"
+      ],
+      "properties": {
+        "schema_version": {"const": "p4-secure-compute-event-0.1"},
+        "event_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "correlation_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "sequence": {"type": "integer", "minimum": 0},
+        "view": {"const": "external_attacker"},
+        "session_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "request_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "step": {"type": "integer", "minimum": 0},
+        "phases": {"$ref": "#/$defs/phases"},
+        "direction": {
+          "enum": [
+            "trusted_to_external",
+            "external_to_trusted",
+            "trusted_internal",
+            "external_internal"
+          ]
+        },
+        "operation": {"type": "string", "minLength": 1},
+        "operator": {"type": "string", "minLength": 1},
+        "artifact_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"}
+        },
+        "external_observation": {"$ref": "#/$defs/externalObservation"}
+      },
+      "additionalProperties": false
+    },
+    "trustedEvent": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "event_id",
+        "correlation_id",
+        "sequence",
+        "view",
+        "session_id",
+        "request_id",
+        "step",
+        "phases",
+        "direction",
+        "operation",
+        "operator",
+        "artifact_ids",
+        "trusted_diagnostic"
+      ],
+      "properties": {
+        "schema_version": {"const": "p4-secure-compute-event-0.1"},
+        "event_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "correlation_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "sequence": {"type": "integer", "minimum": 0},
+        "view": {"const": "trusted_diagnostic"},
+        "session_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "request_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "step": {"type": "integer", "minimum": 0},
+        "phases": {"$ref": "#/$defs/phases"},
+        "direction": {
+          "enum": [
+            "trusted_to_external",
+            "external_to_trusted",
+            "trusted_internal",
+            "external_internal"
+          ]
+        },
+        "operation": {"type": "string", "minLength": 1},
+        "operator": {"type": "string", "minLength": 1},
+        "artifact_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"}
+        },
+        "trusted_diagnostic": {"$ref": "#/$defs/trustedObservation"}
+      },
+      "additionalProperties": false
+    }
+  }
+}

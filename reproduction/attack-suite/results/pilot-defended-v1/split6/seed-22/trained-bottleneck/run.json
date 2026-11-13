@@ -1,0 +1,100 @@
+{
+  "schema": "llm_attacker.splitbench.v1",
+  "config": {
+    "model": "gpt2",
+    "split": "6",
+    "mode": "finetune",
+    "steps": 64,
+    "seq_len": 32,
+    "batch_size": 1,
+    "lr": 5e-05,
+    "capture_every": 1,
+    "defense": "trained-bottleneck",
+    "sigma": 0.0,
+    "sparsity": 0.1,
+    "bottleneck_dim": 8,
+    "at_eps": 0.1,
+    "santext_p": 0.1,
+    "santext_k": 8,
+    "snd_sigma": 1.0,
+    "tb_dim": 64,
+    "tb_hidden": 256,
+    "tb_probe_hidden": 128,
+    "tb_minimax_steps": 200,
+    "tb_mi_weight": 0.1,
+    "tb_allow_cpu": false,
+    "tb_checkpoint": null,
+    "mixup_lambda": 0.75,
+    "mixup_pool": 256,
+    "mixup_correction": true,
+    "replica_count": 3,
+    "replica_tolerance": 0.02,
+    "replica_gauge": true,
+    "replica_gauge_scale": 0.001,
+    "lora_r": 0,
+    "lora_alpha": 16.0,
+    "device": "cuda",
+    "dtype": "fp32",
+    "corpus_file": null,
+    "dataset": "wikitext",
+    "capture_dir": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/results-defended-v1/split6/seed-22/trained-bottleneck/captures",
+    "output": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/results-defended-v1/split6/seed-22/trained-bottleneck/run.json",
+    "save_canonical": true,
+    "body_grad_capture": false,
+    "server_attack": "none",
+    "server_attack_alpha": 8.0,
+    "seed": 22
+  },
+  "threat_model": "honest-but-curious wire observer on the split seam (local harness stand-in for the cloud side of a split deployment): captures record exactly what the server-side body receives (post-defense) and the gradients it returns; labeled local data, per the calibration attacks that consume wire captures",
+  "provenance": {
+    "hostname": "toula",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-09T07:26:47Z",
+    "dtraining_commit": "b3ebea81d20cdf7290bd1870a2393b60302176fe"
+  },
+  "results": [
+    {
+      "captures_written": 128,
+      "steps_run": 64,
+      "defense": "trained-bottleneck",
+      "sigma": 0.0,
+      "defense_config": {
+        "name": "trained-bottleneck",
+        "bottleneck_dim": 64,
+        "encoder_hidden": 256,
+        "probe_hidden": 128,
+        "minimax_steps": 200,
+        "mi_weight": 0.1
+      },
+      "server_attack": "none",
+      "split": "6",
+      "plan": "2-slice split over 12 layers: head[0:6] | body+tail[6:12] (+ ln_f + lm_head behind the last slice)",
+      "final_loss": 20.111366271972656,
+      "mean_loss": 20.344797909259796,
+      "trained_bottleneck_provenance": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/results-defended-v1/split6/seed-22/trained-bottleneck/captures/trained_bottleneck_provenance.json"
+    }
+  ],
+  "summary": [
+    {
+      "captures_written": 128,
+      "steps_run": 64,
+      "defense": "trained-bottleneck",
+      "sigma": 0.0,
+      "defense_config": {
+        "name": "trained-bottleneck",
+        "bottleneck_dim": 64,
+        "encoder_hidden": 256,
+        "probe_hidden": 128,
+        "minimax_steps": 200,
+        "mi_weight": 0.1
+      },
+      "server_attack": "none",
+      "split": "6",
+      "plan": "2-slice split over 12 layers: head[0:6] | body+tail[6:12] (+ ln_f + lm_head behind the last slice)",
+      "final_loss": 20.111366271972656,
+      "mean_loss": 20.344797909259796,
+      "trained_bottleneck_provenance": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/results-defended-v1/split6/seed-22/trained-bottleneck/captures/trained_bottleneck_provenance.json"
+    }
+  ],
+  "interpretation": "results[0]: captures_written / steps_run / final_loss (finetune) / defense; captures land in config.capture_dir in the wire-capture schema and feed every attack module via attacker.captures"
+}

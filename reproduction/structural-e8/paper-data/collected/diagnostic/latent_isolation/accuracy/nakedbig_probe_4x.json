@@ -1,0 +1,366 @@
+{
+  "schema": "dtraining.attacker.latent_probe.v1",
+  "config": {
+    "attack": "latent_probe",
+    "mode": "training",
+    "bundle_schema": null,
+    "latent_dim": 1024,
+    "train_blocks": 256,
+    "eval_blocks": 512,
+    "sequence_length": 32,
+    "epochs": 80,
+    "batch_size": 512,
+    "restarts": 12,
+    "models": [
+      "coordinate_plus_invariants",
+      "invariant_only",
+      "invariant_graph"
+    ]
+  },
+  "threat_model": "Known-plaintext evaluator with labels confined to trusted Toula. Each block preserves exactly the released Koula view, including fresh coordinate rotation and token permutation. The invariant-only arm uses norms, sorted Gram similarities and observed row position; the graph arm attacks the complete sign-invariant Gram structure.",
+  "provenance": {
+    "hostname": "MacBookPro",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-08-19T23:27:59Z",
+    "dtraining_commit": "f1653ad90548bf0c609af958ac2b90b78bf44ed5"
+  },
+  "results": [
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 0,
+      "correct": 393,
+      "total": 16384,
+      "top1_pct": 2.398681640625,
+      "bonferroni_upper95_pct": 2.783084354491848
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 1,
+      "correct": 405,
+      "total": 16384,
+      "top1_pct": 2.471923828125,
+      "bonferroni_upper95_pct": 2.861550454902105
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 2,
+      "correct": 385,
+      "total": 16384,
+      "top1_pct": 2.349853515625,
+      "bonferroni_upper95_pct": 2.730725663339896
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 3,
+      "correct": 393,
+      "total": 16384,
+      "top1_pct": 2.398681640625,
+      "bonferroni_upper95_pct": 2.783084354491848
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 4,
+      "correct": 391,
+      "total": 16384,
+      "top1_pct": 2.386474609375,
+      "bonferroni_upper95_pct": 2.769998340765023
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 5,
+      "correct": 400,
+      "total": 16384,
+      "top1_pct": 2.44140625,
+      "bonferroni_upper95_pct": 2.8288665453158477
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 6,
+      "correct": 391,
+      "total": 16384,
+      "top1_pct": 2.386474609375,
+      "bonferroni_upper95_pct": 2.769998340765023
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 7,
+      "correct": 395,
+      "total": 16384,
+      "top1_pct": 2.410888671875,
+      "bonferroni_upper95_pct": 2.7961679589500124
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 8,
+      "correct": 394,
+      "total": 16384,
+      "top1_pct": 2.40478515625,
+      "bonferroni_upper95_pct": 2.789626456766551
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 9,
+      "correct": 400,
+      "total": 16384,
+      "top1_pct": 2.44140625,
+      "bonferroni_upper95_pct": 2.8288665453158477
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 10,
+      "correct": 395,
+      "total": 16384,
+      "top1_pct": 2.410888671875,
+      "bonferroni_upper95_pct": 2.7961679589500124
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 11,
+      "correct": 414,
+      "total": 16384,
+      "top1_pct": 2.52685546875,
+      "bonferroni_upper95_pct": 2.920345340227918
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 0,
+      "correct": 824,
+      "total": 16384,
+      "top1_pct": 5.029296875,
+      "bonferroni_upper95_pct": 5.565035193189713
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 1,
+      "correct": 824,
+      "total": 16384,
+      "top1_pct": 5.029296875,
+      "bonferroni_upper95_pct": 5.565035193189713
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 2,
+      "correct": 824,
+      "total": 16384,
+      "top1_pct": 5.029296875,
+      "bonferroni_upper95_pct": 5.565035193189713
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 3,
+      "correct": 824,
+      "total": 16384,
+      "top1_pct": 5.029296875,
+      "bonferroni_upper95_pct": 5.565035193189713
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 4,
+      "correct": 824,
+      "total": 16384,
+      "top1_pct": 5.029296875,
+      "bonferroni_upper95_pct": 5.565035193189713
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 5,
+      "correct": 824,
+      "total": 16384,
+      "top1_pct": 5.029296875,
+      "bonferroni_upper95_pct": 5.565035193189713
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 6,
+      "correct": 824,
+      "total": 16384,
+      "top1_pct": 5.029296875,
+      "bonferroni_upper95_pct": 5.565035193189713
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 7,
+      "correct": 824,
+      "total": 16384,
+      "top1_pct": 5.029296875,
+      "bonferroni_upper95_pct": 5.565035193189713
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 8,
+      "correct": 824,
+      "total": 16384,
+      "top1_pct": 5.029296875,
+      "bonferroni_upper95_pct": 5.565035193189713
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 9,
+      "correct": 824,
+      "total": 16384,
+      "top1_pct": 5.029296875,
+      "bonferroni_upper95_pct": 5.565035193189713
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 10,
+      "correct": 824,
+      "total": 16384,
+      "top1_pct": 5.029296875,
+      "bonferroni_upper95_pct": 5.565035193189713
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 11,
+      "correct": 824,
+      "total": 16384,
+      "top1_pct": 5.029296875,
+      "bonferroni_upper95_pct": 5.565035193189713
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 0,
+      "correct": 679,
+      "total": 16384,
+      "top1_pct": 4.144287109375,
+      "bonferroni_upper95_pct": 4.6356480135175095
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 1,
+      "correct": 678,
+      "total": 16384,
+      "top1_pct": 4.13818359375,
+      "bonferroni_upper95_pct": 4.629220269183963
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 2,
+      "correct": 738,
+      "total": 16384,
+      "top1_pct": 4.50439453125,
+      "bonferroni_upper95_pct": 5.014419593228986
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 3,
+      "correct": 622,
+      "total": 16384,
+      "top1_pct": 3.79638671875,
+      "bonferroni_upper95_pct": 4.268811367527405
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 4,
+      "correct": 722,
+      "total": 16384,
+      "top1_pct": 4.40673828125,
+      "bonferroni_upper95_pct": 4.911789656385995
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 5,
+      "correct": 608,
+      "total": 16384,
+      "top1_pct": 3.7109375,
+      "bonferroni_upper95_pct": 4.178561830987415
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 6,
+      "correct": 685,
+      "total": 16384,
+      "top1_pct": 4.180908203125,
+      "bonferroni_upper95_pct": 4.674208756619334
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 7,
+      "correct": 681,
+      "total": 16384,
+      "top1_pct": 4.156494140625,
+      "bonferroni_upper95_pct": 4.648502682337975
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 8,
+      "correct": 789,
+      "total": 16384,
+      "top1_pct": 4.815673828125,
+      "bonferroni_upper95_pct": 5.3411465906301085
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 9,
+      "correct": 637,
+      "total": 16384,
+      "top1_pct": 3.887939453125,
+      "bonferroni_upper95_pct": 4.365439897344989
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 10,
+      "correct": 638,
+      "total": 16384,
+      "top1_pct": 3.89404296875,
+      "bonferroni_upper95_pct": 4.371879376482461
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 11,
+      "correct": 652,
+      "total": 16384,
+      "top1_pct": 3.9794921875,
+      "bonferroni_upper95_pct": 4.462000992338112
+    }
+  ],
+  "summary": [
+    {
+      "experiment": "latent_probe",
+      "best_probe_top1_pct": 5.029296875,
+      "best_probe_model": "invariant_only",
+      "best_probe_restart": 0,
+      "worst_bonferroni_upper95_pct": 5.565035193189713,
+      "label_free_majority_pct": 5.029296875,
+      "upper95_excess_over_majority_pp": 0.5357383181897131,
+      "known_eval_fraction": 0.72332763671875
+    }
+  ],
+  "interpretation": "Production privacy fails if the Bonferroni-adjusted upper confidence recovery exceeds the exact matched majority control by more than the declared margin."
+}

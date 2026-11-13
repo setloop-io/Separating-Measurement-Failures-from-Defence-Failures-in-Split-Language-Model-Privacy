@@ -1,0 +1,716 @@
+{
+  "schema": "llm_attacker.whitebox_sweep.v1",
+  "tier": "whitebox",
+  "addendum_to": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/results-bottleneck-sweep-v1",
+  "base_plan_schema": "llm_attacker.bottleneck_sweep.v1",
+  "purpose": "post-hoc white-box-aware attacker addendum: the attacker is granted each defended cell's ACTUAL trained defense checkpoint; a strictly stronger access condition, reported as a separate tier \u2014 the base matrix's matched-access identity is untouched",
+  "budgets": {
+    "seq_len": 32,
+    "data_seed": 2026,
+    "calibration_seqs": 32,
+    "attack_sequences": 32,
+    "forward_candidates": 32,
+    "beam_width": 4,
+    "sipit_steps": 128
+  },
+  "arms": [
+    "whitebox_inverter",
+    "whitebox_optimization"
+  ],
+  "runner": "run_whitebox_sweep.py",
+  "runner_sha256": "4d91aadbff386376c9d1b74cf2a8e78d307635b0254d6ab61ec2f1a10a13b958",
+  "limits": [
+    "white-box recovery is a strictly stronger access measurement; it does not constrain black-box recovery of the same wire, nor the reverse",
+    "the addendum reuses the base cells' captured wires, canonical truth and utility; nothing about victim training is re-run",
+    "the optimization arm's steps-per-wire budget is matched to the sweep's SIPIT step count, but the two arms spend different compute mixes (encoder-side vs head-side)"
+  ],
+  "cells": [
+    {
+      "path": "whitebox/split3/seed-11/pca-compress-64",
+      "base_cell": "split3/seed-11/dim-64/pca-compress",
+      "split": 3,
+      "seed": 11,
+      "method": "pca-compress",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-11/dim-64/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-11/tb-frozen-64",
+      "base_cell": "split3/seed-11/dim-64/tb-frozen",
+      "split": 3,
+      "seed": 11,
+      "method": "tb-frozen",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-11/dim-64/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-11/tb-cotrain-64",
+      "base_cell": "split3/seed-11/dim-64/tb-cotrain",
+      "split": 3,
+      "seed": 11,
+      "method": "tb-cotrain",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-11/dim-64/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-11/pca-compress-128",
+      "base_cell": "split3/seed-11/dim-128/pca-compress",
+      "split": 3,
+      "seed": 11,
+      "method": "pca-compress",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-11/dim-128/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-11/tb-frozen-128",
+      "base_cell": "split3/seed-11/dim-128/tb-frozen",
+      "split": 3,
+      "seed": 11,
+      "method": "tb-frozen",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-11/dim-128/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-11/tb-cotrain-128",
+      "base_cell": "split3/seed-11/dim-128/tb-cotrain",
+      "split": 3,
+      "seed": 11,
+      "method": "tb-cotrain",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-11/dim-128/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-11/pca-compress-256",
+      "base_cell": "split3/seed-11/dim-256/pca-compress",
+      "split": 3,
+      "seed": 11,
+      "method": "pca-compress",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-11/dim-256/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-11/tb-frozen-256",
+      "base_cell": "split3/seed-11/dim-256/tb-frozen",
+      "split": 3,
+      "seed": 11,
+      "method": "tb-frozen",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-11/dim-256/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-11/tb-cotrain-256",
+      "base_cell": "split3/seed-11/dim-256/tb-cotrain",
+      "split": 3,
+      "seed": 11,
+      "method": "tb-cotrain",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-11/dim-256/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-22/pca-compress-64",
+      "base_cell": "split3/seed-22/dim-64/pca-compress",
+      "split": 3,
+      "seed": 22,
+      "method": "pca-compress",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-22/dim-64/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-22/tb-frozen-64",
+      "base_cell": "split3/seed-22/dim-64/tb-frozen",
+      "split": 3,
+      "seed": 22,
+      "method": "tb-frozen",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-22/dim-64/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-22/tb-cotrain-64",
+      "base_cell": "split3/seed-22/dim-64/tb-cotrain",
+      "split": 3,
+      "seed": 22,
+      "method": "tb-cotrain",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-22/dim-64/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-22/pca-compress-128",
+      "base_cell": "split3/seed-22/dim-128/pca-compress",
+      "split": 3,
+      "seed": 22,
+      "method": "pca-compress",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-22/dim-128/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-22/tb-frozen-128",
+      "base_cell": "split3/seed-22/dim-128/tb-frozen",
+      "split": 3,
+      "seed": 22,
+      "method": "tb-frozen",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-22/dim-128/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-22/tb-cotrain-128",
+      "base_cell": "split3/seed-22/dim-128/tb-cotrain",
+      "split": 3,
+      "seed": 22,
+      "method": "tb-cotrain",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-22/dim-128/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-22/pca-compress-256",
+      "base_cell": "split3/seed-22/dim-256/pca-compress",
+      "split": 3,
+      "seed": 22,
+      "method": "pca-compress",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-22/dim-256/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-22/tb-frozen-256",
+      "base_cell": "split3/seed-22/dim-256/tb-frozen",
+      "split": 3,
+      "seed": 22,
+      "method": "tb-frozen",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-22/dim-256/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-22/tb-cotrain-256",
+      "base_cell": "split3/seed-22/dim-256/tb-cotrain",
+      "split": 3,
+      "seed": 22,
+      "method": "tb-cotrain",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-22/dim-256/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-33/pca-compress-64",
+      "base_cell": "split3/seed-33/dim-64/pca-compress",
+      "split": 3,
+      "seed": 33,
+      "method": "pca-compress",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-33/dim-64/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-33/tb-frozen-64",
+      "base_cell": "split3/seed-33/dim-64/tb-frozen",
+      "split": 3,
+      "seed": 33,
+      "method": "tb-frozen",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-33/dim-64/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-33/tb-cotrain-64",
+      "base_cell": "split3/seed-33/dim-64/tb-cotrain",
+      "split": 3,
+      "seed": 33,
+      "method": "tb-cotrain",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-33/dim-64/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-33/pca-compress-128",
+      "base_cell": "split3/seed-33/dim-128/pca-compress",
+      "split": 3,
+      "seed": 33,
+      "method": "pca-compress",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-33/dim-128/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-33/tb-frozen-128",
+      "base_cell": "split3/seed-33/dim-128/tb-frozen",
+      "split": 3,
+      "seed": 33,
+      "method": "tb-frozen",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-33/dim-128/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-33/tb-cotrain-128",
+      "base_cell": "split3/seed-33/dim-128/tb-cotrain",
+      "split": 3,
+      "seed": 33,
+      "method": "tb-cotrain",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-33/dim-128/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-33/pca-compress-256",
+      "base_cell": "split3/seed-33/dim-256/pca-compress",
+      "split": 3,
+      "seed": 33,
+      "method": "pca-compress",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-33/dim-256/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-33/tb-frozen-256",
+      "base_cell": "split3/seed-33/dim-256/tb-frozen",
+      "split": 3,
+      "seed": 33,
+      "method": "tb-frozen",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-33/dim-256/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split3/seed-33/tb-cotrain-256",
+      "base_cell": "split3/seed-33/dim-256/tb-cotrain",
+      "split": 3,
+      "seed": 33,
+      "method": "tb-cotrain",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split3/seed-33/dim-256/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-11/pca-compress-64",
+      "base_cell": "split6/seed-11/dim-64/pca-compress",
+      "split": 6,
+      "seed": 11,
+      "method": "pca-compress",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-11/dim-64/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-11/tb-frozen-64",
+      "base_cell": "split6/seed-11/dim-64/tb-frozen",
+      "split": 6,
+      "seed": 11,
+      "method": "tb-frozen",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-11/dim-64/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-11/tb-cotrain-64",
+      "base_cell": "split6/seed-11/dim-64/tb-cotrain",
+      "split": 6,
+      "seed": 11,
+      "method": "tb-cotrain",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-11/dim-64/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-11/pca-compress-128",
+      "base_cell": "split6/seed-11/dim-128/pca-compress",
+      "split": 6,
+      "seed": 11,
+      "method": "pca-compress",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-11/dim-128/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-11/tb-frozen-128",
+      "base_cell": "split6/seed-11/dim-128/tb-frozen",
+      "split": 6,
+      "seed": 11,
+      "method": "tb-frozen",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-11/dim-128/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-11/tb-cotrain-128",
+      "base_cell": "split6/seed-11/dim-128/tb-cotrain",
+      "split": 6,
+      "seed": 11,
+      "method": "tb-cotrain",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-11/dim-128/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-11/pca-compress-256",
+      "base_cell": "split6/seed-11/dim-256/pca-compress",
+      "split": 6,
+      "seed": 11,
+      "method": "pca-compress",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-11/dim-256/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-11/tb-frozen-256",
+      "base_cell": "split6/seed-11/dim-256/tb-frozen",
+      "split": 6,
+      "seed": 11,
+      "method": "tb-frozen",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-11/dim-256/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-11/tb-cotrain-256",
+      "base_cell": "split6/seed-11/dim-256/tb-cotrain",
+      "split": 6,
+      "seed": 11,
+      "method": "tb-cotrain",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-11/dim-256/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-22/pca-compress-64",
+      "base_cell": "split6/seed-22/dim-64/pca-compress",
+      "split": 6,
+      "seed": 22,
+      "method": "pca-compress",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-22/dim-64/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-22/tb-frozen-64",
+      "base_cell": "split6/seed-22/dim-64/tb-frozen",
+      "split": 6,
+      "seed": 22,
+      "method": "tb-frozen",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-22/dim-64/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-22/tb-cotrain-64",
+      "base_cell": "split6/seed-22/dim-64/tb-cotrain",
+      "split": 6,
+      "seed": 22,
+      "method": "tb-cotrain",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-22/dim-64/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-22/pca-compress-128",
+      "base_cell": "split6/seed-22/dim-128/pca-compress",
+      "split": 6,
+      "seed": 22,
+      "method": "pca-compress",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-22/dim-128/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-22/tb-frozen-128",
+      "base_cell": "split6/seed-22/dim-128/tb-frozen",
+      "split": 6,
+      "seed": 22,
+      "method": "tb-frozen",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-22/dim-128/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-22/tb-cotrain-128",
+      "base_cell": "split6/seed-22/dim-128/tb-cotrain",
+      "split": 6,
+      "seed": 22,
+      "method": "tb-cotrain",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-22/dim-128/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-22/pca-compress-256",
+      "base_cell": "split6/seed-22/dim-256/pca-compress",
+      "split": 6,
+      "seed": 22,
+      "method": "pca-compress",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-22/dim-256/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-22/tb-frozen-256",
+      "base_cell": "split6/seed-22/dim-256/tb-frozen",
+      "split": 6,
+      "seed": 22,
+      "method": "tb-frozen",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-22/dim-256/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-22/tb-cotrain-256",
+      "base_cell": "split6/seed-22/dim-256/tb-cotrain",
+      "split": 6,
+      "seed": 22,
+      "method": "tb-cotrain",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-22/dim-256/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-33/pca-compress-64",
+      "base_cell": "split6/seed-33/dim-64/pca-compress",
+      "split": 6,
+      "seed": 33,
+      "method": "pca-compress",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-33/dim-64/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-33/tb-frozen-64",
+      "base_cell": "split6/seed-33/dim-64/tb-frozen",
+      "split": 6,
+      "seed": 33,
+      "method": "tb-frozen",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-33/dim-64/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-33/tb-cotrain-64",
+      "base_cell": "split6/seed-33/dim-64/tb-cotrain",
+      "split": 6,
+      "seed": 33,
+      "method": "tb-cotrain",
+      "dim": 64,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-33/dim-64/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-33/pca-compress-128",
+      "base_cell": "split6/seed-33/dim-128/pca-compress",
+      "split": 6,
+      "seed": 33,
+      "method": "pca-compress",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-33/dim-128/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-33/tb-frozen-128",
+      "base_cell": "split6/seed-33/dim-128/tb-frozen",
+      "split": 6,
+      "seed": 33,
+      "method": "tb-frozen",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-33/dim-128/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-33/tb-cotrain-128",
+      "base_cell": "split6/seed-33/dim-128/tb-cotrain",
+      "split": 6,
+      "seed": 33,
+      "method": "tb-cotrain",
+      "dim": 128,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-33/dim-128/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-33/pca-compress-256",
+      "base_cell": "split6/seed-33/dim-256/pca-compress",
+      "split": 6,
+      "seed": 33,
+      "method": "pca-compress",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-33/dim-256/pca-compress/captures/pca_compress_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-33/tb-frozen-256",
+      "base_cell": "split6/seed-33/dim-256/tb-frozen",
+      "split": 6,
+      "seed": 33,
+      "method": "tb-frozen",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-33/dim-256/tb-frozen/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    },
+    {
+      "path": "whitebox/split6/seed-33/tb-cotrain-256",
+      "base_cell": "split6/seed-33/dim-256/tb-cotrain",
+      "split": 6,
+      "seed": 33,
+      "method": "tb-cotrain",
+      "dim": 256,
+      "base_status": "COMPLETE",
+      "checkpoint": "split6/seed-33/dim-256/tb-cotrain/captures/trained_bottleneck_encoder.pt",
+      "checkpoint_present": true
+    }
+  ],
+  "status": "COMPLETE",
+  "not_evaluable": [
+    {
+      "path": "whitebox/split3/seed-11/tb-cotrain-64",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split3/seed-11/tb-cotrain-128",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split3/seed-11/tb-cotrain-256",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split3/seed-22/tb-cotrain-64",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split3/seed-22/tb-cotrain-128",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split3/seed-22/tb-cotrain-256",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split3/seed-33/tb-cotrain-64",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split3/seed-33/tb-cotrain-128",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split3/seed-33/tb-cotrain-256",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split6/seed-11/tb-cotrain-64",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split6/seed-11/tb-cotrain-128",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split6/seed-11/tb-cotrain-256",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split6/seed-22/tb-cotrain-64",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split6/seed-22/tb-cotrain-128",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split6/seed-22/tb-cotrain-256",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split6/seed-33/tb-cotrain-64",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split6/seed-33/tb-cotrain-128",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    },
+    {
+      "path": "whitebox/split6/seed-33/tb-cotrain-256",
+      "method": "tb-cotrain",
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion."
+    }
+  ]
+}

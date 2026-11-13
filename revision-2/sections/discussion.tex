@@ -1,0 +1,127 @@
+\section{Relationship to existing evidence and methods}
+\label{sec:related}
+
+Split learning was originally introduced to train collaborative models
+without exporting raw client records \cite{vepakomma2018}, and recent
+surveys catalogue a rapidly growing literature adapting split architectures
+to LLM fine-tuning \cite{splitsurvey2026}. Backward tensors still leak
+text. Modern reconstruction attacks recover private inputs from exchanged
+gradients and activations \cite{gisurvey2022,dager2024,fedspy2026}. Within
+our audited programme, adding returned gradients in a controlled GPT-2
+benchmark lifts exact-document recovery from $13.71\%$ to $37.77\%$ while
+moving token accuracy by $3.18$ percentage points \cite{gradients2026}, and
+client-returned loss gradients nullify synthetic decoys through exact-zero
+support masks \cite{paper1}. Temporal gradient correlations leak
+trajectories through similar structural channels in reinforcement learning
+\cite{trace2026}. Here we retain each cited measurement under its original
+attribution and denominator.
+
+Methodological overlap with LLM-Attack Suite calls for clear boundaries
+\cite{suite2026}. That framework already specifies observation contracts,
+undefended controls, saved predictions, missing-attack disclosures, and
+harness checks. Our work operates one layer higher. By auditing
+cross-campaign decision tables where qualified breaches, uncalibrated
+probes, shifted labels, and host-key assumptions collide, we isolate which
+programme-level conclusions survive without claiming diagnostic benchmarks
+on unseen external repositories.
+
+External studies warn repeatedly that weak evaluators manufacture false
+privacy. Wu et al.\ \cite{adaptive2022} break federated defences calibrated
+against static attacks, while Smith et al.\ \cite{mia2026} measure
+$1.16$-fold to $6.59$-fold leakage underestimation under mismatched
+inversion evaluators. Threat-model and budget sensitivity appears across
+multimodal and LLM benchmarks as well \cite{labelbudget2026,ablation2026}.
+Layer-wise analyses independently confirm that deeper transformer splits
+retain recoverable internal states
+\cite{depth2025,actinv2026,bettisplit2026}. Evaluator skepticism still cuts
+only one way, because disqualifying 20 uncalibrated probes in our 19-cell
+exploration leaves all 13 breaches caught by the four calibrated probes
+intact.
+
+Recent split-LLM defence designs reinforce both our host-custody and
+variational-bound findings. Jin et al.\ \cite{privpair2026} show that
+perturbation alone struggles during federated split LLM fine-tuning and
+propose client obfuscate-and-recover adapters alongside mixup activation
+blending \cite{mixguard2026} and generative gradient masking
+\cite{aegis2026}. Key custody remains decisive. Thomas et al.\
+\cite{permattack2025} invert permutation-based third-party LLM inference
+schemes and illustrate why invertible coordinate transforms demand explicit
+host-memory accounting. On the information-theoretic side, Noorbakhsh et
+al.\ \cite{mitech2026} and Gu et al.\ \cite{pidi2026} apply
+mutual-information regularisers during split inference, while formal
+statistical limits from McAllester and Stratos \cite{mcallester2020} and
+Song and Ermon \cite{song2020}, paired with empirical differential-privacy
+auditing \cite{jagielski2020}, explain why near-zero critic scores never
+certify small upper leakage budgets.
+
+\section{Limitations and implications for further evaluation}
+\label{sec:limits}
+
+\paragraph{Selection and dependence.}
+Case selection occurred retrospectively after all campaign outcomes had
+already been observed. Shared codebases, corpora, checkpoints, and design
+decisions link every episode inside one group. Archive tallies describe
+this collection alone, and measuring false-positive or false-negative audit
+rates on external papers would require a prospectively registered
+validation cohort.
+
+\paragraph{Evidence available for recomputation.}
+Executable scripts recompute seed contrasts, confidence bounds, and
+composite gate decisions wherever raw CSV or JSON arrays exist in the
+package. Some upstream artifacts remain source-reported. Decoy-gradient
+frame counts and portions of the boundary-replacement review come from
+their primary manuscripts and archived audit verdicts without refitting
+attackers or rescoring tensor captures. File-level SHA-256 digests verify
+byte identity across all 118 consumed records, and untraced constants
+lacking a primary calibration curve stay excluded.
+
+\paragraph{Qualification and uncertainty.}
+Probe qualification binds strictly to one declared target, channel, defence
+mechanism, and budget. Seed cohorts remain small. Four-seed two-sided
+Student-$t$ intervals in the exploration and three-seed one-sided upper
+bounds in the defence pilot condition on fixed evaluation panels without
+multiplicity adjustments, while the unexecuted eight-seed power figure
+serves purely as a variance-sensitive planning bound. Positive-control
+canary floors, permutation-null bands, acceptance gates, and minimum
+detectable leak rates measure distinct properties even when two constants
+share the value $0.02$.
+
+\paragraph{Security and utility.}
+Empirical non-detection reflects a bounded attacker and compute budget. Low
+pooled passive recovery, invertible wrappers whose keys sit in cloud RAM,
+and near-zero variational lower bounds leave compromised-host secrecy
+unproved. Utility gates cover only their scored endpoints, since
+short-context cross-entropy can pass while teacher-forced answer-token
+accuracy drops sharply, and evaluating noise or quantisation fairly
+requires sweeping perturbation strength against explicit task-quality caps.
+
+Explicit threat contracts enable testable future benchmarks. Deliberately
+injected channel omissions and label shifts can run alongside genuinely
+leaky defences under frozen compute budgets. Prospective validation trials
+on held-out model families and corpora can then quantify how reliably
+automated audit checks catch false privacy assurance while preserving
+confirmed breaches.
+
+\section{Conclusion}
+
+Auditing six linked investigations from one split-LLM programme separates
+broken measurements from broken defences. Two early assurances failed on
+method. Omitted client-returned gradients and off-by-one token labels
+undermined those initial claims, yet 13 qualified breaches in the 19-cell
+exploration and $40\times$ structural excesses in the seven-cell pilot
+stand as sound negative evidence against the tested defences despite
+incomplete probe qualification elsewhere. Scope checks likewise confine
+shared-key orthogonal wrappers to passive network links, document the
+$63.16\%$ throughput penalty of rapid per-epoch ratcheting, and show why
+variational mutual-information lower bounds near zero leave true leakage
+unconstrained above. Tying every privacy verdict to its observed channels,
+key custody, calibrated controls, and seed-level uncertainty establishes
+exactly what archived split-training experiments support.
+
+\paragraph{Data and code availability.}
+Code and derived tables live inside \path{revision-2/}
+\cite{artifacts2026}. Python recomputation scripts, vector figure
+generators, SHA-256 input manifests, and automated LaTeX build recipes
+accompany the text, while Appendix~\ref{app:artifacts} maps each statistic
+to its relative archive path. Every consistency check runs offline on the
+Python standard library without GPU retraining.

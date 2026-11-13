@@ -1,0 +1,43 @@
+{
+  "schema": "dtraining.mi_budget.v1",
+  "model": "/workspace/experiments/models/qwen3-0.6b",
+  "seed": 42,
+  "layers_probed": [
+    2,
+    8,
+    14,
+    21
+  ],
+  "target": "current-token identity (privacy variable)",
+  "convention": "I(activations;tokens) >= H(tokens) - CE_probe, bits; probe is a small MLP, so this is a LOWER bound",
+  "results": [
+    {
+      "layer": 2,
+      "probe_ce_nats": 5.775333404541016,
+      "token_prior_entropy_nats": 5.771182537078857,
+      "mi_lower_bound_bits_per_token": 0.0,
+      "top1_pct": 58.658854166666664
+    },
+    {
+      "layer": 8,
+      "probe_ce_nats": 6.013210932413737,
+      "token_prior_entropy_nats": 5.771182537078857,
+      "mi_lower_bound_bits_per_token": 0.0,
+      "top1_pct": 55.338541666666664
+    },
+    {
+      "layer": 14,
+      "probe_ce_nats": 5.96513573328654,
+      "token_prior_entropy_nats": 5.771182537078857,
+      "mi_lower_bound_bits_per_token": 0.0,
+      "top1_pct": 54.622395833333336
+    },
+    {
+      "layer": 21,
+      "probe_ce_nats": 5.8887098630269366,
+      "token_prior_entropy_nats": 5.771182537078857,
+      "mi_lower_bound_bits_per_token": 0.0,
+      "top1_pct": 55.208333333333336
+    }
+  ]
+}

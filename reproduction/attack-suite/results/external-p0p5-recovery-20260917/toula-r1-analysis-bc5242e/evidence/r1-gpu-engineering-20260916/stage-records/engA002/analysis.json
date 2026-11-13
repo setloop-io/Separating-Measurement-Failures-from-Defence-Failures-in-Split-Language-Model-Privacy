@@ -1,0 +1,771 @@
+{
+  "analyzer_source_inventory_sha256": "d036cfea9a218f97555d64f1c82506bc69f712a3e3eede533c9d3594515c421d",
+  "blockers": [
+    "Fresh attack implementation, target/channel/defense qualification and held-out admission are pending.",
+    "Scientific protocol and thresholds have not been prospectively accepted.",
+    "Remote environment and paid compute budget require separate acceptance before execution."
+  ],
+  "completed_count": 14,
+  "created_at_utc": "2026-09-16T00:30:27.605706+00:00",
+  "descriptive_contrasts": [
+    {
+      "cell_id": "smoke-base",
+      "gain_against_frozen": 0.006502866744995117,
+      "gain_against_removed": -0.014277935028076172,
+      "joint_feasibility": "UNDETERMINED",
+      "privacy": "UNDETERMINED",
+      "replacement_penalty": 0.04674887657165527,
+      "seed": 61001
+    },
+    {
+      "cell_id": "smoke-gradient-noise",
+      "gain_against_frozen": 4.267692565917969e-05,
+      "gain_against_removed": -0.026750802993774414,
+      "joint_feasibility": "UNDETERMINED",
+      "privacy": "UNDETERMINED",
+      "replacement_penalty": 0.08519744873046875,
+      "seed": 61001
+    },
+    {
+      "cell_id": "smoke-base",
+      "gain_against_frozen": 0.00481724739074707,
+      "gain_against_removed": -0.00021076202392578125,
+      "joint_feasibility": "UNDETERMINED",
+      "privacy": "UNDETERMINED",
+      "replacement_penalty": 0.030849933624267578,
+      "seed": 61002
+    },
+    {
+      "cell_id": "smoke-gradient-noise",
+      "gain_against_frozen": -0.0005240440368652344,
+      "gain_against_removed": -0.02568364143371582,
+      "joint_feasibility": "UNDETERMINED",
+      "privacy": "UNDETERMINED",
+      "replacement_penalty": 0.08373427391052246,
+      "seed": 61002
+    }
+  ],
+  "failures": [],
+  "input_bindings": [
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/launch.json",
+      "sha256": "2ee01e478695948efa69593c99db9b1bc9ac4f2d9e61c2ded998062b7d8922ea"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/admission.json",
+      "sha256": "4f23a541b290fa5d52710db659ed03dd68a9f4dfa6896f0ebf365216594f60c7"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/admission_claim.json",
+      "sha256": "da335ad7e8258da9206239a75a38a15152a902736fc8ab1f429d0fc7236ca36d"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--all-local--s61001--all_local--eengA002.start.json",
+      "sha256": "30c3224f82893b56847af457ce2b062522df8946c7f34ac03806f417bc21da0b"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--all-local--s61001--all_local--eengA002.end.json",
+      "sha256": "935de7057705a8ba48d0d9076aa1142379aee6c79d31898a5412524d3ee592ad"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--all-local--s61001--all_local--eengA002.json",
+      "sha256": "87910888e561dfe67dbf0368a2d3948a2e73d0c9efc98169205e04c5fc81c9fa"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--all-local--s61001--all_local--eengA002/metrics_summary.json",
+      "sha256": "6bc1b0490e1c6775d191a9c2abe7a0766502848a3f17edb17801d3270ed6236c"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-base--s61001--trained--eengA002.start.json",
+      "sha256": "f64eba8f135ee2a3b05ea4435ef1a79c51611011153fc97b0ea2bb3b13fba758"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-base--s61001--trained--eengA002.end.json",
+      "sha256": "70541dbb23336ce4dda301ec52401a164b00ff0d4b6007b8ee0485c758d4aa41"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--smoke-base--s61001--trained--eengA002.json",
+      "sha256": "a38b83c7b1e6c03c1b41a19ecf1cf6c813821922e3a3588bb18da6b96ccec632"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--smoke-base--s61001--trained--eengA002/metrics_summary.json",
+      "sha256": "dfc2bbb73f97ea00b272760290824394a49bd4b0129325204920258a7864d435"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-base--s61001--frozen_random--eengA002.start.json",
+      "sha256": "c6593201c8ec71263ee31f91c4566fd3f356e0abfb4b558260dd2e8c7f1a8dc3"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-base--s61001--frozen_random--eengA002.end.json",
+      "sha256": "02a9cfed6c4fea8fec21f0484d3b7cb563e907875c75a5c10743018eb09bb7fd"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--smoke-base--s61001--frozen_random--eengA002.json",
+      "sha256": "bdeee1b789aad67bcaf56ced4d4204243268c0977d3f3b6652080fadea168598"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--smoke-base--s61001--frozen_random--eengA002/metrics_summary.json",
+      "sha256": "59c4472a44deddd19d7cc47f0076b9b35506ddcb4a5a3d11dde882952c1d9f75"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-base--s61001--removed_remote--eengA002.start.json",
+      "sha256": "432341790fc13a73f62058e385ce556f17a24b91d038135e7ea9b4ead3425f84"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-base--s61001--removed_remote--eengA002.end.json",
+      "sha256": "dca31c5794fa064c0c5022c5641c4fba71186a5ad07c6c28de82347b89ebf2e8"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--smoke-base--s61001--removed_remote--eengA002.json",
+      "sha256": "43bbf8eade78662aed0a34bea5a204b98f9b3d5cb8a299c362dbdf06a90904be"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--smoke-base--s61001--removed_remote--eengA002/metrics_summary.json",
+      "sha256": "a4d683609a78335edb705ad79849a5ef5aa448b747ac64054d3e536d7c3cc12e"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--trained--eengA002.start.json",
+      "sha256": "3c7f93f22256792cf62bbb9343a351968fb3cf557097b096304130115bd24257"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--trained--eengA002.end.json",
+      "sha256": "756efb0ee64666a190e0b97306c4122b17c0c1ffbedc56edc64d03dcc02d6b36"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--trained--eengA002.json",
+      "sha256": "79bce6ab80d7cd696645d5a3d09bf32da5685ae81625ef8d41e303466d97ccb2"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--trained--eengA002/metrics_summary.json",
+      "sha256": "dc4e1814608e2bb717eb84ce85cd1b3a8c8650feb97c140ef0dff0e14a394f1d"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--frozen_random--eengA002.start.json",
+      "sha256": "c89da5bbfead8efa3c598c579fd2eb1c8390af38d9c011fc2236ab8980021af3"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--frozen_random--eengA002.end.json",
+      "sha256": "e478de4742796080871cf6e9ef5803f95c87ebcc66711e2beb4b1be44dfc8c42"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--frozen_random--eengA002.json",
+      "sha256": "c976237311779bd05e048773167c2571a27d7fc6328f719e54aeb128823fd48f"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--frozen_random--eengA002/metrics_summary.json",
+      "sha256": "307eae28222d70bd87670b967d7178c7560979a9ad5bc5b3e1dac4ed39555800"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--removed_remote--eengA002.start.json",
+      "sha256": "5386801a85c2990341de7dd052af99623ea208858dde9fd46b30fb671bc99a20"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--removed_remote--eengA002.end.json",
+      "sha256": "1c0ad23505af776fd7231113d834e6d84129389d45f9f49418fd89401ab0e143"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--removed_remote--eengA002.json",
+      "sha256": "fa100c42f86dc3806cd82d4ac76142a0acffce05f522f01c1d30fc98a91e89d4"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--removed_remote--eengA002/metrics_summary.json",
+      "sha256": "36c58f06a6caf9e1ae03c990b16ae6d2770bceb8582ecfeb6086a5f3b757eed3"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--all-local--s61002--all_local--eengA002.start.json",
+      "sha256": "7023595bb6994e9dad29bcd25fa9191943aed325bbcc902c977197d47ed84cde"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--all-local--s61002--all_local--eengA002.end.json",
+      "sha256": "a201b5fb26dd33f96605066fdcefb1cedc93e8c73fccd89ab9aa2ceb9eef6592"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--all-local--s61002--all_local--eengA002.json",
+      "sha256": "15b2086d1e48658eeef44414043944d645ac6eceb526e0758090a15500c8e2fb"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--all-local--s61002--all_local--eengA002/metrics_summary.json",
+      "sha256": "201133528977a6f4dc975f20213693a8797fb4cfc5724c82b4f17c74c32bd9b4"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-base--s61002--trained--eengA002.start.json",
+      "sha256": "ca800a633b3304701de8bbb1c66186393970d19a1d35cb753086fdb2fc12f0f9"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-base--s61002--trained--eengA002.end.json",
+      "sha256": "62ddf2f887a7b3c2250ea554adb5dd166098a7babba9b67c48c94cd219741cb0"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--smoke-base--s61002--trained--eengA002.json",
+      "sha256": "d5511f4ff8ee26ee22af22c098da11c2709732e00738b3c6ca3550b0b5ec1f91"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--smoke-base--s61002--trained--eengA002/metrics_summary.json",
+      "sha256": "88c2ad7baefcd68a6444fc795f1df8ab025b7b0d609fe24c62d07639a205f741"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-base--s61002--frozen_random--eengA002.start.json",
+      "sha256": "58b79b6679d54ce6ba04cb7f8ba39f7fad3f5738ab22caf9fe3b84d290475894"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-base--s61002--frozen_random--eengA002.end.json",
+      "sha256": "9ed03f0fd5104214817357da13c2a99eb71d53f5f536c25f400ed9ba68749c93"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--smoke-base--s61002--frozen_random--eengA002.json",
+      "sha256": "882f4f8618e92a79e198abb6db5cbf159cee20749b9847b175213dd39414f787"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--smoke-base--s61002--frozen_random--eengA002/metrics_summary.json",
+      "sha256": "002ecb7874c46cb3832e715f3e71eb6e49f26d391ccecef8e29349092c2209d9"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-base--s61002--removed_remote--eengA002.start.json",
+      "sha256": "a17ecab17df55e88537e7b2ad39b33eecefc15670d1add1f8e7b85e589f298ce"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-base--s61002--removed_remote--eengA002.end.json",
+      "sha256": "d166afa3879d81060902f1e1c0f9ed6b36c30cc5602bf1c0c2679ecd0bfd5d57"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--smoke-base--s61002--removed_remote--eengA002.json",
+      "sha256": "c9c37f0baa999b98e73a6b1575ce7750ed67cb4dfc1628642896a04e214ec107"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--smoke-base--s61002--removed_remote--eengA002/metrics_summary.json",
+      "sha256": "64b461ef900f57c25f3a4e23936278db8649b4ee3a52071f2c06902d82b05866"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--trained--eengA002.start.json",
+      "sha256": "acdf816ded170dcf0c36a76a2a147ebe8099b248612f356cb7c4258bb2a9d267"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--trained--eengA002.end.json",
+      "sha256": "68ac23312f1c5a4cb3b67fd2956b7229fcf9238cdc4316c8c26506d0fd9e2545"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--trained--eengA002.json",
+      "sha256": "5a3fd062c2117cf5672248025ad65e922d8c52d2a9f63d259005031fd9ac52ed"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--trained--eengA002/metrics_summary.json",
+      "sha256": "4fff269e3e69fda4a9049d559626729121be97d8e8b11ddd13a61a657fd52dc2"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--frozen_random--eengA002.start.json",
+      "sha256": "435ff8f7cadac5da8a14372b2031713d69b043f054a51def6ff74eae0378d017"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--frozen_random--eengA002.end.json",
+      "sha256": "57436ae69f4b1198610b4f73fdbd8fc09e78fb644f7354dc5de2ac324371f3a2"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--frozen_random--eengA002.json",
+      "sha256": "b01041c4bfe0c856775b0b35508c046a4e978d002e18e9e0838ee0992e0511a1"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--frozen_random--eengA002/metrics_summary.json",
+      "sha256": "e864c668080c0fe75bc8e8f1ca2da5c30cb77b31ea9a4d0e8d4feed38b927ae5"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--removed_remote--eengA002.start.json",
+      "sha256": "274de4c36a467ff4b3514e335115c6b83105692278d09c3dc20cff0cec12cca9"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/execution_records/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--removed_remote--eengA002.end.json",
+      "sha256": "7e8d51b4ac43a1f75f3dd3c1509c18415aaa677f680538a716d7dba55861272f"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/manifests/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--removed_remote--eengA002.json",
+      "sha256": "81c9bba84155854837aa162f0da439b845166bcedf29eacabf806c19fe640b90"
+    },
+    {
+      "path": "outputs/p3-r1-fresh-start/engineering--engA002/runs/p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--removed_remote--eengA002/metrics_summary.json",
+      "sha256": "67adcb97a152b96263e84b272af908cdca204c2b8e81dc32540e297343b12ec7"
+    }
+  ],
+  "interrupted_runs": [],
+  "joint_feasibility": "UNDETERMINED",
+  "not_started_runs": [],
+  "planned_count": 14,
+  "privacy": "UNDETERMINED",
+  "rows": [
+    {
+      "cell_id": "all-local",
+      "initial_components": {
+        "shared/backbone-layer:0": "bfa8348cd33e3f0c7e1f29e7d99c0bca29250e12440dcd8b887bea249e774157",
+        "shared/backbone-layer:1": "6366603140717e13f20e800abea9f640b42b655746d27074a6da36b346016622",
+        "shared/backbone-layer:2": "d196e52703594d9aaa2a4f16755d8e9f5efca02e74ed627e2afc7e31e17f4ce2",
+        "shared/backbone-layer:3": "2672884e80bd6023a91da37340d8ac764f589ef424ef674f429b08286e906290",
+        "shared/head": "b70ad31ee6f960aaea18799e2dc5b9d3122c3f4237f2e73e47b12a6e5c3a1abf",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "ac1aaeb05d60438663c965a2cd89091eeceb0522ab6a120fe1b01d1778dccc3b",
+        "shared/tok_emb": "1fd0d40e77f7a3e09aa29d88319c0bf44772de68c624f5ab996ded88421518c8"
+      },
+      "initial_model_sha256": "b590d9cfa738d8e461692e9db04c619463d37133b47b72c2cdd80d09638436ce",
+      "initial_trusted_sha256": "b590d9cfa738d8e461692e9db04c619463d37133b47b72c2cdd80d09638436ce",
+      "loss": 5.445553541183472,
+      "mode": "all_local",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 0,
+        "complete_run_wall_seconds": 3.2404729449772276,
+        "cuda_peak_allocated_bytes": 68782592,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 1792446,
+        "remote_cuda_peak_allocated_bytes": null,
+        "remote_cuda_peak_reserved_bytes": null,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--all-local--s61001--all_local--eengA002",
+      "scientific_evidence": false,
+      "seed": 61001,
+      "wall_seconds": 0.4197819239925593
+    },
+    {
+      "cell_id": "smoke-base",
+      "initial_components": {
+        "boundary/1:2:32/decoder": "a2595b9ca680a50f5ad2d1a7c0f2ffcb60c053e36a0a40587c28e1dfd9f63bd1",
+        "boundary/1:2:32/encoder": "db663c18a2021df6384c6a3efefad9298db965e555c4344c2e58d2190ea5705b",
+        "boundary/1:2:32/encoder_ln": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "remote/32:1": "109bb8778c30013dc7a2f0cf7d05ef4cfb3f3cc9a37125deeb3eb8b0eb73f63d",
+        "shared/backbone-layer:0": "bfa8348cd33e3f0c7e1f29e7d99c0bca29250e12440dcd8b887bea249e774157",
+        "shared/backbone-layer:3": "2672884e80bd6023a91da37340d8ac764f589ef424ef674f429b08286e906290",
+        "shared/head": "b70ad31ee6f960aaea18799e2dc5b9d3122c3f4237f2e73e47b12a6e5c3a1abf",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "ac1aaeb05d60438663c965a2cd89091eeceb0522ab6a120fe1b01d1778dccc3b",
+        "shared/tok_emb": "1fd0d40e77f7a3e09aa29d88319c0bf44772de68c624f5ab996ded88421518c8"
+      },
+      "initial_model_sha256": "ce7193906fdbf5202917242c829627934e181ef200c507046d2e5aca2c63ebf8",
+      "initial_trusted_sha256": "6efa1576fc428d63565496e6a47767b3337663f36f3a31015941b35065a6eff6",
+      "loss": 5.492302417755127,
+      "mode": "trained",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 615685,
+        "complete_run_wall_seconds": 5.955462411977351,
+        "cuda_peak_allocated_bytes": 68816384,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 2335383,
+        "remote_cuda_peak_allocated_bytes": 67670016,
+        "remote_cuda_peak_reserved_bytes": 69206016,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--smoke-base--s61001--trained--eengA002",
+      "scientific_evidence": false,
+      "seed": 61001,
+      "wall_seconds": 4.95983691199217
+    },
+    {
+      "cell_id": "smoke-base",
+      "initial_components": {
+        "boundary/1:2:32/decoder": "a2595b9ca680a50f5ad2d1a7c0f2ffcb60c053e36a0a40587c28e1dfd9f63bd1",
+        "boundary/1:2:32/encoder": "db663c18a2021df6384c6a3efefad9298db965e555c4344c2e58d2190ea5705b",
+        "boundary/1:2:32/encoder_ln": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "remote/32:1": "109bb8778c30013dc7a2f0cf7d05ef4cfb3f3cc9a37125deeb3eb8b0eb73f63d",
+        "shared/backbone-layer:0": "bfa8348cd33e3f0c7e1f29e7d99c0bca29250e12440dcd8b887bea249e774157",
+        "shared/backbone-layer:3": "2672884e80bd6023a91da37340d8ac764f589ef424ef674f429b08286e906290",
+        "shared/head": "b70ad31ee6f960aaea18799e2dc5b9d3122c3f4237f2e73e47b12a6e5c3a1abf",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "ac1aaeb05d60438663c965a2cd89091eeceb0522ab6a120fe1b01d1778dccc3b",
+        "shared/tok_emb": "1fd0d40e77f7a3e09aa29d88319c0bf44772de68c624f5ab996ded88421518c8"
+      },
+      "initial_model_sha256": "ce7193906fdbf5202917242c829627934e181ef200c507046d2e5aca2c63ebf8",
+      "initial_trusted_sha256": "6efa1576fc428d63565496e6a47767b3337663f36f3a31015941b35065a6eff6",
+      "loss": 5.498805284500122,
+      "mode": "frozen_random",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 616127,
+        "complete_run_wall_seconds": 4.505317432049196,
+        "cuda_peak_allocated_bytes": 68816384,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 2222706,
+        "remote_cuda_peak_allocated_bytes": 67510784,
+        "remote_cuda_peak_reserved_bytes": 69206016,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--smoke-base--s61001--frozen_random--eengA002",
+      "scientific_evidence": false,
+      "seed": 61001,
+      "wall_seconds": 3.5559690759982914
+    },
+    {
+      "cell_id": "smoke-base",
+      "initial_components": {
+        "boundary/1:2:32/decoder": "a2595b9ca680a50f5ad2d1a7c0f2ffcb60c053e36a0a40587c28e1dfd9f63bd1",
+        "boundary/1:2:32/encoder": "db663c18a2021df6384c6a3efefad9298db965e555c4344c2e58d2190ea5705b",
+        "boundary/1:2:32/encoder_ln": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "remote/32:1": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "shared/backbone-layer:0": "bfa8348cd33e3f0c7e1f29e7d99c0bca29250e12440dcd8b887bea249e774157",
+        "shared/backbone-layer:3": "2672884e80bd6023a91da37340d8ac764f589ef424ef674f429b08286e906290",
+        "shared/head": "b70ad31ee6f960aaea18799e2dc5b9d3122c3f4237f2e73e47b12a6e5c3a1abf",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "ac1aaeb05d60438663c965a2cd89091eeceb0522ab6a120fe1b01d1778dccc3b",
+        "shared/tok_emb": "1fd0d40e77f7a3e09aa29d88319c0bf44772de68c624f5ab996ded88421518c8"
+      },
+      "initial_model_sha256": "6efa1576fc428d63565496e6a47767b3337663f36f3a31015941b35065a6eff6",
+      "initial_trusted_sha256": "6efa1576fc428d63565496e6a47767b3337663f36f3a31015941b35065a6eff6",
+      "loss": 5.478024482727051,
+      "mode": "removed_remote",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 616223,
+        "complete_run_wall_seconds": 4.300079703971278,
+        "cuda_peak_allocated_bytes": 68816384,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 2110685,
+        "remote_cuda_peak_allocated_bytes": 49152,
+        "remote_cuda_peak_reserved_bytes": 2097152,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--smoke-base--s61001--removed_remote--eengA002",
+      "scientific_evidence": false,
+      "seed": 61001,
+      "wall_seconds": 3.327939808019437
+    },
+    {
+      "cell_id": "smoke-gradient-noise",
+      "initial_components": {
+        "boundary/1:2:32/decoder": "a2595b9ca680a50f5ad2d1a7c0f2ffcb60c053e36a0a40587c28e1dfd9f63bd1",
+        "boundary/1:2:32/encoder": "db663c18a2021df6384c6a3efefad9298db965e555c4344c2e58d2190ea5705b",
+        "boundary/1:2:32/encoder_ln": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "remote/32:1": "109bb8778c30013dc7a2f0cf7d05ef4cfb3f3cc9a37125deeb3eb8b0eb73f63d",
+        "shared/backbone-layer:0": "bfa8348cd33e3f0c7e1f29e7d99c0bca29250e12440dcd8b887bea249e774157",
+        "shared/backbone-layer:3": "2672884e80bd6023a91da37340d8ac764f589ef424ef674f429b08286e906290",
+        "shared/head": "b70ad31ee6f960aaea18799e2dc5b9d3122c3f4237f2e73e47b12a6e5c3a1abf",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "ac1aaeb05d60438663c965a2cd89091eeceb0522ab6a120fe1b01d1778dccc3b",
+        "shared/tok_emb": "1fd0d40e77f7a3e09aa29d88319c0bf44772de68c624f5ab996ded88421518c8"
+      },
+      "initial_model_sha256": "ce7193906fdbf5202917242c829627934e181ef200c507046d2e5aca2c63ebf8",
+      "initial_trusted_sha256": "6efa1576fc428d63565496e6a47767b3337663f36f3a31015941b35065a6eff6",
+      "loss": 5.53075098991394,
+      "mode": "trained",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 616703,
+        "complete_run_wall_seconds": 5.9944650909747,
+        "cuda_peak_allocated_bytes": 68816384,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 2338647,
+        "remote_cuda_peak_allocated_bytes": 67670016,
+        "remote_cuda_peak_reserved_bytes": 69206016,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--trained--eengA002",
+      "scientific_evidence": false,
+      "seed": 61001,
+      "wall_seconds": 5.042052873002831
+    },
+    {
+      "cell_id": "smoke-gradient-noise",
+      "initial_components": {
+        "boundary/1:2:32/decoder": "a2595b9ca680a50f5ad2d1a7c0f2ffcb60c053e36a0a40587c28e1dfd9f63bd1",
+        "boundary/1:2:32/encoder": "db663c18a2021df6384c6a3efefad9298db965e555c4344c2e58d2190ea5705b",
+        "boundary/1:2:32/encoder_ln": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "remote/32:1": "109bb8778c30013dc7a2f0cf7d05ef4cfb3f3cc9a37125deeb3eb8b0eb73f63d",
+        "shared/backbone-layer:0": "bfa8348cd33e3f0c7e1f29e7d99c0bca29250e12440dcd8b887bea249e774157",
+        "shared/backbone-layer:3": "2672884e80bd6023a91da37340d8ac764f589ef424ef674f429b08286e906290",
+        "shared/head": "b70ad31ee6f960aaea18799e2dc5b9d3122c3f4237f2e73e47b12a6e5c3a1abf",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "ac1aaeb05d60438663c965a2cd89091eeceb0522ab6a120fe1b01d1778dccc3b",
+        "shared/tok_emb": "1fd0d40e77f7a3e09aa29d88319c0bf44772de68c624f5ab996ded88421518c8"
+      },
+      "initial_model_sha256": "ce7193906fdbf5202917242c829627934e181ef200c507046d2e5aca2c63ebf8",
+      "initial_trusted_sha256": "6efa1576fc428d63565496e6a47767b3337663f36f3a31015941b35065a6eff6",
+      "loss": 5.5307936668396,
+      "mode": "frozen_random",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 617190,
+        "complete_run_wall_seconds": 4.630893138004467,
+        "cuda_peak_allocated_bytes": 68816384,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 2225967,
+        "remote_cuda_peak_allocated_bytes": 67510784,
+        "remote_cuda_peak_reserved_bytes": 69206016,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--frozen_random--eengA002",
+      "scientific_evidence": false,
+      "seed": 61001,
+      "wall_seconds": 3.665128694032319
+    },
+    {
+      "cell_id": "smoke-gradient-noise",
+      "initial_components": {
+        "boundary/1:2:32/decoder": "a2595b9ca680a50f5ad2d1a7c0f2ffcb60c053e36a0a40587c28e1dfd9f63bd1",
+        "boundary/1:2:32/encoder": "db663c18a2021df6384c6a3efefad9298db965e555c4344c2e58d2190ea5705b",
+        "boundary/1:2:32/encoder_ln": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "remote/32:1": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "shared/backbone-layer:0": "bfa8348cd33e3f0c7e1f29e7d99c0bca29250e12440dcd8b887bea249e774157",
+        "shared/backbone-layer:3": "2672884e80bd6023a91da37340d8ac764f589ef424ef674f429b08286e906290",
+        "shared/head": "b70ad31ee6f960aaea18799e2dc5b9d3122c3f4237f2e73e47b12a6e5c3a1abf",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "ac1aaeb05d60438663c965a2cd89091eeceb0522ab6a120fe1b01d1778dccc3b",
+        "shared/tok_emb": "1fd0d40e77f7a3e09aa29d88319c0bf44772de68c624f5ab996ded88421518c8"
+      },
+      "initial_model_sha256": "6efa1576fc428d63565496e6a47767b3337663f36f3a31015941b35065a6eff6",
+      "initial_trusted_sha256": "6efa1576fc428d63565496e6a47767b3337663f36f3a31015941b35065a6eff6",
+      "loss": 5.504000186920166,
+      "mode": "removed_remote",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 617280,
+        "complete_run_wall_seconds": 4.3581939290161245,
+        "cuda_peak_allocated_bytes": 68816384,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 2113961,
+        "remote_cuda_peak_allocated_bytes": 98816,
+        "remote_cuda_peak_reserved_bytes": 2097152,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--smoke-gradient-noise--s61001--removed_remote--eengA002",
+      "scientific_evidence": false,
+      "seed": 61001,
+      "wall_seconds": 3.4366915409918875
+    },
+    {
+      "cell_id": "all-local",
+      "initial_components": {
+        "shared/backbone-layer:0": "b8c68ecc25cbb8fe8c545d0aa461aac1679e50de51f12a433962ca1e911620c3",
+        "shared/backbone-layer:1": "97b2032c39cb31400c17fc51ec85350fa72dc263e65a5cd02ee86a37c10e956f",
+        "shared/backbone-layer:2": "1507da0c1f436938086915a54d1ce895399800ef2b8ff5ed24d378d641cf0003",
+        "shared/backbone-layer:3": "25e8664e172a27e4cfcb6d3c733be2bbffdb24273ce383fc1277d61d99e9e916",
+        "shared/head": "22065f9ed1daf1684fcdb693e5531169607d52809388cbe2db7538210b98daf1",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "fe1dfee6220ff927f505db68883bec58273ce66dc0b58298758278694609afd5",
+        "shared/tok_emb": "11c7efdc0958740bf38bb7393161d838ed7ce968fd8ac4a1c9a8246edc1fc92b"
+      },
+      "initial_model_sha256": "3dd519e17c2560cf4d49247af3e00f339e03e7888dc0881169dfe34062a6a610",
+      "initial_trusted_sha256": "3dd519e17c2560cf4d49247af3e00f339e03e7888dc0881169dfe34062a6a610",
+      "loss": 5.451977491378784,
+      "mode": "all_local",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 0,
+        "complete_run_wall_seconds": 0.9522995089646429,
+        "cuda_peak_allocated_bytes": 68782592,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 1792457,
+        "remote_cuda_peak_allocated_bytes": null,
+        "remote_cuda_peak_reserved_bytes": null,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--all-local--s61002--all_local--eengA002",
+      "scientific_evidence": false,
+      "seed": 61002,
+      "wall_seconds": 0.04060231801122427
+    },
+    {
+      "cell_id": "smoke-base",
+      "initial_components": {
+        "boundary/1:2:32/decoder": "c526cace1bb3581484a32ad368a9b04613b5fba9a2effbc71a3a9719ed557031",
+        "boundary/1:2:32/encoder": "69904cce89318664005818371f9d0447841459e5932685169fb14a995a803666",
+        "boundary/1:2:32/encoder_ln": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "remote/32:1": "031c68b5fe379b1bdab5c3560a1753e36a87624446d077388aeadb4fd6a21918",
+        "shared/backbone-layer:0": "b8c68ecc25cbb8fe8c545d0aa461aac1679e50de51f12a433962ca1e911620c3",
+        "shared/backbone-layer:3": "25e8664e172a27e4cfcb6d3c733be2bbffdb24273ce383fc1277d61d99e9e916",
+        "shared/head": "22065f9ed1daf1684fcdb693e5531169607d52809388cbe2db7538210b98daf1",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "fe1dfee6220ff927f505db68883bec58273ce66dc0b58298758278694609afd5",
+        "shared/tok_emb": "11c7efdc0958740bf38bb7393161d838ed7ce968fd8ac4a1c9a8246edc1fc92b"
+      },
+      "initial_model_sha256": "3da6ef90802a05af568eb823fc90d5ef99427717f3d0758407a374abdc1dd06f",
+      "initial_trusted_sha256": "b40c6b79ccee03fc7e575865937433e3e360ddd8badf17c6db3b3e47d0f1a619",
+      "loss": 5.482827425003052,
+      "mode": "trained",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 615686,
+        "complete_run_wall_seconds": 5.795915803988464,
+        "cuda_peak_allocated_bytes": 68816384,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 2335387,
+        "remote_cuda_peak_allocated_bytes": 67670016,
+        "remote_cuda_peak_reserved_bytes": 69206016,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--smoke-base--s61002--trained--eengA002",
+      "scientific_evidence": false,
+      "seed": 61002,
+      "wall_seconds": 4.863980208989233
+    },
+    {
+      "cell_id": "smoke-base",
+      "initial_components": {
+        "boundary/1:2:32/decoder": "c526cace1bb3581484a32ad368a9b04613b5fba9a2effbc71a3a9719ed557031",
+        "boundary/1:2:32/encoder": "69904cce89318664005818371f9d0447841459e5932685169fb14a995a803666",
+        "boundary/1:2:32/encoder_ln": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "remote/32:1": "031c68b5fe379b1bdab5c3560a1753e36a87624446d077388aeadb4fd6a21918",
+        "shared/backbone-layer:0": "b8c68ecc25cbb8fe8c545d0aa461aac1679e50de51f12a433962ca1e911620c3",
+        "shared/backbone-layer:3": "25e8664e172a27e4cfcb6d3c733be2bbffdb24273ce383fc1277d61d99e9e916",
+        "shared/head": "22065f9ed1daf1684fcdb693e5531169607d52809388cbe2db7538210b98daf1",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "fe1dfee6220ff927f505db68883bec58273ce66dc0b58298758278694609afd5",
+        "shared/tok_emb": "11c7efdc0958740bf38bb7393161d838ed7ce968fd8ac4a1c9a8246edc1fc92b"
+      },
+      "initial_model_sha256": "3da6ef90802a05af568eb823fc90d5ef99427717f3d0758407a374abdc1dd06f",
+      "initial_trusted_sha256": "b40c6b79ccee03fc7e575865937433e3e360ddd8badf17c6db3b3e47d0f1a619",
+      "loss": 5.487644672393799,
+      "mode": "frozen_random",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 616132,
+        "complete_run_wall_seconds": 4.545544098014943,
+        "cuda_peak_allocated_bytes": 68816384,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 2222706,
+        "remote_cuda_peak_allocated_bytes": 67510784,
+        "remote_cuda_peak_reserved_bytes": 69206016,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--smoke-base--s61002--frozen_random--eengA002",
+      "scientific_evidence": false,
+      "seed": 61002,
+      "wall_seconds": 3.6185306630213745
+    },
+    {
+      "cell_id": "smoke-base",
+      "initial_components": {
+        "boundary/1:2:32/decoder": "c526cace1bb3581484a32ad368a9b04613b5fba9a2effbc71a3a9719ed557031",
+        "boundary/1:2:32/encoder": "69904cce89318664005818371f9d0447841459e5932685169fb14a995a803666",
+        "boundary/1:2:32/encoder_ln": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "remote/32:1": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "shared/backbone-layer:0": "b8c68ecc25cbb8fe8c545d0aa461aac1679e50de51f12a433962ca1e911620c3",
+        "shared/backbone-layer:3": "25e8664e172a27e4cfcb6d3c733be2bbffdb24273ce383fc1277d61d99e9e916",
+        "shared/head": "22065f9ed1daf1684fcdb693e5531169607d52809388cbe2db7538210b98daf1",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "fe1dfee6220ff927f505db68883bec58273ce66dc0b58298758278694609afd5",
+        "shared/tok_emb": "11c7efdc0958740bf38bb7393161d838ed7ce968fd8ac4a1c9a8246edc1fc92b"
+      },
+      "initial_model_sha256": "b40c6b79ccee03fc7e575865937433e3e360ddd8badf17c6db3b3e47d0f1a619",
+      "initial_trusted_sha256": "b40c6b79ccee03fc7e575865937433e3e360ddd8badf17c6db3b3e47d0f1a619",
+      "loss": 5.482616662979126,
+      "mode": "removed_remote",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 616221,
+        "complete_run_wall_seconds": 4.21853920200374,
+        "cuda_peak_allocated_bytes": 68816384,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 2110689,
+        "remote_cuda_peak_allocated_bytes": 49152,
+        "remote_cuda_peak_reserved_bytes": 2097152,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--smoke-base--s61002--removed_remote--eengA002",
+      "scientific_evidence": false,
+      "seed": 61002,
+      "wall_seconds": 3.2909699080046266
+    },
+    {
+      "cell_id": "smoke-gradient-noise",
+      "initial_components": {
+        "boundary/1:2:32/decoder": "c526cace1bb3581484a32ad368a9b04613b5fba9a2effbc71a3a9719ed557031",
+        "boundary/1:2:32/encoder": "69904cce89318664005818371f9d0447841459e5932685169fb14a995a803666",
+        "boundary/1:2:32/encoder_ln": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "remote/32:1": "031c68b5fe379b1bdab5c3560a1753e36a87624446d077388aeadb4fd6a21918",
+        "shared/backbone-layer:0": "b8c68ecc25cbb8fe8c545d0aa461aac1679e50de51f12a433962ca1e911620c3",
+        "shared/backbone-layer:3": "25e8664e172a27e4cfcb6d3c733be2bbffdb24273ce383fc1277d61d99e9e916",
+        "shared/head": "22065f9ed1daf1684fcdb693e5531169607d52809388cbe2db7538210b98daf1",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "fe1dfee6220ff927f505db68883bec58273ce66dc0b58298758278694609afd5",
+        "shared/tok_emb": "11c7efdc0958740bf38bb7393161d838ed7ce968fd8ac4a1c9a8246edc1fc92b"
+      },
+      "initial_model_sha256": "3da6ef90802a05af568eb823fc90d5ef99427717f3d0758407a374abdc1dd06f",
+      "initial_trusted_sha256": "b40c6b79ccee03fc7e575865937433e3e360ddd8badf17c6db3b3e47d0f1a619",
+      "loss": 5.535711765289307,
+      "mode": "trained",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 616710,
+        "complete_run_wall_seconds": 5.966923184983898,
+        "cuda_peak_allocated_bytes": 68816384,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 2338647,
+        "remote_cuda_peak_allocated_bytes": 67670016,
+        "remote_cuda_peak_reserved_bytes": 69206016,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--trained--eengA002",
+      "scientific_evidence": false,
+      "seed": 61002,
+      "wall_seconds": 5.004986857995391
+    },
+    {
+      "cell_id": "smoke-gradient-noise",
+      "initial_components": {
+        "boundary/1:2:32/decoder": "c526cace1bb3581484a32ad368a9b04613b5fba9a2effbc71a3a9719ed557031",
+        "boundary/1:2:32/encoder": "69904cce89318664005818371f9d0447841459e5932685169fb14a995a803666",
+        "boundary/1:2:32/encoder_ln": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "remote/32:1": "031c68b5fe379b1bdab5c3560a1753e36a87624446d077388aeadb4fd6a21918",
+        "shared/backbone-layer:0": "b8c68ecc25cbb8fe8c545d0aa461aac1679e50de51f12a433962ca1e911620c3",
+        "shared/backbone-layer:3": "25e8664e172a27e4cfcb6d3c733be2bbffdb24273ce383fc1277d61d99e9e916",
+        "shared/head": "22065f9ed1daf1684fcdb693e5531169607d52809388cbe2db7538210b98daf1",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "fe1dfee6220ff927f505db68883bec58273ce66dc0b58298758278694609afd5",
+        "shared/tok_emb": "11c7efdc0958740bf38bb7393161d838ed7ce968fd8ac4a1c9a8246edc1fc92b"
+      },
+      "initial_model_sha256": "3da6ef90802a05af568eb823fc90d5ef99427717f3d0758407a374abdc1dd06f",
+      "initial_trusted_sha256": "b40c6b79ccee03fc7e575865937433e3e360ddd8badf17c6db3b3e47d0f1a619",
+      "loss": 5.535187721252441,
+      "mode": "frozen_random",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 617186,
+        "complete_run_wall_seconds": 4.689229623996653,
+        "cuda_peak_allocated_bytes": 68816384,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 2225966,
+        "remote_cuda_peak_allocated_bytes": 67510784,
+        "remote_cuda_peak_reserved_bytes": 69206016,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--frozen_random--eengA002",
+      "scientific_evidence": false,
+      "seed": 61002,
+      "wall_seconds": 3.754551275051199
+    },
+    {
+      "cell_id": "smoke-gradient-noise",
+      "initial_components": {
+        "boundary/1:2:32/decoder": "c526cace1bb3581484a32ad368a9b04613b5fba9a2effbc71a3a9719ed557031",
+        "boundary/1:2:32/encoder": "69904cce89318664005818371f9d0447841459e5932685169fb14a995a803666",
+        "boundary/1:2:32/encoder_ln": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "remote/32:1": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "shared/backbone-layer:0": "b8c68ecc25cbb8fe8c545d0aa461aac1679e50de51f12a433962ca1e911620c3",
+        "shared/backbone-layer:3": "25e8664e172a27e4cfcb6d3c733be2bbffdb24273ce383fc1277d61d99e9e916",
+        "shared/head": "22065f9ed1daf1684fcdb693e5531169607d52809388cbe2db7538210b98daf1",
+        "shared/ln_f": "3682cfb8b719f03dbb8137c719406a6051df5151e42dd3af442ad6b9abccdfd6",
+        "shared/pos_emb": "fe1dfee6220ff927f505db68883bec58273ce66dc0b58298758278694609afd5",
+        "shared/tok_emb": "11c7efdc0958740bf38bb7393161d838ed7ce968fd8ac4a1c9a8246edc1fc92b"
+      },
+      "initial_model_sha256": "b40c6b79ccee03fc7e575865937433e3e360ddd8badf17c6db3b3e47d0f1a619",
+      "initial_trusted_sha256": "b40c6b79ccee03fc7e575865937433e3e360ddd8badf17c6db3b3e47d0f1a619",
+      "loss": 5.510028123855591,
+      "mode": "removed_remote",
+      "privacy": "UNDETERMINED",
+      "resource_measurements": {
+        "actual_wire_bytes": 617280,
+        "complete_run_wall_seconds": 4.3655460919835605,
+        "cuda_peak_allocated_bytes": 68816384,
+        "cuda_peak_reserved_bytes": 69206016,
+        "output_bytes_including_source": 2113957,
+        "remote_cuda_peak_allocated_bytes": 98816,
+        "remote_cuda_peak_reserved_bytes": 2097152,
+        "scope": "Two-process loopback split execution; not a two-host network latency measurement."
+      },
+      "run_id": "p3-r1-fresh-start--engineering--smoke-gradient-noise--s61002--removed_remote--eengA002",
+      "scientific_evidence": false,
+      "seed": 61002,
+      "wall_seconds": 3.444607871992048
+    }
+  ],
+  "schema_version": "r1-analysis-1.0",
+  "scientific_evidence": false,
+  "scope": "Engineering behavior only. No attacks are implemented/admitted by this analyzer.",
+  "stage": "engineering",
+  "study_id": "p3-r1-fresh-start"
+}

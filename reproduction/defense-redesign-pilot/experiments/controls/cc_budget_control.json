@@ -1,0 +1,33 @@
+{
+  "schema": "p4.cc_lifecycle_control.v1",
+  "control": "budget",
+  "implementation": "p4d.cc_lifecycle",
+  "clock": "time.monotonic_ns",
+  "packet_interval_bound": "execution_contract.budget_check_interval_minutes",
+  "rate_source": [
+    "quote.hourly_rate",
+    "quote.comparator_hourly_rate"
+  ],
+  "fixed_cost_sources": [
+    "quote.cost_projection.disk_cost",
+    "quote.cost_projection.egress_cost",
+    "quote.cost_projection.private_access_cost",
+    "quote.cost_projection.contingency_cost"
+  ],
+  "cap_source": "budget.proposed_maximum_cost",
+  "formula": "ledger_accrued_usd + first_run_fixed_usd + hourly_rate_usd * elapsed_seconds / 3600",
+  "campaign_ledger": "exclusive-flock-plus-fsync-atomic-replace",
+  "caller_supplied_prior_cost_allowed": false,
+  "paired_arms_share_ledger": [
+    "cc-off",
+    "cc-on"
+  ],
+  "hourly_rate_must_be_positive": true,
+  "predictive_hard_stop": true,
+  "on_violation": [
+    "terminate-workload-group",
+    "kill-after-grace",
+    "run-teardown-adapter",
+    "run-resource-absence-verifier"
+  ]
+}
