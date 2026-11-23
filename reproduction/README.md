@@ -1,75 +1,68 @@
-# Reproduction Package — Paper 9
+# Reproduction archives (`reproduction/`)
 
-Original code, scripts, manifests, and result artifacts for every experiment
-quoted in `paper/main.tex`, collected from the program's source repositories.
-Each subtree keeps the layout of its source repo so existing docs and
-manifest paths resolve unchanged.
+Preserved primary experimental archives backing the retrospective reanalysis in
+*Separating Measurement Failures from Defence Failures in Split Language-Model Privacy*
+(`paper/main.tex`). All original archive files are retained byte-identical so
+upstream manifests and SHA-256 digests remain verifiable.
 
-## Layout
+To verify all 122 pinned inputs and 1,522 internal consistency checks offline
+using only the Python standard library, run from the repository root:
 
-| Directory | Source repository | Contents |
-|---|---|---|
-| `decoy-gradient/` | `paper1_arxiv_submission` | `anc/` attack code, experiment scripts, frozen data, provenance; `output/` run outputs |
-| `boundary-replacement/` | `Paper-2-…` | `attacker/`, `split-training/`, `privacy_runtime/` code + `outputs/` incl. the two independent reviews |
-| `trilemma-campaign/` | `Paper 3 - Privacy-Constrained Remote` | `src/`, `experiments/` (frozen matrix `configs/r1_exploration.yaml`), `evidence/` (verified R1 bundle), `data/`, `outputs/` (original runs) |
-| `defense-redesign-pilot/` | `Paper-4-Defense-Redesign` | `src/p4d`, `experiments/` (freeze record `p4-defense-pilot-1.0.json`), `evidence/`, `outputs/` (runs + scenarios) |
-| `structural-e8/` | `Distributed Training` | `probes/`, `attacker/`, `privacy_runtime/`, `split-training/`, `split-inference/` code + `paper-data/` (collected artifacts, ledgers) |
-| `privacy-contract/` | `Privacy-contract` | `attacker/`, `experiments/`, `paper-data/` (latent v14/v15), runtime code |
-| `attack-suite/` | `LLM-Attacker` (LLM-Attack Suite v2.0) | `attacker/` (65 modules), `scripts/`, `experiments/`, `docs/`, `tests/` + `results/` (original result artifacts) |
+```bash
+python3 analysis/recompute.py
+```
 
-## How to reproduce each quoted result
+## Archived campaign directories
 
-### Failure 1 — decoy-gradient channel (arXiv:2609.04382)
-See `decoy-gradient/anc/README.md` for the ancillary package layout; the E1
-protocol is documented in `../evidence/decoy-gradient/E1_GRADIENT_CHANNEL_2026-08-22.md`
-and its reproduction in `E1_REPRODUCTION_W17_2026-08-22.md`. Frozen data and
-attack code ship inside `anc/`.
+### Decoy-gradient experiment (`decoy-gradient/`)
+Companion source archive for arXiv:2609.04382 (zero-support returned-gradient
+metadata disclosure, forward-vs-joint gate comparison, and per-row gradient
+clipping/noise mitigation). Summarised in `evidence/decoy-gradient/paper1-main.tex`
+and `E1_GRADIENT_CHANNEL_2026-08-22.md`.
 
-### Failure 2 — boundary-replacement experiments
-Harness fixes and re-run rules: source repo `REPRODUCTION_V2.md` (fixed
-harness: corpus filter >500 chars, lr 1e-5, batched eval). The corrected
-endpoint controls are under `boundary-replacement/outputs/phase08_clean_endpoints/`;
-the independent recompute of the −16.64 pp answer-token drop is in
-`outputs/independent_evidence_review_2026-09-09/recomputed_evidence.json`
-(script inputs referenced from that bundle's VERDICTS.md).
+### Boundary-replacement review (`boundary-replacement/`)
+Corrected endpoint controls (`boundary-replacement/outputs/phase08_clean_endpoints/`)
+and upstream records referenced by the independent evidence review in
+`evidence/boundary-replacement/independent_evidence_review_2026-09-09/VERDICTS.md`
+and `recomputed_evidence.json` (shifted next-token label alignment, 6/6
+zero-return comparisons, and −16.64 pp teacher-forced answer-token drop).
 
-### Failure 3 — trilemma campaign (R1)
-Executable frozen matrix: `trilemma-campaign/experiments/configs/r1_exploration.yaml`.
-Runbook: source repo `docs/R1_RUNBOOK.md`. Verified evidence bundle:
-`trilemma-campaign/evidence/r1-exploration-20260917/README.md`. The 19-cell
-verdicts and per-seed numbers are in `../evidence/trilemma-campaign/r1_cell_results.csv`
-and `r1_seed_results.csv`. Note: pre-reset (pre-2026-09-10) observations are
-preserved for audit but are inadmissible evidence per that repo's AGENTS.md.
+### 19-cell trilemma exploration (`trilemma-campaign/`)
+Frozen exploratory configuration (`experiments/configs/r1_exploration.yaml`),
+qualification records (`evidence/r1-qualification-20260916/attack-spec-frozen.json`,
+`calibration_analysis_summary.json`), exploratory analysis JSON
+(`evidence/r1-exploration-20260917/analysis/exploratory_analysis.json`), and
+unexecuted eight-seed planning bound (`confirmation_power.json`). Recomputed
+into `data/r1_cells.csv` and `data/reanalysis_results.json`.
 
-### Failure 4 — defense-redesign pilot
-Freeze record: `defense-redesign-pilot/experiments/freeze/p4-defense-pilot-1.0.json`
-(66-run matrix, protocol p4-defense-pilot-1.0, pinned `gutenberg_p4` corpus).
-Environment setup: source repo `docs/ENVIRONMENT.md`; architecture:
-`docs/ARCHITECTURE.md`. Original runs: `outputs/runs/`; scenario sweeps:
-`outputs/scenarios/`.
+### Seven-cell defence-redesign pilot (`defense-redesign-pilot/`)
+Frozen protocol (`experiments/freeze/p4-defense-pilot-1.0.json`), calibration and
+analysis code (`src/p4d/calibration.py`, `src/p4d/pilot_analysis.py`), pilot
+run manifests (`experiments/manifests/`), and all 66 completed run records
+(`outputs/runs/pilot-20260922-a/`). Recomputed into `data/p4_cells.csv` and
+`data/reanalysis_results.json`.
 
-### Structural results — E8 boundary transform
-Batteries and controls: `structural-e8/paper-data/collected/` (per-cell JSONs,
-collection manifests) with the claim mapping in
-`../evidence/structural-e8/EVIDENCE_EXECUTION_LEDGER.md`. Attack/probe code:
-`probes/` and `attacker/`. Re-run discipline (seed/victim replication rules):
-source repo `REPRODUCTION_V2.md`.
+### Orthogonal wrapper and deployed ratcheting (`structural-e8/`)
+27B dense-$K$ robustness artifact
+(`paper-data/collected/h100-2/issues/issue_e8_27b_20260807/e8_robustness_27b_bf16_densek_20260807T230529Z.json`)
+and deployed 12B per-epoch ratcheting matrix
+(`paper-data/collected/toula/er_20260811/COLLECTION_MANIFEST.json`, `summary.json`,
+`identity.json`, and 56 `wire_attack_*.json` files), paired with
+`evidence/structural-e8/EVIDENCE_EXECUTION_LEDGER.md` and `EXPERIMENT_STORY.md`.
 
-### Privacy contract (MINE budget, delegation triangle)
-v14/v15 experiment data: `privacy-contract/paper-data/latent_v14/`,
-`latent_v15/`; estimator code under `attacker/`; numbers summarized in
-`../evidence/privacy-contract/KEY_NUMBERS.md`.
+### Variational mutual-information companion records (`privacy-contract/`)
+Supporting estimator code and latent campaign records paired with
+`evidence/privacy-contract/privacy-contract-draft.tex` and `KEY_NUMBERS.md`.
 
-### Attack suite (13.71% → 37.77% document recovery)
-The 13.71→37.77 tables come from the published arXiv:2610.04128 study; module
-code in `attack-suite/attacker/`, original result artifacts in `results/`
-(pilot and corrected batteries). The frozen measurement-validation package is
-described in `attack-suite/docs/` (v2.0 release notes: archive-based runner,
-123 pinned source hashes).
+### Attack-suite companion archive (`attack-suite/`)
+Companion framework and benchmark archive associated with arXiv:2610.04128
+(13.71% to 37.77% exact-document recovery and +3.17 pp token recovery on GPT-2)
+and arXiv:2610.22722 (LLM-Attack Suite), preserved alongside
+`evidence/attack-suite/2610.04128-main.tex`.
 
 ## Provenance notes
 
-- Numbers were cross-checked against these artifacts on 2026-11-06; see
-  `../evidence/EVIDENCE_MAP.md` for the claim→file mapping and corrections.
-- Source repos keep their own `AGENTS.md` evidence rules; the copies here are
-  byte-identical (rsync archive mode) so manifest hashes still verify.
+- Every file directly consumed by `analysis/recompute.py` or cited in
+  Appendix A of the manuscript is SHA-256 pinned in `data/source_manifest.json`
+  and indexed in `data/source-index.csv`.
+- See `evidence/EVIDENCE_MAP.md` for the full claim-to-file mapping.

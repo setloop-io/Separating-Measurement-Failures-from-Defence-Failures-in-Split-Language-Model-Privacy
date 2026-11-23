@@ -1,0 +1,134 @@
+\section{Sources and reproducibility}
+\label{app:artifacts}
+
+{\emergencystretch=3em
+Relative paths below resolve from the repository root (\repourl{}). Byte
+counts and SHA-256 digests for all \PinnedInputs\ pinned inputs appear in
+\path{data/source_manifest.json}, paired with a flat lookup table in
+\path{data/source-index.csv}. Every path cited below is directly hashed in
+that manifest while preserving the original campaign manifests as separate
+provenance records.
+
+\begin{description}
+\item[\hypertarget{artifact-E1}{Decoy-gradient experiment.}]
+Primary text and tables reside in
+\path{evidence/decoy-gradient/paper1-main.tex} and
+\path{evidence/decoy-gradient/E1_GRADIENT_CHANNEL_2026-08-22.md}, matching
+public preprint \cite{paper1} on the 4,096-frame support leak, the $+0.65$
+to $+1.50\pp$ token-probe gain, the 1,024-frame per-run mitigation runs,
+and the $0.01$-nat clipping-and-noise utility penalty. Frame tallies remain
+source-reported here without re-parsing raw training logs.
+
+\item[\hypertarget{artifact-B1}{Boundary-replacement review.}]
+Archived findings live in
+\path{evidence/boundary-replacement/independent_evidence_review_2026-09-09/VERDICTS.md}
+and its companion recomputed JSON
+\path{evidence/boundary-replacement/independent_evidence_review_2026-09-09/recomputed_evidence.json}.
+Those two review records trace the shifted sequence alignment
+$(x_1,\ldots,x_{T-1})$ versus $(x_2,\ldots,x_T)$, the six zero-return
+baseline comparisons, and the $16.64\pp$ answer-token drop to their
+original evaluation outputs. Our manifest hashes both review files
+directly, while \path{recomputed_evidence.json} records the SHA-256 digests
+of the 66 upstream evaluation artifacts.
+
+\item[\hypertarget{artifact-R1}{Privacy, utility and gain exploration.}]
+Raw exploratory outputs come from
+\path{reproduction/trilemma-campaign/evidence/r1-exploration-20260917/analysis/exploratory_analysis.json},
+\path{reproduction/trilemma-campaign/evidence/r1-qualification-20260916/attack-spec-frozen.json},
+\path{reproduction/trilemma-campaign/evidence/r1-qualification-20260916/calibration_analysis_summary.json},
+\path{evidence/trilemma-campaign/r1_cell_results.csv}, and
+\path{evidence/trilemma-campaign/r1_seed_results.csv}. Our script rebuilds
+all 76 configuration-by-seed contrasts, Student-$t$ endpoints, probe
+qualifications, and gate outcomes, while reading the unexecuted planning
+bound from
+\path{reproduction/trilemma-campaign/evidence/r1-exploration-20260917/confirmation_power.json}
+and \path{evidence/trilemma-campaign/R1_CONFIRMATION_REVIEW.md}.
+
+\item[\hypertarget{artifact-P4}{Defence-redesign pilot.}]
+Pilot records comprise
+\path{reproduction/defense-redesign-pilot/outputs/runs/pilot-20260922-a/verification.json},
+the adjacent generated report and 66 run-metrics files, and
+\path{evidence/defense-redesign-pilot/PILOT_DECISION.md}. From those saved
+candidate and null arrays, our script recomputes three-seed paired utility
+bounds, remote-gain contrasts, punctuation-property and next-byte structure
+advantages, and all-bindings composite verdicts.
+
+\item[\hypertarget{artifact-E8}{Orthogonal-wrapper experiment.}]
+Wrapper measurements come from
+\path{reproduction/structural-e8/paper-data/collected/h100-2/issues/issue_e8_27b_20260807/e8_robustness_27b_bf16_densek_20260807T230529Z.json}
+and \path{evidence/structural-e8/EXPERIMENT_STORY.md}. Extracted fields
+cover undefended baselines, depth-specific $K_{50}$ interpolation brackets,
+pooled $3.71\%$ recovery, and individual session scores up to $5.73\%$.
+
+\item[\hypertarget{artifact-ER}{Rotation deployment study.}]
+Deployment records draw from
+\path{reproduction/structural-e8/paper-data/collected/toula/er_20260811/COLLECTION_MANIFEST.json},
+accompanying session-identity JSONs, and
+\path{evidence/structural-e8/EVIDENCE_EXECUTION_LEDGER.md}. Across eight
+runs and 24 sessions, session~1 at \texttt{N=16} and zero emulated RTT logs
+$2.8$ versus $7.6$ tokens/s and establishes the $63.16\%$ throughput drop
+at recorded precision.
+
+\item[\hypertarget{artifact-MI}{MI-estimator analysis.}]
+Variational critic records reside in
+\path{evidence/privacy-contract/privacy-contract-draft.tex} and
+\path{evidence/privacy-contract/KEY_NUMBERS.md}, paired with finite
+architecture sweeps in
+\path{evidence/structural-e8/LATENT_CAMPAIGN_REPORT_V7_V9.md}. Near-zero
+critic scores are cited as source-reported alongside Eq.~\eqref{eq:dv} and
+its accompanying constant-critic counterexample.
+\end{description}
+}
+
+\section{Checking the derived records}
+\label{app:checks}
+
+Running the standalone Python script from the repository root regenerates
+every derived table, macro file, and consistency check:
+\begin{quote}\small\ttfamily
+python3 analysis/recompute.py
+\end{quote}
+Execution relies exclusively on the Python standard library and writes
+derived outputs under \path{data/} (syncing count macros to
+\path{paper/results_macros.tex}) without touching model checkpoints, tensor
+captures, or cryptographic keys. Saved logs verify \ConsistencyChecks\
+checks across the \PinnedInputs\ hashed inputs, comparing recomputed seed
+contrasts, confidence limits, and gate flags against the archived
+campaign tables. Table~\ref{tab:intersections} reports the resulting
+disjoint rejection-reason intersections for the \RoneCells-cell
+exploration.
+
+\begin{table}[htb]
+\centering\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+Rejection reason combination & Configurations \\
+\midrule
+Qualified privacy breach only & 10 \\
+Gain failure and qualified privacy breach & 3 \\
+Utility and gain failure & 3 \\
+Utility failure only & 2 \\
+Gain failure only & 1 \\
+\midrule
+Total & \RoneCells \\
+\bottomrule
+\end{tabular}
+\caption{Disjoint rejection-reason intersections across all
+\RoneCells\ exploratory configurations (\artifact{R1}). Partitioning the
+marginal bars in Figure~\ref{fig:campaigns}(a) confirms that all
+\RoneUndetermined\ configurations without a qualified privacy breach fail
+utility or learning-gain gates independently, as stored in
+\texttt{data/reanalysis\_results.json}.}
+\label{tab:intersections}
+\end{table}
+
+Derived JSON outputs preserve per-campaign confidence conventions, scoring
+denominators, and operational caveats. Before writing vector PDFs,
+\path{paper/figs/make_figures.py} cross-checks \path{data/r1_cells.csv} and
+\path{data/p4_cells.csv} against the archived exploration cell and seed
+CSVs, the generated pilot report
+\path{reproduction/defense-redesign-pilot/outputs/runs/pilot-20260922-a/report.md},
+and the seven pilot run manifests. The full build recipe
+\path{paper/build.py} verifies all \PinnedInputs\ input hashes, runs
+\path{analysis/recompute.py}, compiles the manuscript with pdfLaTeX and
+BibTeX, and packages a self-contained \path{paper/arxiv-source.zip} bundle.
