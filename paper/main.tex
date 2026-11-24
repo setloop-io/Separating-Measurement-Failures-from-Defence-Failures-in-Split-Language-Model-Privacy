@@ -56,37 +56,32 @@ Evangelos Pappas\\ Setloop.io\\ {\small\texttt{evanz.pappas@gmail.com}}}
 \begin{document}
 \maketitle
 \begin{abstract}
-Split-training privacy evaluations fail through distinct mechanisms.
-Evaluators can overlook an exposed gradient tensor, align reconstructions
-against shifted labels, or deploy uncalibrated probes before testing a
-single candidate defence, while properly calibrated attacks can also refute
-real defences. Separating those failure modes alters which claims survive.
-We conduct a retrospective evidentiary reanalysis across four experimental
-split-LLM campaigns and two cross-cutting threat-model scope checks
-covering host key custody and variational mutual-information bounds. Every
-recorded claim maps to one of five admissibility states (breach,
-non-detection, undetermined coverage, invalid measurement, or out-of-scope
-inference). Across a \RoneCells-configuration exploration, only four of 24
-required probes passed qualification controls, yet those four calibrated
-probes still established qualified privacy breaches in
-\RoneQualifiedBreaches\ configurations. Independent utility or
-learning-gain failures eliminated the remaining \RoneUndetermined\
-configurations. In a subsequent seven-cell defence-redesign pilot,
-\PfourUtilityFailures\ quantised configurations failed utility gates,
-calibrated next-byte structure probes exceeded the $0.02$ acceptance gate
-on all \PfourCells\ cells ($0.097$ to $0.112$), and qualified
-punctuation-property probes reached $0.79$ to $0.89$, yielding
+Split-training privacy evaluations fail in distinct ways: overlooking an
+exposed gradient channel, aligning reconstructions to shifted labels, or
+using uncalibrated probes can manufacture false privacy, while calibrated
+attacks can also refute real defences. Separating these failure modes
+changes which claims survive. We conduct a retrospective evidentiary
+reanalysis of four split-LLM campaigns and two scope checks (host key
+custody and variational mutual-information bounds), mapping each claim to
+five admissibility states (breach, non-detection, undetermined coverage,
+invalid measurement, or out-of-scope inference). In a
+\RoneCells-configuration exploration, only four of 24 required probes
+qualified, yet they established qualified breaches in
+\RoneQualifiedBreaches\ configurations while utility or learning-gain
+failures eliminated the remaining \RoneUndetermined. In a seven-cell
+defence-redesign pilot, \PfourUtilityFailures\ quantised cells failed
+utility, calibrated next-byte structure probes breached the $0.02$ gate on
+all \PfourCells\ cells ($0.097$--$0.112$), and qualified
+punctuation-property probes reached $0.79$--$0.89$, giving
 \PfourPrivacyFailures\ failed and \PfourPrivacyUndetermined\ undetermined
-composite privacy assessments (the three undetermined cells arising from
-marginal null-band excursions on punctuation bindings). Negative evidence
-against both defence families remains intact. Complementary scope checks
-show that shared-key orthogonal wrappers protect passive network captures
-without hiding activations from a compromised restoring host, and
-demonstrate analytically why near-zero variational lower bounds leave
-worst-case leakage unconstrained. Rerunnable scripts verify
-\ConsistencyChecks\ consistency checks over \PinnedInputs\ SHA-256-pinned
-artifacts while preserving each campaign's seed intervals and retrospective
-boundaries.
+composite verdicts (from marginal null excursions on punctuation bindings).
+Negative evidence against both defence families stands. Scope checks show
+that shared-key orthogonal wrappers protect passive wire captures without
+hiding activations from a compromised restoring host, and why near-zero
+variational lower bounds leave worst-case leakage unconstrained. Offline
+scripts verify \ConsistencyChecks\ checks over \PinnedInputs\
+SHA-256-pinned artifacts while preserving each campaign's seed intervals
+and retrospective scope.
 \end{abstract}
 
 \section{Introduction}
