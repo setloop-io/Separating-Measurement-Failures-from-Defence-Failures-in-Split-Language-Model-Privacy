@@ -1,83 +1,62 @@
-# Evidence Map — Paper 9
+# Evidence Map
 
-Every number quoted in `paper/main.tex` resolves to a file in this tree. Raw
-training outputs (JSON per seed/frame) stay in the source repositories under
-hash-pinned manifests; this folder carries the decision documents, ledgers,
-and result tables that cite them.
+**Manuscript:** *Separating Measurement Failures from Defence Failures in Split Language-Model Privacy* (`paper/main.tex`)
 
-## Failure 1 — decoy-gradient experiment (arXiv:2609.04382, published)
+Every retained quantitative value in `paper/main.tex` resolves to a hashed
+artifact in [../data/source_manifest.json](../data/source_manifest.json) (122
+pinned files verified by `python3 analysis/recompute.py`, 1,522 internal
+consistency checks). Primary archived records live in `evidence/` and
+`reproduction/`; all original files are preserved byte-identical.
 
-| Claim in main.tex | Evidence |
-|---|---|
-| 4,096/4,096 frames, 9 seeds, row agreement 1.000 | `decoy-gradient/paper1-main.tex` (ll. 79, 633–634) |
-| +0.65 to +1.50 pp attack recovery | `decoy-gradient/paper1-main.tex` (l. 81, l. 677) |
-| clip+noise closes channel at ≈0.01 nats | `decoy-gradient/paper1-main.tex` (ll. 89, 616, 783) |
-| E1 protocol and reproduction | `decoy-gradient/E1_GRADIENT_CHANNEL_2026-08-22.md`, `E1_REPRODUCTION_W17_2026-08-22.md`, `METRIC_STATISTICS_AUDIT.md` |
+## 1. Decoy-gradient experiment (`E1`, arXiv:2609.04382)
 
-## Failure 2 — boundary-replacement experiments
+| Claim in `paper/main.tex` | Primary evidence (all hashed in `data/source_manifest.json`) |
+| --- | --- |
+| Exact real/decoy partition recovery on 4,096/4,096 frames per run across 9 seeds | `evidence/decoy-gradient/paper1-main.tex` (ll. 79, 633–634) |
+| Frequent-word token probe gain +0.65 to +1.50 pp over constant-guess baseline | `evidence/decoy-gradient/paper1-main.tex` (ll. 81, 667–678) |
+| Six utility-compliant gradient-open cells pass forward +1.0 pp gate and breach joint gate | `evidence/decoy-gradient/paper1-main.tex` (ll. 737–747, 774–776) |
+| Per-row gradient clipping + Gaussian noise closes partition leak on 1,024 frames/run (3 seeds, 0.400 agreement at 32/80 base rate) at ~0.01 nats utility cost | `evidence/decoy-gradient/paper1-main.tex` (ll. 89, 741–743, 781–783) |
+| Supporting channel protocol record | `evidence/decoy-gradient/E1_GRADIENT_CHANNEL_2026-08-22.md` |
 
-| Claim | Evidence |
-|---|---|
-| Zero-return controls beat trained remote in all 6/6 clean comparisons | `boundary-replacement/independent_evidence_review_2026-09-09/VERDICTS.md` (ll. 10, 38–43) |
-| NLL passes utility gate (+0.034) | source: `Paper-2…/papers/delegation-frontier/generated/results.tex` (`\QualityDeltaNLL`) |
-| Answer-token match collapses −16.64 pp (34.79% → 18.15%) | `boundary-replacement/independent_evidence_review_2026-09-09/VERDICTS.md` (l. 81), `adversarial_recomputed_2026-09-08.json` |
-| 42.2% clean point (47.4% demoted) | `boundary-replacement/paper2-README.md` (l. 22) |
+## 2. Boundary-replacement review (`B1`)
 
-## Failure 3 — trilemma campaign (R1)
+| Claim in `paper/main.tex` | Primary evidence |
+| --- | --- |
+| Off-by-one target shift: $(x_1,\ldots,x_{T-1})$ scored against $(x_2,\ldots,x_T)$ | `evidence/boundary-replacement/independent_evidence_review_2026-09-09/VERDICTS.md` (ll. 49–55) |
+| Standalone zero-return controls beat trained remote in all 6/6 clean corpus–seed pairs | `evidence/boundary-replacement/independent_evidence_review_2026-09-09/VERDICTS.md` (ll. 38–43), `recomputed_evidence.json` |
+| Reviewed checkpoint: NLL rises ~0.034 nats within rule while teacher-forced answer-token top-1 drops 16.64 pp (34.79% to 18.15%) | `evidence/boundary-replacement/independent_evidence_review_2026-09-09/VERDICTS.md` (ll. 79–83), `recomputed_evidence.json` |
 
-| Claim | Evidence |
-|---|---|
-| All 19 configurations rejected | `trilemma-campaign/2026-09-17-exploration-review.md` (l. 27) |
-| 4 of 24 instruments qualified | `trilemma-campaign/2026-09-16-scientific-status.md` (l. 38), `R1_CONFIRMATION_REVIEW.md` (l. 49) |
-| Confirmation power ≤ 26.4% (NO-GO) | `trilemma-campaign/2026-09-17-exploration-review.md` (l. 44) |
-| depth-4 ΔU 0.0091 vs base 0.0348 | `trilemma-campaign/r1_cell_results.csv` (rows `base`, `depth-4`) |
-| span-6 missed utility gate by 2.95e-5 nats | `trilemma-campaign/r1_cell_results.csv` (row `span-6`, utility 0.09997053 vs gate 0.100 in `r1_results.tex`) |
+## 3. 19-cell privacy, utility and gain exploration (`R1`)
 
-## Failure 4 — defense-redesign pilot
+| Claim in `paper/main.tex` | Primary evidence & recomputation |
+| --- | --- |
+| 232 runs, 19 cells × 4 seeds (76 cell–seed contrasts); all 19 rejected | `reproduction/trilemma-campaign/evidence/r1-exploration-20260917/analysis/exploratory_analysis.json`, `evidence/trilemma-campaign/r1_cell_results.csv`, `r1_seed_results.csv` |
+| 4 of 24 required probes qualified (inbound/outbound gradient input-byte probes) | `reproduction/trilemma-campaign/evidence/r1-qualification-20260916/calibration_analysis_summary.json`, `attack-spec-frozen.json` |
+| Overlapping failures: 13 qualified privacy breaches, 5 utility, 7 gain; disjoint intersections (10, 3, 3, 2, 1); all 6 privacy-undetermined cells independently rejected | Recomputed in `data/reanalysis_results.json` and `data/r1_cells.csv` (Table 4, Figure 1a) |
+| `span-6` passes both utility gates (mean 0.0999705344 ≤ 0.10, upper 95% Student-$t$ 0.1195024415 ≤ 0.12); rejected on gain + privacy | Recomputed in `data/r1_cells.csv` (Figure 2) |
+| Unexecuted 8-seed confirmation planning upper power bound 0.263772 | `reproduction/trilemma-campaign/evidence/r1-exploration-20260917/confirmation_power.json`, `evidence/trilemma-campaign/R1_CONFIRMATION_REVIEW.md` |
 
-| Claim | Evidence |
-|---|---|
-| Punctuation advantage 0.79–0.89 vs gate 0.02 | `defense-redesign-pilot/PILOT_DECISION.md` (l. 29), `CLAIM_EVIDENCE_LEDGER.md` (l. 362) |
-| Next-byte structure 0.097–0.112 | same (l. 31); calibration ranges in `QUALIFICATION_DECISION.md` |
-| Utility + causal-gain pass every cell, privacy fails/undetermined | `defense-redesign-pilot/PILOT_DECISION.md` (ll. 41–42) |
-| 0.10 property-control floor ≠ 0.02 acceptance threshold | `defense-redesign-pilot/paper4-README.md` (l. 89) |
-| **OPEN:** "≥6.0% coordinate-visible leak" detection floor | quoted in `synthesis/ADVERSARIAL_REVIEW.md` (l. 55); not yet traced to a Paper 4 ledger entry — verify or drop before submission |
+## 4. Seven-cell defence-redesign pilot (`P4`)
 
-## Structural results — E8 / Distributed Training
+| Claim in `paper/main.tex` | Primary evidence & recomputation |
+| --- | --- |
+| 66 runs across 7 cells × 3 paired seeds (126 candidate probe records, 16,384-window panels); 0 eligible | `reproduction/defense-redesign-pilot/outputs/runs/pilot-20260922-a/verification.json`, `report.md`, `summary.json`, 66 `metrics.json` files, `evidence/defense-redesign-pilot/PILOT_DECISION.md` |
+| 2 utility failures (`d3-q1`, `d3-q2`, one-sided 95% upper Student-$t$ $t_{0.95,2}=2.919986$), 7/7 gain passes, 4 failed / 3 undetermined composite privacy | Recomputed in `data/reanalysis_results.json` and `data/p4_cells.csv` (Table 2, Figure 1b) |
+| Calibrated next-byte structure (`next_byte_structure`, floor 0.02): 0.097–0.112 across all 7 cells (21/21 bindings qualified) | `reproduction/defense-redesign-pilot/src/p4d/calibration.py`, recomputed in `data/p4_cells.csv` |
+| Sequence-property punctuation fraction (`sequence_property`, floor 0.10): 0.79–0.89 across qualified bindings (17/21 bindings qualified; 4 marginal null excursions on 3 cells) | `reproduction/defense-redesign-pilot/src/p4d/calibration.py`, recomputed in `data/p4_cells.csv` |
 
-| Claim | Evidence |
-|---|---|
-| Undefended boundary leaks 55–80% of tokens | `structural-e8/distributed-training-README.md` (l. 28), `EXPERIMENT_COMPARISON_MATRIX.md` |
-| E8 ≤ 3.7% at zero utility cost (≤3.71% @27B bf16; sub-percent on 0.6B–12B) | `structural-e8/EVIDENCE_EXECUTION_LEDGER.md` (l. 38), `EXPERIMENT_STORY.md` (l. 178) |
-| E9 loss unchanged: 3.9985 vs 3.9984 | `structural-e8/EXPERIMENT_COMPARISON_MATRIX.md` |
-| K50 ≈ 0.09·H labeled pairs: 87.7–94.3 @H=1024 (3 W seeds); 258/356/618 @H=5120 depths 1/4/8 | `structural-e8/EXPERIMENT_STORY.md` (l. 178), ledger l. 38 |
-| Live wire: 50% baseline → 0% obfuscated, unchanged loss | `structural-e8/EXPERIMENT_STORY.md` (l. 166) |
-| Per-epoch ratchet: 0% top-1 wire recovery | `structural-e8/EVIDENCE_EXECUTION_LEDGER.md` (l. 42) |
-| Invariant-MLP task contribution flat: 1.473 vs 1.488 | `structural-e8/LATENT_CAMPAIGN_REPORT_V7_V9.md` (l. 334) |
+## 5. Orthogonal wrapper (`E8`) and deployed ratcheting (`ER`)
 
-## Cross-program measurements
+| Claim in `paper/main.tex` | Primary evidence |
+| --- | --- |
+| 27B ($H=5120$) depth-specific $K_{50}$ crossings: 258.32 (d=1), 355.81 (d=4), 617.93 (d=8); ratios 0.05045–0.12069 (2.39-fold range) | `reproduction/structural-e8/paper-data/collected/h100-2/issues/issue_e8_27b_20260807/e8_robustness_27b_bf16_densek_20260807T230529Z.json` |
+| Depth-1 per-session rotation: 3.71% pooled top-1 wire score vs 5.73%, 3.65%, 2.34% individual sessions | Same JSON artifact + `evidence/structural-e8/EXPERIMENT_STORY.md` |
+| Deployed 12B ratcheting matrix: 8 runs, 24 sessions, 20/24 greedy-decode identity, 4/8 runs with known limitations, 0% top-1 rotated wire recovery, `N=16` zero-RTT session-1 throughput 2.8 vs 7.6 tokens/s (63.16% drop), budget arm 5.5–5.6 tokens/s at zero RTT | `reproduction/structural-e8/paper-data/collected/toula/er_20260811/COLLECTION_MANIFEST.json`, `summary.json`, `identity.json`, `wire_attack_*.json`, `evidence/structural-e8/EVIDENCE_EXECUTION_LEDGER.md` |
 
-| Claim | Evidence |
-|---|---|
-| Gradients triple document recovery 13.71% → 37.77% (GPT-2, L6, public copy) | `attack-suite/2610.04128-main.tex` (ll. 55, 230) — published arXiv:2610.04128 |
-| MINE ≈ 0 bits/token on defended boundary | `privacy-contract/privacy-contract-draft.tex` (l. 239) |
-| Delegation triangle: privacy+quality @14%, privacy+delegation @28.6% | `privacy-contract/NEW_PAPER_BRIEF.md` (l. 35) |
+## 6. Variational mutual-information bounds (`MI`) & companion benchmark (`arXiv:2610.04128`)
 
-## Audit basis
-
-`synthesis/SYNTHESIS.md` (program-wide read), `synthesis/ADVERSARIAL_REVIEW.md`
-(external positioning), `synthesis/PAPERS.md` (inventory). Numbers in
-`main.tex` were cross-checked against the files above on 2026-11-06;
-corrections applied: K50 units (pairs, not sessions; 2.4× depth spread, not
-4×), invariant-MLP 1.473 = task contribution (not recovery), MINE in bits
-(not nats), E8 baseline 55–80% (not 64–70%).
-
-## Scripts and raw artifacts
-
-Analysis scripts are frozen inside the source repositories (hash-recorded);
-they are referenced, not duplicated, to keep provenance intact:
-
-- Trilemma analysis: `Paper 3 - Privacy-Constrained Remote/paper/figs/` (CSV generators pinned by that repo's manifests)
-- Pilot decisions: `Paper-4-Defense-Redesign/src/p4d/` + `docs/CLAIM_EVIDENCE_LEDGER.md` manifest hashes
-- E8 batteries: `Distributed Training/probes/`, artifacts under `paper-data/collected/` (see `EVIDENCE_EXECUTION_LEDGER.md` artifact column)
-- Gradient-gain tables: `paper-llm-attack-suite` (code in `LLM-Attacker/`, arXiv ancillary files)
+| Claim in `paper/main.tex` | Primary evidence |
+| --- | --- |
+| Near-zero MINE Donsker–Varadhan readouts and companion cross-entropy lower bound (both acknowledged as lower bounds, not upper ceilings) | `evidence/privacy-contract/privacy-contract-draft.tex`, `evidence/privacy-contract/KEY_NUMBERS.md` |
+| Finite invariant-MLP / radial architecture ablations (empirical saturation, not universal capacity proof) | `evidence/structural-e8/LATENT_CAMPAIGN_REPORT_V7_V9.md` |
+| Controlled GPT-2 returned-gradient gain: 13.71% to 37.77% exact-document recovery and +3.17 pp token recovery (3.1714 pp unrounded) | `evidence/attack-suite/2610.04128-main.tex` (ll. 55, 176, 187, 209) |
