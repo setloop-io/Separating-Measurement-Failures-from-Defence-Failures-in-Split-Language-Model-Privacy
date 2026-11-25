@@ -1,0 +1,78 @@
+{
+  "schema": "dtraining.collection_manifest.v1",
+  "collection": "poc06b_v2_20260814",
+  "experiment": "Qwen3-0.6B strict-budget v2 rotation and local DP-SGD proof of concept",
+  "evidence_status": "diagnostic",
+  "measurement_kind": "measured",
+  "source_hosts": ["toula", "koula"],
+  "source_path": "~/experiments/poc06b_v2_20260814T1830/",
+  "collection_date": "2026-08-14",
+  "provenance": {
+    "production_stack_commit": "c23402f",
+    "corrected_evaluator_commit": "bc9d8b5",
+    "model": "Qwen3-0.6B",
+    "split_after_depth": 8,
+    "cloud_layers": "8..25",
+    "wire_dtype": "bf16",
+    "sequence_length": 64,
+    "training_microbatches": 16,
+    "rotation_version": "v2",
+    "rotation_budget_rows": 64,
+    "dp_sgd": {
+      "scope": "private_local_weight_updates_only",
+      "max_grad_norm": 1.0,
+      "noise_multiplier": 1.2,
+      "delta": 1e-6,
+      "reported_epsilon": 10.149758505150443
+    }
+  },
+  "results": {
+    "plain": {
+      "training_loss": 5.211533851921558,
+      "held_out_eval_loss_mean": 3.634175936381022,
+      "held_out_eval_loss_population_std": 0.6850072145462036,
+      "step_time_seconds": 2.8736778059974313,
+      "label_free_top1_pct": 40.62,
+      "known_plaintext_fwd_top1_pct": 31.25,
+      "known_plaintext_fwd_bwd_top1_pct": 40.62
+    },
+    "protected": {
+      "training_loss": 3.5423253625631332,
+      "held_out_eval_loss_mean": 7.308614730834961,
+      "held_out_eval_loss_population_std": 3.0004024505615234,
+      "step_time_seconds": 91.75768597098067,
+      "label_free_top1_pct": 1.56,
+      "known_plaintext_per_epoch_fwd_mean_pct": 33.78875,
+      "known_plaintext_per_epoch_fwd_median_pct": 31.25,
+      "known_plaintext_per_epoch_fwd_max_pct": 93.75,
+      "known_plaintext_per_epoch_fwd_bwd_mean_pct": 37.304375,
+      "known_plaintext_per_epoch_fwd_bwd_max_pct": 93.75,
+      "disjoint_pooled_k3_512_top1_pct": 21.88
+    }
+  },
+  "decision": "privacy_target_not_met",
+  "known_limitations": [
+    "Single-run, single-seed proof of concept; it is not confirmatory evidence.",
+    "The shared transform seed is available to the cloud process, so this tests capture resistance and mechanics, not privacy from a compromised Koula administrator.",
+    "DP-SGD covers private local weight updates only; it does not make live boundary activations differentially private.",
+    "The protected and plain arms used matched corpus constructions but different fixed/jittered variants, so utility loss values are diagnostic rather than a causal DP/obfuscation comparison.",
+    "Forward and backward observations are both visible; the current B=64 budget counts forward token rows and does not separately debit return-direction observations.",
+    "Dense full-width refolding cost about five seconds per epoch and is not kernel optimized."
+  ],
+  "excluded": [
+    "all raw .pt tensors",
+    "all raw .bin wire captures",
+    "the transform seed",
+    "private corpus contents",
+    "model weights and checkpoints",
+    "two preliminary attack artifacts produced before the replay-isolation fix"
+  ],
+  "artifacts": {
+    "plain.json": "784bc84fd6921013ff518bd842f1718f72a18f1b67b0a9fc674393345c58e2bc",
+    "plain_attack_k3_512.json": "1e1f2c8e93fcf793e38a5d8c648355cdad9e6f4fd6cbfc4768f8bd02833d91dc",
+    "protected.json": "7067eef753791a52f48dff27a99f1c5f58903383281d1ce2251d34a4ec1f7066",
+    "protected_attack_k3_512.json": "7b147a808c52502c40660ae6f7a0270214f44f1346f3128c229dacfee08407a7"
+  },
+  "supersedes": null,
+  "superseded_by": null
+}

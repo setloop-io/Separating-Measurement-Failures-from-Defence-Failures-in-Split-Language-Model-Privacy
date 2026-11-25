@@ -1,0 +1,82 @@
+{
+  "status": "COMPLETE",
+  "source_manifest_sha256": "b34717395e4aa4dc388c31dfa1f5a45fae8da4b119ee294053757128dd8728b2",
+  "depth": 3,
+  "victim_seed": 11,
+  "document_ids": [
+    "wikitext2-train-72aab8c1a38c0c112bf0",
+    "wikitext2-train-8c486530ef8357405ce4",
+    "wikitext2-train-d95ca7c9c4e5b6cce0c5",
+    "wikitext2-train-4e06f6081412494d6234",
+    "wikitext2-train-63fc0bf26656a9e66484",
+    "wikitext2-train-8d0685e61318811b1f22",
+    "wikitext2-train-2c5f2a351644ca05d5ed",
+    "wikitext2-train-3dd55610d3eebb06063a"
+  ],
+  "canonical_indices": [
+    18,
+    19,
+    23,
+    11,
+    30,
+    1,
+    20,
+    16
+  ],
+  "summary": [
+    {
+      "condition": "raw",
+      "status": "ACCEPT",
+      "clipped_units": 0,
+      "token_accuracy": 0.2265625
+    },
+    {
+      "condition": "clip-1.0",
+      "status": "ACCEPT",
+      "clipped_units": 0,
+      "token_accuracy": 0.2265625
+    },
+    {
+      "condition": "clip-0.1",
+      "status": "ACCEPT",
+      "clipped_units": 8,
+      "token_accuracy": 0.2265625
+    },
+    {
+      "condition": "clip-0.001",
+      "status": "ACCEPT",
+      "clipped_units": 248,
+      "token_accuracy": 0.2265625
+    },
+    {
+      "condition": "clip-1e-05",
+      "status": "ACCEPT",
+      "clipped_units": 248,
+      "token_accuracy": 0.2265625
+    },
+    {
+      "condition": "clip1-noise",
+      "status": "ACCEPT",
+      "clipped_units": 0,
+      "token_accuracy": 0.0
+    },
+    {
+      "condition": "clip1-bits8",
+      "status": "ACCEPT",
+      "clipped_units": 0,
+      "token_accuracy": 0.19921875
+    },
+    {
+      "condition": "clip1-bits4",
+      "status": "ACCEPT",
+      "clipped_units": 0,
+      "token_accuracy": 0.0703125
+    }
+  ],
+  "gradient_manifest_sha256": "eb1a392e3a5d25d536d0ecca71a7a62f2b5dbde5e8375aad2a614a26dadae09c",
+  "limits": [
+    "Eight previously inspected GPT2/WikiText2 training documents, one victim run; exploratory replay.",
+    "Clipping granularity is per token; exact deployed sanitizer not reproduced.",
+    "No newly frozen evaluation data accessed."
+  ]
+}

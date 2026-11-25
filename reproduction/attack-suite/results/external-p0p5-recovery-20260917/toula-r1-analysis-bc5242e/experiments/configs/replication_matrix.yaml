@@ -1,0 +1,191 @@
+protocol_status: frozen_for_confirmation
+protocol_version: p3-replication-1.0
+study: remote_substitutability_replication
+purpose: external_replication_of_causal_remote_learning_gain_H1
+cohort: confirmatory
+freeze_note: Frozen for the P3 external-replication study on 2026-09-06, BEFORE any run under this config
+  and before inspecting any artifact produced under it. Seeds are fresh and disjoint from exploratory
+  [101, 202, 303], P2 confirmatory [11, 22, 33, 44, 55, 66, 77, 88], P2b rate-sweep [7, 17, 27, 37, 47,
+  57, 67, 87], P2c [3, 13, 23, 33, 43, 53, 63, 83], and calibration [909, 919, 929]. Changes after this
+  freeze require a versioned amendment written before inspecting affected outcomes.
+settings:
+  a2c1:
+    architecture: arch2
+    corpus: corpus1
+    segment:
+      start: 3
+      span: 6
+  a1c2:
+    architecture: arch1
+    corpus: corpus2
+    segment:
+      start: 2
+      span: 4
+  a2c2:
+    architecture: arch2
+    corpus: corpus2
+    segment:
+      start: 3
+      span: 6
+architectures:
+  arch1:
+    vocab_size: 256
+    d_model: 256
+    n_heads: 8
+    n_layers: 8
+    d_ff: 1024
+    max_seq_len: 128
+    init_std: 0.02
+  arch2:
+    vocab_size: 256
+    d_model: 192
+    n_heads: 6
+    n_layers: 12
+    d_ff: 768
+    max_seq_len: 128
+    init_std: 0.02
+corpora:
+  corpus1:
+    path: data/raw/tinyshakespeare.txt
+    sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+    corpus_split_digest: 6cd31100b2979ed8770cb5b68f9d67759ace427d926197dac604023ef195fb66
+  corpus2:
+    path: data/raw/war_and_peace.txt
+    sha256: 2d5bb2ad5f422765e714617e21fa31bbaf8958aa79682c86fca6660fcc5d1b2b
+    corpus_split_digest: fa9186a8041ae8d14f9a927f3c4cfa0b2dda000cd4a41a1a0cfc762d1437ea4c
+fixed:
+  backbone:
+    vocab_size: 256
+    d_model: 256
+    n_heads: 8
+    n_layers: 8
+    d_ff: 1024
+    max_seq_len: 128
+    init_std: 0.02
+  checkpoint_digest: none_seeded_init_per_run
+  tokenizer: byte_level_identity_vocab_256
+  tokenizer_digest: afba54bc5a1634ee9b070fe918bf9c9a2e15b3cfcbdc6bf24bce941dcb785585
+  corpus_split:
+    rule: first_90_percent_train_last_10_percent_heldout_by_byte_offset
+    train_fraction: 0.9
+  sequence_length: 128
+  batch_size: 32
+  optimizer:
+    name: adamw
+    lr: 0.0003
+    min_lr: 3.0e-05
+    betas:
+    - 0.9
+    - 0.95
+    weight_decay: 0.1
+    no_decay:
+    - layer_norm_weights
+    - biases
+    grad_clip: 1.0
+  scheduler:
+    warmup_steps: 100
+    decay: cosine_to_min_lr
+  steps: 2000
+  eval_every: 100
+  eval_batches: 64
+  convergence_rule: fixed_2000_steps_no_early_stop
+  boundary_defense:
+    type: uniform_per_tensor_affine_quantization
+    q_bits: 8
+    ste_in_training: true
+    serialization: true_quantized_packed_codes_plus_8_byte_affine_metadata
+  surrogate_family:
+    type: single_preln_transformer_block_plus_final_layernorm
+    head_dim: 32
+    d_ff_multiplier: 4
+  transcript_schema_version: 1.0.0
+  transcript_sample_every: 200
+  probe_batch_size: 8
+  ema_beta: 0.95
+  device: auto
+  dtype: float32
+boundary:
+  width: 256
+  q_bits: 8
+  note: frontier-plateau point from P2/P2b
+factors:
+  remote_mode:
+  - trained
+  - frozen_random
+  seed:
+  - 9
+  - 19
+  - 29
+  - 39
+  - 49
+  - 59
+  - 69
+  - 89
+controls:
+  all_local: {}
+  removed_remote:
+    width: high
+    q_bits: 8
+pairing:
+  block_id: pb-p3-{seed}
+  shared_encoder_decoder_initialization: true
+  shared_minibatch_order: true
+  shared_trusted_random_streams: true
+  only_remote_parameter_updates_differ: true
+confirmatory_rule:
+  inferential_unit: independent_training_run_seed
+  pairing: per-seed paired contrast trained vs frozen_random within block pb-p3-{seed}
+  primary:
+    setting: a2c2
+    test: one_sided_paired_t_test_over_8_seeds on G_R at step 2000
+    alpha: 0.05
+    replicate_if: p < 0.05 AND mean G_R >= 0.01 nats AND mean G_R > 0 at steps 1800/1900/2000 (persistence)
+  secondary:
+    settings:
+    - a2c1
+    - a1c2
+    alpha: 0.025
+    note: same gates as primary, Bonferroni over 2 secondary settings
+  descriptive:
+  - delta_u_per_setting
+  - removed_remote_reference_per_setting
+  - downstream_probe_accuracy_gaps
+  - cross_setting_sign_and_magnitude
+  downstream:
+    probes: multinomial logistic from final-layer hidden states of A2C2 trained and all_local final checkpoints
+    properties:
+    - is_uppercase_letter
+    - is_vowel
+    - is_digit
+    - is_whitespace
+    train_stream: train-split batches, label downstream-train, seed per run
+    eval_stream: held-out batches, label downstream-eval, seed per run
+    reported: per-seed held-out accuracy per property per mode and the trained - all_local gap with seed-level
+      95% CI
+    gated: false
+  missing_data: at most one retry per run with identical cell identity; a seed missing a pair member is
+    dropped from that setting's paired tests (predeclared, never outcome-based)
+failure_policy:
+  operational_failure_classes:
+  - device_error
+  - out_of_memory
+  - io_error
+  - schema_validation_error
+  max_retries: 1
+  rule: Failures are recorded with manifest status operational_failure and partial artifacts; never excluded
+    based on outcome.
+notes:
+- 'The remote surrogate block at width 256 with head_dim 32 applies unchanged in arch2 even though d_model
+  differs (192): the trusted encoder maps 192 -> 256 and the decoder 256 -> 192 (src/pcr/split.py RemotePath);
+  width > d_model is structurally supported.'
+- corpus1 corpus_split_digest is the pre-existing frozen value used by all prior configs; its original
+  derivation predates this study and is not recoverable from the repo, so it is kept unchanged. The corpus2
+  corpus_split_digest is DEFINED as sha256( rule.encode('utf-8') || corpus_bytes ) with rule = 'first_90_percent_train_last_10_percent_heldout_by_byte_offset';
+  computed by scripts/make_replication_config.py.
+- Final checkpoints (final_state.pt) are saved only for A2C2 trained and all_local runs (save_final_state
+  flag; additive, no effect on training semantics, RNG consumption, or logging).
+- 'Privacy: the boundary (width 256, q=8) was scored in P2/P2b; no new privacy evaluation in P3; the scope
+  omission (token-inversion family only) still applies wherever P3 results are cited.'
+- No pooling across settings or with prior protocols; cross-setting consistency is reported descriptively
+  (sign and magnitude pattern).
+- Timing is logged for systems accounting only and enters no privacy claim.

@@ -1,0 +1,52 @@
+{
+  "schema": "bisr.execution_admission.v1",
+  "route": "C-A",
+  "resource_ceiling_hours": 36,
+  "approval": "User approved the requested 36 GPU-hour ceiling by saying proceed, then reaffirmed proceed after scope clarification.",
+  "supersedes_resource_cap": "30 hours in docs/bisr-execution-plan-2026-09-18.md",
+  "preparation_ceiling_hours": 6,
+  "source_sha256": {
+    "experiments/run_bisr_preparation.py": "f542fe6a1e9e8cd3e9c54d817e73172efcb49275328c63d945c7cd7b8b1244ed",
+    "experiments/bisr_checkpoint_prepare.py": "d42728713ae2cd8bd92d5436bd8c6b1f1c1c4ceb2ff68adace3ee14c0352403e",
+    "attacker/bisr_fidelity.py": "e514d75fe68d36a35bc5a2ed2aa520498d0f6d794348fdc151805b67ff4791a0",
+    "attacker/splitbench.py": "69515a4c379851a3e558510ff5a53e6c1670acf4b269e90fc52c36b11fb20979",
+    "experiments/bisr_upstream_preflight.py": "49144b04caeb46748eb4dfe67e76dbcc362344c610bad24855b221082e5cc098"
+  },
+  "input_manifest_sha256": "4a4f5b76a3e86bf67eba48a35907c9381eddf34ed9e6c1ccf10662320486fe8d",
+  "model_files": {
+    "model.safetensors": "248dfc3911869ec493c76e65bf2fcf7f615828b0254c12b473182f0f81d3a707",
+    "tokenizer_config.json": "5e04eb606e3a1583530a42e36c2a6b6615c86f34fe77e44d9ddeb43ff940931f",
+    "generation_config.json": "ed0b32ac72c0f5f44a719abb2d7786ea5146c871f83717b7f2018065954de02b",
+    "config.json": "0daed7749b4f02b8f76240d5444551d7b08712dab4d0adb8239c56ba823bb7b4",
+    "vocab.json": "196139668be63f3b5d6574427317ae82f612a97c5d1cdaf36ed2256dbf636783",
+    "tokenizer.json": "8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6",
+    "merges.txt": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5"
+  },
+  "checkpoint_preparation_admitted": true,
+  "heldout_prediction_admitted": false,
+  "requires_before_prediction": [
+    "checkpoint hashes",
+    "trained checkpoint mechanical gates",
+    "committed complete prediction manifest"
+  ],
+  "expected": {
+    "seeds": [
+      31415,
+      27182,
+      16180
+    ],
+    "depths": [
+      3,
+      6
+    ],
+    "knowledge": [
+      "public",
+      "exact"
+    ],
+    "validation_documents": 256,
+    "sip_checkpoints": 6,
+    "victim_checkpoints": 3
+  },
+  "fresh_output": "koula:~/llm-attacker-bisr-fidelity-20260918/run-v1",
+  "hard_total_limit_includes": "preparation and online execution; reserve 0.1 hours for completed canaries"
+}

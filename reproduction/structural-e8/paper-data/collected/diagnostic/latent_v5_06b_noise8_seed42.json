@@ -1,0 +1,79 @@
+{
+  "baseline_eval_loss": 5.40554141998291,
+  "candidate_eval_loss": 13.861950635910034,
+  "cloud_state_contains_hidden_width": false,
+  "device": "cuda",
+  "dp": {
+    "adjacency": "replace_one",
+    "delta": 1e-06,
+    "epsilon": {
+      "composed": 105.60621415523175,
+      "forward": 87.015760009536,
+      "return": 37.751592315472166
+    },
+    "method": "zcdp_gaussian_replace_one",
+    "parameters": {
+      "forward_clip": 1.0,
+      "forward_noise_multiplier": 8.0,
+      "return_clip": 1.0,
+      "return_noise_multiplier": 8.0
+    },
+    "releases": {
+      "forward": 1280,
+      "return": 384
+    },
+    "rho": {
+      "forward": 40.0,
+      "return": 12.0
+    }
+  },
+  "eval_blocks": 4,
+  "eval_loss_delta": 8.456409215927124,
+  "gates": {
+    "cloud_latent_only": true,
+    "privacy_above_band_le_1pct": true,
+    "utility_delta_le_0_35": false
+  },
+  "hidden_dim": 1024,
+  "label_free_majority_pct": 5.46875,
+  "latent_dim": 128,
+  "limitations": [
+    "single-process pilot; two-node protocol not yet exercised",
+    "short training run; not convergence or paper evidence",
+    "fresh probe is a diagnostic subset, not the complete /attacker suite"
+  ],
+  "mean_step_seconds": 0.061854158663967006,
+  "model": "/workspace/experiments/models/qwen3-0.6b",
+  "noise_multiplier": 8.0,
+  "recovery_above_label_free_pct": -5.46875,
+  "resume_after": 26,
+  "schema": "dtraining.latent_native_v5_06b.v1",
+  "seed": 42,
+  "sequence_length": 32,
+  "split_after": 15,
+  "status": "completed",
+  "steps": 12,
+  "token_recovery_pct": 0.0,
+  "train_blocks": 16,
+  "train_seconds": 0.742249903967604,
+  "training_tail": [
+    {
+      "attacker_loss": 1537.6982421875,
+      "distill_loss": 1789.4583740234375,
+      "language_loss": 15.24200439453125,
+      "step": 9
+    },
+    {
+      "attacker_loss": 1496.2374267578125,
+      "distill_loss": 1728.9605712890625,
+      "language_loss": 15.239999771118164,
+      "step": 10
+    },
+    {
+      "attacker_loss": 1197.475830078125,
+      "distill_loss": 1422.9627685546875,
+      "language_loss": 15.345329284667969,
+      "step": 11
+    }
+  ]
+}

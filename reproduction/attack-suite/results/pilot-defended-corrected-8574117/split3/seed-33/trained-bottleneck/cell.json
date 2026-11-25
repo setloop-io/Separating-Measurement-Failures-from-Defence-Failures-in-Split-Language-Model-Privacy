@@ -1,0 +1,257 @@
+{
+  "schema": "llm_attacker.defended_pilot_cell.v1",
+  "status": "COMPLETE",
+  "measurement_version": 2,
+  "observation_location": "body_input_seam",
+  "baseline_scope": "unadapted public-head reconstruction; bottleneck mismatch is not a privacy certificate",
+  "split": 3,
+  "seed": 33,
+  "defense": "trained-bottleneck",
+  "paired_control": "../none/cell.json",
+  "wall_seconds": 0.18177512474358082,
+  "attack_seconds": 0.24032858293503523,
+  "cuda_peak_allocated_bytes": null,
+  "resources_scope": "victim wall includes capture I/O and matched utility measurements; attack time is separate; cuda peak is process-wide (experiment.json convention)",
+  "utility_before": {
+    "cross_entropy": 4.142524128868466,
+    "perplexity": 62.96154409778091,
+    "tokens": 42,
+    "documents": 6,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "before_victim_training"
+  },
+  "utility_after": {
+    "cross_entropy": 4.143990244184222,
+    "perplexity": 63.053920682702376,
+    "tokens": 42,
+    "documents": 6,
+    "partition": "utility_eval",
+    "evaluation_contract": "matched-final-state-v2",
+    "stage": "after_victim_training"
+  },
+  "training": {
+    "steps_run": 12,
+    "final_loss": 4.198554515838623,
+    "mean_loss": 4.175852219263713
+  },
+  "access": {
+    "schema": "llm_attacker.defended_pilot_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 6,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 4,
+        "beam_width": 2
+      },
+      "sipit": {
+        "steps_per_token": 4
+      },
+      "scored_sequences": 4
+    }
+  },
+  "provenance": {
+    "path": "captures/trained_bottleneck_provenance.json",
+    "sha256": "e5977dcf496683d566330389933d3917413c76e74bb8cf9705a6d571984fabee"
+  },
+  "run_artifact": "run.json",
+  "evidence": "run.json.evidence.json",
+  "captures_dir": "captures",
+  "attacks": {
+    "forward": {
+      "accuracy": 0.0,
+      "n_tokens": 32,
+      "n_sequences": 4,
+      "candidate_count": 4,
+      "beam_width": 2,
+      "work": {
+        "head_forward_calls": 8,
+        "head_forward_sequences": 240,
+        "head_forward_token_positions": 1136,
+        "head_backward_calls": 0,
+        "head_backward_token_positions": 0,
+        "vocabulary_dot_products": 2048,
+        "wall_seconds": 0.007083875127136707,
+        "cuda_seconds": null,
+        "peak_allocated_bytes": null,
+        "incremental_peak_allocated_bytes": null
+      },
+      "artifact": "forward-baseline.json"
+    },
+    "sipit": {
+      "accuracy": 0.0,
+      "n_tokens": 32,
+      "n_sequences": 4,
+      "steps_per_token": 4,
+      "work": {
+        "head_forward_calls": 64,
+        "head_forward_sequences": 256,
+        "head_forward_token_positions": 1152,
+        "head_backward_calls": 32,
+        "head_backward_token_positions": 576,
+        "vocabulary_dot_products": 8192,
+        "wall_seconds": 0.04435066692531109,
+        "cuda_seconds": null,
+        "peak_allocated_bytes": null,
+        "incremental_peak_allocated_bytes": null
+      },
+      "artifact": "sipit-baseline.json"
+    },
+    "representation-privacy": {
+      "bundle": "representation-bundle.json",
+      "artifact": "representation-privacy.json",
+      "access": "public labeled auxiliary releases; post-training victim scoring releases",
+      "arms": {
+        "bottleneck": {
+          "probes": [
+            {
+              "family": "coordinate",
+              "target": "label",
+              "control": "fitted",
+              "accuracy": 0.16666666666666666,
+              "calibration_majority_accuracy": 0.0,
+              "unseen_evaluation_classes": 5,
+              "predictions": [
+                29,
+                27,
+                55,
+                15,
+                55,
+                7
+              ]
+            },
+            {
+              "family": "coordinate",
+              "target": "label",
+              "control": "shuffled_calibration_labels",
+              "accuracy": 0.0,
+              "calibration_majority_accuracy": 0.0,
+              "unseen_evaluation_classes": 5,
+              "predictions": [
+                29,
+                7,
+                15,
+                27,
+                15,
+                46
+              ]
+            },
+            {
+              "family": "norm",
+              "target": "label",
+              "control": "fitted",
+              "accuracy": 0.0,
+              "calibration_majority_accuracy": 0.0,
+              "unseen_evaluation_classes": 5,
+              "predictions": [
+                27,
+                46,
+                55,
+                7,
+                7,
+                27
+              ]
+            },
+            {
+              "family": "norm",
+              "target": "label",
+              "control": "shuffled_calibration_labels",
+              "accuracy": 0.0,
+              "calibration_majority_accuracy": 0.0,
+              "unseen_evaluation_classes": 5,
+              "predictions": [
+                7,
+                55,
+                15,
+                46,
+                46,
+                7
+              ]
+            },
+            {
+              "family": "gram",
+              "target": "label",
+              "control": "fitted",
+              "accuracy": 0.0,
+              "calibration_majority_accuracy": 0.0,
+              "unseen_evaluation_classes": 5,
+              "predictions": [
+                27,
+                7,
+                55,
+                7,
+                7,
+                27
+              ]
+            },
+            {
+              "family": "gram",
+              "target": "label",
+              "control": "shuffled_calibration_labels",
+              "accuracy": 0.0,
+              "calibration_majority_accuracy": 0.0,
+              "unseen_evaluation_classes": 5,
+              "predictions": [
+                7,
+                46,
+                15,
+                46,
+                46,
+                7
+              ]
+            },
+            {
+              "family": "coordinate_mlp",
+              "target": "label",
+              "control": "fitted",
+              "accuracy": 0.0,
+              "calibration_majority_accuracy": 0.0,
+              "unseen_evaluation_classes": 5,
+              "predictions": [
+                29,
+                27,
+                55,
+                27,
+                55,
+                27
+              ]
+            },
+            {
+              "family": "coordinate_mlp",
+              "target": "label",
+              "control": "shuffled_calibration_labels",
+              "accuracy": 0.0,
+              "calibration_majority_accuracy": 0.0,
+              "unseen_evaluation_classes": 5,
+              "predictions": [
+                29,
+                7,
+                15,
+                7,
+                15,
+                7
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "artifact_hashes": {
+    "sipit-baseline.json": "061bf0fbf984bc38678d5a38956c6a030b27028b0bac808cdba0f0da86622a9a",
+    "forward-baseline.json": "fdd0be850f8c1948c6cc7165605155680f66c7a125e0f74241f18964adf45eb0",
+    "sipit-predictions.json": "9456ce276777184561a11914a77bc83f9029c8cb795609bff490dba74ded1172",
+    "run.json": "53802162c41483dbf37b662de0308275777e74797d4cff75210165f964139af6",
+    "forward-predictions.json": "8c62edfe2b713fe1e31f76162889229ef93b2a4a5965e0f63744d90e2eec2f81",
+    "representation-privacy.json": "9c8820846aadd7184f1eb35c8ff788be53a9faab1b8c654696a0baf54741574b",
+    "representation-bundle.json": "04d930b34e90cd1dfbc3bee8511b4cdf84dfd56a860c8ff431eb01f18b594cd2"
+  }
+}

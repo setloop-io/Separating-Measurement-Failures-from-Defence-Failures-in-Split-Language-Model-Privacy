@@ -1,0 +1,37 @@
+protocol_id: p4-warmup-stability-engineering-0.1
+kind: warmup
+cohort: engineering
+status: engineering_ready
+seeds: [410301, 410302]
+cpu_threads: 2
+backbone:
+  vocab_size: 256
+  d_model: 256
+  n_heads: 8
+  n_layers: 8
+  d_ff: 1024
+  max_seq_len: 128
+  init_std: 0.02
+split: {start: 2, span: 4, width: 256, remote_depth: 1, q_bits: 8}
+data:
+  path: data/raw/tinyshakespeare.txt
+  sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+  fractions: [0, 0.80, 0.85, 0.90, 0.95, 1.0]
+  sequence_length: 32
+  batch_size: 8
+basis_sequences: 512
+panel_sizes: [16, 64, 256, 1024]
+null_repeats: 16
+noise_scale: 0.1
+warmup_steps: 16
+branch_steps: 16
+eval_batches: 8
+optimizer:
+  lr: 0.0003
+  min_lr: 0.00003
+  warmup_steps: 2
+  weight_decay: 0.1
+  grad_clip: 1.0
+  betas: [0.9, 0.95]
+variants: [d0, d1_initial_basis, d1_warm_basis]
+modes: [trained, frozen_random, removed_remote]

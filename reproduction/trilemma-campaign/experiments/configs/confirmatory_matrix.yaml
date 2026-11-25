@@ -1,0 +1,177 @@
+protocol_status: frozen_for_confirmation
+protocol_version: p2-confirmatory-1.0
+study: remote_substitutability_confirmatory
+purpose: confirmatory_test_of_causal_remote_learning_gain
+cohort: confirmatory
+freeze_note: >
+  Frozen for the P2 confirmatory study on 2026-09-04, BEFORE any confirmatory
+  run and before inspecting any artifact produced under this config. Seeds are
+  fresh and disjoint from the exploratory cohort [101, 202, 303] and from
+  calibration seeds [909, 919]. Headline cells (medium-high, long-high) were
+  selected by the frozen P1 go rule from exploratory data only. Changes after
+  this freeze require a versioned amendment written before inspecting affected
+  outcomes.
+
+fixed:
+  backbone:
+    vocab_size: 256
+    d_model: 256
+    n_heads: 8
+    n_layers: 8
+    d_ff: 1024
+    max_seq_len: 128
+    init_std: 0.02
+  checkpoint_digest: none_seeded_init_per_run
+  tokenizer: byte_level_identity_vocab_256
+  tokenizer_digest: afba54bc5a1634ee9b070fe918bf9c9a2e15b3cfcbdc6bf24bce941dcb785585
+  corpus: data/raw/tinyshakespeare.txt
+  corpus_sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+  corpus_split:
+    rule: first_90_percent_train_last_10_percent_heldout_by_byte_offset
+    train_fraction: 0.9
+  corpus_split_digest: 6cd31100b2979ed8770cb5b68f9d67759ace427d926197dac604023ef195fb66
+  sequence_length: 128
+  batch_size: 32
+  optimizer:
+    name: adamw
+    lr: 3.0e-4
+    min_lr: 3.0e-5
+    betas: [0.9, 0.95]
+    weight_decay: 0.1
+    no_decay: [layer_norm_weights, biases]
+    grad_clip: 1.0
+  scheduler:
+    warmup_steps: 100
+    decay: cosine_to_min_lr
+  steps: 2000
+  eval_every: 100
+  eval_batches: 64
+  convergence_rule: fixed_2000_steps_no_early_stop
+  boundary_defense:
+    type: uniform_per_tensor_affine_quantization
+    q_bits: 8
+    ste_in_training: true
+    serialization: true_quantized_packed_codes_plus_8_byte_affine_metadata
+  surrogate_family:
+    type: single_preln_transformer_block_plus_final_layernorm
+    head_dim: 32
+    d_ff_multiplier: 4
+  transcript_schema_version: "1.0.0"
+  transcript_sample_every: 200
+  probe_batch_size: 8
+  ema_beta: 0.95
+  device: auto
+  dtype: float32
+
+factors:
+  segment_span:
+    short: {start: 3, span: 2}
+    medium: {start: 2, span: 4}
+    long: {start: 1, span: 6}
+  latent_width: {low: 64, high: 256}
+  remote_mode: [trained, frozen_random]
+  seed: [11, 22, 33, 44, 55, 66, 77, 88]
+
+controls:
+  all_local: {}
+  removed_remote:
+    width: low
+    q_bits: 8
+
+pairing:
+  block_id: "pb-conf-{seed}"
+  shared_encoder_decoder_initialization: true
+  shared_minibatch_order: true
+  shared_trusted_random_streams: true
+  only_remote_parameter_updates_differ: true
+
+operational_rate:
+  unit: bits_per_token
+  measurement_stage: serialized_remote_transcript
+  includes_repeated_releases: true
+
+matched_controls:
+  - all_local
+  - removed_remote
+
+primary_outcomes:
+  - causal_remote_learning_gain
+  - heldout_replacement_penalty
+  - per_family_attack_advantage_and_threshold_ratio
+  - measured_remote_flops
+  - communication_bytes
+  - wall_time
+
+calibration:
+  width_low:
+    cohort: calibration
+    seed: 909
+    steps: 500
+    mode: trained
+    span: medium
+    width: low
+    capture_every: 5
+    capture_max_pairs: 131072
+    reuse: p1_pilot_artifact  # pre-existing, disjoint from confirmatory seeds
+  width_high:
+    cohort: calibration
+    seed: 919
+    steps: 500
+    mode: trained
+    span: medium
+    width: high
+    capture_every: 5
+    capture_max_pairs: 131072
+    reuse: none  # must be executed before privacy scoring of width-high cells
+
+confirmatory_rule:
+  inferential_unit: independent_training_run_seed
+  pairing: per-seed paired contrast trained vs frozen_random within block pb-conf-{seed}
+  primary_family:
+    description: H1 at the two headline cells selected by the P1 go rule
+    cells: [medium-high, long-high]
+    test: one_sided_paired_t_test_over_8_seeds
+    alpha_per_cell: 0.025  # Bonferroni over 2 primary tests, family-wise 0.05
+    practical_effect_threshold_nats: 0.01
+    persistence: mean G_R > 0 at eval steps 1800, 1900, and 2000
+    confirm_if: p < alpha_per_cell AND mean G_R >= threshold AND persistence
+  secondary_family:
+    description: remaining surface cells and span x width interaction
+    cells: [short-low, short-high, medium-low, long-low]
+    test: two_sided_paired_t_test_over_8_seeds
+    alpha_per_cell: 0.0125  # Bonferroni over 4 secondary tests
+    interaction: two_way_anova_on_seed_level_G_R factors span(3) x width(2)
+    sensitivity: wilcoxon_signed_rank per primary cell, reported not gated
+  privacy_criterion:
+    attack_family: token_inversion_probe
+    threshold_advantage: 0.02  # calibrated null band from P0 (|null adv| < 0.02)
+    width_matched_calibration_required: true
+    h5_support_if: any primary-confirmed cell also has advantage <= threshold
+  missing_data: >
+    If a run fails operationally, retry once with identical cell identity; the
+    attempt is logged. A seed with a missing trained/frozen pair member is
+    dropped from that cell's paired test (predeclared; never outcome-based).
+
+failure_policy:
+  operational_failure_classes: [device_error, out_of_memory, io_error, schema_validation_error]
+  max_retries: 1
+  rule: >
+    A failed cell is recorded with manifest status operational_failure and any
+    partial artifacts; at most one retry with the same cell identity; never
+    excluded based on outcome. Ambiguous failures remain in the audit log and
+    are handled by this frozen analysis.
+
+notes:
+  - Exploratory seeds [101, 202, 303] and their outcomes were used only to
+    select headline cells and the effect-size estimate for power; no
+    confirmatory estimate pools pilot data.
+  - "Editorial fix pre-execution 2026-09-04: repaired a YAML syntax error in this notes block
+    (invalid block scalar). No protocol semantics changed; no confirmatory run had executed."
+  - "Power (from pilot variance): medium-high mean 0.0168, SD 0.0028, power greater than 0.99
+    at n=8; long-high mean 0.0181, SD 0.0134, power ~0.85 at n=8, one-sided alpha 0.025.
+    n=8 frozen."
+  - removed_remote controls are run at width low (64) per seed x span.
+  - Timing is logged for systems accounting only and enters no privacy claim.
+  - Privacy scoring covers the token-inversion family only; membership,
+    property, and history-accumulation attacks remain out of scope and this
+    omission must be named wherever these results are cited.

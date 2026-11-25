@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paper4.local/schemas/cc_arrival_record.schema.json",
+  "title": "Paper 4 confidential-compute arrival inventory",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "record_type",
+    "recorded_at",
+    "host",
+    "collector",
+    "claim_scope",
+    "hardware_attested",
+    "admission_status",
+    "deployment",
+    "gpu",
+    "cpu",
+    "attestation_tools",
+    "environment",
+    "advisory_inventory",
+    "unassessed_from_guest"
+  ],
+  "properties": {
+    "schema_version": {"const": "p4-cc-arrival-inventory-0.4"},
+    "record_type": {"const": "inventory_only"},
+    "recorded_at": {"type": "string", "format": "date-time"},
+    "host": {"type": "string", "minLength": 1},
+    "collector": {
+      "type": "object",
+      "required": ["script_sha256", "git_commit"],
+      "properties": {
+        "script_sha256": {"$ref": "#/$defs/sha"},
+        "git_commit": {"type": ["string", "null"], "pattern": "^[a-f0-9]{40}$"}
+      },
+      "additionalProperties": false
+    },
+    "claim_scope": {
+      "const": "Arrival inventory only; this record cannot admit hardware or set hardware_attested true."
+    },
+    "hardware_attested": {"const": false},
+    "admission_status": {"const": "pending_separate_validation"},
+    "deployment": {
+      "type": "object",
+      "required": [
+        "provider", "candidate_id", "sku", "region", "zone", "instance_id",
+        "boot_id_sha256",
+        "image_reference", "protection_mode", "pair_id",
+        "cuda_device_index", "deployment_manifest_sha256", "pair_manifest_sha256",
+        "context_sha256", "provider_metadata_sha256"
+      ],
+      "properties": {
+        "provider": {"enum": ["azure", "gcp"]},
+        "candidate_id": {"$ref": "#/$defs/identifier"},
+        "sku": {"type": "string", "minLength": 3, "maxLength": 128},
+        "region": {"type": "string", "pattern": "^[a-z][a-z0-9-]{1,31}$"},
+        "zone": {"type": "string", "pattern": "^[A-Za-z0-9-]{1,64}$"},
+        "instance_id": {"type": "string", "minLength": 3, "maxLength": 256},
+        "boot_id_sha256": {"$ref": "#/$defs/sha"},
+        "image_reference": {"type": "string", "minLength": 8, "maxLength": 1024},
+        "protection_mode": {"enum": ["cc-on", "cc-off"]},
+        "pair_id": {"$ref": "#/$defs/identifier"},
+        "cuda_device_index": {"type": "integer", "minimum": 0},
+        "deployment_manifest_sha256": {"$ref": "#/$defs/sha"},
+        "pair_manifest_sha256": {"$ref": "#/$defs/sha"},
+        "context_sha256": {"$ref": "#/$defs/sha"},
+        "provider_metadata_sha256": {"$ref": "#/$defs/sha"}
+      },
+      "additionalProperties": false
+    },
+    "gpu": {
+      "type": "object",
+      "required": [
+        "nvidia_smi_present",
+        "identity_query",
+        "cuda_runtime_query",
+        "cuda_index",
+        "nvidia_index",
+        "uuid",
+        "pci_bus_id",
+        "name",
+        "driver",
+        "cc_readiness",
+        "protected_memory"
+      ],
+      "properties": {
+        "nvidia_smi_present": {"type": "boolean"},
+        "identity_query": {"$ref": "#/$defs/command"},
+        "cuda_runtime_query": {"$ref": "#/$defs/command"},
+        "cuda_index": {"type": ["integer", "null"], "minimum": 0},
+        "nvidia_index": {"type": ["integer", "null"], "minimum": 0},
+        "uuid": {
+          "type": ["string", "null"],
+          "pattern": "^GPU-[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+        },
+        "pci_bus_id": {
+          "type": ["string", "null"],
+          "pattern": "^(?:[0-9A-Fa-f]{4}|[0-9A-Fa-f]{8}):[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}\\.[0-7]$"
+        },
+        "name": {"type": ["string", "null"]},
+        "driver": {"type": ["string", "null"]},
+        "cc_readiness": {"$ref": "#/$defs/command"},
+        "protected_memory": {"$ref": "#/$defs/command"}
+      },
+      "additionalProperties": false
+    },
+    "cpu": {
+      "type": "object",
+      "required": ["model", "tdx_evidence", "sev_snp_evidence", "tdx_module"],
+      "properties": {
+        "model": {"type": "string", "minLength": 1},
+        "tdx_evidence": {"$ref": "#/$defs/command"},
+        "sev_snp_evidence": {"$ref": "#/$defs/command"},
+        "tdx_module": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "attestation_tools": {
+      "type": "object",
+      "required": ["nvtrust", "nvidia_attestation_sdk"],
+      "properties": {
+        "nvtrust": {"$ref": "#/$defs/tool"},
+        "nvidia_attestation_sdk": {"$ref": "#/$defs/tool"}
+      },
+      "additionalProperties": false
+    },
+    "environment": {
+      "type": "object",
+      "required": ["python", "uv", "uv_lock_sha256"],
+      "properties": {
+        "python": {"type": "string", "minLength": 1},
+        "uv": {"type": ["string", "null"]},
+        "uv_lock_sha256": {"anyOf": [{"$ref": "#/$defs/sha"}, {"type": "null"}]}
+      },
+      "additionalProperties": false
+    },
+    "advisory_inventory": {
+      "type": "array",
+      "minItems": 5,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "unassessed_from_guest": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "identifier": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+    "command": {
+      "type": "object",
+      "required": ["attempted", "exit_code", "output"],
+      "properties": {
+        "attempted": {"type": "boolean"},
+        "exit_code": {"type": ["integer", "null"]},
+        "output": {"type": "string"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"attempted": {"const": true}}, "required": ["attempted"]},
+          "then": {"properties": {"exit_code": {"type": "integer"}}},
+          "else": {"properties": {"exit_code": {"type": "null"}}}
+        }
+      ],
+      "additionalProperties": false
+    },
+    "tool": {
+      "type": "object",
+      "required": ["available", "detail"],
+      "properties": {
+        "available": {"type": "boolean"},
+        "detail": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  }
+}

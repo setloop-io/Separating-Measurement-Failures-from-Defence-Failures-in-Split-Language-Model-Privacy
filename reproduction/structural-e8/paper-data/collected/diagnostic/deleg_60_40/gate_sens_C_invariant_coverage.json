@@ -1,0 +1,929 @@
+{
+  "schema": "dtraining.deleg6040.gate_sensitivity.v1",
+  "bundle": "deleg_6040_conv10k_split14_bundle.pt",
+  "generated_utc": "2026-08-19T16:31:38.088737+00:00",
+  "mode": "invariant",
+  "seed": 20260819,
+  "points": [
+    {
+      "spec": {
+        "mode": "invariant",
+        "coverage": 0.05,
+        "amplitude": 1.0,
+        "seed": 20260819
+      },
+      "tag": "invariant_rho0.05_a1",
+      "injection": {
+        "spec": {
+          "mode": "invariant",
+          "coverage": 0.05,
+          "amplitude": 1.0,
+          "seed": 20260819
+        },
+        "token_values": 3167,
+        "attacker_classes": 1874,
+        "latent_dim": 64,
+        "partitions": [
+          {
+            "partition": "train",
+            "rows_total": 20480,
+            "rows_injected": 1024,
+            "rows_injected_scoreable": 1024,
+            "coverage_achieved": 0.05,
+            "injected": true,
+            "codebook_decode": {
+              "rows": 1024,
+              "correct": 0,
+              "top1_pct": 0.0
+            },
+            "oracle_decode": {
+              "rows": 1024,
+              "correct": 1024,
+              "top1_pct": 100.0
+            },
+            "cosines": {
+              "same_token_pairs": 66,
+              "same_token_mean_cosine": 1.0,
+              "other_token_pairs": 3998,
+              "other_token_mean_cosine": 0.0048480769619345665
+            },
+            "max_row_norm_drift": 4.76837158203125e-07
+          },
+          {
+            "partition": "eval",
+            "rows_total": 20480,
+            "rows_injected": 1024,
+            "rows_injected_scoreable": 895,
+            "coverage_achieved": 0.05,
+            "injected": true,
+            "codebook_decode": {
+              "rows": 1024,
+              "correct": 1,
+              "top1_pct": 0.09765625
+            },
+            "oracle_decode": {
+              "rows": 1024,
+              "correct": 1024,
+              "top1_pct": 100.0
+            },
+            "cosines": {
+              "same_token_pairs": 28,
+              "same_token_mean_cosine": 1.0000001192092896,
+              "other_token_pairs": 3758,
+              "other_token_mean_cosine": 0.0008421124657616019
+            },
+            "max_row_norm_drift": 4.76837158203125e-07
+          }
+        ],
+        "path": "/workspace/experiments/results/training/deleg6040/gate_sens/inj_invariant_rho0.05_a1.pt",
+        "sha256": "cf894f91a51f61e15bd34424d3c9b599d460003bf02b015d77c09958f95e3164"
+      },
+      "gate": {
+        "file": "/workspace/experiments/results/training/deleg6040/gate_sens/inj_invariant_rho0.05_a1_attacker.json",
+        "n_rows": 20480,
+        "n_arms": 9,
+        "z_bonferroni": 2.539184813651313,
+        "label_free_majority_pct": 5.2392578125,
+        "worst_arm": {
+          "model": "invariant_graph",
+          "restart": 0,
+          "correct": 1078,
+          "total": 20480,
+          "top1_pct": 5.263671875,
+          "recomputed_upper95_pct": 5.674154978190084
+        },
+        "excess_pp": 0.4348971656900842,
+        "excess_pp_in_artifact": 0.4348971656900833,
+        "excess_matches_artifact": true,
+        "statistical_floor_pp": 0.40962274193321146,
+        "excess_over_floor_pp": 0.02527442375687272,
+        "excess_over_floor_ratio": 1.0617017103044384,
+        "best_arm_binomial_z": 0.15680355930714093,
+        "classification": "at-floor",
+        "legacy_gate_pp": 1.0,
+        "legacy_verdict": "PASS",
+        "floor_budget_pp": 0.7,
+        "floor_relative_cap_pp": 1.0,
+        "proposed_verdict": "PASS",
+        "gates_agree": true
+      },
+      "arms": [
+        {
+          "model": "coordinate_plus_invariants",
+          "family": "coordinate",
+          "restart": 0,
+          "correct": 476,
+          "total": 20480,
+          "top1_pct": 2.32421875,
+          "binomial_z": -18.722344981272627,
+          "distinct_tokens_predicted": 1233,
+          "modal_token": 1154,
+          "modal_token_share": 0.204541015625
+        },
+        {
+          "model": "coordinate_plus_invariants",
+          "family": "coordinate",
+          "restart": 1,
+          "correct": 639,
+          "total": 20480,
+          "top1_pct": 3.1201171875,
+          "binomial_z": -13.610548947859833,
+          "distinct_tokens_predicted": 1197,
+          "modal_token": 279,
+          "modal_token_share": 0.392431640625
+        },
+        {
+          "model": "coordinate_plus_invariants",
+          "family": "coordinate",
+          "restart": 2,
+          "correct": 537,
+          "total": 20480,
+          "top1_pct": 2.6220703125,
+          "binomial_z": -16.809341557725507,
+          "distinct_tokens_predicted": 1207,
+          "modal_token": 279,
+          "modal_token_share": 0.229296875
+        },
+        {
+          "model": "invariant_only",
+          "family": "invariant",
+          "restart": 0,
+          "correct": 1073,
+          "total": 20480,
+          "top1_pct": 5.2392578125,
+          "binomial_z": 0.0,
+          "distinct_tokens_predicted": 1,
+          "modal_token": 279,
+          "modal_token_share": 1.0
+        },
+        {
+          "model": "invariant_only",
+          "family": "invariant",
+          "restart": 1,
+          "correct": 1075,
+          "total": 20480,
+          "top1_pct": 5.2490234375,
+          "binomial_z": 0.06272142372285637,
+          "distinct_tokens_predicted": 2,
+          "modal_token": 279,
+          "modal_token_share": 0.9978515625
+        },
+        {
+          "model": "invariant_only",
+          "family": "invariant",
+          "restart": 2,
+          "correct": 1073,
+          "total": 20480,
+          "top1_pct": 5.2392578125,
+          "binomial_z": 0.0,
+          "distinct_tokens_predicted": 2,
+          "modal_token": 279,
+          "modal_token_share": 0.9994140625
+        },
+        {
+          "model": "invariant_graph",
+          "family": "invariant",
+          "restart": 0,
+          "correct": 1078,
+          "total": 20480,
+          "top1_pct": 5.263671875,
+          "binomial_z": 0.15680355930714093,
+          "distinct_tokens_predicted": 7,
+          "modal_token": 279,
+          "modal_token_share": 0.9560546875
+        },
+        {
+          "model": "invariant_graph",
+          "family": "invariant",
+          "restart": 1,
+          "correct": 1056,
+          "total": 20480,
+          "top1_pct": 5.15625,
+          "binomial_z": -0.5331321016442792,
+          "distinct_tokens_predicted": 5,
+          "modal_token": 279,
+          "modal_token_share": 0.921484375
+        },
+        {
+          "model": "invariant_graph",
+          "family": "invariant",
+          "restart": 2,
+          "correct": 1070,
+          "total": 20480,
+          "top1_pct": 5.224609375,
+          "binomial_z": -0.09408213558428456,
+          "distinct_tokens_predicted": 3,
+          "modal_token": 279,
+          "modal_token_share": 0.929443359375
+        }
+      ],
+      "families": {
+        "coordinate": {
+          "model": "coordinate_plus_invariants",
+          "restart": 1,
+          "correct": 639,
+          "top1_pct": 3.1201171875,
+          "binomial_z": -13.610548947859833
+        },
+        "invariant": {
+          "model": "invariant_graph",
+          "restart": 0,
+          "correct": 1078,
+          "top1_pct": 5.263671875,
+          "binomial_z": 0.15680355930714093
+        }
+      },
+      "artifact": "/workspace/experiments/results/training/deleg6040/gate_sens/inj_invariant_rho0.05_a1_attacker.json"
+    },
+    {
+      "spec": {
+        "mode": "invariant",
+        "coverage": 0.25,
+        "amplitude": 1.0,
+        "seed": 20260819
+      },
+      "tag": "invariant_rho0.25_a1",
+      "injection": {
+        "spec": {
+          "mode": "invariant",
+          "coverage": 0.25,
+          "amplitude": 1.0,
+          "seed": 20260819
+        },
+        "token_values": 3167,
+        "attacker_classes": 1874,
+        "latent_dim": 64,
+        "partitions": [
+          {
+            "partition": "train",
+            "rows_total": 20480,
+            "rows_injected": 5120,
+            "rows_injected_scoreable": 5120,
+            "coverage_achieved": 0.25,
+            "injected": true,
+            "codebook_decode": {
+              "rows": 5120,
+              "correct": 1,
+              "top1_pct": 0.01953125
+            },
+            "oracle_decode": {
+              "rows": 5120,
+              "correct": 5120,
+              "top1_pct": 100.0
+            },
+            "cosines": {
+              "same_token_pairs": 1086,
+              "same_token_mean_cosine": 1.0,
+              "other_token_pairs": 99864,
+              "other_token_mean_cosine": 0.0022666205186396837
+            },
+            "max_row_norm_drift": 4.76837158203125e-07
+          },
+          {
+            "partition": "eval",
+            "rows_total": 20480,
+            "rows_injected": 5120,
+            "rows_injected_scoreable": 4491,
+            "coverage_achieved": 0.25,
+            "injected": true,
+            "codebook_decode": {
+              "rows": 5120,
+              "correct": 2,
+              "top1_pct": 0.0390625
+            },
+            "oracle_decode": {
+              "rows": 5120,
+              "correct": 5120,
+              "top1_pct": 100.0
+            },
+            "cosines": {
+              "same_token_pairs": 1086,
+              "same_token_mean_cosine": 1.0,
+              "other_token_pairs": 99894,
+              "other_token_mean_cosine": 0.003996625542640686
+            },
+            "max_row_norm_drift": 7.152557373046875e-07
+          }
+        ],
+        "path": "/workspace/experiments/results/training/deleg6040/gate_sens/inj_invariant_rho0.25_a1.pt",
+        "sha256": "9eadc482a44e960855db877e36bd13503b8d9b546b67f1d794913bfa178805da"
+      },
+      "gate": {
+        "file": "/workspace/experiments/results/training/deleg6040/gate_sens/inj_invariant_rho0.25_a1_attacker.json",
+        "n_rows": 20480,
+        "n_arms": 9,
+        "z_bonferroni": 2.539184813651313,
+        "label_free_majority_pct": 5.2392578125,
+        "worst_arm": {
+          "model": "invariant_only",
+          "restart": 0,
+          "correct": 1073,
+          "total": 20480,
+          "top1_pct": 5.2392578125,
+          "recomputed_upper95_pct": 5.6488805544332115
+        },
+        "excess_pp": 0.40962274193321146,
+        "excess_pp_in_artifact": 0.4096227419332106,
+        "excess_matches_artifact": true,
+        "statistical_floor_pp": 0.40962274193321146,
+        "excess_over_floor_pp": 0.0,
+        "excess_over_floor_ratio": 1.0,
+        "best_arm_binomial_z": 0.0,
+        "classification": "at-floor",
+        "legacy_gate_pp": 1.0,
+        "legacy_verdict": "PASS",
+        "floor_budget_pp": 0.7,
+        "floor_relative_cap_pp": 1.0,
+        "proposed_verdict": "PASS",
+        "gates_agree": true
+      },
+      "arms": [
+        {
+          "model": "coordinate_plus_invariants",
+          "family": "coordinate",
+          "restart": 0,
+          "correct": 478,
+          "total": 20480,
+          "top1_pct": 2.333984375,
+          "binomial_z": -18.65962355754977,
+          "distinct_tokens_predicted": 1251,
+          "modal_token": 1154,
+          "modal_token_share": 0.17548828125
+        },
+        {
+          "model": "coordinate_plus_invariants",
+          "family": "coordinate",
+          "restart": 1,
+          "correct": 615,
+          "total": 20480,
+          "top1_pct": 3.0029296875,
+          "binomial_z": -14.36320603253411,
+          "distinct_tokens_predicted": 1252,
+          "modal_token": 279,
+          "modal_token_share": 0.34638671875
+        },
+        {
+          "model": "coordinate_plus_invariants",
+          "family": "coordinate",
+          "restart": 2,
+          "correct": 528,
+          "total": 20480,
+          "top1_pct": 2.578125,
+          "binomial_z": -17.09158796447836,
+          "distinct_tokens_predicted": 1252,
+          "modal_token": 279,
+          "modal_token_share": 0.210595703125
+        },
+        {
+          "model": "invariant_only",
+          "family": "invariant",
+          "restart": 0,
+          "correct": 1073,
+          "total": 20480,
+          "top1_pct": 5.2392578125,
+          "binomial_z": 0.0,
+          "distinct_tokens_predicted": 1,
+          "modal_token": 279,
+          "modal_token_share": 1.0
+        },
+        {
+          "model": "invariant_only",
+          "family": "invariant",
+          "restart": 1,
+          "correct": 1071,
+          "total": 20480,
+          "top1_pct": 5.2294921875,
+          "binomial_z": -0.06272142372285637,
+          "distinct_tokens_predicted": 2,
+          "modal_token": 279,
+          "modal_token_share": 0.99111328125
+        },
+        {
+          "model": "invariant_only",
+          "family": "invariant",
+          "restart": 2,
+          "correct": 1071,
+          "total": 20480,
+          "top1_pct": 5.2294921875,
+          "binomial_z": -0.06272142372285637,
+          "distinct_tokens_predicted": 2,
+          "modal_token": 279,
+          "modal_token_share": 0.9970703125
+        },
+        {
+          "model": "invariant_graph",
+          "family": "invariant",
+          "restart": 0,
+          "correct": 942,
+          "total": 20480,
+          "top1_pct": 4.599609375,
+          "binomial_z": -4.108253253847092,
+          "distinct_tokens_predicted": 7,
+          "modal_token": 279,
+          "modal_token_share": 0.8064453125
+        },
+        {
+          "model": "invariant_graph",
+          "family": "invariant",
+          "restart": 1,
+          "correct": 1062,
+          "total": 20480,
+          "top1_pct": 5.185546875,
+          "binomial_z": -0.34496783047571006,
+          "distinct_tokens_predicted": 6,
+          "modal_token": 279,
+          "modal_token_share": 0.981298828125
+        },
+        {
+          "model": "invariant_graph",
+          "family": "invariant",
+          "restart": 2,
+          "correct": 1028,
+          "total": 20480,
+          "top1_pct": 5.01953125,
+          "binomial_z": -1.4112320337642683,
+          "distinct_tokens_predicted": 5,
+          "modal_token": 279,
+          "modal_token_share": 0.9740234375
+        }
+      ],
+      "families": {
+        "coordinate": {
+          "model": "coordinate_plus_invariants",
+          "restart": 1,
+          "correct": 615,
+          "top1_pct": 3.0029296875,
+          "binomial_z": -14.36320603253411
+        },
+        "invariant": {
+          "model": "invariant_only",
+          "restart": 0,
+          "correct": 1073,
+          "top1_pct": 5.2392578125,
+          "binomial_z": 0.0
+        }
+      },
+      "artifact": "/workspace/experiments/results/training/deleg6040/gate_sens/inj_invariant_rho0.25_a1_attacker.json"
+    },
+    {
+      "spec": {
+        "mode": "invariant",
+        "coverage": 0.5,
+        "amplitude": 1.0,
+        "seed": 20260819
+      },
+      "tag": "invariant_rho0.5_a1",
+      "injection": {
+        "spec": {
+          "mode": "invariant",
+          "coverage": 0.5,
+          "amplitude": 1.0,
+          "seed": 20260819
+        },
+        "token_values": 3167,
+        "attacker_classes": 1874,
+        "latent_dim": 64,
+        "partitions": [
+          {
+            "partition": "train",
+            "rows_total": 20480,
+            "rows_injected": 10240,
+            "rows_injected_scoreable": 10240,
+            "coverage_achieved": 0.5,
+            "injected": true,
+            "codebook_decode": {
+              "rows": 10240,
+              "correct": 2,
+              "top1_pct": 0.01953125
+            },
+            "oracle_decode": {
+              "rows": 10240,
+              "correct": 10240,
+              "top1_pct": 100.0
+            },
+            "cosines": {
+              "same_token_pairs": 4366,
+              "same_token_mean_cosine": 1.0,
+              "other_token_pairs": 399374,
+              "other_token_mean_cosine": 0.0025145667605102062
+            },
+            "max_row_norm_drift": 4.76837158203125e-07
+          },
+          {
+            "partition": "eval",
+            "rows_total": 20480,
+            "rows_injected": 10240,
+            "rows_injected_scoreable": 9001,
+            "coverage_achieved": 0.5,
+            "injected": true,
+            "codebook_decode": {
+              "rows": 10240,
+              "correct": 6,
+              "top1_pct": 0.05859375
+            },
+            "oracle_decode": {
+              "rows": 10240,
+              "correct": 10240,
+              "top1_pct": 100.0
+            },
+            "cosines": {
+              "same_token_pairs": 4290,
+              "same_token_mean_cosine": 1.0,
+              "other_token_pairs": 400118,
+              "other_token_mean_cosine": 0.0033410298638045788
+            },
+            "max_row_norm_drift": 7.152557373046875e-07
+          }
+        ],
+        "path": "/workspace/experiments/results/training/deleg6040/gate_sens/inj_invariant_rho0.5_a1.pt",
+        "sha256": "64bca9bb51559d2350e8898629f4da0e0194a1d37fb25fe9e90abe9f4d054042"
+      },
+      "gate": {
+        "file": "/workspace/experiments/results/training/deleg6040/gate_sens/inj_invariant_rho0.5_a1_attacker.json",
+        "n_rows": 20480,
+        "n_arms": 9,
+        "z_bonferroni": 2.539184813651313,
+        "label_free_majority_pct": 5.2392578125,
+        "worst_arm": {
+          "model": "invariant_graph",
+          "restart": 1,
+          "correct": 1229,
+          "total": 20480,
+          "top1_pct": 6.0009765625,
+          "recomputed_upper95_pct": 6.436392244977671
+        },
+        "excess_pp": 1.1971344324776707,
+        "excess_pp_in_artifact": 1.197134432477669,
+        "excess_matches_artifact": true,
+        "statistical_floor_pp": 0.40962274193321146,
+        "excess_over_floor_pp": 0.7875116905444592,
+        "excess_over_floor_ratio": 2.9225292200032733,
+        "best_arm_binomial_z": 4.8922710503827975,
+        "classification": "resolved",
+        "legacy_gate_pp": 1.0,
+        "legacy_verdict": "FAIL",
+        "floor_budget_pp": 0.7,
+        "floor_relative_cap_pp": 1.0,
+        "proposed_verdict": "FAIL",
+        "gates_agree": true
+      },
+      "arms": [
+        {
+          "model": "coordinate_plus_invariants",
+          "family": "coordinate",
+          "restart": 0,
+          "correct": 601,
+          "total": 20480,
+          "top1_pct": 2.9345703125,
+          "binomial_z": -14.802255998594104,
+          "distinct_tokens_predicted": 1282,
+          "modal_token": 279,
+          "modal_token_share": 0.132470703125
+        },
+        {
+          "model": "coordinate_plus_invariants",
+          "family": "coordinate",
+          "restart": 1,
+          "correct": 649,
+          "total": 20480,
+          "top1_pct": 3.1689453125,
+          "binomial_z": -13.29694182924555,
+          "distinct_tokens_predicted": 1289,
+          "modal_token": 279,
+          "modal_token_share": 0.242724609375
+        },
+        {
+          "model": "coordinate_plus_invariants",
+          "family": "coordinate",
+          "restart": 2,
+          "correct": 586,
+          "total": 20480,
+          "top1_pct": 2.861328125,
+          "binomial_z": -15.272666676515527,
+          "distinct_tokens_predicted": 1262,
+          "modal_token": 279,
+          "modal_token_share": 0.16142578125
+        },
+        {
+          "model": "invariant_only",
+          "family": "invariant",
+          "restart": 0,
+          "correct": 1038,
+          "total": 20480,
+          "top1_pct": 5.068359375,
+          "binomial_z": -1.0976249151499866,
+          "distinct_tokens_predicted": 4,
+          "modal_token": 279,
+          "modal_token_share": 0.91181640625
+        },
+        {
+          "model": "invariant_only",
+          "family": "invariant",
+          "restart": 1,
+          "correct": 1062,
+          "total": 20480,
+          "top1_pct": 5.185546875,
+          "binomial_z": -0.34496783047571006,
+          "distinct_tokens_predicted": 3,
+          "modal_token": 279,
+          "modal_token_share": 0.92470703125
+        },
+        {
+          "model": "invariant_only",
+          "family": "invariant",
+          "restart": 2,
+          "correct": 1052,
+          "total": 20480,
+          "top1_pct": 5.13671875,
+          "binomial_z": -0.6585749490899919,
+          "distinct_tokens_predicted": 4,
+          "modal_token": 279,
+          "modal_token_share": 0.903125
+        },
+        {
+          "model": "invariant_graph",
+          "family": "invariant",
+          "restart": 0,
+          "correct": 1051,
+          "total": 20480,
+          "top1_pct": 5.1318359375,
+          "binomial_z": -0.6899356609514201,
+          "distinct_tokens_predicted": 15,
+          "modal_token": 279,
+          "modal_token_share": 0.470849609375
+        },
+        {
+          "model": "invariant_graph",
+          "family": "invariant",
+          "restart": 1,
+          "correct": 1229,
+          "total": 20480,
+          "top1_pct": 6.0009765625,
+          "binomial_z": 4.8922710503827975,
+          "distinct_tokens_predicted": 12,
+          "modal_token": 279,
+          "modal_token_share": 0.703271484375
+        },
+        {
+          "model": "invariant_graph",
+          "family": "invariant",
+          "restart": 2,
+          "correct": 1170,
+          "total": 20480,
+          "top1_pct": 5.712890625,
+          "binomial_z": 3.0419890505585343,
+          "distinct_tokens_predicted": 14,
+          "modal_token": 279,
+          "modal_token_share": 0.69580078125
+        }
+      ],
+      "families": {
+        "coordinate": {
+          "model": "coordinate_plus_invariants",
+          "restart": 1,
+          "correct": 649,
+          "top1_pct": 3.1689453125,
+          "binomial_z": -13.29694182924555
+        },
+        "invariant": {
+          "model": "invariant_graph",
+          "restart": 1,
+          "correct": 1229,
+          "top1_pct": 6.0009765625,
+          "binomial_z": 4.8922710503827975
+        }
+      },
+      "artifact": "/workspace/experiments/results/training/deleg6040/gate_sens/inj_invariant_rho0.5_a1_attacker.json"
+    },
+    {
+      "spec": {
+        "mode": "invariant",
+        "coverage": 1.0,
+        "amplitude": 1.0,
+        "seed": 20260819
+      },
+      "tag": "invariant_rho1_a1",
+      "injection": {
+        "spec": {
+          "mode": "invariant",
+          "coverage": 1.0,
+          "amplitude": 1.0,
+          "seed": 20260819
+        },
+        "token_values": 3167,
+        "attacker_classes": 1874,
+        "latent_dim": 64,
+        "partitions": [
+          {
+            "partition": "train",
+            "rows_total": 20480,
+            "rows_injected": 20480,
+            "rows_injected_scoreable": 20480,
+            "coverage_achieved": 1.0,
+            "injected": true,
+            "codebook_decode": {
+              "rows": 20480,
+              "correct": 3,
+              "top1_pct": 0.0146484375
+            },
+            "oracle_decode": {
+              "rows": 20480,
+              "correct": 20480,
+              "top1_pct": 100.0
+            },
+            "cosines": {
+              "same_token_pairs": 17896,
+              "same_token_mean_cosine": 1.0,
+              "other_token_pairs": 1600024,
+              "other_token_mean_cosine": 0.002183753764256835
+            },
+            "max_row_norm_drift": 4.76837158203125e-07
+          },
+          {
+            "partition": "eval",
+            "rows_total": 20480,
+            "rows_injected": 20480,
+            "rows_injected_scoreable": 18053,
+            "coverage_achieved": 1.0,
+            "injected": true,
+            "codebook_decode": {
+              "rows": 20480,
+              "correct": 7,
+              "top1_pct": 0.0341796875
+            },
+            "oracle_decode": {
+              "rows": 20480,
+              "correct": 20480,
+              "top1_pct": 100.0
+            },
+            "cosines": {
+              "same_token_pairs": 16940,
+              "same_token_mean_cosine": 1.0,
+              "other_token_pairs": 1600980,
+              "other_token_mean_cosine": 0.003484322689473629
+            },
+            "max_row_norm_drift": 7.152557373046875e-07
+          }
+        ],
+        "path": "/workspace/experiments/results/training/deleg6040/gate_sens/inj_invariant_rho1_a1.pt",
+        "sha256": "dcc4ae55b38322db23a23330bac4da8bc98ef42a91ddcf966217a71915970a58"
+      },
+      "gate": {
+        "file": "/workspace/experiments/results/training/deleg6040/gate_sens/inj_invariant_rho1_a1_attacker.json",
+        "n_rows": 20480,
+        "n_arms": 9,
+        "z_bonferroni": 2.539184813651313,
+        "label_free_majority_pct": 5.2392578125,
+        "worst_arm": {
+          "model": "invariant_graph",
+          "restart": 1,
+          "correct": 3071,
+          "total": 20480,
+          "top1_pct": 14.9951171875,
+          "recomputed_upper95_pct": 15.639600199015149
+        },
+        "excess_pp": 10.400342386515149,
+        "excess_pp_in_artifact": 10.400342386515149,
+        "excess_matches_artifact": true,
+        "statistical_floor_pp": 0.40962274193321146,
+        "excess_over_floor_pp": 9.990719644581937,
+        "excess_over_floor_ratio": 25.39005119059262,
+        "best_arm_binomial_z": 62.658702299133516,
+        "classification": "resolved",
+        "legacy_gate_pp": 1.0,
+        "legacy_verdict": "FAIL",
+        "floor_budget_pp": 0.7,
+        "floor_relative_cap_pp": 1.0,
+        "proposed_verdict": "FAIL",
+        "gates_agree": true
+      },
+      "arms": [
+        {
+          "model": "coordinate_plus_invariants",
+          "family": "coordinate",
+          "restart": 0,
+          "correct": 1283,
+          "total": 20480,
+          "top1_pct": 6.2646484375,
+          "binomial_z": 6.58574949089992,
+          "distinct_tokens_predicted": 1278,
+          "modal_token": 279,
+          "modal_token_share": 0.069580078125
+        },
+        {
+          "model": "coordinate_plus_invariants",
+          "family": "coordinate",
+          "restart": 1,
+          "correct": 1279,
+          "total": 20480,
+          "top1_pct": 6.2451171875,
+          "binomial_z": 6.4603066434542065,
+          "distinct_tokens_predicted": 1283,
+          "modal_token": 315,
+          "modal_token_share": 0.07529296875
+        },
+        {
+          "model": "coordinate_plus_invariants",
+          "family": "coordinate",
+          "restart": 2,
+          "correct": 1340,
+          "total": 20480,
+          "top1_pct": 6.54296875,
+          "binomial_z": 8.373310067001325,
+          "distinct_tokens_predicted": 1256,
+          "modal_token": 279,
+          "modal_token_share": 0.08525390625
+        },
+        {
+          "model": "invariant_only",
+          "family": "invariant",
+          "restart": 0,
+          "correct": 1435,
+          "total": 20480,
+          "top1_pct": 7.0068359375,
+          "binomial_z": 11.352577693837004,
+          "distinct_tokens_predicted": 16,
+          "modal_token": 264,
+          "modal_token_share": 0.261865234375
+        },
+        {
+          "model": "invariant_only",
+          "family": "invariant",
+          "restart": 1,
+          "correct": 1517,
+          "total": 20480,
+          "top1_pct": 7.4072265625,
+          "binomial_z": 13.924156066474115,
+          "distinct_tokens_predicted": 16,
+          "modal_token": 4204,
+          "modal_token_share": 0.16376953125
+        },
+        {
+          "model": "invariant_only",
+          "family": "invariant",
+          "restart": 2,
+          "correct": 1758,
+          "total": 20480,
+          "top1_pct": 8.583984375,
+          "binomial_z": 21.482087625078307,
+          "distinct_tokens_predicted": 16,
+          "modal_token": 4204,
+          "modal_token_share": 0.16328125
+        },
+        {
+          "model": "invariant_graph",
+          "family": "invariant",
+          "restart": 0,
+          "correct": 3033,
+          "total": 20480,
+          "top1_pct": 14.8095703125,
+          "binomial_z": 61.46699524839924,
+          "distinct_tokens_predicted": 101,
+          "modal_token": 279,
+          "modal_token_share": 0.086328125
+        },
+        {
+          "model": "invariant_graph",
+          "family": "invariant",
+          "restart": 1,
+          "correct": 3071,
+          "total": 20480,
+          "top1_pct": 14.9951171875,
+          "binomial_z": 62.658702299133516,
+          "distinct_tokens_predicted": 122,
+          "modal_token": 1154,
+          "modal_token_share": 0.066455078125
+        },
+        {
+          "model": "invariant_graph",
+          "family": "invariant",
+          "restart": 2,
+          "correct": 3069,
+          "total": 20480,
+          "top1_pct": 14.9853515625,
+          "binomial_z": 62.59598087541066,
+          "distinct_tokens_predicted": 134,
+          "modal_token": 366,
+          "modal_token_share": 0.07626953125
+        }
+      ],
+      "families": {
+        "coordinate": {
+          "model": "coordinate_plus_invariants",
+          "restart": 2,
+          "correct": 1340,
+          "top1_pct": 6.54296875,
+          "binomial_z": 8.373310067001325
+        },
+        "invariant": {
+          "model": "invariant_graph",
+          "restart": 1,
+          "correct": 3071,
+          "top1_pct": 14.9951171875,
+          "binomial_z": 62.658702299133516
+        }
+      },
+      "artifact": "/workspace/experiments/results/training/deleg6040/gate_sens/inj_invariant_rho1_a1_attacker.json"
+    }
+  ]
+}

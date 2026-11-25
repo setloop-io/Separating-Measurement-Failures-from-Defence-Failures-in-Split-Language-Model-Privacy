@@ -1,0 +1,147 @@
+{
+  "schema": "dtraining.attacker.latent_sensitivity.v1",
+  "config": {
+    "attack": "latent_sensitivity",
+    "mode": "training",
+    "epochs": 20,
+    "restarts": 2
+  },
+  "threat_model": "Compromise-fraction sensitivity battery on a trusted latent release bundle; extends, does not replace, the frozen latent_probe gate.",
+  "provenance": {
+    "hostname": "toula",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-08-16T10:25:33Z",
+    "dtraining_commit": "c5dfe00ab44a7ddae35a16ca587e7a8661257ec1"
+  },
+  "results": [
+    {
+      "arm": "capture",
+      "fraction": 0.1,
+      "top1_pct": 1.2168141592920354,
+      "majority_pct": 6.332964450120926,
+      "excess_pp": -5.116150290828891,
+      "train_rows": 4080,
+      "eval_rows": 4080
+    },
+    {
+      "arm": "capture",
+      "fraction": 0.25,
+      "top1_pct": 1.3424320393780065,
+      "majority_pct": 5.985009670257568,
+      "excess_pp": -4.642577630879561,
+      "train_rows": 10240,
+      "eval_rows": 10240
+    },
+    {
+      "arm": "capture",
+      "fraction": 0.5,
+      "top1_pct": 1.299060254284135,
+      "majority_pct": 6.3902705907821655,
+      "excess_pp": -5.0912103364980315,
+      "train_rows": 20480,
+      "eval_rows": 20480
+    },
+    {
+      "arm": "capture",
+      "fraction": 1.0,
+      "top1_pct": 1.3615231348239982,
+      "majority_pct": 6.220943108201027,
+      "excess_pp": -4.859419973377029,
+      "train_rows": 40960,
+      "eval_rows": 40960
+    },
+    {
+      "arm": "chaff_id",
+      "fraction": 0.0,
+      "top1_pct": 1.3615231348239982,
+      "majority_pct": 6.220943108201027,
+      "excess_pp": -4.859419973377029,
+      "train_rows": 40960,
+      "eval_rows": 40960
+    },
+    {
+      "arm": "chaff_id",
+      "fraction": 0.25,
+      "top1_pct": 0.9257202103236318,
+      "majority_pct": 6.309708952903748,
+      "excess_pp": -5.383988742580116,
+      "train_rows": 37376,
+      "eval_rows": 37888
+    },
+    {
+      "arm": "chaff_id",
+      "fraction": 0.5,
+      "top1_pct": 0.7811628166499275,
+      "majority_pct": 6.266041845083237,
+      "excess_pp": -5.484879028433309,
+      "train_rows": 28160,
+      "eval_rows": 28160
+    },
+    {
+      "arm": "chaff_id",
+      "fraction": 0.9,
+      "top1_pct": 0.3416856492027335,
+      "majority_pct": 5.979498848319054,
+      "excess_pp": -5.63781319911632,
+      "train_rows": 15300,
+      "eval_rows": 10710
+    },
+    {
+      "arm": "gauge_canonical_views",
+      "fraction": 0.103515625,
+      "top1_pct": 1.3245033112582782,
+      "majority_pct": 7.036423683166504,
+      "excess_pp": -5.711920371908226,
+      "train_rows": 4736,
+      "eval_rows": 1696
+    },
+    {
+      "arm": "gauge_residual_gauged_eval",
+      "fraction": 0.103515625,
+      "top1_pct": 1.5939783041841933,
+      "majority_pct": 6.220943108201027,
+      "excess_pp": -4.626964804016834,
+      "train_rows": 4736,
+      "eval_rows": 40960
+    },
+    {
+      "arm": "known_pt",
+      "fraction": 0.01,
+      "top1_pct": 2.218620766737454,
+      "majority_pct": 6.197608262300491,
+      "excess_pp": -3.978987495563037,
+      "train_rows": 41360,
+      "eval_rows": 40560
+    },
+    {
+      "arm": "known_pt",
+      "fraction": 0.05,
+      "top1_pct": 2.2315568390653717,
+      "majority_pct": 6.2600277364254,
+      "excess_pp": -4.0284708973600285,
+      "train_rows": 43040,
+      "eval_rows": 38880
+    },
+    {
+      "arm": "known_pt",
+      "fraction": 0.2,
+      "top1_pct": 2.1888723676475674,
+      "majority_pct": 6.265776604413986,
+      "excess_pp": -4.076904236766419,
+      "train_rows": 49120,
+      "eval_rows": 32800
+    }
+  ],
+  "summary": [
+    {
+      "arms": [
+        "capture",
+        "chaff_id",
+        "gauge_canonical_views",
+        "gauge_residual_gauged_eval",
+        "known_pt"
+      ],
+      "worst_excess_pp": -3.978987495563037
+    }
+  ]
+}

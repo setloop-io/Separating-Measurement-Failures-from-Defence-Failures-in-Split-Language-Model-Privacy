@@ -1,0 +1,215 @@
+{
+ "schema": "llm_attacker.test_run.v1",
+ "env": {
+  "python": "3.14.6",
+  "platform": "macOS-26.5-arm64-arm-64bit-Mach-O",
+  "torch_present": true,
+  "ts_utc": "2026-10-22T00:09:26Z"
+ },
+ "totals": {
+  "tests": 27,
+  "passed": 27,
+  "failed": 0,
+  "skipped": 0
+ },
+ "tiers": {
+  "torch-free": {
+   "passed": 27,
+   "failed": 0,
+   "skipped": 0
+  }
+ },
+ "returncode": 0,
+ "verdict": "GREEN",
+ "tests": [
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_supported_case_needs_real_control_and_utility_without_legacy_changes",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 1.2181
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_missing_or_weak_reference_cannot_back_acceptance[reference0]",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0007
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_missing_or_weak_reference_cannot_back_acceptance[reference1]",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0009
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_contract_mismatch_and_missing_contract_fields_fail_closed",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.001
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_matching_labels_do_not_replace_actual_reference_alignment[seeds]",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0014
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_matching_labels_do_not_replace_actual_reference_alignment[documents]",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0014
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_matching_labels_do_not_replace_actual_reference_alignment[denominator]",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0009
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_matching_labels_do_not_replace_actual_reference_alignment[control]",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.001
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_upper_margin_is_not_two_sided_equivalence",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0011
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_zero_samples_do_not_create_zero_width_certainty",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0006
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_same_document_ids_across_seeds_are_one_cluster_and_order_invariant",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0008
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_duplicate_seed_document_is_rejected_instead_of_extra_replication",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0003
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_variable_cluster_sizes_preserve_pooled_paired_estimand",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0004
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_serial_blocks_preserve_seed_and_step_and_cannot_authorise_acceptance",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0008
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_missing_or_unmatched_utility_is_inconclusive[None]",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0009
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_missing_or_unmatched_utility_is_inconclusive[u1]",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0008
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_malformed_duplicate_and_overflow_utility_fail_safely",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0021
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_utility_collapse_is_nonviable_even_if_recovery_is_low",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0007
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_seed_minimum_is_not_satisfied_by_many_documents_from_one_victim",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0006
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_explicit_one_sided_tost_components_and_family_allocation",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0005
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_planning_simulation_retains_zero_variance_guard_and_declared_effect",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0013
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_domain_loader_selects_the_declared_defense_in_mixed_bundles",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0097
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_case_tables_include_samples_bounds_controls_utility_and_all_mde_rows",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0034
+  },
+  {
+   "nodeid": "tests/test_clustered_assessment.py::test_horizon_loader_excludes_evidence_sidecars_by_full_filename",
+   "module": "tests/test_clustered_assessment.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0028
+  },
+  {
+   "nodeid": "artifacts/paper-b-review-round2-20261021/all-review-closure/cpu-closure-20261022/statistical/reporting/test_temporal_inputs.py::test_serial_loader_preserves_saved_capture_index_and_source_identity",
+   "module": "artifacts/paper-b-review-round2-20261021/all-review-closure/cpu-closure-20261022/statistical/reporting/test_temporal_inputs.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0007
+  },
+  {
+   "nodeid": "artifacts/paper-b-review-round2-20261021/all-review-closure/cpu-closure-20261022/statistical/reporting/test_temporal_inputs.py::test_explicit_horizon_step_takes_priority_over_local_row_index",
+   "module": "artifacts/paper-b-review-round2-20261021/all-review-closure/cpu-closure-20261022/statistical/reporting/test_temporal_inputs.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0009
+  },
+  {
+   "nodeid": "artifacts/paper-b-review-round2-20261021/all-review-closure/cpu-closure-20261022/statistical/reporting/test_temporal_inputs.py::test_domain_training_is_serial_but_posttraining_prefill_is_frozen",
+   "module": "artifacts/paper-b-review-round2-20261021/all-review-closure/cpu-closure-20261022/statistical/reporting/test_temporal_inputs.py",
+   "tier": "torch-free",
+   "outcome": "passed",
+   "duration_s": 0.0074
+  }
+ ]
+}

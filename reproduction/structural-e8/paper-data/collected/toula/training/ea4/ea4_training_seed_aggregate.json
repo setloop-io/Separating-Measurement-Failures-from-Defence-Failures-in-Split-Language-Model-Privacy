@@ -1,0 +1,151 @@
+{
+  "schema": "dtraining.ea4.training_seed_aggregate.v1",
+  "experiment": "E-A4 membership/property inference repeatability",
+  "training_seeds": [
+    42,
+    43,
+    44
+  ],
+  "attacker_seeds_per_training_run": [
+    0,
+    1,
+    2
+  ],
+  "n_independent_training_runs": 3,
+  "inputs": [
+    {
+      "training_seed": 42,
+      "path": "paper-data/collected/toula/training/ea4/ea4_seed42_membership_property.json",
+      "sha256": "018a61f2827c9b8d88fa1d4fd5a3d07abe3e3e4442d242f84c9df1fba7c819ec"
+    },
+    {
+      "training_seed": 43,
+      "path": "paper-data/collected/toula/training/ea4/ea4_seed43_membership_property.json",
+      "sha256": "85b4d24fa50673831b76f7f98ebf2c36cf7f7eb78c38404dbb4da1eb833963c1"
+    },
+    {
+      "training_seed": 44,
+      "path": "paper-data/collected/toula/training/ea4/ea4_seed44_membership_property.json",
+      "sha256": "9ead85a493bd679d4f62a4fb20211521632febcabafa2cf2e21117d7af942b82"
+    }
+  ],
+  "metrics": {
+    "split_ft": {
+      "membership": {
+        "roc_auc_mean": {
+          "values": [
+            0.869460978835979,
+            0.8658234126984127,
+            0.890625
+          ],
+          "mean": 0.8753031305114639,
+          "sample_std": 0.013393197352353654,
+          "mean_95ci": [
+            0.8420298985974018,
+            0.908576362425526
+          ]
+        },
+        "tpr_at_1pct_fpr_mean": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "sample_std": 0.0,
+          "mean_95ci": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "property": {
+        "roc_auc_mean": {
+          "values": [
+            0.9803765950824775,
+            0.9724712107065048,
+            0.9829754123871771
+          ],
+          "mean": 0.9786077393920531,
+          "sample_std": 0.0054709415165234586,
+          "mean_95ci": [
+            0.9650160703470536,
+            0.9921994084370527
+          ]
+        },
+        "tpr_at_1pct_fpr_mean": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "sample_std": 0.0,
+          "mean_95ci": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "fedavg": {
+      "membership": {
+        "roc_auc_mean": {
+          "values": [
+            0.8813037367724869,
+            0.8656167328042329,
+            0.8747726521164022
+          ],
+          "mean": 0.8738977072310407,
+          "sample_std": 0.007880017118593022,
+          "mean_95ci": [
+            0.8543210796210811,
+            0.8934743348410003
+          ]
+        },
+        "tpr_at_1pct_fpr_mean": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "sample_std": 0.0,
+          "mean_95ci": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "property": {
+        "roc_auc_mean": {
+          "values": [
+            0.9816682228446935,
+            0.9829909741674449,
+            0.9869281045751634
+          ],
+          "mean": 0.9838624338624339,
+          "sample_std": 0.0027360867045153753,
+          "mean_95ci": [
+            0.9770650691211219,
+            0.9906597986037459
+          ]
+        },
+        "tpr_at_1pct_fpr_mean": {
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "sample_std": 0.0,
+          "mean_95ci": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    }
+  },
+  "ci_method": "two-sided Student t interval across training-seed means"
+}

@@ -1,0 +1,177 @@
+protocol_status: frozen_for_confirmation
+protocol_version: p2c-segment-statistics-1.0
+study: remote_substitutability_segment_statistics
+purpose: confirmatory_out_of_sample_predictive_test_of_segment_statistic
+cohort: confirmatory
+freeze_note: Frozen for the P2c segment-statistics confirmatory on 2026-09-04, AFTER stage-1 statistic
+  selection (seed-929 calibration measurement plus the frozen selection rule over the six exploratory
+  cells) and BEFORE any confirmatory run under this config. Seeds are fresh and disjoint from exploratory
+  [101, 202, 303], P2 confirmatory [11, 22, 33, 44, 55, 66, 77, 88], P2b rate-sweep [7, 17, 27, 37, 47,
+  57, 67, 87], and calibration [909, 919, 929]. The selected statistic and the selection table hash are
+  embedded in the selection section; changes after this freeze require a versioned amendment written before
+  inspecting affected outcomes.
+fixed:
+  backbone:
+    vocab_size: 256
+    d_model: 256
+    n_heads: 8
+    n_layers: 8
+    d_ff: 1024
+    max_seq_len: 128
+    init_std: 0.02
+  checkpoint_digest: none_seeded_init_per_run
+  tokenizer: byte_level_identity_vocab_256
+  tokenizer_digest: afba54bc5a1634ee9b070fe918bf9c9a2e15b3cfcbdc6bf24bce941dcb785585
+  corpus: data/raw/tinyshakespeare.txt
+  corpus_sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+  corpus_split:
+    rule: first_90_percent_train_last_10_percent_heldout_by_byte_offset
+    train_fraction: 0.9
+  corpus_split_digest: 6cd31100b2979ed8770cb5b68f9d67759ace427d926197dac604023ef195fb66
+  sequence_length: 128
+  batch_size: 32
+  optimizer:
+    name: adamw
+    lr: 0.0003
+    min_lr: 3.0e-05
+    betas:
+    - 0.9
+    - 0.95
+    weight_decay: 0.1
+    no_decay:
+    - layer_norm_weights
+    - biases
+    grad_clip: 1.0
+  scheduler:
+    warmup_steps: 100
+    decay: cosine_to_min_lr
+  steps: 2000
+  eval_every: 100
+  eval_batches: 64
+  convergence_rule: fixed_2000_steps_no_early_stop
+  boundary_defense:
+    type: uniform_per_tensor_affine_quantization
+    q_bits: 8
+    ste_in_training: true
+    serialization: true_quantized_packed_codes_plus_8_byte_affine_metadata
+  surrogate_family:
+    type: single_preln_transformer_block_plus_final_layernorm
+    head_dim: 32
+    d_ff_multiplier: 4
+  transcript_schema_version: 1.0.0
+  transcript_sample_every: 200
+  probe_batch_size: 8
+  ema_beta: 0.95
+  device: auto
+  dtype: float32
+factors:
+  segment_span:
+    s2at1:
+      start: 1
+      span: 2
+    s2at5:
+      start: 5
+      span: 2
+    s3at2:
+      start: 2
+      span: 3
+    s3at4:
+      start: 4
+      span: 3
+    s4at3:
+      start: 3
+      span: 4
+    s5at1:
+      start: 1
+      span: 5
+    s5at3:
+      start: 3
+      span: 5
+    s6at2:
+      start: 2
+      span: 6
+  latent_width:
+    high: 256
+  remote_mode:
+  - trained
+  seed:
+  - 3
+  - 13
+  - 23
+  - 33
+  - 43
+  - 53
+  - 63
+  - 83
+controls:
+  all_local: {}
+pairing:
+  block_id: pb-p2c-{seed}
+  shared_encoder_decoder_initialization: true
+  shared_minibatch_order: true
+  shared_trusted_random_streams: true
+  note: frozen_random/removed_remote are not run in p2c (prereg scope note); pairing fields kept for protocol
+    continuity
+operational_rate:
+  unit: bits_per_token
+  measurement_stage: serialized_remote_transcript
+  includes_repeated_releases: true
+matched_controls:
+- all_local
+primary_outcomes:
+- heldout_replacement_penalty
+selection:
+  statistic: intrinsic_dimension
+  selection_rule: the primary statistic is the candidate with the highest absolute Pearson correlation
+    with mean Delta_U across the six exploratory cells {2@3, 4@2, 6@1} x {64, 256}; ties broken by the
+    higher correlation within the width-256 subset
+  selection_rule_source: docs/PREREGISTRATION_P2C.md (frozen 2026-09-04)
+  selection_table: outputs/stats/selection_table.json
+  selection_table_sha256: 1bcc48ecc2738a013dde88783fe84b187dd8101f7f4d8192e10612afac998064
+  selection_cells:
+  - 2@3x64
+  - 2@3x256
+  - 4@2x64
+  - 4@2x256
+  - 6@1x64
+  - 6@1x256
+  statistics_measured_on:
+    n_batches: 64
+    run_id: segment-stats-s929
+    seed: 929
+    stream_label: measure
+  note: Statistics derive from ONE calibration backbone (seed 929); they characterize the family attractor,
+    not each seed. The selection cannot change after this freeze.
+confirmatory_rule:
+  inferential_unit: independent_training_run_seed
+  target: per-cell mean Delta_U = mean over seeds of (trained eval loss - all_local eval loss) at step
+    2000, fixed convergence
+  predictors:
+    model_S: Delta_U ~ a + b * intrinsic_dimension; OLS fit on the six exploratory selection points only
+    model_N: Delta_U ~ a + b * span; OLS fit on the six exploratory selection points only
+  primary:
+    test: one_sided_paired_t_test_over_8_cells on per-cell absolute out-of-sample prediction errors (model
+      S better)
+    alpha: 0.05
+    confirm_if: p < 0.05 AND mean absolute error of S < mean absolute error of N AND out-of-sample R^2
+      of S > 0
+  secondary:
+    h4_descriptive: out-of-sample R^2 of Delta_U ~ span vs Delta_U ~ span + position + statistic (latter
+      fit flagged low-power, reported without gating); per-cell residuals
+  missing_data: at most one retry per run with identical cell identity; a cell missing its all_local partner
+    seed drops that seed from the cell mean (predeclared, never outcome-based)
+failure_policy:
+  operational_failure_classes:
+  - device_error
+  - out_of_memory
+  - io_error
+  - schema_validation_error
+  max_retries: 1
+  rule: Failures are recorded with manifest status operational_failure and partial artifacts; never excluded
+    based on outcome.
+notes:
+- Trained mode only per held-out cell; frozen_random/removed_remote are not run in p2c (medium-high causal
+  gain is already confirmed under p2-confirmatory-1.0).
+- 'Privacy is not evaluated in p2c: no new boundary regimes (width 256, q=8 was scored in P2 and P2b).'
+- Prediction targets are replacement penalties Delta_U, not causal gains.
+- Timing is logged for systems accounting only and enters no privacy claim.

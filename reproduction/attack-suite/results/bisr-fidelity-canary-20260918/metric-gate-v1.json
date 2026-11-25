@@ -1,0 +1,108 @@
+{
+  "status": "METRIC_PARITY_PASS",
+  "scope": "fixed strings with declared empty-hypothesis canonicalisation",
+  "cases": [
+    {
+      "hypothesis": "The  quick  brown  fox .",
+      "reference": "The  slow  brown  dog .",
+      "candidate": {
+        "sample_id": "0",
+        "positional_accuracy": 0.6,
+        "rouge_l_f1": 0.4999999950000001,
+        "meteor": 0.3,
+        "token_set_f1": 0.6666666666666666
+      },
+      "upstream": {
+        "positional_accuracy": 0.6,
+        "rouge_l_f1": 0.4999999950000001,
+        "meteor": 0.3,
+        "token_set_f1": 0.6666666666666666
+      },
+      "absolute_differences": {
+        "positional_accuracy": 0.0,
+        "rouge_l_f1": 0.0,
+        "meteor": 0.0,
+        "token_set_f1": 0.0
+      }
+    },
+    {
+      "hypothesis": "The  car  stopped .",
+      "reference": "The  automobile  stopped .",
+      "candidate": {
+        "sample_id": "1",
+        "positional_accuracy": 0.75,
+        "rouge_l_f1": 0.6666666616666668,
+        "meteor": 0.6388888888888888,
+        "token_set_f1": 0.8
+      },
+      "upstream": {
+        "positional_accuracy": 0.75,
+        "rouge_l_f1": 0.6666666616666668,
+        "meteor": 0.6388888888888888,
+        "token_set_f1": 0.8000000000000002
+      },
+      "absolute_differences": {
+        "positional_accuracy": 0.0,
+        "rouge_l_f1": 0.0,
+        "meteor": 0.0,
+        "token_set_f1": 1.1102230246251565e-16
+      }
+    },
+    {
+      "hypothesis": "A  cat  sat  here .",
+      "reference": "A  cat  sat  here .",
+      "candidate": {
+        "sample_id": "2",
+        "positional_accuracy": 1.0,
+        "rouge_l_f1": 0.999999995,
+        "meteor": 0.996,
+        "token_set_f1": 1.0
+      },
+      "upstream": {
+        "positional_accuracy": 1.0,
+        "rouge_l_f1": 0.999999995,
+        "meteor": 0.996,
+        "token_set_f1": 1.0
+      },
+      "absolute_differences": {
+        "positional_accuracy": 0.0,
+        "rouge_l_f1": 0.0,
+        "meteor": 0.0,
+        "token_set_f1": 0.0
+      }
+    },
+    {
+      "hypothesis": "<EMP>",
+      "reference": "A  cat  sat  here .",
+      "candidate": {
+        "sample_id": "3",
+        "positional_accuracy": 0.0,
+        "rouge_l_f1": 0.0,
+        "meteor": 0.0,
+        "token_set_f1": 0.0
+      },
+      "upstream": {
+        "positional_accuracy": 0.0,
+        "rouge_l_f1": 0.0,
+        "meteor": 0.0,
+        "token_set_f1": 0.0
+      },
+      "absolute_differences": {
+        "positional_accuracy": 0.0,
+        "rouge_l_f1": 0.0,
+        "meteor": 0.0,
+        "token_set_f1": 0.0
+      }
+    }
+  ],
+  "tolerance": 1e-12,
+  "upstream_source_sha256": "77aef15b9187c964049e1ef42363c45c00fb204d9520161f97c31c72a620e67d",
+  "wordnet_sha256": "cbda5ea6eef7f36a97a43d4a75f85e07fccbb4f23657d27b4ccbc93e2646ab59",
+  "script_sha256": "cb081634bb47465170369a7a5320366e21d18c19570d3ba4aa0ee6788ea69eb7",
+  "versions": {
+    "rouge": "1.0.1",
+    "nltk": "3.9.1",
+    "transformers": "5.15.0"
+  },
+  "fidelity_established": false
+}

@@ -1,0 +1,1193 @@
+{
+  "analysis_stage": "exploratory",
+  "block_clustered_estimator": "paired nonparametric bootstrap over held-out sequence blocks",
+  "confirmation_manifest": null,
+  "limitations": [
+    "Seed-level training uncertainty and within-run block uncertainty are not pooled.",
+    "Artifacts without evaluation_blocks cannot yield a block-clustered interval.",
+    "Exploratory results remain descriptive even when their interval is below the utility gate.",
+    "Missing actual remote FLOPs remain missing; coverage is not substituted for them."
+  ],
+  "points": [
+    {
+      "block_clustered_status": "available_per_run",
+      "cells": [
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 1.6287491152761504,
+              "ci95_low": 1.5752339739119634,
+              "cluster_count": 4096,
+              "estimate": 1.6013885219581425,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 6.531705359404441,
+            "delegated_eval_seconds": 300.0841160029813,
+            "delegated_eval_time_ratio": 0.9779089582671493,
+            "remote_compute_ms": 132548.64954933873,
+            "training_seconds": 687.5596323799982,
+            "utility_nll_delta": 1.6013885219581425,
+            "wire_bytes": 496891262
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split13_s42.json",
+          "seed": 42
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 1.621302378422115,
+              "ci95_low": 1.5690765008912422,
+              "cluster_count": 4096,
+              "estimate": 1.5948584989528172,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 6.525175336399116,
+            "delegated_eval_seconds": 298.2050753670046,
+            "delegated_eval_time_ratio": 0.9727487494618937,
+            "remote_compute_ms": 61165.02950619906,
+            "training_seconds": 596.7739309240133,
+            "utility_nll_delta": 1.5948584989528172,
+            "wire_bytes": 496888783
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split13_s43.json",
+          "seed": 43
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 1.6518785825464875,
+              "ci95_low": 1.5965543931233697,
+              "cluster_count": 4096,
+              "estimate": 1.6243003471172415,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 6.55461718456354,
+            "delegated_eval_seconds": 299.7251046030142,
+            "delegated_eval_time_ratio": 0.976610979016003,
+            "remote_compute_ms": 71202.02193813748,
+            "training_seconds": 618.6349905590178,
+            "utility_nll_delta": 1.6243003471172415,
+            "wire_bytes": 496889155
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split13_s44.json",
+          "seed": 44
+        }
+      ],
+      "configuration": {
+        "adversary_strength": 0.25,
+        "analysis_stage": "exploratory",
+        "bundle_canonical_fraction": 0.0,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+        "delegate_sublayer": "full",
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "frozen_grid_cell_id": null,
+        "frozen_grid_id": null,
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "sequence_length": 32,
+        "split_after": 13,
+        "steps": 4000,
+        "surrogate_mode": "trained",
+        "surrogate_placement": "remote",
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      },
+      "seed_level": {
+        "actual_remote_flops": {
+          "ci95": null,
+          "ci95_high": null,
+          "ci95_low": null,
+          "mean": null,
+          "n": 0,
+          "sd": null
+        },
+        "baseline_nll": {
+          "ci95": 0.0,
+          "ci95_high": 4.9303168374462985,
+          "ci95_low": 4.9303168374462985,
+          "mean": 4.9303168374462985,
+          "n": 3,
+          "sd": 0.0
+        },
+        "candidate_nll": {
+          "ci95": 0.03841249851333366,
+          "ci95_high": 6.575578458635699,
+          "ci95_low": 6.498753461609032,
+          "mean": 6.5371659601223655,
+          "n": 3,
+          "sd": 0.015461863599990206
+        },
+        "delegated_eval_seconds": {
+          "ci95": 2.4781552310843358,
+          "ci95_high": 301.816253888751,
+          "ci95_low": 296.8599434265824,
+          "mean": 299.3380986576667,
+          "n": 3,
+          "sd": 0.9975112175878832
+        },
+        "delegated_eval_time_ratio": {
+          "ci95": 0.006668440900005478,
+          "ci95_high": 0.9824246698150209,
+          "ci95_low": 0.9690877880150098,
+          "mean": 0.9757562289150153,
+          "n": 3,
+          "sd": 0.00268419206276547
+        },
+        "remote_compute_ms": {
+          "ci95": 96002.72312053214,
+          "ci95_high": 184307.95678509056,
+          "ci95_low": -7697.489455973715,
+          "mean": 88305.23366455843,
+          "n": 3,
+          "sd": 38643.17780844272
+        },
+        "training_seconds": {
+          "ci95": 117.71392764581807,
+          "ci95_high": 752.0367789334945,
+          "ci95_low": 516.6089236418583,
+          "mean": 634.3228512876764,
+          "n": 3,
+          "sd": 47.38240842227366
+        },
+        "utility_nll_delta": {
+          "ci95": 0.03841249851333366,
+          "ci95_high": 1.6452616211894007,
+          "ci95_low": 1.5684366241627334,
+          "mean": 1.606849122676067,
+          "n": 3,
+          "sd": 0.015461863599990206
+        },
+        "wire_bytes": {
+          "ci95": 3321.228799026265,
+          "ci95_high": 496893054.56213236,
+          "ci95_low": 496886412.10453427,
+          "mean": 496889733.3333333,
+          "n": 3,
+          "sd": 1336.8666101497686
+        }
+      },
+      "utility_gate_status": "above_utility_gate"
+    },
+    {
+      "block_clustered_status": "available_per_run",
+      "cells": [
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 1.492791124037467,
+              "ci95_low": 1.4377362910308875,
+              "cluster_count": 4096,
+              "estimate": 1.465184181521181,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 6.3955010189674795,
+            "delegated_eval_seconds": 310.0466104990046,
+            "delegated_eval_time_ratio": 1.01090959520242,
+            "remote_compute_ms": 122570.51547933952,
+            "training_seconds": 674.0112952100026,
+            "utility_nll_delta": 1.465184181521181,
+            "wire_bytes": 496893642
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split14_s42.json",
+          "seed": 42
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 1.4793487084680237,
+              "ci95_low": 1.4254169282503426,
+              "cluster_count": 4096,
+              "estimate": 1.4521338895428926,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 6.382450726989191,
+            "delegated_eval_seconds": 310.392724121979,
+            "delegated_eval_time_ratio": 1.0117228910354907,
+            "remote_compute_ms": 124251.68002242572,
+            "training_seconds": 677.6951253430161,
+            "utility_nll_delta": 1.4521338895428926,
+            "wire_bytes": 496893708
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split14_s43.json",
+          "seed": 43
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 1.5136719710426405,
+              "ci95_low": 1.4612047852715477,
+              "cluster_count": 4096,
+              "estimate": 1.4874653733568266,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 6.417782210803125,
+            "delegated_eval_seconds": 310.00584359897766,
+            "delegated_eval_time_ratio": 1.008001391979772,
+            "remote_compute_ms": 122100.92657108908,
+            "training_seconds": 652.12537754199,
+            "utility_nll_delta": 1.4874653733568266,
+            "wire_bytes": 496893673
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split14_s44.json",
+          "seed": 44
+        }
+      ],
+      "configuration": {
+        "adversary_strength": 0.25,
+        "analysis_stage": "exploratory",
+        "bundle_canonical_fraction": 0.0,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+        "delegate_sublayer": "full",
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "frozen_grid_cell_id": null,
+        "frozen_grid_id": null,
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "sequence_length": 32,
+        "split_after": 14,
+        "steps": 4000,
+        "surrogate_mode": "trained",
+        "surrogate_placement": "remote",
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      },
+      "seed_level": {
+        "actual_remote_flops": {
+          "ci95": null,
+          "ci95_high": null,
+          "ci95_low": null,
+          "mean": null,
+          "n": 0,
+          "sd": null
+        },
+        "baseline_nll": {
+          "ci95": 0.0,
+          "ci95_high": 4.9303168374462985,
+          "ci95_low": 4.9303168374462985,
+          "mean": 4.9303168374462985,
+          "n": 3,
+          "sd": 0.0
+        },
+        "candidate_nll": {
+          "ci95": 0.04438416255015433,
+          "ci95_high": 6.442962148136753,
+          "ci95_low": 6.354193823036444,
+          "mean": 6.3985779855865985,
+          "n": 3,
+          "sd": 0.01786558786620105
+        },
+        "delegated_eval_seconds": {
+          "ci95": 0.5281124169639009,
+          "ci95_high": 310.67650515695095,
+          "ci95_low": 309.62028032302317,
+          "mean": 310.14839273998706,
+          "n": 3,
+          "sd": 0.2125766995792415
+        },
+        "delegated_eval_time_ratio": {
+          "ci95": 0.004860745032012387,
+          "ci95_high": 1.0150720377712399,
+          "ci95_low": 1.005350547707215,
+          "mean": 1.0102112927392275,
+          "n": 3,
+          "sd": 0.0019565552772678276
+        },
+        "remote_compute_ms": {
+          "ci95": 2809.3475964436593,
+          "ci95_high": 125783.72162072844,
+          "ci95_low": 120165.0264278411,
+          "mean": 122974.37402428477,
+          "n": 3,
+          "sd": 1130.8233263216184
+        },
+        "training_seconds": {
+          "ci95": 34.339869154518254,
+          "ci95_high": 702.2838018528545,
+          "ci95_low": 633.6040635438179,
+          "mean": 667.9439326983362,
+          "n": 3,
+          "sd": 13.822541970925617
+        },
+        "utility_nll_delta": {
+          "ci95": 0.04438416255015433,
+          "ci95_high": 1.5126453106904545,
+          "ci95_low": 1.4238769855901456,
+          "mean": 1.4682611481403,
+          "n": 3,
+          "sd": 0.01786558786620105
+        },
+        "wire_bytes": {
+          "ci95": 82.03333417242314,
+          "ci95_high": 496893756.3666675,
+          "ci95_low": 496893592.2999991,
+          "mean": 496893674.3333333,
+          "n": 3,
+          "sd": 33.020195840323744
+        }
+      },
+      "utility_gate_status": "above_utility_gate"
+    },
+    {
+      "block_clustered_status": "available_per_run",
+      "cells": [
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 1.3822896073106676,
+              "ci95_low": 1.3299110727966763,
+              "cluster_count": 4096,
+              "estimate": 1.3564787178183906,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 6.286795555264689,
+            "delegated_eval_seconds": 321.07866671499505,
+            "delegated_eval_time_ratio": 1.0464092987348932,
+            "remote_compute_ms": 125152.8499246051,
+            "training_seconds": 679.894046158006,
+            "utility_nll_delta": 1.3564787178183906,
+            "wire_bytes": 496893036
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split15_s42.json",
+          "seed": 42
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 1.382589852088131,
+              "ci95_low": 1.3294613875332288,
+              "cluster_count": 4096,
+              "estimate": 1.3565997903351672,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 6.286916627781466,
+            "delegated_eval_seconds": 321.50138561299536,
+            "delegated_eval_time_ratio": 1.0489034450188104,
+            "remote_compute_ms": 129478.5120797751,
+            "training_seconds": 679.4705728080007,
+            "utility_nll_delta": 1.3565997903351672,
+            "wire_bytes": 496892915
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split15_s43.json",
+          "seed": 43
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 1.395746748545207,
+              "ci95_low": 1.3429658398381434,
+              "cluster_count": 4096,
+              "estimate": 1.368935145670548,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 6.2992519831168465,
+            "delegated_eval_seconds": 321.4059237509937,
+            "delegated_eval_time_ratio": 1.0476604473363238,
+            "remote_compute_ms": 129480.21938742022,
+            "training_seconds": 677.2966778670088,
+            "utility_nll_delta": 1.368935145670548,
+            "wire_bytes": 496892979
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split15_s44.json",
+          "seed": 44
+        }
+      ],
+      "configuration": {
+        "adversary_strength": 0.25,
+        "analysis_stage": "exploratory",
+        "bundle_canonical_fraction": 0.0,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+        "delegate_sublayer": "full",
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "frozen_grid_cell_id": null,
+        "frozen_grid_id": null,
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "sequence_length": 32,
+        "split_after": 15,
+        "steps": 4000,
+        "surrogate_mode": "trained",
+        "surrogate_placement": "remote",
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      },
+      "seed_level": {
+        "actual_remote_flops": {
+          "ci95": null,
+          "ci95_high": null,
+          "ci95_low": null,
+          "mean": null,
+          "n": 0,
+          "sd": null
+        },
+        "baseline_nll": {
+          "ci95": 0.0,
+          "ci95_high": 4.9303168374462985,
+          "ci95_low": 4.9303168374462985,
+          "mean": 4.9303168374462985,
+          "n": 3,
+          "sd": 0.0
+        },
+        "candidate_nll": {
+          "ci95": 0.01778047655303976,
+          "ci95_high": 6.308768531940707,
+          "ci95_low": 6.2732075788346275,
+          "mean": 6.290988055387667,
+          "n": 3,
+          "sd": 0.007157027369893563
+        },
+        "delegated_eval_seconds": {
+          "ci95": 0.5507741028560973,
+          "ci95_high": 321.8794327958508,
+          "ci95_low": 320.77788459013857,
+          "mean": 321.3286586929947,
+          "n": 3,
+          "sd": 0.22169851955378272
+        },
+        "delegated_eval_time_ratio": {
+          "ci95": 0.003098156969821066,
+          "ci95_high": 1.0507558873331635,
+          "ci95_low": 1.0445595733935216,
+          "mean": 1.0476577303633425,
+          "n": 3,
+          "sd": 0.0012470753617368632
+        },
+        "remote_compute_ms": {
+          "ci95": 6205.6662044136565,
+          "ci95_high": 134242.86000168047,
+          "ci95_low": 121831.52759285315,
+          "mean": 128037.19379726681,
+          "n": 3,
+          "sd": 2497.9152128416367
+        },
+        "training_seconds": {
+          "ci95": 3.4619873093405604,
+          "ci95_high": 682.349086253679,
+          "ci95_low": 675.425111634998,
+          "mean": 678.8870989443385,
+          "n": 3,
+          "sd": 1.3935249628018875
+        },
+        "utility_nll_delta": {
+          "ci95": 0.01778047655303976,
+          "ci95_high": 1.3784516944944085,
+          "ci95_low": 1.3428907413883289,
+          "mean": 1.3606712179413687,
+          "n": 3,
+          "sd": 0.007157027369893563
+        },
+        "wire_bytes": {
+          "ci95": 150.38627609407862,
+          "ci95_high": 496893127.05294275,
+          "ci95_low": 496892826.2803906,
+          "mean": 496892976.6666667,
+          "n": 3,
+          "sd": 60.53373714990124
+        }
+      },
+      "utility_gate_status": "above_utility_gate"
+    },
+    {
+      "block_clustered_status": "available_per_run",
+      "cells": [
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.9783192871254869,
+              "ci95_low": 0.9287705683964305,
+              "cluster_count": 4096,
+              "estimate": 0.9531095472048037,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 5.883426384651102,
+            "delegated_eval_seconds": 340.31709718800266,
+            "delegated_eval_time_ratio": 1.1100518014142833,
+            "remote_compute_ms": 132820.46425882436,
+            "training_seconds": 694.9883957560087,
+            "utility_nll_delta": 0.9531095472048037,
+            "wire_bytes": 496892374
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split17_s42.json",
+          "seed": 42
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.9748382175457664,
+              "ci95_low": 0.9234662200906314,
+              "cluster_count": 4096,
+              "estimate": 0.9493009795551188,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 5.879617817001417,
+            "delegated_eval_seconds": 340.83768283200334,
+            "delegated_eval_time_ratio": 1.1111087520655456,
+            "remote_compute_ms": 132874.8503127572,
+            "training_seconds": 683.7451768750034,
+            "utility_nll_delta": 0.9493009795551188,
+            "wire_bytes": 496892984
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split17_s43.json",
+          "seed": 43
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.9690598897868767,
+              "ci95_low": 0.9151285528205335,
+              "cluster_count": 4096,
+              "estimate": 0.9416669476777315,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 5.87198378512403,
+            "delegated_eval_seconds": 339.92895436398976,
+            "delegated_eval_time_ratio": 1.1088714020928165,
+            "remote_compute_ms": 123659.33662488533,
+            "training_seconds": 670.0393314709945,
+            "utility_nll_delta": 0.9416669476777315,
+            "wire_bytes": 496893541
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split17_s44.json",
+          "seed": 44
+        }
+      ],
+      "configuration": {
+        "adversary_strength": 0.25,
+        "analysis_stage": "exploratory",
+        "bundle_canonical_fraction": 0.0,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+        "delegate_sublayer": "full",
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "frozen_grid_cell_id": null,
+        "frozen_grid_id": null,
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "sequence_length": 32,
+        "split_after": 17,
+        "steps": 4000,
+        "surrogate_mode": "trained",
+        "surrogate_placement": "remote",
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      },
+      "seed_level": {
+        "actual_remote_flops": {
+          "ci95": null,
+          "ci95_high": null,
+          "ci95_low": null,
+          "mean": null,
+          "n": 0,
+          "sd": null
+        },
+        "baseline_nll": {
+          "ci95": 0.0,
+          "ci95_high": 4.9303168374462985,
+          "ci95_low": 4.9303168374462985,
+          "mean": 4.9303168374462985,
+          "n": 3,
+          "sd": 0.0
+        },
+        "candidate_nll": {
+          "ci95": 0.014475995014623337,
+          "ci95_high": 5.892818657273473,
+          "ci95_low": 5.863866667244226,
+          "mean": 5.8783426622588495,
+          "n": 3,
+          "sd": 0.005826901895291981
+        },
+        "delegated_eval_seconds": {
+          "ci95": 1.1327836237218516,
+          "ci95_high": 341.49402841838713,
+          "ci95_low": 339.2284611709434,
+          "mean": 340.36124479466525,
+          "n": 3,
+          "sd": 0.4559699721748158
+        },
+        "delegated_eval_time_ratio": {
+          "ci95": 0.002780576813710106,
+          "ci95_high": 1.1127912286712587,
+          "ci95_low": 1.1072300750438384,
+          "mean": 1.1100106518575485,
+          "n": 3,
+          "sd": 0.0011192424623969056
+        },
+        "remote_compute_ms": {
+          "ci95": 13179.287749284742,
+          "ci95_high": 142964.17148144037,
+          "ci95_low": 116605.59598287087,
+          "mean": 129784.88373215562,
+          "n": 3,
+          "sd": 5304.949102796014
+        },
+        "training_seconds": {
+          "ci95": 31.04123971172096,
+          "ci95_high": 713.9655410790565,
+          "ci95_low": 651.8830616556145,
+          "mean": 682.9243013673355,
+          "n": 3,
+          "sd": 12.494772091709363
+        },
+        "utility_nll_delta": {
+          "ci95": 0.014475995014623337,
+          "ci95_high": 0.9625018198271748,
+          "ci95_low": 0.933549829797928,
+          "mean": 0.9480258248125514,
+          "n": 3,
+          "sd": 0.005826901895291981
+        },
+        "wire_bytes": {
+          "ci95": 1450.1095812719734,
+          "ci95_high": 496894416.4429146,
+          "ci95_low": 496891516.223752,
+          "mean": 496892966.3333333,
+          "n": 3,
+          "sd": 583.7005510819167
+        }
+      },
+      "utility_gate_status": "above_utility_gate"
+    },
+    {
+      "block_clustered_status": "available_per_run",
+      "cells": [
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.539668980462011,
+              "ci95_low": 0.49615180719411,
+              "cluster_count": 4096,
+              "estimate": 0.5177509505301714,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 5.44806778797647,
+            "delegated_eval_seconds": 362.4886474590021,
+            "delegated_eval_time_ratio": 1.1820460784879727,
+            "remote_compute_ms": 129677.20102901512,
+            "training_seconds": 669.8394793649932,
+            "utility_nll_delta": 0.5177509505301714,
+            "wire_bytes": 496893314
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split19_s42.json",
+          "seed": 42
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.5442934872116894,
+              "ci95_low": 0.5002490888000466,
+              "cluster_count": 4096,
+              "estimate": 0.5217240497586317,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 5.45204088720493,
+            "delegated_eval_seconds": 361.80564880500606,
+            "delegated_eval_time_ratio": 1.1807153773298424,
+            "remote_compute_ms": 116271.90926916956,
+            "training_seconds": 653.0501019780058,
+            "utility_nll_delta": 0.5217240497586317,
+            "wire_bytes": 496894621
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split19_s43.json",
+          "seed": 43
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.5322969966218807,
+              "ci95_low": 0.48676435201196,
+              "cluster_count": 4096,
+              "estimate": 0.5094061866984703,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 5.439723024144769,
+            "delegated_eval_seconds": 362.15623113900074,
+            "delegated_eval_time_ratio": 1.180129741846438,
+            "remote_compute_ms": 119161.41640613205,
+            "training_seconds": 659.8847959169943,
+            "utility_nll_delta": 0.5094061866984703,
+            "wire_bytes": 496894079
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split19_s44.json",
+          "seed": 44
+        }
+      ],
+      "configuration": {
+        "adversary_strength": 0.25,
+        "analysis_stage": "exploratory",
+        "bundle_canonical_fraction": 0.0,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+        "delegate_sublayer": "full",
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "frozen_grid_cell_id": null,
+        "frozen_grid_id": null,
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "sequence_length": 32,
+        "split_after": 19,
+        "steps": 4000,
+        "surrogate_mode": "trained",
+        "surrogate_placement": "remote",
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      },
+      "seed_level": {
+        "actual_remote_flops": {
+          "ci95": null,
+          "ci95_high": null,
+          "ci95_low": null,
+          "mean": null,
+          "n": 0,
+          "sd": null
+        },
+        "baseline_nll": {
+          "ci95": 0.0,
+          "ci95_high": 4.9303168374462985,
+          "ci95_low": 4.9303168374462985,
+          "mean": 4.9303168374462985,
+          "n": 3,
+          "sd": 0.0
+        },
+        "candidate_nll": {
+          "ci95": 0.015618775396795083,
+          "ci95_high": 5.462229341838851,
+          "ci95_low": 5.430991791045262,
+          "mean": 5.4466105664420565,
+          "n": 3,
+          "sd": 0.006286895779515648
+        },
+        "delegated_eval_seconds": {
+          "ci95": 0.8484998499693727,
+          "ci95_high": 362.9986756509723,
+          "ci95_low": 361.3016759510336,
+          "mean": 362.15017580100294,
+          "n": 3,
+          "sd": 0.3415395887430916
+        },
+        "delegated_eval_time_ratio": {
+          "ci95": 0.002439648922062896,
+          "ci95_high": 1.183403381476814,
+          "ci95_low": 1.1785240836326882,
+          "mean": 1.180963732554751,
+          "n": 3,
+          "sd": 0.0009820115932241645
+        },
+        "remote_compute_ms": {
+          "ci95": 17526.84979444216,
+          "ci95_high": 139230.35869588106,
+          "ci95_low": 104176.65910699675,
+          "mean": 121703.50890143891,
+          "n": 3,
+          "sd": 7054.937099837777
+        },
+        "training_seconds": {
+          "ci95": 20.97493554955144,
+          "ci95_high": 681.8997279695492,
+          "ci95_low": 639.9498568704463,
+          "mean": 660.9247924199977,
+          "n": 3,
+          "sd": 8.442866385616018
+        },
+        "utility_nll_delta": {
+          "ci95": 0.015618775396795083,
+          "ci95_high": 0.5319125043925529,
+          "ci95_low": 0.5006749535989626,
+          "mean": 0.5162937289957578,
+          "n": 3,
+          "sd": 0.006286895779515648
+        },
+        "wire_bytes": {
+          "ci95": 1631.37305232845,
+          "ci95_high": 496895636.039719,
+          "ci95_low": 496892373.2936144,
+          "mean": 496894004.6666667,
+          "n": 3,
+          "sd": 656.6630287547284
+        }
+      },
+      "utility_gate_status": "above_utility_gate"
+    },
+    {
+      "block_clustered_status": "available_per_run",
+      "cells": [
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": -0.02439090466941707,
+              "ci95_low": -0.06189471349352971,
+              "cluster_count": 4096,
+              "estimate": -0.04220829124096781,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 4.888108546205331,
+            "delegated_eval_seconds": 385.53163521399256,
+            "delegated_eval_time_ratio": 1.2579393642510563,
+            "remote_compute_ms": 104346.54368142947,
+            "training_seconds": 660.3945401230012,
+            "utility_nll_delta": -0.04220829124096781,
+            "wire_bytes": 496891785
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split21_s42.json",
+          "seed": 42
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": -0.03286656766431406,
+              "ci95_low": -0.06814054120332003,
+              "cluster_count": 4096,
+              "estimate": -0.05033678183099255,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 4.879980055615306,
+            "delegated_eval_seconds": 382.97671708700364,
+            "delegated_eval_time_ratio": 1.2434300324658834,
+            "remote_compute_ms": 106049.37391649582,
+            "training_seconds": 662.0858102229977,
+            "utility_nll_delta": -0.05033678183099255,
+            "wire_bytes": 496891750
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split21_s43.json",
+          "seed": 43
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": -0.02938564697979018,
+              "ci95_low": -0.06488511199131608,
+              "cluster_count": 4096,
+              "estimate": -0.046651051845401525,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 4.883665785600897,
+            "delegated_eval_seconds": 381.7547567189904,
+            "delegated_eval_time_ratio": 1.2452224172909123,
+            "remote_compute_ms": 128172.51064012817,
+            "training_seconds": 673.0797362620069,
+            "utility_nll_delta": -0.046651051845401525,
+            "wire_bytes": 496892944
+          },
+          "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier_split21_s44.json",
+          "seed": 44
+        }
+      ],
+      "configuration": {
+        "adversary_strength": 0.25,
+        "analysis_stage": "exploratory",
+        "bundle_canonical_fraction": 0.0,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+        "delegate_sublayer": "full",
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "frozen_grid_cell_id": null,
+        "frozen_grid_id": null,
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "sequence_length": 32,
+        "split_after": 21,
+        "steps": 4000,
+        "surrogate_mode": "trained",
+        "surrogate_placement": "remote",
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      },
+      "seed_level": {
+        "actual_remote_flops": {
+          "ci95": null,
+          "ci95_high": null,
+          "ci95_low": null,
+          "mean": null,
+          "n": 0,
+          "sd": null
+        },
+        "baseline_nll": {
+          "ci95": 0.0,
+          "ci95_high": 4.9303168374462985,
+          "ci95_low": 4.9303168374462985,
+          "mean": 4.9303168374462985,
+          "n": 3,
+          "sd": 0.0
+        },
+        "candidate_nll": {
+          "ci95": 0.010111545762656835,
+          "ci95_high": 4.894029674903168,
+          "ci95_low": 4.8738065833778546,
+          "mean": 4.883918129140511,
+          "n": 3,
+          "sd": 0.0040701164313222005
+        },
+        "delegated_eval_seconds": {
+          "ci95": 4.787924652283742,
+          "ci95_high": 388.20896099227923,
+          "ci95_low": 378.6331116877118,
+          "mean": 383.4210363399955,
+          "n": 3,
+          "sd": 1.9272434953676485
+        },
+        "delegated_eval_time_ratio": {
+          "ci95": 0.019652305857710328,
+          "ci95_high": 1.2685162438603275,
+          "ci95_low": 1.229211632144907,
+          "mean": 1.2488639380026172,
+          "n": 3,
+          "sd": 0.007910479254342958
+        },
+        "remote_compute_ms": {
+          "ci95": 33020.98124299813,
+          "ci95_high": 145877.12398901596,
+          "ci95_low": 79835.16150301968,
+          "mean": 112856.14274601782,
+          "n": 3,
+          "sd": 13291.660987369663
+        },
+        "training_seconds": {
+          "ci95": 17.1113323225038,
+          "ci95_high": 682.2980278585057,
+          "ci95_low": 648.0753632134981,
+          "mean": 665.1866955360019,
+          "n": 3,
+          "sd": 6.88768230717456
+        },
+        "utility_nll_delta": {
+          "ci95": 0.010111545762656835,
+          "ci95_high": -0.03628716254313046,
+          "ci95_low": -0.05651025406844413,
+          "mean": -0.046398708305787295,
+          "n": 3,
+          "sd": 0.0040701164313222005
+        },
+        "wire_bytes": {
+          "ci95": 1688.0531221051008,
+          "ci95_high": 496893847.7197888,
+          "ci95_low": 496890471.6135446,
+          "mean": 496892159.6666667,
+          "n": 3,
+          "sd": 679.4779859078095
+        }
+      },
+      "utility_gate_status": "below_utility_gate"
+    }
+  ],
+  "schema": "dtraining.delegation_statistics.v1",
+  "seed_level_estimator": "two-sided Student-t interval across independent seeds",
+  "skipped": [
+    {
+      "path": "/home/geo/dtraining-phase02/outputs/phase02_exploratory/frontier.json",
+      "reason": "missing eval_loss_delta"
+    }
+  ],
+  "status": "completed",
+  "utility_gate_nll_delta": 0.35
+}

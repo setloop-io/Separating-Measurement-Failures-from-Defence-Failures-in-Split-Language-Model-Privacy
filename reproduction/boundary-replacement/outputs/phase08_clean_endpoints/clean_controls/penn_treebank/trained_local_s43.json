@@ -1,0 +1,183 @@
+{
+  "active_cloud_delta": 0.0,
+  "adversary_strength": 0.25,
+  "analysis_stage": "exploratory",
+  "attack_steps": 256,
+  "attacker_bundle": null,
+  "attacker_updates": 3,
+  "baseline_eval_loss": 5.726744522864465,
+  "baseline_eval_seconds": 75.9421389750205,
+  "bundle_canonical_fraction": 0.0,
+  "byzantine_flagged_frames": 0,
+  "byzantine_max_relative_deviation": 0.0,
+  "byzantine_threshold": null,
+  "byzantine_verified_frames": 0,
+  "byzantine_verify": false,
+  "candidate_eval_loss": 5.679985991620924,
+  "candidate_eval_seconds": 147.31710734707303,
+  "chaff_tokens": 48,
+  "clip_norm": 1.0,
+  "cloud_channels": 1,
+  "cloud_correction_loss_improvement": 6.886166003125254,
+  "cloud_experts": 8,
+  "cloud_kind": "monomial_moe_radial",
+  "cloud_layers": 2,
+  "cloud_state_contains_hidden_width": false,
+  "corpus": "/home/geo/datasets/ptb.train.txt",
+  "decoder_zero_eval_loss": 5.788767483260017,
+  "delegate_sublayer": "full",
+  "device": "cuda",
+  "dp": {
+    "adjacency": "replace_one",
+    "delta": 1e-06,
+    "epsilon": {
+      "composed": 11025341.755302425,
+      "forward": 4646985.18742484,
+      "outbound_gradient": 0.0,
+      "return": 6388459.689318926
+    },
+    "method": "zcdp_gaussian_replace_one",
+    "parameters": {
+      "forward_clip": 1.0,
+      "forward_noise_multiplier": 0.35,
+      "outbound_gradient_clip": 1.0,
+      "outbound_gradient_noise_multiplier": 0.35,
+      "return_clip": 1.0,
+      "return_noise_multiplier": 0.35
+    },
+    "releases": {
+      "forward": 283648,
+      "outbound_gradient": 0,
+      "return": 390144
+    },
+    "rho": {
+      "forward": 4630987.755102818,
+      "outbound_gradient": 0.0,
+      "return": 6369697.95918483
+    }
+  },
+  "eval_blocks": 4096,
+  "eval_loss_delta": -0.04675853124354035,
+  "eval_time_ratio": 1.939859863514376,
+  "exact_capture_label_bundle": null,
+  "fragment_channels": 1,
+  "frozen_grid_cell_id": null,
+  "frozen_grid_id": null,
+  "gates": {
+    "cloud_correction_improves_loss": true,
+    "cloud_latent_only": true,
+    "eval_time_ratio_le_3": true,
+    "privacy_above_band_le_1pct": true,
+    "secret_coordinates_hidden_from_koula": true,
+    "token_norm_and_sign_gauged": false,
+    "token_order_hidden_from_koula": true,
+    "utility_delta_le_0_35": true
+  },
+  "gram_flatten": 0.0,
+  "hidden_dim": 1024,
+  "label_free_majority_pct": 4.67315673828125,
+  "latent_dim": 64,
+  "limitations": [
+    "single-process pilot; two-node protocol not exercised",
+    "short training run; not convergence or paper evidence",
+    "fresh probe is a diagnostic subset, not the complete /attacker suite"
+  ],
+  "lr": 0.0003,
+  "mean_step_seconds": 0.10438200909522129,
+  "mine_mi_nats_held_out": null,
+  "mine_penalty": 0.0,
+  "model": "/workspace/experiments/models/qwen3-0.6b",
+  "noise_multiplier": 0.35,
+  "nominal_covered_layer_share": 0.2857142857142857,
+  "privacy_evaluation": {
+    "cell_id": "sha256:b1ab398adfca861feee1f556affa44639920cf971aff2354c0a08f61fec7e35b",
+    "claim_status": "not_a_full_compromised_cloud_evaluation",
+    "current_bundle_scope": "post_training_regenerated_forward_only",
+    "required_observed_surfaces": [
+      "forward_wire",
+      "outbound_training_gradient",
+      "cloud_state_history",
+      "protocol_metadata"
+    ]
+  },
+  "probe_recovery_pct": [
+    3.9263916015625,
+    4.24102783203125,
+    4.1241455078125
+  ],
+  "probe_restarts": 3,
+  "public_steps": 0,
+  "recovery_above_label_free_pct": -0.43212890625,
+  "remote_capture_sessions": [],
+  "remote_grad_clip": 1.0,
+  "remote_protocol": null,
+  "remote_tampered_frames": 0,
+  "resume_after": 26,
+  "schema": "dtraining.latent_native_v5_06b.v1",
+  "secret_token_gauge": false,
+  "secret_token_permutation": true,
+  "secret_wire_rotation": true,
+  "seed": 43,
+  "sequence_length": 32,
+  "split_after": 17,
+  "status": "completed",
+  "steps": 4000,
+  "surrogate_mode": "trained",
+  "surrogate_placement": "local",
+  "surrogate_return_loss_improvement": 0.10878149163909256,
+  "surrogate_total_parameters": 161,
+  "surrogate_trainable_parameters": 161,
+  "token_recovery_pct": 4.24102783203125,
+  "token_scale_sigma": 0.75,
+  "toula_peak_cuda_memory_mb": 4144.9,
+  "train_blocks": 4096,
+  "train_seconds": 417.52803638088517,
+  "training_tail": [
+    {
+      "attacker_loss": 7.375060081481934,
+      "distill_loss": 0.4092845618724823,
+      "gram_flatten_loss": -0.0,
+      "language_loss": 5.366576194763184,
+      "phase_step": 3997,
+      "step": 3997
+    },
+    {
+      "attacker_loss": 7.275590896606445,
+      "distill_loss": 0.3928571045398712,
+      "gram_flatten_loss": -0.0,
+      "language_loss": 4.88818883895874,
+      "phase_step": 3998,
+      "step": 3998
+    },
+    {
+      "attacker_loss": 7.892744541168213,
+      "distill_loss": 0.39568376541137695,
+      "gram_flatten_loss": -0.0,
+      "language_loss": 5.9800004959106445,
+      "phase_step": 3999,
+      "step": 3999
+    }
+  ],
+  "transport": null,
+  "transport_tls": false,
+  "utility": {
+    "candidate": {
+      "mean_token_nll": 5.679985991620924,
+      "nll_delta_vs_no_replacement": -0.04675853124354035,
+      "perplexity": 292.94532620462945
+    },
+    "decoder_zero_output": {
+      "mean_token_nll": 5.788767483260017,
+      "nll_delta_vs_no_replacement": 0.06202296039555222,
+      "perplexity": 326.6102236295577
+    },
+    "no_replacement": {
+      "mean_token_nll": 5.726744522864465,
+      "nll_delta_vs_no_replacement": 0.0,
+      "perplexity": 306.96831164566004
+    }
+  },
+  "warmup_steps": 400,
+  "wire_quant": "none",
+  "zero_cloud_eval_loss": 12.566151994746178
+}

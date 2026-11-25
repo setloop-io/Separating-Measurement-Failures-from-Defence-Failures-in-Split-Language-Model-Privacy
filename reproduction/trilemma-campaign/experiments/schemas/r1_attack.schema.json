@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/privacy-constrained-remote/r1_attack.schema.json",
+  "title": "R1 target-channel attack suite",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "defense",
+    "seed",
+    "specification",
+    "input_bindings",
+    "panel_bindings",
+    "attack_banks_sha256",
+    "results",
+    "scientific_evidence",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {"const": "r1-attack-suite-1.0"},
+    "defense": {"type": "string", "minLength": 1},
+    "seed": {"type": "integer", "minimum": 0},
+    "specification": {
+      "type": "object",
+      "required": [
+        "ridge_lambda",
+        "positive_doses",
+        "positive_floor_correlation",
+        "positive_floor_accuracy",
+        "null_band",
+        "privacy_limit_correlation",
+        "privacy_limit_accuracy"
+      ],
+      "properties": {
+        "ridge_lambda": {"type": "number", "exclusiveMinimum": 0},
+        "positive_doses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "number", "exclusiveMinimum": 0}
+        },
+        "positive_floor_correlation": {"type": "number", "exclusiveMinimum": 0},
+        "positive_floor_accuracy": {"type": "number", "exclusiveMinimum": 0},
+        "null_band": {"type": "number", "exclusiveMinimum": 0},
+        "privacy_limit_correlation": {"type": "number", "exclusiveMinimum": 0},
+        "privacy_limit_accuracy": {"type": "number", "exclusiveMinimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "input_bindings": {
+      "type": "object",
+      "required": ["panel", "client_checkpoint", "remote_checkpoint", "capture"],
+      "properties": {
+        "panel": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "client_checkpoint": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "remote_checkpoint": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "capture": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "panel_bindings": {
+      "type": "object",
+      "required": ["panel_sha256", "checkpoint_id", "regions"],
+      "properties": {
+        "panel_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "checkpoint_id": {"type": "string", "minLength": 1},
+        "regions": {
+          "type": "object",
+          "required": ["attacker_auxiliary", "qualification", "heldout"],
+          "properties": {
+            "attacker_auxiliary": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+            "qualification": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+            "heldout": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "attack_banks_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "results": {
+      "type": "object",
+      "minProperties": 12,
+      "maxProperties": 12,
+      "propertyNames": {
+        "pattern": "^(punctuation_fraction|next_byte_class|input_byte)@(forward_values|returned_values|inbound_gradients|outbound_gradients)@.+$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["qualification", "score", "status", "attack_bank_sha256"],
+        "properties": {
+          "qualification": {"type": "object"},
+          "score": {"type": ["object", "null"]},
+          "status": {"enum": ["PASS", "REJECTED", "UNDETERMINED"]},
+          "attack_bank_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "scientific_evidence": {"type": "boolean"},
+    "status": {"enum": ["draft_cpu_validation_only", "scoped_probe_suite_only"]}
+  },
+  "additionalProperties": false
+}

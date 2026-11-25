@@ -1,0 +1,112 @@
+{
+  "schema": "llm_attacker.bottleneck_sweep.v1",
+  "tier": "development_sweep",
+  "measurement_version": 2,
+  "purpose": "bottleneck dimension/method development sweep: pca-compress control x frozen/co-trained trained-bottleneck x dims, with a defense-aware attacker arm and dual 1.5x/2x utility gates; the frozen 256-document evaluation corpus stays untouched",
+  "methods": [
+    "none"
+  ],
+  "dims": [
+    64,
+    128,
+    256
+  ],
+  "splits": [
+    3,
+    6
+  ],
+  "seeds": [
+    11,
+    22,
+    33
+  ],
+  "expected_cells": 6,
+  "corpus": {
+    "path": "pilot-corpus.jsonl",
+    "sha256": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77"
+  },
+  "disjointness": {
+    "corpus_sha256": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77",
+    "articles": 96,
+    "frozen_manifest": "code/experiments/validation_corpus_manifest.json",
+    "excluded_pilot_sha256": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77",
+    "article_ids_disjoint_from_frozen": true,
+    "identity_checked": true
+  },
+  "access_spec_sha256": "a8463785d4bc9f81555671548b0e15d481ad6fb1caa02b50ae671fdab3111cb6",
+  "budgets": {
+    "seq_len": 32,
+    "train_steps": 64,
+    "calibration_seqs": 32,
+    "forward_candidates": 32,
+    "beam_width": 4,
+    "sipit_steps": 128,
+    "attack_sequences": 32,
+    "lr": 5e-05,
+    "data_seed": 2026,
+    "tb_minimax_steps": 200,
+    "tb_cotrain_interval": 8
+  },
+  "utility_gate": {
+    "thresholds": [
+      1.5,
+      2.0
+    ],
+    "definition": "ppl_after <= threshold x the paired undefended ppl_after"
+  },
+  "runner": "run_bottleneck_sweep.py",
+  "runner_sha256": "89f45d8194d76e860944fa4e44f518c76f7195de601cedf136332cf8e78fda1a",
+  "limits": [
+    "development sweep for method/dim selection; not a confirmatory security claim",
+    "three victim seeds; intervals are conditional on this fixed article sample",
+    "trained defenders are in-repo re-implementations, not the original defense projects' code or weights",
+    "the defense-aware surrogate is a PCA stand-in for the true defense map; it bounds a class-and-calibration adversary, not a defense-internals adversary",
+    "the MINE reading in bottleneck provenance is a diagnostic, never a certificate",
+    "split depth, dim and method are confounded with cell ordering on a single host"
+  ],
+  "cells": [
+    {
+      "path": "split3/seed-11/none",
+      "split": 3,
+      "seed": 11,
+      "method": "none",
+      "dim": 0
+    },
+    {
+      "path": "split3/seed-22/none",
+      "split": 3,
+      "seed": 22,
+      "method": "none",
+      "dim": 0
+    },
+    {
+      "path": "split3/seed-33/none",
+      "split": 3,
+      "seed": 33,
+      "method": "none",
+      "dim": 0
+    },
+    {
+      "path": "split6/seed-11/none",
+      "split": 6,
+      "seed": 11,
+      "method": "none",
+      "dim": 0
+    },
+    {
+      "path": "split6/seed-22/none",
+      "split": 6,
+      "seed": 22,
+      "method": "none",
+      "dim": 0
+    },
+    {
+      "path": "split6/seed-33/none",
+      "split": 6,
+      "seed": 33,
+      "method": "none",
+      "dim": 0
+    }
+  ],
+  "status": "COMPLETE"
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/privacy-constrained-remote/r1_panel.schema.json",
+  "title": "R1 four-region panel manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "corpus_path",
+    "corpus_sha256",
+    "corpus_bytes",
+    "sequence_length",
+    "guard_bytes_per_boundary",
+    "selection_seed",
+    "selection_algorithm",
+    "requested_windows",
+    "regions",
+    "windows",
+    "panel_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "r1-panel-1.0"},
+    "corpus_path": {"type": "string", "minLength": 1},
+    "corpus_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "corpus_bytes": {"type": "integer", "minimum": 1},
+    "sequence_length": {"type": "integer", "minimum": 1},
+    "guard_bytes_per_boundary": {"type": "integer", "minimum": 2},
+    "selection_seed": {"type": "integer", "minimum": 0},
+    "selection_algorithm": {"const": "nonoverlap-grid-permutation-v1"},
+    "requested_windows": {
+      "type": "object",
+      "required": ["model_train", "attacker_auxiliary", "qualification", "heldout"],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^(model_train|attacker_auxiliary|qualification|heldout)$": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "regions": {
+      "type": "object",
+      "required": ["model_train", "attacker_auxiliary", "qualification", "heldout"],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^(model_train|attacker_auxiliary|qualification|heldout)$": {
+          "type": "object",
+          "required": ["name", "start", "end"],
+          "properties": {
+            "name": {"type": "string"},
+            "start": {"type": "integer", "minimum": 0},
+            "end": {"type": "integer", "minimum": 1}
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "windows": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["region", "index", "start", "end", "input_sha256", "target_sha256"],
+        "properties": {
+          "region": {"enum": ["model_train", "attacker_auxiliary", "qualification", "heldout"]},
+          "index": {"type": "integer", "minimum": 0},
+          "start": {"type": "integer", "minimum": 0},
+          "end": {"type": "integer", "minimum": 1},
+          "input_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "target_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "panel_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "additionalProperties": false
+}

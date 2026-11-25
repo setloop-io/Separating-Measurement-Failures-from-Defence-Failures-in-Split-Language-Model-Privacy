@@ -1,0 +1,32 @@
+{
+  "schema": "dtraining.e9.key-schedule.v1",
+  "experiment": "Issue #44 deployed fixed-key versus per-session rotation",
+  "run_tag": "20260807T163240Z",
+  "launcher_commit": "ac96d8d",
+  "hash_algorithm": "sha256",
+  "fixed_key": {
+    "seed": 44000,
+    "sha256": "7280aaaa00c5228053176781cc5fff600df1d52a40620bdbda4453396d8a4106"
+  },
+  "rotated_keys": [
+    {
+      "session": 1,
+      "seed": 44001,
+      "sha256": "35667002a962e36f41c55fb8d9d63d6d5db0af3a0a3d1a7804b2702654e0f31c"
+    },
+    {
+      "session": 2,
+      "seed": 44002,
+      "sha256": "541853544de898ebb9ee161f9ecc10489e14a7a668604e30429758f8828b0f21"
+    },
+    {
+      "session": 3,
+      "seed": 44003,
+      "sha256": "54b15bcd352fd850f9b140f44e6009c8578dd885f10e0e480fe9a89f84640355"
+    }
+  ],
+  "all_rotated_hashes_distinct": true,
+  "fixed_hash_distinct_from_rotated": true,
+  "key_material_collected": false,
+  "note": "Only one-way hashes and public seed identifiers are retained; key files remain on the experiment hosts and are excluded from Git."
+}

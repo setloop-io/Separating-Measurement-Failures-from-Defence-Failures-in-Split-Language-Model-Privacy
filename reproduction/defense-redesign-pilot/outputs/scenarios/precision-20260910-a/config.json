@@ -1,0 +1,60 @@
+{
+  "candidate_acceptance_threshold": 0.02,
+  "capture_batch_size": 8,
+  "cohort": "engineering",
+  "cpu_threads": 2,
+  "kind": "null_precision",
+  "matched_null_counts": [
+    1,
+    16,
+    64
+  ],
+  "null_band": 0.02,
+  "outer_null_repeats": 32,
+  "panel_sizes": [
+    256,
+    1024
+  ],
+  "positive_doses": [
+    0.5,
+    2.0
+  ],
+  "property_positive_floor": 0.1,
+  "protocol_id": "p4-null-precision-engineering-0.1",
+  "release_conditions": [
+    {
+      "defense": {
+        "name": "none"
+      },
+      "id": "d0-q8",
+      "q_bits": 8
+    },
+    {
+      "defense": {
+        "name": "property_noise",
+        "noise_scale": 0.1
+      },
+      "id": "d1-warm-s01-q8",
+      "q_bits": 8
+    },
+    {
+      "defense": {
+        "name": "aggressive_rate"
+      },
+      "id": "d3-q2",
+      "q_bits": 2
+    }
+  ],
+  "ridge_penalty": 1.0,
+  "sources": [
+    {
+      "control_seed": 410401,
+      "manifest": "experiments/manifests/p4-warmup-warmup-20260910-a-setup-s410301.json"
+    },
+    {
+      "control_seed": 410402,
+      "manifest": "experiments/manifests/p4-warmup-warmup-20260910-a-setup-s410302.json"
+    }
+  ],
+  "status": "engineering_ready"
+}

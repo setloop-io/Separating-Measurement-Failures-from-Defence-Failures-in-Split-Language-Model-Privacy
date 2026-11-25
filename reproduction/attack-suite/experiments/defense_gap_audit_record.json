@@ -1,0 +1,132 @@
+{
+  "schema": "llm_attacker.defense_gap_audit_record.v1",
+  "source_commit": "02d60d4986165c9251687f422a824147759adc25",
+  "source_clean": true,
+  "tests": {
+    "passed": 206,
+    "scope": "new defense modules, metadata, reconstruction baselines/metrics, baseline analysis, evidence and frozen validation protocol"
+  },
+  "engineering_audit": {
+    "path": "results/defense-gap-audit-02d60d4/audit.json",
+    "sha256": "0f5f1559529b296e53ae93fed9d354190397f8e29cdb0182122b36e4c760c040",
+    "manifest_sha256": "e80db60e72c766d37d4e8751cca6365dd7bfc9b3abdb7d3cd884ea99862e177b",
+    "attack_artifacts": 12,
+    "seeds": [
+      11,
+      22,
+      33
+    ],
+    "status": "COMPLETE",
+    "tier": "synthetic engineering scenarios; not measured deployed defense bypasses"
+  },
+  "existing_capture_replay": {
+    "path": "results/gradient-clipping-pilot-02d60d4/replay.json",
+    "sha256": "42803e0f6a54b252ea8fcf7a91653bd674cb639b0589f52db41e242c3d029eb4",
+    "manifest_sha256": "69049c524399f92df11fdba9b1f677ec467bf9781ef55b96d6c59cf13d3e0b22",
+    "status": "COMPLETE",
+    "source_manifest_sha256": "b34717395e4aa4dc388c31dfa1f5a45fae8da4b119ee294053757128dd8728b2",
+    "depth": 3,
+    "victim_seed": 11,
+    "document_ids": [
+      "wikitext2-train-72aab8c1a38c0c112bf0",
+      "wikitext2-train-8c486530ef8357405ce4",
+      "wikitext2-train-d95ca7c9c4e5b6cce0c5",
+      "wikitext2-train-4e06f6081412494d6234",
+      "wikitext2-train-63fc0bf26656a9e66484",
+      "wikitext2-train-8d0685e61318811b1f22",
+      "wikitext2-train-2c5f2a351644ca05d5ed",
+      "wikitext2-train-3dd55610d3eebb06063a"
+    ],
+    "canonical_indices": [
+      18,
+      19,
+      23,
+      11,
+      30,
+      1,
+      20,
+      16
+    ],
+    "summary": [
+      {
+        "condition": "raw",
+        "status": "ACCEPT",
+        "clipped_units": 0,
+        "token_accuracy": 0.2265625
+      },
+      {
+        "condition": "clip-1.0",
+        "status": "ACCEPT",
+        "clipped_units": 0,
+        "token_accuracy": 0.2265625
+      },
+      {
+        "condition": "clip-0.1",
+        "status": "ACCEPT",
+        "clipped_units": 8,
+        "token_accuracy": 0.2265625
+      },
+      {
+        "condition": "clip-0.001",
+        "status": "ACCEPT",
+        "clipped_units": 248,
+        "token_accuracy": 0.2265625
+      },
+      {
+        "condition": "clip-1e-05",
+        "status": "ACCEPT",
+        "clipped_units": 248,
+        "token_accuracy": 0.2265625
+      },
+      {
+        "condition": "clip1-noise",
+        "status": "ACCEPT",
+        "clipped_units": 0,
+        "token_accuracy": 0.0
+      },
+      {
+        "condition": "clip1-bits8",
+        "status": "ACCEPT",
+        "clipped_units": 0,
+        "token_accuracy": 0.19921875
+      },
+      {
+        "condition": "clip1-bits4",
+        "status": "ACCEPT",
+        "clipped_units": 0,
+        "token_accuracy": 0.0703125
+      }
+    ],
+    "gradient_manifest_sha256": "eb1a392e3a5d25d536d0ecca71a7a62f2b5dbde5e8375aad2a614a26dadae09c",
+    "limits": [
+      "Eight previously inspected GPT2/WikiText2 training documents, one victim run; exploratory replay.",
+      "Clipping granularity is per token; exact deployed sanitizer not reproduced.",
+      "No newly frozen evaluation data accessed."
+    ]
+  },
+  "unchanged": [
+    "frozen validation protocol and corpus",
+    "2,720-cell validation budget",
+    "release tag V.0.1"
+  ],
+  "bisr_resolution": {
+    "resolved": true,
+    "outcome": "A+B",
+    "date": "2026-09-09",
+    "decision_rule": "A faithful reproduction needs a substantially larger auxiliary inversion-model training study than pilot scale (the documented gap), so the module was implemented as a scoped, clearly labeled adaptation and the claims were narrowed (outcome B as the resolution of record).",
+    "adaptation_module": "attacker/attacks/bisr_baseline.py",
+    "attack_name": "bisr-baseline",
+    "adaptation_scope": [
+      "SIP-style learned inversion model (small trainable per-position decoder) at pilot-scale auxiliary budget (--aux-seqs/--train-steps configurable), torch-gated, fork_rng+manual_seed",
+      "auxiliary wikitext-2 article ids asserted fail-closed disjoint from the frozen validation manifest partitions and the pilot victim corpus (missing references recorded as skipped, never silently passed)",
+      "bidirectional forward (learned scores) + backward (gradient direction) candidate selection per the paper's description, with forward-consistency beam verification through the public head (reconstruction_baselines.beam_reconstruct/candidate_ids)",
+      "torch-free toy tier with a position-dependent synthetic seam and toy backward channel for CI",
+      "explicitly NOT a faithful BiSR reproduction; its numbers are not comparable cell-for-cell with the paper's"
+    ],
+    "claims_narrowed": [
+      "README.md (published-baseline gap note, baseline-table row, stronger-comparator paragraph, frozen-study paragraphs)",
+      "experiments/analyze_baselines.py report text: assumption mismatch stated explicitly; no frozen-matrix cell cites BiSR numbers as comparable"
+    ],
+    "frozen_matrix_impact": "none; no BiSR cell exists in the frozen matrix and none was added"
+  }
+}

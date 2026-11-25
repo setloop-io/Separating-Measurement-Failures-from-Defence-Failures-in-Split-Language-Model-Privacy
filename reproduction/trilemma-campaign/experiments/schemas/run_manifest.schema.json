@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/privacy-constrained-remote/run_manifest.schema.json",
+  "title": "Remote substitutability run manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "run_id",
+    "protocol_version",
+    "cohort",
+    "pairing_block_id",
+    "seed",
+    "git_commit",
+    "dirty_patch_sha256",
+    "environment_digest",
+    "resolved_config_sha256",
+    "transcript_schema_version",
+    "captured_channels",
+    "status",
+    "artifacts"
+  ],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "run_id": {"type": "string", "minLength": 1},
+    "protocol_version": {"type": "string", "minLength": 1},
+    "cohort": {"enum": ["engineering", "calibration", "exploratory", "tuning", "confirmatory"]},
+    "pairing_block_id": {"type": ["string", "null"]},
+    "seed": {"type": "integer"},
+    "git_commit": {"type": "string", "minLength": 7},
+    "dirty_patch_sha256": {"type": ["string", "null"]},
+    "environment_digest": {"type": "string", "minLength": 1},
+    "resolved_config_sha256": {"type": "string", "minLength": 64},
+    "transcript_schema_version": {"type": "string"},
+    "captured_channels": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "status": {"enum": ["planned", "running", "completed", "operational_failure"]},
+    "execution_provenance": {
+      "type": "object",
+      "required": ["version", "captured_at_utc", "run_id", "resolved_config_sha256",
+                   "output_dir", "git_commit", "source_inventory_sha256",
+                   "working_tree_patch_sha256", "environment_digest", "argv", "cwd"],
+      "properties": {
+        "version": {"const": "1"},
+        "captured_at_utc": {"type": "string", "minLength": 1},
+        "run_id": {"type": "string", "minLength": 1},
+        "resolved_config_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "source_inventory_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "working_tree_patch_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "environment_digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "git_commit": {"type": "string", "minLength": 7},
+        "output_dir": {"type": "string", "minLength": 1},
+        "argv": {"type": "array", "items": {"type": "string"}},
+        "cwd": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": true
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string"},
+          "sha256": {"type": "string", "minLength": 64}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "allOf": [{
+    "if": {"properties": {"schema_version": {"const": "0.2.0"}}},
+    "then": {"required": ["execution_provenance", "recorded_at_utc"]}
+  }],
+  "additionalProperties": true
+}

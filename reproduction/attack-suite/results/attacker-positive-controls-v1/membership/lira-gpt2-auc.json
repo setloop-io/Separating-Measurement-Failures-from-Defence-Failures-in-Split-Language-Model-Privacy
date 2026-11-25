@@ -1,0 +1,94 @@
+{
+  "schema": "dtraining.attacker.lira_membership.v1",
+  "config": {
+    "attack": "lira_membership",
+    "mode": "training",
+    "toy": false,
+    "records": [
+      "results-attacker-positive-controls-v1/membership/lira-records-gpt2.jsonl"
+    ],
+    "scoring": "lira",
+    "statistic": "raw",
+    "worlds": "both",
+    "toy_n": 100000,
+    "toy_shift": 2.0,
+    "toy_ref": 8,
+    "online": false,
+    "n_shadows": 4,
+    "shadow_steps": 200,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "fpr_targets": [
+      0.01,
+      0.001
+    ]
+  },
+  "threat_model": "honest-but-curious cloud with shadow/reference boundary-feature distributions (the LIRA shadow-model assumption adapted to the split seam); per-example Gaussian IN/OUT models of a loss-like statistic, likelihood-ratio membership scores. Split ground truth on the records is evaluation truth, not an attack input (label-free attack).",
+  "provenance": {
+    "hostname": "koula",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-10T04:52:33Z",
+    "dtraining_commit": "12995b5d7c20439164b1567fb8addc4f01da932f"
+  },
+  "results": [
+    {
+      "experiment": "lira_membership",
+      "world": "offline",
+      "seed": null,
+      "scoring": "lira",
+      "n_in": 48,
+      "n_out": 48,
+      "auc": 1.0,
+      "tpr_at_fpr": {
+        "0.01": {
+          "target_fpr": 0.01,
+          "tpr": 1.0,
+          "fpr": 0.0,
+          "min_fpr_step": 0.020833333333333332,
+          "resolvable": false
+        },
+        "0.001": {
+          "target_fpr": 0.001,
+          "tpr": 1.0,
+          "fpr": 0.0,
+          "min_fpr_step": 0.020833333333333332,
+          "resolvable": false
+        }
+      },
+      "best_balanced_accuracy": 1.0,
+      "best_balanced_accuracy_threshold": 72.62101625693217,
+      "gate": {
+        "gate": "frozen-gate.v2",
+        "z": 2.539184813651313,
+        "n": 48,
+        "recovery_pct": 100.0,
+        "control_pct": 50.0,
+        "upper95_pct": 100.0,
+        "excess_pp": 50.0,
+        "gate_pp": 1.0,
+        "floor_pp": 17.205825182293623,
+        "at_floor": false,
+        "control_definition": "label_free_majority",
+        "n_seeds_required": 3,
+        "n_seeds": null,
+        "seeds_sufficient": null,
+        "verdict": "FAIL"
+      }
+    }
+  ],
+  "summary": [
+    {
+      "experiment": "lira_membership",
+      "world": "offline",
+      "auc_mean": 1.0,
+      "gate_verdicts": [
+        "FAIL"
+      ],
+      "n_cells": 1
+    }
+  ],
+  "interpretation": "AUC is rank-based (Mann\u2013Whitney, tie-averaged); TPR@FPR is the conservative achievable-grid value; the gate verdict uses recovery = AUC vs the 0.5 chance control with n = min(n_in, n_out) (a scoring convention \u2014 AUC is not binomial). The null toy world must score AUC ~= 0.5 and PASS the gate; anything else is a machinery bug."
+}

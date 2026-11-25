@@ -1,0 +1,461 @@
+{
+  "config": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "n_layers": 28,
+    "depths_from_end": [
+      2,
+      4,
+      8
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 8,
+    "val_frac": 0.15,
+    "seq_len": 64,
+    "max_pairs": 20000,
+    "epochs": 30,
+    "dtype": "bf16",
+    "device": "cuda",
+    "W_seed": 42,
+    "W_ortho_err": 7.152557373046875e-07,
+    "quick": false
+  },
+  "threat_model": "semi-honest cloud in split inference observes the RETURNING boundary activation at the cloud/tail interface (output of layer L-k-1) at every decode step; it trains an MLP next-token decoder on PUBLIC text through the PUBLIC base model (teacher-forced; document-disjoint; victim docs held out from the END of the corpus). 'obfuscated_passive': tail applies secret orthogonal W, attacker has no labels for h'=h@W. 'obfuscated_retrained': stronger cloud that logs the emitted tokens of its own serving traffic and so can label obfuscated features. 'breach_W_leaked': W leaked (insider) \u2014 sanity control, must return to baseline.",
+  "interpretation": "baseline high => the GENERATED ANSWER leaks from the returning boundary even though token ids never leave the trusted tail (output-side leakage, not just prompt leakage). obfuscated_passive ~random while baseline is high => E8 must be applied on BOTH wire directions (input AND output) \u2014 a one-direction defense leaves the answer exposed. obfuscated_retrained ~baseline => obfuscation buys nothing against a cloud that can label its own output-side traffic. breach ~= baseline => the machinery is correct (W round-trip is exact).",
+  "random_baseline_top1_pct": 0.0007,
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9983,
+      9984,
+      9985,
+      9986,
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "split-inference:spark-x86",
+    "hostname": "6dac2be1bbb0",
+    "dtraining_commit": "c0b3a584e581188b572b769719711c320858f1c0",
+    "model_manifest_sha256": "bbb298585268cc09bcef40664004922c189e0ef0bf70d30c5609a2693c07ee76",
+    "model_path": "qwen3-0.6b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "summary": [
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "baseline_no_defense",
+      "top1_mean": 23.1133,
+      "top1_std": 1.3011,
+      "top5_mean": 38.8,
+      "top5_std": 1.4765,
+      "n_seeds": 3
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "obfuscated_passive",
+      "top1_mean": 3.1233,
+      "top1_std": 0.195,
+      "top5_mean": 8.53,
+      "top5_std": 0.8118,
+      "n_seeds": 3
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "obfuscated_retrained",
+      "top1_mean": 21.29,
+      "top1_std": 0.8546,
+      "top5_mean": 37.5667,
+      "top5_std": 1.7712,
+      "n_seeds": 3
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "breach_W_leaked",
+      "top1_mean": 23.1133,
+      "top1_std": 1.3011,
+      "top5_mean": 38.8,
+      "top5_std": 1.4765,
+      "n_seeds": 3
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "baseline_no_defense",
+      "top1_mean": 22.7233,
+      "top1_std": 0.7365,
+      "top5_mean": 38.0867,
+      "top5_std": 1.7057,
+      "n_seeds": 3
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "obfuscated_passive",
+      "top1_mean": 1.1733,
+      "top1_std": 1.1878,
+      "top5_mean": 3.97,
+      "top5_std": 3.3079,
+      "n_seeds": 3
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "obfuscated_retrained",
+      "top1_mean": 22.98,
+      "top1_std": 0.2252,
+      "top5_mean": 37.8267,
+      "top5_std": 1.0013,
+      "n_seeds": 3
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "breach_W_leaked",
+      "top1_mean": 22.7233,
+      "top1_std": 0.7365,
+      "top5_mean": 38.0867,
+      "top5_std": 1.7057,
+      "n_seeds": 3
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "baseline_no_defense",
+      "top1_mean": 21.2267,
+      "top1_std": 1.6594,
+      "top5_mean": 35.22,
+      "top5_std": 1.2537,
+      "n_seeds": 3
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "obfuscated_passive",
+      "top1_mean": 0.9133,
+      "top1_std": 0.2957,
+      "top5_mean": 4.2933,
+      "top5_std": 1.736,
+      "n_seeds": 3
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "obfuscated_retrained",
+      "top1_mean": 22.72,
+      "top1_std": 1.4765,
+      "top5_mean": 36.46,
+      "top5_std": 1.8167,
+      "n_seeds": 3
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "breach_W_leaked",
+      "top1_mean": 21.2267,
+      "top1_std": 1.6594,
+      "top5_mean": 35.22,
+      "top5_std": 1.2537,
+      "n_seeds": 3
+    }
+  ],
+  "results": [
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "baseline_no_defense",
+      "seed": 0,
+      "top1": 24.22,
+      "top5": 39.84
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "obfuscated_passive",
+      "seed": 0,
+      "top1": 3.32,
+      "top5": 8.79
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "obfuscated_retrained",
+      "seed": 0,
+      "top1": 20.7,
+      "top5": 38.87
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "breach_W_leaked",
+      "seed": 0,
+      "top1": 24.22,
+      "top5": 39.84
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "baseline_no_defense",
+      "seed": 1,
+      "top1": 21.68,
+      "top5": 37.11
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "obfuscated_passive",
+      "seed": 1,
+      "top1": 2.93,
+      "top5": 9.18
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "obfuscated_retrained",
+      "seed": 1,
+      "top1": 20.9,
+      "top5": 38.28
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "breach_W_leaked",
+      "seed": 1,
+      "top1": 21.68,
+      "top5": 37.11
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "baseline_no_defense",
+      "seed": 2,
+      "top1": 23.44,
+      "top5": 39.45
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "obfuscated_passive",
+      "seed": 2,
+      "top1": 3.12,
+      "top5": 7.62
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "obfuscated_retrained",
+      "seed": 2,
+      "top1": 22.27,
+      "top5": 35.55
+    },
+    {
+      "tail_depth": 2,
+      "boundary_layer": 26,
+      "setting": "breach_W_leaked",
+      "seed": 2,
+      "top1": 23.44,
+      "top5": 39.45
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "baseline_no_defense",
+      "seed": 0,
+      "top1": 23.24,
+      "top5": 38.87
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "obfuscated_passive",
+      "seed": 0,
+      "top1": 0.59,
+      "top5": 1.17
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "obfuscated_retrained",
+      "seed": 0,
+      "top1": 22.85,
+      "top5": 36.72
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "breach_W_leaked",
+      "seed": 0,
+      "top1": 23.24,
+      "top5": 38.87
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "baseline_no_defense",
+      "seed": 1,
+      "top1": 21.88,
+      "top5": 36.13
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "obfuscated_passive",
+      "seed": 1,
+      "top1": 2.54,
+      "top5": 7.62
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "obfuscated_retrained",
+      "seed": 1,
+      "top1": 22.85,
+      "top5": 38.09
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "breach_W_leaked",
+      "seed": 1,
+      "top1": 21.88,
+      "top5": 36.13
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "baseline_no_defense",
+      "seed": 2,
+      "top1": 23.05,
+      "top5": 39.26
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "obfuscated_passive",
+      "seed": 2,
+      "top1": 0.39,
+      "top5": 3.12
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "obfuscated_retrained",
+      "seed": 2,
+      "top1": 23.24,
+      "top5": 38.67
+    },
+    {
+      "tail_depth": 4,
+      "boundary_layer": 24,
+      "setting": "breach_W_leaked",
+      "seed": 2,
+      "top1": 23.05,
+      "top5": 39.26
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "baseline_no_defense",
+      "seed": 0,
+      "top1": 21.88,
+      "top5": 36.13
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "obfuscated_passive",
+      "seed": 0,
+      "top1": 0.98,
+      "top5": 4.88
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "obfuscated_retrained",
+      "seed": 0,
+      "top1": 22.07,
+      "top5": 34.96
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "breach_W_leaked",
+      "seed": 0,
+      "top1": 21.88,
+      "top5": 36.13
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "baseline_no_defense",
+      "seed": 1,
+      "top1": 19.34,
+      "top5": 35.74
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "obfuscated_passive",
+      "seed": 1,
+      "top1": 1.17,
+      "top5": 5.66
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "obfuscated_retrained",
+      "seed": 1,
+      "top1": 21.68,
+      "top5": 35.94
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "breach_W_leaked",
+      "seed": 1,
+      "top1": 19.34,
+      "top5": 35.74
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "baseline_no_defense",
+      "seed": 2,
+      "top1": 22.46,
+      "top5": 33.79
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "obfuscated_passive",
+      "seed": 2,
+      "top1": 0.59,
+      "top5": 2.34
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "obfuscated_retrained",
+      "seed": 2,
+      "top1": 24.41,
+      "top5": 38.48
+    },
+    {
+      "tail_depth": 8,
+      "boundary_layer": 20,
+      "setting": "breach_W_leaked",
+      "seed": 2,
+      "top1": 22.46,
+      "top5": 33.79
+    }
+  ]
+}

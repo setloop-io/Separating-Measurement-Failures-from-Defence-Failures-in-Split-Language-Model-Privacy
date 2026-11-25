@@ -1,0 +1,35 @@
+protocol_id: p4-structure-precision-0.1
+kind: structure_precision
+cohort: engineering
+status: engineering_ready
+full_budget: true
+device: cpu
+cpu_threads: 2
+sources:
+- control_seed: 410701
+  prepare_manifest: experiments/manifests/p4-null_precision_128-precision-128-20260918-a-prepare-s410601.json
+- control_seed: 410702
+  prepare_manifest: experiments/manifests/p4-null_precision_128-precision-128-20260918-a-prepare-s410602.json
+release_conditions:
+- id: d0-q8
+  q_bits: 8
+  defense: {name: none}
+- id: d1-warm-s1.0-q8
+  q_bits: 8
+  defense: {name: property_noise, noise_scale: 1.0}
+- id: d3-q1
+  q_bits: 1
+  defense: {name: aggressive_rate}
+panel_sizes: [8192, 16384]
+matched_null_counts: [1, 4]
+outer_null_repeats: 16
+positive_doses: [0.5, 2.0]
+null_band: 0.02
+structure_positive_floor: 0.02
+capture_batch_size: 64
+mlp_hidden: 64
+mlp_lr: 0.003
+mlp_row_batch: 8192
+claim_scope: Engineering diagnostics only; no defense selection, qualification, or
+  privacy claim. All records keep scientific_evidence false, qualified false,
+  privacy undetermined.

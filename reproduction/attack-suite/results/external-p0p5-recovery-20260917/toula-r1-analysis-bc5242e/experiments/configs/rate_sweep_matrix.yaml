@@ -1,0 +1,163 @@
+protocol_status: frozen_for_confirmation
+protocol_version: p2b-rate-sweep-1.0
+study: remote_substitutability_rate_sweep
+purpose: confirmatory_rate_response_and_frontier_shape
+cohort: confirmatory
+freeze_note: >
+  Frozen for the P2b rate-sweep study on 2026-09-04, BEFORE any run under this
+  config and before inspecting any artifact produced under it. Seeds are fresh
+  and disjoint from exploratory [101, 202, 303], P2 confirmatory
+  [11, 22, 33, 44, 55, 66, 77, 88], and calibration [909, 919]. Design fixes
+  span (medium) and width (256) at the P2-confirmed feasible cell and varies
+  ONLY the boundary quantization dose, so measured bits/token changes without
+  changing latent width, architecture, or optimization. Changes after this
+  freeze require a versioned amendment written before inspecting affected
+  outcomes.
+
+fixed:
+  backbone:
+    vocab_size: 256
+    d_model: 256
+    n_heads: 8
+    n_layers: 8
+    d_ff: 1024
+    max_seq_len: 128
+    init_std: 0.02
+  checkpoint_digest: none_seeded_init_per_run
+  tokenizer: byte_level_identity_vocab_256
+  tokenizer_digest: afba54bc5a1634ee9b070fe918bf9c9a2e15b3cfcbdc6bf24bce941dcb785585
+  corpus: data/raw/tinyshakespeare.txt
+  corpus_sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+  corpus_split:
+    rule: first_90_percent_train_last_10_percent_heldout_by_byte_offset
+    train_fraction: 0.9
+  corpus_split_digest: 6cd31100b2979ed8770cb5b68f9d67759ace427d926197dac604023ef195fb66
+  sequence_length: 128
+  batch_size: 32
+  optimizer:
+    name: adamw
+    lr: 3.0e-4
+    min_lr: 3.0e-5
+    betas: [0.9, 0.95]
+    weight_decay: 0.1
+    no_decay: [layer_norm_weights, biases]
+    grad_clip: 1.0
+  scheduler:
+    warmup_steps: 100
+    decay: cosine_to_min_lr
+  steps: 2000
+  eval_every: 100
+  eval_batches: 64
+  convergence_rule: fixed_2000_steps_no_early_stop
+  boundary_defense:
+    type: uniform_per_tensor_affine_quantization
+    ste_in_training: true
+    serialization: true_quantized_packed_codes_plus_8_byte_affine_metadata
+    note: q_bits is the swept factor (below); width stays 256
+  surrogate_family:
+    type: single_preln_transformer_block_plus_final_layernorm
+    head_dim: 32
+    d_ff_multiplier: 4
+  transcript_schema_version: "1.0.0"
+  transcript_sample_every: 200
+  probe_batch_size: 8
+  ema_beta: 0.95
+  device: auto
+  dtype: float32
+
+factors:
+  segment_span:
+    medium: {start: 2, span: 4}
+  latent_width: {high: 256}
+  q_bits: [4, 8, 16, 32]
+  remote_mode: [trained, frozen_random]
+  seed: [7, 17, 27, 37, 47, 57, 67, 87]
+
+controls:
+  all_local: {}
+  removed_remote:
+    width: high
+    q_bits: swept  # removed-remote run per q_bits level (boundary quantizer still applies)
+
+pairing:
+  block_id: "pb-p2b-{seed}"
+  shared_encoder_decoder_initialization: true
+  shared_minibatch_order: true
+  shared_trusted_random_streams: true
+  only_remote_parameter_updates_differ: true
+
+operational_rate:
+  unit: bits_per_token
+  measurement_stage: serialized_remote_transcript
+  includes_repeated_releases: true
+  note: width fixed at 256; rate varies only through q_bits serialization
+
+matched_controls:
+  - all_local
+  - removed_remote
+
+primary_outcomes:
+  - heldout_utility_vs_measured_bits_per_token
+  - causal_remote_learning_gain
+  - per_family_attack_advantage_and_threshold_ratio
+  - measured_remote_flops
+  - communication_bytes
+  - wall_time
+
+calibration:
+  width_high:
+    cohort: calibration
+    seed: 919
+    reuse: p2_confirmatory_artifact  # width-256 medium-span; representation-matched to all P2b cells
+    note: >
+      Token-inversion probes for P2b scoring are trained on the seed-919
+      calibration latents quantized on-the-fly to each cell's q_bits, keeping
+      calibration disjoint from P2b seeds.
+
+confirmatory_rule:
+  inferential_unit: independent_training_run_seed
+  pairing: per-seed paired contrast trained vs frozen_random within block pb-p2b-{seed}
+  primary:
+    description: "H3: held-out utility improves as measured operational bits/token increase, at fixed width and equal convergence"
+    endpoint: per-seed slope of trained-mode final eval loss (step 2000) regressed on q_bits in {4, 8, 16, 32}
+    test: one_sided_t_test_over_8_seed_slopes (slope < 0)
+    alpha: 0.05
+    practical_effect: mean eval-loss reduction from q=4 to q=32 >= 0.01 nats
+    confirm_if: p < alpha AND practical effect met
+  secondary:
+    gain_per_q: >
+      Per q_bits cell, one-sided paired t-test of G_R over 8 seeds, Bonferroni
+      alpha 0.0125 per cell (4 tests); G_R > 0 persistence at steps
+      1800/1900/2000 reported.
+    delta_u_per_q: mean trained-minus-all_local per q with 95% CI, descriptive.
+    removed_reference: mean removed-minus-all_local per q with 95% CI, descriptive.
+  privacy_criterion:
+    attack_family: token_inversion_probe
+    threshold_advantage: 0.02
+    width_matched_calibration_required: true
+    per_q: probe calibrated with latents quantized to the cell's q_bits
+    frontier_rule: >
+      A cell is frontier-feasible if its secondary G_R test confirms positive
+      gain AND its privacy advantage <= threshold. The frontier is the set of
+      feasible (bits/token, eval loss) points; reported with per-seed CIs.
+  missing_data: >
+    At most one retry per failed run with identical cell identity; a seed
+    missing a pair member is dropped from that cell's paired tests and from
+    the slope fit (predeclared; never outcome-based).
+
+failure_policy:
+  operational_failure_classes: [device_error, out_of_memory, io_error, schema_validation_error]
+  max_retries: 1
+  rule: >
+    Failures are recorded with manifest status operational_failure and partial
+    artifacts; never excluded based on outcome.
+
+notes:
+  - "q_bits = 32 means no quantization (32-bit float passthrough): the
+    near-zero-defense endpoint of the rate axis; privacy scoring is expected to
+    be decisive there."
+  - "P2 confirmatory seeds [11..88] are spent; P2b uses [7, 17, 27, 37, 47, 57, 67, 87]."
+  - "Timing is logged for systems accounting only and enters no privacy claim."
+  - "Privacy scope remains the token-inversion family on per-step latents;
+    membership, property, and history-accumulation attacks are out of scope and
+    this omission must be named wherever these results are cited."

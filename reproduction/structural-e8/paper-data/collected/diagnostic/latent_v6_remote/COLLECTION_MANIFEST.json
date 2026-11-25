@@ -1,0 +1,56 @@
+{
+  "schema": "dtraining.latent-v6.collection.v1",
+  "status": "accepted_diagnostic_not_production",
+  "threat_model": {
+    "toula": "trusted",
+    "koula": "fully_compromised"
+  },
+  "candidate": {
+    "model": "Qwen3-0.6B",
+    "split_after": 21,
+    "resume_after": 26,
+    "approximated_middle_layers": 4,
+    "latent_dim": 16,
+    "cloud_kind": "monomial",
+    "noise_multiplier": 0.35,
+    "seeds": [42, 43, 44],
+    "steps_per_seed": 2000,
+    "evaluation_tokens_per_seed": 8192
+  },
+  "passive_summary": {
+    "mean_attacker_upper95_excess_pp": 0.6774961450841405,
+    "attacker_upper95_excess_pp_range": [0.6387576674696422, 0.7162315099772449],
+    "mean_eval_loss_delta": 0.09370036174853642,
+    "eval_loss_delta_range": [0.09023331757634878, 0.09638870321214199],
+    "mean_eval_time_ratio": 1.0546348029820536,
+    "eval_time_ratio_range": [1.0360484159562569, 1.076875832455754],
+    "all_embedded_gates": true
+  },
+  "active_control": {
+    "seed": 42,
+    "declared_return_delta": 0.5,
+    "logical_tampered_returns": 2256,
+    "attacker_upper95_excess_pp": 0.48369589245881617,
+    "eval_loss_delta": 0.11162451561540365,
+    "eval_time_ratio": 1.0371023992978863,
+    "scope": "bounded declared perturbation; not arbitrary malicious-computation integrity"
+  },
+  "safety_validation": {
+    "json_parsed": true,
+    "maximum_json_bytes": 200000,
+    "raw_tensor_extensions_found": 0,
+    "toula_temporary_bundles_remaining": 0,
+    "koula_capture_files_remaining": 0,
+    "experiment_containers_remaining": 0
+  },
+  "sha256": {
+    "latent_v6_split21_active_d050_seed42.json": "43adaeb6ffe3213ac59f4360ddb89d87d3a2c875572ab77e74496716b2533f5a",
+    "latent_v6_split21_active_seed42_attacker.json": "797cd7a0e7d7ddce61c48a5fe66bf78dda3b0d8edbd7125528f7e400abf8acda",
+    "latent_v6_split21_mono_d16_n035_seed42.json": "51328c82ebb2f7c4363a48c006f6edaafebca7c416f7d17b11056aa7ce5354f0",
+    "latent_v6_split21_mono_d16_n035_seed43.json": "28f4165726f3abcd07c5dba28ab2e9bac3913d7152bbcb94ebcf2e07a7e6c252",
+    "latent_v6_split21_mono_d16_n035_seed44.json": "873214cc92acb58128127a24416dc0696a18c9f340b867c29f7187880f7b8ca5",
+    "latent_v6_split21_seed42_attacker.json": "777bb56618f9c9b6b6e1dd4fb2b176076e6925eaa9dc388c6d193aaf5190451f",
+    "latent_v6_split21_seed43_attacker.json": "71fa6cfe26e615c9c9739eac981ca5f8bd55f6257bcb21a32d12906fcd81a09c",
+    "latent_v6_split21_seed44_attacker.json": "db5ed55b57cf6053e8387f1ed84f6699d04835753aabb9ba669351a6d9b5009b"
+  }
+}

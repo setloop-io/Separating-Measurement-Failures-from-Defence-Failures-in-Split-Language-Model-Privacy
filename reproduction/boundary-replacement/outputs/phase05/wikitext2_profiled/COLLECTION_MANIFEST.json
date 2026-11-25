@@ -1,0 +1,58 @@
+{
+  "schema": "dtraining.phase05_collection_manifest.v1",
+  "status": "captured_not_privacy_evaluated",
+  "corpus": "Wikitext-2",
+  "capture_server": {
+    "host": "koula",
+    "raw_capture_directory": "/home/geo/dtraining-phase05/captures/wikitext2_profiled",
+    "raw_capture_git_status": "not_copied_to_repository",
+    "observed_surfaces": [
+      "forward_wire",
+      "outbound_training_gradient",
+      "cloud_state_history",
+      "protocol_metadata"
+    ],
+    "sessions": [
+      {
+        "session_id": "4052aef0-f599-45ac-baf6-a1ecaaafd9bf",
+        "manifest": "outputs/phase05/koula_capture_manifests/4052aef0-f599-45ac-baf6-a1ecaaafd9bf/manifest.json",
+        "manifest_sha256": "95cf49f23a6f879c17c8cb71a246d6ca356daba6b302ea6d4b1df83ce079e604",
+        "frame_count": 12128,
+        "control_count": 4001
+      },
+      {
+        "session_id": "d9b10991-8a87-45fd-b368-3a1395bc2d04",
+        "manifest": "outputs/phase05/koula_capture_manifests/d9b10991-8a87-45fd-b368-3a1395bc2d04/manifest.json",
+        "manifest_sha256": "cf81d739099f02fbdd3163c26e9346a3c5716056576fb97a2be724a099393e69",
+        "frame_count": 12128,
+        "control_count": 4001
+      }
+    ]
+  },
+  "runner_artifacts": [
+    {
+      "path": "outputs/phase05/wikitext2_profiled/confirm_split21_s51.json",
+      "sha256": "e772360f1f0612f90e06295b02e67ab99281a749059ba526a4b11788b8145f7e",
+      "utility_nll_delta": -0.0494043318904005,
+      "privacy_cell_id": "sha256:1d62c5faa98a04c864ce74f76daf9f6ef08d1658f1f6a8fc6b3909804e710a54"
+    },
+    {
+      "path": "outputs/phase05/wikitext2_profiled/confirm_split19_s51.json",
+      "sha256": "9224d897e5d04391a479a550b3c001ddf518d65c63de329d36fc7490d4aca18c",
+      "utility_nll_delta": 0.5071429907111451,
+      "privacy_cell_id": "sha256:2248757f5f52a8a03b806d3350cd5acf4c5efbce9c349299a1360a1d776c225c"
+    }
+  ],
+  "remote_compute_measurement": {
+    "value_per_runner": 243698924128,
+    "unit": "PyTorch-profiler FLOP operator count",
+    "status": "pytorch_profiler_operator_count",
+    "hardware_counter_status": "unavailable",
+    "limitation": "CUPTI activity collection was unavailable on Koula. This is an executed-operator estimate, not a hardware-counter FLOP measurement."
+  },
+  "privacy_evaluation": {
+    "status": "not_measured",
+    "blocking_requirement": "Join each server-side capture to trusted private labels for the same exact-cell execution before running the known-plaintext attack.",
+    "provenance_limitation": "Capture manifests record protocol metadata but not the frozen grid-cell ID, so they cannot independently bind a session to a runner artifact."
+  }
+}

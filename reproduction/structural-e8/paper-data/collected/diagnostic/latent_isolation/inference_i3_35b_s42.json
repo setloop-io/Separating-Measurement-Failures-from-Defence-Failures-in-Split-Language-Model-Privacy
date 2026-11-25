@@ -1,0 +1,446 @@
+{
+ "schema": "dtraining.isolation_adaptive.v1",
+ "args": {
+  "model": "/workspace/experiments/models/qwen36-35b-a3b",
+  "corpus": "/workspace/experiments/models/wikitext2_corpus.txt",
+  "output": "/workspace/experiments/results/training/inference_i3_35b_s42.json",
+  "cloud_url": "wss://koula:5051",
+  "cloud_tls_ca": "/workspace/experiments/tls/ca.crt",
+  "cloud_kind": "invariant_mlp_deep",
+  "cloud_experts": 1,
+  "cloud_layers": 10,
+  "cloud_hidden": 4096,
+  "utility_reference": "full",
+  "latent_dim": 64,
+  "views": 1,
+  "mixup_lambda": 0.0,
+  "width_ladder": "64",
+  "noise_multiplier": 0.35,
+  "clip_norm": 1.0,
+  "split_after": 14,
+  "resume_after": 26,
+  "seq_len": 32,
+  "train_blocks": 256,
+  "eval_blocks": 256,
+  "steps": 500,
+  "warmup_steps": 200,
+  "attack_steps": 64,
+  "postmortem_views": 128,
+  "inference_blocks": 32,
+  "inference_samples": 3,
+  "save_bundle": "/workspace/experiments/results/training/inference_i3_bundle.pt",
+  "bundle_eval_blocks": 256,
+  "lr": 0.0003,
+  "adversary_strength": 1.0,
+  "chaff_tokens": 48,
+  "remote_grad_clip": 1.0,
+  "eval_interval": 100,
+  "tripwire_pct": 1.0,
+  "utility_gate": 0.35,
+  "utility_grace_steps": 500,
+  "mine_beta": 0.0,
+  "backward_probe": false,
+  "seed": 42,
+  "start_ungauged": false
+ },
+ "log": [
+  {
+   "event": "baseline_loss",
+   "time": 1787216884.4750059,
+   "value": 3.2606
+  },
+  {
+   "event": "split_plan",
+   "time": 1787216884.9882386,
+   "width": 64,
+   "views": 1,
+   "boundary_after_layer": 14,
+   "covered_layers": 11,
+   "n_layers": 40,
+   "active_frac": 0.035,
+   "toula_params": 25410264704,
+   "segment_params": 9250345984,
+   "gflop_token_toula": 11.228,
+   "gflop_token_segment": 1.944,
+   "gflop_token_cloud": 2.557,
+   "cloud_share_pct": 18.5
+  },
+  {
+   "event": "window",
+   "time": 1787216943.5558634,
+   "step": 100,
+   "width": 64,
+   "recovery_pct": 0.511,
+   "majority_pct": 5.664,
+   "excess_pp": -5.153,
+   "utility_delta": 1.3851,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 70.12,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787216999.53226,
+   "step": 200,
+   "width": 64,
+   "recovery_pct": 3.578,
+   "majority_pct": 5.664,
+   "excess_pp": -2.087,
+   "utility_delta": 0.6557,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 70.12,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787217055.889331,
+   "step": 300,
+   "width": 64,
+   "recovery_pct": 2.3,
+   "majority_pct": 5.664,
+   "excess_pp": -3.364,
+   "utility_delta": 0.3261,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 70.13,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787217111.7536826,
+   "step": 400,
+   "width": 64,
+   "recovery_pct": 1.874,
+   "majority_pct": 5.664,
+   "excess_pp": -3.79,
+   "utility_delta": 0.339,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 70.13,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787217168.0808423,
+   "step": 500,
+   "width": 64,
+   "recovery_pct": 1.874,
+   "majority_pct": 5.664,
+   "excess_pp": -3.79,
+   "utility_delta": 0.006,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 70.13,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "inference_eval",
+   "time": 1787217208.9308193,
+   "perplexity_composed": 3.9672,
+   "perplexity_intact": 3.5735,
+   "delta": 0.3937,
+   "samples": [
+    {
+     "prompt": " Museum of Fine Arts , now called the Arkansas Arts Center ,",
+     "composed": " and the Little Rock Arsenal . The arsenal was built in Little Rock and was used to store the weapons and ammunition . The",
+     "intact": " in Little Rock in 1939 .\n The Works Progress Administration built the Museum of Fine Arts , now called"
+    },
+    {
+     "prompt": "oric Places in 1970 . Due to its association with the Camden",
+     "composed": " Arsenal , the arsenal was was located on the the north bank of the river , and was to be used as a depot",
+     "intact": " and Amboy Railroad, the first railroad in New Jersey, the station was listed on the National Register of Historic Places in"
+    },
+    {
+     "prompt": " Sites National Historic Landmark designated in 1994 .\nIn ",
+     "composed": "1862 , the Confederate Army began construction of the first Confederate Arsenal in Little Rock , Arkansas . The arsenal was",
+     "intact": "1994, the National Park Service designated the 1860s-era buildings of the Old Town of"
+    }
+   ]
+  },
+  {
+   "event": "bundle_saved",
+   "time": 1787217287.0215309,
+   "path": "/workspace/experiments/results/training/inference_i3_bundle.pt",
+   "train_rows": 20480
+  },
+  {
+   "event": "done",
+   "time": 1787217287.0318015,
+   "total_steps": 500
+  },
+  {
+   "event": "postmortem_start",
+   "time": 1787217287.0325086
+  },
+  {
+   "event": "postmortem",
+   "time": 1787217327.088719,
+   "attacker_token_accuracy_pct": 5.859,
+   "mean_levenshtein": 0.2953,
+   "interpretation": "token accuracy near the majority control and low string similarity mean the attacker's reads are wrong constructions (e.g. 'today' -> 'yadto'); high values would mean a real reconstruction"
+  }
+ ],
+ "postmortem": {
+  "attacker_token_accuracy_pct": 5.859,
+  "mean_levenshtein": 0.2953,
+  "samples": [
+   {
+    "block": 0,
+    "source_excerpt": " south the the of just Arts . now Tower Fine the\n called arsenal Building Arkansas ofThe Arts was , of in the Museum Reg",
+    "attacker_excerpt": " , the the , the the the the the the> the the the , , the and and the the the the the the the the the the the the ,",
+    "word_pairs": [
+     [
+      "south",
+      ","
+     ],
+     [
+      "the",
+      "the"
+     ],
+     [
+      "the",
+      "the"
+     ],
+     [
+      "of",
+      ","
+     ],
+     [
+      "just",
+      "the"
+     ],
+     [
+      "Arts",
+      "the"
+     ],
+     [
+      ".",
+      "the"
+     ],
+     [
+      "now",
+      "the"
+     ],
+     [
+      "Tower",
+      "the"
+     ],
+     [
+      "Fine",
+      "the>"
+     ],
+     [
+      "the",
+      "the"
+     ],
+     [
+      "called",
+      "the"
+     ]
+    ],
+    "levenshtein": 0.3041
+   },
+   {
+    "block": 1,
+    "source_excerpt": " included  in1 Places Expedition . ,1 in  arsenal7 may Expedition of the be Due the486 Camden9 its Camden0 to the associ",
+    "attacker_excerpt": " the the the . and the the the the a the the the the the . the the> the theunk the the . the the the the the the ,",
+    "word_pairs": [
+     [
+      "included",
+      "the"
+     ],
+     [
+      "in1",
+      "the"
+     ],
+     [
+      "Places",
+      "the"
+     ],
+     [
+      "Expedition",
+      "."
+     ],
+     [
+      ".",
+      "and"
+     ],
+     [
+      ",1",
+      "the"
+     ],
+     [
+      "in",
+      "the"
+     ],
+     [
+      "arsenal7",
+      "the"
+     ],
+     [
+      "may",
+      "the"
+     ],
+     [
+      "Expedition",
+      "a"
+     ],
+     [
+      "of",
+      "the"
+     ],
+     [
+      "the",
+      "the"
+     ]
+    ],
+    "levenshtein": 0.3
+   },
+   {
+    "block": 2,
+    "source_excerpt": " in  Tower9In designated \ufffd14 Land  was the renovated the\n of29 . efforts1mark to4 National Historic , the9 Building due",
+    "attacker_excerpt": " , . the , , , , , and the in> the , , with and the , , , , , , the the the the the , and ,",
+    "word_pairs": [
+     [
+      "in",
+      ","
+     ],
+     [
+      "Tower9In",
+      "."
+     ],
+     [
+      "designated",
+      "the"
+     ],
+     [
+      "\ufffd14",
+      ","
+     ],
+     [
+      "Land",
+      ","
+     ],
+     [
+      "was",
+      ","
+     ],
+     [
+      "the",
+      ","
+     ],
+     [
+      "renovated",
+      ","
+     ],
+     [
+      "the",
+      "and"
+     ],
+     [
+      "of29",
+      "the"
+     ],
+     [
+      ".",
+      "in>"
+     ],
+     [
+      "efforts1mark",
+      "the"
+     ]
+    ],
+    "levenshtein": 0.2857
+   },
+   {
+    "block": 3,
+    "source_excerpt": ".> Club Rock Arkansas , of W Museum newrop It ofst . < and the philanthist Progressunk became Works , Administration hom",
+    "attacker_excerpt": " of the the the the the game , the the the . and the the the theunk the the the ,unkunk the the> the the the with the",
+    "word_pairs": [
+     [
+      ".>",
+      "of"
+     ],
+     [
+      "Club",
+      "the"
+     ],
+     [
+      "Rock",
+      "the"
+     ],
+     [
+      "Arkansas",
+      "the"
+     ],
+     [
+      ",",
+      "the"
+     ],
+     [
+      "of",
+      "the"
+     ],
+     [
+      "W",
+      "game"
+     ],
+     [
+      "Museum",
+      ","
+     ],
+     [
+      "newrop",
+      "the"
+     ],
+     [
+      "It",
+      "the"
+     ],
+     [
+      "ofst",
+      "the"
+     ],
+     [
+      ".",
+      "."
+     ]
+    ],
+    "levenshtein": 0.3113
+   }
+  ],
+  "interpretation": "token accuracy near the majority control and low string similarity mean the attacker's reads are wrong constructions (e.g. 'today' -> 'yadto'); high values would mean a real reconstruction"
+ }
+}

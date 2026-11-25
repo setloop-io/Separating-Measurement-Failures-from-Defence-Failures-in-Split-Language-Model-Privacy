@@ -1,0 +1,36 @@
+{
+  "evidence_tier": "engineering_smoke",
+  "primary": {
+    "depth": 1,
+    "knowledge": "public",
+    "mode": "training",
+    "left": "joint_true_k4",
+    "right": "forward_k4",
+    "primary": true,
+    "difference": 0.16666666666666666,
+    "lower": 0.0,
+    "upper": 0.4166666666666667,
+    "alpha": 0.05,
+    "expected_draws_per_tail": 25.0,
+    "exceeds_practical_margin": false
+  },
+  "secondary_family_size": 7,
+  "source_manifest_sha256": "f553d3325b72527d9daa9a5a3a27547174505692c8c1d934f43a601c95c18f72",
+  "limitations": [
+    "Percentile crossed bootstrap is approximate, especially with few independent runs.",
+    "Only token-accuracy contrasts are inferential. Span, sequence, noise, precision, knowledge and cost curves are descriptive.",
+    "A lower bound above zero supports improvement; above 0.02 supports the prespecified practical margin. No equivalence conclusion from crossing zero.",
+    "Fixed sample is not a power guarantee; bootstrap Monte Carlo tail resolution is reported.",
+    "Controlled post-training loss-gradient probes do not reproduce an evolving training trajectory."
+  ],
+  "outputs": {
+    "compute-training.pdf": "132458f20a549c178427cc2cfdda57e151da4ac5e0008b1ecf42a296dadafb35",
+    "compute-inference.pdf": "e4f575b0d42a45bcb06eecf76c38ec6523a29018027449ba9277d70a363cb7d7",
+    "compute-training.png": "196e7ca24a5f3a7195fb473ce34496371a6faa3512bf030a6f48c1ee07a5e21c",
+    "contrasts.csv": "1bcf86f63b146b24e1c27c184c920b74b8b991e23446b4c0552f5991f1b69a61",
+    "compute-inference.png": "9ac22353e6eeb07783c924ab60e54e702fddbefa720698a447816af15850535b",
+    "compute-inference.svg": "ced3579ad694964555b992f9d64f86a3bcd001e872b8dc58bebcf34f28ccaef9",
+    "compute-training.svg": "e0d4c74c2d477c889d414781ca50da6d8f941bace056d1ceb1327d08e4f726cb",
+    "metrics_compute.csv": "1460fdb9118ba41c872a2503b0a1671aa0c978ced6518220ee348c82edc73d45"
+  }
+}

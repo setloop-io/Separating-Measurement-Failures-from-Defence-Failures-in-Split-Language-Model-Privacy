@@ -1,0 +1,131 @@
+{
+  "schema": "llm_attacker.defended_pilot_cell.v1",
+  "status": "COMPLETE",
+  "split": 6,
+  "seed": 11,
+  "defense": "replica-median",
+  "paired_control": "../none/cell.json",
+  "wall_seconds": 9.376464074943215,
+  "attack_seconds": 95.86503808805719,
+  "cuda_peak_allocated_bytes": 1759721472,
+  "resources_scope": "cell wall includes capture I/O; cuda peak is process-wide (experiment.json convention)",
+  "utility_before": {
+    "cross_entropy": 4.444623708724976,
+    "perplexity": 85.16782389784635
+  },
+  "utility_after": {
+    "cross_entropy": 4.438823699951172,
+    "perplexity": 84.67527953357963
+  },
+  "training": {
+    "steps_run": 64,
+    "final_loss": 2.7032864093780518,
+    "mean_loss": 3.6133778877556324
+  },
+  "access": {
+    "schema": "llm_attacker.defended_pilot_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 32,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 8,
+        "beam_width": 2
+      },
+      "sipit": {
+        "steps_per_token": 64
+      },
+      "scored_sequences": 32
+    }
+  },
+  "provenance": {
+    "path": "captures/replica_median_provenance.json",
+    "sha256": "ca355dec3f8317b483172909e92eb8942cb243d4018b2ff73bf1fc1b729c6db1"
+  },
+  "run_artifact": "run.json",
+  "evidence": "run.json.evidence.json",
+  "captures_dir": "captures",
+  "attacks": {
+    "forward": {
+      "accuracy": 0.16015625,
+      "n_tokens": 1024,
+      "n_sequences": 32,
+      "candidate_count": 8,
+      "beam_width": 2,
+      "work": {
+        "head_forward_calls": 32,
+        "head_forward_sequences": 16128,
+        "head_forward_token_positions": 270080,
+        "head_backward_calls": 0,
+        "head_backward_token_positions": 0,
+        "vocabulary_dot_products": 51463168,
+        "wall_seconds": 6.913472533924505,
+        "cuda_seconds": 6.913333984375,
+        "peak_allocated_bytes": 2362026496,
+        "incremental_peak_allocated_bytes": 1311798272
+      },
+      "artifact": "forward-baseline.json"
+    },
+    "sipit": {
+      "accuracy": 0.0380859375,
+      "n_tokens": 1024,
+      "n_sequences": 32,
+      "steps_per_token": 64,
+      "work": {
+        "head_forward_calls": 4096,
+        "head_forward_sequences": 131072,
+        "head_forward_token_positions": 2162688,
+        "head_backward_calls": 2048,
+        "head_backward_token_positions": 1081344,
+        "vocabulary_dot_products": 3293642752,
+        "wall_seconds": 81.11251898505725,
+        "cuda_seconds": 81.112125,
+        "peak_allocated_bytes": 1759721472,
+        "incremental_peak_allocated_bytes": 503557632
+      },
+      "artifact": "sipit-baseline.json"
+    },
+    "replica-integrity": {
+      "observations": "replica-observations.json",
+      "truth": "replica-truth.json",
+      "artifact": "replica-integrity.json",
+      "arms": [
+        {
+          "arm": "clean",
+          "samples": 32,
+          "accepted_error_rate": 0.0,
+          "availability_abort_rate": 1.0,
+          "alarm_rate": 1.0,
+          "false_positive_rate": 1.0,
+          "false_abort_rate": 1.0
+        },
+        {
+          "arm": "one-malicious",
+          "samples": 32,
+          "accepted_error_rate": 0.0,
+          "availability_abort_rate": 1.0,
+          "alarm_rate": 1.0,
+          "false_positive_rate": null,
+          "false_abort_rate": null
+        },
+        {
+          "arm": "two-colluding",
+          "samples": 32,
+          "accepted_error_rate": 1.0,
+          "availability_abort_rate": 0.0,
+          "alarm_rate": 1.0,
+          "false_positive_rate": null,
+          "false_abort_rate": null
+        }
+      ],
+      "perturbation_point": "channel outputs replaced before the coordinate-median aggregation point (replica_integrity.perturb)"
+    }
+  }
+}

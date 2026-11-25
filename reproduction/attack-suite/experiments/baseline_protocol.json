@@ -1,0 +1,108 @@
+{
+  "schema": "llm_attacker.baseline_protocol.v1",
+  "study": "Exploratory stronger-baseline replay of frozen pilot captures",
+  "depths": [
+    3,
+    6
+  ],
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55
+  ],
+  "defenses": [
+    "none",
+    "gaussian"
+  ],
+  "gaussian_sigma": 0.1,
+  "modes": [
+    "training",
+    "inference"
+  ],
+  "selected_document_ids": {
+    "training": [
+      "wikitext2-train-72aab8c1a38c0c112bf0",
+      "wikitext2-train-8c486530ef8357405ce4",
+      "wikitext2-train-d95ca7c9c4e5b6cce0c5",
+      "wikitext2-train-4e06f6081412494d6234",
+      "wikitext2-train-63fc0bf26656a9e66484",
+      "wikitext2-train-8d0685e61318811b1f22",
+      "wikitext2-train-2c5f2a351644ca05d5ed",
+      "wikitext2-train-3dd55610d3eebb06063a"
+    ],
+    "inference": [
+      "wikitext2-train-3128dcff7bbb9935e75b",
+      "wikitext2-train-751db7503a9d33242d6b",
+      "wikitext2-train-39c5dc13d74bf656c2fb",
+      "wikitext2-train-c3e19cc9d7d998df19dc",
+      "wikitext2-train-d6a0e8e7da61ee3b968d",
+      "wikitext2-train-398328f3ca54526217fb",
+      "wikitext2-train-961ef23b22e4e7e3794d",
+      "wikitext2-train-3777a345bc1a3c334772"
+    ]
+  },
+  "selection": "First8 per partition ordered by SHA256(document_id), fixed before new outcomes; same IDs across all seeds, depths and arms",
+  "source_manifest_sha256": {
+    "3": "b34717395e4aa4dc388c31dfa1f5a45fae8da4b119ee294053757128dd8728b2",
+    "6": "648dbe2b10bc34f59ae5d8d815dc7cf06c659f68e31d61d88379c8b335061a55"
+  },
+  "candidate_counts": [
+    8,
+    32
+  ],
+  "beam_width": 2,
+  "sipit_steps": [
+    32,
+    128
+  ],
+  "sipit_step_size": 1.0,
+  "published_baseline": {
+    "name": "SIPIT, budgeted public-checkpoint adaptation",
+    "paper": "https://arxiv.org/abs/2510.15511",
+    "author_repository": "https://github.com/giorgosnikolaou/SIPIT",
+    "author_commit": "820683156b7257313046a4fb3c492e52519525b7",
+    "implementation": "Independent paper implementation; author source used externally for fidelity only",
+    "adaptations": [
+      "Batch independent sequences",
+      "Bound32/128 iterations per token instead of vocabulary-size ceiling",
+      "Return best verified discrete residual on exhaustion",
+      "Use actual stale/noisy captures, not recomputed targets",
+      "Squared Euclidean distances via matrix multiplication; skip final unused backward if all examples match"
+    ]
+  },
+  "compute": {
+    "matched": "Forward and union-joint beam at identical K, beam width, documents and depth; same count of public-head prefix evaluations",
+    "measured": [
+      "Synchronized wall time",
+      "CUDA event elapsed time (includes host launch gaps; not pure GPU busy time)",
+      "CUDA peak and incremental allocated memory",
+      "Public-head forward calls, sequences, prefix token positions",
+      "Backward calls and prefix token positions",
+      "Vocabulary dot products"
+    ],
+    "setup": "Model loading/warmup and public ridge calibration recorded separately; report applicable setup plus attack time",
+    "published_comparison": "Recovery versus measured compute; optimizer iterations are not matched to beam expansions"
+  },
+  "statistics": {
+    "unit": "Five paired seeds, conditional on fixed eight documents per mode",
+    "comparisons": [
+      "joint-minus-forward at each K/depth/defense",
+      "joint-minus-backward at each K/depth/defense",
+      "SIPIT128-minus-forward32 at each depth/defense/mode"
+    ],
+    "family_size": 24,
+    "interval": "Bonferroni-adjusted Student t, alpha .05; descriptive, not confirmatory"
+  },
+  "limits": [
+    "Exploratory reuse of a previously inspected pilot; requires fresh held-out replication",
+    "Training captures include dropout and evolving private weights; inference uses final weights in eval mode",
+    "No private client checkpoint, labels, server-tail weights or dropout masks granted to attacks",
+    "Backward direction is a heuristic, not full published TAG gradient matching",
+    "Finite beam search is approximate and candidate construction is under test",
+    "SIPIT exact-recovery guarantee does not apply to noisy/stale public-checkpoint adaptation",
+    "Depth is assigned to host; no causal depth claim",
+    "Eight fixed documents and five seeds do not establish population generalization"
+  ]
+}

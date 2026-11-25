@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "system_boundary": "trusted encoder output <-> remote surrogate; uniform per-tensor affine quantized latent boundary; trusted decoder return path",
+  "channels": {
+    "forward_values": true,
+    "returned_values": true,
+    "outbound_gradients": true,
+    "inbound_gradients": true,
+    "remote_state": true,
+    "timing": true
+  },
+  "history": {
+    "per_step": true,
+    "accumulated": true
+  },
+  "omissions": [],
+  "accumulated_bytes": {
+    "forward_values": 20592,
+    "returned_values": 81920,
+    "outbound_gradients": 57344,
+    "inbound_gradients": 57344
+  },
+  "remote_state_sha256_per_eval": [
+    "44b4182f1484c2a0c979614ba397176905161dca7ae84e9d7b574669893c1898"
+  ],
+  "notes": "Actual loopback frames under r1-wire-1.0; payload and framing bytes retained separately."
+}

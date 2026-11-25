@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/privacy-constrained-remote/transcript.schema.json",
+  "title": "Declared remote-visible transcript inventory",
+  "type": "object",
+  "required": ["schema_version", "system_boundary", "channels", "history", "omissions"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "system_boundary": {"type": "string", "minLength": 1},
+    "channels": {
+      "type": "object",
+      "required": ["forward_values", "returned_values", "outbound_gradients", "inbound_gradients", "remote_state"],
+      "properties": {
+        "forward_values": {"type": "boolean"},
+        "returned_values": {"type": "boolean"},
+        "outbound_gradients": {"type": "boolean"},
+        "inbound_gradients": {"type": "boolean"},
+        "remote_state": {"type": "boolean"},
+        "timing": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
+    "history": {
+      "type": "object",
+      "required": ["per_step", "accumulated"],
+      "properties": {
+        "per_step": {"type": "boolean"},
+        "accumulated": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "omissions": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}
+

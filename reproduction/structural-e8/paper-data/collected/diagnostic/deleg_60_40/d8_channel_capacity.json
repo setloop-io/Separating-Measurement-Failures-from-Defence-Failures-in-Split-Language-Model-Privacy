@@ -1,0 +1,87 @@
+{
+  "schema": "dtraining.deleg6040.channel_capacity.v1",
+  "model": "per-row AWGN, signal capped by the L2 clip and independent of D, noise linear in D (privacy_runtime/activation_dp.py:97-103)",
+  "asymptote_nats": 4.0816326530612255,
+  "asymptote_depends_only_on_noise_multiplier": true,
+  "rows": [
+    {
+      "latent_dim": 64,
+      "cloud_experts": 8,
+      "cloud_layers": 2,
+      "train_blocks": 256,
+      "steps": 10000,
+      "noise_multiplier": 0.35,
+      "clip_norm": 1.0,
+      "dp_epsilon_composed": 11142501.128927493,
+      "fraction_closed": 0.8614923449020575,
+      "residual_nats": 1.2750080125406384,
+      "capacity_nats": 3.841537353191541,
+      "pct_of_asymptote": 94.11766515319273
+    },
+    {
+      "latent_dim": 64,
+      "cloud_experts": 32,
+      "cloud_layers": 4,
+      "train_blocks": 256,
+      "steps": 10000,
+      "noise_multiplier": 0.35,
+      "clip_norm": 1.0,
+      "dp_epsilon_composed": 11142501.128927493,
+      "fraction_closed": 0.8597197656790165,
+      "residual_nats": 1.2913251807913184,
+      "capacity_nats": 3.841537353191541,
+      "pct_of_asymptote": 94.11766515319273
+    },
+    {
+      "latent_dim": 96,
+      "cloud_experts": 8,
+      "cloud_layers": 2,
+      "train_blocks": 256,
+      "steps": 10000,
+      "noise_multiplier": 0.35,
+      "clip_norm": 1.0,
+      "dp_epsilon_composed": 11142501.128927493,
+      "fraction_closed": 0.8635983729731878,
+      "residual_nats": 1.2556213391944766,
+      "capacity_nats": 3.9173441014158215,
+      "pct_of_asymptote": 95.9749304846876
+    },
+    {
+      "latent_dim": 128,
+      "cloud_experts": 8,
+      "cloud_layers": 2,
+      "train_blocks": 256,
+      "steps": 10000,
+      "noise_multiplier": 0.35,
+      "clip_norm": 1.0,
+      "dp_epsilon_composed": 11142501.128927493,
+      "fraction_closed": 0.8653589446804008,
+      "residual_nats": 1.2394147040322423,
+      "capacity_nats": 3.9567604485336862,
+      "pct_of_asymptote": 96.94063098907529
+    },
+    {
+      "latent_dim": 64,
+      "cloud_experts": 8,
+      "cloud_layers": 2,
+      "train_blocks": 4096,
+      "steps": 10000,
+      "noise_multiplier": 0.35,
+      "clip_norm": 1.0,
+      "dp_epsilon_composed": 15159038.213986121,
+      "fraction_closed": 0.8890948993854183,
+      "residual_nats": 1.0282292610500008,
+      "capacity_nats": 3.841537353191541,
+      "pct_of_asymptote": 94.11766515319273
+    }
+  ],
+  "dp_epsilon_identical_across_latent_dim": true,
+  "latent_dims_compared": [
+    64,
+    96,
+    128
+  ],
+  "epsilon_comparison_scope": "cells sharing train_blocks and steps",
+  "n_cells_in_epsilon_comparison": 4,
+  "capacity_gain_64_to_128_pct": 2.999400623982429
+}

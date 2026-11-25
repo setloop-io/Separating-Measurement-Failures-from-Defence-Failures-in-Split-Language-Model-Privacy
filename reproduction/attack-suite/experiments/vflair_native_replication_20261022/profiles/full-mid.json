@@ -1,0 +1,48 @@
+{
+  "schema": "vflair-native-replication-v1",
+  "phase": "full",
+  "profile": "full",
+  "condition": "mid",
+  "seed": 60,
+  "gpu": 0,
+  "upstream_root": "artifacts/paper-b-review-round2-20261021/all-review-closure/cpu-closure-20261022/framework/upstream",
+  "upstream_manifest": "artifacts/paper-b-review-round2-20261021/all-review-closure/cpu-closure-20261022/framework/source-manifest.json",
+  "upstream_revision": "ff18565d89dce6367b6f13881a415c053b60cb0f",
+  "output_root": "artifacts/vflair-native-replication-20261022/runs",
+  "host": {
+    "base_python": "/home/geo/llm-attacker/.venv/bin/python",
+    "private_environment": "/home/geo/.venvs/vflair-native-20261022",
+    "model_path": "/home/geo/.cache/huggingface/hub/models--gpt2/snapshots/607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "dataset_manifest": "/home/geo/.cache/llm-attack-suite/vflair-native-20261022/lambada/manifest.json"
+  },
+  "bootstrap": false,
+  "prepare_inputs": false,
+  "setup_wall_seconds": 1800,
+  "native_import_check": true,
+  "count_native_windows": false,
+  "compatibility_profile": "gpt2-imports-v1",
+  "guards": {
+    "wall_seconds": 86400,
+    "minimum_free_gib": 40,
+    "maximum_training_windows": null,
+    "maximum_test_rows": null,
+    "maximum_optimizer_steps": null,
+    "maximum_capture_bytes": 1073741824
+  },
+  "canary": {
+    "train_rows": 16,
+    "test_rows": 2,
+    "attack_samples": 1,
+    "attack_epochs": 2
+  },
+  "full": {
+    "epochs": 30,
+    "batch_size": 16,
+    "sequence_length": 512,
+    "learning_rate": 0.001,
+    "native_early_stop_threshold": 1,
+    "include_bisr": false
+  },
+  "claim_scope": "Admission and canary validate infrastructure. Full labels require the complete admitted native data, training, evaluation and attack workload."
+}

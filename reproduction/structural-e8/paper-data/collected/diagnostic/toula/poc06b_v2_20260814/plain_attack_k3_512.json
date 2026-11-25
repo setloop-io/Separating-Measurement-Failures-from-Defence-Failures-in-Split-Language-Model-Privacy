@@ -1,0 +1,37 @@
+{
+  "arm": "plain_baseline",
+  "run_json": "/workspace/experiments/poc06b_v2_20260814T1830/results/plain.json",
+  "capture_dir": "/workspace/experiments/poc06b_v2_20260814T1830/private/eval_captures_plain",
+  "config_echo": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "split_after": 7,
+    "resume_after": 26,
+    "seq_len": 64,
+    "micro_batch_size": 1,
+    "grad_accum": 16,
+    "steps": 1,
+    "seed": 42,
+    "lr": 0.0001,
+    "dtype": "bf16",
+    "obf": null
+  },
+  "attacker": "known-plaintext replay (public weights + corpus + data order); solve_w=polar(lstsq) per epoch",
+  "decoder_public_pairs": 512,
+  "decoder_val_top1": 53.12,
+  "per_epoch": [
+    {
+      "epoch": null,
+      "n_rows": 1024,
+      "n_solve": 512,
+      "n_victim": 32,
+      "solver_tag": "lstsq+svd",
+      "top1_fwd_only_pct": 31.25,
+      "top1_fwd_bwd_pct": 40.62,
+      "undefended_top1_pct": 40.62
+    }
+  ],
+  "labelfree_band_top1_pct": 40.62,
+  "undefended_top1_pct": 40.62,
+  "pooled_cross_epoch": null,
+  "note": "interpretation depends on --arm: rotated arm expect per-epoch ~= band (<= ~3.7%) and pooled in band; baseline arm (no rotation) expect per-epoch ~= undefended"
+}

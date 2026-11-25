@@ -1,0 +1,316 @@
+{
+  "meta": {
+    "access_conditions": {
+      "split-training-wire": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses."
+    },
+    "description": "Adversary-conditioned assurance matrix: defense x attacker access x measured leakage x utility cost x evidence strength. Per-row measurements only \u2014 no universal risk score and no maturity model; the current evidence does not validate either.",
+    "evidence_ladder": [
+      {
+        "level": "fixture",
+        "meaning": "Fixture/synthetic batteries (e.g. replica-integrity fixtures, view-privacy synthetic de-mixing). Engineering checks on synthetic data; positives do not falsify a deployed defense."
+      },
+      {
+        "level": "live_channel_engineering",
+        "meaning": "Live in-repo channels exercised end to end (capture/transport/recovery plumbing). Demonstrates mechanism, not measured leakage against a defended target."
+      },
+      {
+        "level": "defended_pilot_paired",
+        "meaning": "Defended development pilot over trained defenders: paired defense-minus-none seed differences with percentile bootstrap CIs, utility deltas, failures-and-nulls accounting. Development tier; conditional on a fixed article sample; not a confirmatory claim."
+      },
+      {
+        "level": "frozen_crossed_bootstrap",
+        "meaning": "Frozen crossed-bootstrap study under the v2 protocol (crossed document/run bootstrap with multiplicity correction). Protocol frozen; evidence counts at this level only once executed."
+      }
+    ],
+    "fail_closed_policy": "Rows with missing leakage or utility fields are emitted as INCOMPLETE, never dropped or imputed.",
+    "sources": [
+      {
+        "analysis_script_sha256": "2cd3e64bd0d316414b872f8ebf9ac08b73ccb79ea63e28634f1ae4c2f3cc8bb3",
+        "bootstrap": {
+          "method": "percentile, paired over seeds",
+          "replicates": 10000,
+          "seed": 2026
+        },
+        "cells_failed": 0,
+        "cells_ok": 30,
+        "failures": [],
+        "kind": "defended_pilot",
+        "status": "COMPLETE",
+        "tier": "development_pilot"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "gaussian",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": 0.0166015625,
+        "ci_low": 0.001953125,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": 0.007161458333333333,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 1.8740464581076068,
+        "ci_low": -1.4258829390364909,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 0.3456169277368725
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "none",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": 0.0,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 0.0
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "replica-median",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": -0.6494140625,
+        "ci_low": -0.6767578125,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": -0.6669921875,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 97.34171242381652,
+        "ci_low": 6.70263692983017,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 49.11271525388921
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "secret-mixup",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": -0.044921875,
+        "ci_low": -0.0673828125,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": -0.057942708333333336,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 67.96341240959953,
+        "ci_low": 11.01413518520338,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 35.07797688518422
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "trained-bottleneck",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": -0.91015625,
+        "ci_low": -0.9208984375,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": -0.916015625,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 101033823.11347729,
+        "ci_low": 38439400.79602491,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 66407648.624861635
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "gaussian",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": 0.017578125,
+        "ci_low": -0.0166015625,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": 0.001953125,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 0.779637952666306,
+        "ci_low": -1.2211024026457622,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 0.07716568482156798
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "none",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": 0.0,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 0.0
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "replica-median",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": -0.705078125,
+        "ci_low": -0.716796875,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": -0.7122395833333334,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 93.57816581879413,
+        "ci_low": 7.1908850249277165,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 45.32309471428886
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "secret-mixup",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": -0.056640625,
+        "ci_low": -0.0859375,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": -0.072265625,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 71.12558541849407,
+        "ci_low": 15.960607117503791,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 36.32052107452661
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "trained-bottleneck",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": -0.865234375,
+        "ci_low": -0.8857421875,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": -0.8759765625,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 260444642.69833675,
+        "ci_low": 16933224.631866507,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 124342398.41026768
+      }
+    }
+  ],
+  "schema": "llm_attacker.assurance_matrix.v1"
+}

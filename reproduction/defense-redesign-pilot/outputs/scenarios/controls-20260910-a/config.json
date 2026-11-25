@@ -1,0 +1,39 @@
+{
+  "claim_scope": "Engineering only; threshold checks are diagnostics, never scientific qualification; source P0 has three training steps.",
+  "cohort": "engineering",
+  "control_seeds": [
+    410101
+  ],
+  "cpu_threads": 2,
+  "doses": [
+    0.5,
+    2.0
+  ],
+  "kind": "calibration",
+  "probe_epochs": 30,
+  "protocol_id": "p4-control-engineering-0.1",
+  "source_manifests": [
+    "experiments/manifests/p4-p0-20260910-a-d0-q8-trained-s410001.json",
+    "experiments/manifests/p4-p0-20260910-a-d1-s01-q8-trained-s410001.json",
+    "experiments/manifests/p4-p0-20260910-a-d3-q2-trained-s410001.json"
+  ],
+  "status": "engineering_ready",
+  "targets": [
+    {
+      "family": "sequence_property",
+      "target": "punctuation_fraction"
+    },
+    {
+      "family": "next_byte_structure",
+      "target": "next_byte_class"
+    }
+  ],
+  "views": [
+    "forward_values",
+    "returned_values",
+    "inbound_gradients",
+    "outbound_gradients",
+    "quantizer_metadata",
+    "forward_and_metadata"
+  ]
+}

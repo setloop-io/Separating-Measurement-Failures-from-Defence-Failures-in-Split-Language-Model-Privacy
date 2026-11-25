@@ -1,0 +1,89 @@
+{
+  "attack_spec_document": {
+    "approval_reference": "owner instruction 2026-09-16 + approved plan forager-storm-rogue; freeze review of cal001 qualification proposal",
+    "note": "Frozen after owner review of the calibration proposal (status proposal_ready_for_freeze_review). Thresholds UNCHANGED from the draft; the amendment path was evaluated and rejected: qualifying more combinations would require null_band >= 0.041, admitting instruments whose matched nulls show 0.045-0.56 spurious advantage, which would invalidate the privacy instrument's credibility. Qualification verdicts from calibration (strict, every seed): QUALIFIED = input_byte@inbound_gradients@{none,gradient-defense}, input_byte@outbound_gradients@{none,gradient-defense} (4 of 24). UNQUALIFIED = all forward_values and returned_values channels for every target, and all next_byte_class and punctuation_fraction combinations (20 of 24), predominantly on the null criterion. Consequence per protocol: exploratory privacy is UNDETERMINED for every cell unless a qualified gradient-channel breach rejects it; no scoped PASS is available under this instrument suite, and unqualified channels must be named in every report.",
+    "origin": "calibration execution cal001 (76/76 runs, execution root on toula) analyzed at commit bc5242e: analysis_sha256 0468611f7d45c65a6d6bc1c250930778db46d578af55c3fdc09f7fb2450179a2, proposal_sha256 e59a00464f73d55252bc517b107d8d4c46ae906e38063051c242cbe8e97b5888",
+    "reviewed_at_utc": "2026-09-16T17:17:35Z",
+    "reviewed_by": "Georgios Politis (owner)",
+    "schema_version": "r1-attack-spec-1.0",
+    "specification": {
+      "null_band": 0.02,
+      "positive_doses": [
+        0.25,
+        0.5,
+        1.0,
+        2.0
+      ],
+      "positive_floor_accuracy": 0.1,
+      "positive_floor_correlation": 0.2,
+      "privacy_limit_accuracy": 0.02,
+      "privacy_limit_correlation": 0.1,
+      "ridge_lambda": 1.0
+    },
+    "status": "frozen"
+  },
+  "attack_spec_sha256": "547b5a9312a11f052a8468c16901d42ce55c29f519cfc33606a85ef379e150f0",
+  "attack_spec_source": {
+    "path": "/home/geo/r1-acceptance/attack-spec-frozen.json",
+    "sha256": "aadab0dbbfdaa810b2a0ab4088ab5b589667d85f4f085611299f21c12d714cb3"
+  },
+  "attack_spec_status": "frozen",
+  "budget": {
+    "approval_reference": "owner instruction 2026-09-16 (owned nodes) + approved plan forager-storm-rogue; exploratory attempt 2 after exp001 migration off a contended node",
+    "bundle_sha256": "7987e7f95f03eff012e14f97f76fcfa50ab231e130ddc6994877f8cd067de9e3",
+    "hourly_usd": 0.5,
+    "max_runs": 232,
+    "max_total_usd": 16.0,
+    "max_wall_seconds": 86400,
+    "note": "Owned hardware (toula, NVIDIA GB10; verified uncontended at admission: 0% GPU util, load ~0). Attempt 2: exp001 on koula was gracefully interrupted after 9 runs (records preserved) because the co-tenant workload zen_albattani consumed 88% of koula's GPU, projecting 128,400 s against the 86,400 s cap. The exp001 admission remains consumed; this is a newly reviewed approval, not a replenishment. USD 0.50/h nominal amortization+power rate; binding cap is the 86,400 s matrix limit. Basis: uncontended cal001 pace ~350 s/trained run; projection ~81,200 s.",
+    "reviewed_at_utc": "2026-09-16T18:46:11Z",
+    "reviewed_by": "Georgios Politis (owner)",
+    "schema_version": "r1-budget-1.0",
+    "stage": "exploratory",
+    "status": "approved_for_scientific",
+    "study_id": "p3-r1-fresh-start"
+  },
+  "budget_sha256": "beb2dbfa89c62409304946fe31970d32368536a6a9a8edfde0c17ba08ed5e429",
+  "bundle_sha256": "7987e7f95f03eff012e14f97f76fcfa50ab231e130ddc6994877f8cd067de9e3",
+  "created_at_utc": "2026-09-16T18:46:23.367878+00:00",
+  "environment": {
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "deterministic_algorithms": false,
+    "gpu_name": "NVIDIA GB10",
+    "pip_freeze": "attrs==26.1.0\ncontourpy==1.4.0\ncuda-bindings==13.4.1\ncuda-pathfinder==1.8.1\ncuda-toolkit==13.0.3.0\ncycler==0.12.1\nfilelock==3.32.6\nfonttools==4.65.0\nfsspec==2026.7.0\niniconfig==2.3.0\nJinja2==3.1.6\njsonschema==4.26.0\njsonschema-specifications==2025.9.1\nkiwisolver==1.5.1\nMarkupSafe==3.0.3\nmatplotlib==3.11.1\nmpmath==1.3.0\nnetworkx==3.6.1\nnumpy==2.5.2\nnvidia-cublas==13.1.1.3\nnvidia-cuda-cupti==13.0.85\nnvidia-cuda-nvrtc==13.0.88\nnvidia-cuda-runtime==13.0.96\nnvidia-cudnn-cu13==9.24.0.43\nnvidia-cufft==12.0.0.61\nnvidia-cufile==1.15.1.6\nnvidia-curand==10.4.0.35\nnvidia-cusolver==12.0.4.66\nnvidia-cusparse==12.6.3.3\nnvidia-cusparselt-cu13==0.8.1\nnvidia-nccl-cu13==2.30.7\nnvidia-nvjitlink==13.4.52\nnvidia-nvshmem-cu13==3.4.5\nnvidia-nvtx==13.0.85\npackaging==26.3\npillow==12.3.0\npluggy==1.6.0\nPygments==2.21.0\npyparsing==3.3.2\npytest==9.1.1\npython-dateutil==2.9.0.post0\nPyYAML==6.0.3\nreferencing==0.37.0\nrpds-py==2026.6.3\nsetuptools==84.0.0\nsix==1.17.0\nsympy==1.14.0\ntorch==2.14.0+cu130\ntriton==3.8.0\ntyping_extensions==4.16.0\n",
+    "platform": "Linux-6.17.0-1026-nvidia-aarch64-with-glibc2.36",
+    "python": "3.12.12 (main, Feb 24 2026, 20:41:46) [GCC 12.2.0]",
+    "torch_version": "2.14.0+cu130"
+  },
+  "environment_review": {
+    "approval_reference": "owner instruction 2026-09-16 (owned nodes) + approved plan forager-storm-rogue; exploratory attempt 2 after exp001 migration off a contended node",
+    "bundle_sha256": "7987e7f95f03eff012e14f97f76fcfa50ab231e130ddc6994877f8cd067de9e3",
+    "container_image_digest": "sha256:4a53b1b4bb6bc25bd69d69467b4b47b61939f406b1c5586c9ffd85843a3c0357",
+    "environment_sha256": "f90239f3736d5afe838e1e3617cc0cdbda816e32fe1232b498ed7856c19adbde",
+    "note": "Node toula (owned, NVIDIA GB10, driver 580.159.03 / CUDA 13.0). Same accepted image and measured environment as the completed calibration stage (digests unchanged; identical image family to koula). Node verified uncontended at review time (0% GPU util, load average < 0.1). Operator-supplied local image identity; no registry digest. DEVIATION carried: dcgmi unavailable (no sudo); nvidia-smi is the GPU health evidence.",
+    "pip_freeze_sha256": "37513847fb8e7ad5d15a981e77925683456cbcfb8bbeeca516f7fb34d8f1f0f4",
+    "reviewed_at_utc": "2026-09-16T18:46:11Z",
+    "reviewed_by": "Georgios Politis (owner)",
+    "schema_version": "r1-environment-review-1.0",
+    "status": "approved_for_scientific"
+  },
+  "environment_review_sha256": "f271fd7741c999cf95189736e256056d5eea14d31e73b1ddc502f1bc714daa2f",
+  "environment_sha256": "f90239f3736d5afe838e1e3617cc0cdbda816e32fe1232b498ed7856c19adbde",
+  "execution_device": "cuda",
+  "limits": {
+    "output_bytes": 4398046511104,
+    "wall_clock_seconds": 86400
+  },
+  "matrix_declared_device": "cuda",
+  "note": "Admits exactly one local execution of the bound scientific stage; a failure consumes the underlying budget approval.",
+  "protocol": "docs/PREREGISTRATION_R1.md",
+  "protocol_sha256": "071e18cc9a242e768caf0dd33c3fbcbc03498855cd0f484bf205bcab74ffec13",
+  "protocol_status_declared": "frozen_2026-09-16_scientific_admission_required",
+  "run_count": 232,
+  "schema_version": "r1-scientific-admission-1.0",
+  "scientific_evidence": true,
+  "scope": "Local pre-execution binding; no independently witnessed preregistration asserted.",
+  "stage": "exploratory",
+  "study_id": "p3-r1-fresh-start"
+}

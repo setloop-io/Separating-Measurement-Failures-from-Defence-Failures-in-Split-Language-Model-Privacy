@@ -1,0 +1,176 @@
+{
+  "schema": "llm_attacker.crossed_span.v1",
+  "protocol_id": "p6-crossed-span-1.0",
+  "version": 1,
+  "status": "frozen",
+  "freeze_rule": "Draft only. Freeze requires explicit user approval and a freeze commit anchoring this file's SHA-256 (precedent: validation v3 frozen at 064a64f); the automated pipeline drafts but never freezes. No cell may execute before freeze.",
+  "origin": "Workstream WS2 of docs/open-commitments-plan-2026-09-16.md. Paper A Table 5 (protocol p5-delegation-sweep-1.0) is a 7-point diagonal in (span, start-block) space (starts 3,3,2,2,1,1,0 for spans 1..7), so span, starting location, and replaced capacity co-vary; this crossed design separates them.",
+  "grid": {
+    "spans": [
+      2,
+      4,
+      6
+    ],
+    "starts": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "defenses": [
+      "D0",
+      "D1"
+    ],
+    "victim_seeds": [
+      11,
+      22,
+      33,
+      44,
+      55,
+      66,
+      77,
+      88
+    ],
+    "cells_per_architecture": 192,
+    "cell_counting": "3 spans x 4 starts x 2 defenses x 8 victim seeds = 192 trained cell-evaluations per architecture (P5 had 112 = 14 cells x 8 seeds). Controls (all_local per seed, plus the frozen control and, in Mode 1, the removed control per cell) are counted separately and are not part of the 192.",
+    "architectures": {
+      "primary": "GPT-2 124M (openai-community/gpt2, revision 607a30d783dfa663caf39e06633721c8d4cfcd7e) \u2014 the confirmatory architecture, executed first",
+      "secondary": "Qwen3-0.6B \u2014 executed second only if the GPT-2 phase completes within budget; treated as replication, not a second confirmatory family"
+    },
+    "feasibility_rule": {
+      "rule": "a (span, start) cell is feasible iff start + span <= B, where B is the surrogate segment block count",
+      "B_mode1": "the external P5 surrogate segment block count, imported from the P5 surrogate spec (docs/P5_DELEGATION_TRIANGLE_DECISION.md and the P0-P5 phase records; WS1 evidence release). The P5 diagonal (max start+span = 7) implies B >= 7 for the external segment; the exact value is NOT in this repository and MUST be pinned at freeze from the imported spec.",
+      "B_mode2": "the backbone's transformer block count n_layer from the model config (GPT-2: 12; Qwen3-0.6B: per its config at freeze), because the Mode 2 executable segment is a range of the backbone's own blocks (see modes.mode_2).",
+      "contingency": "If the B imported at freeze makes any of the 12 (span, start) combinations infeasible (B < 9), the infeasible cells are dropped and the cell count, the analysis degrees of freedom, and the budget are amended BEFORE any run under the amendment record pattern below. With B = 12 (Mode 2, GPT-2) all 12 combinations are feasible and the grid is the full 192.",
+      "declared_cells": "all 12 (span, start) combinations {2,4,6} x {0,1,2,3}, feasible under B = 12; the diagonal cells of Paper A Table 5 that intersect this grid (span 2 @ 3, span 4 @ 2, span 6 @ 1) are included, so the crossed result is directly comparable to the published diagonal at three points."
+    }
+  },
+  "defenses": {
+    "D0": "8-bit scalar boundary quantization (the P5 reference defense)",
+    "D1": "4-bit scalar boundary quantization + gradient clip 1.0 + noise sigma=0.1 (the P5 hardened defense)",
+    "mode_2_executable": {
+      "D0": "attacker.splitbench --defense quant --quant-bits 8 --quant-grad",
+      "D1": "attacker.splitbench --defense quant --quant-bits 4 --quant-grad --grad-clip 1.0 --grad-noise 0.1",
+      "convention": "signed symmetric per-sequence absmax quantization (the attacker/validation_controls.py bits_N rule, applied to the forward seam activation and, under --quant-grad, to the returned gradient); grad clip is the global L2 norm; grad noise is relative-RMS (per-sequence RMS(g) * sigma, the validation_controls noise_sigma convention); frozen composition order clip -> noise -> quantize. Whether the external P5 D0/D1 quantizes both directions, and whether its noise sigma is absolute or relative-RMS, MUST be confirmed against the imported P5 spec at freeze; the values above are the predeclared Mode 2 interpretation."
+    }
+  },
+  "gates": {
+    "utility": "Delta_U = L(trained) - L(all_local) <= 0.10 nats mean held-out cross-entropy penalty, with the upper bound of the 95% confidence interval <= 0.12 nats (frozen by Paper A from the P2/P2b empirical range 0.02-0.16 nats)",
+    "privacy": "worst per-seed adversarial advantage <= 0.02 over every qualified attack family and channel (token-inversion, sequence-property-v2, structure-semantic-v2; forward latents and returned gradients; property advantage = R2_attack - R2_control)",
+    "delegation": "analytic remote FLOP share = FLOP_remote / FLOP_total (forward and backward) >= 0.15, computed analytically from the cell geometry, not measured",
+    "note": "Gate thresholds are carried verbatim from Paper A section 5.2 and are frozen. Mode 2 evaluates the SAME utility and delegation formulas but a DIFFERENT privacy instrument (see modes.mode_2.privacy_instrument); Mode 2 privacy outcomes are therefore not numerically comparable to the P5 gate and feed only the variance decomposition, never the empty-set claim."
+  },
+  "modes": {
+    "mode_1": {
+      "name": "external surrogate stack (the design as Paper A ran P5)",
+      "requires": "the external P0-P5 programme's machinery, none of which exists in this repository: frozen-backbone surrogate distillation (the pretrained backbone stays frozen; a trained surrogate segment of `span` blocks starting at block `start` REPLACES backbone blocks [start, start+span)), boundary width 256, the all_local and removed matched controls, the P0-qualified property instruments (sequence-property-v2, structure-semantic-v2) with their r-advantage decoders, and the frozen-random surrogate control behind G_R",
+      "execution": "exactly the P5 cell semantics under protocol p5-delegation-sweep-1.0, extended to the crossed grid; surrogate training budget, corpora (WikiText-2 and PTB), and evaluation partitions imported from the P5 spec at freeze"
+    },
+    "mode_2": {
+      "name": "this repository's machinery (closest executable analogue)",
+      "cell": "attacker.splitbench split finetune with a frozen backbone outside the delegated segment: --split START --trainable-range START,START+SPAN (blocks [START, START+SPAN) of the real backbone train in place; every other parameter frozen), --defense per defenses.mode_2_executable, --seed VICTIM_SEED",
+      "utility_control": "all_local = the identical run WITHOUT --trainable-range and with --defense none (full split finetune at the same seam, seed, and budget), one per seed; frozen control = held-out loss of the untouched pretrained model, one per seed (the local analogue of the frozen-surrogate control behind G_R; the removed control has no local analogue)",
+      "privacy_instrument": "the repo's seam batteries over the training captures: seam-inversion (vmi arm, forward latents) and label-scoring (property inference from seam gradients), scored as excess-over-control under attacker/gate.py frozen-gate.v2 (Bonferroni-Wilson upper-95 excess in percentage points, >= 3 seeds). This is NOT the P0/P4b r-advantage instrument: the measure is different, the 0.02 threshold does not apply, and outcomes feed only the variance decomposition.",
+      "known_losses": "segment-trained-in-place real blocks are not a distilled surrogate replacement; no boundary width 256 (the seam is the model's full hidden width); no removed control; no PTB corpus; the privacy instrument differs; utility is a split-finetune penalty, not a surrogate-replacement penalty. The full element-by-element map is experiments/crossed_span_feasibility.md, which is part of this protocol by reference."
+    },
+    "coverage_rule": "Mode 1 is the only mode whose gate outcomes can re-scope Paper A's empty-set claim (the pre-committed text rule below). Mode 2 answers the same statistical question (does start explain residual variance after conditioning on span) on the local instruments and is the engineering rehearsal for the crossed analysis; it cannot pass or fail the P5 gates."
+  },
+  "endpoints": {
+    "primary": {
+      "question": "after conditioning on span, does start block explain residual variance in any gate measure?",
+      "measures": [
+        "Delta_U",
+        "worst_advantage",
+        "remote_FLOP_share"
+      ],
+      "method": "two-way variance decomposition (span x start, both fixed) per gate measure on the 12 crossed cells, effects estimated on per-seed cell means; confidence intervals by crossed bootstrap over victim seeds (10,000 replicates, prespecified seed 41777; unit = independently trained victim run), consistent with the programme's existing statistics. FLOP_share is analytic (no seed variance): its decomposition is exact and descriptive, reported alongside without inferential claims.",
+      "practical_margin": 0.1,
+      "decision": "start block MATTERS for a measure iff its partial R2 given span is >= 0.10 of the residual variance AND the crossed-bootstrap 95% CI lower bound excludes 0. If start matters for no measured gate endpoint, Paper A's diagonal caveat stands confirmed in crossed form; if it matters for any, the appendix ledger reports the decomposition per cell."
+    },
+    "secondary": {
+      "question": "does a depth-only baseline predict gate outcomes out of sample, and does start add predictive power beyond span/depth alone?",
+      "method": "per gate measure, ridge models F0 = {span} and F1 = {span, start} (degree-1 features, closed-form ridge, lambda = 1e-3, fit on per-seed cell means); fit on 6 seeds, evaluate on 2 held-out seeds; report held-out RMSE for both models",
+      "fit_seeds": [
+        11,
+        22,
+        33,
+        44,
+        55,
+        66
+      ],
+      "heldout_seeds": [
+        77,
+        88
+      ],
+      "decision": "start adds predictive power beyond depth alone iff F1's held-out RMSE is at least 10% below F0's (practical margin, predeclared); otherwise the depth-only baseline is reported as sufficient at this grid resolution. Held-out evaluation happens exactly once per measure; no re-splitting."
+    }
+  },
+  "precommitted_text_rule": "If any crossed cell passes all three frozen gates (utility, privacy, delegation \u2014 Mode 1 instruments only), Paper A's empty-set claim is re-scoped to name the exception: the abstract and section 5 text change from 'no configuration satisfies the utility, privacy, and delegation gates simultaneously' to naming the passing (span, start, defense) cell(s) and re-scoping the claim to the remaining grid. If no crossed cell passes all three gates, the Table 5 caption's diagonal caveat is replaced by the crossed confirmation. This rule is frozen with the protocol; a gate flip is handled by this rule, never by post-hoc framing.",
+  "multiplicity": {
+    "primary_family": "the three gate measures of the primary endpoint; Bonferroni alpha = 0.05/3 for the variance-decomposition decisions",
+    "secondary_family": "the three held-out predictive comparisons of the secondary endpoint; Bonferroni alpha = 0.05/3 within the family",
+    "architectures": "GPT-2 is the single confirmatory architecture and is executed first; Qwen3-0.6B is a predeclared replication with its own family-wise correction, not pooled with GPT-2",
+    "everything_else": "descriptive only, labeled as such"
+  },
+  "statistics": {
+    "alpha": 0.05,
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 41777,
+    "unit": "independently trained victim run (seed); cells are (span, start, defense) combinations; attack-side randomness is fixed per protocol and not a replication unit",
+    "missing": "No complete-case deletion. Any missing/failed cell blocks comparative analysis; retain the failure and rerun the entire cell in a fresh directory under the same protocol. No outcome-based retries.",
+    "stopping": "Exactly 8 victim seeds, 12 (span, start) cells, 2 defenses, 2 architectures maximum. GPT-2 completes fully before Qwen3-0.6B starts; Qwen3-0.6B executes only if the GPT-2 phase completed within budget. No outcome-driven sample extension; report achieved precision, no power guarantee.",
+    "generalization": "Inference covers victim-training randomness and the fixed evaluation partitions conditional on the declared corpora; it does not estimate variation across independently sampled corpora or architectures beyond the two declared."
+  },
+  "frozen_inputs": {
+    "mode_1": "external P5 surrogate spec + P0/P4b instrument definitions + corpora partitions (WikiText-2, PTB), imported and hash-pinned at freeze (WS1 evidence release; paths resolved before freeze or the protocol does not freeze)",
+    "mode_2": {
+      "corpus_manifest": "experiments/validation_corpus_manifest.json",
+      "curation_manifest_sha256": "3de17039af6430dba91ddf7935a9382c9474a18213ebf6bfd8f85c9221176930",
+      "note": "Mode 2 reuses the v3 pinned WikiText-2 partitions (calibration 32 / train 128 / evaluation 256; tokenized_sha256 d79ef4fc... in experiments/validation_protocol.v3.json) so cell costs and instruments are directly comparable to the validation campaign. PTB is out of Mode 2 scope."
+    }
+  },
+  "execution": {
+    "discipline": "evidence-v2 sealing on every run; per-cell hash-chained measurement events and immutable captures; crash-safe JSONL journals; fail-closed error journaling; no outcome-based retries; report checkpoint after each victim run and at completion/failure",
+    "mode_2_runner": "a sharded driver in the spirit of experiments/run_long_horizon.py invoking attacker.splitbench per cell (exact per-cell command template in experiments/crossed_span_feasibility.md); the driver does not exist yet and is execution infrastructure, not part of this protocol",
+    "randomized_order": "cell execution order is randomized with a prespecified seed at driver build time, as in the v3 campaign"
+  },
+  "compute_budget": {
+    "basis": "measured local timings, detailed in experiments/crossed_span_feasibility.md section 5: results/long-horizon-v1 capture cells (GPT-2 @6, seq_len 32, batch 1, CPU, this host) = 33.2 s per 100-step finetune capture (none; 34.9-36.0 s for seam-transform defenses), attacks 2.4 s/cell; results/validation-heldout-v3-r3 cell_summary.csv mean online attack cell = 378.1 s on GB10 GPU hosts",
+    "mode_2_gpt2": "192 trained cells + 8 all_local controls + 8 frozen-control evals; per cell ~45 s capture (128 steps) + ~5 s attacks + I/O overhead ~= 60 s -> ~3.5-4 CPU-hours total on the measuring host's class; with 50% planning contingency ~6 CPU-hours. Fleet split: 3 CPU nodes (soula, voula, sasa) ~1.5-2 h each; 1 GPU node (koula) unmeasured for victim training \u2014 a 3-cell canary on each node type at freeze pins the node factors before the full grid is scheduled.",
+    "mode_2_qwen3": "parameter-count scaling 0.6B/124M ~= 4.9x compute per step at equal steps/seq -> ~20 CPU-hours (with contingency ~30), same canary rule",
+    "mode_1": "not estimable from local records; the external programme's P5 executed 288 runs (~1 week of fleet time per docs/open-commitments-plan-2026-09-16.md WS2) and the crossed grid is 192 cells per architecture with matched controls \u2014 budgeted as comparable to P5 at freeze",
+    "exclusions": "excludes model downloads, corpus preparation, analysis, and driver development; not a guaranteed bound"
+  },
+  "amendment": {
+    "record": {
+      "schema": "llm_attacker.crossed_span_amendment.v1",
+      "amendment_id": "p6-freeze-2026-09-16",
+      "date": "2026-09-16",
+      "summary": "Freeze of p6-crossed-span-1.0. Canary gates passed per experiments/phase2_fleet_runbook.md section 0: GPU canary (BRE-bf end-to-end on koula, real leakage numbers, evidence-sealed) and CPU canary (3 Mode-2 capture cells on soula: 290 s span2, 361 s span4, 430 s span6 at 100 steps, gpt2, 4-core). The 3 canary cells are infrastructure timing measurements and are excluded from the protocol cell matrix.",
+      "changes": [
+        {
+          "axis": "status",
+          "new_axis": false,
+          "value": "frozen",
+          "rationale": "canary gates complete; approved via user instruction to proceed with phase 2 per experiments/phase2_fleet_runbook.md section A"
+        }
+      ],
+      "decisions": [
+        "Canary cells (s2@1, s4@2, s6@3 on soula, 2026-09-16) are timing measurements, not protocol cells; no canary outcome enters any gate statistic.",
+        "Mode-2 start=0 mapping: splitbench requires --split >= 1, so the start=0 column executes as --split 1 --trainable-range 0,span (seam after block 0, trainable from block 0); recorded as a documented Mode-2 approximation, matching the feasibility map's lossy-mapping caveat.",
+        "B_mode2 = 12 (GPT-2 block count); all 12 grid cells feasible. B_mode1 import from the external P5 spec remains pending; Mode 1 is unschedulable until that import lands, and only Mode-1 outcomes bind the empty-set claim.",
+        "Aux-supply note for the BiSR v4 protocol: the wikitext-2-train disjoint pool yielded 112 articles (gated by assert_aux_disjoint against the frozen manifest and pilot corpus, sha256 225c861a...); the B1 fidelity gate determines the required aux scale from the SplitLLM reference config before B2."
+      ],
+      "budget": {
+        "base": "192 cell-evaluations per architecture (Mode 2: ~6.4 CPU-hours per span on a 4-core node at canary rates)",
+        "amended": "unchanged",
+        "delta": 0
+      },
+      "record_sha256": "029e7e1699da824be43fd16296e046ea24b79dbb3bdfab06a54a714beb210d41"
+    },
+    "record_schema": "llm_attacker.crossed_span_amendment.v1",
+    "pattern": "Amendments follow the validation v2 -> v3 pattern (experiments/validation_amendment_v3.json): a record object {schema, amendment_id, date, summary, changes: [{axis, new_axis, value, rationale, evidence: {path, sha256}}], decisions, budget: {base, amended, delta}} plus record_sha256 and base_protocol_sha256 pins. The frozen protocol is immutable; amendments append a record and bump version; pre-execution amendments only (no post-outcome amendment of cells, gates, seeds, or statistics). The B-mode1 feasibility import and its possible cell-count change (grid.feasibility_rule.contingency) is an expected pre-freeze amendment.",
+    "base_protocol_sha256": null,
+    "base_version": null
+  }
+}

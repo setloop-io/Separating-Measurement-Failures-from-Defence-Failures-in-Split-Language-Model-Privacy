@@ -1,0 +1,94 @@
+{
+  "backbone": {
+    "d_ff": 1024,
+    "d_model": 256,
+    "init_std": 0.02,
+    "max_seq_len": 128,
+    "n_heads": 8,
+    "n_layers": 8,
+    "vocab_size": 256
+  },
+  "basis_windows": 4096,
+  "branch_steps": 1500,
+  "branches": [
+    {
+      "branch": "d0",
+      "mode": "trained"
+    },
+    {
+      "branch": "d1_s0.1",
+      "mode": "trained"
+    },
+    {
+      "branch": "d1_s1.0",
+      "mode": "trained"
+    },
+    {
+      "branch": "d3_q1",
+      "mode": "trained"
+    },
+    {
+      "branch": "d0",
+      "mode": "frozen_random"
+    },
+    {
+      "branch": "d0",
+      "mode": "removed_remote"
+    },
+    {
+      "branch": "all_local",
+      "mode": "all_local"
+    }
+  ],
+  "claim_scope": "Engineering diagnostics only; no defense selection, qualification, or privacy claim. All records keep scientific_evidence false, qualified false, privacy undetermined.",
+  "cohort": "engineering",
+  "cpu_threads": 2,
+  "data": {
+    "batch_size": 32,
+    "documents": "data/gutenberg_p4.manifest.json",
+    "path": "data/raw/gutenberg_p4.txt",
+    "sequence_length": 128,
+    "sha256": "af3d0245c0ec27d7021f5fd29256bc845bb20cf9c562b37bbe23663b6ebe7436"
+  },
+  "device": "cuda",
+  "full_budget": true,
+  "kind": "warmup_budget",
+  "local_steps": 2000,
+  "noise_scales": {
+    "d1_s0.1": 0.1,
+    "d1_s1.0": 1.0
+  },
+  "null_repeats": 16,
+  "optimizer": {
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "grad_clip": 1.0,
+    "lr": 0.0003,
+    "min_lr": 3e-05,
+    "warmup_steps": 100,
+    "weight_decay": 0.1
+  },
+  "panel_batch_size": 128,
+  "panel_sizes": [
+    1024,
+    4096,
+    16384
+  ],
+  "probe_windows": 16384,
+  "protocol_id": "p4-warmup-budget-0.1",
+  "seeds": [
+    410501,
+    410502
+  ],
+  "split": {
+    "q_bits": 8,
+    "remote_depth": 1,
+    "span": 4,
+    "start": 2,
+    "width": 256
+  },
+  "status": "engineering_ready",
+  "warmup_steps": 500
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "llm_attacker.validation_amendment.v1",
+  "amendment_id": "validation-v2-defended-captures",
+  "date": "2026-09-09",
+  "summary": "Add defended-capture arms for the two utility-viable trained defenders (replica-median, secret-mixup) to the frozen validation matrix, justified by the defended development pilot (results/pilot-defended-v1). Everything else is identical to frozen v1: same corpus and frozen_inputs, same depths {3,6}, victim seeds, attack seeds, budgets, controls, primary/secondary contrast family, statistics and no-retries policy.",
+  "changes": [
+    {
+      "axis": "capture_defenses",
+      "new_axis": true,
+      "value": {
+        "defended": ["replica-median", "secret-mixup"],
+        "arm_families": ["forward", "sipit"],
+        "mode": "training",
+        "budgets": "forward_k at candidate_counts {8,16,32} and sipit_steps at {32,64,128}, at both frozen depths {3,6} and all frozen victim seeds, attack seeds and knowledge conditions",
+        "paired_control": "The undefended training-mode forward_k and sipit_steps arms already in the matrix at identical depth, victim seed, attack seed, knowledge and budget are the prespecified paired controls; defense-minus-control is computed paired within victim run.",
+        "utility_reporting": "Every defended victim run reports held-out evaluation NLL alongside recovery; a defended arm is interpretable only together with its utility cost.",
+        "inference": "Defended arms enter as a prespecified paired descriptive comparison against the undefended control arms. The v1 inferential contrast family (primary plus 47 Bonferroni-corrected secondary contrasts) is unchanged.",
+        "execution_status": "Scheduled, validated and budgeted in v2. Defended-victim capture execution is not implemented in the frozen runner yet (it fails closed on defended arms); no v2 execution may start until that support lands."
+      },
+      "rationale": "Pilot (30 cells, defenses x splits {3,6} x seeds {11,22,33}, matched attacker access, development corpus disjoint from the frozen corpus): replica-median cut token recovery by 66.7-71.2 pp (forward) and 85.9-89.3 pp (SIPIT) versus the paired undefended control at a utility cost of +45.3..+49.1 PPL; secret-mixup cut recovery by 5.8-7.2 pp (forward) and 8.6-11.3 pp (SIPIT) at +35.1..+36.3 PPL. These are the two trained defenders that reduced recovery without destroying held-out utility, so the undefended-only frozen matrix cannot answer the scientifically meaningful question whether the leakage ranking survives viable defenses; the defended arms are added at the frozen splits/seeds/budgets because the pilot demonstrated feasibility there (per-cell attack 47-286 s on GB10; all 30 cells in well under an hour), not because those settings maximize leakage. Arm choice is driven by pilot feasibility and scientific meaning only. Pilot scope caveats: 3 victim seeds (wide intervals), development corpus, in-repo re-implementations, not confirmatory.",
+      "evidence": {
+        "path": "results/pilot-defended-v1/analysis/analysis.json",
+        "sha256": "e51320eeb89deecc0763fa31b44a3a919372f0d0eb6c8bd2254c81153a8190c8"
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "candidate": "trained-bottleneck defended-capture arm",
+      "decision": "considered and rejected",
+      "rationale": "The pilot shows trained-bottleneck drives token recovery to 0.00% at both splits (paired -87.6..-91.6 pp forward, -89.3..-93.5 pp SIPIT vs none) but destroys held-out utility: PPL after is 66M-124M versus 48.3 undefended (paired delta CI lower bounds above 16M). A defense that destroys utility is not a viable defense configuration, and adding it to the frozen matrix would measure an artifact of a broken configuration, not a security property. It is excluded from v2 and will be considered only if a utility-viable bottleneck configuration is later demonstrated on development data. The pilot's bottleneck consumer arms (representation-privacy bottleneck/gram) also reported label_accuracy=None, a consumer tooling gap recorded here rather than hidden.",
+      "evidence": {
+        "path": "results/pilot-defended-v1/analysis/analysis.json",
+        "sha256": "e51320eeb89deecc0763fa31b44a3a919372f0d0eb6c8bd2254c81153a8190c8"
+      }
+    },
+    {
+      "candidate": "prune redundant random-control K values (joint_random_k{8,16,32})",
+      "decision": "kept unchanged",
+      "rationale": "The random-candidate control is a mechanism control that must exist at every candidate budget K to remain paired with joint_true_k and forward_k at that K (the analyzer enforces identical prefix work per K). The pilot and baseline analyses contain no measurement of random-control redundancy across K, and the defended pilot did not vary candidate budgets at all, so there is no evidence that any K carries no information. Pruning without evidence would unpair the prespecified contrasts; all K values stay."
+    },
+    {
+      "candidate": "gaussian sigma=0.1 defended-capture arm",
+      "decision": "considered and rejected",
+      "rationale": "Null result in both pilots: no significant recovery effect (paired intervals include ~0) and no utility cost. Adding a demonstrated-null defense arm would spend budget without scientific content; gaussian noise already appears in the matrix as gradient_conditions noise_0.1/noise_1.0 controls.",
+      "evidence": {
+        "path": "results/pilot-defended-v1/analysis/analysis.json",
+        "sha256": "e51320eeb89deecc0763fa31b44a3a919372f0d0eb6c8bd2254c81153a8190c8"
+      }
+    }
+  ]
+}

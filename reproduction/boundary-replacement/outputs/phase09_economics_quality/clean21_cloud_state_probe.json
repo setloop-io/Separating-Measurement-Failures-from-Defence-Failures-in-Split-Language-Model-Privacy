@@ -1,0 +1,86 @@
+{
+  "schema": "dtraining.attacker.cloud_state_probe.v1",
+  "config": {
+    "attack": "cloud_state_probe",
+    "mode": "training",
+    "capture_dir": "/workspace/experiments/results/training/koula_captures/66a79fde-f85c-4f38-b9b1-ffbf2a4e9c25",
+    "bundle": "/workspace/experiments/results/training/captures/clean21_econ_exactwire.pt",
+    "session_id": "66a79fde-f85c-4f38-b9b1-ffbf2a4e9c25",
+    "privacy_cell_id": "sha256:a64bce70fda3066955c6693b8d78ae29272706bd7322f4bae8a0213940415441",
+    "frames_joined": 8094,
+    "train_frames": 3998,
+    "rows_per_frame": 80,
+    "latent_dim": 64,
+    "state_params": 161,
+    "epochs": 20,
+    "batch_size": 256,
+    "restarts": 3,
+    "probe_width": 128
+  },
+  "threat_model": "Fully compromised cloud node: the attacker holds every captured wire frame, the final cloud weights and optimizer state, and the protocol metadata (frame sizes, step indices, timing, session digests). Labels stay on the trusted node and enter only through the exact-capture label join. The question is whether state/metadata leak token information BEYOND the wire frames; frames_alone is the reference arm and frames_plus_state measures the marginal state leak.",
+  "provenance": {
+    "hostname": "koula",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-03T21:53:29Z",
+    "dtraining_commit": "efbcba9489a7cdff5efabec625e890effdcbac0b"
+  },
+  "results": [
+    {
+      "majority_acc": 0.0415313720703125,
+      "best_eval_acc": 0.03138427734375,
+      "wilson_upper": 0.032038949640594505,
+      "excess_pp": -0.9492422429717997,
+      "restart_scores": [
+        0.03138427734375,
+        0.0312408447265625,
+        0.030194091796875
+      ],
+      "arm": "frames_alone"
+    },
+    {
+      "majority_acc": 0.0415313720703125,
+      "best_eval_acc": 0.0415313720703125,
+      "wilson_upper": 0.04227943803647946,
+      "excess_pp": 0.07480659661669581,
+      "restart_scores": [
+        0.0415313720703125,
+        0.0415313720703125,
+        0.0415313720703125
+      ],
+      "arm": "state_only"
+    },
+    {
+      "majority_acc": 0.0415313720703125,
+      "best_eval_acc": 0.0321197509765625,
+      "wilson_upper": 0.03278171436114729,
+      "excess_pp": -0.8749657709165214,
+      "restart_scores": [
+        0.0321197509765625,
+        0.030029296875,
+        0.031036376953125
+      ],
+      "arm": "frames_plus_state"
+    },
+    {
+      "majority_acc": 0.0415313720703125,
+      "best_eval_acc": 0.0,
+      "wilson_upper": 1.38199277775177e-05,
+      "excess_pp": -4.151755214253498,
+      "restart_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "arm": "metadata_only"
+    }
+  ],
+  "summary": [
+    {
+      "state_marginal_leak_pp": 0.07427647205527832,
+      "metadata_excess_pp": -4.151755214253498,
+      "state_only_excess_pp": 0.07480659661669581,
+      "frames_alone_excess_pp": -0.9492422429717997
+    }
+  ],
+  "interpretation": "state_only is constant across rows by construction and serves as the sanity floor; the state's marginal leak is frames_plus_state minus frames_alone; metadata_only is the traffic-analysis arm."
+}

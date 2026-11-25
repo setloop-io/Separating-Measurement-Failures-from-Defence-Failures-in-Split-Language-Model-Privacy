@@ -1,0 +1,567 @@
+% The Privacy Contract — an explicit leakage budget for split LLM training
+% on compromised cloud nodes.  Draft scaffold (arXiv, target 10-14 pp).
+% Companion to "Defense-in-Depth for Split LLM Training on Fully
+% Compromised Cloud Nodes".  All numbers from committed JSONs in
+% paper-data/latent_v14/ and paper-data/latent_v15/ (this repo).
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\emergencystretch=1.5em
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\newtheorem{proposition}{Proposition}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\Ihat}{\hat{I}}
+
+\title{The Privacy Contract: An Explicit, Certified Leakage Budget\\
+for Split LLM Training on Compromised Cloud Nodes}
+\author{Privacy-Contract Project\\
+\texttt{github.com/geopolitis/dtraining} (companion code and data)}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+% TODO(geo): trim to 200 words at submission.
+Split training delegates the middle of an LLM to an untrusted cloud and
+defends the boundary empirically; the privacy claim has so far been
+``the attacker finds nothing.''  We replace that narrative with a
+\emph{certified, explicit leakage budget}: the encoder is trained under
+$\Ihat(z;x) \le B$ bits/token, estimated by a MINE Donsker--Varadhan
+statistics network and enforced by a Lagrangian dual controller, so
+privacy becomes a number a customer can write into a contract.  On the
+full defense the controller certifies every tier $B \in
+\{0.25, 0.5, 1, 2\}$ bits/token at the estimator floor, with the frozen
+nine-arm attacker at or below the label-free majority control; the
+result transfers to 12B and 35B backbones at $\approx 1\times$ eval
+cost.  On a deliberately weakened defense the same controller
+\emph{binds}: it converges to the penalty that holds the leakage at the
+budget, with monotone pressure across the range.  A second,
+disjoint estimator family (Fano/CE probe) corroborates the certified
+readings, and K=3 Byzantine replication on CPU-only nodes preserves
+integrity at 100\% detection / 0\% false positives over 2{,}256 frames
+at a certified tier.  We state the limits plainly: the certificate is a
+lower-bound statement in the estimator's terms, and all training
+evidence is diagnostic scale.
+\end{abstract}
+
+\clearpage
+\twocolumn
+
+\section{Introduction}
+
+Split training promises cloud-scale compute for LLM adaptation without
+surrendering the data: the client keeps the embedding and the tail, the
+cloud runs only a latent middle.  The privacy claim, however, has
+remained empirical — ``the attacker finds nothing'' — and empiricism is
+not a contracting primitive.  A procurement team cannot write ``trust us,
+our probes fail'' into an SLA; an insurer cannot price it; a regulator
+cannot audit it.
+
+This paper replaces the narrative with a number.  We train the
+client-side encoder under an explicit, enforced leakage budget
+$\Ihat(z;x) \le B$ bits per token, where $\Ihat$ is a MINE
+Donsker--Varadhan estimate of the mutual information between the released
+latent and the token identity, and $B$ is enforced during training by a
+Lagrangian dual controller (\S\ref{sec:method}).  Privacy becomes a
+quantity that is \emph{certified per training run}, reported in the
+artifact, and checkable by a second party who reruns the cell.
+
+Three results carry the paper.  First, the budget is real: on the full
+defense, every tier $B \in \{0.25, 0.5, 1, 2\}$ certifies at the
+estimator floor with the frozen nine-arm attacker at or below the
+label-free majority control, at flat utility cost
+(\S\ref{sec:sweep}).  Second, the mechanism is a controller, not a
+placebo: on a weakened boundary the dual variable rises to meet the
+budget ($\lambda = 2.45$ at $B{=}0.10$) and the tightened run then passes
+the attacker gate it would otherwise fail (\S\ref{sec:sweep},
+finding~2).  Third, the certification composes with scale and integrity:
+12B/35B backbones certify at $\approx 1\times$ eval cost
+(\S\ref{sec:transfer}), and $K{=}3$ Byzantine replication on CPU-only
+nodes preserves integrity at $100\%$/$0\%$ over full-length runs
+(\S\ref{sec:integrity}).
+
+We are equally explicit about what is \emph{not} claimed
+(\S\ref{sec:limits}): the certificate is a lower-bound statement in the
+estimator's terms, and the training evidence is diagnostic scale.  The
+contract we propose is honest about its own coverage.
+
+\section{Threat and System Model}
+\label{sec:threat}
+
+\paragraph{Roles.} The client (Toula) is trusted: it holds the corpus,
+the frozen embedding and tail blocks, the trainable encoder/decoder pair,
+and every gauge secret.  The cloud (Koula) is \emph{fully compromised}:
+it may record every frame it serves, run arbitrary computation on its
+history, adapt its strategy to public knowledge of the defense, and
+return corrupted results.  Integrity adversaries (lying about the
+computation) are covered by \S\ref{sec:formal}c; privacy adversaries
+(recording and analyzing frames) are the subject of the budget.
+
+\paragraph{Channel.} The only information that crosses the trust
+boundary is the released frame: $D{=}64$-dimensional latent rows plus
+the protocol metadata of a binary-WebSocket transport under TLS~1.3 with
+a pinned CA.  The cloud never sees hidden-width activations, token ids,
+backbone gradients, gauge secrets, or the chaff labels.  Per session the
+cloud model is seeded identically across integrity replicas and is
+otherwise fresh per channel.
+
+\paragraph{Adversary goals and the correct null.}
+The privacy adversary's goal is token-identity recovery from released
+frames.  Because the token prior is heavily skewed, raw accuracy is
+meaningless; following the companion paper~\cite{ourswan}, every
+attacker is scored against a label-free majority control, and the
+reported quantity is the \emph{excess} over that control with an
+upper-95 confidence correction.  Attackers are trained frozen against
+each cell's captured bundle (train/eval wire rows plus labels), with
+labels confined to the trusted side.
+
+\paragraph{Gates.} A cell passes when: utility delta $\le +0.35$ nats
+against the backbone baseline; frozen-attacker excess $\le +1.0$\,pp;
+eval-time ratio $\le 3\times$; the cloud state is latent-only; and (new
+in this work) the held-out MINE reading certifies the budget,
+$\Ihat \le B$.  All gates are computed inside the runner and reported in
+the artifact JSON, so the contract claim and the evidence are the same
+file.
+
+\paragraph{Certification stance.} The party that wants the certificate
+runs the estimator (honest-but-curious certification); the cloud is the
+adversary the certificate protects against.  The certificate covers the
+run that produced it — it is a per-training-run artifact, not a property
+claimed of the architecture in the abstract.
+
+\section{The MINE-Formalized Encoder}
+\label{sec:method}
+
+\paragraph{Boundary and release pipeline.}
+The frozen backbone is split after layer~21 (0.6B; layer~31 of~36 for the
+12B/35B cells).  A client-side encoder compresses the hidden state to a
+$D{=}64$ latent row per token position.  Before any row leaves the client,
+the release pipeline applies, per frame: (i) per-token Gaussian noise with
+clipped norm ($\sigma{=}0.35$, clip $1.0$); (ii) a fresh Haar-random
+orthogonal rotation and a fresh token-order permutation, both drawn from a
+client-only CSPRNG; and (iii) $48$ chaff rows recycled from earlier blocks
+with honestly tracked labels.  The cloud is a radial monomial MoE
+($E{=}8$, $L{=}2$) that is \emph{gauge-equivariant} by construction: it
+consumes the rotated, permuted, chaffed frame and its output is restored
+client-side by inverting the gauges.  Transport is a TLS~1.3
+binary-WebSocket protocol with a pinned CA.
+
+\paragraph{Estimator.}
+Following MINE~\cite{mine}, a statistics network $T(z, x)$ — a learned
+token embedding concatenated with the latent row, followed by a two-layer
+GELU MLP — lower-bounds the mutual information between the released row
+and the token identity via the Donsker--Varadhan dual:
+$\Ihat(z;x) = \mathbb{E}_{\text{joint}}[T] - \log
+\mathbb{E}_{\text{marg}}[e^{T}]$, with the marginal term computed on
+within-batch row-permuted pairings.  The estimator is trained by gradient
+ascent interleaved with the defender's updates, so the penalty is always
+evaluated against the estimator's current best view.
+
+\paragraph{Budget enforcement.}
+The budget $B$ (bits/token) is enforced by a Lagrangian dual controller
+rather than a fixed penalty weight.  Writing the DV bound in nats, after a
+warm-up phase the defender updates
+\begin{equation}
+\lambda \leftarrow \max\!\bigl(0,\; \lambda + \eta\,(\overline{\Ihat} - B\ln 2)\bigr),
+\end{equation}
+where $\overline{\Ihat}$ is an exponential moving average (factor $0.05$)
+of the per-step DV reading and $\eta = 0.02$.  The defender minimizes
+$\mathcal{L}_{\text{distill}} + \mathcal{L}_{\text{lang}} +
+\mathcal{L}_{\text{adv}} + \lambda\,\Ihat$,
+so $\lambda$ converges to the \emph{lightest} penalty that holds the
+estimated leakage at or below the budget — and to $\lambda{=}0$ when the
+defense already satisfies it, which is exactly what makes the
+unconstrained endpoint a measurable control rather than an assumption.
+
+\paragraph{Certificate read-out.}
+After training, the estimator is evaluated on held-out eval blocks
+(\texttt{mine\_\allowbreak mi\_\allowbreak bits\_\allowbreak held\_\allowbreak out}); a cell certifies when this reading
+is at or below $B$ (the \texttt{mine\_budget\_satisfied} gate).  A
+measurement-only mode trains the estimator without applying any penalty,
+giving the unconstrained endpoint a certified reading as well.
+
+\section{The Formal Stack}
+\label{sec:formal}
+
+The certificate rests on three layers, each covering what the previous
+one cannot see.
+
+\paragraph{(a) Gauge invariance (provable).}
+\begin{proposition}[sketch]
+Let the released frame be $\tilde z = Q\,z_{\pi}$ with $Q$ drawn fresh per
+frame from the Haar measure on $O(D)$ and $\pi$ a fresh uniform
+permutation of the frame's rows.  Then the posterior over $(Q,\pi)$ given
+$\tilde z$ is uniform, and any statistic of $\tilde z$ that is not
+invariant under the group action is distributionally independent of the
+token content $x$.  \emph{Proof sketch:} the group acts freely and
+transitively on orientations (resp.\ orders), and Haar measure is the
+unique invariant measure; conditioning on $\tilde z$ therefore leaves the
+uniform distribution.  The residual channel available to the cloud is
+exactly the gauge-invariant content: row norms and the sorted Gram
+profile.
+\end{proposition}
+
+\paragraph{(b) Certified budget on the invariant channel (measured).}
+The MINE-certified budget of \S\ref{sec:method} covers what the gauges
+cannot: the gauge-invariant residual channel.  We are explicit that this
+is a \emph{lower-bound} certificate in the estimator's terms —
+$\Ihat_{\mathrm{DV}} \le I(z;x)$ always — so the sellable claim is
+``certified at $B$ in this estimator's terms, on a boundary whose
+orientation and order channels are provably closed,'' not an
+information-theoretic theorem.  \S\ref{sec:robust} strengthens the claim
+two ways: the estimator is shown to have dynamic range on a weakened
+boundary (it \emph{can} see signal), and a disjoint second estimator
+family (Fano/CE probe) corroborates the floor reading on the defended
+one.
+
+\paragraph{(c) Byzantine median for integrity (deterministic).}
+$K{=}3$ cloud replicas are seeded identically and receive identical
+frames and gradients; the client combines restored returns by median and
+flags any frame whose per-replica deviation from the group mean exceeds a
+calibrated threshold ($0.02$ relative).  One adversarial replica is
+therefore both detected and overruled; \S\ref{sec:integrity} measures
+$100\%$ detection at $0\%$ false positives over $2{,}256$ frames on
+CPU-only nodes.
+
+\section{The Budget Sweep: a Measured Frontier}
+\label{sec:sweep}
+
+Table~\ref{tab:sweep} reports the full sweep on the v9.2 winner base and
+Fig.~\ref{fig:frontier} visualizes it.  Three findings matter.
+
+\paragraph{1. Every tier certifies at the estimator floor.}
+On the full defense, the held-out MINE reading is $\approx 0$ bits/token
+at \emph{every} budget tier including the unconstrained endpoint
+($-2.1\!\times\!10^{-4}$ bits), so the dual variable never engages
+($\lambda = 0$ throughout) and the utility cost is flat
+($+0.056$\,\ldots\,$+0.079$ nats, $1.8$–$1.9\times$ eval).  The
+implication for the contract is direct: on this boundary, the tightest
+tier $B{=}0.25$ is already satisfied with margin, and ``choosing a tier''
+is a business decision, not a privacy/utility trade-off.
+
+\paragraph{2. The controller binds when there is leakage to suppress.}
+On a deliberately weakened defense (noise $0.15$, no chaff, no gauges)
+the same mechanism behaves as a controller should: $\lambda$ converges to
+$2.45$ at $B{=}0.10$, to $0.051$ at $B{=}0.25$, and stays at $0$ for
+$B \ge 0.50$ — monotone pressure across the range
+(Fig.~\ref{fig:frontier}b).  Crucially, the tight-budget cell also passes
+the \emph{frozen-attacker} gate (upper-95 excess $+0.67$\,pp $< +1.0$):
+at high pressure the MI penalty suppresses probe-visible leakage, not
+merely the estimator's own reading.  The binding cell is therefore a
+genuine enforcement demonstration, not a curve-fitting artifact.
+
+\paragraph{3. The floor reading is the defense, not the instrument.}
+With the estimator strengthened $4\times$ (hidden 512, token embedding
+128, 4 estimator updates per round), the weakened boundary reads a
+clearly positive $\approx 0.26$ bits/token in the training EMA, while the
+full defense still reads $\approx 0$.  The estimator demonstrably
+\emph{can} see leakage through this boundary; it sees none on the
+defended one.
+
+\paragraph{Long horizon.}
+At $10{,}000$ steps the standard tier still certifies (held-out MI
+$-6.2\!\times\!10^{-4}$ bits, $\lambda=0$, upper-95 excess $+0.62$\,pp),
+and the utility delta \emph{improves} to $+0.026$ nats at $1.79\times$ —
+the certificate is stable in the training length, and longer schedules
+help utility rather than hurting privacy.
+% - weak_b010 (lambda=2.45) also PASSES the frozen-attacker gate
+%   (upper-95 +0.67 pp < +1.0): the MI penalty at high pressure suppresses
+%   probe-visible leakage, not just the estimator reading — the binding
+%   cell is a genuine enforcement demonstration.
+
+\begin{table}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Certified-budget sweep (0.6B, D=64 radial-MoE, chaff-48, seed 42,
+2000 steps; excess = frozen probe over label-free majority, upper-95 in
+parentheses).  MI is the held-out MINE reading.}
+\label{tab:sweep}
+\begin{tabular}{lccccc}
+\toprule
+$B$ (bits) & $\lambda$ & MI (bits) & excess (pp) & util $\Delta$ & ratio \\
+\midrule
+0.25 & 0 & $-4.4\!\times\!10^{-4}$ & $-0.39$ ($+0.57$) & $+0.072$ & $1.82\times$ \\
+0.50 & 0 & $-2.5\!\times\!10^{-4}$ & $-0.34$ ($+0.51$) & $+0.056$ & $1.85\times$ \\
+1.00 & 0 & $-2.0\!\times\!10^{-4}$ & $-0.27$ ($+0.42$) & $+0.072$ & $1.91\times$ \\
+2.00 & 0 & $+5\!\times\!10^{-6}$  & $-0.44$ ($+0.45$) & $+0.079$ & $1.88\times$ \\
+free & --- & $-2.1\!\times\!10^{-4}$ & $-0.29$ ($+0.53$) & $+0.060$ & $1.87\times$ \\
+\midrule
+\multicolumn{6}{l}{\emph{weakened defense} (noise 0.15, no chaff/gauges)} \\
+0.10 & $2.45$ & $-0.078$ & $-0.11$ ($+0.67$) & $+0.055$ & --- \\
+0.25 & $0.051$ & $-0.020$ & $+0.00$ ($+2.48$) & $+0.054$ & --- \\
+0.50 & 0 & $+10^{-4}$ & $+0.21$ ($+2.62$) & $+0.051$ & --- \\
+1.00 & 0 & $-0.047$ & $+0.09$ ($+1.52$) & $+0.055$ & --- \\
+free & --- & $-0.039$ & $+0.06$ ($+0.99$) & $+0.059$ & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_frontier.pdf}
+\caption{The certified budget frontier. (a) held-out MI vs budget with the
+$\Ihat \le B$ ceiling; (b) dual-variable pressure; (c) frozen-attacker
+excess with the $+1.0$\,pp gate (weakened series is diagnostic, not a
+product tier); (d) utility cost across tiers, with 12B/35B transfer cells.}
+\label{fig:frontier}
+\end{figure}
+
+\section{Robustness at a Certified Tier}
+\label{sec:robust}
+
+We attempt to falsify the certified standard tier ($B{=}0.50$, seed~42)
+with the strongest battery available to us.
+
+\paragraph{Max-effort probe.}
+The frozen latent probe re-optimized at $4\times$ its standard budget
+($60$ epochs, $8$ restarts, three probe families) reaches $5.16\%$
+top-1 — \emph{below} both its own standard-budget reading ($5.42\%$) and
+the label-free majority floor ($5.9\%$).  Additional attacker compute
+does not move the reading.
+
+\paragraph{Matching and compromise arms.}
+Vector-moment-anchor centroid matching recovers $0.028\%$ and
+sorted-signature matching $1.35\%$ against the $5.92\%$ majority control;
+the capture-compromise battery is flat at $\approx 1.0\%$ top-1 at every
+capture fraction from $10\%$ to $100\%$.
+
+\paragraph{Second estimator family.}
+A Fano-style CE probe ($I \ge H(\text{tokens}) - \mathrm{CE}$), trained on
+the identical released view, reports a vacuous lower bound ($\le 0$ bits,
+top-1 $2.07\%$) — corroborating the MINE floor with a disjoint
+instrument.
+
+\paragraph{Seeds.}
+Re-scoring the standard tier and the unconstrained endpoint on seeds
+$43$/$44$ reproduces seed~$42$ on every metric (MI within
+$10^{-3}$ bits, excess $-0.20$\,\ldots\,$-0.51$\,pp, utility
+$+0.061$\,\ldots\,$+0.071$).
+
+\section{Integrity Under a Certified Budget}
+\label{sec:integrity}
+
+With $K{=}3$ CPU-only replicas (soula/voula/sasa) under the median
+combine of \S\ref{sec:formal}c at the certified $B{=}0.50$ tier, the
+full-length ($2{,}000$-step) honest run flags $0$ of $2{,}256$ frames
+(max relative deviation $4.9\!\times\!10^{-8}$), and a single replica
+applying an undeclared $0.5$ perturbation is caught at $2{,}256/2{,}256$
+frames ($100\%$, max deviation $0.59$) with utility intact.  The
+$9$–$10\times$ eval-time overhead on these nodes is weak hardware, not
+the mechanism: the same cell on the GPU pair runs at $1.85\times$.
+
+\section{Business and Product Implications}
+\label{sec:business}
+
+The budget is the product.  (1)~\emph{Contractible privacy}: $B$ is a
+signable number with a machine-checkable gate
+(\texttt{mine\_budget\_satisfied}) in the run artifact — a customer
+audits the JSON, not the marketing.  (2)~\emph{Product tiers}: the
+sweep's flat utility cost means strict ($0.25$), standard ($0.50$), and
+performance ($\ge 1.0$) tiers can be priced on contract terms rather than
+on a measured utility trade-off — unusual, and simpler to sell.
+(3)~\emph{Insurable risk}: a per-run certified bound with a frozen
+falsification battery is actuarial input.  (4)~\emph{Short procurement}:
+every number in this paper regenerates from committed scripts on
+documented hardware, so a second party can clear the reproducibility bar
+in days.  The caveat we keep in the sales language mirrors
+\S\ref{sec:limits}: the claim is ``certified in this estimator's terms,
+on a provably gauge-closed boundary, with integrity,'' not a theorem.
+
+\section{Transfer}
+\label{sec:transfer}
+
+The certified tier is not a small-model artifact.  On the 35B hybrid-MoE
+backbone, both $B{=}0.25$ and $B{=}0.50$ certify at the estimator floor
+with the frozen attacker $0.58$–$0.72$\,pp \emph{below} the majority
+floor and utility delta $+0.04$ nats at $\approx 1.0\times$ eval cost —
+the boundary gets cheaper, not dearer, as the backbone grows.  On the 12B
+backbone at $B{=}0.50$, the candidate \emph{beats} the backbone baseline
+($-0.411$ nats), reproducing the known 12B utility anomaly of the
+companion campaign.  All transfer cells pass the budget gate.
+
+\section{Limitations}
+\label{sec:limits}
+(1) DV/MINE is a \emph{lower bound}: the certificate is ``$\le B$ in this
+estimator's terms.''  We mitigate with a dynamic-range proof
+(\S\ref{sec:sweep}, finding~3) and a second estimator family
+(\S\ref{sec:robust}), but neither constitutes an upper bound.
+(2) Diagnostic scale: $2{,}000$-step runs on a $16{,}896$-token corpus
+window; one $10{,}000$-step cell at the standard tier confirms stability
+of the certificate (\S\ref{sec:sweep}) but not full training
+convergence.
+(3) At very tight budgets the controller needs longer schedules: at
+$B{=}0.10$ on the weakened defense the training EMA ($0.205$ bits) had
+not fully converged to budget within $2{,}000$ steps even under
+$\lambda = 2.45$, although the held-out certificate passed.
+(4) The estimator can under-read relative to probe recovery: on weakened
+cells the probe's upper-95 excess reaches $+2.6$\,pp where MINE reads
+$\approx 0.26$ bits.  The two measure different quantities (a lower bound
+in bits vs.\ a point recovery margin), but the gap bounds how much
+certification strength we claim.
+(5) Single corpus (WikiText-2), single threat configuration per cell.
+
+\section{Related Work}
+\label{sec:related}
+\emph{MI-bounded privacy adapters.} The UCLA information-bottleneck
+adapters~\cite{uclaib} formalize MI budgets for inference-time adapters
+but never measure a floor against an adaptive attacker and carry no
+gauges, chaff, or integrity story; the Fraunhofer SAE dual-channel
+construction~\cite{fraunhofersparse} derives closed-form MI budgets in
+vision, the closest analog to our budget in the LLM setting.
+\emph{Obfuscation systems}~\cite{aloepri, gelo, obfnet, sap, pidi}
+report empirical attacker failure without a certified number.
+\emph{Hardware trust} (TEE)~\cite{phalatee, ethtee, fastrack} achieves
+$<$7--20\% overhead but assumes a trusted enclave — the assumption we
+deliberately exclude.  \emph{MPC/HE}~\cite{sigma, bumblebee, nexus,
+nimbus, puma, zkllm, zkgpt} gives cryptographic guarantees at 44\,s to
+14\,min per token, two to four orders of magnitude over plaintext: the
+cost argument for empirical obfuscation.  \emph{Integrity:}
+TOPLOC~\cite{toploc} is the post-hoc analog of our online $K{=}3$ vote;
+PermLLM and shuffling
+analyses~\cite{permllm, shufflinginsecurity, permeq, permreversal}
+motivate the permutation gauge and our matching-attack battery.
+\emph{Estimator:} MINE~\cite{mine}; DP-SGD accounting~\cite{dp}.
+The companion paper~\cite{ourswan} establishes the empirical defense
+this work certifies.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Split LLM training on compromised nodes no longer has to ask for trust.
+An explicit leakage budget — estimated by MINE, enforced by a dual
+controller, corroborated by a second estimator family, and surviving our
+strongest attacks — turns privacy into a contractible engineering
+quantity, at flat utility cost, on backbones up to 35B, with Byzantine
+integrity on commodity CPU witnesses.  The open theoretical work is a
+true upper bound; the open engineering work is longer schedules for
+sub-$0.1$-bit tiers.  Both are stated, with the evidence, so the reader
+can see exactly where the certificate ends.
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\appendix
+
+\section{Proof of the Gauge-Invariance Proposition}
+\label{app:proof}
+
+\emph{Setup.} A frame is a set of latent rows $z = \{z_1,\dots,z_T\}
+\subset \mathbb{R}^D$ produced by the client encoder from token content
+$x$.  Release applies $\tilde z = s \cdot Q z_{\pi}$ where $Q$ is drawn
+fresh per frame from the Haar measure $\mu$ on $O(D)$, $\pi$ is a fresh
+uniform permutation of the row index set, and $s$ (when the scale gauge
+is enabled) is an independent log-normal scalar.  The triple
+$\sigma = (Q, \pi, s)$ is drawn from the product measure and is known
+only to the client.
+
+\emph{Claim.} For any measurable set $A$ of released frames and any two
+contents $x, x'$ whose ungauged frames lie in the same orbit of the
+action,
+$\Pr[\tilde z \in A \mid x] = \Pr[\tilde z \in A \mid x']$.
+
+\emph{Proof.}  The group $G = O(D) \times S_T \times \mathbb{R}_{>0}$
+acts on frames by $(Q,\pi,s) \cdot z = s\,Q z_\pi$.  The action is
+free (a frame has trivial stabilizer a.s., since rows are distinct a.s.)
+and the pushforward of the product Haar measure under the orbit map
+$g \mapsto g \cdot z$ is the unique $G$-invariant measure on the orbit
+$G \cdot z$, independent of which point $z$ of the orbit we started
+from.  Since $\tilde z$ is by construction distributed according to this
+invariant measure on the orbit of the content frame, its law depends on
+$x$ only through the orbit.  Orientation-, order-, and scale-dependent
+statistics of $\tilde z$ therefore carry no information about $x$;
+equivalently, the conditional distribution of $\tilde z$ given the orbit
+is uniform, and the residual channel is exactly the orbit's invariant
+content: row norms and the sorted Gram profile (both preserved by $Q$,
+$\pi$, and, after radial normalization, by $s$). \hfill$\square$
+
+\emph{Remark (what the proposition does not cover).}  The invariant
+content itself \emph{can} depend on $x$ — that is precisely the channel
+the MINE-certified budget of \S\ref{sec:method} bounds, and the two
+layers compose because every released frame factors through
+$\tilde z = \sigma \cdot z$: invariance kills the non-invariant part,
+the budget bounds the invariant part.
+
+\section{Evidence Ledger}
+\label{app:ledger}
+
+Tables~\ref{tab:ledger_v14} and~\ref{tab:ledger_v15} enumerate every
+cell cited in this paper with its headline metrics, regenerated from the
+committed artifacts by \texttt{bin/make\_evidence\_appendix.py} at build
+time.  Runner and frozen-attacker JSONs live under \texttt{paper-data/}
+(\texttt{latent\_v14/}, \texttt{latent\_v15/});
+the bundle captures used for attacker scoring are deleted after scoring
+by policy.
+
+\input{appendix_evidence}
+
+\section{Protocol and Hyperparameters}
+\label{app:protocol}
+
+\begin{table}[h]
+\centering\scriptsize
+\caption{Shared cell configuration (all v14/v15 cells unless the row says
+otherwise).  Source of truth: the stage scripts in \texttt{bin/}.}
+\label{tab:protocol}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{ll}
+\toprule
+parameter & value \\
+\midrule
+backbone split (0.6B) & layers 21 / 26 \\
+backbone split (12B/35B) & layers 31 / 36 \\
+latent dim $D$ & 64 \\
+cloud & radial monomial MoE, $E{=}8$, $L{=}2$ \\
+noise $\sigma$ / clip & 0.35 / 1.0 (0.40 on 35B; 0.15 weakened) \\
+chaff rows & 48 (0 on weakened cells) \\
+gauges & Haar rotation + token permutation (off on weakened) \\
+sequence length & 32 \\
+steps / warmup & 2{,}000 / 200 (10k long-haul; 400 CPU diag.) \\
+train/eval blocks & 256 / 256 (16{,}896-token window) \\
+optimizer & AdamW, lr $3\!\times\!10^{-4}$ \\
+attacker protocol & 256 steps, 3 probe restarts, 3 updates/step \\
+MINE estimator & embed 64, hidden 256, 1 update/round \\
+\quad (strengthened, v15) & embed 128, hidden 512, 4 updates/round \\
+controller & $\eta = 0.02$, EMA factor $0.05$, in nats \\
+Byzantine combine & median, threshold 0.02 relative, $K{=}3$ \\
+seed & 42 (re-scores: 43, 44) \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\section{Reproduction Recipe}
+\label{app:repro}
+
+\emph{Hardware.} Two NVIDIA GB10 (aarch64) GPU nodes (toula: client and
+attacker training; koula: latent cloud server, \texttt{wss://koula:5025})
+and three 4-core ARM CPU nodes (soula/voula/sasa, 192.168.1.120--122) as
+Byzantine replicas, each serving \texttt{latent\_cloud\_\allowbreak server.py} on
+port~5013 with per-node certs from the pinned experiment CA.
+
+\emph{Cells.} All cells run in the \texttt{split-inference:spark}
+container on toula against the frozen local models
+\texttt{qwen3-0.6b}, \texttt{mistral-nemo-12b-\allowbreak instruct},
+and \texttt{qwen36-35b-a3b}, and the committed WikiText-2 corpus window:
+\begin{itemize}\setlength{\itemsep}{0pt}\footnotesize
+\item budget sweep: \texttt{bin/latent\_\allowbreak v14\_\allowbreak stage.sh}
+\item seed re-score: \texttt{bin/latent\_\allowbreak v14\_\allowbreak seeds.sh}
+\item transfer (12B/35B): \texttt{bin/latent\_\allowbreak v14\_\allowbreak transfer.sh}
+\item max-effort battery + CE cross-check:
+      \texttt{bin/latent\_\allowbreak v14\_\allowbreak maxeffort.sh}
+\item integrity (honest/malicious):
+      \texttt{bin/latent\_\allowbreak v14\_\allowbreak byzantine\_\allowbreak stage.sh <cell>}
+      (400 steps; \texttt{STEPS=2000} for full length)
+\item estimator-power / binding range: \texttt{bin/latent\_\allowbreak v15\_\allowbreak stage.sh},
+      \texttt{bin/latent\_\allowbreak v15b\_\allowbreak stage.sh}
+\item long horizon: \texttt{bin/latent\_\allowbreak v14\_\allowbreak longhaul.sh}
+\end{itemize}
+Attacker bundles are deleted after scoring by policy; the ledger
+(Appendix~\ref{app:ledger}) regenerates with
+\texttt{python3 bin/make\_evidence\_appendix.py}.
+
+\end{document}

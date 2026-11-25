@@ -1,0 +1,583 @@
+{
+  "attack_banks_sha256": "8d48065588453282f27be55dc0448aab0fa078b7e63e002409f602d802f1dcd3",
+  "defense": "gradient-defense",
+  "input_bindings": {
+    "capture": "1e626d77f9e33a8ac6350a9b40cb10cd4d4976a831236556ce58a2d543ccd8cc",
+    "client_checkpoint": "6dad33767652d7b2196fdb050b50d0c646ef8aa0699cdbe13e7a58ad99dab3e8",
+    "panel": "383367115b5be8cd377127bb53ca524f2d211282b95c91a245a70611ea8fc594",
+    "remote_checkpoint": "998daafc710a6d991acfcdc0585858217296d331b684a111999534a7f9163698"
+  },
+  "panel_bindings": {
+    "checkpoint_id": "step-2",
+    "panel_sha256": "383367115b5be8cd377127bb53ca524f2d211282b95c91a245a70611ea8fc594",
+    "regions": {
+      "attacker_auxiliary": "d0823aa09e1e2a47fd7e83496ad21688f7444a25c16f3a26d783c64677d92f69",
+      "heldout": "358a655406128f0812ab39be03c3494448620aeba5ad20cd58290f2120e2ca4f",
+      "qualification": "9311b8bc1a2a7168291b604cc0ccccb700ab4e91e14f5a22807d4e0271138bbb"
+    }
+  },
+  "results": {
+    "input_byte@forward_values@gradient-defense": {
+      "attack_bank_sha256": "2460ce2be5b89b325b7396bcd6496df4fc97253f7e4d37b70d907cee3d0ae685",
+      "qualification": {
+        "channel": "forward_values",
+        "null_band": 0.02,
+        "null_pipeline": {
+          "advantage": 0.1328125,
+          "null_score": 0.21875,
+          "score": 0.3515625
+        },
+        "positive_control": [
+          {
+            "advantage": 0.5234375,
+            "dose": 0.25,
+            "null_score": 0.3359375,
+            "score": 0.859375
+          },
+          {
+            "advantage": 0.484375,
+            "dose": 0.5,
+            "null_score": 0.359375,
+            "score": 0.84375
+          },
+          {
+            "advantage": 0.453125,
+            "dose": 1.0,
+            "null_score": 0.40625,
+            "score": 0.859375
+          },
+          {
+            "advantage": 0.4453125,
+            "dose": 2.0,
+            "null_score": 0.4453125,
+            "score": 0.890625
+          }
+        ],
+        "positive_floor": 0.1,
+        "qualification_dose": 2.0,
+        "qualified": false,
+        "target": "input_byte"
+      },
+      "score": null,
+      "status": "UNDETERMINED"
+    },
+    "input_byte@inbound_gradients@gradient-defense": {
+      "attack_bank_sha256": "4faa52fa1fd4958140c513e74bb5cebdb2ce109aea53f2aae45c34293174827b",
+      "qualification": {
+        "channel": "inbound_gradients",
+        "null_band": 0.02,
+        "null_pipeline": {
+          "advantage": 0.0078125,
+          "null_score": 0.0390625,
+          "score": 0.046875
+        },
+        "positive_control": [
+          {
+            "advantage": 0.015625,
+            "dose": 0.25,
+            "null_score": 0.0703125,
+            "score": 0.0859375
+          },
+          {
+            "advantage": 0.0234375,
+            "dose": 0.5,
+            "null_score": 0.0703125,
+            "score": 0.09375
+          },
+          {
+            "advantage": 0.0859375,
+            "dose": 1.0,
+            "null_score": 0.0703125,
+            "score": 0.15625
+          },
+          {
+            "advantage": 0.2421875,
+            "dose": 2.0,
+            "null_score": 0.0703125,
+            "score": 0.3125
+          }
+        ],
+        "positive_floor": 0.1,
+        "qualification_dose": 2.0,
+        "qualified": true,
+        "target": "input_byte"
+      },
+      "score": {
+        "advantage": -0.0078125,
+        "null_score": 0.046875,
+        "score": 0.0390625
+      },
+      "status": "PASS"
+    },
+    "input_byte@outbound_gradients@gradient-defense": {
+      "attack_bank_sha256": "e6c747cf1e61acb45e297352a5a577521172f6502cd07448709c9f0a60dc8744",
+      "qualification": {
+        "channel": "outbound_gradients",
+        "null_band": 0.02,
+        "null_pipeline": {
+          "advantage": -0.046875,
+          "null_score": 0.09375,
+          "score": 0.046875
+        },
+        "positive_control": [
+          {
+            "advantage": 0.0078125,
+            "dose": 0.25,
+            "null_score": 0.1015625,
+            "score": 0.109375
+          },
+          {
+            "advantage": 0.015625,
+            "dose": 0.5,
+            "null_score": 0.1015625,
+            "score": 0.1171875
+          },
+          {
+            "advantage": 0.0625,
+            "dose": 1.0,
+            "null_score": 0.09375,
+            "score": 0.15625
+          },
+          {
+            "advantage": 0.234375,
+            "dose": 2.0,
+            "null_score": 0.1171875,
+            "score": 0.3515625
+          }
+        ],
+        "positive_floor": 0.1,
+        "qualification_dose": 2.0,
+        "qualified": false,
+        "target": "input_byte"
+      },
+      "score": null,
+      "status": "UNDETERMINED"
+    },
+    "input_byte@returned_values@gradient-defense": {
+      "attack_bank_sha256": "51a9f30a4c05d3310b9a09bb9206966edbaa3bcc83513728bdcf84d3ceb3e92c",
+      "qualification": {
+        "channel": "returned_values",
+        "null_band": 0.02,
+        "null_pipeline": {
+          "advantage": -0.03125,
+          "null_score": 0.09375,
+          "score": 0.0625
+        },
+        "positive_control": [
+          {
+            "advantage": 0.5625,
+            "dose": 0.25,
+            "null_score": 0.28125,
+            "score": 0.84375
+          },
+          {
+            "advantage": 0.5546875,
+            "dose": 0.5,
+            "null_score": 0.2890625,
+            "score": 0.84375
+          },
+          {
+            "advantage": 0.578125,
+            "dose": 1.0,
+            "null_score": 0.2890625,
+            "score": 0.8671875
+          },
+          {
+            "advantage": 0.5859375,
+            "dose": 2.0,
+            "null_score": 0.3046875,
+            "score": 0.890625
+          }
+        ],
+        "positive_floor": 0.1,
+        "qualification_dose": 2.0,
+        "qualified": false,
+        "target": "input_byte"
+      },
+      "score": null,
+      "status": "UNDETERMINED"
+    },
+    "next_byte_class@forward_values@gradient-defense": {
+      "attack_bank_sha256": "a8275bd0164de5f188082000abe15c362208e9514697ad46f58a9c3379ed1691",
+      "qualification": {
+        "channel": "forward_values",
+        "null_band": 0.02,
+        "null_pipeline": {
+          "advantage": 0.03125,
+          "null_score": 0.7578125,
+          "score": 0.7890625
+        },
+        "positive_control": [
+          {
+            "advantage": 0.0703125,
+            "dose": 0.25,
+            "null_score": 0.7578125,
+            "score": 0.828125
+          },
+          {
+            "advantage": 0.140625,
+            "dose": 0.5,
+            "null_score": 0.765625,
+            "score": 0.90625
+          },
+          {
+            "advantage": 0.1875,
+            "dose": 1.0,
+            "null_score": 0.765625,
+            "score": 0.953125
+          },
+          {
+            "advantage": 0.2265625,
+            "dose": 2.0,
+            "null_score": 0.765625,
+            "score": 0.9921875
+          }
+        ],
+        "positive_floor": 0.1,
+        "qualification_dose": 2.0,
+        "qualified": false,
+        "target": "next_byte_class"
+      },
+      "score": null,
+      "status": "UNDETERMINED"
+    },
+    "next_byte_class@inbound_gradients@gradient-defense": {
+      "attack_bank_sha256": "22a0581c397876d6671849a7e694f23755b28eb2e2afb7dfa8ece95630191e03",
+      "qualification": {
+        "channel": "inbound_gradients",
+        "null_band": 0.02,
+        "null_pipeline": {
+          "advantage": 0.0,
+          "null_score": 0.75,
+          "score": 0.75
+        },
+        "positive_control": [
+          {
+            "advantage": 0.015625,
+            "dose": 0.25,
+            "null_score": 0.75,
+            "score": 0.765625
+          },
+          {
+            "advantage": 0.0390625,
+            "dose": 0.5,
+            "null_score": 0.75,
+            "score": 0.7890625
+          },
+          {
+            "advantage": 0.046875,
+            "dose": 1.0,
+            "null_score": 0.75,
+            "score": 0.796875
+          },
+          {
+            "advantage": 0.1015625,
+            "dose": 2.0,
+            "null_score": 0.78125,
+            "score": 0.8828125
+          }
+        ],
+        "positive_floor": 0.1,
+        "qualification_dose": 2.0,
+        "qualified": true,
+        "target": "next_byte_class"
+      },
+      "score": {
+        "advantage": -0.0390625,
+        "null_score": 0.7421875,
+        "score": 0.703125
+      },
+      "status": "PASS"
+    },
+    "next_byte_class@outbound_gradients@gradient-defense": {
+      "attack_bank_sha256": "85d1eced02152a335d0e188b0325a9d743062139191e5d84607d7af265c9df54",
+      "qualification": {
+        "channel": "outbound_gradients",
+        "null_band": 0.02,
+        "null_pipeline": {
+          "advantage": 0.015625,
+          "null_score": 0.7421875,
+          "score": 0.7578125
+        },
+        "positive_control": [
+          {
+            "advantage": 0.0,
+            "dose": 0.25,
+            "null_score": 0.7421875,
+            "score": 0.7421875
+          },
+          {
+            "advantage": 0.0234375,
+            "dose": 0.5,
+            "null_score": 0.7421875,
+            "score": 0.765625
+          },
+          {
+            "advantage": 0.0234375,
+            "dose": 1.0,
+            "null_score": 0.7578125,
+            "score": 0.78125
+          },
+          {
+            "advantage": 0.125,
+            "dose": 2.0,
+            "null_score": 0.765625,
+            "score": 0.890625
+          }
+        ],
+        "positive_floor": 0.1,
+        "qualification_dose": 2.0,
+        "qualified": true,
+        "target": "next_byte_class"
+      },
+      "score": {
+        "advantage": 0.03125,
+        "null_score": 0.71875,
+        "score": 0.75
+      },
+      "status": "REJECTED"
+    },
+    "next_byte_class@returned_values@gradient-defense": {
+      "attack_bank_sha256": "3acc71eefbe006ef2b41c5450db5835a8d10cd33401a3b17ca2d73b8e3ef4fa2",
+      "qualification": {
+        "channel": "returned_values",
+        "null_band": 0.02,
+        "null_pipeline": {
+          "advantage": 0.0,
+          "null_score": 0.75,
+          "score": 0.75
+        },
+        "positive_control": [
+          {
+            "advantage": 0.0859375,
+            "dose": 0.25,
+            "null_score": 0.7421875,
+            "score": 0.828125
+          },
+          {
+            "advantage": 0.140625,
+            "dose": 0.5,
+            "null_score": 0.75,
+            "score": 0.890625
+          },
+          {
+            "advantage": 0.21875,
+            "dose": 1.0,
+            "null_score": 0.75,
+            "score": 0.96875
+          },
+          {
+            "advantage": 0.2265625,
+            "dose": 2.0,
+            "null_score": 0.765625,
+            "score": 0.9921875
+          }
+        ],
+        "positive_floor": 0.1,
+        "qualification_dose": 2.0,
+        "qualified": true,
+        "target": "next_byte_class"
+      },
+      "score": {
+        "advantage": 0.03125,
+        "null_score": 0.7109375,
+        "score": 0.7421875
+      },
+      "status": "REJECTED"
+    },
+    "punctuation_fraction@forward_values@gradient-defense": {
+      "attack_bank_sha256": "2db27779685e2223eeb8f638f8ed80d8c9507ebb2b08a22f384949a543fa4d9d",
+      "qualification": {
+        "channel": "forward_values",
+        "null_band": 0.02,
+        "null_pipeline": {
+          "advantage": 0.030987556977390293,
+          "null_score": -0.001363059910499529,
+          "score": 0.029624497066890763
+        },
+        "positive_control": [
+          {
+            "advantage": 0.41856050795837574,
+            "dose": 0.25,
+            "null_score": -0.1460341775221403,
+            "score": 0.2725263304362355
+          },
+          {
+            "advantage": 0.6917497903044607,
+            "dose": 0.5,
+            "null_score": -0.1177958504864604,
+            "score": 0.5739539398180004
+          },
+          {
+            "advantage": 0.8979908369704497,
+            "dose": 1.0,
+            "null_score": -0.036013636629084356,
+            "score": 0.8619772003413654
+          },
+          {
+            "advantage": 0.874570253351256,
+            "dose": 2.0,
+            "null_score": 0.08652554900430565,
+            "score": 0.9610958023555617
+          }
+        ],
+        "positive_floor": 0.2,
+        "qualification_dose": 2.0,
+        "qualified": false,
+        "target": "punctuation_fraction"
+      },
+      "score": null,
+      "status": "UNDETERMINED"
+    },
+    "punctuation_fraction@inbound_gradients@gradient-defense": {
+      "attack_bank_sha256": "6c3d23f393dab477032cac08c8bc7016b5ebd36c6ebe4d80aa5728e78bc7a8df",
+      "qualification": {
+        "channel": "inbound_gradients",
+        "null_band": 0.02,
+        "null_pipeline": {
+          "advantage": -0.18346129655927784,
+          "null_score": -0.49276575322412425,
+          "score": -0.6762270497834021
+        },
+        "positive_control": [
+          {
+            "advantage": -0.023849589429683182,
+            "dose": 0.25,
+            "null_score": 0.7506985302588932,
+            "score": 0.72684894082921
+          },
+          {
+            "advantage": 0.5959508477774795,
+            "dose": 0.5,
+            "null_score": 0.37060928230202367,
+            "score": 0.9665601300795033
+          },
+          {
+            "advantage": 1.032070769629379,
+            "dose": 1.0,
+            "null_score": -0.03394706851865623,
+            "score": 0.9981237011107227
+          },
+          {
+            "advantage": 0.9624656716348874,
+            "dose": 2.0,
+            "null_score": 0.037377136025556125,
+            "score": 0.9998428076604435
+          }
+        ],
+        "positive_floor": 0.2,
+        "qualification_dose": 2.0,
+        "qualified": false,
+        "target": "punctuation_fraction"
+      },
+      "score": null,
+      "status": "UNDETERMINED"
+    },
+    "punctuation_fraction@outbound_gradients@gradient-defense": {
+      "attack_bank_sha256": "d9f369018c5823ec4e7d4e7ffb94521d8d5d1a34819925586b59434c2cc2917f",
+      "qualification": {
+        "channel": "outbound_gradients",
+        "null_band": 0.02,
+        "null_pipeline": {
+          "advantage": -0.4451473217879809,
+          "null_score": 0.6390353517790305,
+          "score": 0.1938880299910496
+        },
+        "positive_control": [
+          {
+            "advantage": 0.5352596737955244,
+            "dose": 0.25,
+            "null_score": 0.2755242434233165,
+            "score": 0.8107839172188409
+          },
+          {
+            "advantage": 0.8785938836799047,
+            "dose": 0.5,
+            "null_score": 0.09360645766628647,
+            "score": 0.9722003413461912
+          },
+          {
+            "advantage": 1.0806320789930761,
+            "dose": 1.0,
+            "null_score": -0.08498081334665702,
+            "score": 0.9956512656464191
+          },
+          {
+            "advantage": 1.1539231480828753,
+            "dose": 2.0,
+            "null_score": -0.1553157541315028,
+            "score": 0.9986073939513725
+          }
+        ],
+        "positive_floor": 0.2,
+        "qualification_dose": 2.0,
+        "qualified": false,
+        "target": "punctuation_fraction"
+      },
+      "score": null,
+      "status": "UNDETERMINED"
+    },
+    "punctuation_fraction@returned_values@gradient-defense": {
+      "attack_bank_sha256": "264c0c4d1315d873ff1fa5790d1700f6746ac25e660c26706cdc2813a1d2539e",
+      "qualification": {
+        "channel": "returned_values",
+        "null_band": 0.02,
+        "null_pipeline": {
+          "advantage": 0.5675005848487654,
+          "null_score": -0.6937813192205293,
+          "score": -0.12628073437176388
+        },
+        "positive_control": [
+          {
+            "advantage": 1.015130365798308,
+            "dose": 0.25,
+            "null_score": -0.522180357017863,
+            "score": 0.4929500087804449
+          },
+          {
+            "advantage": 1.4488823708101057,
+            "dose": 0.5,
+            "null_score": -0.6975296683591364,
+            "score": 0.7513527024509693
+          },
+          {
+            "advantage": 1.7366905702598632,
+            "dose": 1.0,
+            "null_score": -0.8054096281212287,
+            "score": 0.9312809421386344
+          },
+          {
+            "advantage": 1.796854783610532,
+            "dose": 2.0,
+            "null_score": -0.8186200987641213,
+            "score": 0.9782346848464106
+          }
+        ],
+        "positive_floor": 0.2,
+        "qualification_dose": 2.0,
+        "qualified": false,
+        "target": "punctuation_fraction"
+      },
+      "score": null,
+      "status": "UNDETERMINED"
+    }
+  },
+  "schema_version": "r1-attack-suite-1.0",
+  "scientific_evidence": false,
+  "seed": 65002,
+  "specification": {
+    "null_band": 0.02,
+    "positive_doses": [
+      0.25,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "positive_floor_accuracy": 0.1,
+    "positive_floor_correlation": 0.2,
+    "privacy_limit_accuracy": 0.02,
+    "privacy_limit_correlation": 0.1,
+    "ridge_lambda": 1.0
+  },
+  "status": "draft_cpu_validation_only"
+}

@@ -1,0 +1,72 @@
+{
+  "config": {
+    "role": "client",
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "k_local": 5,
+    "total_steps": 10,
+    "lr": 0.0001,
+    "seq_len": 128,
+    "dtype": "bf16",
+    "sync_dtype": "bf16",
+    "seed": 42,
+    "device": "cuda"
+  },
+  "steps": [
+    {
+      "step": 0,
+      "loss": 4.087182998657227
+    },
+    {
+      "step": 1,
+      "loss": 4.475035667419434
+    },
+    {
+      "step": 2,
+      "loss": 4.092122554779053
+    },
+    {
+      "step": 3,
+      "loss": 4.731152534484863
+    },
+    {
+      "step": 4,
+      "loss": 4.09960412979126
+    },
+    {
+      "step": 5,
+      "loss": 3.3774404525756836
+    },
+    {
+      "step": 6,
+      "loss": 3.0733652114868164
+    },
+    {
+      "step": 7,
+      "loss": 2.7401552200317383
+    },
+    {
+      "step": 8,
+      "loss": 3.954127550125122
+    },
+    {
+      "step": 9,
+      "loss": 3.744189739227295
+    }
+  ],
+  "syncs": [
+    {
+      "round": 0,
+      "after_step": 4,
+      "t_sync": 263.04941801101086,
+      "bytes": 1503264768,
+      "rss_gb": 1.96
+    },
+    {
+      "round": 1,
+      "after_step": 9,
+      "t_sync": 246.23266934399726,
+      "bytes": 1503264768,
+      "rss_gb": 2.0
+    }
+  ]
+}

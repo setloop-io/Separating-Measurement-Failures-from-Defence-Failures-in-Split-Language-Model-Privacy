@@ -1,0 +1,9 @@
+{
+  "version": "latent-native-v5-inference",
+  "launchable": false,
+  "topology": {"trusted_node": "toula", "compromised_node": "koula", "hidden_width": 1024, "wire_width": 128},
+  "request_policy": {"fresh_nonce": true, "replay_refusal": true, "template_randomization": true, "dense_latent_rotation": "per_request"},
+  "boundary_policy": {"token_clipping": true, "bidirectional_noise": true, "canonical_decoder_on_koula": false},
+  "required_before_launch": ["real_inference_protocol", "full_attacker_gate", "quality_gate", "latency_gate"],
+  "warning": "The two-node training protocol has passed a D-only smoke; live inference and the full real-capture attacker gate remain unapproved."
+}

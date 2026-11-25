@@ -1,0 +1,1452 @@
+{
+  "id": "phase2-pending-20260917-v1",
+  "status": "frozen-at-commit",
+  "scope": "Prospective scope extensions; historical pilot outcomes known. No P5 gate or published BiSR fidelity claim.",
+  "inputs": {
+    "results/phase2-pending-20260917/inputs/code.jsonl": "25841c8e8b116e173304b79068b68a09bf6afab017848cdbe8cb3fa61b452025",
+    "results/phase2-pending-20260917/inputs/dialogue.jsonl": "6e899c9497d8d007c3e3e9fa2ec51a8444f654000eb244a78a3c4700293a8267",
+    "results/phase2-pending-20260917/inputs/pilot.txt": "026c4a6a930ec765c5d17b6b38783e42cb19be02b7e0f7fd4f6a34682aa9da43",
+    "results/phase2-pending-20260917/inputs/wikitext-reference.jsonl": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77"
+  },
+  "input_selection": {
+    "dialogue_source": "cached knkarthick/dialogsum official train arrow",
+    "source_arrow_sha256": "36cb9ffad6def3ea65158c42d8c0b9b26ddf66530af04f62d510a35a9d90bc18",
+    "selection": "96 unique documents >=1000 chars, SHA256(phase2-dialogue-20260917:+id) ranking, before outcomes",
+    "validation_overlap": "zero exact normalised-text hashes across all frozen validation partitions",
+    "code_license_correction": "Apache-2.0; historical manifest MIT label is incorrect"
+  },
+  "model_revisions": {
+    "gpt2": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "Qwen/Qwen3-0.6B": "c1899de289a04d12100db370d81485cdf75e47ca"
+  },
+  "queues": {
+    "soula": [
+      {
+        "id": "canary",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.experiment",
+          "--smoke",
+          "--output",
+          "@OUT/canary",
+          "--threads",
+          "4"
+        ],
+        "verify": [
+          "@OUT/canary/experiment.json"
+        ],
+        "timeout_s": 600,
+        "requires": []
+      },
+      {
+        "id": "wikitext-reference-seq64",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.experiment",
+          "--model",
+          "@GPT2",
+          "--corpus",
+          "results/phase2-pending-20260917/inputs/wikitext-reference.jsonl",
+          "--output",
+          "@OUT/wikitext-reference-seq64",
+          "--seeds",
+          "11",
+          "22",
+          "33",
+          "--data-seed",
+          "2026",
+          "--defenses",
+          "none",
+          "gaussian",
+          "--sigma",
+          "15",
+          "--arms",
+          "vmi",
+          "--seq-len",
+          "64",
+          "--train-steps",
+          "8",
+          "--decode-steps",
+          "2",
+          "--attack-steps",
+          "20",
+          "--calibration-seqs",
+          "16",
+          "--lr",
+          "0.0005",
+          "--split",
+          "6",
+          "--device",
+          "cpu",
+          "--threads",
+          "4"
+        ],
+        "verify": [
+          "@OUT/wikitext-reference-seq64/experiment.json"
+        ],
+        "timeout_s": 14400,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "wikitext-reference-seq128",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.experiment",
+          "--model",
+          "@GPT2",
+          "--corpus",
+          "results/phase2-pending-20260917/inputs/wikitext-reference.jsonl",
+          "--output",
+          "@OUT/wikitext-reference-seq128",
+          "--seeds",
+          "11",
+          "22",
+          "33",
+          "--data-seed",
+          "2026",
+          "--defenses",
+          "none",
+          "gaussian",
+          "--sigma",
+          "15",
+          "--arms",
+          "vmi",
+          "--seq-len",
+          "128",
+          "--train-steps",
+          "8",
+          "--decode-steps",
+          "2",
+          "--attack-steps",
+          "20",
+          "--calibration-seqs",
+          "16",
+          "--lr",
+          "0.0005",
+          "--split",
+          "6",
+          "--device",
+          "cpu",
+          "--threads",
+          "4"
+        ],
+        "verify": [
+          "@OUT/wikitext-reference-seq128/experiment.json"
+        ],
+        "timeout_s": 14400,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "code-seq64",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.experiment",
+          "--model",
+          "@GPT2",
+          "--corpus",
+          "results/phase2-pending-20260917/inputs/code.jsonl",
+          "--output",
+          "@OUT/code-seq64",
+          "--seeds",
+          "11",
+          "22",
+          "33",
+          "--data-seed",
+          "2026",
+          "--defenses",
+          "none",
+          "gaussian",
+          "--sigma",
+          "15",
+          "--arms",
+          "vmi",
+          "--seq-len",
+          "64",
+          "--train-steps",
+          "8",
+          "--decode-steps",
+          "2",
+          "--attack-steps",
+          "20",
+          "--calibration-seqs",
+          "16",
+          "--lr",
+          "0.0005",
+          "--split",
+          "6",
+          "--device",
+          "cpu",
+          "--threads",
+          "4"
+        ],
+        "verify": [
+          "@OUT/code-seq64/experiment.json"
+        ],
+        "timeout_s": 14400,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "code-seq128",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.experiment",
+          "--model",
+          "@GPT2",
+          "--corpus",
+          "results/phase2-pending-20260917/inputs/code.jsonl",
+          "--output",
+          "@OUT/code-seq128",
+          "--seeds",
+          "11",
+          "22",
+          "33",
+          "--data-seed",
+          "2026",
+          "--defenses",
+          "none",
+          "gaussian",
+          "--sigma",
+          "15",
+          "--arms",
+          "vmi",
+          "--seq-len",
+          "128",
+          "--train-steps",
+          "8",
+          "--decode-steps",
+          "2",
+          "--attack-steps",
+          "20",
+          "--calibration-seqs",
+          "16",
+          "--lr",
+          "0.0005",
+          "--split",
+          "6",
+          "--device",
+          "cpu",
+          "--threads",
+          "4"
+        ],
+        "verify": [
+          "@OUT/code-seq128/experiment.json"
+        ],
+        "timeout_s": 14400,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-11",
+        "argv": [
+          "@PY",
+          "-m",
+          "experiments.run_phase2_pending",
+          "--bundle",
+          "@OUT/bundle-11",
+          "--seed",
+          "11"
+        ],
+        "verify": [
+          "@OUT/bundle-11/generation.json"
+        ],
+        "timeout_s": 300,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-11-plain-split-latent-matching",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "latent-matching",
+          "--bundle",
+          "@OUT/bundle-11/plain-split.pt",
+          "--output",
+          "@OUT/bundle-11-plain-split-latent-matching.json",
+          "--epochs",
+          "20",
+          "--restarts",
+          "2",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/bundle-11-plain-split-latent-matching.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "bundle-11",
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-11-plain-split-latent-sensitivity",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "latent-sensitivity",
+          "--bundle",
+          "@OUT/bundle-11/plain-split.pt",
+          "--output",
+          "@OUT/bundle-11-plain-split-latent-sensitivity.json",
+          "--epochs",
+          "20",
+          "--restarts",
+          "2",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/bundle-11-plain-split-latent-sensitivity.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "bundle-11",
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-11-composite-latent-matching",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "latent-matching",
+          "--bundle",
+          "@OUT/bundle-11/composite.pt",
+          "--output",
+          "@OUT/bundle-11-composite-latent-matching.json",
+          "--epochs",
+          "20",
+          "--restarts",
+          "2",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/bundle-11-composite-latent-matching.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "bundle-11",
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-11-composite-latent-sensitivity",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "latent-sensitivity",
+          "--bundle",
+          "@OUT/bundle-11/composite.pt",
+          "--output",
+          "@OUT/bundle-11-composite-latent-sensitivity.json",
+          "--epochs",
+          "20",
+          "--restarts",
+          "2",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/bundle-11-composite-latent-sensitivity.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "bundle-11",
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-22",
+        "argv": [
+          "@PY",
+          "-m",
+          "experiments.run_phase2_pending",
+          "--bundle",
+          "@OUT/bundle-22",
+          "--seed",
+          "22"
+        ],
+        "verify": [
+          "@OUT/bundle-22/generation.json"
+        ],
+        "timeout_s": 300,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-22-plain-split-latent-matching",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "latent-matching",
+          "--bundle",
+          "@OUT/bundle-22/plain-split.pt",
+          "--output",
+          "@OUT/bundle-22-plain-split-latent-matching.json",
+          "--epochs",
+          "20",
+          "--restarts",
+          "2",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/bundle-22-plain-split-latent-matching.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "bundle-22",
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-22-plain-split-latent-sensitivity",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "latent-sensitivity",
+          "--bundle",
+          "@OUT/bundle-22/plain-split.pt",
+          "--output",
+          "@OUT/bundle-22-plain-split-latent-sensitivity.json",
+          "--epochs",
+          "20",
+          "--restarts",
+          "2",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/bundle-22-plain-split-latent-sensitivity.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "bundle-22",
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-22-composite-latent-matching",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "latent-matching",
+          "--bundle",
+          "@OUT/bundle-22/composite.pt",
+          "--output",
+          "@OUT/bundle-22-composite-latent-matching.json",
+          "--epochs",
+          "20",
+          "--restarts",
+          "2",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/bundle-22-composite-latent-matching.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "bundle-22",
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-22-composite-latent-sensitivity",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "latent-sensitivity",
+          "--bundle",
+          "@OUT/bundle-22/composite.pt",
+          "--output",
+          "@OUT/bundle-22-composite-latent-sensitivity.json",
+          "--epochs",
+          "20",
+          "--restarts",
+          "2",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/bundle-22-composite-latent-sensitivity.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "bundle-22",
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-33",
+        "argv": [
+          "@PY",
+          "-m",
+          "experiments.run_phase2_pending",
+          "--bundle",
+          "@OUT/bundle-33",
+          "--seed",
+          "33"
+        ],
+        "verify": [
+          "@OUT/bundle-33/generation.json"
+        ],
+        "timeout_s": 300,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-33-plain-split-latent-matching",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "latent-matching",
+          "--bundle",
+          "@OUT/bundle-33/plain-split.pt",
+          "--output",
+          "@OUT/bundle-33-plain-split-latent-matching.json",
+          "--epochs",
+          "20",
+          "--restarts",
+          "2",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/bundle-33-plain-split-latent-matching.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "bundle-33",
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-33-plain-split-latent-sensitivity",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "latent-sensitivity",
+          "--bundle",
+          "@OUT/bundle-33/plain-split.pt",
+          "--output",
+          "@OUT/bundle-33-plain-split-latent-sensitivity.json",
+          "--epochs",
+          "20",
+          "--restarts",
+          "2",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/bundle-33-plain-split-latent-sensitivity.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "bundle-33",
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-33-composite-latent-matching",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "latent-matching",
+          "--bundle",
+          "@OUT/bundle-33/composite.pt",
+          "--output",
+          "@OUT/bundle-33-composite-latent-matching.json",
+          "--epochs",
+          "20",
+          "--restarts",
+          "2",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/bundle-33-composite-latent-matching.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "bundle-33",
+          "canary"
+        ]
+      },
+      {
+        "id": "bundle-33-composite-latent-sensitivity",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "latent-sensitivity",
+          "--bundle",
+          "@OUT/bundle-33/composite.pt",
+          "--output",
+          "@OUT/bundle-33-composite-latent-sensitivity.json",
+          "--epochs",
+          "20",
+          "--restarts",
+          "2",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/bundle-33-composite-latent-sensitivity.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "bundle-33",
+          "canary"
+        ]
+      }
+    ],
+    "voula": [
+      {
+        "id": "canary",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.experiment",
+          "--smoke",
+          "--output",
+          "@OUT/canary",
+          "--threads",
+          "4"
+        ],
+        "verify": [
+          "@OUT/canary/experiment.json"
+        ],
+        "timeout_s": 600,
+        "requires": []
+      },
+      {
+        "id": "independent-dialogue",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.experiment",
+          "--model",
+          "@GPT2",
+          "--corpus",
+          "results/phase2-pending-20260917/inputs/dialogue.jsonl",
+          "--output",
+          "@OUT/independent-dialogue",
+          "--seeds",
+          "11",
+          "22",
+          "33",
+          "--data-seed",
+          "2026",
+          "--defenses",
+          "none",
+          "gaussian",
+          "--sigma",
+          "15",
+          "--arms",
+          "vmi",
+          "--seq-len",
+          "32",
+          "--train-steps",
+          "8",
+          "--decode-steps",
+          "2",
+          "--attack-steps",
+          "20",
+          "--calibration-seqs",
+          "16",
+          "--lr",
+          "0.0005",
+          "--split",
+          "6",
+          "--device",
+          "cpu",
+          "--threads",
+          "4"
+        ],
+        "verify": [
+          "@OUT/independent-dialogue/experiment.json"
+        ],
+        "timeout_s": 14400,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "adaptive-reference",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.experiment",
+          "--model",
+          "@GPT2",
+          "--corpus",
+          "results/phase2-pending-20260917/inputs/wikitext-reference.jsonl",
+          "--output",
+          "@OUT/adaptive-reference",
+          "--seeds",
+          "11",
+          "22",
+          "33",
+          "--data-seed",
+          "2026",
+          "--defenses",
+          "none",
+          "gaussian",
+          "--sigma",
+          "15",
+          "--arms",
+          "vmi",
+          "--seq-len",
+          "32",
+          "--train-steps",
+          "8",
+          "--decode-steps",
+          "2",
+          "--attack-steps",
+          "20",
+          "--calibration-seqs",
+          "16",
+          "--lr",
+          "0.0005",
+          "--split",
+          "6",
+          "--device",
+          "cpu",
+          "--threads",
+          "4"
+        ],
+        "verify": [
+          "@OUT/adaptive-reference/experiment.json"
+        ],
+        "timeout_s": 14400,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "adaptive-whitening",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.experiment",
+          "--model",
+          "@GPT2",
+          "--corpus",
+          "results/phase2-pending-20260917/inputs/wikitext-reference.jsonl",
+          "--output",
+          "@OUT/adaptive-whitening",
+          "--seeds",
+          "11",
+          "22",
+          "33",
+          "--data-seed",
+          "2026",
+          "--defenses",
+          "none",
+          "gaussian",
+          "--sigma",
+          "15",
+          "--arms",
+          "vmi",
+          "--seq-len",
+          "32",
+          "--train-steps",
+          "8",
+          "--decode-steps",
+          "2",
+          "--attack-steps",
+          "20",
+          "--calibration-seqs",
+          "16",
+          "--lr",
+          "0.0005",
+          "--split",
+          "6",
+          "--device",
+          "cpu",
+          "--threads",
+          "4",
+          "--adaptive"
+        ],
+        "verify": [
+          "@OUT/adaptive-whitening/experiment.json"
+        ],
+        "timeout_s": 14400,
+        "requires": [
+          "canary"
+        ]
+      }
+    ],
+    "sasa": [
+      {
+        "id": "canary",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.experiment",
+          "--smoke",
+          "--output",
+          "@OUT/canary",
+          "--threads",
+          "4"
+        ],
+        "verify": [
+          "@OUT/canary/experiment.json"
+        ],
+        "timeout_s": 600,
+        "requires": []
+      },
+      {
+        "id": "convergence-none-11",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.splitbench",
+          "--model",
+          "@GPT2",
+          "--split",
+          "6",
+          "--mode",
+          "finetune",
+          "--steps",
+          "500",
+          "--seq-len",
+          "32",
+          "--batch-size",
+          "1",
+          "--lr",
+          "0.00005",
+          "--device",
+          "cpu",
+          "--dtype",
+          "fp32",
+          "--seed",
+          "11",
+          "--defense",
+          "none",
+          "--corpus-file",
+          "results/phase2-pending-20260917/inputs/pilot.txt",
+          "--capture-dir",
+          "@OUT/convergence-none-11/captures",
+          "--save-canonical",
+          "--output",
+          "@OUT/convergence-none-11/capture.json",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/convergence-none-11/capture.json"
+        ],
+        "timeout_s": 7200,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "convergence-none-11-vmi",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "seam-inversion",
+          "--arm",
+          "vmi",
+          "--model",
+          "@GPT2",
+          "--split",
+          "6",
+          "--capture-dir",
+          "@OUT/convergence-none-11/captures",
+          "--canonical-pt",
+          "@OUT/convergence-none-11/captures/canonical.pt",
+          "--calibration-file",
+          "results/phase2-pending-20260917/inputs/pilot.txt",
+          "--samples",
+          "500",
+          "--device",
+          "cpu",
+          "--output",
+          "@OUT/convergence-none-11/vmi.json",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/convergence-none-11/vmi.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "convergence-none-11",
+          "canary"
+        ]
+      },
+      {
+        "id": "convergence-mid-lite-11",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.splitbench",
+          "--model",
+          "@GPT2",
+          "--split",
+          "6",
+          "--mode",
+          "finetune",
+          "--steps",
+          "500",
+          "--seq-len",
+          "32",
+          "--batch-size",
+          "1",
+          "--lr",
+          "0.00005",
+          "--device",
+          "cpu",
+          "--dtype",
+          "fp32",
+          "--seed",
+          "11",
+          "--defense",
+          "mid-lite",
+          "--corpus-file",
+          "results/phase2-pending-20260917/inputs/pilot.txt",
+          "--capture-dir",
+          "@OUT/convergence-mid-lite-11/captures",
+          "--save-canonical",
+          "--output",
+          "@OUT/convergence-mid-lite-11/capture.json",
+          "--evidence",
+          "--bottleneck-dim",
+          "64"
+        ],
+        "verify": [
+          "@OUT/convergence-mid-lite-11/capture.json"
+        ],
+        "timeout_s": 7200,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "convergence-mid-lite-11-vmi",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "seam-inversion",
+          "--arm",
+          "vmi",
+          "--model",
+          "@GPT2",
+          "--split",
+          "6",
+          "--capture-dir",
+          "@OUT/convergence-mid-lite-11/captures",
+          "--canonical-pt",
+          "@OUT/convergence-mid-lite-11/captures/canonical.pt",
+          "--calibration-file",
+          "results/phase2-pending-20260917/inputs/pilot.txt",
+          "--samples",
+          "500",
+          "--device",
+          "cpu",
+          "--output",
+          "@OUT/convergence-mid-lite-11/vmi.json",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/convergence-mid-lite-11/vmi.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "convergence-mid-lite-11",
+          "canary"
+        ]
+      },
+      {
+        "id": "convergence-none-22",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.splitbench",
+          "--model",
+          "@GPT2",
+          "--split",
+          "6",
+          "--mode",
+          "finetune",
+          "--steps",
+          "500",
+          "--seq-len",
+          "32",
+          "--batch-size",
+          "1",
+          "--lr",
+          "0.00005",
+          "--device",
+          "cpu",
+          "--dtype",
+          "fp32",
+          "--seed",
+          "22",
+          "--defense",
+          "none",
+          "--corpus-file",
+          "results/phase2-pending-20260917/inputs/pilot.txt",
+          "--capture-dir",
+          "@OUT/convergence-none-22/captures",
+          "--save-canonical",
+          "--output",
+          "@OUT/convergence-none-22/capture.json",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/convergence-none-22/capture.json"
+        ],
+        "timeout_s": 7200,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "convergence-none-22-vmi",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "seam-inversion",
+          "--arm",
+          "vmi",
+          "--model",
+          "@GPT2",
+          "--split",
+          "6",
+          "--capture-dir",
+          "@OUT/convergence-none-22/captures",
+          "--canonical-pt",
+          "@OUT/convergence-none-22/captures/canonical.pt",
+          "--calibration-file",
+          "results/phase2-pending-20260917/inputs/pilot.txt",
+          "--samples",
+          "500",
+          "--device",
+          "cpu",
+          "--output",
+          "@OUT/convergence-none-22/vmi.json",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/convergence-none-22/vmi.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "convergence-none-22",
+          "canary"
+        ]
+      },
+      {
+        "id": "convergence-mid-lite-22",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.splitbench",
+          "--model",
+          "@GPT2",
+          "--split",
+          "6",
+          "--mode",
+          "finetune",
+          "--steps",
+          "500",
+          "--seq-len",
+          "32",
+          "--batch-size",
+          "1",
+          "--lr",
+          "0.00005",
+          "--device",
+          "cpu",
+          "--dtype",
+          "fp32",
+          "--seed",
+          "22",
+          "--defense",
+          "mid-lite",
+          "--corpus-file",
+          "results/phase2-pending-20260917/inputs/pilot.txt",
+          "--capture-dir",
+          "@OUT/convergence-mid-lite-22/captures",
+          "--save-canonical",
+          "--output",
+          "@OUT/convergence-mid-lite-22/capture.json",
+          "--evidence",
+          "--bottleneck-dim",
+          "64"
+        ],
+        "verify": [
+          "@OUT/convergence-mid-lite-22/capture.json"
+        ],
+        "timeout_s": 7200,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "convergence-mid-lite-22-vmi",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "seam-inversion",
+          "--arm",
+          "vmi",
+          "--model",
+          "@GPT2",
+          "--split",
+          "6",
+          "--capture-dir",
+          "@OUT/convergence-mid-lite-22/captures",
+          "--canonical-pt",
+          "@OUT/convergence-mid-lite-22/captures/canonical.pt",
+          "--calibration-file",
+          "results/phase2-pending-20260917/inputs/pilot.txt",
+          "--samples",
+          "500",
+          "--device",
+          "cpu",
+          "--output",
+          "@OUT/convergence-mid-lite-22/vmi.json",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/convergence-mid-lite-22/vmi.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "convergence-mid-lite-22",
+          "canary"
+        ]
+      },
+      {
+        "id": "convergence-none-33",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.splitbench",
+          "--model",
+          "@GPT2",
+          "--split",
+          "6",
+          "--mode",
+          "finetune",
+          "--steps",
+          "500",
+          "--seq-len",
+          "32",
+          "--batch-size",
+          "1",
+          "--lr",
+          "0.00005",
+          "--device",
+          "cpu",
+          "--dtype",
+          "fp32",
+          "--seed",
+          "33",
+          "--defense",
+          "none",
+          "--corpus-file",
+          "results/phase2-pending-20260917/inputs/pilot.txt",
+          "--capture-dir",
+          "@OUT/convergence-none-33/captures",
+          "--save-canonical",
+          "--output",
+          "@OUT/convergence-none-33/capture.json",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/convergence-none-33/capture.json"
+        ],
+        "timeout_s": 7200,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "convergence-none-33-vmi",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "seam-inversion",
+          "--arm",
+          "vmi",
+          "--model",
+          "@GPT2",
+          "--split",
+          "6",
+          "--capture-dir",
+          "@OUT/convergence-none-33/captures",
+          "--canonical-pt",
+          "@OUT/convergence-none-33/captures/canonical.pt",
+          "--calibration-file",
+          "results/phase2-pending-20260917/inputs/pilot.txt",
+          "--samples",
+          "500",
+          "--device",
+          "cpu",
+          "--output",
+          "@OUT/convergence-none-33/vmi.json",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/convergence-none-33/vmi.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "convergence-none-33",
+          "canary"
+        ]
+      },
+      {
+        "id": "convergence-mid-lite-33",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker.splitbench",
+          "--model",
+          "@GPT2",
+          "--split",
+          "6",
+          "--mode",
+          "finetune",
+          "--steps",
+          "500",
+          "--seq-len",
+          "32",
+          "--batch-size",
+          "1",
+          "--lr",
+          "0.00005",
+          "--device",
+          "cpu",
+          "--dtype",
+          "fp32",
+          "--seed",
+          "33",
+          "--defense",
+          "mid-lite",
+          "--corpus-file",
+          "results/phase2-pending-20260917/inputs/pilot.txt",
+          "--capture-dir",
+          "@OUT/convergence-mid-lite-33/captures",
+          "--save-canonical",
+          "--output",
+          "@OUT/convergence-mid-lite-33/capture.json",
+          "--evidence",
+          "--bottleneck-dim",
+          "64"
+        ],
+        "verify": [
+          "@OUT/convergence-mid-lite-33/capture.json"
+        ],
+        "timeout_s": 7200,
+        "requires": [
+          "canary"
+        ]
+      },
+      {
+        "id": "convergence-mid-lite-33-vmi",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "training",
+          "--attack",
+          "seam-inversion",
+          "--arm",
+          "vmi",
+          "--model",
+          "@GPT2",
+          "--split",
+          "6",
+          "--capture-dir",
+          "@OUT/convergence-mid-lite-33/captures",
+          "--canonical-pt",
+          "@OUT/convergence-mid-lite-33/captures/canonical.pt",
+          "--calibration-file",
+          "results/phase2-pending-20260917/inputs/pilot.txt",
+          "--samples",
+          "500",
+          "--device",
+          "cpu",
+          "--output",
+          "@OUT/convergence-mid-lite-33/vmi.json",
+          "--evidence"
+        ],
+        "verify": [
+          "@OUT/convergence-mid-lite-33/vmi.json"
+        ],
+        "timeout_s": 3600,
+        "requires": [
+          "convergence-mid-lite-33",
+          "canary"
+        ]
+      }
+    ],
+    "koula": [
+      {
+        "id": "agent-goal-hijack",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "inference",
+          "--attack",
+          "agent-goal-hijack",
+          "--endpoint",
+          "local:@QWEN",
+          "--llm-trials",
+          "2",
+          "--llm-max-turns",
+          "8",
+          "--llm-max-new-tokens",
+          "768",
+          "--llm-seed",
+          "0",
+          "--seed",
+          "1234",
+          "--output",
+          "@OUT/agent-goal-hijack.json",
+          "--evidence",
+          "--arms",
+          "tool-output-hijack"
+        ],
+        "verify": [
+          "@OUT/agent-goal-hijack.json"
+        ],
+        "timeout_s": 3600,
+        "requires": []
+      },
+      {
+        "id": "cross-agent-deputy",
+        "argv": [
+          "@PY",
+          "-m",
+          "attacker",
+          "--mode",
+          "inference",
+          "--attack",
+          "cross-agent-deputy",
+          "--endpoint",
+          "local:@QWEN",
+          "--llm-trials",
+          "2",
+          "--llm-max-turns",
+          "6",
+          "--llm-max-new-tokens",
+          "768",
+          "--llm-seed",
+          "0",
+          "--seed",
+          "1234",
+          "--output",
+          "@OUT/cross-agent-deputy.json",
+          "--evidence",
+          "--arms",
+          "forwarded-deputy-request",
+          "sanctioned-peer-request",
+          "--llm-worlds",
+          "vulnerable",
+          "defended",
+          "principal-binding-only"
+        ],
+        "verify": [
+          "@OUT/cross-agent-deputy.json"
+        ],
+        "timeout_s": 3600,
+        "requires": []
+      }
+    ]
+  },
+  "interpretation": {
+    "agentic": "Two deterministic greedy repetitions per existing cell; not two independent model seeds. Sandbox tools only.",
+    "convergence": "Training-trajectory probe; no held-out generalisation/convergence proof. Compare none and mid-lite k64 at fixed500steps.",
+    "order_chaff": "Matched synthetic reference bundles only; connectivity-selected rows are not a claim of actual deployed chaff labels.",
+    "adaptive": "Paired VMI noise-whitening ablation at known gaussian sigma15; no universal adaptive adversary claim."
+  },
+  "blocked": {
+    "B1_BiSR": "Original SensiReplaced unavailable and no defensible fidelity tolerance/aligned dual-cut implementation. Preparation only; no substitution advertised as faithful.",
+    "B2_matched": "Depends on B1 fidelity pass.",
+    "P6_Mode1": "External current R1 exp002 running on toula; no concurrent launch or retired evidence promotion.",
+    "repeated_sessions_v13": "Needs external v13 capture/release mapping and frozen session/key-reuse threat model.",
+    "deployment_evidence": "Read-only inventory/recovery, no experimental execution."
+  }
+}

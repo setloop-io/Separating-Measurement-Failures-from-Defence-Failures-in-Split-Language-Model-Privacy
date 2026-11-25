@@ -1,0 +1,328 @@
+{
+  "param_digest": null,
+  "eval_loss": 3.6879875659942627,
+  "eval_loss_std": 1.2431350946426392,
+  "eval_blocks": 3,
+  "final_train_loss": 3.529659755527973,
+  "config": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "n_layers": 28,
+    "split_after": 15,
+    "resume_after": 26,
+    "local_params": 438740480,
+    "cloud_params": 157309440,
+    "cloud_trainable_params": 0,
+    "cloud": "ws://10.10.10.2:5003",
+    "wire_dtype": "bf16",
+    "pipeline": "sync",
+    "max_inflight": null,
+    "lora_rank": 0,
+    "lr": 0.0001,
+    "seq_len": 64,
+    "micro_batch_size": 1,
+    "grad_accum": 16,
+    "steps": 1,
+    "dtype": "bf16",
+    "device": "cuda",
+    "seed": 42,
+    "corpus_file": "/workspace/experiments/private/er9/corpus.jitter.txt.1",
+    "act_noise_sigma": 0.0,
+    "tee": {
+      "requested": false,
+      "mode": "none",
+      "note": null
+    },
+    "act_noise": null,
+    "dp_sgd": null,
+    "boundary_dp": null,
+    "obf": null
+  },
+  "steps": [
+    {
+      "step": 0,
+      "loss": 3.529659755527973,
+      "t_step": 2.6567900150548667,
+      "t_blocked_cloud": 0.0,
+      "overlap_savings_s": 0.0
+    }
+  ],
+  "microbatch_timing": [
+    {
+      "step": 0,
+      "microbatch": 0,
+      "block_indices": [
+        20
+      ],
+      "t_local_fwd": 0.5031340840505436,
+      "t_cloud_fwd": 0.43107681605033576,
+      "t_wait_cloud_fwd": 0.43107681605033576,
+      "loss": 6.17258882522583,
+      "t_tail_fwd": 0.03409801993984729,
+      "t_local_bwd": 0.05851582903414965,
+      "t_cloud_bwd": 0.0553956440417096,
+      "t_wait_cloud_bwd": 0.0553956440417096,
+      "bytes_crossed": 262144,
+      "t_total": 1.1412139039020985
+    },
+    {
+      "step": 0,
+      "microbatch": 1,
+      "block_indices": [
+        3
+      ],
+      "t_local_fwd": 0.007838121964596212,
+      "t_cloud_fwd": 0.021163880010135472,
+      "t_wait_cloud_fwd": 0.021163880010135472,
+      "loss": 3.4577126502990723,
+      "t_tail_fwd": 0.003762508975341916,
+      "t_local_bwd": 0.01894606393761933,
+      "t_cloud_bwd": 0.026108248042874038,
+      "t_wait_cloud_bwd": 0.026108248042874038,
+      "bytes_crossed": 262144,
+      "t_total": 0.09804913098923862
+    },
+    {
+      "step": 0,
+      "microbatch": 2,
+      "block_indices": [
+        0
+      ],
+      "t_local_fwd": 0.0074700419791042805,
+      "t_cloud_fwd": 0.020703157992102206,
+      "t_wait_cloud_fwd": 0.020703157992102206,
+      "loss": 1.9581005573272705,
+      "t_tail_fwd": 0.003692219965159893,
+      "t_local_bwd": 0.004649120033718646,
+      "t_cloud_bwd": 0.03009299805853516,
+      "t_wait_cloud_bwd": 0.03009299805853516,
+      "bytes_crossed": 262144,
+      "t_total": 0.08923777297604829
+    },
+    {
+      "step": 0,
+      "microbatch": 3,
+      "block_indices": [
+        8
+      ],
+      "t_local_fwd": 0.007220200030133128,
+      "t_cloud_fwd": 0.02062704600393772,
+      "t_wait_cloud_fwd": 0.02062704600393772,
+      "loss": 3.501461982727051,
+      "t_tail_fwd": 0.003688668948598206,
+      "t_local_bwd": 0.0039884930010885,
+      "t_cloud_bwd": 0.03022960596717894,
+      "t_wait_cloud_bwd": 0.03022960596717894,
+      "bytes_crossed": 262144,
+      "t_total": 0.08977060706820339
+    },
+    {
+      "step": 0,
+      "microbatch": 4,
+      "block_indices": [
+        7
+      ],
+      "t_local_fwd": 0.007209416013211012,
+      "t_cloud_fwd": 0.020380276953801513,
+      "t_wait_cloud_fwd": 0.020380276953801513,
+      "loss": 1.8187530040740967,
+      "t_tail_fwd": 0.003654555999673903,
+      "t_local_bwd": 0.004408751032315195,
+      "t_cloud_bwd": 0.030100982054136693,
+      "t_wait_cloud_bwd": 0.030100982054136693,
+      "bytes_crossed": 262144,
+      "t_total": 0.08938591706100851
+    },
+    {
+      "step": 0,
+      "microbatch": 5,
+      "block_indices": [
+        7
+      ],
+      "t_local_fwd": 0.00740357709582895,
+      "t_cloud_fwd": 0.019923459040001035,
+      "t_wait_cloud_fwd": 0.019923459040001035,
+      "loss": 1.8187530040740967,
+      "t_tail_fwd": 0.003676717053167522,
+      "t_local_bwd": 0.004360669991001487,
+      "t_cloud_bwd": 0.030228229938074946,
+      "t_wait_cloud_bwd": 0.030228229938074946,
+      "bytes_crossed": 262144,
+      "t_total": 0.09260580106638372
+    },
+    {
+      "step": 0,
+      "microbatch": 6,
+      "block_indices": [
+        4
+      ],
+      "t_local_fwd": 0.007195129059255123,
+      "t_cloud_fwd": 0.020595509093254805,
+      "t_wait_cloud_fwd": 0.020595509093254805,
+      "loss": 6.199193000793457,
+      "t_tail_fwd": 0.0036479810951277614,
+      "t_local_bwd": 0.004424927057698369,
+      "t_cloud_bwd": 0.02930430695414543,
+      "t_wait_cloud_bwd": 0.02930430695414543,
+      "bytes_crossed": 262144,
+      "t_total": 0.08878246007952839
+    },
+    {
+      "step": 0,
+      "microbatch": 7,
+      "block_indices": [
+        3
+      ],
+      "t_local_fwd": 0.00722256803419441,
+      "t_cloud_fwd": 0.020188836031593382,
+      "t_wait_cloud_fwd": 0.020188836031593382,
+      "loss": 3.4577126502990723,
+      "t_tail_fwd": 0.0036638210294768214,
+      "t_local_bwd": 0.004332429962232709,
+      "t_cloud_bwd": 0.029481171048246324,
+      "t_wait_cloud_bwd": 0.029481171048246324,
+      "bytes_crossed": 262144,
+      "t_total": 0.0895820630248636
+    },
+    {
+      "step": 0,
+      "microbatch": 8,
+      "block_indices": [
+        17
+      ],
+      "t_local_fwd": 0.0071647599106654525,
+      "t_cloud_fwd": 0.01994289900176227,
+      "t_wait_cloud_fwd": 0.01994289900176227,
+      "loss": 0.5464150905609131,
+      "t_tail_fwd": 0.003634636988863349,
+      "t_local_bwd": 0.004176334012299776,
+      "t_cloud_bwd": 0.02914118696935475,
+      "t_wait_cloud_bwd": 0.02914118696935475,
+      "bytes_crossed": 262144,
+      "t_total": 0.08795711304992437
+    },
+    {
+      "step": 0,
+      "microbatch": 9,
+      "block_indices": [
+        2
+      ],
+      "t_local_fwd": 0.007105416036210954,
+      "t_cloud_fwd": 0.020050851977430284,
+      "t_wait_cloud_fwd": 0.020050851977430284,
+      "loss": 3.215175151824951,
+      "t_tail_fwd": 0.003644459997303784,
+      "t_local_bwd": 0.004301662091165781,
+      "t_cloud_bwd": 0.029384803026914597,
+      "t_wait_cloud_bwd": 0.029384803026914597,
+      "bytes_crossed": 262144,
+      "t_total": 0.088160952902399
+    },
+    {
+      "step": 0,
+      "microbatch": 10,
+      "block_indices": [
+        18
+      ],
+      "t_local_fwd": 0.0072047930443659425,
+      "t_cloud_fwd": 0.018432157929055393,
+      "t_wait_cloud_fwd": 0.018432157929055393,
+      "loss": 5.595928192138672,
+      "t_tail_fwd": 0.0033381549874320626,
+      "t_local_bwd": 0.0033609080128371716,
+      "t_cloud_bwd": 0.02771782095078379,
+      "t_wait_cloud_bwd": 0.02771782095078379,
+      "bytes_crossed": 262144,
+      "t_total": 0.08376765891443938
+    },
+    {
+      "step": 0,
+      "microbatch": 11,
+      "block_indices": [
+        13
+      ],
+      "t_local_fwd": 0.007294232025742531,
+      "t_cloud_fwd": 0.015388947911560535,
+      "t_wait_cloud_fwd": 0.015388947911560535,
+      "loss": 7.4208574295043945,
+      "t_tail_fwd": 0.003552988055162132,
+      "t_local_bwd": 0.0036451799096539617,
+      "t_cloud_bwd": 0.032005948945879936,
+      "t_wait_cloud_bwd": 0.032005948945879936,
+      "bytes_crossed": 262144,
+      "t_total": 0.08612041897140443
+    },
+    {
+      "step": 0,
+      "microbatch": 12,
+      "block_indices": [
+        1
+      ],
+      "t_local_fwd": 0.007345304940827191,
+      "t_cloud_fwd": 0.01973502605687827,
+      "t_wait_cloud_fwd": 0.01973502605687827,
+      "loss": 1.2118061780929565,
+      "t_tail_fwd": 0.003617403912357986,
+      "t_local_bwd": 0.004025742062367499,
+      "t_cloud_bwd": 0.028155582956969738,
+      "t_wait_cloud_bwd": 0.028155582956969738,
+      "bytes_crossed": 262144,
+      "t_total": 0.08780423295684159
+    },
+    {
+      "step": 0,
+      "microbatch": 13,
+      "block_indices": [
+        0
+      ],
+      "t_local_fwd": 0.007134424988180399,
+      "t_cloud_fwd": 0.018912927946075797,
+      "t_wait_cloud_fwd": 0.018912927946075797,
+      "loss": 1.9581005573272705,
+      "t_tail_fwd": 0.0036920130951330066,
+      "t_local_bwd": 0.004069966031238437,
+      "t_cloud_bwd": 0.029165377956815064,
+      "t_wait_cloud_bwd": 0.029165377956815064,
+      "bytes_crossed": 262144,
+      "t_total": 0.08660134801175445
+    },
+    {
+      "step": 0,
+      "microbatch": 14,
+      "block_indices": [
+        2
+      ],
+      "t_local_fwd": 0.007135816966183484,
+      "t_cloud_fwd": 0.019798371009528637,
+      "t_wait_cloud_fwd": 0.019798371009528637,
+      "loss": 3.215175151824951,
+      "t_tail_fwd": 0.0036271970020607114,
+      "t_local_bwd": 0.00407964491751045,
+      "t_cloud_bwd": 0.029044691007584333,
+      "t_wait_cloud_bwd": 0.029044691007584333,
+      "bytes_crossed": 262144,
+      "t_total": 0.08728408708702773
+    },
+    {
+      "step": 0,
+      "microbatch": 15,
+      "block_indices": [
+        6
+      ],
+      "t_local_fwd": 0.006978343008086085,
+      "t_cloud_fwd": 0.020576405921019614,
+      "t_wait_cloud_fwd": 0.020576405921019614,
+      "loss": 4.926822662353516,
+      "t_tail_fwd": 0.003651867969892919,
+      "t_local_bwd": 0.0037755650701001287,
+      "t_cloud_bwd": 0.029095826903358102,
+      "t_wait_cloud_bwd": 0.029095826903358102,
+      "bytes_crossed": 262144,
+      "t_total": 0.08804249006789178
+    }
+  ],
+  "bytes_crossed_total": {
+    "activations": 2097152,
+    "grads": 2097152
+  },
+  "note": "remote cloud: t_cloud_* includes network round-trip"
+}

@@ -1,0 +1,51 @@
+{
+  "backend": "tenseal",
+  "backend_version": "0.3.18",
+  "baseline_mean_total_matmul_seconds": 15.207497888384387,
+  "binding": {
+    "checkpoint_manifest": "experiments/manifests/p4-qualification-20260922-a-d0-q8-trained-s419101.json",
+    "checkpoint_manifest_sha256": "cf19e8868f469d12c72b44f96c8956f298a0ec38525976edc6db840d3a11090f",
+    "checkpoint_run_id": "p4-qualification-20260922-a-d0-q8-trained-s419101",
+    "device": "cuda",
+    "input_window_sha256": "2ee63c0e4f424e2a0a3c9d0237684b97d8bc95c54c47194dfdaaa08627149ad7",
+    "panels_manifest": "experiments/manifests/p4-pilot-20260922-a-d0-q8-trained-s411101.json",
+    "panels_manifest_sha256": "06b2f537f4308fb07e11517c1f8fd0ed7f7ab076b0ac55af0cab985a9a300912",
+    "panels_sha256": "1e89b6cd49fd72c69a6f4d248da69ed74acb37c3ba8c048cc1bb3467e3e33a81",
+    "seed": 410801,
+    "selected_stages": [
+      "stage-c",
+      "stage-d"
+    ]
+  },
+  "ckks": {
+    "coeff_mod_bit_sizes": [
+      60,
+      40,
+      40,
+      60
+    ],
+    "global_scale": "2^40",
+    "poly_modulus_degree": 8192
+  },
+  "deployment_scope": "Plaintext-emulated boundary (stage A) and one real CKKS projection (stage B); no confidentiality, integrity, or attestation claim",
+  "hardware_attested": false,
+  "keygen_amortized": {
+    "keygen_seconds": 0.088497395045124,
+    "keygen_share_seconds_per_token": 0.002765543595160125,
+    "mean_per_token_matmul_seconds": 0.11834389297291636,
+    "sequential_mms": 32
+  },
+  "op_count_explanation": "measured packed/per-token homomorphic-matmul ratios [0.7256146912246956, 0.859683429210285, 1.1422020520036895] at block counts [1, 2, 4]: rotations and diagonal multiplies scale with the output dimension regardless of packing, so slot-packing does not reduce the homomorphic matmul cost at this shape; the saving is ciphertext count, not computation (measured, not asserted)",
+  "packed_per_token_ratio": {
+    "1": 0.7256146912246956,
+    "2": 0.859683429210285,
+    "4": 1.1422020520036895
+  },
+  "privacy_outcome": "undetermined",
+  "qualified": false,
+  "scientific_evidence": false,
+  "seed": 410801,
+  "stage": "C_batched_matmul_corrective",
+  "timing_scope": "in-process engineering timing on a research node; not a secure-serving latency (no TEE, no attestation, no network)",
+  "wall_seconds": 302.3817933029495
+}

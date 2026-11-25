@@ -1,0 +1,45 @@
+{
+  "schema": "dtraining.deleg6040.mi_compare.v1",
+  "convention": "mi_budget layer N == split_after N; both tools use run_layer_stack(layers[: N + 1], ...) (measure_mi_budget.py:83, run_latent_native_v5_06b.py:361)",
+  "rows": [
+    {
+      "layer": 2,
+      "published_top1_pct": 58.658854166666664,
+      "measured_top1_pct": 58.658854166666664,
+      "delta_pp": 0.0,
+      "measured_probe_ce_nats": 5.775333404541016,
+      "measured_mi_lower_bound_bits": 0.0
+    },
+    {
+      "layer": 8,
+      "published_top1_pct": 55.338541666666664,
+      "measured_top1_pct": 55.338541666666664,
+      "delta_pp": 0.0,
+      "measured_probe_ce_nats": 6.013210932413737,
+      "measured_mi_lower_bound_bits": 0.0
+    },
+    {
+      "layer": 14,
+      "published_top1_pct": 54.622395833333336,
+      "measured_top1_pct": 54.622395833333336,
+      "delta_pp": 0.0,
+      "measured_probe_ce_nats": 5.96513573328654,
+      "measured_mi_lower_bound_bits": 0.0
+    },
+    {
+      "layer": 21,
+      "published_top1_pct": 55.143229166666664,
+      "measured_top1_pct": 55.208333333333336,
+      "delta_pp": 0.0651041666666714,
+      "measured_probe_ce_nats": 5.8887098630269366,
+      "measured_mi_lower_bound_bits": 0.0
+    }
+  ],
+  "published_layer14_minus_layer21_pp": -0.5208333333333286,
+  "measured_layer14_minus_layer21_pp": -0.5859375,
+  "ordering_reproduces": true,
+  "layer14_less_recoverable_than_layer21": true,
+  "corpus_window_matches_published": true,
+  "token_prior_entropy_nats": 5.771182537078857,
+  "mi_lower_bound_vacuous_everywhere": true
+}

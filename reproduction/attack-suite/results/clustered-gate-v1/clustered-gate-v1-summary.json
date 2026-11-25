@@ -1,0 +1,1571 @@
+{
+ "schema": "llm_attacker.clustered_gate_summary.v1",
+ "provenance": {
+  "argv": [
+   "experiments/analyze_clustered_gate.py",
+   "--replicates",
+   "100000"
+  ],
+  "cwd": "/Users/geo/LLM-Attacker",
+  "generated_utc": "2026-09-16T10:33:48Z",
+  "hostname": "MacBookPro",
+  "platform": "macOS-26.5-arm64-arm-64bit-Mach-O",
+  "python_version": "3.14.6",
+  "git_head": "f4d1f133f3a8c42116101001bdb006a4c78d715c",
+  "packages": "stdlib-only (attacker.gate is pure python)"
+ },
+ "gate": {
+  "version": "frozen-gate.v2",
+  "z": 2.5391848136513127,
+  "gate_pp": 1.0,
+  "n_seeds_required": 3,
+  "control": "label_free_majority",
+  "control_source": "attack-recorded per_sequence.control_correct (calibration-corpus mode token decoded at every position, attacker/attacks/seam_inversion.py); pooled counts asserted to reproduce every artifact's published recovery/control exactly",
+  "confidence_note": "the frozen gate's z=2.5392 is a one-sided 99.44% bound (Bonferroni over 9 trials); the clustered interval is two-sided 95%. The clustered check drops the binomial-independence assumption and the fixed-control assumption; it is not multiplicity-adjusted."
+ },
+ "bootstrap": {
+  "seed": 93281,
+  "replicates": 100000,
+  "resampling": "documents with replacement within each seed; seeds never resampled (3 fixed replicates)",
+  "statistic": "token-pooled paired excess pp = 100*(sum correct - sum control_correct)/sum n_tokens over the pooled resample; equal per-seed token counts make this the mean of the per-seed excesses",
+  "interval": "two-sided 95% percentile (type-7)",
+  "rng": "random.Random(f'{seed}:{cell_id}')"
+ },
+ "clustering": {
+  "unit": "evaluation document",
+  "domain-shift": "per_sequence.document_id (unique per row in every result)",
+  "long-horizon": "one attacked sequence per training-step cell; all truths distinct per run, so one cluster per step-document"
+ },
+ "reconciliation": {
+  "n_cells": 24,
+  "max_abs_diff_pp": 0.0049,
+  "tolerance_pp": 0.051,
+  "all_within_tolerance": true
+ },
+ "cells": [
+  {
+   "campaign": "domain-shift-v1",
+   "cell": "domain-shift/code/training/none",
+   "corpus": "code",
+   "mode": "training",
+   "defense": "none",
+   "source": "results/domain-shift-v1/code/experiment.json",
+   "wilson_excess_pp": 52.8983,
+   "wilson_convention": "pooled across seeds (attacker.gate.verdict)",
+   "published_excess_pp": 52.89825495583752,
+   "published_source": "results/domain-shift-v1/domain-shift-v1-summary.json",
+   "n_seeds": 3,
+   "seeds": [
+    "11",
+    "22",
+    "33"
+   ],
+   "n_docs_total": 24,
+   "n_tokens_total": 768,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.688802,
+   "control_pooled": 0.200521,
+   "paired_excess_pp": 48.8281,
+   "per_seed": {
+    "11": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 0.691406,
+     "control": 0.246094,
+     "excess_pp": 44.5312,
+     "wilson_excess_pp": 51.3162
+    },
+    "22": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 0.667969,
+     "control": 0.171875,
+     "excess_pp": 49.6094,
+     "wilson_excess_pp": 56.5897
+    },
+    "33": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 0.707031,
+     "control": 0.183594,
+     "excess_pp": 52.3438,
+     "wilson_excess_pp": 58.9868
+    }
+   },
+   "per_seed_excess_range_pp": [
+    44.5312,
+    52.3438
+   ],
+   "clustered_ci95_pp": [
+    43.4896,
+    54.1667
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "domain-shift-v1",
+   "cell": "domain-shift/code/inference/none",
+   "corpus": "code",
+   "mode": "inference",
+   "defense": "none",
+   "source": "results/domain-shift-v1/code/experiment.json",
+   "wilson_excess_pp": 46.7815,
+   "wilson_convention": "pooled across seeds (attacker.gate.verdict)",
+   "published_excess_pp": 46.7815049737297,
+   "published_source": "results/domain-shift-v1/domain-shift-v1-summary.json",
+   "n_seeds": 3,
+   "seeds": [
+    "11",
+    "22",
+    "33"
+   ],
+   "n_docs_total": 96,
+   "n_tokens_total": 3072,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.649414,
+   "control_pooled": 0.203125,
+   "paired_excess_pp": 44.6289,
+   "per_seed": {
+    "11": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 0.643555,
+     "control": 0.203125,
+     "excess_pp": 44.043,
+     "wilson_excess_pp": 47.7427
+    },
+    "22": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 0.634766,
+     "control": 0.203125,
+     "excess_pp": 43.1641,
+     "wilson_excess_pp": 46.8893
+    },
+    "33": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 0.669922,
+     "control": 0.203125,
+     "excess_pp": 46.6797,
+     "wilson_excess_pp": 50.2945
+    }
+   },
+   "per_seed_excess_range_pp": [
+    43.1641,
+    46.6797
+   ],
+   "clustered_ci95_pp": [
+    42.4154,
+    46.875
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "domain-shift-v1",
+   "cell": "domain-shift/code/training/gaussian",
+   "corpus": "code",
+   "mode": "training",
+   "defense": "gaussian",
+   "source": "results/domain-shift-v1/code-defended/experiment.json",
+   "wilson_excess_pp": 52.7739,
+   "wilson_convention": "pooled across seeds (attacker.gate.verdict)",
+   "published_excess_pp": 52.77391254839522,
+   "published_source": "results/domain-shift-v1/domain-shift-v1-defended-summary.json",
+   "n_seeds": 3,
+   "seeds": [
+    "11",
+    "22",
+    "33"
+   ],
+   "n_docs_total": 24,
+   "n_tokens_total": 768,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.6875,
+   "control_pooled": 0.200521,
+   "paired_excess_pp": 48.6979,
+   "per_seed": {
+    "11": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 0.710938,
+     "control": 0.246094,
+     "excess_pp": 46.4844,
+     "wilson_excess_pp": 53.0904
+    },
+    "22": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 0.65625,
+     "control": 0.171875,
+     "excess_pp": 48.4375,
+     "wilson_excess_pp": 55.5079
+    },
+    "33": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 0.695312,
+     "control": 0.183594,
+     "excess_pp": 51.1719,
+     "wilson_excess_pp": 57.9222
+    }
+   },
+   "per_seed_excess_range_pp": [
+    46.4844,
+    51.1719
+   ],
+   "clustered_ci95_pp": [
+    43.3594,
+    54.0365
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "domain-shift-v1",
+   "cell": "domain-shift/code/inference/gaussian",
+   "corpus": "code",
+   "mode": "inference",
+   "defense": "gaussian",
+   "source": "results/domain-shift-v1/code-defended/experiment.json",
+   "wilson_excess_pp": 47.5176,
+   "wilson_convention": "pooled across seeds (attacker.gate.verdict)",
+   "published_excess_pp": 47.51763323506357,
+   "published_source": "results/domain-shift-v1/domain-shift-v1-defended-summary.json",
+   "n_seeds": 3,
+   "seeds": [
+    "11",
+    "22",
+    "33"
+   ],
+   "n_docs_total": 96,
+   "n_tokens_total": 3072,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.656901,
+   "control_pooled": 0.203125,
+   "paired_excess_pp": 45.3776,
+   "per_seed": {
+    "11": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 0.654297,
+     "control": 0.203125,
+     "excess_pp": 45.1172,
+     "wilson_excess_pp": 48.7839
+    },
+    "22": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 0.651367,
+     "control": 0.203125,
+     "excess_pp": 44.8242,
+     "wilson_excess_pp": 48.5002
+    },
+    "33": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 0.665039,
+     "control": 0.203125,
+     "excess_pp": 46.1914,
+     "wilson_excess_pp": 49.8229
+    }
+   },
+   "per_seed_excess_range_pp": [
+    44.8242,
+    46.1914
+   ],
+   "clustered_ci95_pp": [
+    42.9688,
+    47.7865
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "domain-shift-v1",
+   "cell": "domain-shift/clinical/training/none",
+   "corpus": "clinical",
+   "mode": "training",
+   "defense": "none",
+   "source": "results/domain-shift-v1/clinical/experiment.json",
+   "wilson_excess_pp": 93.75,
+   "wilson_convention": "pooled across seeds (attacker.gate.verdict)",
+   "published_excess_pp": 93.75,
+   "published_source": "results/domain-shift-v1/domain-shift-v1-summary.json",
+   "n_seeds": 3,
+   "seeds": [
+    "11",
+    "22",
+    "33"
+   ],
+   "n_docs_total": 24,
+   "n_tokens_total": 768,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 1.0,
+   "control_pooled": 0.0625,
+   "paired_excess_pp": 93.75,
+   "per_seed": {
+    "11": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 1.0,
+     "control": 0.0625,
+     "excess_pp": 93.75,
+     "wilson_excess_pp": 93.75
+    },
+    "22": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 1.0,
+     "control": 0.0625,
+     "excess_pp": 93.75,
+     "wilson_excess_pp": 93.75
+    },
+    "33": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 1.0,
+     "control": 0.0625,
+     "excess_pp": 93.75,
+     "wilson_excess_pp": 93.75
+    }
+   },
+   "per_seed_excess_range_pp": [
+    93.75,
+    93.75
+   ],
+   "clustered_ci95_pp": [
+    93.75,
+    93.75
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "domain-shift-v1",
+   "cell": "domain-shift/clinical/inference/none",
+   "corpus": "clinical",
+   "mode": "inference",
+   "defense": "none",
+   "source": "results/domain-shift-v1/clinical/experiment.json",
+   "wilson_excess_pp": 93.75,
+   "wilson_convention": "pooled across seeds (attacker.gate.verdict)",
+   "published_excess_pp": 93.75000000000003,
+   "published_source": "results/domain-shift-v1/domain-shift-v1-summary.json",
+   "n_seeds": 3,
+   "seeds": [
+    "11",
+    "22",
+    "33"
+   ],
+   "n_docs_total": 96,
+   "n_tokens_total": 3072,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 1.0,
+   "control_pooled": 0.0625,
+   "paired_excess_pp": 93.75,
+   "per_seed": {
+    "11": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 1.0,
+     "control": 0.0625,
+     "excess_pp": 93.75,
+     "wilson_excess_pp": 93.75
+    },
+    "22": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 1.0,
+     "control": 0.0625,
+     "excess_pp": 93.75,
+     "wilson_excess_pp": 93.75
+    },
+    "33": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 1.0,
+     "control": 0.0625,
+     "excess_pp": 93.75,
+     "wilson_excess_pp": 93.75
+    }
+   },
+   "per_seed_excess_range_pp": [
+    93.75,
+    93.75
+   ],
+   "clustered_ci95_pp": [
+    93.75,
+    93.75
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "domain-shift-v1",
+   "cell": "domain-shift/clinical/training/gaussian",
+   "corpus": "clinical",
+   "mode": "training",
+   "defense": "gaussian",
+   "source": "results/domain-shift-v1/clinical-defended/experiment.json",
+   "wilson_excess_pp": 93.75,
+   "wilson_convention": "pooled across seeds (attacker.gate.verdict)",
+   "published_excess_pp": 93.75,
+   "published_source": "results/domain-shift-v1/domain-shift-v1-defended-summary.json",
+   "n_seeds": 3,
+   "seeds": [
+    "11",
+    "22",
+    "33"
+   ],
+   "n_docs_total": 24,
+   "n_tokens_total": 768,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 1.0,
+   "control_pooled": 0.0625,
+   "paired_excess_pp": 93.75,
+   "per_seed": {
+    "11": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 1.0,
+     "control": 0.0625,
+     "excess_pp": 93.75,
+     "wilson_excess_pp": 93.75
+    },
+    "22": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 1.0,
+     "control": 0.0625,
+     "excess_pp": 93.75,
+     "wilson_excess_pp": 93.75
+    },
+    "33": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 1.0,
+     "control": 0.0625,
+     "excess_pp": 93.75,
+     "wilson_excess_pp": 93.75
+    }
+   },
+   "per_seed_excess_range_pp": [
+    93.75,
+    93.75
+   ],
+   "clustered_ci95_pp": [
+    93.75,
+    93.75
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "domain-shift-v1",
+   "cell": "domain-shift/clinical/inference/gaussian",
+   "corpus": "clinical",
+   "mode": "inference",
+   "defense": "gaussian",
+   "source": "results/domain-shift-v1/clinical-defended/experiment.json",
+   "wilson_excess_pp": 93.75,
+   "wilson_convention": "pooled across seeds (attacker.gate.verdict)",
+   "published_excess_pp": 93.75000000000003,
+   "published_source": "results/domain-shift-v1/domain-shift-v1-defended-summary.json",
+   "n_seeds": 3,
+   "seeds": [
+    "11",
+    "22",
+    "33"
+   ],
+   "n_docs_total": 96,
+   "n_tokens_total": 3072,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 1.0,
+   "control_pooled": 0.0625,
+   "paired_excess_pp": 93.75,
+   "per_seed": {
+    "11": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 1.0,
+     "control": 0.0625,
+     "excess_pp": 93.75,
+     "wilson_excess_pp": 93.75
+    },
+    "22": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 1.0,
+     "control": 0.0625,
+     "excess_pp": 93.75,
+     "wilson_excess_pp": 93.75
+    },
+    "33": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 1.0,
+     "control": 0.0625,
+     "excess_pp": 93.75,
+     "wilson_excess_pp": 93.75
+    }
+   },
+   "per_seed_excess_range_pp": [
+    93.75,
+    93.75
+   ],
+   "clustered_ci95_pp": [
+    93.75,
+    93.75
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "domain-shift-v1",
+   "cell": "domain-shift/wikitext-reference/training/none",
+   "corpus": "wikitext-reference",
+   "mode": "training",
+   "defense": "none",
+   "source": "results/domain-shift-v1/wikitext-reference/experiment.json",
+   "wilson_excess_pp": 65.2683,
+   "wilson_convention": "pooled across seeds (attacker.gate.verdict)",
+   "published_excess_pp": 65.26825741367081,
+   "published_source": "results/domain-shift-v1/domain-shift-v1-summary.json",
+   "n_seeds": 3,
+   "seeds": [
+    "11",
+    "22",
+    "33"
+   ],
+   "n_docs_total": 24,
+   "n_tokens_total": 768,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.657552,
+   "control_pooled": 0.046875,
+   "paired_excess_pp": 61.0677,
+   "per_seed": {
+    "11": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 0.617188,
+     "control": 0.039062,
+     "excess_pp": 57.8125,
+     "wilson_excess_pp": 65.1486
+    },
+    "22": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 0.707031,
+     "control": 0.050781,
+     "excess_pp": 65.625,
+     "wilson_excess_pp": 72.268
+    },
+    "33": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 0.648438,
+     "control": 0.050781,
+     "excess_pp": 59.7656,
+     "wilson_excess_pp": 66.8934
+    }
+   },
+   "per_seed_excess_range_pp": [
+    57.8125,
+    65.625
+   ],
+   "clustered_ci95_pp": [
+    56.7708,
+    65.3646
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "domain-shift-v1",
+   "cell": "domain-shift/wikitext-reference/inference/none",
+   "corpus": "wikitext-reference",
+   "mode": "inference",
+   "defense": "none",
+   "source": "results/domain-shift-v1/wikitext-reference/experiment.json",
+   "wilson_excess_pp": 62.7908,
+   "wilson_convention": "pooled across seeds (attacker.gate.verdict)",
+   "published_excess_pp": 62.79083800192586,
+   "published_source": "results/domain-shift-v1/domain-shift-v1-summary.json",
+   "n_seeds": 3,
+   "seeds": [
+    "11",
+    "22",
+    "33"
+   ],
+   "n_docs_total": 96,
+   "n_tokens_total": 3072,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.632487,
+   "control_pooled": 0.026367,
+   "paired_excess_pp": 60.612,
+   "per_seed": {
+    "11": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 0.646484,
+     "control": 0.026367,
+     "excess_pp": 62.0117,
+     "wilson_excess_pp": 65.7027
+    },
+    "22": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 0.614258,
+     "control": 0.026367,
+     "excess_pp": 58.7891,
+     "wilson_excess_pp": 62.5686
+    },
+    "33": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 0.636719,
+     "control": 0.026367,
+     "excess_pp": 61.0352,
+     "wilson_excess_pp": 64.7549
+    }
+   },
+   "per_seed_excess_range_pp": [
+    58.7891,
+    62.0117
+   ],
+   "clustered_ci95_pp": [
+    58.2357,
+    62.9557
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "domain-shift-v1",
+   "cell": "domain-shift/wikitext-reference/training/gaussian",
+   "corpus": "wikitext-reference",
+   "mode": "training",
+   "defense": "gaussian",
+   "source": "results/domain-shift-v1/wikitext-reference-defended/experiment.json",
+   "wilson_excess_pp": 65.5186,
+   "wilson_convention": "pooled across seeds (attacker.gate.verdict)",
+   "published_excess_pp": 65.51861437388975,
+   "published_source": "results/domain-shift-v1/domain-shift-v1-defended-summary.json",
+   "n_seeds": 3,
+   "seeds": [
+    "11",
+    "22",
+    "33"
+   ],
+   "n_docs_total": 24,
+   "n_tokens_total": 768,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.660156,
+   "control_pooled": 0.046875,
+   "paired_excess_pp": 61.3281,
+   "per_seed": {
+    "11": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 0.625,
+     "control": 0.039062,
+     "excess_pp": 58.5938,
+     "wilson_excess_pp": 65.8809
+    },
+    "22": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 0.710938,
+     "control": 0.050781,
+     "excess_pp": 66.0156,
+     "wilson_excess_pp": 72.6216
+    },
+    "33": {
+     "n_docs": 8,
+     "n_tokens": 256,
+     "recovery": 0.644531,
+     "control": 0.050781,
+     "excess_pp": 59.375,
+     "wilson_excess_pp": 66.5307
+    }
+   },
+   "per_seed_excess_range_pp": [
+    58.5938,
+    66.0156
+   ],
+   "clustered_ci95_pp": [
+    56.5104,
+    66.0156
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "domain-shift-v1",
+   "cell": "domain-shift/wikitext-reference/inference/gaussian",
+   "corpus": "wikitext-reference",
+   "mode": "inference",
+   "defense": "gaussian",
+   "source": "results/domain-shift-v1/wikitext-reference-defended/experiment.json",
+   "wilson_excess_pp": 64.105,
+   "wilson_convention": "pooled across seeds (attacker.gate.verdict)",
+   "published_excess_pp": 64.10501614963793,
+   "published_source": "results/domain-shift-v1/domain-shift-v1-defended-summary.json",
+   "n_seeds": 3,
+   "seeds": [
+    "11",
+    "22",
+    "33"
+   ],
+   "n_docs_total": 96,
+   "n_tokens_total": 3072,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.645833,
+   "control_pooled": 0.026367,
+   "paired_excess_pp": 61.9466,
+   "per_seed": {
+    "11": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 0.666016,
+     "control": 0.026367,
+     "excess_pp": 63.9648,
+     "wilson_excess_pp": 67.5931
+    },
+    "22": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 0.635742,
+     "control": 0.026367,
+     "excess_pp": 60.9375,
+     "wilson_excess_pp": 64.66
+    },
+    "33": {
+     "n_docs": 32,
+     "n_tokens": 1024,
+     "recovery": 0.635742,
+     "control": 0.026367,
+     "excess_pp": 60.9375,
+     "wilson_excess_pp": 64.66
+    }
+   },
+   "per_seed_excess_range_pp": [
+    60.9375,
+    63.9648
+   ],
+   "clustered_ci95_pp": [
+    59.7982,
+    64.1276
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "long-horizon-v1",
+   "cell": "long-horizon/none/h20",
+   "arm": "none",
+   "steps": 20,
+   "source": "results/long-horizon-v1/matrix/artifacts/seam-inversion_vmi_none_s*_h20.json",
+   "wilson_excess_pp": 63.0215,
+   "wilson_convention": "mean over seeds of per-seed attacker.gate.verdict excess",
+   "published_excess_pp": 63.02,
+   "published_source": "results/long-horizon-v1/report.json",
+   "n_seeds": 3,
+   "seeds": [
+    "1234",
+    "2026",
+    "7"
+   ],
+   "n_docs_total": 60,
+   "n_tokens_total": 1920,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.581771,
+   "control_pooled": 0.0,
+   "paired_excess_pp": 58.1771,
+   "per_seed": {
+    "1234": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.589063,
+     "control": 0.0,
+     "excess_pp": 58.9062,
+     "wilson_excess_pp": 63.7318
+    },
+    "2026": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.56875,
+     "control": 0.0,
+     "excess_pp": 56.875,
+     "wilson_excess_pp": 61.7529
+    },
+    "7": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.5875,
+     "control": 0.0,
+     "excess_pp": 58.75,
+     "wilson_excess_pp": 63.5799
+    }
+   },
+   "per_seed_excess_range_pp": [
+    56.875,
+    58.9062
+   ],
+   "clustered_ci95_pp": [
+    56.3021,
+    60.0
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "long-horizon-v1",
+   "cell": "long-horizon/none/h100",
+   "arm": "none",
+   "steps": 100,
+   "source": "results/long-horizon-v1/matrix/artifacts/seam-inversion_vmi_none_s*_h100.json",
+   "wilson_excess_pp": 58.8851,
+   "wilson_convention": "mean over seeds of per-seed attacker.gate.verdict excess",
+   "published_excess_pp": 58.89,
+   "published_source": "results/long-horizon-v1/report.json",
+   "n_seeds": 3,
+   "seeds": [
+    "1234",
+    "2026",
+    "7"
+   ],
+   "n_docs_total": 300,
+   "n_tokens_total": 9600,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.566771,
+   "control_pooled": 0.0,
+   "paired_excess_pp": 56.6771,
+   "per_seed": {
+    "1234": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.575937,
+     "control": 0.0,
+     "excess_pp": 57.5938,
+     "wilson_excess_pp": 59.7946
+    },
+    "2026": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.573438,
+     "control": 0.0,
+     "excess_pp": 57.3438,
+     "wilson_excess_pp": 59.5468
+    },
+    "7": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.550937,
+     "control": 0.0,
+     "excess_pp": 55.0938,
+     "wilson_excess_pp": 57.314
+    }
+   },
+   "per_seed_excess_range_pp": [
+    55.0938,
+    57.5938
+   ],
+   "clustered_ci95_pp": [
+    55.7188,
+    57.625
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "long-horizon-v1",
+   "cell": "long-horizon/gaussian-s15/h20",
+   "arm": "gaussian-s15",
+   "steps": 20,
+   "source": "results/long-horizon-v1/matrix/artifacts/seam-inversion_vmi_gaussian-s15_s*_h20.json",
+   "wilson_excess_pp": 2.4242,
+   "wilson_convention": "mean over seeds of per-seed attacker.gate.verdict excess",
+   "published_excess_pp": 2.42,
+   "published_source": "results/long-horizon-v1/report.json",
+   "n_seeds": 3,
+   "seeds": [
+    "1234",
+    "2026",
+    "7"
+   ],
+   "n_docs_total": 60,
+   "n_tokens_total": 1920,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.008854,
+   "control_pooled": 0.0,
+   "paired_excess_pp": 0.8854,
+   "per_seed": {
+    "1234": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.0125,
+     "control": 0.0,
+     "excess_pp": 1.25,
+     "wilson_excess_pp": 2.9476
+    },
+    "2026": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.00625,
+     "control": 0.0,
+     "excess_pp": 0.625,
+     "wilson_excess_pp": 2.0459
+    },
+    "7": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.007812,
+     "control": 0.0,
+     "excess_pp": 0.7812,
+     "wilson_excess_pp": 2.2792
+    }
+   },
+   "per_seed_excess_range_pp": [
+    0.625,
+    1.25
+   ],
+   "clustered_ci95_pp": [
+    0.4688,
+    1.3542
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": true,
+   "verdict_sensitive": true,
+   "sensitivity_reason": "clustered 95% interval contains the +1.0 pp threshold"
+  },
+  {
+   "campaign": "long-horizon-v1",
+   "cell": "long-horizon/gaussian-s15/h100",
+   "arm": "gaussian-s15",
+   "steps": 100,
+   "source": "results/long-horizon-v1/matrix/artifacts/seam-inversion_vmi_gaussian-s15_s*_h100.json",
+   "wilson_excess_pp": 3.6885,
+   "wilson_convention": "mean over seeds of per-seed attacker.gate.verdict excess",
+   "published_excess_pp": 3.69,
+   "published_source": "results/long-horizon-v1/report.json",
+   "n_seeds": 3,
+   "seeds": [
+    "1234",
+    "2026",
+    "7"
+   ],
+   "n_docs_total": 300,
+   "n_tokens_total": 9600,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.028438,
+   "control_pooled": 0.0,
+   "paired_excess_pp": 2.8438,
+   "per_seed": {
+    "1234": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.0325,
+     "control": 0.0,
+     "excess_pp": 3.25,
+     "wilson_excess_pp": 4.1447
+    },
+    "2026": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.02875,
+     "control": 0.0,
+     "excess_pp": 2.875,
+     "wilson_excess_pp": 3.725
+    },
+    "7": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.024063,
+     "control": 0.0,
+     "excess_pp": 2.4062,
+     "wilson_excess_pp": 3.1958
+    }
+   },
+   "per_seed_excess_range_pp": [
+    2.4062,
+    3.25
+   ],
+   "clustered_ci95_pp": [
+    2.4688,
+    3.2292
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "long-horizon-v1",
+   "cell": "long-horizon/sparsify-10/h20",
+   "arm": "sparsify-10",
+   "steps": 20,
+   "source": "results/long-horizon-v1/matrix/artifacts/seam-inversion_vmi_sparsify-10_s*_h20.json",
+   "wilson_excess_pp": 23.5248,
+   "wilson_convention": "mean over seeds of per-seed attacker.gate.verdict excess",
+   "published_excess_pp": 23.52,
+   "published_source": "results/long-horizon-v1/report.json",
+   "n_seeds": 3,
+   "seeds": [
+    "1234",
+    "2026",
+    "7"
+   ],
+   "n_docs_total": 60,
+   "n_tokens_total": 1920,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.192708,
+   "control_pooled": 0.0,
+   "paired_excess_pp": 19.2708,
+   "per_seed": {
+    "1234": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.210938,
+     "control": 0.0,
+     "excess_pp": 21.0938,
+     "wilson_excess_pp": 25.4666
+    },
+    "2026": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.179688,
+     "control": 0.0,
+     "excess_pp": 17.9688,
+     "wilson_excess_pp": 22.1357
+    },
+    "7": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.1875,
+     "control": 0.0,
+     "excess_pp": 18.75,
+     "wilson_excess_pp": 22.9721
+    }
+   },
+   "per_seed_excess_range_pp": [
+    17.9688,
+    21.0938
+   ],
+   "clustered_ci95_pp": [
+    17.5,
+    21.0417
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "long-horizon-v1",
+   "cell": "long-horizon/sparsify-10/h100",
+   "arm": "sparsify-10",
+   "steps": 100,
+   "source": "results/long-horizon-v1/matrix/artifacts/seam-inversion_vmi_sparsify-10_s*_h100.json",
+   "wilson_excess_pp": 25.0275,
+   "wilson_convention": "mean over seeds of per-seed attacker.gate.verdict excess",
+   "published_excess_pp": 25.03,
+   "published_source": "results/long-horizon-v1/report.json",
+   "n_seeds": 3,
+   "seeds": [
+    "1234",
+    "2026",
+    "7"
+   ],
+   "n_docs_total": 300,
+   "n_tokens_total": 9600,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.230833,
+   "control_pooled": 0.0,
+   "paired_excess_pp": 23.0833,
+   "per_seed": {
+    "1234": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.237813,
+     "control": 0.0,
+     "excess_pp": 23.7812,
+     "wilson_excess_pp": 25.7438
+    },
+    "2026": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.22375,
+     "control": 0.0,
+     "excess_pp": 22.375,
+     "wilson_excess_pp": 24.3002
+    },
+    "7": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.230937,
+     "control": 0.0,
+     "excess_pp": 23.0938,
+     "wilson_excess_pp": 25.0384
+    }
+   },
+   "per_seed_excess_range_pp": [
+    22.375,
+    23.7812
+   ],
+   "clustered_ci95_pp": [
+    22.1875,
+    23.9792
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "long-horizon-v1",
+   "cell": "long-horizon/mid-lite-k64/h20",
+   "arm": "mid-lite-k64",
+   "steps": 20,
+   "source": "results/long-horizon-v1/matrix/artifacts/seam-inversion_vmi_mid-lite-k64_s*_h20.json",
+   "wilson_excess_pp": 0.9974,
+   "wilson_convention": "mean over seeds of per-seed attacker.gate.verdict excess",
+   "published_excess_pp": 1.0,
+   "published_source": "results/long-horizon-v1/report.json",
+   "n_seeds": 3,
+   "seeds": [
+    "1234",
+    "2026",
+    "7"
+   ],
+   "n_docs_total": 60,
+   "n_tokens_total": 1920,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.0,
+   "control_pooled": 0.0,
+   "paired_excess_pp": 0.0,
+   "per_seed": {
+    "1234": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.0,
+     "control": 0.0,
+     "excess_pp": 0.0,
+     "wilson_excess_pp": 0.9974
+    },
+    "2026": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.0,
+     "control": 0.0,
+     "excess_pp": 0.0,
+     "wilson_excess_pp": 0.9974
+    },
+    "7": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.0,
+     "control": 0.0,
+     "excess_pp": 0.0,
+     "wilson_excess_pp": 0.9974
+    }
+   },
+   "per_seed_excess_range_pp": [
+    0.0,
+    0.0
+   ],
+   "clustered_ci95_pp": [
+    0.0,
+    0.0
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "PASS",
+   "clustered_verdict": "PASS",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "long-horizon-v1",
+   "cell": "long-horizon/mid-lite-k64/h100",
+   "arm": "mid-lite-k64",
+   "steps": 100,
+   "source": "results/long-horizon-v1/matrix/artifacts/seam-inversion_vmi_mid-lite-k64_s*_h100.json",
+   "wilson_excess_pp": 0.2011,
+   "wilson_convention": "mean over seeds of per-seed attacker.gate.verdict excess",
+   "published_excess_pp": 0.2,
+   "published_source": "results/long-horizon-v1/report.json",
+   "n_seeds": 3,
+   "seeds": [
+    "1234",
+    "2026",
+    "7"
+   ],
+   "n_docs_total": 300,
+   "n_tokens_total": 9600,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.0,
+   "control_pooled": 0.0,
+   "paired_excess_pp": 0.0,
+   "per_seed": {
+    "1234": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.0,
+     "control": 0.0,
+     "excess_pp": 0.0,
+     "wilson_excess_pp": 0.2011
+    },
+    "2026": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.0,
+     "control": 0.0,
+     "excess_pp": 0.0,
+     "wilson_excess_pp": 0.2011
+    },
+    "7": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.0,
+     "control": 0.0,
+     "excess_pp": 0.0,
+     "wilson_excess_pp": 0.2011
+    }
+   },
+   "per_seed_excess_range_pp": [
+    0.0,
+    0.0
+   ],
+   "clustered_ci95_pp": [
+    0.0,
+    0.0
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "PASS",
+   "clustered_verdict": "PASS",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "long-horizon-v1",
+   "cell": "long-horizon/santext-30/h20",
+   "arm": "santext-30",
+   "steps": 20,
+   "source": "results/long-horizon-v1/matrix/artifacts/seam-inversion_vmi_santext-30_s*_h20.json",
+   "wilson_excess_pp": 46.1461,
+   "wilson_convention": "mean over seeds of per-seed attacker.gate.verdict excess",
+   "published_excess_pp": 46.15,
+   "published_source": "results/long-horizon-v1/report.json",
+   "n_seeds": 3,
+   "seeds": [
+    "1234",
+    "2026",
+    "7"
+   ],
+   "n_docs_total": 60,
+   "n_tokens_total": 1920,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.411458,
+   "control_pooled": 0.0,
+   "paired_excess_pp": 41.1458,
+   "per_seed": {
+    "1234": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.432812,
+     "control": 0.0,
+     "excess_pp": 43.2812,
+     "wilson_excess_pp": 48.2968
+    },
+    "2026": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.4125,
+     "control": 0.0,
+     "excess_pp": 41.25,
+     "wilson_excess_pp": 46.2544
+    },
+    "7": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.389062,
+     "control": 0.0,
+     "excess_pp": 38.9062,
+     "wilson_excess_pp": 43.8871
+    }
+   },
+   "per_seed_excess_range_pp": [
+    38.9062,
+    43.2812
+   ],
+   "clustered_ci95_pp": [
+    39.0625,
+    43.1771
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "long-horizon-v1",
+   "cell": "long-horizon/santext-30/h100",
+   "arm": "santext-30",
+   "steps": 100,
+   "source": "results/long-horizon-v1/matrix/artifacts/seam-inversion_vmi_santext-30_s*_h100.json",
+   "wilson_excess_pp": 42.6676,
+   "wilson_convention": "mean over seeds of per-seed attacker.gate.verdict excess",
+   "published_excess_pp": 42.67,
+   "published_source": "results/long-horizon-v1/report.json",
+   "n_seeds": 3,
+   "seeds": [
+    "1234",
+    "2026",
+    "7"
+   ],
+   "n_docs_total": 300,
+   "n_tokens_total": 9600,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.404479,
+   "control_pooled": 0.0,
+   "paired_excess_pp": 40.4479,
+   "per_seed": {
+    "1234": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.406562,
+     "control": 0.0,
+     "excess_pp": 40.6562,
+     "wilson_excess_pp": 42.8777
+    },
+    "2026": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.414687,
+     "control": 0.0,
+     "excess_pp": 41.4688,
+     "wilson_excess_pp": 43.6952
+    },
+    "7": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.392188,
+     "control": 0.0,
+     "excess_pp": 39.2188,
+     "wilson_excess_pp": 41.4299
+    }
+   },
+   "per_seed_excess_range_pp": [
+    39.2188,
+    41.4688
+   ],
+   "clustered_ci95_pp": [
+    39.5104,
+    41.3854
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "long-horizon-v1",
+   "cell": "long-horizon/at-lite-e15/h20",
+   "arm": "at-lite-e15",
+   "steps": 20,
+   "source": "results/long-horizon-v1/matrix/artifacts/seam-inversion_vmi_at-lite-e15_s*_h20.json",
+   "wilson_excess_pp": 63.1733,
+   "wilson_convention": "mean over seeds of per-seed attacker.gate.verdict excess",
+   "published_excess_pp": 63.17,
+   "published_source": "results/long-horizon-v1/report.json",
+   "n_seeds": 3,
+   "seeds": [
+    "1234",
+    "2026",
+    "7"
+   ],
+   "n_docs_total": 60,
+   "n_tokens_total": 1920,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.583333,
+   "control_pooled": 0.0,
+   "paired_excess_pp": 58.3333,
+   "per_seed": {
+    "1234": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.59375,
+     "control": 0.0,
+     "excess_pp": 59.375,
+     "wilson_excess_pp": 64.1872
+    },
+    "2026": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.56875,
+     "control": 0.0,
+     "excess_pp": 56.875,
+     "wilson_excess_pp": 61.7529
+    },
+    "7": {
+     "n_docs": 20,
+     "n_tokens": 640,
+     "recovery": 0.5875,
+     "control": 0.0,
+     "excess_pp": 58.75,
+     "wilson_excess_pp": 63.5799
+    }
+   },
+   "per_seed_excess_range_pp": [
+    56.875,
+    59.375
+   ],
+   "clustered_ci95_pp": [
+    56.4062,
+    60.2083
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  },
+  {
+   "campaign": "long-horizon-v1",
+   "cell": "long-horizon/at-lite-e15/h100",
+   "arm": "at-lite-e15",
+   "steps": 100,
+   "source": "results/long-horizon-v1/matrix/artifacts/seam-inversion_vmi_at-lite-e15_s*_h100.json",
+   "wilson_excess_pp": 58.9986,
+   "wilson_convention": "mean over seeds of per-seed attacker.gate.verdict excess",
+   "published_excess_pp": 59.0,
+   "published_source": "results/long-horizon-v1/report.json",
+   "n_seeds": 3,
+   "seeds": [
+    "1234",
+    "2026",
+    "7"
+   ],
+   "n_docs_total": 300,
+   "n_tokens_total": 9600,
+   "tokens_per_doc_constant": true,
+   "recovery_pooled": 0.567917,
+   "control_pooled": 0.0,
+   "paired_excess_pp": 56.7917,
+   "per_seed": {
+    "1234": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.578125,
+     "control": 0.0,
+     "excess_pp": 57.8125,
+     "wilson_excess_pp": 60.0114
+    },
+    "2026": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.575313,
+     "control": 0.0,
+     "excess_pp": 57.5312,
+     "wilson_excess_pp": 59.7327
+    },
+    "7": {
+     "n_docs": 100,
+     "n_tokens": 3200,
+     "recovery": 0.550312,
+     "control": 0.0,
+     "excess_pp": 55.0312,
+     "wilson_excess_pp": 57.2519
+    }
+   },
+   "per_seed_excess_range_pp": [
+    55.0312,
+    57.8125
+   ],
+   "clustered_ci95_pp": [
+    55.8333,
+    57.7396
+   ],
+   "bootstrap_replicates": 100000,
+   "wilson_verdict": "FAIL",
+   "clustered_verdict": "FAIL",
+   "interval_contains_threshold": false,
+   "verdict_sensitive": false,
+   "sensitivity_reason": ""
+  }
+ ]
+}

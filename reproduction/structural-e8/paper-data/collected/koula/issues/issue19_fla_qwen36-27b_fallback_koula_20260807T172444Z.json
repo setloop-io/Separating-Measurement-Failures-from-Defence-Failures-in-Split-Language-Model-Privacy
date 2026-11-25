@@ -1,0 +1,260 @@
+{
+  "schema": "dtraining.fla_kernel_benchmark.v1",
+  "experiment": "E-K FLA/causal-conv benchmark",
+  "config": {
+    "measurement_kind": "measured",
+    "model": "/workspace/experiments/models/qwen36-27b",
+    "implementation": "fallback",
+    "dtype": "bfloat16",
+    "device": "cuda",
+    "seq_len": 256,
+    "warmup": 5,
+    "repetitions": 20
+  },
+  "evidence_status": "fallback_baseline",
+  "known_limitations": [
+    "Each implementation is measured in a separate environment; compare only artifacts with identical model, dtype, sequence length, and hardware.",
+    "Full-model timing identifies end-to-end kernel impact; named linear-attention modules document path coverage but are not independently timed."
+  ],
+  "backend_availability": {
+    "fla": {
+      "available": false,
+      "error": "No module named 'fla'"
+    },
+    "causal_conv1d": {
+      "available": false,
+      "error": "No module named 'causal_conv1d'"
+    }
+  },
+  "linear_attention_modules": [
+    {
+      "name": "model.layers.0.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.1.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.2.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.4.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.5.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.6.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.8.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.9.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.10.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.12.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.13.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.14.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.16.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.17.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.18.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.20.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.21.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.22.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.24.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.25.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.26.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.28.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.29.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.30.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.32.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.33.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.34.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.36.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.37.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.38.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.40.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.41.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.42.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.44.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.45.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.46.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.48.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.49.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.50.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.52.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.53.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.54.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.56.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.57.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.58.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.60.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.61.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    },
+    {
+      "name": "model.layers.62.linear_attn",
+      "class": "Qwen3_5GatedDeltaNet"
+    }
+  ],
+  "timing_ms": {
+    "raw": [
+      530.7252549973782,
+      527.324677008437,
+      533.6114460078534,
+      528.140873007942,
+      530.6545979983639,
+      525.9292120172177,
+      527.127923007356,
+      530.6345979915932,
+      529.4350709882565,
+      530.2439549996052,
+      526.9126569910441,
+      528.9243639854249,
+      533.8649989862461,
+      534.2918000242207,
+      533.1304029969033,
+      533.1317790260073,
+      528.2689679879695,
+      530.9276869811583,
+      536.1611539847218,
+      531.8184109928552
+    ],
+    "median": 530.6445979949785,
+    "p05": 526.8634847423527,
+    "p95": 534.3852677222458
+  },
+  "determinism_max_abs": 0.0,
+  "provenance": {
+    "dtraining_commit": "unknown",
+    "hostname": "bb2a2bf5d4cf",
+    "platform": "Linux-6.17.0-1026-nvidia-aarch64-with-glibc2.39",
+    "torch": "2.11.0+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA GB10",
+    "container_image": "split-inference:spark"
+  }
+}

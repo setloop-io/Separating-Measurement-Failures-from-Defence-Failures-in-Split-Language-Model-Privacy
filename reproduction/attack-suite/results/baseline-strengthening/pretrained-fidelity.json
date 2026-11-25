@@ -1,0 +1,93 @@
+{
+  "study": "Public-calibration pretrained SIPIT fidelity; no victim tokens or GPU execution",
+  "device": "cpu",
+  "seed": 11,
+  "steps": 128,
+  "step_size": 1.0,
+  "torch": "2.14.0",
+  "reference_commit": "820683156b7257313046a4fb3c492e52519525b7",
+  "reference_files": {
+    "src/algorithm/SIPIT.py": "f7e6a1c860c4abb0b2e5c5da18bf05866eee8c9f97fa5fd05ac3ec2b104578cd",
+    "src/algorithm/base.py": "0d608fa22ccfcfbe5d7e3cbd5c6c284d2b2d7d672406d61e3ce0e2d1e09a3065",
+    "src/utils/model.py": "55fe4ea3a94397b3a5c37fa814514547d31ed9d5bb46a126b17214087e8fc64b"
+  },
+  "kernel_sha256": "96391ca4697fa9e2fe82e5de0430f1ab3fa1d2bc3be6fb7fc889a9dc4c8872f3",
+  "script_sha256": "51efdc97a7df09b4c8a53e1f8696b8b0477f3c7c1e80c4511e1befa97192e46a",
+  "cases": [
+    {
+      "depth": 3,
+      "status": "PASS",
+      "head_sha256": "ae5a784171df40cf693d3ff9d16a166bd115648bc48d57c3b2d1ba2e14c7648c",
+      "calibration_sha256": "94c9951d3b8a4bc131f44d494e787fe524b5bff9bda3c1ac262195293d7c9668",
+      "selection": "first public calibration sequence, first two tokens",
+      "public_tokens": [
+        16928,
+        36013
+      ],
+      "ours": [
+        16928,
+        36013
+      ],
+      "our_iterations": [
+        109,
+        7
+      ],
+      "our_exact": true,
+      "our_wall_seconds": 1.6148902084678411,
+      "our_hidden_match": [
+        true,
+        true
+      ],
+      "author": [
+        16928,
+        36013
+      ],
+      "author_iterations": [
+        109,
+        7
+      ],
+      "author_seconds": 2.6821839809417725,
+      "prediction_fidelity": true,
+      "iteration_fidelity": true,
+      "total_seconds": 7.927796250209212
+    },
+    {
+      "depth": 6,
+      "status": "PASS",
+      "head_sha256": "a3dc5c528967cb84c98d87cb40d32c0d25203146398cfd9c268cfdbd003fbc69",
+      "calibration_sha256": "94c9951d3b8a4bc131f44d494e787fe524b5bff9bda3c1ac262195293d7c9668",
+      "selection": "first public calibration sequence, first two tokens",
+      "public_tokens": [
+        16928,
+        36013
+      ],
+      "ours": [
+        16928,
+        36013
+      ],
+      "our_iterations": [
+        124,
+        7
+      ],
+      "our_exact": true,
+      "our_wall_seconds": 2.9910856252536178,
+      "our_hidden_match": [
+        true,
+        true
+      ],
+      "author": [
+        16928,
+        36013
+      ],
+      "author_iterations": [
+        124,
+        7
+      ],
+      "author_seconds": 4.109298944473267,
+      "prediction_fidelity": true,
+      "iteration_fidelity": true,
+      "total_seconds": 10.829428708180785
+    }
+  ],
+  "status": "PASS"
+}

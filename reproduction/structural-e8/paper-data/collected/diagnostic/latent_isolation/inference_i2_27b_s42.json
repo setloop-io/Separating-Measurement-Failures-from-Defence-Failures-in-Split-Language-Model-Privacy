@@ -1,0 +1,454 @@
+{
+ "schema": "dtraining.isolation_adaptive.v1",
+ "args": {
+  "model": "/workspace/experiments/models/qwen36-27b",
+  "corpus": "/workspace/experiments/models/wikitext2_corpus.txt",
+  "output": "/workspace/experiments/results/training/inference_i2_27b_s42.json",
+  "cloud_url": "wss://koula:5050",
+  "cloud_tls_ca": "/workspace/experiments/tls/ca.crt",
+  "cloud_kind": "invariant_mlp_deep",
+  "cloud_experts": 1,
+  "cloud_layers": 31,
+  "cloud_hidden": 12288,
+  "utility_reference": "full",
+  "latent_dim": 64,
+  "views": 1,
+  "mixup_lambda": 0.0,
+  "width_ladder": "64",
+  "noise_multiplier": 0.35,
+  "clip_norm": 1.0,
+  "split_after": 13,
+  "resume_after": 50,
+  "seq_len": 32,
+  "train_blocks": 256,
+  "eval_blocks": 256,
+  "steps": 500,
+  "warmup_steps": 200,
+  "attack_steps": 64,
+  "postmortem_views": 128,
+  "inference_blocks": 32,
+  "inference_samples": 3,
+  "save_bundle": "/workspace/experiments/results/training/inference_i2_bundle.pt",
+  "bundle_eval_blocks": 256,
+  "lr": 0.0003,
+  "adversary_strength": 1.0,
+  "chaff_tokens": 48,
+  "remote_grad_clip": 1.0,
+  "eval_interval": 100,
+  "tripwire_pct": 1.0,
+  "utility_gate": 0.35,
+  "utility_grace_steps": 500,
+  "mine_beta": 0.0,
+  "backward_probe": false,
+  "seed": 42,
+  "start_ungauged": false
+ },
+ "log": [
+  {
+   "event": "baseline_loss",
+   "time": 1787214742.0483704,
+   "value": 3.2464
+  },
+  {
+   "event": "split_plan",
+   "time": 1787214755.527352,
+   "width": 64,
+   "views": 1,
+   "boundary_after_layer": 13,
+   "covered_layers": 36,
+   "n_layers": 64,
+   "active_frac": 1.0,
+   "toula_params": 13197325408,
+   "segment_params": 13698673056,
+   "gflop_token_toula": 79.184,
+   "gflop_token_segment": 82.192,
+   "gflop_token_cloud": 71.344,
+   "cloud_share_pct": 47.4
+  },
+  {
+   "event": "window",
+   "time": 1787215039.080402,
+   "step": 100,
+   "width": 64,
+   "recovery_pct": 2.129,
+   "majority_pct": 5.664,
+   "excess_pp": -3.535,
+   "utility_delta": 0.906,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.99,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787215309.20091,
+   "step": 200,
+   "width": 64,
+   "recovery_pct": 2.555,
+   "majority_pct": 5.664,
+   "excess_pp": -3.109,
+   "utility_delta": 0.4962,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 54.99,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787215579.3130317,
+   "step": 300,
+   "width": 64,
+   "recovery_pct": 1.448,
+   "majority_pct": 5.664,
+   "excess_pp": -4.216,
+   "utility_delta": 0.3857,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 55.0,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787215849.435597,
+   "step": 400,
+   "width": 64,
+   "recovery_pct": 1.107,
+   "majority_pct": 5.664,
+   "excess_pp": -4.557,
+   "utility_delta": 0.3974,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 55.0,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787216119.3771598,
+   "step": 500,
+   "width": 64,
+   "recovery_pct": 0.511,
+   "majority_pct": 5.664,
+   "excess_pp": -5.153,
+   "utility_delta": 0.3626,
+   "view_recovery_pct": null,
+   "view_excess_pp": null,
+   "views": 1,
+   "mixup": 0.0,
+   "mine_nats": null,
+   "backward_recovery_pct": null,
+   "backward_excess_pp": null,
+   "toula_peak_gb": 55.0,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "action",
+   "time": 1787216119.377578,
+   "reason": "utility_gate",
+   "action": "widen_width",
+   "from_width": 64,
+   "step": 500
+  },
+  {
+   "event": "inference_eval",
+   "time": 1787216194.5408387,
+   "perplexity_composed": 4.094,
+   "perplexity_intact": 3.5241,
+   "delta": 0.5699,
+   "samples": [
+    {
+     "prompt": " Museum of Fine Arts , now called the Arkansas Arts Center ,",
+     "composed": " and the State Arsenal , the arsenal of the arsenal Arsenal . The <unk> <unk> , <unk> ,",
+     "intact": " in Little Rock . The WPA also built the Arkansas State Capitol in Little Rock . The WPA built the Arkansas State"
+    },
+    {
+     "prompt": "oric Places in 1970 . Due to its association with the Camden",
+     "composed": " County Courthouse , the building was used as a hospital for the 1860 , 1860",
+     "intact": " and Amboy Railroad and the development of the railroad industry in the United States, the station was listed on the National Register"
+    },
+    {
+     "prompt": " Sites National Historic Landmark designated in 1994 .\nIn ",
+     "composed": "1865 , the 1st Regiment of the 111st Infantry Regiment was ordered to Fort Smith",
+     "intact": "1994 , the National Historic Landmark was designated as the National Historic Landmark .\n\nThe 19"
+    }
+   ]
+  },
+  {
+   "event": "bundle_saved",
+   "time": 1787216332.8374844,
+   "path": "/workspace/experiments/results/training/inference_i2_bundle.pt",
+   "train_rows": 20480
+  },
+  {
+   "event": "done",
+   "time": 1787216332.8548806,
+   "total_steps": 500
+  },
+  {
+   "event": "postmortem_start",
+   "time": 1787216332.8556187
+  },
+  {
+   "event": "postmortem",
+   "time": 1787216411.2713838,
+   "attacker_token_accuracy_pct": 5.859,
+   "mean_levenshtein": 0.291,
+   "interpretation": "token accuracy near the majority control and low string similarity mean the attacker's reads are wrong constructions (e.g. 'today' -> 'yadto'); high values would mean a real reconstruction"
+  }
+ ],
+ "postmortem": {
+  "attacker_token_accuracy_pct": 5.859,
+  "mean_levenshtein": 0.291,
+  "samples": [
+   {
+    "block": 0,
+    "source_excerpt": " just Center listed was\n National . the Administration the south ofThe Arts now in the of Museum Building Fine Register ",
+    "attacker_excerpt": " to the the in . the the , the of , the , the the , , .unk the , the the , to to , , as the , the",
+    "word_pairs": [
+     [
+      "just",
+      "to"
+     ],
+     [
+      "Center",
+      "the"
+     ],
+     [
+      "listed",
+      "the"
+     ],
+     [
+      "was",
+      "in"
+     ],
+     [
+      "National",
+      "."
+     ],
+     [
+      ".",
+      "the"
+     ],
+     [
+      "the",
+      "the"
+     ],
+     [
+      "Administration",
+      ","
+     ],
+     [
+      "the",
+      "the"
+     ],
+     [
+      "south",
+      "of"
+     ],
+     [
+      "ofThe",
+      ","
+     ],
+     [
+      "Arts",
+      "the"
+     ]
+    ],
+    "levenshtein": 0.3216
+   },
+   {
+    "block": 1,
+    "source_excerpt": " Expedition of Camden0 Expedition ,9 arsenal  in  the in6 to7 association Camden4 the Places be . included1 Due with1 it",
+    "attacker_excerpt": " , , , the the the , in a the the the the the the the the the , the the the , , the in the , , the , the",
+    "word_pairs": [
+     [
+      "Expedition",
+      ","
+     ],
+     [
+      "of",
+      ","
+     ],
+     [
+      "Camden0",
+      ","
+     ],
+     [
+      "Expedition",
+      "the"
+     ],
+     [
+      ",9",
+      "the"
+     ],
+     [
+      "arsenal",
+      "the"
+     ],
+     [
+      "in",
+      ","
+     ],
+     [
+      "the",
+      "in"
+     ],
+     [
+      "in6",
+      "a"
+     ],
+     [
+      "to7",
+      "the"
+     ],
+     [
+      "association",
+      "the"
+     ],
+     [
+      "Camden4",
+      "the"
+     ]
+    ],
+    "levenshtein": 0.3231
+   },
+   {
+    "block": 2,
+    "source_excerpt": " the to Building  Tower9 the  designated11 efforts , National due\n9 Historic renovated Land44 of2 .mark wasIn the in \ufffd9",
+    "attacker_excerpt": " the the the the to to to the , , . of , to the in the the the the , the , the the , , to the the of ,",
+    "word_pairs": [
+     [
+      "the",
+      "the"
+     ],
+     [
+      "to",
+      "the"
+     ],
+     [
+      "Building",
+      "the"
+     ],
+     [
+      "Tower9",
+      "the"
+     ],
+     [
+      "the",
+      "to"
+     ],
+     [
+      "designated11",
+      "to"
+     ],
+     [
+      "efforts",
+      "to"
+     ],
+     [
+      ",",
+      "the"
+     ],
+     [
+      "National",
+      ","
+     ],
+     [
+      "due",
+      ","
+     ],
+     [
+      "9",
+      "."
+     ],
+     [
+      "Historic",
+      "of"
+     ]
+    ],
+    "levenshtein": 0.2689
+   },
+   {
+    "block": 3,
+    "source_excerpt": ". Museum , Rockunk of Administration of The> home Little becamerop Arkansas theist . It andst Workshetic Frederick phila",
+    "attacker_excerpt": " , the the , , , , to the the , , the , the the , . the the , , , , , , . . , the , ,",
+    "word_pairs": [
+     [
+      ".",
+      ","
+     ],
+     [
+      "Museum",
+      "the"
+     ],
+     [
+      ",",
+      "the"
+     ],
+     [
+      "Rockunk",
+      ","
+     ],
+     [
+      "of",
+      ","
+     ],
+     [
+      "Administration",
+      ","
+     ],
+     [
+      "of",
+      ","
+     ],
+     [
+      "The>",
+      "to"
+     ],
+     [
+      "home",
+      "the"
+     ],
+     [
+      "Little",
+      "the"
+     ],
+     [
+      "becamerop",
+      ","
+     ],
+     [
+      "Arkansas",
+      ","
+     ]
+    ],
+    "levenshtein": 0.2649
+   }
+  ],
+  "interpretation": "token accuracy near the majority control and low string similarity mean the attacker's reads are wrong constructions (e.g. 'today' -> 'yadto'); high values would mean a real reconstruction"
+ }
+}

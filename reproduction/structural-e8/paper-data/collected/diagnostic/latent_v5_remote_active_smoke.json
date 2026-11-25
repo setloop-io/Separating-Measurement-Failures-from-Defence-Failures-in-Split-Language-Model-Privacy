@@ -1,0 +1,89 @@
+{
+  "active_cloud_delta": 0.5,
+  "adversary_strength": 0.5,
+  "baseline_eval_loss": 4.739937901496887,
+  "baseline_eval_seconds": 0.5308187020709738,
+  "candidate_eval_loss": 5.18161928653717,
+  "candidate_eval_seconds": 0.0662425640039146,
+  "cloud_state_contains_hidden_width": false,
+  "device": "cuda",
+  "dp": {
+    "adjacency": "replace_one",
+    "delta": 1e-06,
+    "epsilon": {
+      "composed": 91825.19189823582,
+      "forward": 52882.08696632221,
+      "return": 39856.73004420973
+    },
+    "method": "zcdp_gaussian_replace_one",
+    "parameters": {
+      "forward_clip": 1.0,
+      "forward_noise_multiplier": 0.1,
+      "return_clip": 1.0,
+      "return_noise_multiplier": 0.1
+    },
+    "releases": {
+      "forward": 256,
+      "return": 192
+    },
+    "rho": {
+      "forward": 51199.99999999999,
+      "return": 38399.99999999999
+    }
+  },
+  "eval_blocks": 4,
+  "eval_loss_delta": 0.4416813850402832,
+  "eval_time_ratio": 0.1247931991572097,
+  "gates": {
+    "cloud_latent_only": true,
+    "eval_time_ratio_le_3": true,
+    "privacy_above_band_le_1pct": true,
+    "utility_delta_le_0_35": false
+  },
+  "hidden_dim": 1024,
+  "label_free_majority_pct": 3.125,
+  "latent_dim": 128,
+  "limitations": [
+    "two-node latent protocol exercised",
+    "short training run; not convergence or paper evidence",
+    "fresh probe is a diagnostic subset, not the complete /attacker suite"
+  ],
+  "mean_step_seconds": 0.19988273200578988,
+  "model": "/workspace/experiments/models/qwen3-0.6b",
+  "noise_multiplier": 0.1,
+  "recovery_above_label_free_pct": -3.125,
+  "remote_protocol": {
+    "latent_dim": 128,
+    "latent_only_audit": true,
+    "max_parameter_dimension": 512,
+    "op": "hello_ack",
+    "session_id": "5256f804-2ab8-4d79-a9e1-a49ae29b5a26",
+    "state_shape_digest": "5f29ff9aadeaa0025e7d1475e2f0e17041b460dd1dd15a40907a23681fd07446"
+  },
+  "remote_tampered_frames": 6,
+  "resume_after": 26,
+  "schema": "dtraining.latent_native_v5_06b.v1",
+  "seed": 42,
+  "sequence_length": 32,
+  "split_after": 23,
+  "status": "completed",
+  "steps": 2,
+  "token_recovery_pct": 0.0,
+  "train_blocks": 8,
+  "train_seconds": 0.39976546401157975,
+  "training_tail": [
+    {
+      "attacker_loss": 14.608419418334961,
+      "distill_loss": 0.2538948953151703,
+      "language_loss": 5.581667900085449,
+      "step": 0
+    },
+    {
+      "attacker_loss": 14.712454795837402,
+      "distill_loss": 0.20220080018043518,
+      "language_loss": 6.3406524658203125,
+      "step": 1
+    }
+  ],
+  "warmup_steps": 1
+}

@@ -1,0 +1,1215 @@
+{
+  "checked_utc": "2026-09-22T01:10:42.083589+00:00",
+  "candidate_tag": "submission-candidate-20260922-r2",
+  "starting_head": "41dde59",
+  "starting_worktree_clean": true,
+  "status": "FROZEN_CANDIDATE_PENDING_AUTHOR_AND_ACCESS_DECISIONS",
+  "claims": {
+    "sources_sha256": {
+      "results/long-horizon-v1/report.json": "485b087bb450454e8acc02f228ababd3cb7a574cde696233d9fd46e0754303de",
+      "results/long-horizon-v1/matrix/artifacts/aligned_accumulation_fwd_none_s1234_h100_epochwrap.json": "3aa7b38deeb91aa8fa473ce377f0aa8561eedb60b2a524d2d0abfeef59127250",
+      "results/long-horizon-v1/matrix/artifacts/aligned_accumulation_fwd_mid-lite-k64_s1234_h100_epochwrap.json": "17d29a9a922de56d7f78508e111db884394886aecd7acf9e7e78ff18cd87d887",
+      "results/domain-shift-v1/domain-shift-v1-summary.json": "186c2880afc8d6bc7e2209b1f04479e9abad860f0f6509ba5ce35969ad43c882",
+      "results/domain-shift-v1/code/experiment.json": "4acfa78f5dff85284648060259a4eb347d5836e50db600c47cb09b2f77572bbe",
+      "results/domain-shift-v1/clinical/experiment.json": "1d5e72e1d8b9c64ce905fb623f4ea8c16f0ff599774327cdcadf81f5b32fd83f",
+      "results/domain-shift-v1/wikitext-reference/experiment.json": "12f71e8f076c28deadef0a24c861c12c61b10ea65d9d8db0b2ad659a386345e2",
+      "results/paper-b-followup-20260917/whitebox/original36-summary.json": "70fb2625f24785cd363ea9425812eaa8b50be44713102f9f4da7ddf2fdf97350",
+      "results/paper-b-followup-20260917/whitebox/full-summary.json": "29d29f6c426d022aa2800f70a8294c5766e7b31aa0f9e01d5f35ea28a673bc30",
+      "build/hf-release-2026-09-17/paper-a/v3-campaign/review/arm_summary.csv": "71b97a7048360f836b75e89cc7a22d13c53500bdbc40ff652a3ef684f61da594"
+    },
+    "accumulation_aligned_means_percent": {
+      "none": {
+        "64": {
+          "within_epoch_top1": 19.722222222222225,
+          "pooled_cross_epoch_top1": 16.38888888888889
+        },
+        "256": {
+          "within_epoch_top1": 50.55555555555555,
+          "pooled_cross_epoch_top1": 51.27777777777777
+        },
+        "768": {
+          "within_epoch_top1": 19.5,
+          "pooled_cross_epoch_top1": 18.777777777777775
+        }
+      },
+      "mid-lite-k64": {
+        "64": {
+          "within_epoch_top1": 0.0,
+          "pooled_cross_epoch_top1": 0.0
+        },
+        "256": {
+          "within_epoch_top1": 0.0,
+          "pooled_cross_epoch_top1": 0.0
+        },
+        "768": {
+          "within_epoch_top1": 0.0,
+          "pooled_cross_epoch_top1": 0.5
+        }
+      }
+    },
+    "domain_training_control_floors": {
+      "code": {
+        "n_pooled": 768,
+        "control_correct": 154,
+        "control_pct": 20.052083333333336,
+        "floor_pp": 3.9110904631194323,
+        "z": 2.5391848136513127
+      },
+      "clinical": {
+        "n_pooled": 768,
+        "control_correct": 48,
+        "control_pct": 6.25,
+        "floor_pp": 2.602695630273261,
+        "z": 2.5391848136513127
+      },
+      "wikitext-reference": {
+        "n_pooled": 768,
+        "control_correct": 36,
+        "control_pct": 4.6875,
+        "floor_pp": 2.342392765605128,
+        "z": 2.5391848136513127
+      }
+    },
+    "whitebox_overlap": {
+      "matched_configurations": 36,
+      "stable_grid_configurations": 198,
+      "all_overlap_accuracy_values_equal": true,
+      "all_overlap_execution_hashes_different": true,
+      "additional_unique_configurations": 162
+    },
+    "horizon_whole_means": {
+      "20": {
+        "seeds": [
+          1234,
+          2026,
+          7
+        ],
+        "recovery_mean": 0.0089,
+        "recovery_sd": 0.0033,
+        "control_mean": 0.0,
+        "excess_v2_pp_mean": 2.42,
+        "excess_v1z_pp_mean": 2.5,
+        "raw_gap_pp_mean": 0.89,
+        "n_tokens_per_run": 640
+      },
+      "100": {
+        "seeds": [
+          1234,
+          2026,
+          7
+        ],
+        "recovery_mean": 0.0284,
+        "recovery_sd": 0.0042,
+        "control_mean": 0.0,
+        "excess_v2_pp_mean": 3.69,
+        "excess_v1z_pp_mean": 3.72,
+        "raw_gap_pp_mean": 2.84,
+        "n_tokens_per_run": 3200
+      },
+      "delta_recovery_pp": 1.95,
+      "paper_20step_v1": {
+        "excess_pp": 9.49,
+        "loss": 8.6
+      }
+    },
+    "horizon_window_means": {
+      "0-7": {
+        "recovery": 0.0026,
+        "control": 0.0,
+        "n": 768,
+        "excess_v2_pp": 1.3
+      },
+      "8-19": {
+        "recovery": 0.013,
+        "control": 0.0,
+        "n": 1152,
+        "excess_v2_pp": 2.46
+      },
+      "20-49": {
+        "recovery": 0.0184,
+        "control": 0.0,
+        "n": 2880,
+        "excess_v2_pp": 2.59
+      },
+      "50-99": {
+        "recovery": 0.0423,
+        "control": 0.0,
+        "n": 4800,
+        "excess_v2_pp": 5.03
+      }
+    },
+    "v3_control_percent": {
+      "forward_k32": 94.2041015625,
+      "joint_random_k32": 93.8873291015625,
+      "joint_shuffled_k32": 93.905029296875
+    }
+  },
+  "hf_link_checks": {
+    "checked_at": "2026-09-22T00:59:50.092266+00:00",
+    "checks": [
+      {
+        "paper": "paper_a",
+        "repo": "Setloop/llm-attacker-paper-a",
+        "prefix": "",
+        "revision": "a02fb09280dae643da4f5a11abf08ca8f62d8337",
+        "url": "https://huggingface.co/datasets/Setloop/llm-attacker-paper-a/tree/a02fb09280dae643da4f5a11abf08ca8f62d8337",
+        "resolved": true,
+        "immediate_entries": 21,
+        "immediate_files": [
+          {
+            "path": ".gitattributes",
+            "size": 3932,
+            "lfs_sha256": null
+          },
+          {
+            "path": "BINARY-VERIFICATION.json",
+            "size": 70,
+            "lfs_sha256": null
+          },
+          {
+            "path": "INDEX.md",
+            "size": 1298,
+            "lfs_sha256": null
+          },
+          {
+            "path": "MANIFEST-AUDIT-20260917.sha256",
+            "size": 754,
+            "lfs_sha256": null
+          },
+          {
+            "path": "MANIFEST.sha256",
+            "size": 10841262,
+            "lfs_sha256": "3231fd533a9c2d26f60ab51317ea0cac5ea570732f6bc490e9bc572e457bb209"
+          },
+          {
+            "path": "P6-DRIVER-AUDIT.md",
+            "size": 4104,
+            "lfs_sha256": null
+          },
+          {
+            "path": "PENDING.md",
+            "size": 1406,
+            "lfs_sha256": null
+          },
+          {
+            "path": "PHASE2-STATUS.json",
+            "size": 2782,
+            "lfs_sha256": null
+          },
+          {
+            "path": "README.md",
+            "size": 1161,
+            "lfs_sha256": null
+          },
+          {
+            "path": "RELEASE-UPDATE.md",
+            "size": 1642,
+            "lfs_sha256": null
+          },
+          {
+            "path": "REPRODUCE.md",
+            "size": 4525,
+            "lfs_sha256": null
+          },
+          {
+            "path": "p6-evidence-verification.json",
+            "size": 252,
+            "lfs_sha256": null
+          }
+        ]
+      },
+      {
+        "paper": "paper_a",
+        "repo": "Setloop/llm-attacker-paper-a",
+        "prefix": "revision-20260917/p6-raw",
+        "revision": "0bec5c37b960fdb5be5b2bd8fab1cdd05a4bbe4c",
+        "url": "https://huggingface.co/datasets/Setloop/llm-attacker-paper-a/tree/0bec5c37b960fdb5be5b2bd8fab1cdd05a4bbe4c/revision-20260917/p6-raw",
+        "resolved": true,
+        "immediate_entries": 11,
+        "immediate_files": [
+          {
+            "path": "revision-20260917/p6-raw/MANIFEST.sha256",
+            "size": 859,
+            "lfs_sha256": "0daaabcefa94de9631f8e7f9b448a8383b0b20245d73e4ab105601b2e57e4f17"
+          },
+          {
+            "path": "revision-20260917/p6-raw/README.md",
+            "size": 490,
+            "lfs_sha256": null
+          },
+          {
+            "path": "revision-20260917/p6-raw/evidence.tar.part000",
+            "size": 4294967296,
+            "lfs_sha256": "255e9693359dda7db927561684d0a055835c35d65e65446f4b3b39f80d705dd1"
+          },
+          {
+            "path": "revision-20260917/p6-raw/evidence.tar.part001",
+            "size": 4294967296,
+            "lfs_sha256": "4a9092a01f05a8e9b304afa2bf2b95646a02cf74cf0dde53d2234e35d5aa4c10"
+          },
+          {
+            "path": "revision-20260917/p6-raw/evidence.tar.part002",
+            "size": 4294967296,
+            "lfs_sha256": "97f4f1803888cc09b9ad5217b34ee14551d4e7f76c6c1250bb89af22d7480ece"
+          },
+          {
+            "path": "revision-20260917/p6-raw/evidence.tar.part003",
+            "size": 4294967296,
+            "lfs_sha256": "2f65c98e6a2e796ddb8a83fd0b707ec5815690486200be864799000e8a0da403"
+          },
+          {
+            "path": "revision-20260917/p6-raw/evidence.tar.part004",
+            "size": 4294967296,
+            "lfs_sha256": "5e67a56e99e319cf4b16f932b6a39c2f2a095bb2891497542ba4ff9947e1a4b3"
+          },
+          {
+            "path": "revision-20260917/p6-raw/evidence.tar.part005",
+            "size": 4294967296,
+            "lfs_sha256": "6f249b61980b9d865f87dfc1dd4bb3e51c7ec9649ead356125be6624c046c43c"
+          },
+          {
+            "path": "revision-20260917/p6-raw/evidence.tar.part006",
+            "size": 4294967296,
+            "lfs_sha256": "51819ba4e07c61761de6c49321ba73132da6cd8ad852144af2b0b0cdfc0b0f0e"
+          },
+          {
+            "path": "revision-20260917/p6-raw/evidence.tar.part007",
+            "size": 4294967296,
+            "lfs_sha256": "e76831401641a7cb1978c609d74f8568f8514e0a4129804fbfca600434405878"
+          },
+          {
+            "path": "revision-20260917/p6-raw/evidence.tar.part008",
+            "size": 343406592,
+            "lfs_sha256": "94c91f60a368f2e4f897b4a8d3b1b759b2ed7e5d6ba729e710ac12195d7afd0f"
+          }
+        ]
+      },
+      {
+        "paper": "paper_a",
+        "repo": "Setloop/llm-attacker-paper-a",
+        "prefix": "revision-20260917/manuscript",
+        "revision": "f7b2aef7649588e9021805f2edc25428b6f26c93",
+        "url": "https://huggingface.co/datasets/Setloop/llm-attacker-paper-a/tree/f7b2aef7649588e9021805f2edc25428b6f26c93/revision-20260917/manuscript",
+        "resolved": true,
+        "immediate_entries": 6,
+        "immediate_files": [
+          {
+            "path": "revision-20260917/manuscript/MANIFEST.sha256",
+            "size": 1717,
+            "lfs_sha256": "6720b92430680da6dd47aa2a50ca6b464cbe696263e04db5f3bd518f78cea95a"
+          },
+          {
+            "path": "revision-20260917/manuscript/README.md",
+            "size": 4612,
+            "lfs_sha256": null
+          },
+          {
+            "path": "revision-20260917/manuscript/response-to-review-2026-09-17.md",
+            "size": 3476,
+            "lfs_sha256": null
+          }
+        ]
+      },
+      {
+        "paper": "paper_a",
+        "repo": "Setloop/llm-attacker-paper-a",
+        "prefix": "qwen-fp64-20260921/evidence",
+        "revision": "c0981bf75ba4a62e4388c3477c63e9f90d5d01fd",
+        "url": "https://huggingface.co/datasets/Setloop/llm-attacker-paper-a/tree/c0981bf75ba4a62e4388c3477c63e9f90d5d01fd/qwen-fp64-20260921/evidence",
+        "resolved": true,
+        "immediate_entries": 39,
+        "immediate_files": [
+          {
+            "path": "qwen-fp64-20260921/evidence/ARCHIVE.json",
+            "size": 6215,
+            "lfs_sha256": null
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/MANIFEST.sha256",
+            "size": 7034,
+            "lfs_sha256": "44d7df12a2dbcf8cb3b66b6bfefcc8313aa6748553367f19b0635b4dd4d5d68e"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/RAW_FILES.jsonl",
+            "size": 52597265,
+            "lfs_sha256": "99f692283b16a221caaa9774871d4575118a81f0d41a17c5b6366874c825693e"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/README.md",
+            "size": 3384,
+            "lfs_sha256": null
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part000",
+            "size": 4294967296,
+            "lfs_sha256": "cf2be8477787898ba5b089f34f5b1956757ef9a6ad91ad7ded9ae6ed2833a190"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part001",
+            "size": 4294967296,
+            "lfs_sha256": "e01fe2ed3136ca921c6d378ca2d9dd73d507b79a800828c8142b078941d86d57"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part002",
+            "size": 4294967296,
+            "lfs_sha256": "1bff356a133517c66f40cbfd65f5da8815ee810247f663ede9e2395e23ea8006"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part003",
+            "size": 4294967296,
+            "lfs_sha256": "91bf046973742f0ea1dffbe1c96fe1882b5f8b0e0023c028f157fd0dabbc2f84"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part004",
+            "size": 4294967296,
+            "lfs_sha256": "d8367b65b63fbbdd1324a6b4cfabe2449729bdc03ec61a11f509105dcbc28805"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part005",
+            "size": 4294967296,
+            "lfs_sha256": "2dff2668918f89638fd79aad2b1769751514c3ce97d793f4de1667a77a04241c"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part006",
+            "size": 4294967296,
+            "lfs_sha256": "ecae054822939f2a69397d8f6ca43202c8031952712338784f5e483561c9c06a"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part007",
+            "size": 4294967296,
+            "lfs_sha256": "84008fd18155e4afb423b254763da4f4e972b8021463a5c720e98dda183c7f8a"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part008",
+            "size": 4294967296,
+            "lfs_sha256": "415810eee72279dab6dfb697114e9326fd412e1f1d1ab97104c965a62cb329d4"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part009",
+            "size": 4294967296,
+            "lfs_sha256": "794e41dfd71002b4b3904cdcd976b4d198bcf97043622ead31701abe8a3f617e"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part010",
+            "size": 4294967296,
+            "lfs_sha256": "3cfb4b87529e795b78b2b9972e646d96408428c98c0475be2600032605d88385"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part011",
+            "size": 4294967296,
+            "lfs_sha256": "2fcec84d20637a94acf6171df6890d9612d5c57281664506c404f235ed7ed3ba"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part012",
+            "size": 4294967296,
+            "lfs_sha256": "e4a7349f078418b1c5f5649e7b05f3cd6f759c93fc8f0f573bcdf7fd2afa748c"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part013",
+            "size": 4294967296,
+            "lfs_sha256": "5f1c320e61cf2c0c714075346c26990ccf0bd04f153c72db416b9847b03f5719"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part014",
+            "size": 4294967296,
+            "lfs_sha256": "767c566c0d5d95dc2e8a5a398fb1c061ca00fd5f9ad9d3876fe0c0cfdf332430"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part015",
+            "size": 4294967296,
+            "lfs_sha256": "867fe4b5103fd94996da09504b1b2e0b2888b328f341b95b202148f7087b3c6b"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part016",
+            "size": 4294967296,
+            "lfs_sha256": "116cb2007af8264c8c44893d71d42d8135c71e8aa8050511263418b60490a521"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part017",
+            "size": 4294967296,
+            "lfs_sha256": "c5ef1b260c0509437003e6d677f2b4fa70a56f7d39882e29b690b8f114e94010"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part018",
+            "size": 4294967296,
+            "lfs_sha256": "254121cb7c523e3147fa4697882382c9a7de23504eaf82c4e60964a688e146fc"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part019",
+            "size": 4294967296,
+            "lfs_sha256": "6a8809823a0473c07c168579b9c206f0017b7e697c16855a80f849e0b1e875c3"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part020",
+            "size": 4294967296,
+            "lfs_sha256": "54b5c63c840fb249c2f938a306a9e27d9d0c1d637f3f8c722bb5e274e5ca5545"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part021",
+            "size": 4294967296,
+            "lfs_sha256": "88d18080fdfbeb167958778d3df92953b22c9901b4cfd286bef650a83a0fe8aa"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part022",
+            "size": 4294967296,
+            "lfs_sha256": "e8a99677ac10739ad13a12b86f6c4802e0729075f9ef14970cfa26d1ad5871aa"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part023",
+            "size": 4294967296,
+            "lfs_sha256": "8d63cc914c16379739a266c19b57c1c8c421cab6a86faca5bb1b58d95e165684"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part024",
+            "size": 4294967296,
+            "lfs_sha256": "6375056d689a53ec54c6a9e26fbb008332ffed025bba96985ae2486345dee9b5"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part025",
+            "size": 4294967296,
+            "lfs_sha256": "d948e8395b16b169d7728ad0c4db688b062c7267a67b2294d33528013aeeefdb"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part026",
+            "size": 4294967296,
+            "lfs_sha256": "e2058d4cad7094ba9cace2d710ae6d30346e58055c4bc8c1106685ea43eb9b4c"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part027",
+            "size": 4294967296,
+            "lfs_sha256": "7056661f21d15c56a62301987365ddf314b63d48cdc30cd5427bdf5b8b4d3747"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part028",
+            "size": 4294967296,
+            "lfs_sha256": "b6716be7ce13c9acb91025d705521162442dd0a7ef45654bfa546ad3722ad5ee"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part029",
+            "size": 4294967296,
+            "lfs_sha256": "b0ef81fe902dfce016df53ad4fe7b343e40761b6e78408ed2f4b64bb7ea59464"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part030",
+            "size": 4294967296,
+            "lfs_sha256": "0c511cb5d2270537fefdda81ef313d777b3f96e180ca16508a974780c516f009"
+          },
+          {
+            "path": "qwen-fp64-20260921/evidence/evidence.tar.gz.part031",
+            "size": 3582554528,
+            "lfs_sha256": "5e2c6941881d30ac5ed965922c5340126f62c7ac3245779164a224982d0cd124"
+          }
+        ]
+      },
+      {
+        "paper": "paper_b",
+        "repo": "Setloop/llm-attacker-paper-b",
+        "prefix": "",
+        "revision": "9833a3df9c660a6b214336d029095c46224c6987",
+        "url": "https://huggingface.co/datasets/Setloop/llm-attacker-paper-b/tree/9833a3df9c660a6b214336d029095c46224c6987",
+        "resolved": true,
+        "immediate_entries": 24,
+        "immediate_files": [
+          {
+            "path": ".gitattributes",
+            "size": 3880,
+            "lfs_sha256": null
+          },
+          {
+            "path": "BINARY-VERIFICATION.json",
+            "size": 70,
+            "lfs_sha256": null
+          },
+          {
+            "path": "INDEX.md",
+            "size": 1237,
+            "lfs_sha256": null
+          },
+          {
+            "path": "MANIFEST.sha256",
+            "size": 3760277,
+            "lfs_sha256": null
+          },
+          {
+            "path": "P6-DRIVER-AUDIT.md",
+            "size": 4104,
+            "lfs_sha256": null
+          },
+          {
+            "path": "PENDING.md",
+            "size": 1653,
+            "lfs_sha256": null
+          },
+          {
+            "path": "PHASE2-STATUS.json",
+            "size": 2782,
+            "lfs_sha256": null
+          },
+          {
+            "path": "README.md",
+            "size": 1172,
+            "lfs_sha256": null
+          },
+          {
+            "path": "REPRODUCE.md",
+            "size": 4525,
+            "lfs_sha256": null
+          },
+          {
+            "path": "p6-evidence-verification.json",
+            "size": 252,
+            "lfs_sha256": null
+          }
+        ]
+      },
+      {
+        "paper": "paper_b",
+        "repo": "Setloop/llm-attacker-paper-b",
+        "prefix": "agentic-amendment-20260920/evidence",
+        "revision": "0a07b9d35ad517269b26e1d187c45017feeaedd1",
+        "url": "https://huggingface.co/datasets/Setloop/llm-attacker-paper-b/tree/0a07b9d35ad517269b26e1d187c45017feeaedd1/agentic-amendment-20260920/evidence",
+        "resolved": true,
+        "immediate_entries": 9,
+        "immediate_files": [
+          {
+            "path": "agentic-amendment-20260920/evidence/MANIFEST.sha256",
+            "size": 1384,
+            "lfs_sha256": null
+          },
+          {
+            "path": "agentic-amendment-20260920/evidence/README.md",
+            "size": 2501,
+            "lfs_sha256": null
+          },
+          {
+            "path": "agentic-amendment-20260920/evidence/SOURCE.json",
+            "size": 284,
+            "lfs_sha256": null
+          },
+          {
+            "path": "agentic-amendment-20260920/evidence/agentic_amended_followup.py",
+            "size": 6181,
+            "lfs_sha256": null
+          },
+          {
+            "path": "agentic-amendment-20260920/evidence/agentic_amendment.v1.json",
+            "size": 2992,
+            "lfs_sha256": null
+          },
+          {
+            "path": "agentic-amendment-20260920/evidence/run-status.json",
+            "size": 172,
+            "lfs_sha256": null
+          },
+          {
+            "path": "agentic-amendment-20260920/evidence/source.tar.gz",
+            "size": 874946,
+            "lfs_sha256": "e031246de2b1a326c9184e924774d0e93c7ab1d1a3a9a15d6a4a04d736f97c22"
+          }
+        ]
+      },
+      {
+        "paper": "paper_b",
+        "repo": "Setloop/llm-attacker-paper-b",
+        "prefix": "sasa-500step-20260920/evidence",
+        "revision": "f1488fbde74726635f1e8616092ca187ac051270",
+        "url": "https://huggingface.co/datasets/Setloop/llm-attacker-paper-b/tree/f1488fbde74726635f1e8616092ca187ac051270/sasa-500step-20260920/evidence",
+        "resolved": true,
+        "immediate_entries": 11,
+        "immediate_files": [
+          {
+            "path": "sasa-500step-20260920/evidence/MANIFEST.sha256",
+            "size": 1686,
+            "lfs_sha256": null
+          },
+          {
+            "path": "sasa-500step-20260920/evidence/README.md",
+            "size": 3549,
+            "lfs_sha256": null
+          },
+          {
+            "path": "sasa-500step-20260920/evidence/REPRODUCTION.json",
+            "size": 724,
+            "lfs_sha256": null
+          },
+          {
+            "path": "sasa-500step-20260920/evidence/SOURCE.json",
+            "size": 842,
+            "lfs_sha256": null
+          },
+          {
+            "path": "sasa-500step-20260920/evidence/audit-source.tar.gz",
+            "size": 4200120,
+            "lfs_sha256": "30e43eeb901fbf42f749b252fc09ab5c3b1f4346282a1da78d6bd21d64793167"
+          },
+          {
+            "path": "sasa-500step-20260920/evidence/original-source.tar.gz",
+            "size": 852609,
+            "lfs_sha256": "3f3e86306932ca60aa535350568f1427588a9692b90a0c1b95d15fdc9a575e18"
+          },
+          {
+            "path": "sasa-500step-20260920/evidence/raw.tar.gz",
+            "size": 216532648,
+            "lfs_sha256": "bfdf7a02664ede90d0a01e18a69d09e59dfca97ae4837f193ffccb5453709f2c"
+          }
+        ]
+      },
+      {
+        "paper": "paper_b",
+        "repo": "Setloop/llm-attacker-paper-b",
+        "prefix": "fidelity-20260919/evidence",
+        "revision": "be59bdca280258ac82ce358cae5f1e0c529869c2",
+        "url": "https://huggingface.co/datasets/Setloop/llm-attacker-paper-b/tree/be59bdca280258ac82ce358cae5f1e0c529869c2/fidelity-20260919/evidence",
+        "resolved": true,
+        "immediate_entries": 18,
+        "immediate_files": [
+          {
+            "path": "fidelity-20260919/evidence/ENVIRONMENT.md",
+            "size": 465,
+            "lfs_sha256": null
+          },
+          {
+            "path": "fidelity-20260919/evidence/FILES.sha256.json",
+            "size": 1065796,
+            "lfs_sha256": null
+          },
+          {
+            "path": "fidelity-20260919/evidence/GPT2-MODEL-CARD.md",
+            "size": 8092,
+            "lfs_sha256": null
+          },
+          {
+            "path": "fidelity-20260919/evidence/INPUT-PATH-MAP.json",
+            "size": 2597,
+            "lfs_sha256": null
+          },
+          {
+            "path": "fidelity-20260919/evidence/INTEGRITY.json",
+            "size": 8059,
+            "lfs_sha256": null
+          },
+          {
+            "path": "fidelity-20260919/evidence/LICENSE-SplitLLM.txt",
+            "size": 11338,
+            "lfs_sha256": null
+          },
+          {
+            "path": "fidelity-20260919/evidence/MANIFEST.sha256",
+            "size": 1459,
+            "lfs_sha256": null
+          },
+          {
+            "path": "fidelity-20260919/evidence/README.md",
+            "size": 713,
+            "lfs_sha256": null
+          },
+          {
+            "path": "fidelity-20260919/evidence/REPRODUCE.md",
+            "size": 5222,
+            "lfs_sha256": null
+          },
+          {
+            "path": "fidelity-20260919/evidence/REPRODUCTION-VERIFIED.json",
+            "size": 385,
+            "lfs_sha256": null
+          },
+          {
+            "path": "fidelity-20260919/evidence/RESULT.json",
+            "size": 3736,
+            "lfs_sha256": null
+          },
+          {
+            "path": "fidelity-20260919/evidence/THIRD-PARTY-NOTICES.md",
+            "size": 1361,
+            "lfs_sha256": null
+          },
+          {
+            "path": "fidelity-20260919/evidence/WIKITEXT-DATASET-CARD.md",
+            "size": 10464,
+            "lfs_sha256": null
+          },
+          {
+            "path": "fidelity-20260919/evidence/evidence.tar.part000",
+            "size": 4294967296,
+            "lfs_sha256": "bc9164fb1ac93f559d185b68163d99874cde65b909db073aaeae8b96797b9edc"
+          },
+          {
+            "path": "fidelity-20260919/evidence/evidence.tar.part001",
+            "size": 4294967296,
+            "lfs_sha256": "af9ee0a27e851eb99046ddbda1c712c4c61f41ac6507822911489a79e2d361bb"
+          },
+          {
+            "path": "fidelity-20260919/evidence/evidence.tar.part002",
+            "size": 2736191488,
+            "lfs_sha256": "16e22eae702b715523bc5e7624d0028836ccfd11813c64110e87967412118211"
+          },
+          {
+            "path": "fidelity-20260919/evidence/execution-source-8f8a4c4.tar.gz",
+            "size": 1799470,
+            "lfs_sha256": "22d133151f8e803fac402126a25c932d252b71486ea48cf21702f7f2bae68fdb"
+          },
+          {
+            "path": "fidelity-20260919/evidence/verify_and_reproduce.py",
+            "size": 2694,
+            "lfs_sha256": null
+          }
+        ]
+      },
+      {
+        "paper": "paper_b",
+        "repo": "Setloop/llm-attacker-paper-b",
+        "prefix": "v4-adaptation-20260920/evidence",
+        "revision": "d415492614cb1eb760926bf2e01a33b7fb024124",
+        "url": "https://huggingface.co/datasets/Setloop/llm-attacker-paper-b/tree/d415492614cb1eb760926bf2e01a33b7fb024124/v4-adaptation-20260920/evidence",
+        "resolved": true,
+        "immediate_entries": 23,
+        "immediate_files": [
+          {
+            "path": "v4-adaptation-20260920/evidence/ANALYSIS-REVIEW.md",
+            "size": 3253,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/DEPENDENCIES-VERIFIED.json",
+            "size": 264,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/DEPENDENCIES.json",
+            "size": 4529,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/GPT2-MODEL-CARD.md",
+            "size": 8092,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/INTEGRITY.json",
+            "size": 1736,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/LICENSE-SplitLLM.txt",
+            "size": 11338,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/MANIFEST.sha256",
+            "size": 2311,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/PROTOCOL-ERRATUM.md",
+            "size": 708,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/RAW-ARCHIVE-VERIFIED.json",
+            "size": 438,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/RAW-FILES.sha256.json",
+            "size": 2549912,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/README.md",
+            "size": 2765,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/REPRODUCE.md",
+            "size": 9180,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/REPRODUCTION-INPUT-MANIFEST.sha256",
+            "size": 1946,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/REPRODUCTION-VERIFIED.json",
+            "size": 1024,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/THIRD-PARTY-NOTICES.md",
+            "size": 1408,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/WIKITEXT-DATASET-CARD.md",
+            "size": 10464,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/analysis-source.tar.gz",
+            "size": 96844025,
+            "lfs_sha256": "2fdbc20cdb2758716ec5ef81a2b35d5e038fb9f08bc248fdc2ef15e0023bb711"
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/execution-source-2d0f58b.tar.gz",
+            "size": 1916622,
+            "lfs_sha256": "b64b5690e5352062403563f25b21ca4416285df9581121fc9853f67d1a604a75"
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/koula-environment.json",
+            "size": 2261,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/raw-evidence.tar.zst",
+            "size": 3021056242,
+            "lfs_sha256": "f49b3120135a0019799aab5d7ed8b7360c0626ee7d0e86ef1a578292817584d0"
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/toula-environment.json",
+            "size": 2290,
+            "lfs_sha256": null
+          },
+          {
+            "path": "v4-adaptation-20260920/evidence/verify_and_reproduce.py",
+            "size": 11712,
+            "lfs_sha256": null
+          }
+        ]
+      },
+      {
+        "paper": "paper_b",
+        "repo": "Setloop/llm-attacker-paper-b",
+        "prefix": "whitebox35-20260917/original36",
+        "revision": "ba37427807a29f217e6fefb565c5e468e9bdac81",
+        "url": "https://huggingface.co/datasets/Setloop/llm-attacker-paper-b/tree/ba37427807a29f217e6fefb565c5e468e9bdac81/whitebox35-20260917/original36",
+        "resolved": true,
+        "immediate_entries": 5,
+        "immediate_files": [
+          {
+            "path": "whitebox35-20260917/original36/README.md",
+            "size": 1909,
+            "lfs_sha256": null
+          },
+          {
+            "path": "whitebox35-20260917/original36/artifacts.tar.gz.part000",
+            "size": 1786729208,
+            "lfs_sha256": "5ffe48e0fc59ec6aab71052cf63e37ddd6eb3cc1768c69f147f75930e96f4568"
+          },
+          {
+            "path": "whitebox35-20260917/original36/manifest.json",
+            "size": 803,
+            "lfs_sha256": null
+          },
+          {
+            "path": "whitebox35-20260917/original36/protocol.json",
+            "size": 1854,
+            "lfs_sha256": null
+          },
+          {
+            "path": "whitebox35-20260917/original36/summary.json",
+            "size": 42298,
+            "lfs_sha256": null
+          }
+        ]
+      },
+      {
+        "paper": "paper_b",
+        "repo": "Setloop/llm-attacker-paper-b",
+        "prefix": "whitebox35-20260917/full",
+        "revision": "08ed4bd07ecde7613eff62826f6cce6638415d7b",
+        "url": "https://huggingface.co/datasets/Setloop/llm-attacker-paper-b/tree/08ed4bd07ecde7613eff62826f6cce6638415d7b/whitebox35-20260917/full",
+        "resolved": true,
+        "immediate_entries": 31,
+        "immediate_files": [
+          {
+            "path": "whitebox35-20260917/full/README.md",
+            "size": 1909,
+            "lfs_sha256": null
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part000",
+            "size": 4000000000,
+            "lfs_sha256": "0bf7ec92831636e5e5b20b9bac315de2f309a3ab232174cff750d72d10066792"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part001",
+            "size": 4000000000,
+            "lfs_sha256": "2ae41b387d918c1e913d4fb497d76636db9d217d68412b213100025b915c5a10"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part002",
+            "size": 4000000000,
+            "lfs_sha256": "109f9495d8d339e591dd7f8ef2a90f827cfb408d111cde62fcd001ee2cf7bdec"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part003",
+            "size": 4000000000,
+            "lfs_sha256": "6f4a9da32b86f5f71cf090e21f20b1239fa3b100f8c2a6abb1bd86dd56651ffe"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part004",
+            "size": 4000000000,
+            "lfs_sha256": "912a147b63df89342c97894fbeb01cf5c4a908255d56a34767060d67e58544d4"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part005",
+            "size": 4000000000,
+            "lfs_sha256": "d0074a06f009be1249799b0d9dad4269956410fe38de6cf47467343fd79add08"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part006",
+            "size": 4000000000,
+            "lfs_sha256": "a882772c7685e56cb2befeaca98ee184f932f18131e6a3f49b2fb15687f37ee7"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part007",
+            "size": 4000000000,
+            "lfs_sha256": "87a1265bafee057a7e8c6bb9937aebf752863d1a643f05e53190ed626e4169ce"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part008",
+            "size": 4000000000,
+            "lfs_sha256": "d593990ff588378feaf3d65c5be5020f6c9cdc62a29824a46c0f1f5bdbcd6bfd"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part009",
+            "size": 4000000000,
+            "lfs_sha256": "97623f6cb06b401292b907bcd7bc49a7bf406cfe22bc7f041d35d9786e72d47d"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part010",
+            "size": 4000000000,
+            "lfs_sha256": "436a6e5552ff623f81eb1db93f7f61658e5d0c846601c3d98f088e12f4ddd0c9"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part011",
+            "size": 4000000000,
+            "lfs_sha256": "3e7ff03a3a1f632116e563818d08228819b5ebae57858ad0dabdbc9a8cdead66"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part012",
+            "size": 4000000000,
+            "lfs_sha256": "2e27305be4caa6adee492818fe68ec7ca1148855928aebeaaed0681181d8c881"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part013",
+            "size": 4000000000,
+            "lfs_sha256": "cba68c0c271982eef7d2dcbdc67efc1b072261969b12d1513414032ee0c77167"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part014",
+            "size": 4000000000,
+            "lfs_sha256": "6d6ed4ea2f5669092998b2a1f21ee4e0d5a2f608adfb9ba364462a7da5439119"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part015",
+            "size": 4000000000,
+            "lfs_sha256": "c619019ce7df133bf84965c76a0b935c420a553ccb7f3cdecfe844817f21d930"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part016",
+            "size": 4000000000,
+            "lfs_sha256": "25dc7c16505d48bb967e50c55d305fa3736b09595cbd69947340de9aa3dbd725"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part017",
+            "size": 4000000000,
+            "lfs_sha256": "169c5ebd03fdbbd30c520089b74806847f264dac1ef58d3c054024297c915e04"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part018",
+            "size": 4000000000,
+            "lfs_sha256": "ed7a3b1db48f8f9aa2b0d2b822f9fdf9987686021d7c8c665e5406e8852246a6"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part019",
+            "size": 4000000000,
+            "lfs_sha256": "0b1fe93c0e7626514ee8032e01f25d9d9a19de850d2ac9bfc966867fa8cbcc84"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part020",
+            "size": 4000000000,
+            "lfs_sha256": "a8327195d598a7d4714c127c3a6acbcba308788d7ce0fcdaf3f609cc4bb98962"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part021",
+            "size": 4000000000,
+            "lfs_sha256": "cec309b3756f64819b5607fe006c73d777de5443b7536050035aede7a867f0cf"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part022",
+            "size": 4000000000,
+            "lfs_sha256": "4558872197cdd1e3e798236e39cb691c7b04a57967b6bbd8b2f6874f0943471c"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part023",
+            "size": 4000000000,
+            "lfs_sha256": "6effa6e7e4e261f898d28096b17775451be184dace8510daaaf2fe0e3570c21a"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part024",
+            "size": 4000000000,
+            "lfs_sha256": "d6887d8bd70c8ae4c998e62798dae0e87166308201c3c941840f8e78666a426f"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part025",
+            "size": 4000000000,
+            "lfs_sha256": "03fcbd4cbad855a0ad21c21343b2176e45fbd8a443f5d787ae352d161590b32f"
+          },
+          {
+            "path": "whitebox35-20260917/full/artifacts.tar.gz.part026",
+            "size": 1095700628,
+            "lfs_sha256": "9b65c87ebae6594061f0ced5020235cbf21a96e96d24c179a002beae9cf22bcc"
+          },
+          {
+            "path": "whitebox35-20260917/full/manifest.json",
+            "size": 4724,
+            "lfs_sha256": null
+          },
+          {
+            "path": "whitebox35-20260917/full/protocol.json",
+            "size": 1854,
+            "lfs_sha256": null
+          },
+          {
+            "path": "whitebox35-20260917/full/summary.json",
+            "size": 297240,
+            "lfs_sha256": null
+          }
+        ]
+      },
+      {
+        "paper": "paper_b",
+        "repo": "Setloop/llm-attacker-paper-b",
+        "prefix": "revision-20260917/phase2-raw",
+        "revision": "7aac5e7b1e9db9978ef1ef1366eb9bc5a4637ed4",
+        "url": "https://huggingface.co/datasets/Setloop/llm-attacker-paper-b/tree/7aac5e7b1e9db9978ef1ef1366eb9bc5a4637ed4/revision-20260917/phase2-raw",
+        "resolved": true,
+        "immediate_entries": 4,
+        "immediate_files": [
+          {
+            "path": "revision-20260917/phase2-raw/MANIFEST.sha256",
+            "size": 250,
+            "lfs_sha256": null
+          },
+          {
+            "path": "revision-20260917/phase2-raw/README.md",
+            "size": 534,
+            "lfs_sha256": null
+          },
+          {
+            "path": "revision-20260917/phase2-raw/evidence.tar.part000",
+            "size": 4294967296,
+            "lfs_sha256": "6006b73e063282de9debb4349aaf7add7a76d422d43001cf3da5c01cfd9b3113"
+          },
+          {
+            "path": "revision-20260917/phase2-raw/evidence.tar.part001",
+            "size": 2854088704,
+            "lfs_sha256": "2ac1f0fe1909de60adb2ccff9ac79ccddb89378a52905f1958b55e281ac25798"
+          }
+        ]
+      }
+    ],
+    "access": {
+      "paper_a": {
+        "private": false,
+        "gated": "manual"
+      },
+      "paper_b": {
+        "private": false,
+        "gated": "manual"
+      }
+    },
+    "github": {
+      "url": "https://github.com/geopolitis/llm-attacker",
+      "visibility": "PRIVATE"
+    },
+    "scope": "Fresh authenticated pinned-directory and metadata checks; earlier complete manifest verifications retained. No full binary redownload."
+  },
+  "packages": {
+    "paper_a": {
+      "references": 19,
+      "citation_bibliography_bbl_sets_equal": true,
+      "bibtex_regenerated": true,
+      "compile": "PASS",
+      "source_archive_validation": "PASS exact inventory and all SHA256 values",
+      "source_archive": "build/arxiv-preprints-20260922-freeze-r2-final/paper_a/paper_a-arxiv-source.zip",
+      "archive_sha256": "c3390f4ac37e929b57e87f0c8ac50af3e89d01c14b5de3570a38182d37cb9989",
+      "pdf": "build/arxiv-preprints-20260922-freeze-r2-final/paper_a/paper_a.pdf",
+      "pdf_sha256": "ab8901c77d31e74ff848ec276c243c374fd31438cf0aa85000f01631ad09afe6",
+      "pages": 14,
+      "repository_pdf_text_equals_package": true,
+      "source_sha256": {
+        "main.bbl": "32b4750f56fa01156f026bd82bd8586d19d0c032951ae6eafd31f5f2632abf34",
+        "main.tex": "b35542408cc896a26902e756b38a8cdda9832e684b748dd1f3e05bf1d3d37b0a",
+        "main.bib": "43d8aae1e9ab680e2353dddc4a152f70995190065c82af8ec2dbc46f8f02bce6",
+        "figures/fig_privacy_utility.pdf": "5c06a7928c28085c412c48e96ac0e08e8691bb268d92faca7b96b84cec1aba33",
+        "figures/fig_arm_heatmap.pdf": "431edbe4138e34961c360f16f2f6026ea5bc6db9cb9598920a9133466a522652",
+        "figures/fig_gradient_conditions.pdf": "e9d0228713bd0d3bd95eb05a04a090260e664a737a224359f7a88f6d4b388e9c"
+      },
+      "all_hf_evidence_links_use_immutable_revisions": true
+    },
+    "paper_b": {
+      "references": 41,
+      "citation_bibliography_bbl_sets_equal": true,
+      "bibtex_regenerated": true,
+      "compile": "PASS",
+      "source_archive_validation": "PASS exact inventory and all SHA256 values",
+      "source_archive": "build/arxiv-preprints-20260922-freeze-r2-final/paper_b/paper_b-arxiv-source.zip",
+      "archive_sha256": "d776c4ab4978a30aa243e700c8fd7a2063219317cb5c5ae4fa1c375faa00acb8",
+      "pdf": "build/arxiv-preprints-20260922-freeze-r2-final/paper_b/paper_b.pdf",
+      "pdf_sha256": "5db096fec1335bb38a702ce810a4fb76358197374f31ea9bb4dc44ae226c7add",
+      "pages": 25,
+      "repository_pdf_text_equals_package": true,
+      "source_sha256": {
+        "main.bbl": "b8f0fd12dc87394eff8171b74be79b56950b2f8db02f7cc80a821bd36c25e450",
+        "main.tex": "203065df261f872ccebbbcc3f6e47a7a41ac8288c115175c28edb86e5f36fef7",
+        "main.bib": "1c1156dbe8df3216e5b35af83056f734ff4d483637b720edf1167276d2257e6d"
+      },
+      "all_hf_evidence_links_use_immutable_revisions": true
+    }
+  },
+  "manuscript_files_sha256": {
+    "paper/paper_a/main.tex": "79949257b645d8ab8997ca03c3f50f75658e90474bee6d4500803e8f58397809",
+    "paper/paper_a/main.bib": "43d8aae1e9ab680e2353dddc4a152f70995190065c82af8ec2dbc46f8f02bce6",
+    "paper/paper_a/main.bbl": "32b4750f56fa01156f026bd82bd8586d19d0c032951ae6eafd31f5f2632abf34",
+    "paper/paper_a/main.pdf": "ee69eca9e7caabfa4a59924fd429f09e2e2fbb390a46c6b51312c38001d80852",
+    "paper/paper_b/main.tex": "203065df261f872ccebbbcc3f6e47a7a41ac8288c115175c28edb86e5f36fef7",
+    "paper/paper_b/main.bib": "1c1156dbe8df3216e5b35af83056f734ff4d483637b720edf1167276d2257e6d",
+    "paper/paper_b/main.bbl": "b8f0fd12dc87394eff8171b74be79b56950b2f8db02f7cc80a821bd36c25e450",
+    "paper/paper_b/main.pdf": "ccd5f63e69b1994f6a0b66431da3785037e52909a30417b416186d32c8e49592"
+  },
+  "visual_review": {
+    "all_page_contact_sheets": true,
+    "enlarged_pages": {
+      "paper_a": [
+        5,
+        6,
+        10,
+        11
+      ],
+      "paper_b": [
+        12,
+        14,
+        16,
+        23
+      ]
+    },
+    "paper_b_blank_page_fixed": true,
+    "issues_remaining": []
+  },
+  "scientific_runs_launched": 0,
+  "history_deleted": false,
+  "visibility_or_gating_changed": false,
+  "hf_manuscript_upload": false,
+  "arxiv_submitted": false,
+  "post_commit_validation_path": "build/submission-freeze-20260922-r2/committed-head-check.json",
+  "remaining_author_decisions": [
+    "Artifact-access posture and target venue requirements",
+    "Authors/order/affiliations/corresponding author",
+    "Category and cross-list",
+    "Manuscript licence; code licence before a public code release",
+    "Shared-evidence overlap disclosure and actual submission",
+    "Reconcile any history cleanup with retained pinned evidence"
+  ]
+}

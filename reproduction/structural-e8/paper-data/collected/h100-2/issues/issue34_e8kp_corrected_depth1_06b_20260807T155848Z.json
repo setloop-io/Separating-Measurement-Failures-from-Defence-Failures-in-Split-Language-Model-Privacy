@@ -1,0 +1,5920 @@
+{
+  "config": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "n_layers": 28,
+    "depths": [
+      1
+    ],
+    "prefix_lengths": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "wire_dtype": [
+      "bf16"
+    ],
+    "k_points": 16,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "solve_seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 10,
+    "seq_len": 64,
+    "max_pairs": 20000,
+    "epochs": 30,
+    "model_dtype": "bf16",
+    "device": "cuda",
+    "W_seed": 42,
+    "quick": false
+  },
+  "threat_model": "semi-honest cloud that KNOWS the system prompt (very realistic: sessions start with a fixed known prefix, or the cloud is itself a client and injects chosen prompts) and whose model head is PUBLIC. Each session's first S boundary tensors give S exact (h, hW) pairs; W is a fresh random orthogonal per deployment, hidden from the attacker. The attacker computes h with its own copy in the model dtype (bf16) while the wire crosses in --wire-dtype. No oracle, no victim labels.",
+  "interpretation": "recovery-vs-K flat at random until K ~ hidden, then a sharp rise to the undefended baseline => the realistic known-prefix attack breaks E8 with ceil(hidden/S) sessions, no oracle needed \u2014 per-session W rotation is MANDATORY, and even it only helps if S < hidden. wire_dtype != model dtype degrading the curve => cast noise is a (weak) free defense. W_hat rel-Frobenius -> 0 as K -> hidden is the mechanistic cause.",
+  "random_baseline_top1_pct": 0.0007,
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9981,
+      9982,
+      9983,
+      9984,
+      9985,
+      9986,
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "unknown",
+    "hostname": "8b6c8c848130",
+    "victim_doc_sha256": {},
+    "dtraining_commit": "32118d45b41124b7b0dec39947d99fd455e41d4c",
+    "model_manifest_sha256": "d3ad538fab96c0c1ada1a6356e9a23ecd1760958f7b87e84a339a397c67f8003",
+    "model_manifest_algo": "v2-sizes-no-cache",
+    "model_manifest_n_files": 10,
+    "model_path": "qwen3-0.6b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "summary": [
+    {
+      "depth": 1,
+      "setting": "baseline_no_defense",
+      "top1_mean": 69.74,
+      "top1_std": 0.889,
+      "top5_mean": 70.78,
+      "top5_std": 0.16,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "setting": "known_prefix_break",
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "sessions_to_full_break_analytic": 32,
+      "sessions_to_full_break_interpolated": 8,
+      "K_at_90pct_interpolated": 234.0113,
+      "K_at_90pct_crossing": {
+        "k50_interpolated": 234.0113,
+        "k50_bracket": [
+          223,
+          294
+        ],
+        "k50_bracket_ratio": 1.3184,
+        "k50_method": "linear_in_K",
+        "k50_threshold_pct": 62.766,
+        "k50_max_sampled_k": 2048,
+        "k50_n_points": 17
+      },
+      "baseline_top1_mean": 69.74,
+      "final_K": 2048,
+      "final_top1_mean": 69.74,
+      "final_W_rel_fro_mean": 0.004483
+    },
+    {
+      "depth": 1,
+      "setting": "known_prefix_break",
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "sessions_to_full_break_analytic": 16,
+      "sessions_to_full_break_interpolated": 4,
+      "K_at_90pct_interpolated": 231.5721,
+      "K_at_90pct_crossing": {
+        "k50_interpolated": 231.5721,
+        "k50_bracket": [
+          203,
+          256
+        ],
+        "k50_bracket_ratio": 1.2611,
+        "k50_method": "linear_in_K",
+        "k50_threshold_pct": 62.766,
+        "k50_max_sampled_k": 2048,
+        "k50_n_points": 16
+      },
+      "baseline_top1_mean": 69.74,
+      "final_K": 2048,
+      "final_top1_mean": 69.74,
+      "final_W_rel_fro_mean": 0.004714
+    },
+    {
+      "depth": 1,
+      "setting": "known_prefix_break",
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "sessions_to_full_break_analytic": 8,
+      "sessions_to_full_break_interpolated": 2,
+      "K_at_90pct_interpolated": 239.6012,
+      "K_at_90pct_crossing": {
+        "k50_interpolated": 239.6012,
+        "k50_bracket": [
+          223,
+          268
+        ],
+        "k50_bracket_ratio": 1.2018,
+        "k50_method": "linear_in_K",
+        "k50_threshold_pct": 62.766,
+        "k50_max_sampled_k": 2048,
+        "k50_n_points": 17
+      },
+      "baseline_top1_mean": 69.74,
+      "final_K": 2048,
+      "final_top1_mean": 69.74,
+      "final_W_rel_fro_mean": 0.005318
+    },
+    {
+      "depth": 1,
+      "setting": "known_prefix_break",
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "sessions_to_full_break_analytic": 4,
+      "sessions_to_full_break_interpolated": null,
+      "K_at_90pct_interpolated": null,
+      "K_at_90pct_crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": [
+          null,
+          256
+        ],
+        "k50_bracket_ratio": null,
+        "k50_method": "crossed_at_or_below_min_k",
+        "k50_threshold_pct": 62.766,
+        "k50_max_sampled_k": 2048,
+        "k50_n_points": 16
+      },
+      "baseline_top1_mean": 69.74,
+      "final_K": 2048,
+      "final_top1_mean": 69.74,
+      "final_W_rel_fro_mean": 0.005426
+    }
+  ],
+  "results": [
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 32,
+      "sessions": 1,
+      "W_rel_fro_mean": 1.391701,
+      "W_misalign_deg_mean": 88.19,
+      "top1_mean": 22.3267,
+      "top5_mean": 30.5033,
+      "top1_variance_decomposition": {
+        "grand_mean": 22.3267,
+        "within_decoder_std": 0.6135,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 1.9289,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 30.5033,
+        "within_decoder_std": 1.7739,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 1.4571,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            23.91,
+            23.28,
+            23.59
+          ],
+          "top5": [
+            34.06,
+            31.72,
+            29.06
+          ],
+          "W_rel_fro": 1.391986,
+          "W_misalign_deg": 88.2128
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            23.12,
+            23.28,
+            23.44
+          ],
+          "top5": [
+            29.69,
+            31.72,
+            31.72
+          ],
+          "W_rel_fro": 1.392178,
+          "W_misalign_deg": 88.2281
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            19.38,
+            19.69,
+            21.25
+          ],
+          "top5": [
+            27.66,
+            28.59,
+            30.31
+          ],
+          "W_rel_fro": 1.390938,
+          "W_misalign_deg": 88.1292
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 42,
+      "sessions": 2,
+      "W_rel_fro_mean": 1.384893,
+      "W_misalign_deg_mean": 87.6482,
+      "top1_mean": 25.0867,
+      "top5_mean": 35.3989,
+      "top1_variance_decomposition": {
+        "grand_mean": 25.0867,
+        "within_decoder_std": 0.9482,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 2.8431,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 35.3989,
+        "within_decoder_std": 2.0271,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 1.7703,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            29.53,
+            27.34,
+            27.19
+          ],
+          "top5": [
+            38.44,
+            35.0,
+            38.12
+          ],
+          "W_rel_fro": 1.384143,
+          "W_misalign_deg": 87.5886
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            25.47,
+            24.38,
+            24.84
+          ],
+          "top5": [
+            35.31,
+            33.59,
+            37.19
+          ],
+          "W_rel_fro": 1.385775,
+          "W_misalign_deg": 87.7183
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            22.03,
+            21.72,
+            23.28
+          ],
+          "top5": [
+            31.72,
+            32.97,
+            36.25
+          ],
+          "W_rel_fro": 1.384761,
+          "W_misalign_deg": 87.6377
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 56,
+      "sessions": 2,
+      "W_rel_fro_mean": 1.37529,
+      "W_misalign_deg_mean": 86.888,
+      "top1_mean": 30.9733,
+      "top5_mean": 43.5422,
+      "top1_variance_decomposition": {
+        "grand_mean": 30.9733,
+        "within_decoder_std": 0.5698,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 1.1349,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 43.5422,
+        "within_decoder_std": 1.1377,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 1.5738,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            31.25,
+            31.56,
+            30.78
+          ],
+          "top5": [
+            44.06,
+            42.5,
+            43.44
+          ],
+          "W_rel_fro": 1.374754,
+          "W_misalign_deg": 86.8457
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            32.5,
+            31.25,
+            32.19
+          ],
+          "top5": [
+            45.0,
+            44.38,
+            46.25
+          ],
+          "W_rel_fro": 1.374506,
+          "W_misalign_deg": 86.8261
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            29.38,
+            30.47,
+            29.38
+          ],
+          "top5": [
+            40.31,
+            42.97,
+            42.97
+          ],
+          "W_rel_fro": 1.376611,
+          "W_misalign_deg": 86.9923
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 74,
+      "sessions": 3,
+      "W_rel_fro_mean": 1.36246,
+      "W_misalign_deg_mean": 85.8797,
+      "top1_mean": 36.0256,
+      "top5_mean": 51.0767,
+      "top1_variance_decomposition": {
+        "grand_mean": 36.0256,
+        "within_decoder_std": 1.0059,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 3.6762,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 51.0767,
+        "within_decoder_std": 1.1809,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 4.2446,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            37.03,
+            39.38,
+            36.41
+          ],
+          "top5": [
+            54.38,
+            52.5,
+            50.62
+          ],
+          "W_rel_fro": 1.361774,
+          "W_misalign_deg": 85.826
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            38.75,
+            38.75,
+            38.44
+          ],
+          "top5": [
+            55.0,
+            54.22,
+            54.06
+          ],
+          "W_rel_fro": 1.36312,
+          "W_misalign_deg": 85.9313
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            32.66,
+            31.25,
+            31.56
+          ],
+          "top5": [
+            47.03,
+            45.94,
+            45.94
+          ],
+          "W_rel_fro": 1.362486,
+          "W_misalign_deg": 85.8817
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 97,
+      "sessions": 4,
+      "W_rel_fro_mean": 1.345256,
+      "W_misalign_deg_mean": 84.5405,
+      "top1_mean": 40.6578,
+      "top5_mean": 55.9378,
+      "top1_variance_decomposition": {
+        "grand_mean": 40.6578,
+        "within_decoder_std": 0.8327,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 3.5604,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 55.9378,
+        "within_decoder_std": 1.0109,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 2.5606,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            42.03,
+            40.31,
+            41.56
+          ],
+          "top5": [
+            54.84,
+            53.12,
+            52.97
+          ],
+          "W_rel_fro": 1.345248,
+          "W_misalign_deg": 84.5398
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            44.53,
+            43.12,
+            43.91
+          ],
+          "top5": [
+            59.22,
+            57.97,
+            58.91
+          ],
+          "W_rel_fro": 1.345036,
+          "W_misalign_deg": 84.5234
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            36.56,
+            36.09,
+            37.81
+          ],
+          "top5": [
+            54.22,
+            56.72,
+            55.47
+          ],
+          "W_rel_fro": 1.345485,
+          "W_misalign_deg": 84.5582
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 128,
+      "sessions": 4,
+      "W_rel_fro_mean": 1.323101,
+      "W_misalign_deg_mean": 82.8365,
+      "top1_mean": 46.32,
+      "top5_mean": 60.8322,
+      "top1_variance_decomposition": {
+        "grand_mean": 46.32,
+        "within_decoder_std": 1.1223,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 1.1036,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 60.8322,
+        "within_decoder_std": 0.466,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.5804,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            47.97,
+            44.38,
+            46.09
+          ],
+          "top5": [
+            60.62,
+            60.16,
+            59.84
+          ],
+          "W_rel_fro": 1.323225,
+          "W_misalign_deg": 82.8459
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            48.12,
+            47.5,
+            46.88
+          ],
+          "top5": [
+            60.62,
+            60.94,
+            61.25
+          ],
+          "W_rel_fro": 1.323344,
+          "W_misalign_deg": 82.8551
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            45.16,
+            45.78,
+            45.0
+          ],
+          "top5": [
+            60.78,
+            62.03,
+            61.25
+          ],
+          "W_rel_fro": 1.322735,
+          "W_misalign_deg": 82.8085
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 169,
+      "sessions": 6,
+      "W_rel_fro_mean": 1.292532,
+      "W_misalign_deg_mean": 80.5213,
+      "top1_mean": 55.1911,
+      "top5_mean": 65.26,
+      "top1_variance_decomposition": {
+        "grand_mean": 55.1911,
+        "within_decoder_std": 1.7681,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.7434,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 65.26,
+        "within_decoder_std": 0.7317,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.4245,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            56.25,
+            54.22,
+            57.03
+          ],
+          "top5": [
+            65.31,
+            64.22,
+            65.94
+          ],
+          "W_rel_fro": 1.291384,
+          "W_misalign_deg": 80.4351
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            55.16,
+            53.59,
+            54.38
+          ],
+          "top5": [
+            65.16,
+            65.0,
+            64.53
+          ],
+          "W_rel_fro": 1.293279,
+          "W_misalign_deg": 80.5774
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            55.31,
+            52.81,
+            57.97
+          ],
+          "top5": [
+            64.84,
+            65.78,
+            66.56
+          ],
+          "W_rel_fro": 1.292933,
+          "W_misalign_deg": 80.5514
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 223,
+      "sessions": 7,
+      "W_rel_fro_mean": 1.25142,
+      "W_misalign_deg_mean": 77.4686,
+      "top1_mean": 62.05,
+      "top5_mean": 68.1589,
+      "top1_variance_decomposition": {
+        "grand_mean": 62.05,
+        "within_decoder_std": 0.8751,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.5436,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 68.1589,
+        "within_decoder_std": 0.5815,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.5559,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            61.88,
+            63.44,
+            62.66
+          ],
+          "top5": [
+            69.06,
+            68.59,
+            68.75
+          ],
+          "W_rel_fro": 1.250877,
+          "W_misalign_deg": 77.4287
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            62.03,
+            60.78,
+            62.81
+          ],
+          "top5": [
+            68.28,
+            67.34,
+            67.81
+          ],
+          "W_rel_fro": 1.251742,
+          "W_misalign_deg": 77.4923
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            61.41,
+            60.94,
+            62.5
+          ],
+          "top5": [
+            66.88,
+            68.28,
+            68.44
+          ],
+          "W_rel_fro": 1.25164,
+          "W_misalign_deg": 77.4848
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 294,
+      "sessions": 10,
+      "W_rel_fro_mean": 1.194927,
+      "W_misalign_deg_mean": 73.3769,
+      "top1_mean": 66.6667,
+      "top5_mean": 69.5489,
+      "top1_variance_decomposition": {
+        "grand_mean": 66.6667,
+        "within_decoder_std": 0.7076,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.73,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 69.5489,
+        "within_decoder_std": 0.3337,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.2337,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            66.25,
+            65.94,
+            65.62
+          ],
+          "top5": [
+            69.69,
+            69.38,
+            69.53
+          ],
+          "W_rel_fro": 1.194434,
+          "W_misalign_deg": 73.3417
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            67.81,
+            65.47,
+            66.72
+          ],
+          "top5": [
+            69.53,
+            68.75,
+            69.69
+          ],
+          "W_rel_fro": 1.195409,
+          "W_misalign_deg": 73.4113
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            67.19,
+            67.5,
+            67.5
+          ],
+          "top5": [
+            69.84,
+            69.53,
+            70.0
+          ],
+          "W_rel_fro": 1.194939,
+          "W_misalign_deg": 73.3778
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 388,
+      "sessions": 13,
+      "W_rel_fro_mean": 1.11722,
+      "W_misalign_deg_mean": 67.9195,
+      "top1_mean": 68.7344,
+      "top5_mean": 70.1044,
+      "top1_variance_decomposition": {
+        "grand_mean": 68.7344,
+        "within_decoder_std": 1.0318,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.3468,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.1044,
+        "within_decoder_std": 0.2952,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.2886,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.69,
+            67.66,
+            67.97
+          ],
+          "top5": [
+            70.47,
+            70.31,
+            70.31
+          ],
+          "W_rel_fro": 1.115322,
+          "W_misalign_deg": 67.7884
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.16,
+            67.5,
+            68.28
+          ],
+          "top5": [
+            70.16,
+            69.38,
+            69.84
+          ],
+          "W_rel_fro": 1.119232,
+          "W_misalign_deg": 68.0585
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            68.91,
+            68.91,
+            69.53
+          ],
+          "top5": [
+            70.16,
+            69.84,
+            70.47
+          ],
+          "W_rel_fro": 1.117106,
+          "W_misalign_deg": 67.9116
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 512,
+      "sessions": 16,
+      "W_rel_fro_mean": 1.00467,
+      "W_misalign_deg_mean": 60.3092,
+      "top1_mean": 69.5122,
+      "top5_mean": 70.4833,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.5122,
+        "within_decoder_std": 0.9017,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.2406,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.4833,
+        "within_decoder_std": 0.1456,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0797,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.0,
+            68.12,
+            70.0
+          ],
+          "top5": [
+            70.62,
+            70.31,
+            70.31
+          ],
+          "W_rel_fro": 1.003704,
+          "W_misalign_deg": 60.2452
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.84,
+            68.12,
+            70.16
+          ],
+          "top5": [
+            70.62,
+            70.62,
+            70.47
+          ],
+          "W_rel_fro": 1.004019,
+          "W_misalign_deg": 60.2661
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.0,
+            69.53,
+            69.84
+          ],
+          "top5": [
+            70.62,
+            70.31,
+            70.47
+          ],
+          "W_rel_fro": 1.006286,
+          "W_misalign_deg": 60.4163
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 676,
+      "sessions": 22,
+      "W_rel_fro_mean": 0.833357,
+      "W_misalign_deg_mean": 49.2501,
+      "top1_mean": 69.6878,
+      "top5_mean": 70.5544,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.6878,
+        "within_decoder_std": 0.8686,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.2083,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.5544,
+        "within_decoder_std": 0.2147,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0597,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.53,
+            68.75,
+            70.16
+          ],
+          "top5": [
+            70.78,
+            70.31,
+            70.47
+          ],
+          "W_rel_fro": 0.832651,
+          "W_misalign_deg": 49.2057
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.78,
+            70.62,
+            70.47
+          ],
+          "W_rel_fro": 0.832018,
+          "W_misalign_deg": 49.1657
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.78,
+            68.75,
+            70.16
+          ],
+          "top5": [
+            70.78,
+            70.31,
+            70.47
+          ],
+          "W_rel_fro": 0.835401,
+          "W_misalign_deg": 49.379
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 891,
+      "sessions": 28,
+      "W_rel_fro_mean": 0.534137,
+      "W_misalign_deg_mean": 30.9799,
+      "top1_mean": 69.7911,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7911,
+        "within_decoder_std": 0.8793,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.1373,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            69.22,
+            70.31
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.528741,
+          "W_misalign_deg": 30.6591
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.59,
+            70.16
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.531179,
+          "W_misalign_deg": 30.804
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.59,
+            70.16
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.54249,
+          "W_misalign_deg": 31.4767
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 1024,
+      "sessions": 32,
+      "W_rel_fro_mean": 0.192928,
+      "W_misalign_deg_mean": 11.0714,
+      "top1_mean": 69.74,
+      "top5_mean": 70.7622,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.74,
+        "within_decoder_std": 0.7881,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0533,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.7622,
+        "within_decoder_std": 0.1687,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0308,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.91,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.19121,
+          "W_misalign_deg": 10.9723
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.180088,
+          "W_misalign_deg": 10.3323
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.91,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.62
+          ],
+          "W_rel_fro": 0.207486,
+          "W_misalign_deg": 11.9095
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 1176,
+      "sessions": 37,
+      "W_rel_fro_mean": 0.016346,
+      "W_misalign_deg_mean": 0.9366,
+      "top1_mean": 69.7222,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7222,
+        "within_decoder_std": 0.8734,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0308,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.91,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.016511,
+          "W_misalign_deg": 0.946
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.016473,
+          "W_misalign_deg": 0.9438
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.016055,
+          "W_misalign_deg": 0.9199
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 1552,
+      "sessions": 49,
+      "W_rel_fro_mean": 0.006946,
+      "W_misalign_deg_mean": 0.3979,
+      "top1_mean": 69.7222,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7222,
+        "within_decoder_std": 0.9198,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0308,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.006969,
+          "W_misalign_deg": 0.3992
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.00698,
+          "W_misalign_deg": 0.3998
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.006888,
+          "W_misalign_deg": 0.3946
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 32,
+      "K": 2048,
+      "sessions": 64,
+      "W_rel_fro_mean": 0.004483,
+      "W_misalign_deg_mean": 0.2567,
+      "top1_mean": 69.74,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.74,
+        "within_decoder_std": 0.889,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.004483,
+          "W_misalign_deg": 0.2567
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.004483,
+          "W_misalign_deg": 0.2567
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.004483,
+          "W_misalign_deg": 0.2567
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 64,
+      "sessions": 1,
+      "W_rel_fro_mean": 1.369491,
+      "W_misalign_deg_mean": 86.4313,
+      "top1_mean": 31.3711,
+      "top5_mean": 46.0422,
+      "top1_variance_decomposition": {
+        "grand_mean": 31.3711,
+        "within_decoder_std": 0.929,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 2.61,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 46.0422,
+        "within_decoder_std": 1.5469,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 3.5993,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            31.56,
+            31.09,
+            29.22
+          ],
+          "top5": [
+            46.25,
+            45.16,
+            45.0
+          ],
+          "W_rel_fro": 1.368778,
+          "W_misalign_deg": 86.3752
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            34.22,
+            34.22,
+            34.38
+          ],
+          "top5": [
+            50.62,
+            48.12,
+            50.94
+          ],
+          "W_rel_fro": 1.370307,
+          "W_misalign_deg": 86.4954
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            28.28,
+            30.31,
+            29.06
+          ],
+          "top5": [
+            41.72,
+            45.16,
+            41.41
+          ],
+          "W_rel_fro": 1.369389,
+          "W_misalign_deg": 86.4232
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 81,
+      "sessions": 2,
+      "W_rel_fro_mean": 1.357457,
+      "W_misalign_deg_mean": 85.4888,
+      "top1_mean": 37.8311,
+      "top5_mean": 54.2533,
+      "top1_variance_decomposition": {
+        "grand_mean": 37.8311,
+        "within_decoder_std": 1.6459,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 1.2772,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 54.2533,
+        "within_decoder_std": 1.0696,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 2.6689,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            36.41,
+            37.66,
+            35.0
+          ],
+          "top5": [
+            49.84,
+            52.19,
+            51.72
+          ],
+          "W_rel_fro": 1.357813,
+          "W_misalign_deg": 85.5165
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            38.75,
+            38.28,
+            38.75
+          ],
+          "top5": [
+            54.22,
+            55.16,
+            56.09
+          ],
+          "W_rel_fro": 1.356734,
+          "W_misalign_deg": 85.4323
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            38.75,
+            40.94,
+            35.94
+          ],
+          "top5": [
+            55.62,
+            57.5,
+            55.94
+          ],
+          "W_rel_fro": 1.357825,
+          "W_misalign_deg": 85.5175
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 102,
+      "sessions": 2,
+      "W_rel_fro_mean": 1.342039,
+      "W_misalign_deg_mean": 84.2916,
+      "top1_mean": 42.6211,
+      "top5_mean": 57.5511,
+      "top1_variance_decomposition": {
+        "grand_mean": 42.6211,
+        "within_decoder_std": 1.2172,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 2.314,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 57.5511,
+        "within_decoder_std": 0.7595,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 2.7554,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            42.34,
+            38.91,
+            40.62
+          ],
+          "top5": [
+            54.38,
+            55.31,
+            53.59
+          ],
+          "W_rel_fro": 1.342098,
+          "W_misalign_deg": 84.2962
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            42.5,
+            41.56,
+            42.19
+          ],
+          "top5": [
+            58.75,
+            58.75,
+            58.28
+          ],
+          "W_rel_fro": 1.342411,
+          "W_misalign_deg": 84.3204
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            46.41,
+            44.84,
+            44.22
+          ],
+          "top5": [
+            59.84,
+            58.59,
+            60.47
+          ],
+          "W_rel_fro": 1.341607,
+          "W_misalign_deg": 84.2582
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 128,
+      "sessions": 2,
+      "W_rel_fro_mean": 1.322883,
+      "W_misalign_deg_mean": 82.8198,
+      "top1_mean": 48.2811,
+      "top5_mean": 61.8767,
+      "top1_variance_decomposition": {
+        "grand_mean": 48.2811,
+        "within_decoder_std": 1.0423,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.8007,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 61.8767,
+        "within_decoder_std": 0.7951,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 1.4922,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            49.53,
+            49.06,
+            48.28
+          ],
+          "top5": [
+            60.16,
+            60.16,
+            60.16
+          ],
+          "W_rel_fro": 1.323044,
+          "W_misalign_deg": 82.8321
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            50.31,
+            47.97,
+            47.19
+          ],
+          "top5": [
+            64.22,
+            62.34,
+            62.03
+          ],
+          "W_rel_fro": 1.322938,
+          "W_misalign_deg": 82.824
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            46.88,
+            47.81,
+            47.5
+          ],
+          "top5": [
+            61.88,
+            62.66,
+            63.28
+          ],
+          "W_rel_fro": 1.322667,
+          "W_misalign_deg": 82.8033
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 161,
+      "sessions": 3,
+      "W_rel_fro_mean": 1.298317,
+      "W_misalign_deg_mean": 80.9564,
+      "top1_mean": 55.6611,
+      "top5_mean": 65.0889,
+      "top1_variance_decomposition": {
+        "grand_mean": 55.6611,
+        "within_decoder_std": 1.3118,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 1.5474,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 65.0889,
+        "within_decoder_std": 1.083,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 1.0856,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            55.94,
+            54.06,
+            57.66
+          ],
+          "top5": [
+            64.69,
+            65.16,
+            66.72
+          ],
+          "W_rel_fro": 1.297844,
+          "W_misalign_deg": 80.9208
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            54.38,
+            54.69,
+            52.97
+          ],
+          "top5": [
+            64.69,
+            63.75,
+            63.12
+          ],
+          "W_rel_fro": 1.297976,
+          "W_misalign_deg": 80.9307
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            56.56,
+            58.28,
+            56.41
+          ],
+          "top5": [
+            64.38,
+            66.41,
+            66.88
+          ],
+          "W_rel_fro": 1.299132,
+          "W_misalign_deg": 81.0178
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 203,
+      "sessions": 4,
+      "W_rel_fro_mean": 1.265883,
+      "W_misalign_deg_mean": 78.535,
+      "top1_mean": 60.6611,
+      "top5_mean": 67.57,
+      "top1_variance_decomposition": {
+        "grand_mean": 60.6611,
+        "within_decoder_std": 0.7662,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 1.6272,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 67.57,
+        "within_decoder_std": 0.4981,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.5261,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            60.16,
+            58.91,
+            58.44
+          ],
+          "top5": [
+            66.88,
+            68.12,
+            66.88
+          ],
+          "W_rel_fro": 1.26576,
+          "W_misalign_deg": 78.5258
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            60.0,
+            59.84,
+            61.41
+          ],
+          "top5": [
+            67.19,
+            67.19,
+            67.34
+          ],
+          "W_rel_fro": 1.265942,
+          "W_misalign_deg": 78.5394
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            62.81,
+            61.88,
+            62.5
+          ],
+          "top5": [
+            68.59,
+            68.28,
+            67.66
+          ],
+          "W_rel_fro": 1.265947,
+          "W_misalign_deg": 78.5397
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 256,
+      "sessions": 4,
+      "W_rel_fro_mean": 1.224012,
+      "W_misalign_deg_mean": 75.4694,
+      "top1_mean": 64.5656,
+      "top5_mean": 68.9933,
+      "top1_variance_decomposition": {
+        "grand_mean": 64.5656,
+        "within_decoder_std": 0.963,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.7514,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 68.9933,
+        "within_decoder_std": 0.5263,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.3862,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            65.78,
+            65.78,
+            63.59
+          ],
+          "top5": [
+            69.69,
+            69.69,
+            68.91
+          ],
+          "W_rel_fro": 1.223552,
+          "W_misalign_deg": 75.4361
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            64.38,
+            62.66,
+            64.06
+          ],
+          "top5": [
+            69.22,
+            67.81,
+            69.06
+          ],
+          "W_rel_fro": 1.224715,
+          "W_misalign_deg": 75.5203
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            64.53,
+            64.69,
+            65.62
+          ],
+          "top5": [
+            68.75,
+            68.75,
+            69.06
+          ],
+          "W_rel_fro": 1.223768,
+          "W_misalign_deg": 75.4517
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 323,
+      "sessions": 6,
+      "W_rel_fro_mean": 1.170153,
+      "W_misalign_deg_mean": 71.6168,
+      "top1_mean": 66.5444,
+      "top5_mean": 69.3067,
+      "top1_variance_decomposition": {
+        "grand_mean": 66.5444,
+        "within_decoder_std": 0.8425,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.7397,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 69.3067,
+        "within_decoder_std": 0.7267,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.4248,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            67.5,
+            67.03,
+            67.5
+          ],
+          "top5": [
+            70.0,
+            70.0,
+            69.38
+          ],
+          "W_rel_fro": 1.170084,
+          "W_misalign_deg": 71.6119
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            65.78,
+            64.53,
+            67.34
+          ],
+          "top5": [
+            67.97,
+            69.22,
+            69.84
+          ],
+          "W_rel_fro": 1.17097,
+          "W_misalign_deg": 71.6745
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            66.72,
+            66.25,
+            66.25
+          ],
+          "top5": [
+            68.28,
+            69.38,
+            69.69
+          ],
+          "W_rel_fro": 1.169404,
+          "W_misalign_deg": 71.5639
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 406,
+      "sessions": 7,
+      "W_rel_fro_mean": 1.09958,
+      "W_misalign_deg_mean": 66.7052,
+      "top1_mean": 68.2456,
+      "top5_mean": 70.1211,
+      "top1_variance_decomposition": {
+        "grand_mean": 68.2456,
+        "within_decoder_std": 0.5723,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.5724,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.1211,
+        "within_decoder_std": 0.2845,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.1962,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            68.59,
+            67.81,
+            68.44
+          ],
+          "top5": [
+            70.0,
+            70.16,
+            69.53
+          ],
+          "W_rel_fro": 1.099447,
+          "W_misalign_deg": 66.6961
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            68.12,
+            66.88,
+            67.97
+          ],
+          "top5": [
+            70.31,
+            70.0,
+            70.31
+          ],
+          "W_rel_fro": 1.101003,
+          "W_misalign_deg": 66.8028
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.22,
+            68.12,
+            69.06
+          ],
+          "top5": [
+            70.62,
+            70.16,
+            70.0
+          ],
+          "W_rel_fro": 1.098289,
+          "W_misalign_deg": 66.6167
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 512,
+      "sessions": 8,
+      "W_rel_fro_mean": 1.003331,
+      "W_misalign_deg_mean": 60.2205,
+      "top1_mean": 68.8878,
+      "top5_mean": 70.5011,
+      "top1_variance_decomposition": {
+        "grand_mean": 68.8878,
+        "within_decoder_std": 0.7962,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0597,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.5011,
+        "within_decoder_std": 0.3103,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.08,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.06,
+            68.44,
+            69.06
+          ],
+          "top5": [
+            70.78,
+            70.62,
+            70.16
+          ],
+          "W_rel_fro": 1.003653,
+          "W_misalign_deg": 60.2418
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            68.91,
+            67.81,
+            69.84
+          ],
+          "top5": [
+            70.78,
+            70.62,
+            70.31
+          ],
+          "W_rel_fro": 1.002345,
+          "W_misalign_deg": 60.1552
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            68.91,
+            68.12,
+            69.84
+          ],
+          "top5": [
+            70.62,
+            70.62,
+            70.0
+          ],
+          "W_rel_fro": 1.003994,
+          "W_misalign_deg": 60.2644
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 645,
+      "sessions": 11,
+      "W_rel_fro_mean": 0.863114,
+      "W_misalign_deg_mean": 51.1328,
+      "top1_mean": 69.4967,
+      "top5_mean": 70.6578,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.4967,
+        "within_decoder_std": 0.7892,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0318,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.6578,
+        "within_decoder_std": 0.1655,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0597,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.0,
+            68.44,
+            70.0
+          ],
+          "top5": [
+            70.78,
+            70.62,
+            70.47
+          ],
+          "W_rel_fro": 0.865299,
+          "W_misalign_deg": 51.2716
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.16,
+            68.44,
+            70.0
+          ],
+          "top5": [
+            70.78,
+            70.62,
+            70.47
+          ],
+          "W_rel_fro": 0.859959,
+          "W_misalign_deg": 50.9325
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.06,
+            69.53,
+            69.84
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.62
+          ],
+          "W_rel_fro": 0.864083,
+          "W_misalign_deg": 51.1944
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 813,
+      "sessions": 13,
+      "W_rel_fro_mean": 0.647561,
+      "W_misalign_deg_mean": 37.7834,
+      "top1_mean": 69.6189,
+      "top5_mean": 70.7456,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.6189,
+        "within_decoder_std": 0.8204,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0782,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.7456,
+        "within_decoder_std": 0.1973,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0299,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.0,
+            69.06,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.648471,
+          "W_misalign_deg": 37.8385
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.16,
+            68.44,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.62
+          ],
+          "W_rel_fro": 0.645543,
+          "W_misalign_deg": 37.6612
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.16,
+            68.59,
+            70.16
+          ],
+          "top5": [
+            70.94,
+            70.78,
+            70.47
+          ],
+          "W_rel_fro": 0.648668,
+          "W_misalign_deg": 37.8505
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 1024,
+      "sessions": 16,
+      "W_rel_fro_mean": 0.13893,
+      "W_misalign_deg_mean": 7.9666,
+      "top1_mean": 69.6689,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.6689,
+        "within_decoder_std": 0.9076,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0616,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.145441,
+          "W_misalign_deg": 8.3405
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.13248,
+          "W_misalign_deg": 7.5961
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.13887,
+          "W_misalign_deg": 7.9631
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 1290,
+      "sessions": 21,
+      "W_rel_fro_mean": 0.011736,
+      "W_misalign_deg_mean": 0.6723,
+      "top1_mean": 69.7044,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7044,
+        "within_decoder_std": 0.8983,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0616,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.011921,
+          "W_misalign_deg": 0.6829
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.011989,
+          "W_misalign_deg": 0.6869
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.011297,
+          "W_misalign_deg": 0.6472
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 1625,
+      "sessions": 26,
+      "W_rel_fro_mean": 0.006747,
+      "W_misalign_deg_mean": 0.3865,
+      "top1_mean": 69.7578,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7578,
+        "within_decoder_std": 0.8604,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0308,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.006763,
+          "W_misalign_deg": 0.3874
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.00677,
+          "W_misalign_deg": 0.3878
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.91,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.006707,
+          "W_misalign_deg": 0.3842
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 64,
+      "K": 2048,
+      "sessions": 32,
+      "W_rel_fro_mean": 0.004714,
+      "W_misalign_deg_mean": 0.2699,
+      "top1_mean": 69.74,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.74,
+        "within_decoder_std": 0.889,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.004714,
+          "W_misalign_deg": 0.2699
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.004714,
+          "W_misalign_deg": 0.2699
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.004714,
+          "W_misalign_deg": 0.2699
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 128,
+      "sessions": 1,
+      "W_rel_fro_mean": 1.322799,
+      "W_misalign_deg_mean": 82.8134,
+      "top1_mean": 50.7122,
+      "top5_mean": 62.76,
+      "top1_variance_decomposition": {
+        "grand_mean": 50.7122,
+        "within_decoder_std": 0.7893,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 2.4708,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 62.76,
+        "within_decoder_std": 1.0997,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.3243,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            47.97,
+            48.59,
+            47.19
+          ],
+          "top5": [
+            62.34,
+            61.88,
+            62.97
+          ],
+          "W_rel_fro": 1.322425,
+          "W_misalign_deg": 82.7848
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            50.94,
+            51.41,
+            52.5
+          ],
+          "top5": [
+            61.56,
+            62.19,
+            64.84
+          ],
+          "W_rel_fro": 1.323062,
+          "W_misalign_deg": 82.8334
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            52.03,
+            53.59,
+            52.19
+          ],
+          "top5": [
+            63.59,
+            62.97,
+            62.5
+          ],
+          "W_rel_fro": 1.32291,
+          "W_misalign_deg": 82.8219
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 154,
+      "sessions": 2,
+      "W_rel_fro_mean": 1.303853,
+      "W_misalign_deg_mean": 81.3741,
+      "top1_mean": 53.35,
+      "top5_mean": 65.8322,
+      "top1_variance_decomposition": {
+        "grand_mean": 53.35,
+        "within_decoder_std": 0.7868,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 2.1583,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 65.8322,
+        "within_decoder_std": 0.4207,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.7028,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            52.5,
+            51.56,
+            51.72
+          ],
+          "top5": [
+            65.62,
+            65.62,
+            65.62
+          ],
+          "W_rel_fro": 1.304841,
+          "W_misalign_deg": 81.4487
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            52.34,
+            52.19,
+            52.34
+          ],
+          "top5": [
+            65.47,
+            65.78,
+            64.53
+          ],
+          "W_rel_fro": 1.303125,
+          "W_misalign_deg": 81.319
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            55.62,
+            57.19,
+            54.69
+          ],
+          "top5": [
+            66.72,
+            66.88,
+            66.25
+          ],
+          "W_rel_fro": 1.303594,
+          "W_misalign_deg": 81.3545
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 185,
+      "sessions": 2,
+      "W_rel_fro_mean": 1.279845,
+      "W_misalign_deg_mean": 79.5721,
+      "top1_mean": 58.16,
+      "top5_mean": 67.2922,
+      "top1_variance_decomposition": {
+        "grand_mean": 58.16,
+        "within_decoder_std": 1.448,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 1.407,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 67.2922,
+        "within_decoder_std": 0.6336,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.954,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            56.25,
+            56.09,
+            57.97
+          ],
+          "top5": [
+            65.78,
+            66.88,
+            66.72
+          ],
+          "W_rel_fro": 1.279348,
+          "W_misalign_deg": 79.535
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            60.47,
+            56.88,
+            57.03
+          ],
+          "top5": [
+            67.97,
+            66.56,
+            66.72
+          ],
+          "W_rel_fro": 1.280031,
+          "W_misalign_deg": 79.5859
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            60.47,
+            59.84,
+            58.44
+          ],
+          "top5": [
+            68.12,
+            68.91,
+            67.97
+          ],
+          "W_rel_fro": 1.280156,
+          "W_misalign_deg": 79.5953
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 223,
+      "sessions": 2,
+      "W_rel_fro_mean": 1.251798,
+      "W_misalign_deg_mean": 77.4964,
+      "top1_mean": 61.8056,
+      "top5_mean": 68.3856,
+      "top1_variance_decomposition": {
+        "grand_mean": 61.8056,
+        "within_decoder_std": 1.2071,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.7414,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 68.3856,
+        "within_decoder_std": 0.7797,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.78,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            61.56,
+            59.22,
+            63.12
+          ],
+          "top5": [
+            67.03,
+            67.97,
+            69.22
+          ],
+          "W_rel_fro": 1.253225,
+          "W_misalign_deg": 77.6013
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            61.72,
+            60.94,
+            61.72
+          ],
+          "top5": [
+            67.03,
+            68.59,
+            67.81
+          ],
+          "W_rel_fro": 1.250713,
+          "W_misalign_deg": 77.4167
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            63.28,
+            62.19,
+            62.5
+          ],
+          "top5": [
+            69.22,
+            69.22,
+            69.38
+          ],
+          "W_rel_fro": 1.251456,
+          "W_misalign_deg": 77.4712
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 268,
+      "sessions": 3,
+      "W_rel_fro_mean": 1.215433,
+      "W_misalign_deg_mean": 74.8491,
+      "top1_mean": 64.4089,
+      "top5_mean": 68.9067,
+      "top1_variance_decomposition": {
+        "grand_mean": 64.4089,
+        "within_decoder_std": 1.119,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 1.1221,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 68.9067,
+        "within_decoder_std": 0.5251,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0533,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            65.0,
+            61.88,
+            63.75
+          ],
+          "top5": [
+            68.12,
+            69.06,
+            69.38
+          ],
+          "W_rel_fro": 1.216015,
+          "W_misalign_deg": 74.8911
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            64.84,
+            63.12,
+            64.06
+          ],
+          "top5": [
+            69.22,
+            69.06,
+            68.44
+          ],
+          "W_rel_fro": 1.214731,
+          "W_misalign_deg": 74.7985
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            65.94,
+            64.84,
+            66.25
+          ],
+          "top5": [
+            69.38,
+            68.44,
+            69.06
+          ],
+          "W_rel_fro": 1.215553,
+          "W_misalign_deg": 74.8578
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 323,
+      "sessions": 3,
+      "W_rel_fro_mean": 1.17095,
+      "W_misalign_deg_mean": 71.6731,
+      "top1_mean": 66.3556,
+      "top5_mean": 69.3589,
+      "top1_variance_decomposition": {
+        "grand_mean": 66.3556,
+        "within_decoder_std": 0.3212,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.3429,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 69.3589,
+        "within_decoder_std": 0.6934,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.471,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            66.41,
+            66.88,
+            66.72
+          ],
+          "top5": [
+            68.44,
+            69.69,
+            69.84
+          ],
+          "W_rel_fro": 1.169542,
+          "W_misalign_deg": 71.5736
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            66.09,
+            66.41,
+            65.47
+          ],
+          "top5": [
+            67.97,
+            69.53,
+            69.22
+          ],
+          "W_rel_fro": 1.171448,
+          "W_misalign_deg": 71.7083
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            66.56,
+            66.25,
+            66.41
+          ],
+          "top5": [
+            70.0,
+            69.38,
+            70.16
+          ],
+          "W_rel_fro": 1.171859,
+          "W_misalign_deg": 71.7374
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 388,
+      "sessions": 4,
+      "W_rel_fro_mean": 1.114342,
+      "W_misalign_deg_mean": 67.7207,
+      "top1_mean": 67.97,
+      "top5_mean": 69.9467,
+      "top1_variance_decomposition": {
+        "grand_mean": 67.97,
+        "within_decoder_std": 0.3587,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.2379,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 69.9467,
+        "within_decoder_std": 0.4022,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            67.81,
+            67.66,
+            67.66
+          ],
+          "top5": [
+            69.84,
+            69.69,
+            70.31
+          ],
+          "W_rel_fro": 1.115122,
+          "W_misalign_deg": 67.7746
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            67.97,
+            67.66,
+            68.44
+          ],
+          "top5": [
+            70.62,
+            69.69,
+            69.53
+          ],
+          "W_rel_fro": 1.1139,
+          "W_misalign_deg": 67.6903
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            68.59,
+            67.66,
+            68.28
+          ],
+          "top5": [
+            69.84,
+            70.16,
+            69.84
+          ],
+          "W_rel_fro": 1.114003,
+          "W_misalign_deg": 67.6973
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 467,
+      "sessions": 4,
+      "W_rel_fro_mean": 1.043032,
+      "W_misalign_deg_mean": 62.868,
+      "top1_mean": 68.8378,
+      "top5_mean": 70.2933,
+      "top1_variance_decomposition": {
+        "grand_mean": 68.8378,
+        "within_decoder_std": 1.0072,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.5749,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.2933,
+        "within_decoder_std": 0.3557,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.195,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            67.5,
+            67.5,
+            69.53
+          ],
+          "top5": [
+            70.31,
+            70.31,
+            70.0
+          ],
+          "W_rel_fro": 1.043534,
+          "W_misalign_deg": 62.9017
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.69,
+            68.44,
+            69.22
+          ],
+          "top5": [
+            70.78,
+            70.0,
+            69.69
+          ],
+          "W_rel_fro": 1.042619,
+          "W_misalign_deg": 62.8402
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.16,
+            67.97,
+            69.53
+          ],
+          "top5": [
+            70.62,
+            70.62,
+            70.31
+          ],
+          "W_rel_fro": 1.042942,
+          "W_misalign_deg": 62.862
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 562,
+      "sessions": 5,
+      "W_rel_fro_mean": 0.950362,
+      "W_misalign_deg_mean": 56.7423,
+      "top1_mean": 69.3222,
+      "top5_mean": 70.6067,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.3222,
+        "within_decoder_std": 0.9709,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.4992,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.6067,
+        "within_decoder_std": 0.1392,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.1291,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            68.12,
+            68.28,
+            69.84
+          ],
+          "top5": [
+            70.47,
+            70.47,
+            70.47
+          ],
+          "W_rel_fro": 0.950702,
+          "W_misalign_deg": 56.7644
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.0,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.62
+          ],
+          "W_rel_fro": 0.949816,
+          "W_misalign_deg": 56.7067
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.28,
+            70.16
+          ],
+          "top5": [
+            70.78,
+            70.62,
+            70.47
+          ],
+          "W_rel_fro": 0.950569,
+          "W_misalign_deg": 56.7557
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 676,
+      "sessions": 6,
+      "W_rel_fro_mean": 0.826959,
+      "W_misalign_deg_mean": 48.8472,
+      "top1_mean": 69.4978,
+      "top5_mean": 70.5889,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.4978,
+        "within_decoder_std": 0.8592,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.3843,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.5889,
+        "within_decoder_std": 0.2275,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.1092,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            68.75,
+            68.44,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.47
+          ],
+          "W_rel_fro": 0.826238,
+          "W_misalign_deg": 48.8018
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.0,
+            69.38,
+            70.0
+          ],
+          "top5": [
+            70.62,
+            70.78,
+            70.47
+          ],
+          "W_rel_fro": 0.827505,
+          "W_misalign_deg": 48.8816
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.28,
+            70.16
+          ],
+          "top5": [
+            70.78,
+            70.31,
+            70.31
+          ],
+          "W_rel_fro": 0.827135,
+          "W_misalign_deg": 48.8583
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 813,
+      "sessions": 7,
+      "W_rel_fro_mean": 0.645515,
+      "W_misalign_deg_mean": 37.6596,
+      "top1_mean": 69.7911,
+      "top5_mean": 70.6944,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7911,
+        "within_decoder_std": 0.6176,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.2375,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.6944,
+        "within_decoder_std": 0.2807,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.1078,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.0,
+            69.84,
+            70.31
+          ],
+          "top5": [
+            70.94,
+            70.78,
+            70.62
+          ],
+          "W_rel_fro": 0.646379,
+          "W_misalign_deg": 37.7118
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.84,
+            68.91,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.78,
+            70.47
+          ],
+          "W_rel_fro": 0.645918,
+          "W_misalign_deg": 37.684
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.75,
+            70.16
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.16
+          ],
+          "W_rel_fro": 0.644249,
+          "W_misalign_deg": 37.5829
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 978,
+      "sessions": 8,
+      "W_rel_fro_mean": 0.309815,
+      "W_misalign_deg_mean": 17.8229,
+      "top1_mean": 69.7222,
+      "top5_mean": 70.7622,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7222,
+        "within_decoder_std": 0.8622,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0616,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.7622,
+        "within_decoder_std": 0.1687,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0308,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.91,
+            70.16
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.307159,
+          "W_misalign_deg": 17.6689
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.62
+          ],
+          "W_rel_fro": 0.310107,
+          "W_misalign_deg": 17.8398
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.31218,
+          "W_misalign_deg": 17.96
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 1024,
+      "sessions": 8,
+      "W_rel_fro_mean": 0.143276,
+      "W_misalign_deg_mean": 8.2162,
+      "top1_mean": 69.6867,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.6867,
+        "within_decoder_std": 0.878,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0533,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.134788,
+          "W_misalign_deg": 7.7286
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.147108,
+          "W_misalign_deg": 8.4363
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.147931,
+          "W_misalign_deg": 8.4836
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 1176,
+      "sessions": 10,
+      "W_rel_fro_mean": 0.020441,
+      "W_misalign_deg_mean": 1.1712,
+      "top1_mean": 69.7222,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7222,
+        "within_decoder_std": 0.9198,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0308,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.019726,
+          "W_misalign_deg": 1.1302
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.021454,
+          "W_misalign_deg": 1.2292
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.020144,
+          "W_misalign_deg": 1.1541
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 1415,
+      "sessions": 12,
+      "W_rel_fro_mean": 0.010609,
+      "W_misalign_deg_mean": 0.6078,
+      "top1_mean": 69.7222,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7222,
+        "within_decoder_std": 0.9198,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0308,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.010474,
+          "W_misalign_deg": 0.6
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.010868,
+          "W_misalign_deg": 0.6226
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.010485,
+          "W_misalign_deg": 0.6007
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 1702,
+      "sessions": 14,
+      "W_rel_fro_mean": 0.007105,
+      "W_misalign_deg_mean": 0.407,
+      "top1_mean": 69.6867,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.6867,
+        "within_decoder_std": 0.9784,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.007062,
+          "W_misalign_deg": 0.4045
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.007133,
+          "W_misalign_deg": 0.4086
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.007121,
+          "W_misalign_deg": 0.4079
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 128,
+      "K": 2048,
+      "sessions": 16,
+      "W_rel_fro_mean": 0.005318,
+      "W_misalign_deg_mean": 0.3045,
+      "top1_mean": 69.74,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.74,
+        "within_decoder_std": 0.889,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.005318,
+          "W_misalign_deg": 0.3045
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.005318,
+          "W_misalign_deg": 0.3045
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.005318,
+          "W_misalign_deg": 0.3045
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 256,
+      "sessions": 1,
+      "W_rel_fro_mean": 1.224529,
+      "W_misalign_deg_mean": 75.5069,
+      "top1_mean": 65.5022,
+      "top5_mean": 68.9944,
+      "top1_variance_decomposition": {
+        "grand_mean": 65.5022,
+        "within_decoder_std": 0.7103,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.643,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 68.9944,
+        "within_decoder_std": 0.3091,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.2117,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            65.16,
+            65.78,
+            66.09
+          ],
+          "top5": [
+            69.06,
+            68.91,
+            69.38
+          ],
+          "W_rel_fro": 1.225396,
+          "W_misalign_deg": 75.5697
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            67.03,
+            65.31,
+            65.78
+          ],
+          "top5": [
+            69.06,
+            68.91,
+            69.38
+          ],
+          "W_rel_fro": 1.224087,
+          "W_misalign_deg": 75.4748
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            65.47,
+            64.84,
+            64.06
+          ],
+          "top5": [
+            69.22,
+            68.44,
+            68.59
+          ],
+          "W_rel_fro": 1.224105,
+          "W_misalign_deg": 75.4761
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 294,
+      "sessions": 2,
+      "W_rel_fro_mean": 1.194187,
+      "W_misalign_deg_mean": 73.3241,
+      "top1_mean": 67.2922,
+      "top5_mean": 69.6022,
+      "top1_variance_decomposition": {
+        "grand_mean": 67.2922,
+        "within_decoder_std": 0.7677,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.3413,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 69.6022,
+        "within_decoder_std": 0.5051,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.331,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            68.44,
+            67.81,
+            66.72
+          ],
+          "top5": [
+            69.69,
+            70.0,
+            69.69
+          ],
+          "W_rel_fro": 1.194009,
+          "W_misalign_deg": 73.3113
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            67.34,
+            67.5,
+            66.88
+          ],
+          "top5": [
+            69.84,
+            68.44,
+            69.38
+          ],
+          "W_rel_fro": 1.195097,
+          "W_misalign_deg": 73.3891
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            67.81,
+            65.94,
+            67.19
+          ],
+          "top5": [
+            70.31,
+            69.38,
+            69.69
+          ],
+          "W_rel_fro": 1.193455,
+          "W_misalign_deg": 73.2718
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 338,
+      "sessions": 2,
+      "W_rel_fro_mean": 1.157944,
+      "W_misalign_deg_mean": 70.7566,
+      "top1_mean": 68.1589,
+      "top5_mean": 69.93,
+      "top1_variance_decomposition": {
+        "grand_mean": 68.1589,
+        "within_decoder_std": 0.5434,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.3771,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 69.93,
+        "within_decoder_std": 0.2545,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.1582,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.06,
+            68.75,
+            67.97
+          ],
+          "top5": [
+            70.0,
+            70.31,
+            70.0
+          ],
+          "W_rel_fro": 1.158508,
+          "W_misalign_deg": 70.7961
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            68.75,
+            67.34,
+            67.66
+          ],
+          "top5": [
+            70.0,
+            69.84,
+            69.84
+          ],
+          "W_rel_fro": 1.156878,
+          "W_misalign_deg": 70.6817
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            68.12,
+            67.81,
+            67.97
+          ],
+          "top5": [
+            69.84,
+            69.38,
+            70.16
+          ],
+          "W_rel_fro": 1.158447,
+          "W_misalign_deg": 70.7919
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 388,
+      "sessions": 2,
+      "W_rel_fro_mean": 1.114675,
+      "W_misalign_deg_mean": 67.7438,
+      "top1_mean": 69.1333,
+      "top5_mean": 70.26,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.1333,
+        "within_decoder_std": 0.2044,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.1593,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.26,
+        "within_decoder_std": 0.1156,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.1033,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.22,
+            68.75,
+            68.91
+          ],
+          "top5": [
+            70.16,
+            70.0,
+            70.31
+          ],
+          "W_rel_fro": 1.115475,
+          "W_misalign_deg": 67.799
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.38,
+            69.06,
+            69.06
+          ],
+          "top5": [
+            70.31,
+            70.16,
+            70.31
+          ],
+          "W_rel_fro": 1.113968,
+          "W_misalign_deg": 67.6949
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.38,
+            69.06,
+            69.38
+          ],
+          "top5": [
+            70.47,
+            70.31,
+            70.31
+          ],
+          "W_rel_fro": 1.114583,
+          "W_misalign_deg": 67.7374
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 446,
+      "sessions": 2,
+      "W_rel_fro_mean": 1.062893,
+      "W_misalign_deg_mean": 64.2065,
+      "top1_mean": 69.0456,
+      "top5_mean": 70.2778,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.0456,
+        "within_decoder_std": 0.8615,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.4193,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.2778,
+        "within_decoder_std": 0.2063,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0587,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.69,
+            69.53,
+            69.22
+          ],
+          "top5": [
+            70.62,
+            70.16,
+            70.16
+          ],
+          "W_rel_fro": 1.063355,
+          "W_misalign_deg": 64.2377
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.0,
+            67.34,
+            68.59
+          ],
+          "top5": [
+            70.47,
+            70.0,
+            70.16
+          ],
+          "W_rel_fro": 1.061414,
+          "W_misalign_deg": 64.1064
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            68.91,
+            68.44,
+            69.69
+          ],
+          "top5": [
+            70.31,
+            70.31,
+            70.31
+          ],
+          "W_rel_fro": 1.063911,
+          "W_misalign_deg": 64.2753
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 512,
+      "sessions": 2,
+      "W_rel_fro_mean": 0.999404,
+      "W_misalign_deg_mean": 59.9606,
+      "top1_mean": 69.7922,
+      "top5_mean": 70.5367,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7922,
+        "within_decoder_std": 0.3457,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.1399,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.5367,
+        "within_decoder_std": 0.2134,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.1065,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.0,
+            70.0,
+            69.69
+          ],
+          "top5": [
+            70.78,
+            70.47,
+            70.47
+          ],
+          "W_rel_fro": 0.998506,
+          "W_misalign_deg": 59.9012
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.69,
+            70.16,
+            69.69
+          ],
+          "top5": [
+            70.78,
+            70.31,
+            70.16
+          ],
+          "W_rel_fro": 1.000752,
+          "W_misalign_deg": 60.0498
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.0,
+            69.06,
+            69.84
+          ],
+          "top5": [
+            70.62,
+            70.62,
+            70.62
+          ],
+          "W_rel_fro": 0.998954,
+          "W_misalign_deg": 59.9308
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 588,
+      "sessions": 3,
+      "W_rel_fro_mean": 0.922922,
+      "W_misalign_deg_mean": 54.9628,
+      "top1_mean": 69.74,
+      "top5_mean": 70.6411,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.74,
+        "within_decoder_std": 0.6766,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.2379,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.6411,
+        "within_decoder_std": 0.1956,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.1203,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            69.84,
+            70.16,
+            69.84
+          ],
+          "top5": [
+            70.78,
+            70.62,
+            70.31
+          ],
+          "W_rel_fro": 0.922387,
+          "W_misalign_deg": 54.9283
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.16,
+            69.22,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.78,
+            70.62
+          ],
+          "W_rel_fro": 0.922734,
+          "W_misalign_deg": 54.9507
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.16,
+            68.28,
+            70.0
+          ],
+          "top5": [
+            70.78,
+            70.47,
+            70.47
+          ],
+          "W_rel_fro": 0.923644,
+          "W_misalign_deg": 55.0095
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 676,
+      "sessions": 3,
+      "W_rel_fro_mean": 0.824492,
+      "W_misalign_deg_mean": 48.692,
+      "top1_mean": 69.5478,
+      "top5_mean": 70.6222,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.5478,
+        "within_decoder_std": 0.6493,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.4835,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.6222,
+        "within_decoder_std": 0.1156,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0517,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            69.53,
+            69.84
+          ],
+          "top5": [
+            70.78,
+            70.62,
+            70.62
+          ],
+          "W_rel_fro": 0.826968,
+          "W_misalign_deg": 48.8478
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.0,
+            69.06,
+            70.0
+          ],
+          "top5": [
+            70.62,
+            70.62,
+            70.47
+          ],
+          "W_rel_fro": 0.822241,
+          "W_misalign_deg": 48.5505
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            68.44,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.78,
+            70.62,
+            70.47
+          ],
+          "W_rel_fro": 0.824266,
+          "W_misalign_deg": 48.6778
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 776,
+      "sessions": 4,
+      "W_rel_fro_mean": 0.696295,
+      "W_misalign_deg_mean": 40.7481,
+      "top1_mean": 69.7933,
+      "top5_mean": 70.7278,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7933,
+        "within_decoder_std": 0.6006,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.1567,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.7278,
+        "within_decoder_std": 0.1978,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0517,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.16,
+            69.53,
+            70.16
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.62
+          ],
+          "W_rel_fro": 0.69359,
+          "W_misalign_deg": 40.5828
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.0,
+            69.38,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.696132,
+          "W_misalign_deg": 40.7381
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.16,
+            68.59,
+            70.16
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.47
+          ],
+          "W_rel_fro": 0.699162,
+          "W_misalign_deg": 40.9234
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 891,
+      "sessions": 4,
+      "W_rel_fro_mean": 0.51311,
+      "W_misalign_deg_mean": 29.7315,
+      "top1_mean": 69.7056,
+      "top5_mean": 70.7444,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7056,
+        "within_decoder_std": 0.7047,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0597,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.7444,
+        "within_decoder_std": 0.1769,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0308,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.91,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.513206,
+          "W_misalign_deg": 29.7372
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.0,
+            68.75,
+            70.16
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.62
+          ],
+          "W_rel_fro": 0.511323,
+          "W_misalign_deg": 29.6256
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.16,
+            69.06,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.62
+          ],
+          "W_rel_fro": 0.514801,
+          "W_misalign_deg": 29.8318
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 1024,
+      "sessions": 4,
+      "W_rel_fro_mean": 0.15328,
+      "W_misalign_deg_mean": 8.7909,
+      "top1_mean": 69.7578,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7578,
+        "within_decoder_std": 0.7576,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0308,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.91,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.159244,
+          "W_misalign_deg": 9.1336
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.91,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.159692,
+          "W_misalign_deg": 9.1594
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.91,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.140903,
+          "W_misalign_deg": 8.0798
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 1176,
+      "sessions": 5,
+      "W_rel_fro_mean": 0.023233,
+      "W_misalign_deg_mean": 1.3312,
+      "top1_mean": 69.7044,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7044,
+        "within_decoder_std": 0.8983,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0616,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.023423,
+          "W_misalign_deg": 1.3421
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.59,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.023817,
+          "W_misalign_deg": 1.3646
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.02246,
+          "W_misalign_deg": 1.2868
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 1351,
+      "sessions": 6,
+      "W_rel_fro_mean": 0.013022,
+      "W_misalign_deg_mean": 0.7461,
+      "top1_mean": 69.7222,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.7222,
+        "within_decoder_std": 0.8685,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0308,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.013192,
+          "W_misalign_deg": 0.7558
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.013215,
+          "W_misalign_deg": 0.7571
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.31,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.01266,
+          "W_misalign_deg": 0.7253
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 1552,
+      "sessions": 7,
+      "W_rel_fro_mean": 0.009027,
+      "W_misalign_deg_mean": 0.5171,
+      "top1_mean": 69.74,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.74,
+        "within_decoder_std": 0.889,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.009042,
+          "W_misalign_deg": 0.518
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.009216,
+          "W_misalign_deg": 0.528
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.008823,
+          "W_misalign_deg": 0.5054
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 1783,
+      "sessions": 7,
+      "W_rel_fro_mean": 0.006817,
+      "W_misalign_deg_mean": 0.3905,
+      "top1_mean": 69.74,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.74,
+        "within_decoder_std": 0.889,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.006804,
+          "W_misalign_deg": 0.3898
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.006878,
+          "W_misalign_deg": 0.3939
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.006769,
+          "W_misalign_deg": 0.3877
+        }
+      ]
+    },
+    {
+      "depth": 1,
+      "wire_dtype": "bf16",
+      "prefix_len": 256,
+      "K": 2048,
+      "sessions": 8,
+      "W_rel_fro_mean": 0.005426,
+      "W_misalign_deg_mean": 0.3107,
+      "top1_mean": 69.74,
+      "top5_mean": 70.78,
+      "top1_variance_decomposition": {
+        "grand_mean": 69.74,
+        "within_decoder_std": 0.889,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 70.78,
+        "within_decoder_std": 0.16,
+        "n_decoder_seeds_per_probe": 3,
+        "between_solve_std": 0.0,
+        "n_solve_repetitions": 3
+      },
+      "solve_repetitions": [
+        {
+          "solve_seed": 0,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.005426,
+          "W_misalign_deg": 0.3107
+        },
+        {
+          "solve_seed": 1,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.005426,
+          "W_misalign_deg": 0.3107
+        },
+        {
+          "solve_seed": 2,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            70.47,
+            68.75,
+            70.0
+          ],
+          "top5": [
+            70.94,
+            70.62,
+            70.78
+          ],
+          "W_rel_fro": 0.005426,
+          "W_misalign_deg": 0.3107
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "analysis_stage": "confirmatory",
+  "block_clustered_estimator": "paired nonparametric bootstrap over held-out sequence blocks",
+  "confirmation_manifest": "/home/geo/dtraining-phase06/manifests/wikitext2_confirmation_manifest.json",
+  "limitations": [
+    "Seed-level training uncertainty and within-run block uncertainty are not pooled.",
+    "Artifacts without evaluation_blocks cannot yield a block-clustered interval.",
+    "Exploratory results remain descriptive even when their interval is below the utility gate.",
+    "Missing actual remote FLOPs remain missing; coverage is not substituted for them."
+  ],
+  "points": [],
+  "schema": "dtraining.delegation_statistics.v1",
+  "seed_level_estimator": "two-sided Student-t interval across independent seeds",
+  "skipped": [
+    {
+      "path": "/home/geo/dtraining-phase06/outputs/wikitext2_confirmation/confirm_split19_s51.json",
+      "reason": "confirmatory artifact differs from manifest at attack_steps"
+    },
+    {
+      "path": "/home/geo/dtraining-phase06/outputs/wikitext2_confirmation/confirm_split19_s52.json",
+      "reason": "confirmatory artifact differs from manifest at attack_steps"
+    },
+    {
+      "path": "/home/geo/dtraining-phase06/outputs/wikitext2_confirmation/confirm_split19_s53.json",
+      "reason": "confirmatory artifact differs from manifest at attack_steps"
+    },
+    {
+      "path": "/home/geo/dtraining-phase06/outputs/wikitext2_confirmation/confirm_split19_s54.json",
+      "reason": "confirmatory artifact differs from manifest at attack_steps"
+    },
+    {
+      "path": "/home/geo/dtraining-phase06/outputs/wikitext2_confirmation/confirm_split19_s55.json",
+      "reason": "confirmatory artifact differs from manifest at attack_steps"
+    },
+    {
+      "path": "/home/geo/dtraining-phase06/outputs/wikitext2_confirmation/confirm_split21_s51.json",
+      "reason": "confirmatory artifact differs from manifest at attack_steps"
+    },
+    {
+      "path": "/home/geo/dtraining-phase06/outputs/wikitext2_confirmation/confirm_split21_s52.json",
+      "reason": "confirmatory artifact differs from manifest at attack_steps"
+    },
+    {
+      "path": "/home/geo/dtraining-phase06/outputs/wikitext2_confirmation/confirm_split21_s53.json",
+      "reason": "confirmatory artifact differs from manifest at attack_steps"
+    },
+    {
+      "path": "/home/geo/dtraining-phase06/outputs/wikitext2_confirmation/confirm_split21_s54.json",
+      "reason": "confirmatory artifact differs from manifest at attack_steps"
+    },
+    {
+      "path": "/home/geo/dtraining-phase06/outputs/wikitext2_confirmation/confirm_split21_s55.json",
+      "reason": "confirmatory artifact differs from manifest at attack_steps"
+    }
+  ],
+  "status": "completed",
+  "utility_gate_nll_delta": 0.35
+}

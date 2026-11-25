@@ -1,0 +1,365 @@
+{
+ "schema": "dtraining.isolation_adaptive.v1",
+ "args": {
+  "model": "/workspace/experiments/models/qwen3-0.6b",
+  "corpus": "/workspace/experiments/models/wikitext2_corpus.txt",
+  "output": "/workspace/experiments/results/training/isolation_adaptive_w1024_06b_s42.json",
+  "cloud_url": "wss://koula:5054",
+  "cloud_tls_ca": "/workspace/experiments/tls/ca.crt",
+  "cloud_kind": "invariant_mlp_deep",
+  "cloud_experts": 1,
+  "cloud_layers": 28,
+  "cloud_hidden": 2048,
+  "utility_reference": "full",
+  "latent_dim": 1024,
+  "width_ladder": "1024",
+  "noise_multiplier": 0.35,
+  "clip_norm": 1.0,
+  "split_after": 8,
+  "resume_after": 28,
+  "seq_len": 32,
+  "train_blocks": 256,
+  "eval_blocks": 64,
+  "steps": 500,
+  "warmup_steps": 200,
+  "attack_steps": 64,
+  "lr": 0.0003,
+  "adversary_strength": 1.0,
+  "chaff_tokens": 48,
+  "remote_grad_clip": 1.0,
+  "eval_interval": 100,
+  "tripwire_pct": 1.0,
+  "utility_gate": 0.35,
+  "utility_grace_steps": 500,
+  "mine_beta": 0.0,
+  "seed": 42,
+  "start_ungauged": false
+ },
+ "log": [
+  {
+   "event": "baseline_loss",
+   "time": 1787086844.4440603,
+   "value": 4.3734
+  },
+  {
+   "event": "window",
+   "time": 1787086955.7838917,
+   "step": 100,
+   "width": 1024,
+   "recovery_pct": 4.542,
+   "majority_pct": 5.273,
+   "excess_pp": -0.732,
+   "utility_delta": 4.2969,
+   "mine_nats": null,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787087065.3122907,
+   "step": 200,
+   "width": 1024,
+   "recovery_pct": 5.227,
+   "majority_pct": 5.273,
+   "excess_pp": -0.046,
+   "utility_delta": 3.07,
+   "mine_nats": null,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787087181.0914195,
+   "step": 300,
+   "width": 1024,
+   "recovery_pct": 5.227,
+   "majority_pct": 5.273,
+   "excess_pp": -0.046,
+   "utility_delta": 2.9873,
+   "mine_nats": null,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787087291.0940945,
+   "step": 400,
+   "width": 1024,
+   "recovery_pct": 4.799,
+   "majority_pct": 5.273,
+   "excess_pp": -0.475,
+   "utility_delta": 2.6383,
+   "mine_nats": null,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "window",
+   "time": 1787087400.5692642,
+   "step": 500,
+   "width": 1024,
+   "recovery_pct": 4.284,
+   "majority_pct": 5.273,
+   "excess_pp": -0.989,
+   "utility_delta": 2.3463,
+   "mine_nats": null,
+   "noise": 0.35,
+   "chaff": 48
+  },
+  {
+   "event": "action",
+   "time": 1787087400.5692997,
+   "reason": "utility_gate",
+   "action": "widen_width",
+   "from_width": 1024,
+   "step": 500
+  },
+  {
+   "event": "done",
+   "time": 1787087400.5709233,
+   "total_steps": 500
+  },
+  {
+   "event": "postmortem_start",
+   "time": 1787087400.5709345
+  },
+  {
+   "event": "postmortem",
+   "time": 1787087535.1869876,
+   "attacker_token_accuracy_pct": 3.125,
+   "mean_levenshtein": 0.276,
+   "interpretation": "token accuracy near the majority control and low string similarity mean the attacker's reads are wrong constructions (e.g. 'today' -> 'yadto'); high values would mean a real reconstruction"
+  }
+ ],
+ "postmortem": {
+  "attacker_token_accuracy_pct": 3.125,
+  "mean_levenshtein": 0.276,
+  "samples": [
+   {
+    "block": 0,
+    "source_excerpt": " association Camden the the its with Camden 0 Places the1 . Due of included8 be arsenal7 Expedition6 in may , Historic41",
+    "attacker_excerpt": " . , to the the the the ,unk the the < the the theunk the the the the , the , the the> the the the the the the",
+    "word_pairs": [
+     [
+      "association",
+      "."
+     ],
+     [
+      "Camden",
+      ","
+     ],
+     [
+      "the",
+      "to"
+     ],
+     [
+      "the",
+      "the"
+     ],
+     [
+      "its",
+      "the"
+     ],
+     [
+      "with",
+      "the"
+     ],
+     [
+      "Camden",
+      "the"
+     ],
+     [
+      "0",
+      ",unk"
+     ],
+     [
+      "Places",
+      "the"
+     ],
+     [
+      "the1",
+      "the"
+     ],
+     [
+      ".",
+      "<"
+     ],
+     [
+      "Due",
+      "the"
+     ]
+    ],
+    "levenshtein": 0.2891
+   },
+   {
+    "block": 1,
+    "source_excerpt": " the19 19 efforts Sites Tower9 Land BuildingIn the of was renovated , National to .\n designatedmark the due42 4 in Histo",
+    "attacker_excerpt": " theunk , the the the < , . the the the the the the , the the , , the , the . the . the the the , , .",
+    "word_pairs": [
+     [
+      "the19",
+      "theunk"
+     ],
+     [
+      "19",
+      ","
+     ],
+     [
+      "efforts",
+      "the"
+     ],
+     [
+      "Sites",
+      "the"
+     ],
+     [
+      "Tower9",
+      "the"
+     ],
+     [
+      "Land",
+      "<"
+     ],
+     [
+      "BuildingIn",
+      ","
+     ],
+     [
+      "the",
+      "."
+     ],
+     [
+      "of",
+      "the"
+     ],
+     [
+      "was",
+      "the"
+     ],
+     [
+      "renovated",
+      "the"
+     ],
+     [
+      ",",
+      "the"
+     ]
+    ],
+    "levenshtein": 0.28
+   },
+   {
+    "block": 2,
+    "source_excerpt": " . of , W Therop>heticst Progress Administration newist Works Rock.unk Club the Arkansas the became Frederick Museum phi",
+    "attacker_excerpt": " the the < , the the , the the> the to the ,> , the the the the , theunk the the < the the . the the the",
+    "word_pairs": [
+     [
+      ".",
+      "the"
+     ],
+     [
+      "of",
+      "the"
+     ],
+     [
+      ",",
+      "<"
+     ],
+     [
+      "W",
+      ","
+     ],
+     [
+      "Therop>heticst",
+      "the"
+     ],
+     [
+      "Progress",
+      "the"
+     ],
+     [
+      "Administration",
+      ","
+     ],
+     [
+      "newist",
+      "the"
+     ],
+     [
+      "Works",
+      "the>"
+     ],
+     [
+      "Rock.unk",
+      "the"
+     ],
+     [
+      "Club",
+      "to"
+     ],
+     [
+      "the",
+      "the"
+     ]
+    ],
+    "levenshtein": 0.2848
+   },
+   {
+    "block": 3,
+    "source_excerpt": " fifty Ant History tower museum City approximately @ building , . remained years@ in Rock five The the been Halliqu Litt",
+    "attacker_excerpt": " . the the . the <unk < the , ,> the the the <>unk . the the , the , the , . . ,> the the",
+    "word_pairs": [
+     [
+      "fifty",
+      "."
+     ],
+     [
+      "Ant",
+      "the"
+     ],
+     [
+      "History",
+      "the"
+     ],
+     [
+      "tower",
+      "."
+     ],
+     [
+      "museum",
+      "the"
+     ],
+     [
+      "City",
+      "<unk"
+     ],
+     [
+      "approximately",
+      "<"
+     ],
+     [
+      "@",
+      "the"
+     ],
+     [
+      "building",
+      ","
+     ],
+     [
+      ",",
+      ",>"
+     ],
+     [
+      ".",
+      "the"
+     ],
+     [
+      "remained",
+      "the"
+     ]
+    ],
+    "levenshtein": 0.2516
+   }
+  ],
+  "interpretation": "token accuracy near the majority control and low string similarity mean the attacker's reads are wrong constructions (e.g. 'today' -> 'yadto'); high values would mean a real reconstruction"
+ }
+}

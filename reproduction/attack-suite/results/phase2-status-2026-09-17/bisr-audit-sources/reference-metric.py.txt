@@ -1,0 +1,49 @@
+def evaluate_attacker_rouge(tok, attacker_logits, batch):
+    if 'input_santi_mask' in batch:  # 只评估敏感词
+        mask = batch['input_santi_mask']
+        zero_indexes = torch.where(mask == 0)
+        masked_atk_ids = attacker_logits.argmax(dim=-1)
+        masked_atk_ids[zero_indexes] = tok.unk_token_id
+        masked_gt_ids = batch['input_ids'].clone()
+        masked_gt_ids[zero_indexes] = tok.unk_token_id
+        atk_txts = [decode_with_extra_space(tok, s) for s in masked_atk_ids]
+        gt_txts = [decode_with_extra_space(tok, s) for s in masked_gt_ids]
+    else:
+        atk_txts = [decode_with_extra_space(tok, s) for s in attacker_logits.argmax(dim=-1)]
+        gt_txts = [decode_with_extra_space(tok, s) for s in batch['input_ids']]  # batch['input_text']
+    rouge = calculate_rouge_text(atk_txts, gt_txts, print_comparison=False)
+    meteor = calculate_meteor(atk_txts, gt_txts)
+    token_acc = calculate_token_acc(tok, atk_txts, gt_txts)
+    return rouge, meteor, token_acc
+
+
+def calculate_token_acc(tok, texts, labels):
+    f1_avg = 0
+    for g, r in zip(texts, labels):
+        generated_tokens = set(tok.tokenize(g))
+        reference_tokens = set(tok.tokenize(r))
+        # calculate overlap number
+        overlap = len(generated_tokens & reference_tokens)
+        # calculate precision and recall
+        if len(generated_tokens) == 0:
+            precision = 0
+        else:
+            precision = overlap / len(generated_tokens)
+        if len(reference_tokens) == 0:
+            recall = 0
+        else:
+            recall = overlap / len(reference_tokens)
+        # calculate f1
+        if precision + recall == 0:
+            f1 = 0
+        else:
+            f1 = 2 * precision * recall / (precision + recall)
+        f1_avg += f1
+    if len(texts) == 0:
+        return 0
+    return f1_avg / len(texts)
+
+
+def evaluate_attacker_mse(attacker_outputs, batch):
+    return torch.nn.functional.mse_loss(attacker_outputs, batch)
+

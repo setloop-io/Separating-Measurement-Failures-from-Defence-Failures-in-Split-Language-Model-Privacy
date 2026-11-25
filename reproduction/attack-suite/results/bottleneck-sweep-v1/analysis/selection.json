@@ -1,0 +1,1204 @@
+{
+  "schema": "llm_attacker.operating_point_selection.v1",
+  "analysis_status": "COMPLETE",
+  "analysis_failures": 0,
+  "gates": {
+    "primary_ppl_ratio": 1.5,
+    "secondary_ppl_ratio": 2.0,
+    "predefined": true,
+    "retuning": "refused (no-retuning rule)"
+  },
+  "compute_factor": 2.0,
+  "candidate_methods": [
+    "tb-frozen",
+    "tb-cotrain"
+  ],
+  "control_method": "pca-compress",
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 2026,
+    "method": "percentile, paired over seeds"
+  },
+  "leakage_statistic": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+  "eligibility_conditions": "PCA-superiority requires BOTH the bootstrap condition (point estimate > 0 AND bootstrap CI lower > 0 on the paired per-seed differences) AND the all-seeds-positive condition (per-seed paired difference > 0 for EVERY seed). They are separate mechanical checks, recorded separately per candidate; the bootstrap condition alone does not imply improvement on every paired seed.",
+  "meta": {
+    "notes": [
+      "field wording corrected post-review: the per-seed leakage statistic is the strongest observed attack result across measured arms (earlier drafts mislabeled the white-box-only max as a conservative ceiling); schema name unchanged (llm_attacker.operating_point_selection.v1), the comparison block now carries statistic_label, bootstrap_condition and all_seeds_positive_condition sub-records.",
+      "adaptive end-to-end (whitebox-e2e) tier ingested: when the analyzer's whitebox_e2e_seed_rows are present, the adaptive_e2e snap value joins the per-seed max (validated fail-closed like every other arm; NOT_EVALUABLE cells are scored over the remaining measured arms with the exclusion recorded under e2e_tier); schema name unchanged."
+    ]
+  },
+  "access_labels": {
+    "surrogate_arm": "the defense-aware arm fits a PCA surrogate (stand-in) inverse on public calibration; it is NOT a faithful decoder of the true defense transform and its recovery numbers are an approximation, not a certificate",
+    "whitebox_tier": "white-box-aware rows grant the attacker the TRUE defense checkpoint (encoder weights / PCA basis + provenance) \u2014 a strictly stronger access condition than the matched matrix. White-box recovery is a stronger-access measurement; it does not constrain black-box recovery of the same wire, nor the reverse",
+    "whitebox_e2e_tier": "adaptive end-to-end rows grant the attacker the TRUE defense checkpoint and optimize each wire's token sequence straight through it \u2014 a strictly stronger, adaptive access condition. Adaptive e2e recovery is a stronger-access measurement only: it does not constrain black-box recovery of the same wire, nor the surrogate arm, nor any defense-internals-hidden adversary"
+  },
+  "v3_status": "UNFROZEN",
+  "v3_rule": "a negative outcome retains the NEGATIVE result; v3 remains UNFROZEN \u2014 this tool never freezes anything",
+  "splits": {
+    "3": {
+      "outcome": "negative",
+      "selected": null,
+      "candidates": [
+        {
+          "split": 3,
+          "dim": 64,
+          "method": "tb-cotrain",
+          "eligible": false,
+          "reasons": [
+            "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+            "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.0078125, 0.017578125] includes 0 (ESTIMATED)",
+            "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+          ],
+          "gate": "fail",
+          "utility_gate_recomputed": {
+            "seeds": [
+              11,
+              22,
+              33
+            ],
+            "per_seed": {
+              "11": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 3.8915065912881124
+              },
+              "22": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 3.8350666777009286
+              },
+              "33": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 3.99453854719738
+              }
+            },
+            "pass_1_5x_seeds": 0,
+            "pass_2x_seeds": 0,
+            "gate_1_5x": "FAIL",
+            "gate_2x": "FAIL",
+            "source": "recomputed from the per-seed rows; the summary's labels are cross-checked, never trusted"
+          },
+          "pca_leakage_comparison": {
+            "metric": "strongest observed attack result across measured arms (max per seed)",
+            "statistic_label": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+            "candidate_per_seed": {
+              "11": 0.5810546875,
+              "22": 0.6044921875,
+              "33": 0.591796875
+            },
+            "control_per_seed": {
+              "11": 0.59765625,
+              "22": 0.5966796875,
+              "33": 0.609375
+            },
+            "whitebox_tier": "NOT_EVALUABLE: tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+            "control_whitebox_tier": "measured",
+            "e2e_tier": "NOT_EVALUABLE: tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+            "control_e2e_tier": "measured",
+            "paired_seeds": [
+              11,
+              22,
+              33
+            ],
+            "control_minus_candidate_diffs": [
+              0.0166015625,
+              -0.0078125,
+              0.017578125
+            ],
+            "point_estimate": 0.0087890625,
+            "ci_low": -0.0078125,
+            "ci_high": 0.017578125,
+            "ci_status": "ESTIMATED",
+            "bootstrap_condition": {
+              "point_estimate_positive": true,
+              "ci_low_positive": false,
+              "passed": false
+            },
+            "all_seeds_positive_condition": {
+              "per_seed_diffs_positive": {
+                "11": true,
+                "22": false,
+                "33": true
+              },
+              "passed": false
+            }
+          },
+          "compute_comparison": {
+            "candidate_train_plus_attack_seconds": 229.18067711708136,
+            "control_train_plus_attack_seconds": 342.0018983692086,
+            "whitebox_attack_seconds_mean": null,
+            "control_whitebox_attack_seconds_mean": 125.87004797292563,
+            "scope": "train + attack wall seconds across ALL measured arms (base tier plus the white-box addendum tier)",
+            "ratio": 0.6701152192718798,
+            "max_factor": 2.0,
+            "within_factor": true
+          }
+        },
+        {
+          "split": 3,
+          "dim": 64,
+          "method": "tb-frozen",
+          "eligible": false,
+          "reasons": [
+            "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+            "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.0107421875, 0.0078125] includes 0 (ESTIMATED)",
+            "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+          ],
+          "gate": "fail",
+          "utility_gate_recomputed": {
+            "seeds": [
+              11,
+              22,
+              33
+            ],
+            "per_seed": {
+              "11": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 3.891325673036685
+              },
+              "22": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 3.8480977122258593
+              },
+              "33": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 3.9650344022682447
+              }
+            },
+            "pass_1_5x_seeds": 0,
+            "pass_2x_seeds": 0,
+            "gate_1_5x": "FAIL",
+            "gate_2x": "FAIL",
+            "source": "recomputed from the per-seed rows; the summary's labels are cross-checked, never trusted"
+          },
+          "pca_leakage_comparison": {
+            "metric": "strongest observed attack result across measured arms (max per seed)",
+            "statistic_label": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+            "candidate_per_seed": {
+              "11": 0.58984375,
+              "22": 0.607421875,
+              "33": 0.6015625
+            },
+            "control_per_seed": {
+              "11": 0.59765625,
+              "22": 0.5966796875,
+              "33": 0.609375
+            },
+            "whitebox_tier": "measured",
+            "control_whitebox_tier": "measured",
+            "e2e_tier": "measured",
+            "control_e2e_tier": "measured",
+            "paired_seeds": [
+              11,
+              22,
+              33
+            ],
+            "control_minus_candidate_diffs": [
+              0.0078125,
+              -0.0107421875,
+              0.0078125
+            ],
+            "point_estimate": 0.0016276041666666667,
+            "ci_low": -0.0107421875,
+            "ci_high": 0.0078125,
+            "ci_status": "ESTIMATED",
+            "bootstrap_condition": {
+              "point_estimate_positive": true,
+              "ci_low_positive": false,
+              "passed": false
+            },
+            "all_seeds_positive_condition": {
+              "per_seed_diffs_positive": {
+                "11": true,
+                "22": false,
+                "33": true
+              },
+              "passed": false
+            }
+          },
+          "compute_comparison": {
+            "candidate_train_plus_attack_seconds": 352.27994339967455,
+            "control_train_plus_attack_seconds": 342.0018983692086,
+            "whitebox_attack_seconds_mean": 124.50862160030131,
+            "control_whitebox_attack_seconds_mean": 125.87004797292563,
+            "scope": "train + attack wall seconds across ALL measured arms (base tier plus the white-box addendum tier)",
+            "ratio": 1.03005259643141,
+            "max_factor": 2.0,
+            "within_factor": true
+          }
+        },
+        {
+          "split": 3,
+          "dim": 128,
+          "method": "tb-cotrain",
+          "eligible": false,
+          "reasons": [
+            "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+            "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.01171875, 0.025390625] includes 0 (ESTIMATED)",
+            "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+          ],
+          "gate": "fail",
+          "utility_gate_recomputed": {
+            "seeds": [
+              11,
+              22,
+              33
+            ],
+            "per_seed": {
+              "11": {
+                "pass_1_5x": false,
+                "pass_2x": true,
+                "ppl_ratio": 1.8474060237510435
+              },
+              "22": {
+                "pass_1_5x": false,
+                "pass_2x": true,
+                "ppl_ratio": 1.7415986102361793
+              },
+              "33": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 2.0024494768672456
+              }
+            },
+            "pass_1_5x_seeds": 0,
+            "pass_2x_seeds": 2,
+            "gate_1_5x": "FAIL",
+            "gate_2x": "FAIL",
+            "source": "recomputed from the per-seed rows; the summary's labels are cross-checked, never trusted"
+          },
+          "pca_leakage_comparison": {
+            "metric": "strongest observed attack result across measured arms (max per seed)",
+            "statistic_label": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+            "candidate_per_seed": {
+              "11": 0.79296875,
+              "22": 0.830078125,
+              "33": 0.798828125
+            },
+            "control_per_seed": {
+              "11": 0.818359375,
+              "22": 0.818359375,
+              "33": 0.8203125
+            },
+            "whitebox_tier": "NOT_EVALUABLE: tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+            "control_whitebox_tier": "measured",
+            "e2e_tier": "NOT_EVALUABLE: tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+            "control_e2e_tier": "measured",
+            "paired_seeds": [
+              11,
+              22,
+              33
+            ],
+            "control_minus_candidate_diffs": [
+              0.025390625,
+              -0.01171875,
+              0.021484375
+            ],
+            "point_estimate": 0.01171875,
+            "ci_low": -0.01171875,
+            "ci_high": 0.025390625,
+            "ci_status": "ESTIMATED",
+            "bootstrap_condition": {
+              "point_estimate_positive": true,
+              "ci_low_positive": false,
+              "passed": false
+            },
+            "all_seeds_positive_condition": {
+              "per_seed_diffs_positive": {
+                "11": true,
+                "22": false,
+                "33": true
+              },
+              "passed": false
+            }
+          },
+          "compute_comparison": {
+            "candidate_train_plus_attack_seconds": 229.00295481070256,
+            "control_train_plus_attack_seconds": 341.8611722040611,
+            "whitebox_attack_seconds_mean": null,
+            "control_whitebox_attack_seconds_mean": 126.15982797307272,
+            "scope": "train + attack wall seconds across ALL measured arms (base tier plus the white-box addendum tier)",
+            "ratio": 0.6698712033726015,
+            "max_factor": 2.0,
+            "within_factor": true
+          }
+        },
+        {
+          "split": 3,
+          "dim": 128,
+          "method": "tb-frozen",
+          "eligible": false,
+          "reasons": [
+            "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+            "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.01171875, 0.0205078125] includes 0 (ESTIMATED)",
+            "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+          ],
+          "gate": "fail",
+          "utility_gate_recomputed": {
+            "seeds": [
+              11,
+              22,
+              33
+            ],
+            "per_seed": {
+              "11": {
+                "pass_1_5x": false,
+                "pass_2x": true,
+                "ppl_ratio": 1.846138712832766
+              },
+              "22": {
+                "pass_1_5x": false,
+                "pass_2x": true,
+                "ppl_ratio": 1.739440688029044
+              },
+              "33": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 2.0096212811312495
+              }
+            },
+            "pass_1_5x_seeds": 0,
+            "pass_2x_seeds": 2,
+            "gate_1_5x": "FAIL",
+            "gate_2x": "FAIL",
+            "source": "recomputed from the per-seed rows; the summary's labels are cross-checked, never trusted"
+          },
+          "pca_leakage_comparison": {
+            "metric": "strongest observed attack result across measured arms (max per seed)",
+            "statistic_label": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+            "candidate_per_seed": {
+              "11": 0.8037109375,
+              "22": 0.830078125,
+              "33": 0.7998046875
+            },
+            "control_per_seed": {
+              "11": 0.818359375,
+              "22": 0.818359375,
+              "33": 0.8203125
+            },
+            "whitebox_tier": "measured",
+            "control_whitebox_tier": "measured",
+            "e2e_tier": "measured",
+            "control_e2e_tier": "measured",
+            "paired_seeds": [
+              11,
+              22,
+              33
+            ],
+            "control_minus_candidate_diffs": [
+              0.0146484375,
+              -0.01171875,
+              0.0205078125
+            ],
+            "point_estimate": 0.0078125,
+            "ci_low": -0.01171875,
+            "ci_high": 0.0205078125,
+            "ci_status": "ESTIMATED",
+            "bootstrap_condition": {
+              "point_estimate_positive": true,
+              "ci_low_positive": false,
+              "passed": false
+            },
+            "all_seeds_positive_condition": {
+              "per_seed_diffs_positive": {
+                "11": true,
+                "22": false,
+                "33": true
+              },
+              "passed": false
+            }
+          },
+          "compute_comparison": {
+            "candidate_train_plus_attack_seconds": 354.7290016862874,
+            "control_train_plus_attack_seconds": 341.8611722040611,
+            "whitebox_attack_seconds_mean": 125.86068593066496,
+            "control_whitebox_attack_seconds_mean": 126.15982797307272,
+            "scope": "train + attack wall seconds across ALL measured arms (base tier plus the white-box addendum tier)",
+            "ratio": 1.037640511788058,
+            "max_factor": 2.0,
+            "within_factor": true
+          }
+        },
+        {
+          "split": 3,
+          "dim": 256,
+          "method": "tb-cotrain",
+          "eligible": false,
+          "reasons": [
+            "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.0087890625, 0.0078125] includes 0 (ESTIMATED)",
+            "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+          ],
+          "gate": "primary",
+          "utility_gate_recomputed": {
+            "seeds": [
+              11,
+              22,
+              33
+            ],
+            "per_seed": {
+              "11": {
+                "pass_1_5x": true,
+                "pass_2x": true,
+                "ppl_ratio": 1.323398572612422
+              },
+              "22": {
+                "pass_1_5x": true,
+                "pass_2x": true,
+                "ppl_ratio": 1.261083014422342
+              },
+              "33": {
+                "pass_1_5x": true,
+                "pass_2x": true,
+                "ppl_ratio": 1.3210932053514253
+              }
+            },
+            "pass_1_5x_seeds": 3,
+            "pass_2x_seeds": 3,
+            "gate_1_5x": "PASS",
+            "gate_2x": "PASS",
+            "source": "recomputed from the per-seed rows; the summary's labels are cross-checked, never trusted"
+          },
+          "pca_leakage_comparison": {
+            "metric": "strongest observed attack result across measured arms (max per seed)",
+            "statistic_label": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+            "candidate_per_seed": {
+              "11": 0.8876953125,
+              "22": 0.908203125,
+              "33": 0.8857421875
+            },
+            "control_per_seed": {
+              "11": 0.8955078125,
+              "22": 0.8994140625,
+              "33": 0.8916015625
+            },
+            "whitebox_tier": "NOT_EVALUABLE: tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+            "control_whitebox_tier": "measured",
+            "e2e_tier": "NOT_EVALUABLE: tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+            "control_e2e_tier": "measured",
+            "paired_seeds": [
+              11,
+              22,
+              33
+            ],
+            "control_minus_candidate_diffs": [
+              0.0078125,
+              -0.0087890625,
+              0.005859375
+            ],
+            "point_estimate": 0.0016276041666666667,
+            "ci_low": -0.0087890625,
+            "ci_high": 0.0078125,
+            "ci_status": "ESTIMATED",
+            "bootstrap_condition": {
+              "point_estimate_positive": true,
+              "ci_low_positive": false,
+              "passed": false
+            },
+            "all_seeds_positive_condition": {
+              "per_seed_diffs_positive": {
+                "11": true,
+                "22": false,
+                "33": true
+              },
+              "passed": false
+            }
+          },
+          "compute_comparison": {
+            "candidate_train_plus_attack_seconds": 230.91343325787844,
+            "control_train_plus_attack_seconds": 345.94028739227605,
+            "whitebox_attack_seconds_mean": null,
+            "control_whitebox_attack_seconds_mean": 127.41979101998731,
+            "scope": "train + attack wall seconds across ALL measured arms (base tier plus the white-box addendum tier)",
+            "ratio": 0.6674950610653685,
+            "max_factor": 2.0,
+            "within_factor": true
+          }
+        },
+        {
+          "split": 3,
+          "dim": 256,
+          "method": "tb-frozen",
+          "eligible": false,
+          "reasons": [
+            "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.0078125, 0.0068359375] includes 0 (ESTIMATED)",
+            "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+          ],
+          "gate": "primary",
+          "utility_gate_recomputed": {
+            "seeds": [
+              11,
+              22,
+              33
+            ],
+            "per_seed": {
+              "11": {
+                "pass_1_5x": true,
+                "pass_2x": true,
+                "ppl_ratio": 1.3229313454754619
+              },
+              "22": {
+                "pass_1_5x": true,
+                "pass_2x": true,
+                "ppl_ratio": 1.2616423134233672
+              },
+              "33": {
+                "pass_1_5x": true,
+                "pass_2x": true,
+                "ppl_ratio": 1.320980835833769
+              }
+            },
+            "pass_1_5x_seeds": 3,
+            "pass_2x_seeds": 3,
+            "gate_1_5x": "PASS",
+            "gate_2x": "PASS",
+            "source": "recomputed from the per-seed rows; the summary's labels are cross-checked, never trusted"
+          },
+          "pca_leakage_comparison": {
+            "metric": "strongest observed attack result across measured arms (max per seed)",
+            "statistic_label": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+            "candidate_per_seed": {
+              "11": 0.888671875,
+              "22": 0.9072265625,
+              "33": 0.8857421875
+            },
+            "control_per_seed": {
+              "11": 0.8955078125,
+              "22": 0.8994140625,
+              "33": 0.8916015625
+            },
+            "whitebox_tier": "measured",
+            "control_whitebox_tier": "measured",
+            "e2e_tier": "measured",
+            "control_e2e_tier": "measured",
+            "paired_seeds": [
+              11,
+              22,
+              33
+            ],
+            "control_minus_candidate_diffs": [
+              0.0068359375,
+              -0.0078125,
+              0.005859375
+            ],
+            "point_estimate": 0.0016276041666666667,
+            "ci_low": -0.0078125,
+            "ci_high": 0.0068359375,
+            "ci_status": "ESTIMATED",
+            "bootstrap_condition": {
+              "point_estimate_positive": true,
+              "ci_low_positive": false,
+              "passed": false
+            },
+            "all_seeds_positive_condition": {
+              "per_seed_diffs_positive": {
+                "11": true,
+                "22": false,
+                "33": true
+              },
+              "passed": false
+            }
+          },
+          "compute_comparison": {
+            "candidate_train_plus_attack_seconds": 354.6030955409321,
+            "control_train_plus_attack_seconds": 345.94028739227605,
+            "whitebox_attack_seconds_mean": 127.05047488554071,
+            "control_whitebox_attack_seconds_mean": 127.41979101998731,
+            "scope": "train + attack wall seconds across ALL measured arms (base tier plus the white-box addendum tier)",
+            "ratio": 1.025041339399805,
+            "max_factor": 2.0,
+            "within_factor": true
+          }
+        }
+      ]
+    },
+    "6": {
+      "outcome": "negative",
+      "selected": null,
+      "candidates": [
+        {
+          "split": 6,
+          "dim": 64,
+          "method": "tb-cotrain",
+          "eligible": false,
+          "reasons": [
+            "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+            "strongest observed leakage NOT below pca-compress control (paired point estimate -0.0048828125)",
+            "per-seed paired difference not positive for every seed (seeds [11, 22]); the bootstrap condition alone does not establish improvement on every paired seed"
+          ],
+          "gate": "fail",
+          "utility_gate_recomputed": {
+            "seeds": [
+              11,
+              22,
+              33
+            ],
+            "per_seed": {
+              "11": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 3.9788080265482297
+              },
+              "22": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 4.258041186559534
+              },
+              "33": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 3.879684713513357
+              }
+            },
+            "pass_1_5x_seeds": 0,
+            "pass_2x_seeds": 0,
+            "gate_1_5x": "FAIL",
+            "gate_2x": "FAIL",
+            "source": "recomputed from the per-seed rows; the summary's labels are cross-checked, never trusted"
+          },
+          "pca_leakage_comparison": {
+            "metric": "strongest observed attack result across measured arms (max per seed)",
+            "statistic_label": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+            "candidate_per_seed": {
+              "11": 0.5537109375,
+              "22": 0.5576171875,
+              "33": 0.55078125
+            },
+            "control_per_seed": {
+              "11": 0.546875,
+              "22": 0.546875,
+              "33": 0.5537109375
+            },
+            "whitebox_tier": "NOT_EVALUABLE: tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+            "control_whitebox_tier": "measured",
+            "e2e_tier": "NOT_EVALUABLE: tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+            "control_e2e_tier": "measured",
+            "paired_seeds": [
+              11,
+              22,
+              33
+            ],
+            "control_minus_candidate_diffs": [
+              -0.0068359375,
+              -0.0107421875,
+              0.0029296875
+            ],
+            "point_estimate": -0.0048828125,
+            "ci_low": -0.0107421875,
+            "ci_high": 0.0029296875,
+            "ci_status": "ESTIMATED",
+            "bootstrap_condition": {
+              "point_estimate_positive": false,
+              "ci_low_positive": false,
+              "passed": false
+            },
+            "all_seeds_positive_condition": {
+              "per_seed_diffs_positive": {
+                "11": false,
+                "22": false,
+                "33": true
+              },
+              "passed": false
+            }
+          },
+          "compute_comparison": {
+            "candidate_train_plus_attack_seconds": 420.9938176327074,
+            "control_train_plus_attack_seconds": 647.8639706710043,
+            "whitebox_attack_seconds_mean": null,
+            "control_whitebox_attack_seconds_mean": 241.6887691259229,
+            "scope": "train + attack wall seconds across ALL measured arms (base tier plus the white-box addendum tier)",
+            "ratio": 0.6498182283491959,
+            "max_factor": 2.0,
+            "within_factor": true
+          }
+        },
+        {
+          "split": 6,
+          "dim": 64,
+          "method": "tb-frozen",
+          "eligible": false,
+          "reasons": [
+            "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+            "strongest observed leakage NOT below pca-compress control (paired point estimate -0.008138020833333334)",
+            "per-seed paired difference not positive for every seed (seeds [11, 22, 33]); the bootstrap condition alone does not establish improvement on every paired seed"
+          ],
+          "gate": "fail",
+          "utility_gate_recomputed": {
+            "seeds": [
+              11,
+              22,
+              33
+            ],
+            "per_seed": {
+              "11": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 3.9758414157918076
+              },
+              "22": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 4.258163535825004
+              },
+              "33": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 3.8807648630047575
+              }
+            },
+            "pass_1_5x_seeds": 0,
+            "pass_2x_seeds": 0,
+            "gate_1_5x": "FAIL",
+            "gate_2x": "FAIL",
+            "source": "recomputed from the per-seed rows; the summary's labels are cross-checked, never trusted"
+          },
+          "pca_leakage_comparison": {
+            "metric": "strongest observed attack result across measured arms (max per seed)",
+            "statistic_label": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+            "candidate_per_seed": {
+              "11": 0.5556640625,
+              "22": 0.5595703125,
+              "33": 0.556640625
+            },
+            "control_per_seed": {
+              "11": 0.546875,
+              "22": 0.546875,
+              "33": 0.5537109375
+            },
+            "whitebox_tier": "measured",
+            "control_whitebox_tier": "measured",
+            "e2e_tier": "measured",
+            "control_e2e_tier": "measured",
+            "paired_seeds": [
+              11,
+              22,
+              33
+            ],
+            "control_minus_candidate_diffs": [
+              -0.0087890625,
+              -0.0126953125,
+              -0.0029296875
+            ],
+            "point_estimate": -0.008138020833333334,
+            "ci_low": -0.0126953125,
+            "ci_high": -0.0029296875,
+            "ci_status": "ESTIMATED",
+            "bootstrap_condition": {
+              "point_estimate_positive": false,
+              "ci_low_positive": false,
+              "passed": false
+            },
+            "all_seeds_positive_condition": {
+              "per_seed_diffs_positive": {
+                "11": false,
+                "22": false,
+                "33": false
+              },
+              "passed": false
+            }
+          },
+          "compute_comparison": {
+            "candidate_train_plus_attack_seconds": 656.4589313833663,
+            "control_train_plus_attack_seconds": 647.8639706710043,
+            "whitebox_attack_seconds_mean": 241.16349225204127,
+            "control_whitebox_attack_seconds_mean": 241.6887691259229,
+            "scope": "train + attack wall seconds across ALL measured arms (base tier plus the white-box addendum tier)",
+            "ratio": 1.0132666132111963,
+            "max_factor": 2.0,
+            "within_factor": true
+          }
+        },
+        {
+          "split": 6,
+          "dim": 128,
+          "method": "tb-cotrain",
+          "eligible": false,
+          "reasons": [
+            "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+            "strongest observed leakage NOT below pca-compress control (paired point estimate -0.0006510416666666666)",
+            "per-seed paired difference not positive for every seed (seeds [11, 22]); the bootstrap condition alone does not establish improvement on every paired seed"
+          ],
+          "gate": "fail",
+          "utility_gate_recomputed": {
+            "seeds": [
+              11,
+              22,
+              33
+            ],
+            "per_seed": {
+              "11": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 2.12737158357794
+              },
+              "22": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 2.216570905683691
+              },
+              "33": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 2.184880534195879
+              }
+            },
+            "pass_1_5x_seeds": 0,
+            "pass_2x_seeds": 0,
+            "gate_1_5x": "FAIL",
+            "gate_2x": "FAIL",
+            "source": "recomputed from the per-seed rows; the summary's labels are cross-checked, never trusted"
+          },
+          "pca_leakage_comparison": {
+            "metric": "strongest observed attack result across measured arms (max per seed)",
+            "statistic_label": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+            "candidate_per_seed": {
+              "11": 0.763671875,
+              "22": 0.7666015625,
+              "33": 0.7314453125
+            },
+            "control_per_seed": {
+              "11": 0.740234375,
+              "22": 0.7607421875,
+              "33": 0.7587890625
+            },
+            "whitebox_tier": "NOT_EVALUABLE: tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+            "control_whitebox_tier": "measured",
+            "e2e_tier": "NOT_EVALUABLE: tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+            "control_e2e_tier": "measured",
+            "paired_seeds": [
+              11,
+              22,
+              33
+            ],
+            "control_minus_candidate_diffs": [
+              -0.0234375,
+              -0.005859375,
+              0.02734375
+            ],
+            "point_estimate": -0.0006510416666666666,
+            "ci_low": -0.0234375,
+            "ci_high": 0.02734375,
+            "ci_status": "ESTIMATED",
+            "bootstrap_condition": {
+              "point_estimate_positive": false,
+              "ci_low_positive": false,
+              "passed": false
+            },
+            "all_seeds_positive_condition": {
+              "per_seed_diffs_positive": {
+                "11": false,
+                "22": false,
+                "33": true
+              },
+              "passed": false
+            }
+          },
+          "compute_comparison": {
+            "candidate_train_plus_attack_seconds": 422.9423099992952,
+            "control_train_plus_attack_seconds": 652.1671096070979,
+            "whitebox_attack_seconds_mean": null,
+            "control_whitebox_attack_seconds_mean": 240.54004944736758,
+            "scope": "train + attack wall seconds across ALL measured arms (base tier plus the white-box addendum tier)",
+            "ratio": 0.6485183073002553,
+            "max_factor": 2.0,
+            "within_factor": true
+          }
+        },
+        {
+          "split": 6,
+          "dim": 128,
+          "method": "tb-frozen",
+          "eligible": false,
+          "reasons": [
+            "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+            "strongest observed leakage NOT below pca-compress control (paired point estimate -0.0068359375)",
+            "per-seed paired difference not positive for every seed (seeds [11, 22]); the bootstrap condition alone does not establish improvement on every paired seed"
+          ],
+          "gate": "fail",
+          "utility_gate_recomputed": {
+            "seeds": [
+              11,
+              22,
+              33
+            ],
+            "per_seed": {
+              "11": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 2.1321517894957887
+              },
+              "22": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 2.2202635457951523
+              },
+              "33": {
+                "pass_1_5x": false,
+                "pass_2x": false,
+                "ppl_ratio": 2.1807616057985415
+              }
+            },
+            "pass_1_5x_seeds": 0,
+            "pass_2x_seeds": 0,
+            "gate_1_5x": "FAIL",
+            "gate_2x": "FAIL",
+            "source": "recomputed from the per-seed rows; the summary's labels are cross-checked, never trusted"
+          },
+          "pca_leakage_comparison": {
+            "metric": "strongest observed attack result across measured arms (max per seed)",
+            "statistic_label": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+            "candidate_per_seed": {
+              "11": 0.7666015625,
+              "22": 0.7705078125,
+              "33": 0.7431640625
+            },
+            "control_per_seed": {
+              "11": 0.740234375,
+              "22": 0.7607421875,
+              "33": 0.7587890625
+            },
+            "whitebox_tier": "measured",
+            "control_whitebox_tier": "measured",
+            "e2e_tier": "measured",
+            "control_e2e_tier": "measured",
+            "paired_seeds": [
+              11,
+              22,
+              33
+            ],
+            "control_minus_candidate_diffs": [
+              -0.0263671875,
+              -0.009765625,
+              0.015625
+            ],
+            "point_estimate": -0.0068359375,
+            "ci_low": -0.0263671875,
+            "ci_high": 0.015625,
+            "ci_status": "ESTIMATED",
+            "bootstrap_condition": {
+              "point_estimate_positive": false,
+              "ci_low_positive": false,
+              "passed": false
+            },
+            "all_seeds_positive_condition": {
+              "per_seed_diffs_positive": {
+                "11": false,
+                "22": false,
+                "33": true
+              },
+              "passed": false
+            }
+          },
+          "compute_comparison": {
+            "candidate_train_plus_attack_seconds": 663.3684356140438,
+            "control_train_plus_attack_seconds": 652.1671096070979,
+            "whitebox_attack_seconds_mean": 242.08547094766982,
+            "control_whitebox_attack_seconds_mean": 240.54004944736758,
+            "scope": "train + attack wall seconds across ALL measured arms (base tier plus the white-box addendum tier)",
+            "ratio": 1.0171755457181737,
+            "max_factor": 2.0,
+            "within_factor": true
+          }
+        },
+        {
+          "split": 6,
+          "dim": 256,
+          "method": "tb-cotrain",
+          "eligible": false,
+          "reasons": [
+            "strongest observed leakage NOT below pca-compress control (paired point estimate -0.011393229166666666)",
+            "per-seed paired difference not positive for every seed (seeds [11, 22, 33]); the bootstrap condition alone does not establish improvement on every paired seed"
+          ],
+          "gate": "secondary",
+          "utility_gate_recomputed": {
+            "seeds": [
+              11,
+              22,
+              33
+            ],
+            "per_seed": {
+              "11": {
+                "pass_1_5x": true,
+                "pass_2x": true,
+                "ppl_ratio": 1.402270396363251
+              },
+              "22": {
+                "pass_1_5x": true,
+                "pass_2x": true,
+                "ppl_ratio": 1.4333845046396072
+              },
+              "33": {
+                "pass_1_5x": false,
+                "pass_2x": true,
+                "ppl_ratio": 1.5458318503684385
+              }
+            },
+            "pass_1_5x_seeds": 2,
+            "pass_2x_seeds": 3,
+            "gate_1_5x": "FAIL",
+            "gate_2x": "PASS",
+            "source": "recomputed from the per-seed rows; the summary's labels are cross-checked, never trusted"
+          },
+          "pca_leakage_comparison": {
+            "metric": "strongest observed attack result across measured arms (max per seed)",
+            "statistic_label": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+            "candidate_per_seed": {
+              "11": 0.845703125,
+              "22": 0.85546875,
+              "33": 0.8486328125
+            },
+            "control_per_seed": {
+              "11": 0.82421875,
+              "22": 0.84765625,
+              "33": 0.84375
+            },
+            "whitebox_tier": "NOT_EVALUABLE: tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+            "control_whitebox_tier": "measured",
+            "e2e_tier": "NOT_EVALUABLE: tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+            "control_e2e_tier": "measured",
+            "paired_seeds": [
+              11,
+              22,
+              33
+            ],
+            "control_minus_candidate_diffs": [
+              -0.021484375,
+              -0.0078125,
+              -0.0048828125
+            ],
+            "point_estimate": -0.011393229166666666,
+            "ci_low": -0.021484375,
+            "ci_high": -0.0048828125,
+            "ci_status": "ESTIMATED",
+            "bootstrap_condition": {
+              "point_estimate_positive": false,
+              "ci_low_positive": false,
+              "passed": false
+            },
+            "all_seeds_positive_condition": {
+              "per_seed_diffs_positive": {
+                "11": false,
+                "22": false,
+                "33": false
+              },
+              "passed": false
+            }
+          },
+          "compute_comparison": {
+            "candidate_train_plus_attack_seconds": 417.0179988932796,
+            "control_train_plus_attack_seconds": 650.3806273816153,
+            "whitebox_attack_seconds_mean": null,
+            "control_whitebox_attack_seconds_mean": 241.89105795362653,
+            "scope": "train + attack wall seconds across ALL measured arms (base tier plus the white-box addendum tier)",
+            "ratio": 0.6411906833267212,
+            "max_factor": 2.0,
+            "within_factor": true
+          }
+        },
+        {
+          "split": 6,
+          "dim": 256,
+          "method": "tb-frozen",
+          "eligible": false,
+          "reasons": [
+            "strongest observed leakage NOT below pca-compress control (paired point estimate -0.008463541666666666)",
+            "per-seed paired difference not positive for every seed (seeds [11, 22]); the bootstrap condition alone does not establish improvement on every paired seed"
+          ],
+          "gate": "secondary",
+          "utility_gate_recomputed": {
+            "seeds": [
+              11,
+              22,
+              33
+            ],
+            "per_seed": {
+              "11": {
+                "pass_1_5x": true,
+                "pass_2x": true,
+                "ppl_ratio": 1.4022943495022668
+              },
+              "22": {
+                "pass_1_5x": true,
+                "pass_2x": true,
+                "ppl_ratio": 1.432915232617424
+              },
+              "33": {
+                "pass_1_5x": false,
+                "pass_2x": true,
+                "ppl_ratio": 1.5453976703029306
+              }
+            },
+            "pass_1_5x_seeds": 2,
+            "pass_2x_seeds": 3,
+            "gate_1_5x": "FAIL",
+            "gate_2x": "PASS",
+            "source": "recomputed from the per-seed rows; the summary's labels are cross-checked, never trusted"
+          },
+          "pca_leakage_comparison": {
+            "metric": "strongest observed attack result across measured arms (max per seed)",
+            "statistic_label": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+            "candidate_per_seed": {
+              "11": 0.845703125,
+              "22": 0.8544921875,
+              "33": 0.8408203125
+            },
+            "control_per_seed": {
+              "11": 0.82421875,
+              "22": 0.84765625,
+              "33": 0.84375
+            },
+            "whitebox_tier": "measured",
+            "control_whitebox_tier": "measured",
+            "e2e_tier": "measured",
+            "control_e2e_tier": "measured",
+            "paired_seeds": [
+              11,
+              22,
+              33
+            ],
+            "control_minus_candidate_diffs": [
+              -0.021484375,
+              -0.0068359375,
+              0.0029296875
+            ],
+            "point_estimate": -0.008463541666666666,
+            "ci_low": -0.021484375,
+            "ci_high": 0.0029296875,
+            "ci_status": "ESTIMATED",
+            "bootstrap_condition": {
+              "point_estimate_positive": false,
+              "ci_low_positive": false,
+              "passed": false
+            },
+            "all_seeds_positive_condition": {
+              "per_seed_diffs_positive": {
+                "11": false,
+                "22": false,
+                "33": true
+              },
+              "passed": false
+            }
+          },
+          "compute_comparison": {
+            "candidate_train_plus_attack_seconds": 656.2922268229693,
+            "control_train_plus_attack_seconds": 650.3806273816153,
+            "whitebox_attack_seconds_mean": 239.88574685971253,
+            "control_whitebox_attack_seconds_mean": 241.89105795362653,
+            "scope": "train + attack wall seconds across ALL measured arms (base tier plus the white-box addendum tier)",
+            "ratio": 1.0090894457683244,
+            "max_factor": 2.0,
+            "within_factor": true
+          }
+        }
+      ]
+    }
+  },
+  "negative_splits": [
+    "3",
+    "6"
+  ],
+  "negative_statement": "split(s) ['3', '6'] selected NO operating point; the NEGATIVE result is retained and v3 remains UNFROZEN"
+}

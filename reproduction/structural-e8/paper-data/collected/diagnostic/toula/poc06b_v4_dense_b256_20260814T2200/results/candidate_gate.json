@@ -1,0 +1,42 @@
+{
+  "schema": "dtraining.v4_candidate_gate.v1",
+  "passed": false,
+  "checks": {
+    "privacy": false,
+    "utility": true,
+    "cost": false,
+    "formal_boundary_dp": true
+  },
+  "metrics": {
+    "eval_loss_delta": 0.08440025647481297,
+    "step_time_ratio": 8.021743037363319,
+    "boundary_epsilon": null,
+    "boundary_dp_status": "not_enabled",
+    "attacks": [
+      {
+        "source": "paper-data/collected/diagnostic/toula/poc06b_v4_dense_b256_20260814T2200/results/attack_solve8.json",
+        "recovery_pct": 21.88,
+        "band_pct": 5.47,
+        "passed": false
+      },
+      {
+        "source": "paper-data/collected/diagnostic/toula/poc06b_v4_dense_b256_20260814T2200/results/attack_solve16.json",
+        "recovery_pct": 21.88,
+        "band_pct": 5.86,
+        "passed": false
+      },
+      {
+        "source": "paper-data/collected/diagnostic/toula/poc06b_v4_dense_b256_20260814T2200/results/attack_solve32.json",
+        "recovery_pct": 18.75,
+        "band_pct": 6.25,
+        "passed": false
+      }
+    ]
+  },
+  "thresholds": {
+    "max_eval_loss_delta": 0.35,
+    "max_step_ratio": 3.0,
+    "max_recovery_above_band": 1.0,
+    "max_boundary_epsilon": 8.0
+  }
+}

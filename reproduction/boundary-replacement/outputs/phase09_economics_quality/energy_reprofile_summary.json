@@ -1,0 +1,183 @@
+{
+  "limitations": [
+    "An analytic coverage share is not an actual remote-FLOP measurement.",
+    "Only a profiler-supplied FLOP count can populate actual_remote_flops.",
+    "Training and inference timing remain separate success criteria."
+  ],
+  "rows": [
+    {
+      "actual_remote_flops": 243698924128,
+      "actual_remote_flops_status": "pytorch_profiler_operator_count",
+      "artifact_model": "/home/geo/experiments/models/qwen3-0.6b",
+      "delegated_eval_seconds": 391.3356066418346,
+      "delegated_vs_no_replacement_eval_time_ratio": 1.2772560938995032,
+      "no_replacement_eval_seconds": 306.387738927966,
+      "nominal_covered_layer_share": 0.14285714285714285,
+      "remote_backward_compute_ms": 586770.2557574958,
+      "remote_forward_compute_ms": 234348.6512294039,
+      "seed": 42,
+      "systems_profile": {
+        "command_exit_status": 0,
+        "limitations": [
+          "GPU utilization and power are two-second samples, not per-operation profiles.",
+          "Hardware energy counters are preferred; otherwise energy is estimated from sampled power times profiled wall time.",
+          "Estimated energy is operational and is not equivalent to a hardware energy-counter measurement."
+        ],
+        "name": "clean21_energy_retry",
+        "raw_logs": {
+          "remote_cpu": "/home/geo/experiments/results/training/phase09_energy_reprofile/clean21_retry/economics/clean21_energy_retry_remote_cpu.log",
+          "remote_gpu": "/home/geo/experiments/results/training/phase09_energy_reprofile/clean21_retry/economics/clean21_energy_retry_remote_gpu.csv",
+          "trusted_cpu": "/home/geo/experiments/results/training/phase09_energy_reprofile/clean21_retry/economics/clean21_energy_retry_trusted_cpu.log",
+          "trusted_gpu": "/home/geo/experiments/results/training/phase09_energy_reprofile/clean21_retry/economics/clean21_energy_retry_trusted_gpu.csv"
+        },
+        "remote": {
+          "cpu": {
+            "sample_count": 1162,
+            "utilization_mean_pct": 2.216867469879517,
+            "utilization_peak_pct": 4.0
+          },
+          "energy": {
+            "coverage_seconds": 2322,
+            "estimated_gpu_energy_joules": 28819.094018932876,
+            "measured_gpu_energy_joules": null,
+            "method": "sampled_power_mean_times_wall_time",
+            "note": "Operational estimate from two-second nvidia-smi power.draw samples; not a hardware energy counter.",
+            "sample_count": 1162,
+            "sampling_interval_seconds": 2,
+            "status": "estimated",
+            "wall_seconds": 2323
+          },
+          "gpu": {
+            "memory_used_peak_mib": null,
+            "power_draw_mean_watts": 12.405981067125646,
+            "power_draw_peak_watts": 12.89,
+            "sample_count": 1162,
+            "utilization_gpu_mean_pct": 0.5137693631669535,
+            "utilization_gpu_peak_pct": 4.0
+          }
+        },
+        "remote_host": "koula",
+        "schema": "dtraining.systems_profile.v1",
+        "trusted": {
+          "cpu": {
+            "sample_count": 1162,
+            "utilization_mean_pct": 3.1462994836488747,
+            "utilization_peak_pct": 8.0
+          },
+          "energy": {
+            "coverage_seconds": 2322,
+            "estimated_gpu_energy_joules": 44984.63511187607,
+            "measured_gpu_energy_joules": null,
+            "method": "sampled_power_mean_times_wall_time",
+            "note": "Operational estimate from two-second nvidia-smi power.draw samples; not a hardware energy counter.",
+            "sample_count": 1162,
+            "sampling_interval_seconds": 2,
+            "status": "estimated",
+            "wall_seconds": 2323
+          },
+          "gpu": {
+            "memory_used_peak_mib": null,
+            "power_draw_mean_watts": 19.364888123924267,
+            "power_draw_peak_watts": 40.46,
+            "sample_count": 1162,
+            "utilization_gpu_mean_pct": 45.126506024096386,
+            "utilization_gpu_peak_pct": 94.0
+          }
+        },
+        "wall_seconds": 2323
+      },
+      "training_seconds": 1549.3187489272095,
+      "trusted_peak_cuda_memory_mb": 4193.5,
+      "utility_nll_delta": 0.000644026295049116,
+      "wire_bytes": 497079142
+    },
+    {
+      "actual_remote_flops": 243698924128,
+      "actual_remote_flops_status": "pytorch_profiler_operator_count",
+      "artifact_model": "/home/geo/experiments/models/qwen3-0.6b",
+      "delegated_eval_seconds": 371.52700275182724,
+      "delegated_vs_no_replacement_eval_time_ratio": 1.204900535712453,
+      "no_replacement_eval_seconds": 308.3466159570962,
+      "nominal_covered_layer_share": 0.21428571428571427,
+      "remote_backward_compute_ms": 700881.7149656825,
+      "remote_forward_compute_ms": 240534.5901811961,
+      "seed": 42,
+      "systems_profile": {
+        "command_exit_status": 0,
+        "limitations": [
+          "GPU utilization and power are two-second samples, not per-operation profiles.",
+          "Hardware energy counters are preferred; otherwise energy is estimated from sampled power times profiled wall time.",
+          "Estimated energy is operational and is not equivalent to a hardware energy-counter measurement."
+        ],
+        "name": "failed19_energy",
+        "raw_logs": {
+          "remote_cpu": "/home/geo/experiments/results/training/phase09_energy_reprofile/failed19/economics/failed19_energy_remote_cpu.log",
+          "remote_gpu": "/home/geo/experiments/results/training/phase09_energy_reprofile/failed19/economics/failed19_energy_remote_gpu.csv",
+          "trusted_cpu": "/home/geo/experiments/results/training/phase09_energy_reprofile/failed19/economics/failed19_energy_trusted_cpu.log",
+          "trusted_gpu": "/home/geo/experiments/results/training/phase09_energy_reprofile/failed19/economics/failed19_energy_trusted_gpu.csv"
+        },
+        "remote": {
+          "cpu": {
+            "sample_count": 1217,
+            "utilization_mean_pct": 2.5505341002465087,
+            "utilization_peak_pct": 8.0
+          },
+          "energy": {
+            "coverage_seconds": 2432,
+            "estimated_gpu_energy_joules": 30550.34334428924,
+            "measured_gpu_energy_joules": null,
+            "method": "sampled_power_mean_times_wall_time",
+            "note": "Operational estimate from two-second nvidia-smi power.draw samples; not a hardware energy counter.",
+            "sample_count": 1217,
+            "sampling_interval_seconds": 2,
+            "status": "estimated",
+            "wall_seconds": 2433
+          },
+          "gpu": {
+            "memory_used_peak_mib": null,
+            "power_draw_mean_watts": 12.556655710764176,
+            "power_draw_peak_watts": 13.22,
+            "sample_count": 1217,
+            "utilization_gpu_mean_pct": 0.4741166803615448,
+            "utilization_gpu_peak_pct": 3.0
+          }
+        },
+        "remote_host": "koula",
+        "schema": "dtraining.systems_profile.v1",
+        "trusted": {
+          "cpu": {
+            "sample_count": 1217,
+            "utilization_mean_pct": 3.1364009860312194,
+            "utilization_peak_pct": 10.0
+          },
+          "energy": {
+            "coverage_seconds": 2432,
+            "estimated_gpu_energy_joules": 46153.810082169264,
+            "measured_gpu_energy_joules": null,
+            "method": "sampled_power_mean_times_wall_time",
+            "note": "Operational estimate from two-second nvidia-smi power.draw samples; not a hardware energy counter.",
+            "sample_count": 1217,
+            "sampling_interval_seconds": 2,
+            "status": "estimated",
+            "wall_seconds": 2433
+          },
+          "gpu": {
+            "memory_used_peak_mib": null,
+            "power_draw_mean_watts": 18.969917830731305,
+            "power_draw_peak_watts": 40.49,
+            "sample_count": 1217,
+            "utilization_gpu_mean_pct": 42.43467543138866,
+            "utilization_gpu_peak_pct": 95.0
+          }
+        },
+        "wall_seconds": 2433
+      },
+      "training_seconds": 1682.5286775901914,
+      "trusted_peak_cuda_memory_mb": 4193.5,
+      "utility_nll_delta": 0.5419132727547549,
+      "wire_bytes": 497079078
+    }
+  ],
+  "schema": "dtraining.delegation_systems_summary.v1",
+  "status": "completed"
+}

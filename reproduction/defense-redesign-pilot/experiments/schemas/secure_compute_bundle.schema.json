@@ -1,0 +1,407 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://paper4.local/schemas/secure_compute_bundle.schema.json",
+  "title": "Paper 4 no-hardware two-view secure-compute bundle",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "bundle_id",
+    "protocol_id",
+    "run_id",
+    "cohort",
+    "scientific_evidence",
+    "hardware_attested",
+    "privacy_outcome",
+    "cell",
+    "mode",
+    "claim_scope",
+    "deployment",
+    "bindings",
+    "session",
+    "phase_coverage",
+    "views",
+    "artifacts",
+    "event_chain_sha256",
+    "omissions"
+  ],
+  "properties": {
+    "schema_version": {"const": "p4-secure-compute-bundle-0.1"},
+    "bundle_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+    "protocol_id": {"type": "string", "pattern": "^p4-"},
+    "run_id": {"type": "string", "pattern": "^p4-"},
+    "cohort": {"const": "engineering"},
+    "scientific_evidence": {"const": false},
+    "hardware_attested": {"const": false},
+    "privacy_outcome": {"const": "undetermined"},
+    "cell": {"const": "d0-q8"},
+    "mode": {"enum": ["trained", "frozen_random", "removed_remote"]},
+    "claim_scope": {
+      "const": "No-hardware two-view recorder diagnostic; no confidentiality, integrity, attestation, privacy, or defense claim."
+    },
+    "deployment": {"$ref": "#/$defs/deployment"},
+    "bindings": {"$ref": "#/$defs/bindings"},
+    "session": {"$ref": "#/$defs/session"},
+    "phase_coverage": {"$ref": "#/$defs/phaseCoverage"},
+    "views": {"$ref": "#/$defs/views"},
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/artifact"}
+    },
+    "event_chain_sha256": {"$ref": "#/$defs/sha"},
+    "omissions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "shape": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "integer", "minimum": 1}
+    },
+    "phases": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "forward",
+          "backward",
+          "update",
+          "optimizer",
+          "staging",
+          "log",
+          "checkpoint",
+          "crash"
+        ]
+      }
+    },
+    "deployment": {
+      "type": "object",
+      "required": [
+        "environment",
+        "hardware",
+        "transport",
+        "encryption",
+        "attestation",
+        "protection_implemented"
+      ],
+      "properties": {
+        "environment": {"const": "local_no_hardware_diagnostic"},
+        "hardware": {"const": "none"},
+        "transport": {"const": "in_process_plaintext_serialized_loopback"},
+        "encryption": {"const": "none"},
+        "attestation": {"const": "none"},
+        "protection_implemented": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "bindings": {
+      "type": "object",
+      "required": [
+        "source_tree_sha256",
+        "config_sha256",
+        "checkpoint_manifest_sha256",
+        "panels_manifest_sha256",
+        "panels_sha256"
+      ],
+      "properties": {
+        "source_tree_sha256": {"$ref": "#/$defs/sha"},
+        "config_sha256": {"$ref": "#/$defs/sha"},
+        "checkpoint_manifest_sha256": {"$ref": "#/$defs/sha"},
+        "panels_manifest_sha256": {"$ref": "#/$defs/sha"},
+        "panels_sha256": {"$ref": "#/$defs/sha"}
+      },
+      "additionalProperties": false
+    },
+    "request": {
+      "type": "object",
+      "required": ["request_id", "step"],
+      "properties": {
+        "request_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "step": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "session": {
+      "type": "object",
+      "required": ["session_id", "requests"],
+      "properties": {
+        "session_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "requests": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/request"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "recordedPhase": {
+      "type": "object",
+      "required": ["status", "event_count", "reason"],
+      "properties": {
+        "status": {"const": "recorded"},
+        "event_count": {"type": "integer", "minimum": 1},
+        "reason": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "absentPhase": {
+      "type": "object",
+      "required": ["status", "event_count", "reason"],
+      "properties": {
+        "status": {"enum": ["not_exercised", "not_applicable"]},
+        "event_count": {"const": 0},
+        "reason": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "phaseStatus": {
+      "oneOf": [
+        {"$ref": "#/$defs/recordedPhase"},
+        {"$ref": "#/$defs/absentPhase"}
+      ]
+    },
+    "phaseCoverage": {
+      "type": "object",
+      "required": [
+        "forward",
+        "backward",
+        "update",
+        "optimizer",
+        "staging",
+        "log",
+        "checkpoint",
+        "crash"
+      ],
+      "properties": {
+        "forward": {"$ref": "#/$defs/phaseStatus"},
+        "backward": {"$ref": "#/$defs/phaseStatus"},
+        "update": {"$ref": "#/$defs/phaseStatus"},
+        "optimizer": {"$ref": "#/$defs/phaseStatus"},
+        "staging": {"$ref": "#/$defs/phaseStatus"},
+        "log": {"$ref": "#/$defs/phaseStatus"},
+        "checkpoint": {"$ref": "#/$defs/phaseStatus"},
+        "crash": {"$ref": "#/$defs/phaseStatus"}
+      },
+      "additionalProperties": false
+    },
+    "externalObservation": {
+      "type": "object",
+      "required": [
+        "payload_state",
+        "serialized_bytes",
+        "packet_sha256",
+        "shape",
+        "dtype",
+        "metadata_visible"
+      ],
+      "properties": {
+        "payload_state": {"const": "plaintext_unprotected"},
+        "serialized_bytes": {"type": "integer", "minimum": 1},
+        "packet_sha256": {"$ref": "#/$defs/sha"},
+        "shape": {"$ref": "#/$defs/shape"},
+        "dtype": {"type": "string", "minLength": 1},
+        "metadata_visible": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "session_id",
+              "request_id",
+              "step",
+              "phase",
+              "direction",
+              "operator",
+              "shape",
+              "dtype",
+              "serialized_bytes",
+              "packet_bytes"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "trustedObservation": {
+      "type": "object",
+      "required": [
+        "payload_state",
+        "serialized_bytes",
+        "packet_sha256",
+        "tensor_sha256",
+        "shape",
+        "dtype",
+        "finite"
+      ],
+      "properties": {
+        "payload_state": {"const": "plaintext_trusted_diagnostic"},
+        "serialized_bytes": {"type": "integer", "minimum": 1},
+        "packet_sha256": {"$ref": "#/$defs/sha"},
+        "tensor_sha256": {"$ref": "#/$defs/sha"},
+        "shape": {"$ref": "#/$defs/shape"},
+        "dtype": {"type": "string", "minLength": 1},
+        "finite": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "externalEvent": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "event_id",
+        "correlation_id",
+        "sequence",
+        "view",
+        "session_id",
+        "request_id",
+        "step",
+        "phases",
+        "direction",
+        "operation",
+        "operator",
+        "artifact_ids",
+        "external_observation"
+      ],
+      "properties": {
+        "schema_version": {"const": "p4-secure-compute-event-0.1"},
+        "event_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "correlation_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "sequence": {"type": "integer", "minimum": 0},
+        "view": {"const": "external_attacker"},
+        "session_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "request_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "step": {"type": "integer", "minimum": 0},
+        "phases": {"$ref": "#/$defs/phases"},
+        "direction": {
+          "enum": [
+            "trusted_to_external",
+            "external_to_trusted",
+            "trusted_internal",
+            "external_internal"
+          ]
+        },
+        "operation": {"type": "string", "minLength": 1},
+        "operator": {"type": "string", "minLength": 1},
+        "artifact_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"}
+        },
+        "external_observation": {"$ref": "#/$defs/externalObservation"}
+      },
+      "additionalProperties": false
+    },
+    "trustedEvent": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "event_id",
+        "correlation_id",
+        "sequence",
+        "view",
+        "session_id",
+        "request_id",
+        "step",
+        "phases",
+        "direction",
+        "operation",
+        "operator",
+        "artifact_ids",
+        "trusted_diagnostic"
+      ],
+      "properties": {
+        "schema_version": {"const": "p4-secure-compute-event-0.1"},
+        "event_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "correlation_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "sequence": {"type": "integer", "minimum": 0},
+        "view": {"const": "trusted_diagnostic"},
+        "session_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "request_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "step": {"type": "integer", "minimum": 0},
+        "phases": {"$ref": "#/$defs/phases"},
+        "direction": {
+          "enum": [
+            "trusted_to_external",
+            "external_to_trusted",
+            "trusted_internal",
+            "external_internal"
+          ]
+        },
+        "operation": {"type": "string", "minLength": 1},
+        "operator": {"type": "string", "minLength": 1},
+        "artifact_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"}
+        },
+        "trusted_diagnostic": {"$ref": "#/$defs/trustedObservation"}
+      },
+      "additionalProperties": false
+    },
+    "view": {
+      "type": "object",
+      "required": ["description", "events"],
+      "properties": {
+        "description": {"type": "string", "minLength": 1},
+        "events": {"type": "array", "minItems": 1}
+      },
+      "additionalProperties": false
+    },
+    "views": {
+      "type": "object",
+      "required": ["external_attacker", "trusted_diagnostic"],
+      "properties": {
+        "external_attacker": {
+          "type": "object",
+          "required": ["description", "events"],
+          "properties": {
+            "description": {"type": "string", "minLength": 1},
+            "events": {
+              "type": "array",
+              "minItems": 1,
+              "items": {"$ref": "#/$defs/externalEvent"}
+            }
+          },
+          "additionalProperties": false
+        },
+        "trusted_diagnostic": {
+          "type": "object",
+          "required": ["description", "events"],
+          "properties": {
+            "description": {"type": "string", "minLength": 1},
+            "events": {
+              "type": "array",
+              "minItems": 1,
+              "items": {"$ref": "#/$defs/trustedEvent"}
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "artifact": {
+      "type": "object",
+      "required": ["artifact_id", "path", "sha256", "bytes", "media_type", "view"],
+      "properties": {
+        "artifact_id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "media_type": {"type": "string", "minLength": 1},
+        "view": {"enum": ["external_attacker", "trusted_diagnostic", "shared_metadata"]}
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,482 @@
+{
+  "frontiers": [
+    {
+      "configuration": {
+        "active_cloud_delta": 0.0,
+        "adversary_strength": 0.25,
+        "attack_steps": null,
+        "attacker_updates": 3,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/datasets/ptb.train.txt",
+        "delegate_sublayer": null,
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "probe_restarts": 3,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "sequence_length": 32,
+        "steps": 4000,
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      },
+      "frontier_interval_nominal_covered_share": {
+        "clean_lower_bound": 0.2857142857142857,
+        "failed_upper_bound": 0.39285714285714285
+      },
+      "minimum_seed_count": 3,
+      "points": [
+        {
+          "cells": [
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 5.089965509891044,
+              "nominal_covered_layer_share": 0.14285714285714285,
+              "path": "outputs/phase02/penn_treebank/frontier_split21_s42.json",
+              "remote_compute_ms": 37553.46510378877,
+              "seed": 42,
+              "split_after": 21,
+              "utility_nll_delta": -0.6364182927645743,
+              "wire_bytes": 496891132
+            },
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 5.094257586228196,
+              "nominal_covered_layer_share": 0.14285714285714285,
+              "path": "outputs/phase02/penn_treebank/frontier_split21_s43.json",
+              "remote_compute_ms": 62272.89636727073,
+              "seed": 43,
+              "split_after": 21,
+              "utility_nll_delta": -0.6321262164274231,
+              "wire_bytes": 496889237
+            },
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 5.0939290957467165,
+              "nominal_covered_layer_share": 0.14285714285714285,
+              "path": "outputs/phase02/penn_treebank/frontier_split21_s44.json",
+              "remote_compute_ms": 112164.63270073291,
+              "seed": 44,
+              "split_after": 21,
+              "utility_nll_delta": -0.6324547069089022,
+              "wire_bytes": 496894380
+            }
+          ],
+          "classification": "clean",
+          "nominal_covered_layer_percent": 14.285714285714285,
+          "nominal_covered_layer_share": 0.14285714285714285,
+          "remote_compute_ms": {
+            "ci95": 94421.53237346625,
+            "ci95_high": 165085.19709739706,
+            "ci95_low": -23757.867649535445,
+            "mean": 70663.66472393081,
+            "n": 3,
+            "sd": 38006.71424572464
+          },
+          "split_after": [
+            21
+          ],
+          "utility_nll_delta": {
+            "ci95": 0.005934729717425648,
+            "ci95_high": -0.6277316756495408,
+            "ci95_low": -0.6396011350843922,
+            "mean": -0.6336664053669665,
+            "n": 3,
+            "sd": 0.002388857401759263
+          },
+          "wire_bytes": {
+            "ci95": 6461.745532023242,
+            "ci95_high": 496898044.74553204,
+            "ci95_low": 496885121.25446796,
+            "mean": 496891583.0,
+            "n": 3,
+            "sd": 2600.9926951070047
+          }
+        },
+        {
+          "cells": [
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 5.449070663366001,
+              "nominal_covered_layer_share": 0.21428571428571427,
+              "path": "outputs/phase02/penn_treebank/frontier_split19_s42.json",
+              "remote_compute_ms": 118881.58174598357,
+              "seed": 42,
+              "split_after": 19,
+              "utility_nll_delta": -0.27731313928961754,
+              "wire_bytes": 496894065
+            },
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 5.445276114449371,
+              "nominal_covered_layer_share": 0.21428571428571427,
+              "path": "outputs/phase02/penn_treebank/frontier_split19_s43.json",
+              "remote_compute_ms": 48025.14692739351,
+              "seed": 43,
+              "split_after": 19,
+              "utility_nll_delta": -0.281107688206248,
+              "wire_bytes": 496890061
+            },
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 5.448708034586161,
+              "nominal_covered_layer_share": 0.21428571428571427,
+              "path": "outputs/phase02/penn_treebank/frontier_split19_s44.json",
+              "remote_compute_ms": 111805.5871555116,
+              "seed": 44,
+              "split_after": 19,
+              "utility_nll_delta": -0.27767576806945726,
+              "wire_bytes": 496893414
+            }
+          ],
+          "classification": "clean",
+          "nominal_covered_layer_percent": 21.428571428571427,
+          "nominal_covered_layer_share": 0.21428571428571427,
+          "remote_compute_ms": {
+            "ci95": 96956.31094786241,
+            "ci95_high": 189860.41622415863,
+            "ci95_low": -4052.2056715661893,
+            "mean": 92904.10527629622,
+            "n": 3,
+            "sd": 39027.01758683343
+          },
+          "split_after": [
+            19
+          ],
+          "utility_nll_delta": {
+            "ci95": 0.005202121251747128,
+            "ci95_high": -0.2734967439366938,
+            "ci95_low": -0.2839009864401881,
+            "mean": -0.27869886518844095,
+            "n": 3,
+            "sd": 0.002093966608217484
+          },
+          "wire_bytes": {
+            "ci95": 5337.80419594588,
+            "ci95_high": 496897851.13752925,
+            "ci95_low": 496887175.5291374,
+            "mean": 496892513.3333333,
+            "n": 3,
+            "sd": 2148.581935447967
+          }
+        },
+        {
+          "cells": [
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 5.690677003120072,
+              "nominal_covered_layer_share": 0.2857142857142857,
+              "path": "outputs/phase02/penn_treebank/frontier_split17_s42.json",
+              "remote_compute_ms": 137678.84757078718,
+              "seed": 42,
+              "split_after": 17,
+              "utility_nll_delta": -0.03570679953554645,
+              "wire_bytes": 496891094
+            },
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 5.681140674103517,
+              "nominal_covered_layer_share": 0.2857142857142857,
+              "path": "outputs/phase02/penn_treebank/frontier_split17_s43.json",
+              "remote_compute_ms": 34796.955765923485,
+              "seed": 43,
+              "split_after": 17,
+              "utility_nll_delta": -0.04524312855210155,
+              "wire_bytes": 496891253
+            },
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 5.682103781553451,
+              "nominal_covered_layer_share": 0.2857142857142857,
+              "path": "outputs/phase02/penn_treebank/frontier_split17_s44.json",
+              "remote_compute_ms": 87362.26005473873,
+              "seed": 44,
+              "split_after": 17,
+              "utility_nll_delta": -0.044280021102167666,
+              "wire_bytes": 496889128
+            }
+          ],
+          "classification": "clean",
+          "nominal_covered_layer_percent": 28.57142857142857,
+          "nominal_covered_layer_share": 0.2857142857142857,
+          "remote_compute_ms": {
+            "ci95": 127806.8825731487,
+            "ci95_high": 214419.57037029852,
+            "ci95_low": -41194.1947759989,
+            "mean": 86612.6877971498,
+            "n": 3,
+            "sd": 51445.041639247705
+          },
+          "split_after": [
+            17
+          ],
+          "utility_nll_delta": {
+            "ci95": 0.013042549836477794,
+            "ci95_high": -0.02870076656012743,
+            "ci95_low": -0.054785866233083014,
+            "mean": -0.04174331639660522,
+            "n": 3,
+            "sd": 0.0052499091278244685
+          },
+          "wire_bytes": {
+            "ci95": 2940.569091124275,
+            "ci95_high": 496893432.2357578,
+            "ci95_low": 496887551.09757555,
+            "mean": 496890491.6666667,
+            "n": 3,
+            "sd": 1183.6428233776155
+          }
+        },
+        {
+          "cells": [
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 6.091309145325795,
+              "nominal_covered_layer_share": 0.35714285714285715,
+              "path": "outputs/phase02/penn_treebank/frontier_split15_s42.json",
+              "remote_compute_ms": 64314.16633512708,
+              "seed": 42,
+              "split_after": 15,
+              "utility_nll_delta": 0.3649253426701762,
+              "wire_bytes": 496892208
+            },
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 6.066168947669212,
+              "nominal_covered_layer_share": 0.35714285714285715,
+              "path": "outputs/phase02/penn_treebank/frontier_split15_s43.json",
+              "remote_compute_ms": 53357.925890304614,
+              "seed": 43,
+              "split_after": 15,
+              "utility_nll_delta": 0.33978514501359314,
+              "wire_bytes": 496889508
+            },
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 6.0972813124535605,
+              "nominal_covered_layer_share": 0.35714285714285715,
+              "path": "outputs/phase02/penn_treebank/frontier_split15_s44.json",
+              "remote_compute_ms": 47910.45703922282,
+              "seed": 44,
+              "split_after": 15,
+              "utility_nll_delta": 0.3708975097979419,
+              "wire_bytes": 496889851
+            }
+          ],
+          "classification": "marginal",
+          "nominal_covered_layer_percent": 35.714285714285715,
+          "nominal_covered_layer_share": 0.35714285714285715,
+          "remote_compute_ms": {
+            "ci95": 20755.64588131891,
+            "ci95_high": 75949.82896953708,
+            "ci95_low": 34438.537206899266,
+            "mean": 55194.183088218175,
+            "n": 3,
+            "sd": 8354.597539008148
+          },
+          "split_after": [
+            15
+          ],
+          "utility_nll_delta": {
+            "ci95": 0.04101886847088906,
+            "ci95_high": 0.3995548676314594,
+            "ci95_low": 0.31751713068968135,
+            "mean": 0.3585359991605704,
+            "n": 3,
+            "sd": 0.01651098402523006
+          },
+          "wire_bytes": {
+            "ci95": 3651.6529485234646,
+            "ci95_high": 496894173.9862818,
+            "ci95_low": 496886870.6803848,
+            "mean": 496890522.3333333,
+            "n": 3,
+            "sd": 1469.8694953407712
+          }
+        },
+        {
+          "cells": [
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 6.208542923210189,
+              "nominal_covered_layer_share": 0.39285714285714285,
+              "path": "outputs/phase02/penn_treebank/frontier_split14_s42.json",
+              "remote_compute_ms": 121362.07156462478,
+              "seed": 42,
+              "split_after": 14,
+              "utility_nll_delta": 0.4821591205545701,
+              "wire_bytes": 496892467
+            },
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 6.1722553700674325,
+              "nominal_covered_layer_share": 0.39285714285714285,
+              "path": "outputs/phase02/penn_treebank/frontier_split14_s43.json",
+              "remote_compute_ms": 137416.57872046926,
+              "seed": 43,
+              "split_after": 14,
+              "utility_nll_delta": 0.4458715674118139,
+              "wire_bytes": 496891638
+            },
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 6.235247197269928,
+              "nominal_covered_layer_share": 0.39285714285714285,
+              "path": "outputs/phase02/penn_treebank/frontier_split14_s44.json",
+              "remote_compute_ms": 129510.04239247413,
+              "seed": 44,
+              "split_after": 14,
+              "utility_nll_delta": 0.5088633946143091,
+              "wire_bytes": 496892691
+            }
+          ],
+          "classification": "failed",
+          "nominal_covered_layer_percent": 39.285714285714285,
+          "nominal_covered_layer_share": 0.39285714285714285,
+          "remote_compute_ms": {
+            "ci95": 19943.164434174152,
+            "ci95_high": 149372.7286600302,
+            "ci95_low": 109486.3997916819,
+            "mean": 129429.56422585605,
+            "n": 3,
+            "sd": 8027.556138436033
+          },
+          "split_after": [
+            14
+          ],
+          "utility_nll_delta": {
+            "ci95": 0.07854775936589597,
+            "ci95_high": 0.5575124535594603,
+            "ci95_low": 0.4004169348276684,
+            "mean": 0.47896469419356436,
+            "n": 3,
+            "sd": 0.03161717639842574
+          },
+          "wire_bytes": {
+            "ci95": 1378.089821029134,
+            "ci95_high": 496893643.42315435,
+            "ci95_low": 496890887.2435123,
+            "mean": 496892265.3333333,
+            "n": 3,
+            "sd": 554.7110358856522
+          }
+        },
+        {
+          "cells": [
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 6.2327961652190425,
+              "nominal_covered_layer_share": 0.42857142857142855,
+              "path": "outputs/phase02/penn_treebank/frontier_split13_s42.json",
+              "remote_compute_ms": 79644.17701697676,
+              "seed": 42,
+              "split_after": 13,
+              "utility_nll_delta": 0.5064123625634238,
+              "wire_bytes": 496891096
+            },
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 6.24272072565509,
+              "nominal_covered_layer_share": 0.42857142857142855,
+              "path": "outputs/phase02/penn_treebank/frontier_split13_s43.json",
+              "remote_compute_ms": 84677.53352891305,
+              "seed": 43,
+              "split_after": 13,
+              "utility_nll_delta": 0.5163369229994714,
+              "wire_bytes": 496892432
+            },
+            {
+              "baseline_nll": 5.726383802655619,
+              "candidate_nll": 6.2988614469068125,
+              "nominal_covered_layer_share": 0.42857142857142855,
+              "path": "outputs/phase02/penn_treebank/frontier_split13_s44.json",
+              "remote_compute_ms": 118819.604446413,
+              "seed": 44,
+              "split_after": 13,
+              "utility_nll_delta": 0.5724776442511939,
+              "wire_bytes": 496893925
+            }
+          ],
+          "classification": "failed",
+          "nominal_covered_layer_percent": 42.857142857142854,
+          "nominal_covered_layer_share": 0.42857142857142855,
+          "remote_compute_ms": {
+            "ci95": 52951.28386667056,
+            "ci95_high": 147331.72219743815,
+            "ci95_low": 41429.154464097046,
+            "mean": 94380.4383307676,
+            "n": 3,
+            "sd": 21314.039968179317
+          },
+          "split_after": [
+            13
+          ],
+          "utility_nll_delta": {
+            "ci95": 0.08850486932196852,
+            "ci95_high": 0.6202471792599983,
+            "ci95_low": 0.4432374406160612,
+            "mean": 0.5317423099380297,
+            "n": 3,
+            "sd": 0.03562512906876447
+          },
+          "wire_bytes": {
+            "ci95": 3515.8997638780097,
+            "ci95_high": 496896000.2330972,
+            "ci95_low": 496888968.43356943,
+            "mean": 496892484.3333333,
+            "n": 3,
+            "sd": 1415.2258948073743
+          }
+        }
+      ],
+      "utility_gate_nll_delta": 0.35
+    }
+  ],
+  "schema": "dtraining.delegation_frontier.v1",
+  "selection": {
+    "minimum_seed_count": 3,
+    "mode": "trained_remote_only",
+    "utility_gate_nll_delta": 0.35
+  },
+  "skipped": [
+    {
+      "path": "outputs/phase02/penn_treebank/COLLECTION_MANIFEST.json",
+      "reason": "not a selected runner artifact"
+    },
+    {
+      "path": "outputs/phase02/penn_treebank/frontier.json",
+      "reason": "not a selected runner artifact"
+    },
+    {
+      "path": "outputs/phase02/penn_treebank/frontier_manifest.json",
+      "reason": "not a selected runner artifact"
+    },
+    {
+      "path": "outputs/phase02/penn_treebank/input_provenance.json",
+      "reason": "not a selected runner artifact"
+    },
+    {
+      "path": "outputs/phase02/penn_treebank/statistics.json",
+      "reason": "not a selected runner artifact"
+    }
+  ],
+  "status": "completed"
+}

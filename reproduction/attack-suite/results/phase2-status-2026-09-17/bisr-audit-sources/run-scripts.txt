@@ -1,0 +1,209 @@
+#!/bin/bash
+# B1 REFERENCE: BiSR on gpt2-large/wikitext-2, SplitLLM official pipeline,
+# matched to the paper's published setting (arXiv:2409.00960):
+#   - split 6-27 (Table 3 GPT2-large column), LoRA on bottom+trunk+top,
+#     batch 2, lr 1e-5 (repo demo defaults)
+#   - victim FT on wikitext-2 train (shrink 0.08 per repo demo), capped at
+#     602 steps; attacks on 5 batches every 200 steps (paper SS4.1)
+#   - SIP aux = sensireplaced substitute at published scale (19,665 rows);
+#     GRU(256, drop 0.1) inverter, repo-default SIP training hyperparams
+#     (Adam lr 1e-3 wd 1e-5, batch 6, test_frac 0.1)
+#   - BRE per paper Table 1 GPT2-large: GM 32 iters lr 0.09 beta 0.85 tau 1.2;
+#     SM 800 iters lr 0.01 wd 0.01 (sma = BiSR(f) from SIP; gsma = BiSR(b+f)
+#     warm-started from BiSR(b))
+# Env knobs (deviations from demo recorded in FIDELITY-NOTES.md):
+#   SIP_EPOCHS (default 20), SIP_TRAIN_FRAC (default 1.0), SEED (default 42)
+set -u
+cd ~/splitllm-ref/experiments/scripts/pipeline
+export HF_HUB_DISABLE_XET=1
+export WANDB_MODE=offline
+SEED=${SEED:-42}
+SIP_EPOCHS=${SIP_EPOCHS:-20}
+SIP_TRAIN_FRAC=${SIP_TRAIN_FRAC:-1.0}
+RUN_DIR=~/splitllm-ref/results/ref-seed$SEED
+export SFL_JOURNAL_PATH=$RUN_DIR/report.jsonl
+export SFL_ATTACK_JOURNAL_PATH=$RUN_DIR/attacks.jsonl
+mkdir -p $RUN_DIR
+rm -f "$SFL_JOURNAL_PATH" "$SFL_ATTACK_JOURNAL_PATH"
+
+~/splitllm-ref/.venv/bin/python ../py/sim_with_attacker.py \
+  --noise_mode none --noise_scale 0.0 \
+  --model_name gpt2-large \
+  --split_points 6-27 \
+  --global_round 1 --client_num 1 \
+  --seed $SEED \
+  --dataset wikitext --dataset_label train \
+  --data_shrink_frac 0.08 --test_data_shrink_frac 0.3 \
+  --evaluate_freq 200 \
+  --client_steps 650 --client_epoch 1 \
+  --max_global_step 602 \
+  --lora_at_top True --lora_at_trunk True --lora_at_bottom True \
+  --collect_all_layers True \
+  --batch_size 2 \
+  --exp_name B1-reference --case_name ref-seed$SEED \
+  --sip_dataset sensireplaced --sip_prefix normal \
+  --sip_b2tr_enable True --sip_b2tr_layer -1 --sip_tr2t_enable False \
+  --sip_train_frac $SIP_TRAIN_FRAC --sip_training_epochs $SIP_EPOCHS \
+  --sip_training_checkpoint_freq ${SIP_CKPT_FREQ:-5} \
+  --gma_enable True --gma_lr 0.09 --gma_beta 0.85 --gma_epochs 32 --gma_init_temp 1.2 \
+  --sma_enable True --sma_epochs 800 --sma_lr 0.01 --sma_wd 0.01 \
+  --gsma_enable True --gsma_epochs 800 --gsma_lr 0.01 --gsma_wd 0.01 \
+  --tag_enable False --eia_enable False \
+  --attacker_freq 200 --attacker_samples 5
+echo "REF_EXIT=$?"
+#!/bin/bash
+# B1 OUR-SIDE matched run: clean-room bisr-baseline (our harness) at the
+# closest matched setting to the SplitLLM reference run. Runs on the pilot
+# venv (torch 2.11 + transformers 4.57) with the repo clone at
+# ~/llm-attacker-pilots/gpt2-wikitext2-v01/code (== main for these modules).
+# Prereq: reference run finished (one GPU job at a time on koula).
+set -u
+CODE=~/llm-attacker-pilots/gpt2-wikitext2-v01/code
+PY=~/llm-attacker-pilots/gpt2-wikitext2-v01/.venv/bin/python
+OUT=$CODE/results/bisr-fidelity-v1
+CAPS=$OUT/captures-gpt2large-split6
+MODEL=/home/geo/splitllm-ref/data/sfl/models/gpt2-large
+AUX=/home/geo/splitllm-ref/data/sfl/datasets/sensi/aux-cnndm-19665.jsonl
+CORPUS=/home/geo/splitllm-ref/data/sfl/datasets/wikitext2-v1-train.txt
+mkdir -p "$OUT" "$CAPS"
+cd "$CODE"
+export HF_HUB_DISABLE_XET=1
+
+echo "=== [1/3] splitbench captures: gpt2-large LoRA-FT on wikitext-2, seam 6, 605 steps"
+$PY -u -m attacker.splitbench \
+  --model "$MODEL" --split 6 --mode finetune \
+  --steps 605 --batch-size 2 --seq-len 128 --lr 1e-5 --lora-r 8 \
+  --capture-every 1 --save-canonical \
+  --corpus-file "$CORPUS" \
+  --capture-dir "$CAPS" \
+  --output "$OUT/splitbench-captures.json" --evidence --seed 42 --device cuda
+
+echo "=== [2/3] SIP train: aux = same 19,665 CNN/DM articles, public head split 6"
+$PY -u -m attacker --mode training --attack bisr-baseline \
+  --phase train --model "$MODEL" --split 6 --seq-len 128 \
+  --aux-file "$AUX" --aux-seqs 127000 --aux-chunk-seqs 4096 \
+  --train-steps 20000 --batch-size 32 \
+  --inverter-pt "$OUT/sip-inverter-gpt2large-split6.pt" \
+  --output "$OUT/sip-train.json" --evidence --seed 42 --device cuda
+
+echo "=== [3/3] attack: SIP -> BRE(bf) at paper Table-1 GPT2-large budgets"
+# slice the 12 attacked batches of the reference cadence (0-indexed steps
+# 200-204, 400-404, 600-601) + aligned canonical rows
+$PY - <<'EOF'
+import json, os, shutil, torch
+caps = os.path.expanduser("~/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/bisr-fidelity-v1/captures-gpt2large-split6")
+sub = caps + "-attackwin"
+os.makedirs(sub, exist_ok=True)
+canon = torch.load(os.path.join(caps, "canonical.pt"), map_location="cpu")
+steps = list(range(200, 205)) + list(range(400, 405)) + [600, 601]
+keep_rows = []
+cursor = 0
+have = sorted(int(f.split("_")[1].split(".")[0]) for f in os.listdir(caps)
+              if f.startswith("wire_") and f.endswith(".pt"))
+seen = sorted({json.load(open(os.path.join(caps, f)))["step"]
+               for f in os.listdir(caps) if f.startswith("wire_") and f.endswith(".json")})
+step_set = set(steps)
+rows_per_step = {}
+import glob
+for f in sorted(glob.glob(os.path.join(caps, "wire_*.json"))):
+    meta = json.load(open(f))
+    if meta["phase"] != "fwd":
+        continue
+    t = torch.load(os.path.join(caps, f.replace(".json", ".pt")), map_location="cpu")
+    b = t.shape[0] if t.dim() == 3 else 1
+    rows_per_step[meta["step"]] = b
+ordered = sorted(rows_per_step)
+assert ordered == list(range(605)), f"unexpected captured steps: {ordered[:5]}...{ordered[-5:]}"
+idx = 0
+slices = []
+for s in ordered:
+    b = rows_per_step[s]
+    if s in step_set:
+        slices.append((idx, idx + b))
+    idx += b
+keep = torch.cat([canon[a:b] for a, b in slices])
+for f in glob.glob(os.path.join(caps, "wire_*")):
+    base = os.path.basename(f)
+    if not base.startswith("wire_"):
+        continue
+    meta = json.load(open(f)) if base.endswith(".json") else None
+    if meta is not None and meta["step"] in step_set:
+        shutil.copy2(f, os.path.join(sub, base))
+    elif base.endswith(".pt"):
+        meta = json.load(open(f[:-3] + ".json"))
+        if meta["step"] in step_set:
+            shutil.copy2(f, os.path.join(sub, base))
+torch.save(keep, os.path.join(sub, "canonical.pt"))
+print("attack window:", len(slices), "batches,", keep.shape[0], "sequences ->", sub)
+EOF
+
+$PY -u -m attacker --mode training --attack bisr-baseline \
+  --phase attack --capture-dir "$CAPS-attackwin" \
+  --canonical-pt "$CAPS-attackwin/canonical.pt" \
+  --inverter-pt "$OUT/sip-inverter-gpt2large-split6.pt" \
+  --model "$MODEL" --split 6 \
+  --opt-arm bf --gm-iters 32 --gm-lr 0.09 --gm-beta 0.85 --gm-tau 1.2 \
+  --sm-iters 800 --sm-lr 0.01 --sm-wd 0.01 \
+  --samples 24 \
+  --output "$OUT/our-bisr-attack.json" --evidence --seed 42 --device cuda
+
+echo "OUR_RUN_EXIT=$?"
+#!/bin/bash
+# B1 OUR-SIDE attack-only resume: reruns just the attack phase (read-only on
+# captures + inverter checkpoint). Used if run_b1_ours.sh was interrupted
+# after the train phase. Idempotent: the slicing rebuilds the window dir.
+set -u
+CODE=~/llm-attacker-pilots/gpt2-wikitext2-v01/code
+PY=~/llm-attacker-pilots/gpt2-wikitext2-v01/.venv/bin/python
+OUT=$CODE/results/bisr-fidelity-v1
+CAPS=$OUT/captures-gpt2large-split6
+MODEL=/home/geo/splitllm-ref/data/sfl/models/gpt2-large
+mkdir -p "$OUT"
+cd "$CODE"
+export HF_HUB_DISABLE_XET=1
+
+$PY - <<'EOF'
+import glob, json, os, shutil, torch
+caps = os.path.expanduser("~/llm-attacker-pilots/gpt2-wikitext2-v01/code/results/bisr-fidelity-v1/captures-gpt2large-split6")
+sub = caps + "-attackwin"
+os.makedirs(sub, exist_ok=True)
+canon = torch.load(os.path.join(caps, "canonical.pt"), map_location="cpu")
+steps = list(range(200, 205)) + list(range(400, 405)) + [600, 601]
+rows_per_step = {}
+for f in sorted(glob.glob(os.path.join(caps, "wire_*.json"))):
+    meta = json.load(open(f))
+    if meta["phase"] != "fwd":
+        continue
+    t = torch.load(os.path.join(caps, f.replace(".json", ".pt")), map_location="cpu")
+    b = t.shape[0] if t.dim() == 3 else 1
+    rows_per_step[meta["step"]] = b
+ordered = sorted(rows_per_step)
+assert ordered == list(range(605)), f"unexpected captured steps: {ordered[:5]}...{ordered[-5:]}"
+idx = 0
+slices = []
+for s in ordered:
+    b = rows_per_step[s]
+    if s in set(steps):
+        slices.append((idx, idx + b))
+    idx += b
+keep = torch.cat([canon[a:b] for a, b in slices])
+for f in glob.glob(os.path.join(caps, "wire_*")):
+    base = os.path.basename(f)
+    meta = json.load(open(f[:-3] + ".json")) if base.endswith(".pt") \
+        else json.load(open(f))
+    if meta["step"] in set(steps):
+        shutil.copy2(f, os.path.join(sub, base))
+torch.save(keep, os.path.join(sub, "canonical.pt"))
+print("attack window:", len(slices), "batches,", keep.shape[0], "sequences ->", sub)
+EOF
+
+$PY -u -m attacker --mode training --attack bisr-baseline \
+  --phase attack --capture-dir "$CAPS-attackwin" \
+  --canonical-pt "$CAPS-attackwin/canonical.pt" \
+  --inverter-pt "$OUT/sip-inverter-gpt2large-split6.pt" \
+  --model "$MODEL" --split 6 \
+  --opt-arm bf --gm-iters 32 --gm-lr 0.09 --gm-beta 0.85 --gm-tau 1.2 \
+  --sm-iters 800 --sm-lr 0.01 --sm-wd 0.01 \
+  --samples 24 \
+  --output "$OUT/our-bisr-attack.json" --evidence --seed 42 --device cpu
+echo "ATTACK_ONLY_EXIT=$?"

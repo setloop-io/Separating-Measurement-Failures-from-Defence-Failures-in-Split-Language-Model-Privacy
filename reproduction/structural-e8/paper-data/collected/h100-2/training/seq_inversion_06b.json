@@ -1,0 +1,431 @@
+{
+  "config": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "n_layers": 28,
+    "depths": [
+      1,
+      4,
+      8
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 8,
+    "val_frac": 0.15,
+    "seq_len": 64,
+    "max_pairs": 20000,
+    "epochs": 30,
+    "top_k": 8,
+    "beam": 8,
+    "lm_weight": 1.0,
+    "min_span": 3,
+    "joint": false,
+    "dtype": "bf16",
+    "device": "cuda",
+    "quick": false
+  },
+  "threat_model": "semi-honest cloud observes the boundary activation sequence h* per microbatch; attacker trains a per-position MLP on PUBLIC text through the PUBLIC base model (document-disjoint; victim docs held out from the END of the corpus) and rescores the top-k lattice with the base model itself as LM prior",
+  "interpretation": "uplift = sequence-aware (top-k lattice + beam + base-model LM rescore) minus position-independent MLP argmax, same decoder and same data. Positive uplift quantifies how much sequence context adds to the trained-inversion attack.",
+  "random_baseline_top1_pct": 0.0007,
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9983,
+      9984,
+      9985,
+      9986,
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "split-inference:spark-x86",
+    "hostname": "21cdcd05690b",
+    "dtraining_commit": "54ba1d59f8953865a4e6962f02492e516cad36ad",
+    "model_manifest_sha256": "360b2664dfc77077f7b91c6c4c0ca0ac725f903b0a5e96d31928d4a1381654e1",
+    "model_path": "qwen3-0.6b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "summary": [
+    {
+      "depth": 1,
+      "attacker": "mlp",
+      "n_seeds": 3,
+      "baseline_token_acc_mean": 73.6328,
+      "baseline_token_acc_std": 0.6099,
+      "baseline_span_acc_mean": 58.2357,
+      "baseline_span_acc_std": 0.1491,
+      "baseline_longest_run_frac_mean": 0.2064,
+      "baseline_longest_run_frac_std": 0.0032,
+      "baseline_exact_mean": 0.0,
+      "baseline_exact_std": 0.0,
+      "rescored_token_acc_mean": 73.6003,
+      "rescored_token_acc_std": 0.6647,
+      "rescored_span_acc_mean": 58.2031,
+      "rescored_span_acc_std": 0.0977,
+      "rescored_longest_run_frac_mean": 0.2064,
+      "rescored_longest_run_frac_std": 0.0032,
+      "rescored_exact_mean": 0.0,
+      "rescored_exact_std": 0.0,
+      "uplift_token_acc_mean": -0.0325,
+      "uplift_token_acc_std": 0.0563,
+      "uplift_span_acc_mean": -0.0325,
+      "uplift_span_acc_std": 0.0563,
+      "uplift_longest_run_frac_mean": 0.0,
+      "uplift_longest_run_frac_std": 0.0,
+      "uplift_exact_mean": 0.0,
+      "uplift_exact_std": 0.0
+    },
+    {
+      "depth": 4,
+      "attacker": "mlp",
+      "n_seeds": 3,
+      "baseline_token_acc_mean": 70.7031,
+      "baseline_token_acc_std": 0.0977,
+      "baseline_span_acc_mean": 55.2734,
+      "baseline_span_acc_std": 0.4475,
+      "baseline_longest_run_frac_mean": 0.1979,
+      "baseline_longest_run_frac_std": 0.002,
+      "baseline_exact_mean": 0.0,
+      "baseline_exact_std": 0.0,
+      "rescored_token_acc_mean": 70.7682,
+      "rescored_token_acc_std": 0.2458,
+      "rescored_span_acc_mean": 55.5339,
+      "rescored_span_acc_std": 0.6928,
+      "rescored_longest_run_frac_mean": 0.1992,
+      "rescored_longest_run_frac_std": 0.0026,
+      "rescored_exact_mean": 0.0,
+      "rescored_exact_std": 0.0,
+      "uplift_token_acc_mean": 0.0651,
+      "uplift_token_acc_std": 0.1492,
+      "uplift_span_acc_mean": 0.2604,
+      "uplift_span_acc_std": 0.3139,
+      "uplift_longest_run_frac_mean": 0.0013,
+      "uplift_longest_run_frac_std": 0.0023,
+      "uplift_exact_mean": 0.0,
+      "uplift_exact_std": 0.0
+    },
+    {
+      "depth": 8,
+      "attacker": "mlp",
+      "n_seeds": 3,
+      "baseline_token_acc_mean": 69.2383,
+      "baseline_token_acc_std": 0.6836,
+      "baseline_span_acc_mean": 52.4089,
+      "baseline_span_acc_std": 1.3259,
+      "baseline_longest_run_frac_mean": 0.1839,
+      "baseline_longest_run_frac_std": 0.0072,
+      "baseline_exact_mean": 0.0,
+      "baseline_exact_std": 0.0,
+      "rescored_token_acc_mean": 69.2708,
+      "rescored_token_acc_std": 0.5378,
+      "rescored_span_acc_mean": 52.3438,
+      "rescored_span_acc_std": 1.0289,
+      "rescored_longest_run_frac_mean": 0.1862,
+      "rescored_longest_run_frac_std": 0.0035,
+      "rescored_exact_mean": 0.0,
+      "rescored_exact_std": 0.0,
+      "uplift_token_acc_mean": 0.0325,
+      "uplift_token_acc_std": 0.1492,
+      "uplift_span_acc_mean": -0.0651,
+      "uplift_span_acc_std": 0.2983,
+      "uplift_longest_run_frac_mean": 0.0023,
+      "uplift_longest_run_frac_std": 0.0039,
+      "uplift_exact_mean": 0.0,
+      "uplift_exact_std": 0.0
+    }
+  ],
+  "results": [
+    {
+      "phase": "attack_train",
+      "depth": 1,
+      "attacker": "mlp",
+      "seed": 0,
+      "val_top1": 76.27,
+      "val_top5": 76.56
+    },
+    {
+      "phase": "attack_train",
+      "depth": 1,
+      "attacker": "mlp",
+      "seed": 1,
+      "val_top1": 76.27,
+      "val_top5": 76.53
+    },
+    {
+      "phase": "attack_train",
+      "depth": 1,
+      "attacker": "mlp",
+      "seed": 2,
+      "val_top1": 76.23,
+      "val_top5": 76.5
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "attacker": "mlp",
+      "seed": 0,
+      "baseline": {
+        "token_acc": 74.1211,
+        "span_acc": 58.2031,
+        "longest_run_frac": 0.21,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 74.1211,
+        "span_acc": 58.2031,
+        "longest_run_frac": 0.21,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.0,
+        "span_acc": 0.0,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "attacker": "mlp",
+      "seed": 1,
+      "baseline": {
+        "token_acc": 72.9492,
+        "span_acc": 58.3984,
+        "longest_run_frac": 0.2051,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 72.8516,
+        "span_acc": 58.3008,
+        "longest_run_frac": 0.2051,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": -0.0976,
+        "span_acc": -0.0976,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "attacker": "mlp",
+      "seed": 2,
+      "baseline": {
+        "token_acc": 73.8281,
+        "span_acc": 58.1055,
+        "longest_run_frac": 0.2041,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 73.8281,
+        "span_acc": 58.1055,
+        "longest_run_frac": 0.2041,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.0,
+        "span_acc": 0.0,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_train",
+      "depth": 4,
+      "attacker": "mlp",
+      "seed": 0,
+      "val_top1": 73.93,
+      "val_top5": 75.15
+    },
+    {
+      "phase": "attack_train",
+      "depth": 4,
+      "attacker": "mlp",
+      "seed": 1,
+      "val_top1": 74.08,
+      "val_top5": 75.29
+    },
+    {
+      "phase": "attack_train",
+      "depth": 4,
+      "attacker": "mlp",
+      "seed": 2,
+      "val_top1": 73.99,
+      "val_top5": 75.23
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "attacker": "mlp",
+      "seed": 0,
+      "baseline": {
+        "token_acc": 70.6055,
+        "span_acc": 54.8828,
+        "longest_run_frac": 0.1963,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 70.5078,
+        "span_acc": 54.7852,
+        "longest_run_frac": 0.1963,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": -0.0977,
+        "span_acc": -0.0976,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "attacker": "mlp",
+      "seed": 1,
+      "baseline": {
+        "token_acc": 70.8008,
+        "span_acc": 55.7617,
+        "longest_run_frac": 0.1973,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 70.9961,
+        "span_acc": 56.1523,
+        "longest_run_frac": 0.2012,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.1953,
+        "span_acc": 0.3906,
+        "longest_run_frac": 0.0039,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "attacker": "mlp",
+      "seed": 2,
+      "baseline": {
+        "token_acc": 70.7031,
+        "span_acc": 55.1758,
+        "longest_run_frac": 0.2002,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 70.8008,
+        "span_acc": 55.6641,
+        "longest_run_frac": 0.2002,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.0977,
+        "span_acc": 0.4883,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_train",
+      "depth": 8,
+      "attacker": "mlp",
+      "seed": 0,
+      "val_top1": 72.25,
+      "val_top5": 74.51
+    },
+    {
+      "phase": "attack_train",
+      "depth": 8,
+      "attacker": "mlp",
+      "seed": 1,
+      "val_top1": 72.17,
+      "val_top5": 74.36
+    },
+    {
+      "phase": "attack_train",
+      "depth": 8,
+      "attacker": "mlp",
+      "seed": 2,
+      "val_top1": 72.37,
+      "val_top5": 74.57
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 8,
+      "attacker": "mlp",
+      "seed": 0,
+      "baseline": {
+        "token_acc": 68.5547,
+        "span_acc": 51.1719,
+        "longest_run_frac": 0.1758,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 68.75,
+        "span_acc": 51.3672,
+        "longest_run_frac": 0.1826,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.1953,
+        "span_acc": 0.1953,
+        "longest_run_frac": 0.0068,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 8,
+      "attacker": "mlp",
+      "seed": 1,
+      "baseline": {
+        "token_acc": 69.2383,
+        "span_acc": 52.2461,
+        "longest_run_frac": 0.1865,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 69.2383,
+        "span_acc": 52.2461,
+        "longest_run_frac": 0.1865,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": 0.0,
+        "span_acc": 0.0,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 8,
+      "attacker": "mlp",
+      "seed": 2,
+      "baseline": {
+        "token_acc": 69.9219,
+        "span_acc": 53.8086,
+        "longest_run_frac": 0.1895,
+        "exact": 0.0
+      },
+      "rescored": {
+        "token_acc": 69.8242,
+        "span_acc": 53.418,
+        "longest_run_frac": 0.1895,
+        "exact": 0.0
+      },
+      "uplift": {
+        "token_acc": -0.0977,
+        "span_acc": -0.3906,
+        "longest_run_frac": 0.0,
+        "exact": 0.0
+      }
+    }
+  ]
+}

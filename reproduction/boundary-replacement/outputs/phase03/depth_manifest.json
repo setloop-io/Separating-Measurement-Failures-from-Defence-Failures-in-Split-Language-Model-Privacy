@@ -1,0 +1,60 @@
+{
+  "family": "qwen3-0.6b-truncation",
+  "variant_construction": "20- and 24-layer variants truncate the same frozen 28-layer Qwen3-0.6B checkpoint; all tokenizer and retained-layer weights are shared.",
+  "fixed_protocol": {
+    "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+    "eval_blocks": 4096,
+    "latent_dim": 64,
+    "seed": 42,
+    "seq_len": 32,
+    "train_blocks": 4096
+  },
+  "pre_execution_checks": [
+    "Populate required_metadata from each model configuration.",
+    "Reject a causal interpretation if tokenizer, layer type, or training data differ.",
+    "Keep protected-boundary code, optimizer, bottleneck, and evaluation blocks fixed."
+  ],
+  "schema": "dtraining.depth_study_manifest.v1",
+  "status": "frozen_before_execution",
+  "variants": [
+    {
+      "declared_depth": 20,
+      "label": "shallow",
+      "model_path": "/home/geo/experiments/models/qwen3-0.6b-depth20",
+      "required_metadata": {
+        "hidden_dim": 1024,
+        "layer_type": "Qwen3DecoderLayer",
+        "parameter_count": 470202368,
+        "tokenizer": "Qwen2Tokenizer from the Qwen3-0.6B source checkpoint",
+        "training_data": "same frozen Qwen3-0.6B checkpoint; this is a layer-truncation intervention, not separately pretrained data"
+      },
+      "status": "planned"
+    },
+    {
+      "declared_depth": 24,
+      "label": "medium",
+      "model_path": "/home/geo/experiments/models/qwen3-0.6b-depth24",
+      "required_metadata": {
+        "hidden_dim": 1024,
+        "layer_type": "Qwen3DecoderLayer",
+        "parameter_count": 533126144,
+        "tokenizer": "Qwen2Tokenizer from the Qwen3-0.6B source checkpoint",
+        "training_data": "same frozen Qwen3-0.6B checkpoint; this is a layer-truncation intervention, not separately pretrained data"
+      },
+      "status": "planned"
+    },
+    {
+      "declared_depth": 28,
+      "label": "deep",
+      "model_path": "/home/geo/experiments/models/qwen3-0.6b",
+      "required_metadata": {
+        "hidden_dim": 1024,
+        "layer_type": "Qwen3DecoderLayer",
+        "parameter_count": 596049920,
+        "tokenizer": "Qwen2Tokenizer from the Qwen3-0.6B source checkpoint",
+        "training_data": "source frozen Qwen3-0.6B checkpoint"
+      },
+      "status": "planned"
+    }
+  ]
+}

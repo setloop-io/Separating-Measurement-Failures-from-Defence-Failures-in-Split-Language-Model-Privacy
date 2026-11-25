@@ -1,0 +1,1473 @@
+{
+  "schema": "dtraining.rotation_lifetime.v1",
+  "config": {
+    "model": "/workspace/experiments/models/qwen36-27b",
+    "n_layers": 64,
+    "experiment": "er5",
+    "depths": [
+      1
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "solve_seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 10,
+    "seq_len": 64,
+    "epoch_sizes": [
+      64,
+      256,
+      1024,
+      4096
+    ],
+    "prefix_len": 64,
+    "sessions": 16,
+    "stale_epoch_sizes": [
+      256,
+      1024
+    ],
+    "shards": [
+      1,
+      4,
+      16
+    ],
+    "rotation_period": 8,
+    "shard_epoch_pairs": 1024,
+    "dtype": "bf16",
+    "device": "cuda",
+    "master_seed_base": 42,
+    "quick": false
+  },
+  "threat_model": "honest-but-curious cloud under PER-EPOCH rotation of the E8 boundary secret W (fresh ratchet-derived W each epoch). Attacker capabilities under test: (E-R1a) E labeled (h, hW) pairs from WITHIN one epoch (oracle serving/self-labeled traffic); (E-R3) knowledge of a fixed system-prompt prefix, static W, with/without scaffold jitter; (E-R4) an insider HANDED stale keys W_1..W_3 plus the derivation rule but not master_seed; (E-R5) labeled pairs against block-diagonal sharded secrets with a 2-epoch sliding window. W itself is never leaked in the current epoch.",
+  "interpretation": "E-R1a: recovery below 50% at epoch size E => the per-epoch budget is safe at E; max_safe_epoch is compared against the static-W K50 prior {1: 258, 4: 356, 8: 618} (depths 1/4/8, 27B bf16, e8_robustness_27b_bf16_densek_20260807T230529Z.json). The pooled-cross-epoch control must sit in the label-free band (<=3.7% on real models): accumulation does not cross rotation boundaries. E-R3: fixed_scaffold reproduces the known break (~4 sessions at S=64, K90 ~= 232-240 pairs); jittered_scaffold must show no K90 crossing within 16 sessions. E-R4: stale-only recovery ~= band with W rel_err ~= sqrt(2) (random); fresh-pair cells must match E-R1a at the same E (stale keys give zero bootstrap). E-R5: static sharding is the NEGATIVE CONTROL \u2014 per-block budgets shrink to 0.1*h_b, so s=16 is easier to break than s=1; staggering restores the defense because no 2-epoch window has all blocks on one key.",
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9981,
+      9982,
+      9983,
+      9984,
+      9985,
+      9986,
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "split-inference:spark",
+    "hostname": "koula",
+    "victim_doc_sha256": {},
+    "dtraining_commit": "5c9832c44e3025bf2116971c3e9ee07c2b572dc5",
+    "model_manifest_sha256": "f8c3bc4bd8e650242cc38e534146672c60a932e92202cd4d5d47b29fde8a7d30",
+    "model_manifest_algo": "v2-sizes-no-cache",
+    "model_manifest_n_files": 29,
+    "model_path": "qwen36-27b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "random_baseline_top1_pct": 0.0004,
+  "measurement_kind": "lab-harness simulation: attacks executed in-process against collected boundary activations; no live wire",
+  "evidence_status": "primary",
+  "known_limitations": [
+    "labeled-pair attacker is an upper bound (oracle serving); real self-labeled traffic yields noisier pairs",
+    "rotation cadence is per-epoch; sub-epoch accumulation is the binding constraint, so epoch sizes must stay below max_safe_epoch with margin",
+    "E-R3 jitter models pad-insertion + slot permutation only; a stronger attacker with approximate alignment search is not covered",
+    "E-R5 sharding WITHOUT staggering strictly weakens per-block budgets (negative control) \u2014 shard counts must not be deployed without the staggered schedule",
+    "historical artifacts are immutable; the K50 prior quoted here comes from e8_robustness_27b_bf16_densek_20260807T230529Z.json"
+  ],
+  "summary": [
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "n_blocks": 1,
+      "static_sharded_composed_mean": 56.98,
+      "staggered_composed_mean": 50.3016,
+      "labelfree_band_mean": 0.3133,
+      "n_seeds": 3
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "n_blocks": 4,
+      "static_sharded_composed_mean": 58.4867,
+      "staggered_composed_mean": 54.5971,
+      "labelfree_band_mean": 0.3133,
+      "n_seeds": 3
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "n_blocks": 16,
+      "static_sharded_composed_mean": 58.4867,
+      "staggered_composed_mean": 47.575,
+      "labelfree_band_mean": 0.3133,
+      "n_seeds": 3
+    }
+  ],
+  "results": [
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "seed": 0,
+      "n_blocks": 1,
+      "block_size": 5120,
+      "epoch_pairs": 1024,
+      "window_epochs": 2,
+      "rotation_period": 8,
+      "static_sharded": {
+        "composed_top1": 69.22,
+        "per_block_rel_err": [
+          1.095873
+        ],
+        "per_block_budget_pairs": 512.0,
+        "pairs_in_window": 2048
+      },
+      "staggered": {
+        "per_epoch": [
+          {
+            "epoch": 1,
+            "composed_top1": 64.22,
+            "per_block_rel_err": [
+              1.264903
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 2,
+            "composed_top1": 63.75,
+            "per_block_rel_err": [
+              1.265152
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 3,
+            "composed_top1": 64.22,
+            "per_block_rel_err": [
+              1.264903
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 4,
+            "composed_top1": 64.22,
+            "per_block_rel_err": [
+              1.264903
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 5,
+            "composed_top1": 64.22,
+            "per_block_rel_err": [
+              1.264903
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 6,
+            "composed_top1": 63.75,
+            "per_block_rel_err": [
+              1.265152
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 7,
+            "composed_top1": 64.22,
+            "per_block_rel_err": [
+              1.264903
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 8,
+            "composed_top1": 30.78,
+            "per_block_rel_err": [
+              1.311829
+            ],
+            "blocks_rotated_in_window": [
+              0
+            ]
+          }
+        ],
+        "composed_top1_mean": 59.9225
+      },
+      "labelfree_band_top1": 0.0
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "seed": 0,
+      "n_blocks": 4,
+      "block_size": 1280,
+      "epoch_pairs": 1024,
+      "window_epochs": 2,
+      "rotation_period": 8,
+      "static_sharded": {
+        "composed_top1": 70.31,
+        "per_block_rel_err": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "per_block_budget_pairs": 128.0,
+        "pairs_in_window": 2048
+      },
+      "staggered": {
+        "per_epoch": [
+          {
+            "epoch": 1,
+            "composed_top1": 68.91,
+            "per_block_rel_err": [
+              0.635132,
+              0.635972,
+              0.635749,
+              0.63525
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 2,
+            "composed_top1": 23.44,
+            "per_block_rel_err": [
+              0.635132,
+              0.635972,
+              0.635749,
+              0.973867
+            ],
+            "blocks_rotated_in_window": [
+              3
+            ]
+          },
+          {
+            "epoch": 3,
+            "composed_top1": 69.38,
+            "per_block_rel_err": [
+              0.635132,
+              0.635972,
+              0.635749,
+              0.634568
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 4,
+            "composed_top1": 69.06,
+            "per_block_rel_err": [
+              0.635132,
+              0.635972,
+              0.975372,
+              0.634568
+            ],
+            "blocks_rotated_in_window": [
+              2
+            ]
+          },
+          {
+            "epoch": 5,
+            "composed_top1": 68.59,
+            "per_block_rel_err": [
+              0.635132,
+              0.635972,
+              0.634866,
+              0.634568
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 6,
+            "composed_top1": 69.06,
+            "per_block_rel_err": [
+              0.635132,
+              0.975312,
+              0.634866,
+              0.634568
+            ],
+            "blocks_rotated_in_window": [
+              1
+            ]
+          },
+          {
+            "epoch": 7,
+            "composed_top1": 70.0,
+            "per_block_rel_err": [
+              0.635132,
+              0.636473,
+              0.634866,
+              0.634568
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 8,
+            "composed_top1": 69.84,
+            "per_block_rel_err": [
+              0.975077,
+              0.636473,
+              0.634866,
+              0.634568
+            ],
+            "blocks_rotated_in_window": [
+              0
+            ]
+          }
+        ],
+        "composed_top1_mean": 63.535
+      },
+      "labelfree_band_top1": 0.0
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "seed": 0,
+      "n_blocks": 16,
+      "block_size": 320,
+      "epoch_pairs": 1024,
+      "window_epochs": 2,
+      "rotation_period": 8,
+      "static_sharded": {
+        "composed_top1": 70.31,
+        "per_block_rel_err": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "per_block_budget_pairs": 32.0,
+        "pairs_in_window": 2048
+      },
+      "staggered": {
+        "per_epoch": [
+          {
+            "epoch": 1,
+            "composed_top1": 70.31,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 2,
+            "composed_top1": 70.31,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 3,
+            "composed_top1": 70.31,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 4,
+            "composed_top1": 70.31,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 5,
+            "composed_top1": 70.31,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 6,
+            "composed_top1": 70.31,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 7,
+            "composed_top1": 70.31,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 8,
+            "composed_top1": 42.97,
+            "per_block_rel_err": [
+              0.851131,
+              0.855323,
+              0.852951,
+              0.852182,
+              0.853624,
+              0.856326,
+              0.849735,
+              0.853591,
+              0.851571,
+              0.850665,
+              0.851578,
+              0.850383,
+              0.848879,
+              0.855694,
+              0.849672,
+              0.852793
+            ],
+            "blocks_rotated_in_window": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15
+            ]
+          }
+        ],
+        "composed_top1_mean": 66.8925
+      },
+      "labelfree_band_top1": 0.0
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "seed": 1,
+      "n_blocks": 1,
+      "block_size": 5120,
+      "epoch_pairs": 1024,
+      "window_epochs": 2,
+      "rotation_period": 8,
+      "static_sharded": {
+        "composed_top1": 67.81,
+        "per_block_rel_err": [
+          1.095651
+        ],
+        "per_block_budget_pairs": 512.0,
+        "pairs_in_window": 2048
+      },
+      "staggered": {
+        "per_epoch": [
+          {
+            "epoch": 1,
+            "composed_top1": 65.16,
+            "per_block_rel_err": [
+              1.264772
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 2,
+            "composed_top1": 65.16,
+            "per_block_rel_err": [
+              1.264772
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 3,
+            "composed_top1": 65.31,
+            "per_block_rel_err": [
+              1.265026
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 4,
+            "composed_top1": 65.16,
+            "per_block_rel_err": [
+              1.264772
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 5,
+            "composed_top1": 65.16,
+            "per_block_rel_err": [
+              1.264772
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 6,
+            "composed_top1": 65.16,
+            "per_block_rel_err": [
+              1.264772
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 7,
+            "composed_top1": 65.31,
+            "per_block_rel_err": [
+              1.265026
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 8,
+            "composed_top1": 21.41,
+            "per_block_rel_err": [
+              1.311759
+            ],
+            "blocks_rotated_in_window": [
+              0
+            ]
+          }
+        ],
+        "composed_top1_mean": 59.7287
+      },
+      "labelfree_band_top1": 0.16
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "seed": 1,
+      "n_blocks": 4,
+      "block_size": 1280,
+      "epoch_pairs": 1024,
+      "window_epochs": 2,
+      "rotation_period": 8,
+      "static_sharded": {
+        "composed_top1": 70.31,
+        "per_block_rel_err": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "per_block_budget_pairs": 128.0,
+        "pairs_in_window": 2048
+      },
+      "staggered": {
+        "per_epoch": [
+          {
+            "epoch": 1,
+            "composed_top1": 70.16,
+            "per_block_rel_err": [
+              0.632507,
+              0.634797,
+              0.631304,
+              0.631354
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 2,
+            "composed_top1": 41.88,
+            "per_block_rel_err": [
+              0.632507,
+              0.634797,
+              0.631304,
+              0.974758
+            ],
+            "blocks_rotated_in_window": [
+              3
+            ]
+          },
+          {
+            "epoch": 3,
+            "composed_top1": 70.16,
+            "per_block_rel_err": [
+              0.632507,
+              0.634797,
+              0.631304,
+              0.632853
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 4,
+            "composed_top1": 69.69,
+            "per_block_rel_err": [
+              0.632507,
+              0.634797,
+              0.972687,
+              0.632853
+            ],
+            "blocks_rotated_in_window": [
+              2
+            ]
+          },
+          {
+            "epoch": 5,
+            "composed_top1": 70.16,
+            "per_block_rel_err": [
+              0.632507,
+              0.634797,
+              0.632439,
+              0.632853
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 6,
+            "composed_top1": 69.69,
+            "per_block_rel_err": [
+              0.632507,
+              0.973583,
+              0.632439,
+              0.632853
+            ],
+            "blocks_rotated_in_window": [
+              1
+            ]
+          },
+          {
+            "epoch": 7,
+            "composed_top1": 70.16,
+            "per_block_rel_err": [
+              0.632507,
+              0.631744,
+              0.632439,
+              0.632853
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 8,
+            "composed_top1": 70.31,
+            "per_block_rel_err": [
+              0.972495,
+              0.631744,
+              0.632439,
+              0.632853
+            ],
+            "blocks_rotated_in_window": [
+              0
+            ]
+          }
+        ],
+        "composed_top1_mean": 66.5263
+      },
+      "labelfree_band_top1": 0.16
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "seed": 1,
+      "n_blocks": 16,
+      "block_size": 320,
+      "epoch_pairs": 1024,
+      "window_epochs": 2,
+      "rotation_period": 8,
+      "static_sharded": {
+        "composed_top1": 70.31,
+        "per_block_rel_err": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "per_block_budget_pairs": 32.0,
+        "pairs_in_window": 2048
+      },
+      "staggered": {
+        "per_epoch": [
+          {
+            "epoch": 1,
+            "composed_top1": 70.31,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 2,
+            "composed_top1": 70.31,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 3,
+            "composed_top1": 35.62,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 4,
+            "composed_top1": 35.62,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 5,
+            "composed_top1": 35.62,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 6,
+            "composed_top1": 35.62,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 7,
+            "composed_top1": 35.62,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 8,
+            "composed_top1": 21.72,
+            "per_block_rel_err": [
+              0.851861,
+              0.850936,
+              0.853012,
+              0.851497,
+              0.853598,
+              0.851445,
+              0.853761,
+              0.855506,
+              0.851135,
+              0.855637,
+              0.851235,
+              0.854209,
+              0.852633,
+              0.854107,
+              0.852656,
+              0.854799
+            ],
+            "blocks_rotated_in_window": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15
+            ]
+          }
+        ],
+        "composed_top1_mean": 42.555
+      },
+      "labelfree_band_top1": 0.16
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "seed": 2,
+      "n_blocks": 1,
+      "block_size": 5120,
+      "epoch_pairs": 1024,
+      "window_epochs": 2,
+      "rotation_period": 8,
+      "static_sharded": {
+        "composed_top1": 33.91,
+        "per_block_rel_err": [
+          1.09707
+        ],
+        "per_block_budget_pairs": 512.0,
+        "pairs_in_window": 2048
+      },
+      "staggered": {
+        "per_epoch": [
+          {
+            "epoch": 1,
+            "composed_top1": 32.66,
+            "per_block_rel_err": [
+              1.265508
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 2,
+            "composed_top1": 32.66,
+            "per_block_rel_err": [
+              1.265508
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 3,
+            "composed_top1": 32.66,
+            "per_block_rel_err": [
+              1.265296
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 4,
+            "composed_top1": 32.66,
+            "per_block_rel_err": [
+              1.265508
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 5,
+            "composed_top1": 32.66,
+            "per_block_rel_err": [
+              1.265508
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 6,
+            "composed_top1": 32.66,
+            "per_block_rel_err": [
+              1.265508
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 7,
+            "composed_top1": 32.66,
+            "per_block_rel_err": [
+              1.265296
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 8,
+            "composed_top1": 21.41,
+            "per_block_rel_err": [
+              1.312282
+            ],
+            "blocks_rotated_in_window": [
+              0
+            ]
+          }
+        ],
+        "composed_top1_mean": 31.2537
+      },
+      "labelfree_band_top1": 0.78
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "seed": 2,
+      "n_blocks": 4,
+      "block_size": 1280,
+      "epoch_pairs": 1024,
+      "window_epochs": 2,
+      "rotation_period": 8,
+      "static_sharded": {
+        "composed_top1": 34.84,
+        "per_block_rel_err": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "per_block_budget_pairs": 128.0,
+        "pairs_in_window": 2048
+      },
+      "staggered": {
+        "per_epoch": [
+          {
+            "epoch": 1,
+            "composed_top1": 35.47,
+            "per_block_rel_err": [
+              0.633372,
+              0.635541,
+              0.633525,
+              0.633019
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 2,
+            "composed_top1": 23.12,
+            "per_block_rel_err": [
+              0.633372,
+              0.635541,
+              0.633525,
+              0.974263
+            ],
+            "blocks_rotated_in_window": [
+              3
+            ]
+          },
+          {
+            "epoch": 3,
+            "composed_top1": 35.47,
+            "per_block_rel_err": [
+              0.633372,
+              0.635541,
+              0.633525,
+              0.636881
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 4,
+            "composed_top1": 34.53,
+            "per_block_rel_err": [
+              0.633372,
+              0.635541,
+              0.975129,
+              0.636881
+            ],
+            "blocks_rotated_in_window": [
+              2
+            ]
+          },
+          {
+            "epoch": 5,
+            "composed_top1": 35.47,
+            "per_block_rel_err": [
+              0.633372,
+              0.635541,
+              0.635635,
+              0.636881
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 6,
+            "composed_top1": 35.47,
+            "per_block_rel_err": [
+              0.633372,
+              0.974467,
+              0.635635,
+              0.636881
+            ],
+            "blocks_rotated_in_window": [
+              1
+            ]
+          },
+          {
+            "epoch": 7,
+            "composed_top1": 35.31,
+            "per_block_rel_err": [
+              0.633372,
+              0.63552,
+              0.635635,
+              0.636881
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 8,
+            "composed_top1": 35.0,
+            "per_block_rel_err": [
+              0.974435,
+              0.63552,
+              0.635635,
+              0.636881
+            ],
+            "blocks_rotated_in_window": [
+              0
+            ]
+          }
+        ],
+        "composed_top1_mean": 33.73
+      },
+      "labelfree_band_top1": 0.78
+    },
+    {
+      "experiment": "er5",
+      "depth": 1,
+      "seed": 2,
+      "n_blocks": 16,
+      "block_size": 320,
+      "epoch_pairs": 1024,
+      "window_epochs": 2,
+      "rotation_period": 8,
+      "static_sharded": {
+        "composed_top1": 34.84,
+        "per_block_rel_err": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "per_block_budget_pairs": 32.0,
+        "pairs_in_window": 2048
+      },
+      "staggered": {
+        "per_epoch": [
+          {
+            "epoch": 1,
+            "composed_top1": 34.84,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 2,
+            "composed_top1": 34.84,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 3,
+            "composed_top1": 34.84,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 4,
+            "composed_top1": 34.84,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 5,
+            "composed_top1": 34.84,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 6,
+            "composed_top1": 34.84,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 7,
+            "composed_top1": 34.84,
+            "per_block_rel_err": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "blocks_rotated_in_window": []
+          },
+          {
+            "epoch": 8,
+            "composed_top1": 22.34,
+            "per_block_rel_err": [
+              0.853364,
+              0.850976,
+              0.852554,
+              0.853591,
+              0.850518,
+              0.851945,
+              0.851349,
+              0.853274,
+              0.853444,
+              0.853483,
+              0.852979,
+              0.856514,
+              0.851452,
+              0.849959,
+              0.852311,
+              0.852719
+            ],
+            "blocks_rotated_in_window": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15
+            ]
+          }
+        ],
+        "composed_top1_mean": 33.2775
+      },
+      "labelfree_band_top1": 0.78
+    }
+  ]
+}

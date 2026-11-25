@@ -1,0 +1,4103 @@
+{
+  "schema": "dtraining.attacker.leak_accumulation.v1",
+  "config": {
+    "attack": "leak_accumulation",
+    "mode": "training",
+    "toy": true,
+    "hidden": 64,
+    "epochs": 50,
+    "leak_per_epoch": [
+      1,
+      4,
+      16
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "threat_model": "PERSISTENT (APT) insider: steals --leak-per-epoch rows of W_t per epoch and accumulates them ACROSS epochs (the per-epoch leak budget does NOT reset with rotation). Composite of the partial-row-leak break (e8_robustness attack 4) and the rotation schedule.",
+  "provenance": {
+    "hostname": "MacBookPro",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-16T01:37:16Z",
+    "dtraining_commit": "ec08486849760f2233f7036d44f580412976088f"
+  },
+  "results": [
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 0,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 1,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 1,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 2,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 2,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 3,
+      "composite_decode_top1": 5.0781
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 3,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 4,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 4,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 5,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 5,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 6,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 6,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 7,
+      "composite_decode_top1": 2.1484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 7,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 8,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 8,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 9,
+      "composite_decode_top1": 1.9531
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 9,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 10,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 10,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 11,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 11,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 12,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 12,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 13,
+      "composite_decode_top1": 1.9531
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 13,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 14,
+      "composite_decode_top1": 6.0547
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 14,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 15,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 15,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 16,
+      "composite_decode_top1": 5.2734
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 16,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 17,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 17,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 18,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 18,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 19,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 19,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 20,
+      "composite_decode_top1": 2.5391
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 20,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 21,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 21,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 22,
+      "composite_decode_top1": 1.9531
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 22,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 23,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 23,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 24,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 24,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 25,
+      "composite_decode_top1": 2.5391
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 25,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 26,
+      "composite_decode_top1": 1.5625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 26,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 27,
+      "composite_decode_top1": 3.3203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 27,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 28,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 28,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 29,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 29,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 30,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 30,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 31,
+      "composite_decode_top1": 3.3203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 31,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 32,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 32,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 33,
+      "composite_decode_top1": 2.3438
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 33,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 34,
+      "composite_decode_top1": 2.5391
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 34,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 35,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 35,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 36,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 36,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 37,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 37,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 38,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 38,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 39,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 39,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 40,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 40,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 41,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 41,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 42,
+      "composite_decode_top1": 3.3203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 42,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 43,
+      "composite_decode_top1": 1.7578
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 43,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 44,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 44,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 45,
+      "composite_decode_top1": 1.7578
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 45,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 46,
+      "composite_decode_top1": 5.4688
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 46,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 47,
+      "composite_decode_top1": 1.9531
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 47,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 48,
+      "composite_decode_top1": 2.5391
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 48,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 49,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 0,
+      "epoch": 49,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 50,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 0,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 1,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 1,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 2,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 2,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 3,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 3,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 4,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 4,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 5,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 5,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 6,
+      "composite_decode_top1": 5.2734
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 6,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 7,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 7,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 8,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 8,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 9,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 9,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 10,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 10,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 11,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 11,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 12,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 12,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 13,
+      "composite_decode_top1": 1.9531
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 13,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 14,
+      "composite_decode_top1": 2.1484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 14,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 15,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 15,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 16,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 16,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 17,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 17,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 18,
+      "composite_decode_top1": 2.5391
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 18,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 19,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 19,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 20,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 20,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 21,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 21,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 22,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 22,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 23,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 23,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 24,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 24,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 25,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 25,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 26,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 26,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 27,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 27,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 28,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 28,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 29,
+      "composite_decode_top1": 6.0547
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 29,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 30,
+      "composite_decode_top1": 5.6641
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 30,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 31,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 31,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 32,
+      "composite_decode_top1": 7.2266
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 32,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 33,
+      "composite_decode_top1": 0.9766
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 33,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 34,
+      "composite_decode_top1": 0.5859
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 34,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 35,
+      "composite_decode_top1": 6.6406
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 35,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 36,
+      "composite_decode_top1": 2.1484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 36,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 37,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 37,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 38,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 38,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 39,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 39,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 40,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 40,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 41,
+      "composite_decode_top1": 0.9766
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 41,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 42,
+      "composite_decode_top1": 2.3438
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 42,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 43,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 43,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 44,
+      "composite_decode_top1": 5.6641
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 44,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 45,
+      "composite_decode_top1": 5.4688
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 45,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 46,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 46,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 47,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 47,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 48,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 48,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 49,
+      "composite_decode_top1": 2.3438
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 1,
+      "epoch": 49,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 50,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 0,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 1,
+      "composite_decode_top1": 1.7578
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 1,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 2,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 2,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 3,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 3,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 4,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 4,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 5,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 5,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 6,
+      "composite_decode_top1": 2.1484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 6,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 7,
+      "composite_decode_top1": 5.4688
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 7,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 8,
+      "composite_decode_top1": 3.3203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 8,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 9,
+      "composite_decode_top1": 2.3438
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 9,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 10,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 10,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 11,
+      "composite_decode_top1": 2.5391
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 11,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 12,
+      "composite_decode_top1": 2.5391
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 12,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 13,
+      "composite_decode_top1": 1.7578
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 13,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 14,
+      "composite_decode_top1": 2.3438
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 14,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 15,
+      "composite_decode_top1": 1.5625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 15,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 16,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 16,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 17,
+      "composite_decode_top1": 5.8594
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 17,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 18,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 18,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 19,
+      "composite_decode_top1": 1.9531
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 19,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 20,
+      "composite_decode_top1": 1.5625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 20,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 21,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 21,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 22,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 22,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 23,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 23,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 24,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 24,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 25,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 25,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 26,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 26,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 27,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 27,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 28,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 28,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 29,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 29,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 30,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 30,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 31,
+      "composite_decode_top1": 1.9531
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 31,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 32,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 32,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 33,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 33,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 34,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 34,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 35,
+      "composite_decode_top1": 2.1484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 35,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 36,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 36,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 37,
+      "composite_decode_top1": 2.1484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 37,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 38,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 38,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 39,
+      "composite_decode_top1": 6.4453
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 39,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 40,
+      "composite_decode_top1": 3.3203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 40,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 41,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 41,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 42,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 42,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 43,
+      "composite_decode_top1": 3.3203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 43,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 44,
+      "composite_decode_top1": 1.3672
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 44,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 45,
+      "composite_decode_top1": 1.5625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 45,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 46,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 46,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 47,
+      "composite_decode_top1": 3.3203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 47,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 48,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 48,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 49,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "seed": 2,
+      "epoch": 49,
+      "leaked_rows_this_epoch": 1,
+      "cumulative_leaked_rows": 50,
+      "composite_decode_top1": 3.3203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 0,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 4,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 1,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 8,
+      "composite_decode_top1": 5.8594
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 2,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 12,
+      "composite_decode_top1": 6.4453
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 3,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 16,
+      "composite_decode_top1": 2.1484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 4,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 20,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 5,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 24,
+      "composite_decode_top1": 5.6641
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 6,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 28,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 7,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 32,
+      "composite_decode_top1": 6.6406
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 8,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 36,
+      "composite_decode_top1": 3.3203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 9,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 40,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 10,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 44,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 11,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 48,
+      "composite_decode_top1": 5.8594
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 12,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 52,
+      "composite_decode_top1": 5.8594
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 13,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 56,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 14,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 60,
+      "composite_decode_top1": 6.25
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 15,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 64,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 16,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 68,
+      "composite_decode_top1": 5.2734
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 17,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 72,
+      "composite_decode_top1": 7.0312
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 18,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 76,
+      "composite_decode_top1": 6.6406
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 19,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 80,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 20,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 84,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 21,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 88,
+      "composite_decode_top1": 2.3438
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 22,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 92,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 23,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 96,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 24,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 100,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 25,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 104,
+      "composite_decode_top1": 5.2734
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 26,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 108,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 27,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 112,
+      "composite_decode_top1": 5.4688
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 28,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 116,
+      "composite_decode_top1": 5.4688
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 29,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 120,
+      "composite_decode_top1": 8.0078
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 30,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 124,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 31,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 128,
+      "composite_decode_top1": 8.0078
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 32,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 132,
+      "composite_decode_top1": 5.0781
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 33,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 136,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 34,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 140,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 35,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 144,
+      "composite_decode_top1": 5.2734
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 36,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 148,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 37,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 152,
+      "composite_decode_top1": 5.0781
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 38,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 156,
+      "composite_decode_top1": 3.3203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 39,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 160,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 40,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 164,
+      "composite_decode_top1": 7.2266
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 41,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 168,
+      "composite_decode_top1": 6.0547
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 42,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 172,
+      "composite_decode_top1": 6.25
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 43,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 176,
+      "composite_decode_top1": 6.0547
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 44,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 180,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 45,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 184,
+      "composite_decode_top1": 5.0781
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 46,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 188,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 47,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 192,
+      "composite_decode_top1": 5.4688
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 48,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 196,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 0,
+      "epoch": 49,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 200,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 0,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 4,
+      "composite_decode_top1": 5.2734
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 1,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 8,
+      "composite_decode_top1": 5.0781
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 2,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 12,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 3,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 16,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 4,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 20,
+      "composite_decode_top1": 5.4688
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 5,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 24,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 6,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 28,
+      "composite_decode_top1": 5.8594
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 7,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 32,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 8,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 36,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 9,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 40,
+      "composite_decode_top1": 7.6172
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 10,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 44,
+      "composite_decode_top1": 3.3203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 11,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 48,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 12,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 52,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 13,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 56,
+      "composite_decode_top1": 6.6406
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 14,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 60,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 15,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 64,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 16,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 68,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 17,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 72,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 18,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 76,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 19,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 80,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 20,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 84,
+      "composite_decode_top1": 6.25
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 21,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 88,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 22,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 92,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 23,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 96,
+      "composite_decode_top1": 6.8359
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 24,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 100,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 25,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 104,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 26,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 108,
+      "composite_decode_top1": 5.4688
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 27,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 112,
+      "composite_decode_top1": 5.2734
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 28,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 116,
+      "composite_decode_top1": 5.6641
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 29,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 120,
+      "composite_decode_top1": 5.6641
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 30,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 124,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 31,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 128,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 32,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 132,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 33,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 136,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 34,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 140,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 35,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 144,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 36,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 148,
+      "composite_decode_top1": 6.0547
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 37,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 152,
+      "composite_decode_top1": 2.3438
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 38,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 156,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 39,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 160,
+      "composite_decode_top1": 5.4688
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 40,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 164,
+      "composite_decode_top1": 6.8359
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 41,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 168,
+      "composite_decode_top1": 5.0781
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 42,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 172,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 43,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 176,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 44,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 180,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 45,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 184,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 46,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 188,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 47,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 192,
+      "composite_decode_top1": 7.8125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 48,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 196,
+      "composite_decode_top1": 2.1484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 1,
+      "epoch": 49,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 200,
+      "composite_decode_top1": 5.6641
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 0,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 4,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 1,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 8,
+      "composite_decode_top1": 5.0781
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 2,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 12,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 3,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 16,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 4,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 20,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 5,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 24,
+      "composite_decode_top1": 6.0547
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 6,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 28,
+      "composite_decode_top1": 7.0312
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 7,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 32,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 8,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 36,
+      "composite_decode_top1": 3.9062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 9,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 40,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 10,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 44,
+      "composite_decode_top1": 5.6641
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 11,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 48,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 12,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 52,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 13,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 56,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 14,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 60,
+      "composite_decode_top1": 6.0547
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 15,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 64,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 16,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 68,
+      "composite_decode_top1": 5.0781
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 17,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 72,
+      "composite_decode_top1": 5.2734
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 18,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 76,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 19,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 80,
+      "composite_decode_top1": 3.125
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 20,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 84,
+      "composite_decode_top1": 5.0781
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 21,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 88,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 22,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 92,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 23,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 96,
+      "composite_decode_top1": 5.4688
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 24,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 100,
+      "composite_decode_top1": 5.0781
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 25,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 104,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 26,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 108,
+      "composite_decode_top1": 4.4922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 27,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 112,
+      "composite_decode_top1": 5.6641
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 28,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 116,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 29,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 120,
+      "composite_decode_top1": 5.2734
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 30,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 124,
+      "composite_decode_top1": 3.7109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 31,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 128,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 32,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 132,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 33,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 136,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 34,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 140,
+      "composite_decode_top1": 6.6406
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 35,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 144,
+      "composite_decode_top1": 2.9297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 36,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 148,
+      "composite_decode_top1": 5.4688
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 37,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 152,
+      "composite_decode_top1": 4.1016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 38,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 156,
+      "composite_decode_top1": 5.4688
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 39,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 160,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 40,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 164,
+      "composite_decode_top1": 5.2734
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 41,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 168,
+      "composite_decode_top1": 7.4219
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 42,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 172,
+      "composite_decode_top1": 4.6875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 43,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 176,
+      "composite_decode_top1": 2.7344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 44,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 180,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 45,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 184,
+      "composite_decode_top1": 1.3672
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 46,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 188,
+      "composite_decode_top1": 3.5156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 47,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 192,
+      "composite_decode_top1": 4.8828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 48,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 196,
+      "composite_decode_top1": 6.25
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "seed": 2,
+      "epoch": 49,
+      "leaked_rows_this_epoch": 4,
+      "cumulative_leaked_rows": 200,
+      "composite_decode_top1": 4.2969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 0,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 16,
+      "composite_decode_top1": 14.4531
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 1,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 32,
+      "composite_decode_top1": 13.0859
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 2,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 48,
+      "composite_decode_top1": 14.6484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 3,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 64,
+      "composite_decode_top1": 13.2812
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 4,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 80,
+      "composite_decode_top1": 13.4766
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 5,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 96,
+      "composite_decode_top1": 11.9141
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 6,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 112,
+      "composite_decode_top1": 15.8203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 7,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 128,
+      "composite_decode_top1": 15.625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 8,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 144,
+      "composite_decode_top1": 16.6016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 9,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 160,
+      "composite_decode_top1": 12.8906
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 10,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 176,
+      "composite_decode_top1": 14.8438
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 11,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 192,
+      "composite_decode_top1": 10.3516
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 12,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 208,
+      "composite_decode_top1": 14.0625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 13,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 224,
+      "composite_decode_top1": 13.4766
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 14,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 240,
+      "composite_decode_top1": 12.6953
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 15,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 256,
+      "composite_decode_top1": 16.9922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 16,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 272,
+      "composite_decode_top1": 8.9844
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 17,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 288,
+      "composite_decode_top1": 12.8906
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 18,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 304,
+      "composite_decode_top1": 12.8906
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 19,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 320,
+      "composite_decode_top1": 11.5234
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 20,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 336,
+      "composite_decode_top1": 10.3516
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 21,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 352,
+      "composite_decode_top1": 12.5
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 22,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 368,
+      "composite_decode_top1": 15.625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 23,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 384,
+      "composite_decode_top1": 13.4766
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 24,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 400,
+      "composite_decode_top1": 15.8203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 25,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 416,
+      "composite_decode_top1": 15.2344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 26,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 432,
+      "composite_decode_top1": 15.625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 27,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 448,
+      "composite_decode_top1": 14.0625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 28,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 464,
+      "composite_decode_top1": 10.7422
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 29,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 480,
+      "composite_decode_top1": 15.2344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 30,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 496,
+      "composite_decode_top1": 17.5781
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 31,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 512,
+      "composite_decode_top1": 14.0625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 32,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 528,
+      "composite_decode_top1": 15.0391
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 33,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 544,
+      "composite_decode_top1": 17.1875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 34,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 560,
+      "composite_decode_top1": 16.7969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 35,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 576,
+      "composite_decode_top1": 16.7969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 36,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 592,
+      "composite_decode_top1": 13.8672
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 37,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 608,
+      "composite_decode_top1": 18.5547
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 38,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 624,
+      "composite_decode_top1": 12.6953
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 39,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 640,
+      "composite_decode_top1": 16.2109
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 40,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 656,
+      "composite_decode_top1": 14.6484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 41,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 672,
+      "composite_decode_top1": 13.6719
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 42,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 688,
+      "composite_decode_top1": 16.7969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 43,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 704,
+      "composite_decode_top1": 14.8438
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 44,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 720,
+      "composite_decode_top1": 10.9375
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 45,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 736,
+      "composite_decode_top1": 16.0156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 46,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 752,
+      "composite_decode_top1": 13.6719
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 47,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 768,
+      "composite_decode_top1": 14.0625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 48,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 784,
+      "composite_decode_top1": 14.0625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 0,
+      "epoch": 49,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 800,
+      "composite_decode_top1": 15.4297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 0,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 16,
+      "composite_decode_top1": 18.3594
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 1,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 32,
+      "composite_decode_top1": 12.5
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 2,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 48,
+      "composite_decode_top1": 11.3281
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 3,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 64,
+      "composite_decode_top1": 14.4531
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 4,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 80,
+      "composite_decode_top1": 16.6016
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 5,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 96,
+      "composite_decode_top1": 16.4062
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 6,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 112,
+      "composite_decode_top1": 12.1094
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 7,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 128,
+      "composite_decode_top1": 11.1328
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 8,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 144,
+      "composite_decode_top1": 12.3047
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 9,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 160,
+      "composite_decode_top1": 18.75
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 10,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 176,
+      "composite_decode_top1": 18.9453
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 11,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 192,
+      "composite_decode_top1": 13.8672
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 12,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 208,
+      "composite_decode_top1": 12.6953
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 13,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 224,
+      "composite_decode_top1": 12.8906
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 14,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 240,
+      "composite_decode_top1": 11.5234
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 15,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 256,
+      "composite_decode_top1": 18.5547
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 16,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 272,
+      "composite_decode_top1": 11.5234
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 17,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 288,
+      "composite_decode_top1": 15.4297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 18,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 304,
+      "composite_decode_top1": 14.2578
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 19,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 320,
+      "composite_decode_top1": 12.1094
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 20,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 336,
+      "composite_decode_top1": 13.4766
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 21,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 352,
+      "composite_decode_top1": 13.6719
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 22,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 368,
+      "composite_decode_top1": 12.6953
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 23,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 384,
+      "composite_decode_top1": 14.6484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 24,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 400,
+      "composite_decode_top1": 17.3828
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 25,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 416,
+      "composite_decode_top1": 10.3516
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 26,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 432,
+      "composite_decode_top1": 16.7969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 27,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 448,
+      "composite_decode_top1": 8.9844
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 28,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 464,
+      "composite_decode_top1": 11.7188
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 29,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 480,
+      "composite_decode_top1": 11.3281
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 30,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 496,
+      "composite_decode_top1": 16.0156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 31,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 512,
+      "composite_decode_top1": 10.7422
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 32,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 528,
+      "composite_decode_top1": 12.5
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 33,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 544,
+      "composite_decode_top1": 16.7969
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 34,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 560,
+      "composite_decode_top1": 10.3516
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 35,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 576,
+      "composite_decode_top1": 15.0391
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 36,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 592,
+      "composite_decode_top1": 13.8672
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 37,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 608,
+      "composite_decode_top1": 16.0156
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 38,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 624,
+      "composite_decode_top1": 13.2812
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 39,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 640,
+      "composite_decode_top1": 12.8906
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 40,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 656,
+      "composite_decode_top1": 12.1094
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 41,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 672,
+      "composite_decode_top1": 18.1641
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 42,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 688,
+      "composite_decode_top1": 15.0391
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 43,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 704,
+      "composite_decode_top1": 12.6953
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 44,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 720,
+      "composite_decode_top1": 10.1562
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 45,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 736,
+      "composite_decode_top1": 14.2578
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 46,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 752,
+      "composite_decode_top1": 19.1406
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 47,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 768,
+      "composite_decode_top1": 17.5781
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 48,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 784,
+      "composite_decode_top1": 20.1172
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 1,
+      "epoch": 49,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 800,
+      "composite_decode_top1": 11.3281
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 0,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 16,
+      "composite_decode_top1": 11.7188
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 1,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 32,
+      "composite_decode_top1": 10.1562
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 2,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 48,
+      "composite_decode_top1": 10.3516
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 3,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 64,
+      "composite_decode_top1": 13.6719
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 4,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 80,
+      "composite_decode_top1": 14.6484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 5,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 96,
+      "composite_decode_top1": 10.7422
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 6,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 112,
+      "composite_decode_top1": 14.8438
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 7,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 128,
+      "composite_decode_top1": 11.7188
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 8,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 144,
+      "composite_decode_top1": 10.3516
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 9,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 160,
+      "composite_decode_top1": 15.8203
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 10,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 176,
+      "composite_decode_top1": 10.9375
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 11,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 192,
+      "composite_decode_top1": 18.1641
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 12,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 208,
+      "composite_decode_top1": 12.8906
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 13,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 224,
+      "composite_decode_top1": 15.0391
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 14,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 240,
+      "composite_decode_top1": 12.6953
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 15,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 256,
+      "composite_decode_top1": 12.5
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 16,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 272,
+      "composite_decode_top1": 14.6484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 17,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 288,
+      "composite_decode_top1": 14.0625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 18,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 304,
+      "composite_decode_top1": 10.9375
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 19,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 320,
+      "composite_decode_top1": 10.3516
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 20,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 336,
+      "composite_decode_top1": 15.4297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 21,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 352,
+      "composite_decode_top1": 13.6719
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 22,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 368,
+      "composite_decode_top1": 13.2812
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 23,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 384,
+      "composite_decode_top1": 15.2344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 24,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 400,
+      "composite_decode_top1": 15.2344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 25,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 416,
+      "composite_decode_top1": 13.4766
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 26,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 432,
+      "composite_decode_top1": 12.6953
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 27,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 448,
+      "composite_decode_top1": 12.5
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 28,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 464,
+      "composite_decode_top1": 12.8906
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 29,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 480,
+      "composite_decode_top1": 13.2812
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 30,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 496,
+      "composite_decode_top1": 17.9688
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 31,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 512,
+      "composite_decode_top1": 12.8906
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 32,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 528,
+      "composite_decode_top1": 12.6953
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 33,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 544,
+      "composite_decode_top1": 17.1875
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 34,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 560,
+      "composite_decode_top1": 19.1406
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 35,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 576,
+      "composite_decode_top1": 12.3047
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 36,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 592,
+      "composite_decode_top1": 12.1094
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 37,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 608,
+      "composite_decode_top1": 15.4297
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 38,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 624,
+      "composite_decode_top1": 9.375
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 39,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 640,
+      "composite_decode_top1": 11.5234
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 40,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 656,
+      "composite_decode_top1": 14.6484
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 41,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 672,
+      "composite_decode_top1": 12.6953
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 42,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 688,
+      "composite_decode_top1": 14.4531
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 43,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 704,
+      "composite_decode_top1": 10.9375
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 44,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 720,
+      "composite_decode_top1": 15.625
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 45,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 736,
+      "composite_decode_top1": 16.9922
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 46,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 752,
+      "composite_decode_top1": 15.2344
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 47,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 768,
+      "composite_decode_top1": 12.8906
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 48,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 784,
+      "composite_decode_top1": 17.5781
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "seed": 2,
+      "epoch": 49,
+      "leaked_rows_this_epoch": 16,
+      "cumulative_leaked_rows": 800,
+      "composite_decode_top1": 13.4766
+    }
+  ],
+  "summary": [
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 1,
+      "decode_mean": 3.485676,
+      "final_cumulative_leaked_rows": 50,
+      "n_cells": 150
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 4,
+      "decode_mean": 4.678386,
+      "final_cumulative_leaked_rows": 200,
+      "n_cells": 150
+    },
+    {
+      "experiment": "leak_accumulation",
+      "leak_per_epoch": 16,
+      "decode_mean": 13.973960666666665,
+      "final_cumulative_leaked_rows": 800,
+      "n_cells": 150
+    }
+  ],
+  "interpretation": "The per-epoch budget accounting of E-R1a/E-R4 does not bound this adversary: what matters is the CUMULATIVE leaked coordinates and the per-epoch decode achievable from the composite W_tilde_t."
+}

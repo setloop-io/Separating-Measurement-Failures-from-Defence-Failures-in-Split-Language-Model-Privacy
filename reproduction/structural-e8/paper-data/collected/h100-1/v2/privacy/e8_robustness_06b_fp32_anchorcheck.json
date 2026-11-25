@@ -1,0 +1,198 @@
+{
+  "config": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "n_layers": 28,
+    "depths": [
+      1
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 8,
+    "seq_len": 64,
+    "max_pairs": 20000,
+    "epochs": 30,
+    "k_list": [
+      10,
+      100,
+      1000,
+      1024,
+      5000
+    ],
+    "leak_fracs": [
+      0.5,
+      0.9
+    ],
+    "sessions": 3,
+    "W_seed": 99,
+    "dtype": "fp32",
+    "device": "cuda",
+    "quick": false
+  },
+  "threat_model": "attacks 1/2/4: PASSIVE observer of h'=h@W with public text+model but no victim labels. attack 3: ORACLE / chosen-plaintext (K exact position-0 pairs) \u2014 strictly stronger than the E8 default; the K-curve is the honest security parameter, not a claim about the default model.",
+  "random_baseline_top1_pct": 0.0007,
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9983,
+      9984,
+      9985,
+      9986,
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "split-inference:spark-x86",
+    "hostname": "ed4ae9b00d95",
+    "dtraining_commit": "c0b3a584e581188b572b769719711c320858f1c0",
+    "model_manifest_sha256": "bbb298585268cc09bcef40664004922c189e0ef0bf70d30c5609a2693c07ee76",
+    "model_path": "qwen3-0.6b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "verdict": "PASSIVE: label-free attacks (whiten-NN, moment alignment, session pooling) recover at most 2.73% top-1 (random 0.0007%) -> no label-free route past W. ORACLE: top-1 crosses 50% at K=100 labeled pairs (H=1024) -> chosen-plaintext queries are the real security parameter; rotate W per session to cap an oracle's accumulation. PARTIAL LEAK: 90% of rows leaked -> 68.4233% top-1.",
+  "summary": [
+    {
+      "attack": "0_baseline_no_defense",
+      "depth": 1,
+      "setting": "plain_h",
+      "top1_mean": 68.5533,
+      "top1_std": 0.195,
+      "top5_mean": 69.6633,
+      "top5_std": 0.9187,
+      "n_seeds": 3
+    },
+    {
+      "attack": "0_obfuscated_static_W",
+      "depth": 1,
+      "setting": "h@W",
+      "top1_mean": 0.1967,
+      "top1_std": 0.195,
+      "top5_mean": 0.39,
+      "top5_std": 0.39,
+      "n_seeds": 3
+    },
+    {
+      "attack": "1a_whiten_nn",
+      "depth": 1,
+      "setting": "label-free",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.0,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "ref_token_coverage_pct": 70.7,
+      "note": "seed-independent; top5==top1 (NN decode)"
+    },
+    {
+      "attack": "1b_moment_align",
+      "depth": 1,
+      "setting": "label-free",
+      "top1_mean": 1.6267,
+      "top1_std": 0.56,
+      "top5_mean": 4.8167,
+      "top5_std": 1.0728,
+      "n_seeds": 3
+    },
+    {
+      "attack": "2_session_rotation",
+      "depth": 1,
+      "setting": "3_sessions",
+      "top1_mean": 2.73,
+      "top1_std": 0.0,
+      "top5_mean": 5.66,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "per_session_top1": [
+        4.69,
+        2.08,
+        1.56
+      ],
+      "marginal_info_per_session": "pooled 2.73% vs per-session [4.69, 2.08, 1.56]"
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 1,
+      "setting": "K=10",
+      "top1_mean": 21.55,
+      "top1_std": 2.8049,
+      "top5_mean": 24.1533,
+      "top5_std": 2.0508,
+      "n_seeds": 3,
+      "K_effective": 10,
+      "W_recovery_rel_err": 1.4064
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 1,
+      "setting": "K=100",
+      "top1_mean": 51.2367,
+      "top1_std": 0.6258,
+      "top5_mean": 56.25,
+      "top5_std": 0.8546,
+      "n_seeds": 3,
+      "K_effective": 100,
+      "W_recovery_rel_err": 1.3432
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 1,
+      "setting": "K=1000",
+      "top1_mean": 68.5533,
+      "top1_std": 0.195,
+      "top5_mean": 69.6633,
+      "top5_std": 0.9187,
+      "n_seeds": 3,
+      "K_effective": 1000,
+      "W_recovery_rel_err": 0.2198
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 1,
+      "setting": "K=1024",
+      "top1_mean": 68.5533,
+      "top1_std": 0.195,
+      "top5_mean": 69.6633,
+      "top5_std": 0.9187,
+      "n_seeds": 3,
+      "K_effective": 1024,
+      "W_recovery_rel_err": 0.0001
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 1,
+      "setting": "K=5000",
+      "top1_mean": 68.5533,
+      "top1_std": 0.195,
+      "top5_mean": 69.6633,
+      "top5_std": 0.9187,
+      "n_seeds": 3,
+      "K_effective": 5000,
+      "W_recovery_rel_err": 0.0
+    },
+    {
+      "attack": "4_partial_leak",
+      "depth": 1,
+      "setting": "rows_leaked=50%",
+      "top1_mean": 65.04,
+      "top1_std": 0.8546,
+      "top5_mean": 67.19,
+      "top5_std": 0.0,
+      "n_seeds": 3
+    },
+    {
+      "attack": "4_partial_leak",
+      "depth": 1,
+      "setting": "rows_leaked=90%",
+      "top1_mean": 68.4233,
+      "top1_std": 0.3001,
+      "top5_mean": 69.4667,
+      "top5_std": 1.0728,
+      "n_seeds": 3
+    }
+  ],
+  "results": []
+}

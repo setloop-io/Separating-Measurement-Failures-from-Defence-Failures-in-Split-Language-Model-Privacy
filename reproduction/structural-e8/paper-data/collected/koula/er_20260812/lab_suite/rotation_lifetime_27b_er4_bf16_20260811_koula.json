@@ -1,0 +1,458 @@
+{
+  "schema": "dtraining.rotation_lifetime.v1",
+  "config": {
+    "model": "/workspace/experiments/models/qwen36-27b",
+    "n_layers": 64,
+    "experiment": "er4",
+    "depths": [
+      1,
+      4,
+      8
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "solve_seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 10,
+    "seq_len": 64,
+    "epoch_sizes": [
+      64,
+      256,
+      1024,
+      4096
+    ],
+    "prefix_len": 64,
+    "sessions": 16,
+    "stale_epoch_sizes": [
+      256,
+      1024
+    ],
+    "shards": [
+      1,
+      4,
+      16
+    ],
+    "rotation_period": 8,
+    "shard_epoch_pairs": 1024,
+    "dtype": "bf16",
+    "device": "cuda",
+    "master_seed_base": 42,
+    "quick": false
+  },
+  "threat_model": "honest-but-curious cloud under PER-EPOCH rotation of the E8 boundary secret W (fresh ratchet-derived W each epoch). Attacker capabilities under test: (E-R1a) E labeled (h, hW) pairs from WITHIN one epoch (oracle serving/self-labeled traffic); (E-R3) knowledge of a fixed system-prompt prefix, static W, with/without scaffold jitter; (E-R4) an insider HANDED stale keys W_1..W_3 plus the derivation rule but not master_seed; (E-R5) labeled pairs against block-diagonal sharded secrets with a 2-epoch sliding window. W itself is never leaked in the current epoch.",
+  "interpretation": "E-R1a: recovery below 50% at epoch size E => the per-epoch budget is safe at E; max_safe_epoch is compared against the static-W K50 prior {1: 258, 4: 356, 8: 618} (depths 1/4/8, 27B bf16, e8_robustness_27b_bf16_densek_20260807T230529Z.json). The pooled-cross-epoch control must sit in the label-free band (<=3.7% on real models): accumulation does not cross rotation boundaries. E-R3: fixed_scaffold reproduces the known break (~4 sessions at S=64, K90 ~= 232-240 pairs); jittered_scaffold must show no K90 crossing within 16 sessions. E-R4: stale-only recovery ~= band with W rel_err ~= sqrt(2) (random); fresh-pair cells must match E-R1a at the same E (stale keys give zero bootstrap). E-R5: static sharding is the NEGATIVE CONTROL \u2014 per-block budgets shrink to 0.1*h_b, so s=16 is easier to break than s=1; staggering restores the defense because no 2-epoch window has all blocks on one key.",
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9981,
+      9982,
+      9983,
+      9984,
+      9985,
+      9986,
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "split-inference:spark",
+    "hostname": "koula",
+    "victim_doc_sha256": {},
+    "dtraining_commit": "749d721ad6486bce62903f5fece3616dc3339560",
+    "model_manifest_sha256": "f8c3bc4bd8e650242cc38e534146672c60a932e92202cd4d5d47b29fde8a7d30",
+    "model_manifest_algo": "v2-sizes-no-cache",
+    "model_manifest_n_files": 29,
+    "model_path": "qwen36-27b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "random_baseline_top1_pct": 0.0004,
+  "measurement_kind": "lab-harness simulation: attacks executed in-process against collected boundary activations; no live wire",
+  "evidence_status": "primary",
+  "known_limitations": [
+    "labeled-pair attacker is an upper bound (oracle serving); real self-labeled traffic yields noisier pairs",
+    "rotation cadence is per-epoch; sub-epoch accumulation is the binding constraint, so epoch sizes must stay below max_safe_epoch with margin",
+    "E-R3 jitter models pad-insertion + slot permutation only; a stronger attacker with approximate alignment search is not covered",
+    "E-R5 sharding WITHOUT staggering strictly weakens per-block budgets (negative control) \u2014 shard counts must not be deployed without the staggered schedule",
+    "historical artifacts are immutable; the K50 prior quoted here comes from e8_robustness_27b_bf16_densek_20260807T230529Z.json"
+  ],
+  "summary": [
+    {
+      "experiment": "er4",
+      "depth": 1,
+      "stale_only_best_top1_mean": 1.98,
+      "labelfree_band_mean": 0.47,
+      "pairwise_rel_err_mean": 1.4141,
+      "fresh_pairs_epoch4": {
+        "256": 47.8133,
+        "1024": 65.3133
+      },
+      "n_seeds": 3
+    },
+    {
+      "experiment": "er4",
+      "depth": 4,
+      "stale_only_best_top1_mean": 2.4467,
+      "labelfree_band_mean": 0.0,
+      "pairwise_rel_err_mean": 1.4141,
+      "fresh_pairs_epoch4": {
+        "256": 45.9367,
+        "1024": 63.0233
+      },
+      "n_seeds": 3
+    },
+    {
+      "experiment": "er4",
+      "depth": 8,
+      "stale_only_best_top1_mean": 0.9367,
+      "labelfree_band_mean": 0.0533,
+      "pairwise_rel_err_mean": 1.4141,
+      "fresh_pairs_epoch4": {
+        "256": 45.3633,
+        "1024": 61.1967
+      },
+      "n_seeds": 3
+    }
+  ],
+  "results": [
+    {
+      "experiment": "er4",
+      "depth": 1,
+      "seed": 0,
+      "pairwise_consecutive_rel_err": {
+        "1-2": 1.414238,
+        "2-3": 1.41415,
+        "3-4": 1.413925
+      },
+      "random_rel_err_reference": 1.4142,
+      "stale_only": {
+        "W_1": {
+          "top1": 0.0,
+          "rel_err_to_W4": 1.414072
+        },
+        "W_2": {
+          "top1": 0.0,
+          "rel_err_to_W4": 1.413965
+        },
+        "W_3": {
+          "top1": 2.66,
+          "rel_err_to_W4": 1.413925
+        }
+      },
+      "stale_only_best_top1": 2.66,
+      "labelfree_band_top1": 0.0,
+      "fresh_pairs_epoch4": {
+        "256": {
+          "top1": 49.06,
+          "rel_err_to_W4": 1.384347
+        },
+        "1024": {
+          "top1": 64.69,
+          "rel_err_to_W4": 1.271019
+        }
+      }
+    },
+    {
+      "experiment": "er4",
+      "depth": 1,
+      "seed": 1,
+      "pairwise_consecutive_rel_err": {
+        "1-2": 1.413963,
+        "2-3": 1.414183,
+        "3-4": 1.4143
+      },
+      "random_rel_err_reference": 1.4142,
+      "stale_only": {
+        "W_1": {
+          "top1": 0.47,
+          "rel_err_to_W4": 1.414175
+        },
+        "W_2": {
+          "top1": 0.94,
+          "rel_err_to_W4": 1.414296
+        },
+        "W_3": {
+          "top1": 3.12,
+          "rel_err_to_W4": 1.4143
+        }
+      },
+      "stale_only_best_top1": 3.12,
+      "labelfree_band_top1": 0.16,
+      "fresh_pairs_epoch4": {
+        "256": {
+          "top1": 49.38,
+          "rel_err_to_W4": 1.384316
+        },
+        "1024": {
+          "top1": 65.31,
+          "rel_err_to_W4": 1.271087
+        }
+      }
+    },
+    {
+      "experiment": "er4",
+      "depth": 1,
+      "seed": 2,
+      "pairwise_consecutive_rel_err": {
+        "1-2": 1.4141,
+        "2-3": 1.414162,
+        "3-4": 1.414033
+      },
+      "random_rel_err_reference": 1.4142,
+      "stale_only": {
+        "W_1": {
+          "top1": 0.16,
+          "rel_err_to_W4": 1.414219
+        },
+        "W_2": {
+          "top1": 0.0,
+          "rel_err_to_W4": 1.414036
+        },
+        "W_3": {
+          "top1": 0.0,
+          "rel_err_to_W4": 1.414033
+        }
+      },
+      "stale_only_best_top1": 0.16,
+      "labelfree_band_top1": 1.25,
+      "fresh_pairs_epoch4": {
+        "256": {
+          "top1": 45.0,
+          "rel_err_to_W4": 1.384531
+        },
+        "1024": {
+          "top1": 65.94,
+          "rel_err_to_W4": 1.270754
+        }
+      }
+    },
+    {
+      "experiment": "er4",
+      "depth": 4,
+      "seed": 0,
+      "pairwise_consecutive_rel_err": {
+        "1-2": 1.414238,
+        "2-3": 1.41415,
+        "3-4": 1.413925
+      },
+      "random_rel_err_reference": 1.4142,
+      "stale_only": {
+        "W_1": {
+          "top1": 0.0,
+          "rel_err_to_W4": 1.414072
+        },
+        "W_2": {
+          "top1": 2.97,
+          "rel_err_to_W4": 1.413965
+        },
+        "W_3": {
+          "top1": 4.06,
+          "rel_err_to_W4": 1.413925
+        }
+      },
+      "stale_only_best_top1": 4.06,
+      "labelfree_band_top1": 0.0,
+      "fresh_pairs_epoch4": {
+        "256": {
+          "top1": 47.03,
+          "rel_err_to_W4": 1.384184
+        },
+        "1024": {
+          "top1": 62.66,
+          "rel_err_to_W4": 1.270774
+        }
+      }
+    },
+    {
+      "experiment": "er4",
+      "depth": 4,
+      "seed": 1,
+      "pairwise_consecutive_rel_err": {
+        "1-2": 1.413963,
+        "2-3": 1.414183,
+        "3-4": 1.4143
+      },
+      "random_rel_err_reference": 1.4142,
+      "stale_only": {
+        "W_1": {
+          "top1": 1.72,
+          "rel_err_to_W4": 1.414175
+        },
+        "W_2": {
+          "top1": 0.31,
+          "rel_err_to_W4": 1.414296
+        },
+        "W_3": {
+          "top1": 3.12,
+          "rel_err_to_W4": 1.4143
+        }
+      },
+      "stale_only_best_top1": 3.12,
+      "labelfree_band_top1": 0.0,
+      "fresh_pairs_epoch4": {
+        "256": {
+          "top1": 47.34,
+          "rel_err_to_W4": 1.384366
+        },
+        "1024": {
+          "top1": 62.66,
+          "rel_err_to_W4": 1.270874
+        }
+      }
+    },
+    {
+      "experiment": "er4",
+      "depth": 4,
+      "seed": 2,
+      "pairwise_consecutive_rel_err": {
+        "1-2": 1.4141,
+        "2-3": 1.414162,
+        "3-4": 1.414033
+      },
+      "random_rel_err_reference": 1.4142,
+      "stale_only": {
+        "W_1": {
+          "top1": 0.0,
+          "rel_err_to_W4": 1.414219
+        },
+        "W_2": {
+          "top1": 0.0,
+          "rel_err_to_W4": 1.414036
+        },
+        "W_3": {
+          "top1": 0.16,
+          "rel_err_to_W4": 1.414033
+        }
+      },
+      "stale_only_best_top1": 0.16,
+      "labelfree_band_top1": 0.0,
+      "fresh_pairs_epoch4": {
+        "256": {
+          "top1": 43.44,
+          "rel_err_to_W4": 1.384401
+        },
+        "1024": {
+          "top1": 63.75,
+          "rel_err_to_W4": 1.270715
+        }
+      }
+    },
+    {
+      "experiment": "er4",
+      "depth": 8,
+      "seed": 0,
+      "pairwise_consecutive_rel_err": {
+        "1-2": 1.414238,
+        "2-3": 1.41415,
+        "3-4": 1.413925
+      },
+      "random_rel_err_reference": 1.4142,
+      "stale_only": {
+        "W_1": {
+          "top1": 0.0,
+          "rel_err_to_W4": 1.414072
+        },
+        "W_2": {
+          "top1": 0.78,
+          "rel_err_to_W4": 1.413965
+        },
+        "W_3": {
+          "top1": 0.16,
+          "rel_err_to_W4": 1.413925
+        }
+      },
+      "stale_only_best_top1": 0.78,
+      "labelfree_band_top1": 0.16,
+      "fresh_pairs_epoch4": {
+        "256": {
+          "top1": 46.09,
+          "rel_err_to_W4": 1.384419
+        },
+        "1024": {
+          "top1": 60.47,
+          "rel_err_to_W4": 1.271096
+        }
+      }
+    },
+    {
+      "experiment": "er4",
+      "depth": 8,
+      "seed": 1,
+      "pairwise_consecutive_rel_err": {
+        "1-2": 1.413963,
+        "2-3": 1.414183,
+        "3-4": 1.4143
+      },
+      "random_rel_err_reference": 1.4142,
+      "stale_only": {
+        "W_1": {
+          "top1": 1.56,
+          "rel_err_to_W4": 1.414175
+        },
+        "W_2": {
+          "top1": 0.0,
+          "rel_err_to_W4": 1.414296
+        },
+        "W_3": {
+          "top1": 0.0,
+          "rel_err_to_W4": 1.4143
+        }
+      },
+      "stale_only_best_top1": 1.56,
+      "labelfree_band_top1": 0.0,
+      "fresh_pairs_epoch4": {
+        "256": {
+          "top1": 47.03,
+          "rel_err_to_W4": 1.384153
+        },
+        "1024": {
+          "top1": 61.56,
+          "rel_err_to_W4": 1.270989
+        }
+      }
+    },
+    {
+      "experiment": "er4",
+      "depth": 8,
+      "seed": 2,
+      "pairwise_consecutive_rel_err": {
+        "1-2": 1.4141,
+        "2-3": 1.414162,
+        "3-4": 1.414033
+      },
+      "random_rel_err_reference": 1.4142,
+      "stale_only": {
+        "W_1": {
+          "top1": 0.31,
+          "rel_err_to_W4": 1.414219
+        },
+        "W_2": {
+          "top1": 0.31,
+          "rel_err_to_W4": 1.414036
+        },
+        "W_3": {
+          "top1": 0.47,
+          "rel_err_to_W4": 1.414033
+        }
+      },
+      "stale_only_best_top1": 0.47,
+      "labelfree_band_top1": 0.0,
+      "fresh_pairs_epoch4": {
+        "256": {
+          "top1": 42.97,
+          "rel_err_to_W4": 1.384103
+        },
+        "1024": {
+          "top1": 61.56,
+          "rel_err_to_W4": 1.270776
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,439 @@
+{
+  "config": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "n_layers": 28,
+    "depths": [
+      1,
+      4,
+      8
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 8,
+    "seq_len": 64,
+    "max_pairs": 20000,
+    "epochs": 30,
+    "k_list": [
+      10,
+      100,
+      1000,
+      5000
+    ],
+    "leak_fracs": [
+      0.5,
+      0.9
+    ],
+    "sessions": 3,
+    "W_seed": 42,
+    "dtype": "bf16",
+    "device": "cuda",
+    "quick": false
+  },
+  "threat_model": "attacks 1/2/4: PASSIVE observer of h'=h@W with public text+model but no victim labels. attack 3: ORACLE / chosen-plaintext (K exact position-0 pairs) \u2014 strictly stronger than the E8 default; the K-curve is the honest security parameter, not a claim about the default model.",
+  "random_baseline_top1_pct": 0.0007,
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9983,
+      9984,
+      9985,
+      9986,
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "split-inference:spark-x86",
+    "hostname": "69478f7ea0ce",
+    "dtraining_commit": "c0b3a584e581188b572b769719711c320858f1c0",
+    "model_manifest_sha256": "bbb298585268cc09bcef40664004922c189e0ef0bf70d30c5609a2693c07ee76",
+    "model_path": "qwen3-0.6b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "verdict": "PASSIVE: label-free attacks (whiten-NN, moment alignment, session pooling) recover at most 3.19% top-1 (random 0.0007%) -> no label-free route past W. ORACLE: top-1 crosses 50% at K=100 labeled pairs (H=1024) -> chosen-plaintext queries are the real security parameter; rotate W per session to cap an oracle's accumulation. PARTIAL LEAK: 90% of rows leaked -> 68.4233% top-1.",
+  "summary": [
+    {
+      "attack": "0_baseline_no_defense",
+      "depth": 1,
+      "setting": "plain_h",
+      "top1_mean": 69.7267,
+      "top1_std": 0.7003,
+      "top5_mean": 70.6367,
+      "top5_std": 0.1097,
+      "n_seeds": 3
+    },
+    {
+      "attack": "0_obfuscated_static_W",
+      "depth": 1,
+      "setting": "h@W",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.0,
+      "top5_std": 0.0,
+      "n_seeds": 3
+    },
+    {
+      "attack": "1a_whiten_nn",
+      "depth": 1,
+      "setting": "label-free",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.0,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "ref_token_coverage_pct": 70.7,
+      "note": "seed-independent; top5==top1 (NN decode)"
+    },
+    {
+      "attack": "1b_moment_align",
+      "depth": 1,
+      "setting": "label-free",
+      "top1_mean": 3.19,
+      "top1_std": 0.4107,
+      "top5_mean": 5.3367,
+      "top5_std": 0.4067,
+      "n_seeds": 3
+    },
+    {
+      "attack": "2_session_rotation",
+      "depth": 1,
+      "setting": "3_sessions",
+      "top1_mean": 1.37,
+      "top1_std": 0.0,
+      "top5_mean": 3.91,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "per_session_top1": [
+        2.08,
+        1.04,
+        0.0
+      ],
+      "marginal_info_per_session": "pooled 1.37% vs per-session [2.08, 1.04, 0.0]"
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 1,
+      "setting": "K=10",
+      "top1_mean": 18.1,
+      "top1_std": 1.5159,
+      "top5_mean": 22.1333,
+      "top5_std": 1.3011,
+      "n_seeds": 3,
+      "K_effective": 10,
+      "W_recovery_rel_err": 1.4074
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 1,
+      "setting": "K=100",
+      "top1_mean": 52.9267,
+      "top1_std": 0.8958,
+      "top5_mean": 56.9,
+      "top5_std": 1.1915,
+      "n_seeds": 3,
+      "K_effective": 100,
+      "W_recovery_rel_err": 1.3445
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 1,
+      "setting": "K=1000",
+      "top1_mean": 69.7267,
+      "top1_std": 0.7003,
+      "top5_mean": 70.6367,
+      "top5_std": 0.1097,
+      "n_seeds": 3,
+      "K_effective": 1000,
+      "W_recovery_rel_err": 0.2125
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 1,
+      "setting": "K=5000",
+      "top1_mean": 69.7267,
+      "top1_std": 0.7003,
+      "top5_mean": 70.6367,
+      "top5_std": 0.1097,
+      "n_seeds": 3,
+      "K_effective": 5000,
+      "W_recovery_rel_err": 0.0
+    },
+    {
+      "attack": "4_partial_leak",
+      "depth": 1,
+      "setting": "rows_leaked=50%",
+      "top1_mean": 59.44,
+      "top1_std": 2.5796,
+      "top5_mean": 65.3667,
+      "top5_std": 2.0304,
+      "n_seeds": 3
+    },
+    {
+      "attack": "4_partial_leak",
+      "depth": 1,
+      "setting": "rows_leaked=90%",
+      "top1_mean": 68.4233,
+      "top1_std": 0.9636,
+      "top5_mean": 69.9867,
+      "top5_std": 0.6824,
+      "n_seeds": 3
+    },
+    {
+      "attack": "0_baseline_no_defense",
+      "depth": 4,
+      "setting": "plain_h",
+      "top1_mean": 67.1867,
+      "top1_std": 0.195,
+      "top5_mean": 68.1633,
+      "top5_std": 0.195,
+      "n_seeds": 3
+    },
+    {
+      "attack": "0_obfuscated_static_W",
+      "depth": 4,
+      "setting": "h@W",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.0667,
+      "top5_std": 0.1155,
+      "n_seeds": 3
+    },
+    {
+      "attack": "1a_whiten_nn",
+      "depth": 4,
+      "setting": "label-free",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.0,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "ref_token_coverage_pct": 70.7,
+      "note": "seed-independent; top5==top1 (NN decode)"
+    },
+    {
+      "attack": "1b_moment_align",
+      "depth": 4,
+      "setting": "label-free",
+      "top1_mean": 0.2,
+      "top1_std": 0.0,
+      "top5_mean": 4.5567,
+      "top5_std": 1.1757,
+      "n_seeds": 3
+    },
+    {
+      "attack": "2_session_rotation",
+      "depth": 4,
+      "setting": "3_sessions",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 4.88,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "per_session_top1": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "marginal_info_per_session": "none: pooled ~= per-session ~= random"
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 4,
+      "setting": "K=10",
+      "top1_mean": 4.1667,
+      "top1_std": 2.5478,
+      "top5_mean": 11.07,
+      "top5_std": 1.4765,
+      "n_seeds": 3,
+      "K_effective": 10,
+      "W_recovery_rel_err": 1.4066
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 4,
+      "setting": "K=100",
+      "top1_mean": 29.95,
+      "top1_std": 3.3504,
+      "top5_mean": 41.2733,
+      "top5_std": 2.4563,
+      "n_seeds": 3,
+      "K_effective": 100,
+      "W_recovery_rel_err": 1.343
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 4,
+      "setting": "K=1000",
+      "top1_mean": 67.1867,
+      "top1_std": 0.195,
+      "top5_mean": 68.1633,
+      "top5_std": 0.195,
+      "n_seeds": 3,
+      "K_effective": 1000,
+      "W_recovery_rel_err": 0.2219
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 4,
+      "setting": "K=5000",
+      "top1_mean": 67.1867,
+      "top1_std": 0.195,
+      "top5_mean": 68.1633,
+      "top5_std": 0.195,
+      "n_seeds": 3,
+      "K_effective": 5000,
+      "W_recovery_rel_err": 0.0003
+    },
+    {
+      "attack": "4_partial_leak",
+      "depth": 4,
+      "setting": "rows_leaked=50%",
+      "top1_mean": 45.64,
+      "top1_std": 1.5159,
+      "top5_mean": 53.06,
+      "top5_std": 0.8815,
+      "n_seeds": 3
+    },
+    {
+      "attack": "4_partial_leak",
+      "depth": 4,
+      "setting": "rows_leaked=90%",
+      "top1_mean": 66.34,
+      "top1_std": 0.793,
+      "top5_mean": 68.03,
+      "top5_std": 0.2252,
+      "n_seeds": 3
+    },
+    {
+      "attack": "0_baseline_no_defense",
+      "depth": 8,
+      "setting": "plain_h",
+      "top1_mean": 66.21,
+      "top1_std": 0.7045,
+      "top5_mean": 67.9033,
+      "top5_std": 0.2957,
+      "n_seeds": 3
+    },
+    {
+      "attack": "0_obfuscated_static_W",
+      "depth": 8,
+      "setting": "h@W",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.1967,
+      "top5_std": 0.195,
+      "n_seeds": 3
+    },
+    {
+      "attack": "1a_whiten_nn",
+      "depth": 8,
+      "setting": "label-free",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.0,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "ref_token_coverage_pct": 70.7,
+      "note": "seed-independent; top5==top1 (NN decode)"
+    },
+    {
+      "attack": "1b_moment_align",
+      "depth": 8,
+      "setting": "label-free",
+      "top1_mean": 0.1333,
+      "top1_std": 0.1155,
+      "top5_mean": 6.3167,
+      "top5_std": 0.1155,
+      "n_seeds": 3
+    },
+    {
+      "attack": "2_session_rotation",
+      "depth": 8,
+      "setting": "3_sessions",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 4.69,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "per_session_top1": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "marginal_info_per_session": "none: pooled ~= per-session ~= random"
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 8,
+      "setting": "K=10",
+      "top1_mean": 1.4333,
+      "top1_std": 0.1097,
+      "top5_mean": 9.05,
+      "top5_std": 3.787,
+      "n_seeds": 3,
+      "K_effective": 10,
+      "W_recovery_rel_err": 1.4079
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 8,
+      "setting": "K=100",
+      "top1_mean": 26.6933,
+      "top1_std": 2.2624,
+      "top5_mean": 39.1267,
+      "top5_std": 2.2217,
+      "n_seeds": 3,
+      "K_effective": 100,
+      "W_recovery_rel_err": 1.3423
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 8,
+      "setting": "K=1000",
+      "top1_mean": 66.1467,
+      "top1_std": 0.3001,
+      "top5_mean": 67.9,
+      "top5_std": 0.2252,
+      "n_seeds": 3,
+      "K_effective": 1000,
+      "W_recovery_rel_err": 0.2159
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 8,
+      "setting": "K=5000",
+      "top1_mean": 66.21,
+      "top1_std": 0.7045,
+      "top5_mean": 67.9033,
+      "top5_std": 0.2957,
+      "n_seeds": 3,
+      "K_effective": 5000,
+      "W_recovery_rel_err": 0.0003
+    },
+    {
+      "attack": "4_partial_leak",
+      "depth": 8,
+      "setting": "rows_leaked=50%",
+      "top1_mean": 46.4167,
+      "top1_std": 2.263,
+      "top5_mean": 54.8167,
+      "top5_std": 1.8558,
+      "n_seeds": 3
+    },
+    {
+      "attack": "4_partial_leak",
+      "depth": 8,
+      "setting": "rows_leaked=90%",
+      "top1_mean": 64.4533,
+      "top1_std": 0.3349,
+      "top5_mean": 67.58,
+      "top5_std": 0.78,
+      "n_seeds": 3
+    }
+  ],
+  "results": []
+}

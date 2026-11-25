@@ -1,0 +1,697 @@
+{
+  "config": {
+    "model": "/workspace/experiments/models/qwen36-27b",
+    "n_layers": 64,
+    "depths": [
+      1,
+      4,
+      8
+    ],
+    "configs": [
+      "lora-local"
+    ],
+    "train_steps_list": [
+      0,
+      10,
+      100
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 8,
+    "val_frac": 0.15,
+    "seq_len": 64,
+    "max_pairs": 20000,
+    "epochs": 30,
+    "lr": 1e-05,
+    "lora_rank": 8,
+    "dtype": "bf16",
+    "device": "cuda",
+    "quick": false
+  },
+  "threat_model": "semi-honest cloud observes boundary activation h* and gradient g*=dL/dh per microbatch; attacker trains an MLP decoder on PUBLIC text through the PUBLIC base model and applies it unchanged to the victim's training-time boundary tensors (document-disjoint; victim docs held out from the END of the corpus)",
+  "interpretation": "top-1 vs train_step: flat/high => fine-tuning drift does NOT protect (base-model attacker transfers); decaying => drift defends. B vs A at the same step: gradients add recovery power iff B > A.",
+  "random_baseline_top1_pct": 0.0004,
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9983,
+      9984,
+      9985,
+      9986,
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "split-inference:spark-x86",
+    "hostname": "3558df477d0c",
+    "dtraining_commit": "94bc8421d0406d11ef60c5ef0df5da1ac5261e91",
+    "model_manifest_sha256": "e9036ac8812be0ee89fce79b8e4862bcc0a7c1c244f557c1bc8b089a38a25a51",
+    "model_path": "qwen36-27b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "summary": [
+    {
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "A_act",
+      "top1_mean": 69.8567,
+      "top1_std": 0.6279,
+      "top5_mean": 70.31,
+      "top5_std": 0.0,
+      "utility_loss": 2.407146692276001,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "B_act+grad",
+      "top1_mean": 68.75,
+      "top1_std": 0.5197,
+      "top5_mean": 70.31,
+      "top5_std": 0.0,
+      "utility_loss": 2.407146692276001,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "A_act",
+      "top1_mean": 69.73,
+      "top1_std": 0.6755,
+      "top5_mean": 70.31,
+      "top5_std": 0.0,
+      "utility_loss": 2.281289259592692,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "B_act+grad",
+      "top1_mean": 68.49,
+      "top1_std": 0.4927,
+      "top5_mean": 70.31,
+      "top5_std": 0.0,
+      "utility_loss": 2.281289259592692,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "A_act",
+      "top1_mean": 69.7933,
+      "top1_std": 0.5658,
+      "top5_mean": 70.31,
+      "top5_std": 0.0,
+      "utility_loss": 2.178971449534098,
+      "n_seeds": 3
+    },
+    {
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "B_act+grad",
+      "top1_mean": 68.8167,
+      "top1_std": 0.6012,
+      "top5_mean": 70.31,
+      "top5_std": 0.0,
+      "utility_loss": 2.178971449534098,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "A_act",
+      "top1_mean": 67.4467,
+      "top1_std": 0.1155,
+      "top5_mean": 69.7267,
+      "top5_std": 0.5178,
+      "utility_loss": 2.407146692276001,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "B_act+grad",
+      "top1_mean": 67.4467,
+      "top1_std": 0.4067,
+      "top5_mean": 68.9467,
+      "top5_std": 0.975,
+      "utility_loss": 2.407146692276001,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "A_act",
+      "top1_mean": 67.5133,
+      "top1_std": 0.1155,
+      "top5_mean": 69.66,
+      "top5_std": 0.4503,
+      "utility_loss": 2.2443811893463135,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "B_act+grad",
+      "top1_mean": 67.4467,
+      "top1_std": 0.4067,
+      "top5_mean": 68.8833,
+      "top5_std": 0.8819,
+      "utility_loss": 2.2443811893463135,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "A_act",
+      "top1_mean": 67.4467,
+      "top1_std": 0.1155,
+      "top5_mean": 69.5333,
+      "top5_std": 0.514,
+      "utility_loss": 2.130548040072123,
+      "n_seeds": 3
+    },
+    {
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "B_act+grad",
+      "top1_mean": 67.4467,
+      "top1_std": 0.4067,
+      "top5_mean": 68.8833,
+      "top5_std": 0.8819,
+      "utility_loss": 2.130548040072123,
+      "n_seeds": 3
+    }
+  ],
+  "results": [
+    {
+      "phase": "attack_train",
+      "depth": 1,
+      "attack": "A_act",
+      "seed": 0,
+      "val_top1": 76.01,
+      "val_top5": 76.4
+    },
+    {
+      "phase": "attack_train",
+      "depth": 1,
+      "attack": "A_act",
+      "seed": 1,
+      "val_top1": 75.84,
+      "val_top5": 76.3
+    },
+    {
+      "phase": "attack_train",
+      "depth": 1,
+      "attack": "A_act",
+      "seed": 2,
+      "val_top1": 75.72,
+      "val_top5": 76.33
+    },
+    {
+      "phase": "attack_train",
+      "depth": 1,
+      "attack": "B_act+grad",
+      "seed": 0,
+      "val_top1": 75.8,
+      "val_top5": 76.42
+    },
+    {
+      "phase": "attack_train",
+      "depth": 1,
+      "attack": "B_act+grad",
+      "seed": 1,
+      "val_top1": 75.9,
+      "val_top5": 76.37
+    },
+    {
+      "phase": "attack_train",
+      "depth": 1,
+      "attack": "B_act+grad",
+      "seed": 2,
+      "val_top1": 76.08,
+      "val_top5": 76.37
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "A_act",
+      "seed": 0,
+      "top1": 70.12,
+      "top5": 70.31,
+      "utility_loss": 2.407146692276001
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "A_act",
+      "seed": 1,
+      "top1": 70.31,
+      "top5": 70.31,
+      "utility_loss": 2.407146692276001
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "A_act",
+      "seed": 2,
+      "top1": 69.14,
+      "top5": 70.31,
+      "utility_loss": 2.407146692276001
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "B_act+grad",
+      "seed": 0,
+      "top1": 68.16,
+      "top5": 70.31,
+      "utility_loss": 2.407146692276001
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "B_act+grad",
+      "seed": 1,
+      "top1": 69.14,
+      "top5": 70.31,
+      "utility_loss": 2.407146692276001
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "B_act+grad",
+      "seed": 2,
+      "top1": 68.95,
+      "top5": 70.31,
+      "utility_loss": 2.407146692276001
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "A_act",
+      "seed": 0,
+      "top1": 70.12,
+      "top5": 70.31,
+      "utility_loss": 2.281289259592692
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "A_act",
+      "seed": 1,
+      "top1": 70.12,
+      "top5": 70.31,
+      "utility_loss": 2.281289259592692
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "A_act",
+      "seed": 2,
+      "top1": 68.95,
+      "top5": 70.31,
+      "utility_loss": 2.281289259592692
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "B_act+grad",
+      "seed": 0,
+      "top1": 67.97,
+      "top5": 70.31,
+      "utility_loss": 2.281289259592692
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "B_act+grad",
+      "seed": 1,
+      "top1": 68.95,
+      "top5": 70.31,
+      "utility_loss": 2.281289259592692
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "B_act+grad",
+      "seed": 2,
+      "top1": 68.55,
+      "top5": 70.31,
+      "utility_loss": 2.281289259592692
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "A_act",
+      "seed": 0,
+      "top1": 70.12,
+      "top5": 70.31,
+      "utility_loss": 2.178971449534098
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "A_act",
+      "seed": 1,
+      "top1": 70.12,
+      "top5": 70.31,
+      "utility_loss": 2.178971449534098
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "A_act",
+      "seed": 2,
+      "top1": 69.14,
+      "top5": 70.31,
+      "utility_loss": 2.178971449534098
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "B_act+grad",
+      "seed": 0,
+      "top1": 68.16,
+      "top5": 70.31,
+      "utility_loss": 2.178971449534098
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "B_act+grad",
+      "seed": 1,
+      "top1": 69.34,
+      "top5": 70.31,
+      "utility_loss": 2.178971449534098
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 1,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "B_act+grad",
+      "seed": 2,
+      "top1": 68.95,
+      "top5": 70.31,
+      "utility_loss": 2.178971449534098
+    },
+    {
+      "phase": "attack_train",
+      "depth": 4,
+      "attack": "A_act",
+      "seed": 0,
+      "val_top1": 74.52,
+      "val_top5": 75.59
+    },
+    {
+      "phase": "attack_train",
+      "depth": 4,
+      "attack": "A_act",
+      "seed": 1,
+      "val_top1": 74.57,
+      "val_top5": 75.6
+    },
+    {
+      "phase": "attack_train",
+      "depth": 4,
+      "attack": "A_act",
+      "seed": 2,
+      "val_top1": 74.51,
+      "val_top5": 75.56
+    },
+    {
+      "phase": "attack_train",
+      "depth": 4,
+      "attack": "B_act+grad",
+      "seed": 0,
+      "val_top1": 74.4,
+      "val_top5": 75.56
+    },
+    {
+      "phase": "attack_train",
+      "depth": 4,
+      "attack": "B_act+grad",
+      "seed": 1,
+      "val_top1": 74.44,
+      "val_top5": 75.59
+    },
+    {
+      "phase": "attack_train",
+      "depth": 4,
+      "attack": "B_act+grad",
+      "seed": 2,
+      "val_top1": 74.51,
+      "val_top5": 75.53
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "A_act",
+      "seed": 0,
+      "top1": 67.58,
+      "top5": 69.14,
+      "utility_loss": 2.407146692276001
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "A_act",
+      "seed": 1,
+      "top1": 67.38,
+      "top5": 70.12,
+      "utility_loss": 2.407146692276001
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "A_act",
+      "seed": 2,
+      "top1": 67.38,
+      "top5": 69.92,
+      "utility_loss": 2.407146692276001
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "B_act+grad",
+      "seed": 0,
+      "top1": 67.77,
+      "top5": 69.92,
+      "utility_loss": 2.407146692276001
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "B_act+grad",
+      "seed": 1,
+      "top1": 66.99,
+      "top5": 68.95,
+      "utility_loss": 2.407146692276001
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 0,
+      "attack": "B_act+grad",
+      "seed": 2,
+      "top1": 67.58,
+      "top5": 67.97,
+      "utility_loss": 2.407146692276001
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "A_act",
+      "seed": 0,
+      "top1": 67.58,
+      "top5": 69.14,
+      "utility_loss": 2.2443811893463135
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "A_act",
+      "seed": 1,
+      "top1": 67.38,
+      "top5": 69.92,
+      "utility_loss": 2.2443811893463135
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "A_act",
+      "seed": 2,
+      "top1": 67.58,
+      "top5": 69.92,
+      "utility_loss": 2.2443811893463135
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "B_act+grad",
+      "seed": 0,
+      "top1": 67.77,
+      "top5": 69.73,
+      "utility_loss": 2.2443811893463135
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "B_act+grad",
+      "seed": 1,
+      "top1": 66.99,
+      "top5": 68.95,
+      "utility_loss": 2.2443811893463135
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 10,
+      "attack": "B_act+grad",
+      "seed": 2,
+      "top1": 67.58,
+      "top5": 67.97,
+      "utility_loss": 2.2443811893463135
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "A_act",
+      "seed": 0,
+      "top1": 67.58,
+      "top5": 68.95,
+      "utility_loss": 2.130548040072123
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "A_act",
+      "seed": 1,
+      "top1": 67.38,
+      "top5": 69.92,
+      "utility_loss": 2.130548040072123
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "A_act",
+      "seed": 2,
+      "top1": 67.38,
+      "top5": 69.73,
+      "utility_loss": 2.130548040072123
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "B_act+grad",
+      "seed": 0,
+      "top1": 67.77,
+      "top5": 69.73,
+      "utility_loss": 2.130548040072123
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "B_act+grad",
+      "seed": 1,
+      "top1": 66.99,
+      "top5": 68.95,
+      "utility_loss": 2.130548040072123
+    },
+    {
+      "phase": "attack_eval",
+      "depth": 4,
+      "config": "lora-local",
+      "train_step": 100,
+      "attack": "B_act+grad",
+      "seed": 2,
+      "top1": 67.58,
+      "top5": 67.97,
+      "utility_loss": 2.130548040072123
+    }
+  ]
+}

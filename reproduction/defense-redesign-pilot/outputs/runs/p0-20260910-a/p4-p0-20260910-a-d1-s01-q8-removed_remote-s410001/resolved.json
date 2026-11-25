@@ -1,0 +1,155 @@
+{
+  "cell": {
+    "defense": {
+      "name": "property_noise",
+      "noise_scale": 0.1
+    },
+    "id": "d1-s01-q8",
+    "q_bits": 8
+  },
+  "matrix": {
+    "backbone": {
+      "d_ff": 1024,
+      "d_model": 256,
+      "init_std": 0.02,
+      "max_seq_len": 128,
+      "n_heads": 8,
+      "n_layers": 8,
+      "vocab_size": 256
+    },
+    "basis_policy": "same-model initial ridge on separate calibration text; wiring test only",
+    "calibration_batches": 16,
+    "cells": [
+      {
+        "defense": {
+          "name": "none"
+        },
+        "id": "d0-q8",
+        "q_bits": 8
+      },
+      {
+        "defense": {
+          "name": "property_noise",
+          "noise_scale": 0.1
+        },
+        "id": "d1-s01-q8",
+        "q_bits": 8
+      },
+      {
+        "defense": {
+          "name": "aggressive_rate"
+        },
+        "id": "d3-q2",
+        "q_bits": 2
+      }
+    ],
+    "claim_scope": "No scientific/privacy/convergence claim; full pilot is disabled pending P0 and freeze.",
+    "cohort": "engineering",
+    "cpu_threads": 2,
+    "data": {
+      "batch_size": 2,
+      "fractions": [
+        0,
+        0.8,
+        0.9,
+        0.95,
+        1.0
+      ],
+      "path": "data/raw/tinyshakespeare.txt",
+      "sequence_length": 32,
+      "sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed"
+    },
+    "eval_batches": 4,
+    "modes": [
+      "trained",
+      "frozen_random",
+      "removed_remote"
+    ],
+    "optimizer": {
+      "betas": [
+        0.9,
+        0.95
+      ],
+      "grad_clip": 1.0,
+      "lr": 0.0003,
+      "min_lr": 3e-05,
+      "steps": 3,
+      "warmup_steps": 1,
+      "weight_decay": 0.1
+    },
+    "probe_batches": 8,
+    "probe_epochs": 2,
+    "protocol_id": "p4-p0-engineering-0.1",
+    "quantizer": "per-token-affine-width-axis; min/scale visible; differs from Paper3 per-tensor",
+    "reserved_prior_seeds": [
+      3,
+      7,
+      9,
+      11,
+      13,
+      17,
+      19,
+      21,
+      22,
+      23,
+      27,
+      29,
+      31,
+      33,
+      37,
+      39,
+      41,
+      43,
+      44,
+      47,
+      49,
+      51,
+      53,
+      55,
+      57,
+      59,
+      61,
+      63,
+      66,
+      67,
+      69,
+      71,
+      77,
+      81,
+      83,
+      87,
+      88,
+      89,
+      91,
+      101,
+      202,
+      303,
+      909,
+      919,
+      929,
+      939,
+      949,
+      959,
+      969,
+      9390,
+      9391,
+      9490,
+      9491,
+      9590,
+      9690
+    ],
+    "seed_policy": "reserved IDs checked against inherited manifests; each stream independently keyed",
+    "seeds": [
+      410001
+    ],
+    "split": {
+      "remote_depth": 1,
+      "span": 4,
+      "start": 2,
+      "width": 256
+    },
+    "status": "engineering_ready"
+  },
+  "mode": "removed_remote",
+  "seed": 410001
+}

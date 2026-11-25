@@ -1,0 +1,28 @@
+protocol_id: p4-tee-fhe-batched-0.1
+kind: tee_fhe
+cohort: engineering
+status: engineering_ready
+full_budget: true
+device: cpu
+cpu_threads: 2
+seeds: [410801]
+checkpoint_manifest: experiments/manifests/p4-qualification-20260922-a-d0-q8-trained-s419101.json
+panels_manifest: experiments/manifests/p4-pilot-20260922-a-d0-q8-trained-s411101.json
+stage_a_scenario_manifest: experiments/manifests/p4-tee_fhe-tee-fhe-20260922-a-stage-a-s410801.json
+stage_c_block_counts: [1, 2, 4]
+stage_c_amortized_mms: 32
+stage_c_n_tokens: 128
+stage_d_n_tokens: 128
+stage_repetitions: 5
+ckks_poly_modulus_degree: 8192
+ckks_coeff_mod_bit_sizes: [60, 40, 40, 60]
+ckks_global_scale_exp: 40
+stage_d_shapes:
+  qkv: [256, 768]
+  proj: [256, 256]
+  mlp_fc: [256, 1024]
+  mlp_proj: [1024, 256]
+claim_scope: Engineering diagnostics for the TEE/FHE deployment track; hardware_attested
+  false everywhere; no confidentiality, integrity, or attestation claim; timings are not
+  secure-serving latencies. All records keep scientific_evidence false, qualified false,
+  privacy undetermined.

@@ -1,0 +1,294 @@
+{
+  "backend": "tenseal",
+  "backend_version": "0.3.18",
+  "baseline_per_token": {
+    "mean_total_matmul_seconds": 15.207497888384387,
+    "n_tokens": 128,
+    "repetitions": [
+      {
+        "context_keygen_seconds": 0.10974923195317388,
+        "decrypt_reencrypt_refresh_seconds": 0.2760930299991742,
+        "decryption_seconds": 0.07749183708801866,
+        "encryption_seconds": 0.2880732340272516,
+        "end_to_end_seconds": 15.926228651078418,
+        "homomorphic_matmul_seconds": 15.1748213180108,
+        "max_abs_error": 6.974765603962041e-07,
+        "mean_abs_error": 4.678473854866761e-08,
+        "repetition": 0,
+        "serialized_ciphertext_bytes": 42423336
+      },
+      {
+        "context_keygen_seconds": 0.0993627900024876,
+        "decrypt_reencrypt_refresh_seconds": 0.28100356401409954,
+        "decryption_seconds": 0.07740891992580146,
+        "encryption_seconds": 0.2715459190076217,
+        "end_to_end_seconds": 15.967319584917277,
+        "homomorphic_matmul_seconds": 15.237998391967267,
+        "max_abs_error": 6.977346530545603e-07,
+        "mean_abs_error": 4.6791204024530085e-08,
+        "repetition": 1,
+        "serialized_ciphertext_bytes": 42414285
+      },
+      {
+        "context_keygen_seconds": 0.08936831005848944,
+        "decrypt_reencrypt_refresh_seconds": 0.27728393394500017,
+        "decryption_seconds": 0.07807150098960847,
+        "encryption_seconds": 0.2757653419394046,
+        "end_to_end_seconds": 16.017025737906806,
+        "homomorphic_matmul_seconds": 15.296536650974303,
+        "max_abs_error": 6.96487965745618e-07,
+        "mean_abs_error": 4.6791681923782597e-08,
+        "repetition": 2,
+        "serialized_ciphertext_bytes": 42413370
+      },
+      {
+        "context_keygen_seconds": 0.08885879500303417,
+        "decrypt_reencrypt_refresh_seconds": 0.2772131309611723,
+        "decryption_seconds": 0.07754021300934255,
+        "encryption_seconds": 0.2724289000034332,
+        "end_to_end_seconds": 15.951325414935127,
+        "homomorphic_matmul_seconds": 15.235284375958145,
+        "max_abs_error": 6.973325773484973e-07,
+        "mean_abs_error": 4.6784258163118965e-08,
+        "repetition": 3,
+        "serialized_ciphertext_bytes": 42415092
+      },
+      {
+        "context_keygen_seconds": 0.08836868905927986,
+        "decrypt_reencrypt_refresh_seconds": 0.282663754071109,
+        "decryption_seconds": 0.07802100002299994,
+        "encryption_seconds": 0.27344043098855764,
+        "end_to_end_seconds": 15.815342579153366,
+        "homomorphic_matmul_seconds": 15.09284870501142,
+        "max_abs_error": 6.972792453430188e-07,
+        "mean_abs_error": 4.678961819441857e-08,
+        "repetition": 4,
+        "serialized_ciphertext_bytes": 42419582
+      }
+    ]
+  },
+  "ckks": {
+    "coeff_mod_bit_sizes": [
+      60,
+      40,
+      40,
+      60
+    ],
+    "global_scale": "2^40",
+    "poly_modulus_degree": 8192
+  },
+  "keygen_amortized": {
+    "keygen_seconds": 0.088497395045124,
+    "keygen_share_seconds_per_token": 0.002765543595160125,
+    "mean_per_token_matmul_seconds": 0.11834389297291636,
+    "sequential_mms": 32
+  },
+  "layout": "per-token ckks_vector.mm baseline; packed variant encrypts per token, packs via CKKSVector.pack_vectors into b-token blocks, and runs one block-diagonal mm (b*width -> b*4*width); fresh context per repetition",
+  "op_count_explanation": "measured packed/per-token homomorphic-matmul ratios [0.7256146912246956, 0.859683429210285, 1.1422020520036895] at block counts [1, 2, 4]: rotations and diagonal multiplies scale with the output dimension regardless of packing, so slot-packing does not reduce the homomorphic matmul cost at this shape; the saving is ciphertext count, not computation (measured, not asserted)",
+  "packed": [
+    {
+      "block_count": 1,
+      "blocks_per_sequence": 128,
+      "packed_per_token_ratio": 0.7256146912246956,
+      "repetitions": [
+        {
+          "context_keygen_seconds": 0.08985530899371952,
+          "decrypt_reencrypt_refresh_seconds": 0.278037304058671,
+          "decryption_seconds": 0.048982124077156186,
+          "encryption_seconds": 0.35284938500262797,
+          "homomorphic_matmul_seconds": 11.135489503969438,
+          "max_abs_error": 1.2569195142475564e-06,
+          "mean_abs_error": 1.603001252116468e-07,
+          "per_token_matmul_seconds": 0.08699601174976124,
+          "repetition": 0,
+          "serialized_ciphertext_bytes": 30088655
+        },
+        {
+          "context_keygen_seconds": 0.0881574519444257,
+          "decrypt_reencrypt_refresh_seconds": 0.2784703519428149,
+          "decryption_seconds": 0.04884766694158316,
+          "encryption_seconds": 0.3471846090396866,
+          "homomorphic_matmul_seconds": 11.097227202029899,
+          "max_abs_error": 1.2600099562609657e-06,
+          "mean_abs_error": 1.6030305870005415e-07,
+          "per_token_matmul_seconds": 0.08669708751585858,
+          "repetition": 1,
+          "serialized_ciphertext_bytes": 30090844
+        },
+        {
+          "context_keygen_seconds": 0.08806798001751304,
+          "decrypt_reencrypt_refresh_seconds": 0.27838096395134926,
+          "decryption_seconds": 0.04895028402097523,
+          "encryption_seconds": 0.3470958969555795,
+          "homomorphic_matmul_seconds": 11.0339923389256,
+          "max_abs_error": 1.2599409089375513e-06,
+          "mean_abs_error": 1.603053864042257e-07,
+          "per_token_matmul_seconds": 0.08620306514785625,
+          "repetition": 2,
+          "serialized_ciphertext_bytes": 30089485
+        },
+        {
+          "context_keygen_seconds": 0.0881408960558474,
+          "decrypt_reencrypt_refresh_seconds": 0.2777325299102813,
+          "decryption_seconds": 0.04896477307192981,
+          "encryption_seconds": 0.3473388700513169,
+          "homomorphic_matmul_seconds": 11.018782100989483,
+          "max_abs_error": 1.2578403350005374e-06,
+          "mean_abs_error": 1.6030075732449665e-07,
+          "per_token_matmul_seconds": 0.08608423516398034,
+          "repetition": 3,
+          "serialized_ciphertext_bytes": 30087877
+        },
+        {
+          "context_keygen_seconds": 0.08816278597805649,
+          "decrypt_reencrypt_refresh_seconds": 0.28564108593855053,
+          "decryption_seconds": 0.04894068499561399,
+          "encryption_seconds": 0.34741384093649685,
+          "homomorphic_matmul_seconds": 10.888428276986815,
+          "max_abs_error": 1.2606854632446485e-06,
+          "mean_abs_error": 1.602963289575663e-07,
+          "per_token_matmul_seconds": 0.08506584591395949,
+          "repetition": 4,
+          "serialized_ciphertext_bytes": 30088771
+        }
+      ]
+    },
+    {
+      "block_count": 2,
+      "blocks_per_sequence": 64,
+      "packed_per_token_ratio": 0.859683429210285,
+      "repetitions": [
+        {
+          "context_keygen_seconds": 0.08804208401124924,
+          "decrypt_reencrypt_refresh_seconds": 0.14532236801460385,
+          "decryption_seconds": 0.013749469071626663,
+          "encryption_seconds": 0.347524669021368,
+          "homomorphic_matmul_seconds": 13.087948690052144,
+          "max_abs_error": 1.2606575856555224e-06,
+          "mean_abs_error": 1.603063076962293e-07,
+          "per_token_matmul_seconds": 0.10224959914103238,
+          "repetition": 0,
+          "serialized_ciphertext_bytes": 15043854
+        },
+        {
+          "context_keygen_seconds": 0.09005237801466137,
+          "decrypt_reencrypt_refresh_seconds": 0.15654719294980168,
+          "decryption_seconds": 0.02753795695025474,
+          "encryption_seconds": 0.35522686794865876,
+          "homomorphic_matmul_seconds": 12.938973100972362,
+          "max_abs_error": 1.2588167053184662e-06,
+          "mean_abs_error": 1.6029380539128332e-07,
+          "per_token_matmul_seconds": 0.10108572735134658,
+          "repetition": 1,
+          "serialized_ciphertext_bytes": 15045547
+        },
+        {
+          "context_keygen_seconds": 0.09014012396801263,
+          "decrypt_reencrypt_refresh_seconds": 0.15691109304316342,
+          "decryption_seconds": 0.02751664095558226,
+          "encryption_seconds": 0.3537590190535411,
+          "homomorphic_matmul_seconds": 13.043206354952417,
+          "max_abs_error": 1.2593769855850923e-06,
+          "mean_abs_error": 1.602968094910284e-07,
+          "per_token_matmul_seconds": 0.10190004964806576,
+          "repetition": 2,
+          "serialized_ciphertext_bytes": 15045257
+        },
+        {
+          "context_keygen_seconds": 0.08989033196121454,
+          "decrypt_reencrypt_refresh_seconds": 0.15729499200824648,
+          "decryption_seconds": 0.027649805997498333,
+          "encryption_seconds": 0.35386345896404237,
+          "homomorphic_matmul_seconds": 13.155821184045635,
+          "max_abs_error": 1.2578146915132038e-06,
+          "mean_abs_error": 1.6029569705986202e-07,
+          "per_token_matmul_seconds": 0.10277985300035652,
+          "repetition": 3,
+          "serialized_ciphertext_bytes": 15044714
+        },
+        {
+          "context_keygen_seconds": 0.08993391809053719,
+          "decrypt_reencrypt_refresh_seconds": 0.15755463403183967,
+          "decryption_seconds": 0.027664217981509864,
+          "encryption_seconds": 0.35355932102538645,
+          "homomorphic_matmul_seconds": 13.142220341949724,
+          "max_abs_error": 1.2584083488587083e-06,
+          "mean_abs_error": 1.6030954107587098e-07,
+          "per_token_matmul_seconds": 0.10267359642148222,
+          "repetition": 4,
+          "serialized_ciphertext_bytes": 15045583
+        }
+      ]
+    },
+    {
+      "block_count": 4,
+      "blocks_per_sequence": 32,
+      "packed_per_token_ratio": 1.1422020520036895,
+      "repetitions": [
+        {
+          "context_keygen_seconds": 0.09022881893906742,
+          "decrypt_reencrypt_refresh_seconds": 0.07529744494240731,
+          "decryption_seconds": 0.008652240969240665,
+          "encryption_seconds": 0.3561167009174824,
+          "homomorphic_matmul_seconds": 17.01062363095116,
+          "max_abs_error": 1.260344623110754e-06,
+          "mean_abs_error": 1.6030889691217423e-07,
+          "per_token_matmul_seconds": 0.13289549711680593,
+          "repetition": 0,
+          "serialized_ciphertext_bytes": 7521978
+        },
+        {
+          "context_keygen_seconds": 0.08848936192225665,
+          "decrypt_reencrypt_refresh_seconds": 0.07514808606356382,
+          "decryption_seconds": 0.008654096047393978,
+          "encryption_seconds": 0.34898485499434173,
+          "homomorphic_matmul_seconds": 17.37760182796046,
+          "max_abs_error": 1.2580754691349227e-06,
+          "mean_abs_error": 1.603041272625796e-07,
+          "per_token_matmul_seconds": 0.1357625142809411,
+          "repetition": 1,
+          "serialized_ciphertext_bytes": 7522377
+        },
+        {
+          "context_keygen_seconds": 0.08825049502775073,
+          "decrypt_reencrypt_refresh_seconds": 0.07715560996439308,
+          "decryption_seconds": 0.008722143014892936,
+          "encryption_seconds": 0.3496606689877808,
+          "homomorphic_matmul_seconds": 17.416333638946526,
+          "max_abs_error": 1.259723947710789e-06,
+          "mean_abs_error": 1.6033216226460067e-07,
+          "per_token_matmul_seconds": 0.13606510655426973,
+          "repetition": 2,
+          "serialized_ciphertext_bytes": 7523295
+        },
+        {
+          "context_keygen_seconds": 0.09000908699817955,
+          "decrypt_reencrypt_refresh_seconds": 0.07665071298833936,
+          "decryption_seconds": 0.008697101031430066,
+          "encryption_seconds": 0.35561568406410515,
+          "homomorphic_matmul_seconds": 17.455161376972683,
+          "max_abs_error": 1.2595864182785022e-06,
+          "mean_abs_error": 1.603232220362152e-07,
+          "per_token_matmul_seconds": 0.13636844825759908,
+          "repetition": 3,
+          "serialized_ciphertext_bytes": 7522432
+        },
+        {
+          "context_keygen_seconds": 0.09009542397689074,
+          "decrypt_reencrypt_refresh_seconds": 0.07494265306740999,
+          "decryption_seconds": 0.008629595045931637,
+          "encryption_seconds": 0.3551630270667374,
+          "homomorphic_matmul_seconds": 17.590455994941294,
+          "max_abs_error": 1.2574766078410349e-06,
+          "mean_abs_error": 1.6032702741225353e-07,
+          "per_token_matmul_seconds": 0.13742543746047886,
+          "repetition": 4,
+          "serialized_ciphertext_bytes": 7522340
+        }
+      ]
+    }
+  ],
+  "reference_sha256": "301f9d175c8d3b0a7e20d58046317d3d28480b2aef8cf8088b58782089329b87",
+  "timing_scope": "in-process engineering timing on a research node; not a secure-serving latency (no TEE, no attestation, no network)",
+  "weight_sha256": "357668f6709bf79bf2b71fea0deea118bf008d94a6c33584bd3f5cc04c6c1384"
+}

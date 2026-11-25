@@ -1,0 +1,462 @@
+{
+  "schema": "paper.closure_schedule.v1",
+  "created_utc": "2026-09-20T15:01:48.834515+00:00",
+  "purpose": "Schedule six outstanding workstreams and prepare two arXiv preprints; eventual IEEE/USENIX target remains undecided",
+  "authorisation": "User: schedule all steps 1 to 6; prepare preprints for arXiv",
+  "publication_scope": "Prepare arXiv packages; actual arXiv submission is not part of this schedule",
+  "fleet": {
+    "gpu": [
+      "koula",
+      "toula"
+    ],
+    "cpu": [
+      "sasa",
+      "soula",
+      "voula"
+    ]
+  },
+  "audit_experiment": "29874f46-1739-4e76-86e4-0e1dbd12d974",
+  "audit_source_commit": "eb98eea90fff34d272520b4fc7b965f000d82b8b",
+  "rules": [
+    "Preserve original protocols, failed runs and immutable HF revisions",
+    "All model and scientific-analysis jobs launch through orx exp run from committed child branches",
+    "No partial-grid analysis, NaN masking, stronger grants or hidden ground-truth access",
+    "No concurrent GPU job on a host; bounded canaries precede corrected full runs",
+    "Missing external provenance stays a dependency, never a fabricated completed experiment",
+    "Publish additive HF supplements only after complete integrity/reproduction gates; verify immutable remote hashes",
+    "Do not contact authors or third parties; do not push to StupidTrees/SplitLLM"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "name": "Paper A P6 raw release",
+      "host": "koula",
+      "state_at_schedule": "UPLOADING",
+      "dispatch": {
+        "pid": 2877565,
+        "host": "koula",
+        "root": "/home/geo/paper-a-p6-release-20260920",
+        "scope": "CPU verification/archive/HF publication; no GPU work"
+      },
+      "source": "/home/geo/llm-attacker-p6-v2-d5ec03e/results/p6-corrected-gpt2-v2",
+      "status_path": "/home/geo/paper-a-p6-release-20260920/status.json",
+      "sequence": [
+        "Verify all 200 source cells and published analysis anchors",
+        "Archive complete source directly on koula",
+        "Upload revision-20260917/p6-raw to Setloop/llm-attacker-paper-a",
+        "Verify pinned HF hashes and update Paper A release index and manuscript link"
+      ],
+      "done_when": "Immutable HF verification ok=true for full raw tier; Paper A points to verified evidence"
+    },
+    {
+      "id": "2",
+      "name": "Sasa 500-step extension",
+      "host": "sasa",
+      "state_at_schedule": "INTEGRITY_VERIFIED_GRANT_REVIEW_AND_ANALYSIS_QUEUED",
+      "sequence": [
+        "Verify complete queue, protocol/input hashes, all journals and raw inventory",
+        "Collect sealed evidence without modifying source",
+        "Audit capture-to-checkpoint/grant validity before scoring; excluded invalid captures cannot become valid through journalling",
+        "Run descriptive analysis and reproduce it from archive",
+        "Publish additive HF supplement and update Paper B after review"
+      ],
+      "done_when": "Valid evidence verified, analysis reproduced, scope reviewed and HF supplement pinned; invalid comparisons explicitly excluded",
+      "audit_run": "148c2140-c947-4b38-9595-95dbac00cd6d",
+      "audit_summary": {
+        "complete_jobs": 13,
+        "verified_evidence_journals": 13,
+        "raw_files_hashed": 12443,
+        "raw_inventory_sha256": "2f9c6e5f9ebdb05b28a7e5c004ff0fda69ea25d50e63fe738367288653086359"
+      }
+    },
+    {
+      "id": "3",
+      "name": "Qwen P6 correction",
+      "audit_host": "soula",
+      "gpu_host": "koula",
+      "state_at_schedule": "NONFINITE_LOSS_CONFIRMED_CAUSE_REPAIR_QUEUED",
+      "historical_wall_seconds": 1117.2592863180034,
+      "aggregate_original_and_followup_gpu_seconds_ceiling": 86400,
+      "canary_max_seconds": 1800,
+      "sequence": [
+        "Identify earliest non-finite operation in failed trained-span4_b0_D1_s66",
+        "Repair on child branch; freeze amended source/protocol and inputs before new predictions",
+        "Run excluded failing-configuration and original-control canaries with finite-value and identity checks",
+        "Only after canaries and resource projection fit remaining original 24-hour envelope, launch fresh complete 200-cell grid",
+        "Verify, analyse, reproduce, publish and review claim scope"
+      ],
+      "done_when": "Corrected complete grid qualifies under explicitly amended protocol, or concrete blocking failure is documented with original evidence retained",
+      "audit_run": "3677e766-dfda-415f-9fa9-f03eb5c0e8c3",
+      "audit_summary": {
+        "nonfinite_fields": [
+          "/results/0/final_loss",
+          "/results/0/mean_loss",
+          "/summary/0/final_loss",
+          "/summary/0/mean_loss"
+        ],
+        "root_cause_resolved": false
+      }
+    },
+    {
+      "id": "4",
+      "name": "Agentic measurement repair",
+      "audit_host": "voula",
+      "gpu_host": "toula",
+      "state_at_schedule": "AUDIT_COMPLETE_REPAIR_QUEUED",
+      "followup_gpu_seconds_ceiling": 9000,
+      "canary_max_seconds": 900,
+      "sequence": [
+        "Inspect invalid/missing ACTION output in five unmeasured cells",
+        "Repair protocol-compliant parsing/decoding; test canaries on a frozen child",
+        "Run the full matched ten-cell follow-up in fresh paths after canary gate",
+        "Preserve failed original outcomes; greedy repetitions are not independent seeds",
+        "Verify and publish complete measurements and update Paper B with observed categories"
+      ],
+      "done_when": "All ten follow-up cells have valid measurements or explicit scientifically justified unresolved status; no errors relabelled as zero violations",
+      "audit_run": "170c8b36-339f-4906-9ebd-31d2dbdaa6e2"
+    },
+    {
+      "id": "5",
+      "name": "Original-setting and historical provenance",
+      "hosts": [
+        "toula",
+        "koula",
+        "soula",
+        "voula",
+        "sasa"
+      ],
+      "state_at_schedule": "QUEUED_PREREQUISITE_REVIEW",
+      "sequence": [
+        "Refresh bounded existing evidence inventory and exact missing dependency register",
+        "Check original processed SensiReplaced version/split hashes, matching dual-cut implementation/cadence and prospective fidelity rule",
+        "Check external deployment/defence journals, source commits and release mapping",
+        "If dependencies remain absent, record BLOCKED_EXTERNAL and preserve exclusions; reconsider only when new assets arrive"
+      ],
+      "done_when": "Dependencies recovered and scientifically qualified, or explicit blocked/excluded disposition is included in preprint checklist",
+      "does_not_block_scoped_preprint_if_excluded": true
+    },
+    {
+      "id": "6",
+      "name": "Integration and arXiv preparation",
+      "state_at_schedule": "MERGED_PROVISIONAL_ARXIV_PACKAGES_BUILT",
+      "merged_commit": "24e68be",
+      "sequence": [
+        "Merge publication safeguard without altering frozen experiment refs (done)",
+        "Prepare both arXiv source archives, bibliography/figures, metadata drafts and PDFs now",
+        "After evidence updates, rebuild and visually review final packages with resolved claim-to-evidence links",
+        "Check authors/affiliations, category, licence selection and overlap disclosure before actual submission",
+        "Keep IEEE/USENIX conversion as a later venue-specific step"
+      ],
+      "done_when": "Two reproducible, reviewed arXiv upload packages and explicit author-facing metadata/remaining-action checklist; no actual submission",
+      "provisional_package_index": "build/arxiv-preprints-20260920/INDEX.json"
+    }
+  ],
+  "followup": {
+    "service": "com.geo.paper-closure-20260920",
+    "first_check_local": "2026-09-20T19:23:06.851584+01:00",
+    "timezone": "Europe/London",
+    "interval_seconds_after_followup": 1800,
+    "config": "/Users/geo/.codex/scheduled-checks/paper-closure-20260920/config.json",
+    "runtime_state": "build/closure-queue-20260920/queue-state.json",
+    "automatic_submission": false,
+    "transport": "codex queue",
+    "delivery_receipt_required": true,
+    "completion_receipt_required": true,
+    "delivery_timeout_seconds": 1800,
+    "running_timeout_seconds": 7200
+  },
+  "scheduler_repair": {
+    "previous_transport": "codex exec resume",
+    "failure": "Existing conversation has an active writer;66 attempts failed before work started",
+    "replacement": "Queue to existing owner and track execution receipts",
+    "transport_probe_message_id": "01a0bfeb-6d5b-7bf2-b817-74cae9f3551b",
+    "probe_accepted": true,
+    "probe_execution_acknowledged": true,
+    "probe_acknowledged_utc": "2026-09-20T17:56:46.273505+00:00"
+  },
+  "repair_canaries": {
+    "experiment": "29da2edc-17d5-44a6-880d-a7aedff96b76",
+    "source_commit": "e39b2e0",
+    "worktree": "/Users/geo/LLM-Attacker-repairs-20260920",
+    "toula": "agentic diagnostics and proposed parser/decoding canaries",
+    "koula": "Qwen original D1 and D0 finite-training diagnostics",
+    "full_followup_admitted": false,
+    "runs": {
+      "koula": "a7e7c2d0-987c-4b70-8dda-5d24ac6b8a18",
+      "toula": "905b561b-e4df-474a-8349-bb2595e836d0"
+    }
+  },
+  "latest_execution": {
+    "updated_utc": "2026-09-21T22:16:45.272209+00:00",
+    "paper_a": {
+      "name": "Paper A P6 raw release",
+      "state": "COMPLETE_RAW_AND_MANUSCRIPT_HF_VERIFIED",
+      "remote_verification_complete": true,
+      "raw_hf_revision": "0bec5c37b960fdb5be5b2bd8fab1cdd05a4bbe4c",
+      "raw_hf_prefix": "revision-20260917/p6-raw",
+      "raw_files": 11,
+      "raw_bytes": 34703146309,
+      "raw_manifest_sha256": "0daaabcefa94de9631f8e7f9b448a8383b0b20245d73e4ab105601b2e57e4f17",
+      "manuscript_hf_revision": "2540f5904e5aaeb019179f9f528209a10f746ea1",
+      "manuscript_hf_prefix": "closure-20260920/manuscript",
+      "manuscript_files": 14,
+      "manuscript_bytes": 573793,
+      "verification_report": "docs/paper-a-release-verification-2026-09-20.json",
+      "release_index": "docs/paper-a-release-2026-09-20.md",
+      "local_reports": "build/paper-a-raw-closure-20260920",
+      "pdf_pages": 12
+    },
+    "sasa": {
+      "name": "Sasa 500-step extension",
+      "state": "COMPLETE_EVIDENCE_AND_MANUSCRIPT_HF_VERIFIED",
+      "audit_run": "148c2140-c947-4b38-9595-95dbac00cd6d",
+      "experiment": "476d8f7f-5825-4c57-967b-87ed28ba7e89",
+      "source_commit": "3d8858f",
+      "run": "4c192da0-0e74-4985-9473-52a85f72437c",
+      "host": "sasa",
+      "worktree": "/Users/geo/LLM-Attacker-sasa-review-20260920",
+      "local_archive": "build/sasa-extension-20260920/raw.tar",
+      "raw_files_verified": 12443,
+      "raw_archive_bytes": 349491200,
+      "reproduction_host": "soula",
+      "reproduction_state": "PASS_BYTE_IDENTICAL",
+      "audit_wall_seconds": 45.59914581896737,
+      "reproduction_experiment": "7e61e901-54cd-4532-a76a-02ed13d6eefa",
+      "reproduction_source_commit": "bd4aabf",
+      "reproduction_run": "608d1a39-dc29-4353-b14a-f61b49f22eac",
+      "reproduction_worktree": "/Users/geo/LLM-Attacker-sasa-reproduction-20260920",
+      "clarification": "First audit found 500 unique rows per trajectory. A child corrected a generic cycles-text limitation; metrics and analysis code were unchanged. The same revised plan subsequently reproduced byte-identical outputs on sasa and soula before publication.",
+      "primary_reproduction_run": "39ae413f-8203-4ef7-b81a-83c07952d6b1",
+      "release_stage": "build/sasa-extension-20260920/release",
+      "hf_prefix": "sasa-500step-20260920/evidence",
+      "hf_revision": "f1488fbde74726635f1e8616092ca187ac051270",
+      "hf_files": 18,
+      "hf_bytes": 223541131,
+      "manuscript_hf_revision": "6a853d04eb50d7dd639cb0bf08354cc4a032278d",
+      "manuscript_hf_prefix": "sasa-500step-20260920/manuscript",
+      "manuscript_hf_files": 11,
+      "manuscript_hf_bytes": 664880,
+      "paper_b_pdf_pages": 24
+    },
+    "qwen": {
+      "name": "Qwen P6 correction",
+      "state": "COMPLETE_EVIDENCE_AND_MANUSCRIPT_HF_VERIFIED",
+      "audit_run": "3677e766-dfda-415f-9fa9-f03eb5c0e8c3",
+      "experiment": "70fa3a32-1dd8-4772-bbfb-c4ff236ae5f2",
+      "source_commit": "e2d4268",
+      "worktree": "/Users/geo/LLM-Attacker-qwen-fp64-grid-20260920",
+      "run": "766a85bc-0bfe-40d2-aa13-51df27f5e926",
+      "diagnostic_wall_seconds": 60.49387792596826,
+      "control": "D0 completed128 steps with finite training and utility",
+      "first_detected_nonfinite": "step99 parameter-gradient/model.layers.3.mlp.down_proj.weight",
+      "prior_diagnostic_wall_seconds": 191.513830987,
+      "root_cause": "Exploding fp32 backward gradients: finite magnitudes4e28 at layer20,1.6e32 at19,3.5e35 at18, non-finite entering layer17",
+      "prior_wall_seconds": 1516.019708333004,
+      "prior_new_canary_seconds": 398.760422015,
+      "trained_full_canary_seconds": 158.48504668101668,
+      "full_grid_admitted": true,
+      "precision_canaries": {
+        "run": "7c357032-83ec-47a1-a88c-20cf6a2719d6",
+        "wall_seconds": 207.2465910280007,
+        "both_128_step_training_and_utility": "PASS"
+      },
+      "remote_root": "/home/geo/.orx/runs/766a85bc-0bfe-40d2-aa13-51df27f5e926/repo/qwen-fp64-v2",
+      "cumulative_canary_ceiling_seconds": 1800,
+      "remaining_canary_seconds_before_full_cell_checks": 1401.239577985,
+      "diagnostic_wall_seconds_total": 191.513830987,
+      "full_cell_canary_scope": "training, utility, 256 held-out captures, VMI/property attacks, journals and finite persisted capture checks",
+      "admission": {
+        "trained_canary_seconds": 158.48504668101668,
+        "control_canary_seconds": 253.20614668697817,
+        "projection_seconds": 48682.16720437654,
+        "remaining_seconds": 84472.28869968996,
+        "analysis_reserve_seconds": 1800,
+        "factor": 1.5,
+        "canaries_excluded": true
+      },
+      "verified_grid_cells": 200,
+      "verified_controls": 8,
+      "verified_trained_cells": 192,
+      "progress_checked_utc": "2026-09-21T03:59:03.991786+00:00",
+      "failed_grid_cells": 0,
+      "progress_evidence": "docs/qwen-fp64-closure-2026-09-21.json",
+      "primary_analysis_sha256": "ae7b2d03f88856dcbb0cae7e9d99a97e634059ebaa20e604c91180398af16e20",
+      "controller_seconds": 32829.60097172699,
+      "total_seconds_before_reproduction": 34345.62068006,
+      "reproduction_experiment": "bdab9989-b662-479a-97ab-0fcd63a6c053",
+      "reproduction_run": "169c1e94-e8a5-4b99-bb83-eadadd73046a",
+      "reproduction_source": "61b8df569f6673b2a5d4d0b5a71a9740be610dae",
+      "reproduction_root": "/home/geo/.orx/runs/169c1e94-e8a5-4b99-bb83-eadadd73046a/repo/qwen-reproduction",
+      "reproduction_host": "soula",
+      "reproduction_ceiling_seconds": 7200,
+      "archive_root": "/home/geo/qwen-release-20260921/archive",
+      "archive_pid": 3336987,
+      "archive_host": "koula",
+      "transport_attempt": {
+        "run": "4420555d-f029-4057-a464-e7fb36376af9",
+        "source": "9e2198b7b8eda7a3a7be8961a6c2688d68172ba8",
+        "state": "CANCELLED_UNANSWERED",
+        "reason": "Observed approximately 2.5 MB/s cannot transfer 142 GB within 7200-second reproduction ceiling",
+        "orx_wall_seconds": 461,
+        "conservative_budget_charge_seconds": 600,
+        "evidence_retained": true
+      },
+      "publication_state": "COMPLETE_PINNED_HF_VERIFIED",
+      "latest_archive_check": {
+        "checked_utc": "2026-09-21T04:35:56.966203+00:00",
+        "archive": {
+          "status": "ARCHIVING_COMPLETED_EVIDENCE",
+          "files": 313000,
+          "raw_bytes": 148605461381,
+          "wall_seconds": 2835.565914391016
+        },
+        "reproduction": {
+          "status": "WAITING_FOR_COMPLETE_ARCHIVE_INVENTORY",
+          "wall_seconds": 0.011301346123218536,
+          "host": "soula",
+          "source_run": "766a85bc-0bfe-40d2-aa13-51df27f5e926"
+        },
+        "publication_started": false
+      },
+      "reproduction_state": "PASS",
+      "publisher": {
+        "state": "COMPLETE_PINNED_HF_VERIFIED",
+        "pid": 3384533,
+        "host": "koula",
+        "root": "/home/geo/qwen-release-20260921",
+        "status": "/home/geo/qwen-release-20260921/publisher-status.json",
+        "verification": "/home/geo/qwen-release-20260921/publisher-verification.json",
+        "prefix": "qwen-fp64-20260921/evidence",
+        "started_checked_utc": "2026-09-21T05:10:22.277721+00:00",
+        "auth_repair": {
+          "checked_utc": "2026-09-21T05:42:43.068738+00:00",
+          "old_pid": 3382119,
+          "old_process_stopped": true,
+          "pid": 3384533,
+          "state": "HASHING_AND_PUBLISHING",
+          "cause": "Invalid cached koula HF token; whoami returned 401",
+          "repair": "Existing authenticated local credential supplied in process environment over SSH; no credential stored in release files",
+          "authenticated_identity": "gpolitis",
+          "accessible_revision": "2540f5904e5aaeb019179f9f528209a10f746ea1",
+          "log": "/home/geo/qwen-release-20260921/publisher-auth-retry.log",
+          "verification_pending": true
+        },
+        "latest_upload_check": {
+          "checked_utc": "2026-09-21T21:42:20.076194+00:00",
+          "revision": "28c6c921f3ed315f1f099b08d81a37fd91fef788",
+          "files_committed": 75,
+          "bytes_committed": 132775585953,
+          "archive_parts_committed": 31,
+          "archive_part_lfs_hashes_match": true,
+          "parts_verified": [
+            "evidence.tar.gz.part000",
+            "evidence.tar.gz.part001",
+            "evidence.tar.gz.part002",
+            "evidence.tar.gz.part003",
+            "evidence.tar.gz.part004",
+            "evidence.tar.gz.part005",
+            "evidence.tar.gz.part006",
+            "evidence.tar.gz.part007",
+            "evidence.tar.gz.part008",
+            "evidence.tar.gz.part009",
+            "evidence.tar.gz.part010",
+            "evidence.tar.gz.part011",
+            "evidence.tar.gz.part012",
+            "evidence.tar.gz.part013",
+            "evidence.tar.gz.part014",
+            "evidence.tar.gz.part015",
+            "evidence.tar.gz.part016",
+            "evidence.tar.gz.part017",
+            "evidence.tar.gz.part018",
+            "evidence.tar.gz.part019",
+            "evidence.tar.gz.part020",
+            "evidence.tar.gz.part021",
+            "evidence.tar.gz.part022",
+            "evidence.tar.gz.part023",
+            "evidence.tar.gz.part024",
+            "evidence.tar.gz.part025",
+            "evidence.tar.gz.part026",
+            "evidence.tar.gz.part027",
+            "evidence.tar.gz.part028",
+            "evidence.tar.gz.part029",
+            "evidence.tar.gz.part031"
+          ],
+          "complete_release_verified": false,
+          "publisher_pid": 3384533,
+          "remaining_at_last_commit": 2
+        }
+      },
+      "regular_scoring_files": 160003,
+      "evidence_verification": {
+        "repo": "Setloop/llm-attacker-paper-a",
+        "revision": "c0981bf75ba4a62e4388c3477c63e9f90d5d01fd",
+        "prefix": "qwen-fp64-20260921/evidence",
+        "files": 77,
+        "bytes": 137070560283,
+        "ok": true,
+        "method": "Exact pinned tree; all manifest SHA256 via LFS metadata or downloaded non-LFS bytes; manifest SHA256 independently checked",
+        "manifest_sha256": "44d7df12a2dbcf8cb3b66b6bfefcc8313aa6748553367f19b0635b4dd4d5d68e"
+      },
+      "manuscript_verification": {
+        "repo": "Setloop/llm-attacker-paper-a",
+        "revision": "c120b3b21b53e029bf7cb615dfc576637b7d8f76",
+        "private": false,
+        "tier": "manuscript",
+        "prefix": "qwen-fp64-20260921/manuscript",
+        "files": 7,
+        "bytes": 456091,
+        "ok": true,
+        "errors": [],
+        "manifest_sha256": "3b9dd9f1bd7efc36909d6e6ef2a0a2ff1a343545edcaeed2f09a4a98414c239e"
+      }
+    },
+    "agentic": {
+      "name": "Agentic measurement repair",
+      "state": "COMPLETE_EVIDENCE_AND_MANUSCRIPT_HF_VERIFIED",
+      "audit_run": "170c8b36-339f-4906-9ebd-31d2dbdaa6e2",
+      "experiment": "4f10d085-7b9a-4227-8187-4223ba45bc1f",
+      "source_commit": "edf0df5",
+      "worktree": "/Users/geo/LLM-Attacker-agentic-followup-20260920",
+      "run": "fe79474d-361e-4585-a6c5-b88de0d50333",
+      "canary_wall_seconds": 158.50769299804233,
+      "measured_cells": 10,
+      "policy_violating_trials": 0,
+      "false_blocks": 6,
+      "worker_seconds_including_canaries": 234.78565845207777,
+      "hf_revision": "0a07b9d35ad517269b26e1d187c45017feeaedd1",
+      "hf_prefix": "agentic-amendment-20260920/evidence",
+      "manuscript_hf_revision": "30fda02272bcd9b2c3110855978528e40cc76e97",
+      "manuscript_hf_prefix": "agentic-amendment-20260920/manuscript"
+    },
+    "prerequisites": {
+      "name": "Original-setting and historical provenance",
+      "state": "BLOCKED_EXTERNAL_EXCLUSIONS_RETAINED",
+      "review": "docs/closure-prerequisites-2026-09-20.json",
+      "scoped_preprint_blocked": false
+    },
+    "preprints": {
+      "name": "Integration and arXiv preparation",
+      "state": "PACKAGES_REVIEWED_PENDING_AUTHOR_DECISIONS",
+      "package_index": "build/arxiv-preprints-20260921-qwen-final/INDEX.json",
+      "readiness_checklist": "docs/preprint-readiness-2026-09-20.md",
+      "remaining": "Complete HF verification, pin final evidence link and publish manuscript tier; author decisions remain."
+    },
+    "completed_releases_manifest_recheck": {
+      "report": "build/closure-queue-20260920/hf-manifest-check-fbf79376.json",
+      "checked_utc": "2026-09-20T20:09:32.093553+00:00",
+      "manifests": 6,
+      "ok": true,
+      "scope": "Fresh pinned-manifest downloads match previous complete verification reports; no full archive re-download or duplicate upload"
+    },
+    "active": false,
+    "status": "EXECUTABLE_CLOSURE_COMPLETE_AUTHOR_DECISIONS_REMAIN",
+    "outstanding_dependencies": [
+      "Author names/order/affiliations/contact confirmation",
+      "Author category/cross-list and manuscript licence selection",
+      "Overlap disclosure and separately authorised arXiv submission/preview",
+      "Later IEEE/USENIX venue choice",
+      "Original SensiReplaced/split identities unavailable: excluded",
+      "Historical external provenance/retirement policy: excluded"
+    ]
+  }
+}

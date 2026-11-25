@@ -1,0 +1,23 @@
+{
+  "schema": "llm_attacker.defended_pilot_access.v1",
+  "matched_across_defenses": true,
+  "calibration": {
+    "documents": 6,
+    "source": "public calibration partition of the 96-article development corpus",
+    "distinct_from_scoring_truth": true
+  },
+  "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+  "victim_final_head_granted": false,
+  "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+  "query_budgets": {
+    "ridge_fit": "one pass over the public calibration partition",
+    "forward_beam": {
+      "candidate_count": 4,
+      "beam_width": 2
+    },
+    "sipit": {
+      "steps_per_token": 4
+    },
+    "scored_sequences": 4
+  }
+}

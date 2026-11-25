@@ -1,0 +1,56 @@
+{
+  "schema": "vflair-original-at-setup-v1",
+  "stage": "dependencies",
+  "seed": 60,
+  "host": {
+    "base_python": "/home/geo/llm-attacker/.venv/bin/python",
+    "private_environment": "/home/geo/.venvs/vflair-native-at-20261022",
+    "forbidden_environment_paths": [
+      "/home/geo/.venvs/vflair-native-20261022"
+    ],
+    "asset_root": "/home/geo/.cache/llm-attack-suite/vflair-native-at-20261022"
+  },
+  "output_root": "artifacts/paper-b-vflair-replication-20261022/at-admission/runs",
+  "timeouts": {
+    "dependency_seconds": 3600,
+    "dataset_asset_seconds": 600,
+    "model_asset_seconds": 3600
+  },
+  "guards": {
+    "minimum_free_gib_dependencies": 8,
+    "minimum_free_gib_dataset_assets": 8,
+    "minimum_free_gib_model_assets": 60,
+    "maximum_model_asset_bytes": 13479516728
+  },
+  "pins": {
+    "python_major_minor": "3.12",
+    "upstream_revision": "ff18565d89dce6367b6f13881a415c053b60cb0f",
+    "native_at_config_sha256": "00932f240945e76f78ac11f9412daba16ed3e0c57972a984ba9f035905180b60",
+    "model_repository": "codellama/CodeLlama-7b-hf",
+    "model_revision": "6c284d1468fe6c413cf56183e69b194dcfa27fe6",
+    "dataset_repository": "sahil2801/CodeAlpaca-20k",
+    "dataset_revision": "152bb5e9a29651266b018106053980070a0521a1",
+    "codebleu": "0.7.0",
+    "tree-sitter": "0.22.3",
+    "tree-sitter-python": "0.21.0",
+    "setuptools": "80.9.0",
+    "wheel": "0.45.1",
+    "grammar_source_commit": "0f9047c857ed0990931b1f899c7d3bf403703147",
+    "grammar_source_sha256": "62cf59b7013e8d1c7e60aa181fe3216f54df18145d218699061f84376b17170c",
+    "ubuntu_python_dev_sha256": "945ad3f651f683c11e72d19d804b1cff097308dcffa01057635cba038f875164",
+    "ubuntu_python_dev_version": "3.12.3-1ubuntu0.17",
+    "cffi": "1.17.1",
+    "pycparser": "2.22",
+    "nvidia-ml-py": "12.535.161"
+  },
+  "native_metric_policy": "preserve-upstream-mapping-callback-v1",
+  "optional_corrected_metric": "codebleu-default-whitespace.v1-from-saved-generations",
+  "corrected_metric_execution_in_setup": false,
+  "model_import_training_generation_attack_in_setup": false,
+  "claim_scope": "Software and asset admission only. Native model import/canary/full execution requires separate child nodes; setup success supplies no model or defence result.",
+  "provisional_software_repair": {
+    "prior_contract_sha256": "6e2732f206cfe1a158439fd226cb553810b027b96b0d975f17ec0ae6c2f583d5",
+    "failed_orx_run_id": "2a8327a1-dd19-4999-9ca7-28f73f029a85",
+    "reason": "missing-system-Python.h-before-any-model-or-asset-stage"
+  }
+}

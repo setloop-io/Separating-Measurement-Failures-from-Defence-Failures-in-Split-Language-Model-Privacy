@@ -1,0 +1,183 @@
+{
+  "active_cloud_delta": 0.0,
+  "adversary_strength": 0.25,
+  "attacker_updates": 3,
+  "baseline_eval_loss": 4.976320003159344,
+  "baseline_eval_seconds": 19.46167443500599,
+  "bundle_canonical_fraction": 0.0,
+  "byzantine_flagged_frames": 0,
+  "byzantine_max_relative_deviation": 0.0,
+  "byzantine_threshold": null,
+  "byzantine_verified_frames": 0,
+  "byzantine_verify": false,
+  "candidate_eval_loss": 6.800677830353379,
+  "candidate_eval_seconds": 19.488773347009555,
+  "chaff_tokens": 48,
+  "clip_norm": 1.0,
+  "cloud_channels": 1,
+  "cloud_correction_loss_improvement": 7.3807614129036665,
+  "cloud_experts": 8,
+  "cloud_kind": "monomial_moe_radial",
+  "cloud_layers": 2,
+  "cloud_state_contains_hidden_width": false,
+  "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+  "decoder_zero_eval_loss": 7.045394960790873,
+  "device": "cuda",
+  "dp": {
+    "adjacency": "replace_one",
+    "delta": 1e-06,
+    "epsilon": {
+      "composed": 2904920.0651760222,
+      "forward": 1589229.5738237451,
+      "return": 1320908.0244444194
+    },
+    "method": "zcdp_gaussian_replace_one",
+    "parameters": {
+      "forward_clip": 1.0,
+      "forward_noise_multiplier": 0.35,
+      "return_clip": 1.0,
+      "return_noise_multiplier": 0.35
+    },
+    "releases": {
+      "forward": 96768,
+      "return": 80384
+    },
+    "rho": {
+      "forward": 1579885.7142858256,
+      "return": 1312391.8367347468
+    }
+  },
+  "eval_blocks": 256,
+  "eval_loss_delta": 1.824357827194035,
+  "eval_time_ratio": 1.0013924244850598,
+  "fragment_channels": 1,
+  "gates": {
+    "cloud_correction_improves_loss": true,
+    "cloud_latent_only": true,
+    "eval_time_ratio_le_3": true,
+    "privacy_above_band_le_1pct": true,
+    "secret_coordinates_hidden_from_koula": true,
+    "token_norm_and_sign_gauged": false,
+    "token_order_hidden_from_koula": true,
+    "utility_delta_le_0_35": false
+  },
+  "gram_flatten": 0.0,
+  "hidden_dim": 1024,
+  "label_free_majority_pct": 5.1513671875,
+  "latent_dim": 64,
+  "limitations": [
+    "two-node latent protocol exercised",
+    "short training run; not convergence or paper evidence",
+    "fresh probe is a diagnostic subset, not the complete /attacker suite"
+  ],
+  "lr": 0.0003,
+  "mean_step_seconds": 0.16683640858099533,
+  "mine_mi_nats_held_out": null,
+  "mine_penalty": 0.0,
+  "model": "/home/geo/experiments/models/qwen3-0.6b",
+  "noise_multiplier": 0.35,
+  "nominal_covered_layer_share": 0.39285714285714285,
+  "probe_recovery_pct": [
+    4.3994140625,
+    4.931640625,
+    4.3896484375
+  ],
+  "probe_restarts": 3,
+  "public_steps": 0,
+  "recovery_above_label_free_pct": -0.2197265625,
+  "remote_grad_clip": 1.0,
+  "remote_protocol": {
+    "cloud_experts": 8,
+    "cloud_hidden": 0,
+    "cloud_kind": "monomial_moe_radial",
+    "cloud_layers": 2,
+    "cloud_seed": 9783002680928545127,
+    "latent_dim": 64,
+    "latent_only_audit": true,
+    "max_parameter_dimension": 8,
+    "op": "hello_ack",
+    "session_id": "a66ba32f-6f68-43e4-872f-6226b04e1e51",
+    "state_shape_digest": "db573d04caa3eb69ceab368412149b0ba83b72453c329591fcb5c342ff5905d1"
+  },
+  "remote_tampered_frames": 0,
+  "resume_after": 26,
+  "schema": "dtraining.latent_native_v5_06b.v1",
+  "secret_token_gauge": false,
+  "secret_token_permutation": true,
+  "secret_wire_rotation": true,
+  "seed": 43,
+  "sequence_length": 32,
+  "split_after": 14,
+  "status": "completed",
+  "steps": 2000,
+  "surrogate_mode": "trained",
+  "surrogate_placement": "remote",
+  "surrogate_return_loss_improvement": 0.24471713043749332,
+  "surrogate_total_parameters": 161,
+  "surrogate_trainable_parameters": 161,
+  "token_recovery_pct": 4.931640625,
+  "token_scale_sigma": 0.75,
+  "toula_peak_cuda_memory_mb": 1488.9,
+  "train_blocks": 256,
+  "train_seconds": 333.6728171619907,
+  "training_tail": [
+    {
+      "attacker_loss": 7.167006015777588,
+      "distill_loss": 0.5836318731307983,
+      "gram_flatten_loss": -0.0,
+      "language_loss": 6.139135360717773,
+      "phase_step": 1997,
+      "step": 1997
+    },
+    {
+      "attacker_loss": 7.398770809173584,
+      "distill_loss": 0.6223672032356262,
+      "gram_flatten_loss": 0.0,
+      "language_loss": 5.730246543884277,
+      "phase_step": 1998,
+      "step": 1998
+    },
+    {
+      "attacker_loss": 7.300331115722656,
+      "distill_loss": 0.5795537233352661,
+      "gram_flatten_loss": 0.0,
+      "language_loss": 5.822336196899414,
+      "phase_step": 1999,
+      "step": 1999
+    }
+  ],
+  "transport": {
+    "actual_remote_flops": null,
+    "actual_remote_flops_status": "not_profiled",
+    "backward_inbound_wire_bytes": 41111540,
+    "backward_outbound_wire_bytes": 41038314,
+    "control_inbound_wire_bytes": 94368,
+    "control_outbound_wire_bytes": 48252,
+    "forward_inbound_wire_bytes": 46386620,
+    "forward_outbound_wire_bytes": 46311470,
+    "remote_backward_compute_ms": 55832.96360063832,
+    "remote_forward_compute_ms": 5762.52454110363,
+    "total_wire_bytes": 174990564
+  },
+  "transport_tls": true,
+  "utility": {
+    "candidate": {
+      "mean_token_nll": 6.800677830353379,
+      "nll_delta_vs_no_replacement": 1.824357827194035,
+      "perplexity": 898.456086103768
+    },
+    "decoder_zero_output": {
+      "mean_token_nll": 7.045394960790873,
+      "nll_delta_vs_no_replacement": 2.0690749576315284,
+      "perplexity": 1147.5619883117115
+    },
+    "no_replacement": {
+      "mean_token_nll": 4.976320003159344,
+      "nll_delta_vs_no_replacement": 0.0,
+      "perplexity": 144.940020215973
+    }
+  },
+  "warmup_steps": 200,
+  "wire_quant": "none",
+  "zero_cloud_eval_loss": 14.181439243257046
+}

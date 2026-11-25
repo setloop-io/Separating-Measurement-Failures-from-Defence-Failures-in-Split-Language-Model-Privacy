@@ -1,0 +1,28 @@
+{
+  "schema": "llm_attacker.v4_resource_authorization.v1",
+  "date": "2026-09-19",
+  "user_instruction": "approved 50h ceilling",
+  "scope_id": "v4-single-seam-adaptation-20260919",
+  "scope_sha256": "cb550e8ccf063bd3f9367d85bd42d0033aaa921894083d434b7434840743aab5",
+  "approved_total_gpu_hours": 50,
+  "accounting": "Aggregate GPU time across toula and koula, including adaptation preparation, training, validation, predictions and failed attempts; not 50 hours per node. Completed C-A campaign is separate.",
+  "previous_ceiling_gpu_hours": 30,
+  "supersedes_pending_proposal_gpu_hours": 40,
+  "online_canary_projection_gpu_hours": 34.62071315484742,
+  "full_launch_admitted": false,
+  "activation_replay_blocker": "CLOSED: all20 captures/5120 document-depth rows bitwise equal with original SDPA kernel",
+  "remaining_admission": [
+    "Pin complete auxiliary/control/environment dependencies",
+    "Train fresh seeds17/29 GRUs at depths3/6",
+    "Pass trained-checkpoint mechanical gates",
+    "Freeze complete prediction manifests and enforce aggregate ceiling"
+  ],
+  "availability": {
+    "toula": "reachable",
+    "koula": "SSH host-down then connection-timeout",
+    "soula": "reachable",
+    "voula": "reachable",
+    "sasa": "reachable"
+  },
+  "next_stage": "Prepare and train fresh SIP checkpoints; currently awaiting koula auxiliary assets"
+}

@@ -1,0 +1,95 @@
+{
+  "analysis_module_sha256": "05db30957eff1c440bbd5efbecb39fa953cd83586142a73b1e93e4d96f0eb13d",
+  "completed": 2,
+  "deployment_scope": "Plaintext-emulated boundary (stage A) and one real CKKS projection (stage B); no confidentiality, integrity, or attestation claim",
+  "failed": 0,
+  "git_commit": "0f7b17317b7a65cd73fa141f576968ca5d4107c8",
+  "hardware_attested": false,
+  "label": "tee-fhe-batched-20260922-a",
+  "privacy_outcome": "undetermined",
+  "qualified": false,
+  "scientific_evidence": false,
+  "source_archive_and_artifacts_verified": true,
+  "source_tree_sha256": "0d5d69726939936e922414ff96a372ea6970ce025a5fdaf1de3fb02cd300d22d",
+  "stage_a": null,
+  "stage_b": null,
+  "stage_c": {
+    "baseline_mean_total_matmul_seconds": 15.207497888384387,
+    "keygen_amortized": {
+      "keygen_seconds": 0.088497395045124,
+      "keygen_share_seconds_per_token": 0.002765543595160125,
+      "mean_per_token_matmul_seconds": 0.11834389297291636,
+      "sequential_mms": 32
+    },
+    "packed_per_token_ratio": {
+      "1": 0.7256146912246956,
+      "2": 0.859683429210285,
+      "4": 1.1422020520036895
+    },
+    "repetitions_retained": 20
+  },
+  "stage_d": {
+    "per_shape_mean_matmul_seconds": {
+      "mlp_fc": 0.11185489399358631,
+      "mlp_proj": 0.45082147801294925,
+      "proj": 0.1014753940049559,
+      "qkv": 0.11147055316250772
+    },
+    "policy_table": [
+      {
+        "ciphertext_bytes": 0,
+        "conceivability_statement": "end-to-end 0s for one 128-token sequence at this scale against a declared 1.0s interactive reference budget; interactive-latency conceivable: True \u2014 from these measurements only, no extrapolation to other models, hardware, backends, or layouts",
+        "decryption_seconds": 0,
+        "encryption_seconds": 0,
+        "end_to_end_seconds": 0,
+        "homomorphic_seconds": 0,
+        "interactive_latency_conceivable": true,
+        "operators": [],
+        "policy": "none",
+        "ratio_to_plaintext_batched": 1.0,
+        "reference_plaintext_batched_seconds": 0,
+        "refresh_seconds": 0,
+        "traffic_bytes": 0.0
+      },
+      {
+        "ciphertext_bytes": 42423910.4,
+        "conceivability_statement": "end-to-end 14.99s for one 128-token sequence at this scale against a declared 1.0s interactive reference budget; interactive-latency conceivable: False \u2014 from these measurements only, no extrapolation to other models, hardware, backends, or layouts",
+        "decryption_seconds": 0.05793100893497467,
+        "encryption_seconds": 0.31364897191524505,
+        "end_to_end_seconds": 14.988187393546106,
+        "homomorphic_seconds": 14.317426431179047,
+        "interactive_latency_conceivable": false,
+        "operators": [
+          "blocks.2.remote.blocks.0.mlp_fc"
+        ],
+        "policy": "ffn-up-only",
+        "ratio_to_plaintext_batched": 11494.476373843736,
+        "reference_plaintext_batched_seconds": 0.0013039469486102462,
+        "refresh_seconds": 0.2991809815168381,
+        "traffic_bytes": 655363.28125
+      },
+      {
+        "ciphertext_bytes": 169725593.6,
+        "conceivability_statement": "end-to-end 102s for one 128-token sequence at this scale against a declared 1.0s interactive reference budget; interactive-latency conceivable: False \u2014 from these measurements only, no extrapolation to other models, hardware, backends, or layouts",
+        "decryption_seconds": 0.2244439095258713,
+        "encryption_seconds": 1.2644718825817107,
+        "end_to_end_seconds": 101.95710891485214,
+        "homomorphic_seconds": 99.27965685427189,
+        "interactive_latency_conceivable": false,
+        "operators": [
+          "blocks.2.remote.blocks.0.qkv",
+          "blocks.2.remote.blocks.0.proj",
+          "blocks.2.remote.blocks.0.mlp_fc",
+          "blocks.2.remote.blocks.0.mlp_proj"
+        ],
+        "policy": "all-remote-linears",
+        "ratio_to_plaintext_batched": 14304.331038588258,
+        "reference_plaintext_batched_seconds": 0.007127708988264203,
+        "refresh_seconds": 1.1885362684726715,
+        "traffic_bytes": 2097165.0625
+      }
+    ]
+  },
+  "stored_estimates_verified": true,
+  "timing_scope": "in-process engineering timing on a research node; not a secure-serving latency (no TEE, no attestation, no network)"
+}

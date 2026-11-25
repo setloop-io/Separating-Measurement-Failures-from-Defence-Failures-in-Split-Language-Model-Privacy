@@ -1,0 +1,124 @@
+protocol_id: p4-p0-engineering-0.1
+status: engineering_ready
+cohort: engineering
+seed_policy: reserved IDs checked against inherited manifests; each stream independently
+  keyed
+seeds:
+- 410001
+reserved_prior_seeds:
+- 3
+- 7
+- 9
+- 11
+- 13
+- 17
+- 19
+- 21
+- 22
+- 23
+- 27
+- 29
+- 31
+- 33
+- 37
+- 39
+- 41
+- 43
+- 44
+- 47
+- 49
+- 51
+- 53
+- 55
+- 57
+- 59
+- 61
+- 63
+- 66
+- 67
+- 69
+- 71
+- 77
+- 81
+- 83
+- 87
+- 88
+- 89
+- 91
+- 101
+- 202
+- 303
+- 909
+- 919
+- 929
+- 939
+- 949
+- 959
+- 969
+- 9390
+- 9391
+- 9490
+- 9491
+- 9590
+- 9690
+backbone:
+  vocab_size: 256
+  d_model: 256
+  n_heads: 8
+  n_layers: 8
+  d_ff: 1024
+  max_seq_len: 128
+  init_std: 0.02
+split:
+  start: 2
+  span: 4
+  width: 256
+  remote_depth: 1
+quantizer: per-token-affine-width-axis; min/scale visible; differs from Paper3 per-tensor
+data:
+  path: data/raw/tinyshakespeare.txt
+  sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+  fractions:
+  - 0
+  - 0.8
+  - 0.9
+  - 0.95
+  - 1.0
+  batch_size: 2
+  sequence_length: 32
+optimizer:
+  steps: 3
+  lr: 0.0003
+  min_lr: 3.0e-05
+  warmup_steps: 1
+  weight_decay: 0.1
+  grad_clip: 1.0
+  betas:
+  - 0.9
+  - 0.95
+modes:
+- trained
+- frozen_random
+- removed_remote
+cells:
+- id: d0-q8
+  q_bits: 8
+  defense:
+    name: none
+- id: d1-s01-q8
+  q_bits: 8
+  defense:
+    name: property_noise
+    noise_scale: 0.1
+- id: d3-q2
+  q_bits: 2
+  defense:
+    name: aggressive_rate
+calibration_batches: 16
+eval_batches: 4
+probe_batches: 8
+probe_epochs: 2
+cpu_threads: 2
+basis_policy: same-model initial ridge on separate calibration text; wiring test only
+claim_scope: No scientific/privacy/convergence claim; full pilot is disabled pending
+  P0 and freeze.

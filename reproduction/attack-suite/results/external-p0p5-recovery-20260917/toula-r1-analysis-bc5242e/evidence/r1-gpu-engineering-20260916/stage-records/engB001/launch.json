@@ -1,0 +1,297 @@
+{
+  "admission_claim_sha256": "c4f5612f617dc3301e47f0ccef178423ad1feef065dbb178d19e247b70382bca",
+  "admission_sha256": "9682c7ab75d8f1c8d6bfce98f199e47ae905475fc0542d315f0a8a968dc1adb9",
+  "argv": [
+    "/home/geo/r1-bundle-eng-20260916/scripts/run_r1.py",
+    "execute-engineering",
+    "--admission",
+    "/home/geo/r1-acceptance/admission-stage-b.json",
+    "--execution-id",
+    "engB001"
+  ],
+  "bundle_root_at_execution": "/home/geo/r1-bundle-eng-20260916",
+  "bundle_sha256": "45d7682eaf0ef8a3c2445901df8c521fa9f9dbcbff3ed1d04cfd982a33ac041d",
+  "cwd": "/opt/r1-cuda",
+  "execution_id": "engB001",
+  "hostname": "06146bda1bf3",
+  "launch_uuid": "448e2d90-c009-4e76-a56a-e1708f6471d3",
+  "panel_manifest": "panel_manifest.json",
+  "panel_sha256": "ab295e183bde3ee244852f2ca0b56208818a4a779d9b44369550da74235de05b",
+  "pid": 1,
+  "runs": [
+    {
+      "backbone": {
+        "d_ff": 1024,
+        "d_model": 256,
+        "init_std": 0.02,
+        "max_seq_len": 128,
+        "n_heads": 8,
+        "n_layers": 8,
+        "vocab_size": 256
+      },
+      "cohort": "engineering",
+      "data": {
+        "batch_size": 32,
+        "corpus_sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+        "eval_batches": 8,
+        "path": "data/raw/tinyshakespeare.txt",
+        "seq_len": 128,
+        "train_fraction": 0.9
+      },
+      "device": "cuda",
+      "dtype": "float32",
+      "logging": {
+        "ema_beta": 0.95,
+        "eval_batches": 8,
+        "eval_every": 50,
+        "probe_batch_size": 8,
+        "transcript_sample_every": 50
+      },
+      "mode": "all_local",
+      "optim": {
+        "betas": [
+          0.9,
+          0.95
+        ],
+        "grad_clip": 1.0,
+        "lr": 0.0003,
+        "min_lr": 3e-05,
+        "steps": 100,
+        "warmup_steps": 10,
+        "weight_decay": 0.1
+      },
+      "output_dir": "/home/geo/r1-bundle-eng-20260916/outputs/p3-r1-fresh-start/performance_calibration--engB001/runs/p3-r1-fresh-start--performance_calibration--all-local--s61103--all_local--eengB001",
+      "pairing_block_id": null,
+      "protocol_version": "r1-exploration-draft-0.1",
+      "r1": {
+        "attack_validation": false,
+        "capture_rng": "preserve-gradient-stream-v1",
+        "cell_id": "all-local",
+        "initialization": "r1-named-streams-v1",
+        "panel_sha256": "ab295e183bde3ee244852f2ca0b56208818a4a779d9b44369550da74235de05b",
+        "scientific_evidence": false,
+        "semantic_validation": true,
+        "stage": "performance_calibration",
+        "study_id": "p3-r1-fresh-start",
+        "transport": "loopback-tcp-r1-wire-1.0"
+      },
+      "run_id": "p3-r1-fresh-start--performance_calibration--all-local--s61103--all_local--eengB001",
+      "save_final_state": true,
+      "seed": 61103,
+      "split": null,
+      "transcript_schema_version": "1.0.0"
+    },
+    {
+      "backbone": {
+        "d_ff": 1024,
+        "d_model": 256,
+        "init_std": 0.02,
+        "max_seq_len": 128,
+        "n_heads": 8,
+        "n_layers": 8,
+        "vocab_size": 256
+      },
+      "cohort": "engineering",
+      "data": {
+        "batch_size": 32,
+        "corpus_sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+        "eval_batches": 8,
+        "path": "data/raw/tinyshakespeare.txt",
+        "seq_len": 128,
+        "train_fraction": 0.9
+      },
+      "device": "cuda",
+      "dtype": "float32",
+      "logging": {
+        "ema_beta": 0.95,
+        "eval_batches": 8,
+        "eval_every": 50,
+        "probe_batch_size": 8,
+        "transcript_sample_every": 50
+      },
+      "mode": "trained",
+      "optim": {
+        "betas": [
+          0.9,
+          0.95
+        ],
+        "grad_clip": 1.0,
+        "lr": 0.0003,
+        "min_lr": 3e-05,
+        "steps": 100,
+        "warmup_steps": 10,
+        "weight_decay": 0.1
+      },
+      "output_dir": "/home/geo/r1-bundle-eng-20260916/outputs/p3-r1-fresh-start/performance_calibration--engB001/runs/p3-r1-fresh-start--performance_calibration--speed-base--s61103--trained--eengB001",
+      "pairing_block_id": "p3-r1-fresh-start--performance_calibration--speed-base--s61103",
+      "protocol_version": "r1-exploration-draft-0.1",
+      "r1": {
+        "attack_validation": false,
+        "capture_rng": "preserve-gradient-stream-v1",
+        "cell_id": "speed-base",
+        "initialization": "r1-named-streams-v1",
+        "panel_sha256": "ab295e183bde3ee244852f2ca0b56208818a4a779d9b44369550da74235de05b",
+        "scientific_evidence": false,
+        "semantic_validation": true,
+        "stage": "performance_calibration",
+        "study_id": "p3-r1-fresh-start",
+        "transport": "loopback-tcp-r1-wire-1.0"
+      },
+      "run_id": "p3-r1-fresh-start--performance_calibration--speed-base--s61103--trained--eengB001",
+      "save_final_state": true,
+      "seed": 61103,
+      "split": {
+        "grad_defense": null,
+        "q_bits": 8,
+        "remote_depth": 1,
+        "span": 4,
+        "start": 2,
+        "width": 256
+      },
+      "transcript_schema_version": "1.0.0"
+    },
+    {
+      "backbone": {
+        "d_ff": 1024,
+        "d_model": 256,
+        "init_std": 0.02,
+        "max_seq_len": 128,
+        "n_heads": 8,
+        "n_layers": 8,
+        "vocab_size": 256
+      },
+      "cohort": "engineering",
+      "data": {
+        "batch_size": 32,
+        "corpus_sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+        "eval_batches": 8,
+        "path": "data/raw/tinyshakespeare.txt",
+        "seq_len": 128,
+        "train_fraction": 0.9
+      },
+      "device": "cuda",
+      "dtype": "float32",
+      "logging": {
+        "ema_beta": 0.95,
+        "eval_batches": 8,
+        "eval_every": 50,
+        "probe_batch_size": 8,
+        "transcript_sample_every": 50
+      },
+      "mode": "frozen_random",
+      "optim": {
+        "betas": [
+          0.9,
+          0.95
+        ],
+        "grad_clip": 1.0,
+        "lr": 0.0003,
+        "min_lr": 3e-05,
+        "steps": 100,
+        "warmup_steps": 10,
+        "weight_decay": 0.1
+      },
+      "output_dir": "/home/geo/r1-bundle-eng-20260916/outputs/p3-r1-fresh-start/performance_calibration--engB001/runs/p3-r1-fresh-start--performance_calibration--speed-base--s61103--frozen_random--eengB001",
+      "pairing_block_id": "p3-r1-fresh-start--performance_calibration--speed-base--s61103",
+      "protocol_version": "r1-exploration-draft-0.1",
+      "r1": {
+        "attack_validation": false,
+        "capture_rng": "preserve-gradient-stream-v1",
+        "cell_id": "speed-base",
+        "initialization": "r1-named-streams-v1",
+        "panel_sha256": "ab295e183bde3ee244852f2ca0b56208818a4a779d9b44369550da74235de05b",
+        "scientific_evidence": false,
+        "semantic_validation": true,
+        "stage": "performance_calibration",
+        "study_id": "p3-r1-fresh-start",
+        "transport": "loopback-tcp-r1-wire-1.0"
+      },
+      "run_id": "p3-r1-fresh-start--performance_calibration--speed-base--s61103--frozen_random--eengB001",
+      "save_final_state": true,
+      "seed": 61103,
+      "split": {
+        "grad_defense": null,
+        "q_bits": 8,
+        "remote_depth": 1,
+        "span": 4,
+        "start": 2,
+        "width": 256
+      },
+      "transcript_schema_version": "1.0.0"
+    },
+    {
+      "backbone": {
+        "d_ff": 1024,
+        "d_model": 256,
+        "init_std": 0.02,
+        "max_seq_len": 128,
+        "n_heads": 8,
+        "n_layers": 8,
+        "vocab_size": 256
+      },
+      "cohort": "engineering",
+      "data": {
+        "batch_size": 32,
+        "corpus_sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+        "eval_batches": 8,
+        "path": "data/raw/tinyshakespeare.txt",
+        "seq_len": 128,
+        "train_fraction": 0.9
+      },
+      "device": "cuda",
+      "dtype": "float32",
+      "logging": {
+        "ema_beta": 0.95,
+        "eval_batches": 8,
+        "eval_every": 50,
+        "probe_batch_size": 8,
+        "transcript_sample_every": 50
+      },
+      "mode": "removed_remote",
+      "optim": {
+        "betas": [
+          0.9,
+          0.95
+        ],
+        "grad_clip": 1.0,
+        "lr": 0.0003,
+        "min_lr": 3e-05,
+        "steps": 100,
+        "warmup_steps": 10,
+        "weight_decay": 0.1
+      },
+      "output_dir": "/home/geo/r1-bundle-eng-20260916/outputs/p3-r1-fresh-start/performance_calibration--engB001/runs/p3-r1-fresh-start--performance_calibration--speed-base--s61103--removed_remote--eengB001",
+      "pairing_block_id": "p3-r1-fresh-start--performance_calibration--speed-base--s61103",
+      "protocol_version": "r1-exploration-draft-0.1",
+      "r1": {
+        "attack_validation": false,
+        "capture_rng": "preserve-gradient-stream-v1",
+        "cell_id": "speed-base",
+        "initialization": "r1-named-streams-v1",
+        "panel_sha256": "ab295e183bde3ee244852f2ca0b56208818a4a779d9b44369550da74235de05b",
+        "scientific_evidence": false,
+        "semantic_validation": true,
+        "stage": "performance_calibration",
+        "study_id": "p3-r1-fresh-start",
+        "transport": "loopback-tcp-r1-wire-1.0"
+      },
+      "run_id": "p3-r1-fresh-start--performance_calibration--speed-base--s61103--removed_remote--eengB001",
+      "save_final_state": true,
+      "seed": 61103,
+      "split": {
+        "grad_defense": null,
+        "q_bits": 8,
+        "remote_depth": 1,
+        "span": 4,
+        "start": 2,
+        "width": 256
+      },
+      "transcript_schema_version": "1.0.0"
+    }
+  ],
+  "schema_version": "r1-launch-1.0",
+  "scientific_evidence": false,
+  "stage": "performance_calibration",
+  "started_at_utc": "2026-09-16T00:16:53.981936+00:00",
+  "study_id": "p3-r1-fresh-start"
+}

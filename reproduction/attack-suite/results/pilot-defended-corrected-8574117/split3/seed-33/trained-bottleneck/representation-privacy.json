@@ -1,0 +1,181 @@
+{
+  "schema": "dtraining.attacker.representation_privacy.v1",
+  "config": {
+    "attack": "representation_privacy",
+    "mode": "training",
+    "toy": false,
+    "shadow_toy": false,
+    "arms": [
+      "bottleneck"
+    ],
+    "nonlinear_probe": true
+  },
+  "threat_model": "attacker-known labeled calibration releases; disjoint evaluation truth is used only after predictions; phase references attacker-owned",
+  "provenance": {
+    "hostname": "MacBookPro",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-09T10:58:28Z",
+    "dtraining_commit": "85741177f4e3416a4481d8a32fa43eb97845e75d"
+  },
+  "results": {
+    "arms": {
+      "bottleneck": {
+        "feature_shape": [
+          8,
+          8
+        ],
+        "calibration_documents": 6,
+        "evaluation_documents": 6,
+        "results": [
+          {
+            "family": "coordinate",
+            "target": "label",
+            "control": "fitted",
+            "accuracy": 0.16666666666666666,
+            "calibration_majority_accuracy": 0.0,
+            "unseen_evaluation_classes": 5,
+            "predictions": [
+              29,
+              27,
+              55,
+              15,
+              55,
+              7
+            ]
+          },
+          {
+            "family": "coordinate",
+            "target": "label",
+            "control": "shuffled_calibration_labels",
+            "accuracy": 0.0,
+            "calibration_majority_accuracy": 0.0,
+            "unseen_evaluation_classes": 5,
+            "predictions": [
+              29,
+              7,
+              15,
+              27,
+              15,
+              46
+            ]
+          },
+          {
+            "family": "norm",
+            "target": "label",
+            "control": "fitted",
+            "accuracy": 0.0,
+            "calibration_majority_accuracy": 0.0,
+            "unseen_evaluation_classes": 5,
+            "predictions": [
+              27,
+              46,
+              55,
+              7,
+              7,
+              27
+            ]
+          },
+          {
+            "family": "norm",
+            "target": "label",
+            "control": "shuffled_calibration_labels",
+            "accuracy": 0.0,
+            "calibration_majority_accuracy": 0.0,
+            "unseen_evaluation_classes": 5,
+            "predictions": [
+              7,
+              55,
+              15,
+              46,
+              46,
+              7
+            ]
+          },
+          {
+            "family": "gram",
+            "target": "label",
+            "control": "fitted",
+            "accuracy": 0.0,
+            "calibration_majority_accuracy": 0.0,
+            "unseen_evaluation_classes": 5,
+            "predictions": [
+              27,
+              7,
+              55,
+              7,
+              7,
+              27
+            ]
+          },
+          {
+            "family": "gram",
+            "target": "label",
+            "control": "shuffled_calibration_labels",
+            "accuracy": 0.0,
+            "calibration_majority_accuracy": 0.0,
+            "unseen_evaluation_classes": 5,
+            "predictions": [
+              7,
+              46,
+              15,
+              46,
+              46,
+              7
+            ]
+          },
+          {
+            "family": "coordinate_mlp",
+            "target": "label",
+            "control": "fitted",
+            "accuracy": 0.0,
+            "calibration_majority_accuracy": 0.0,
+            "unseen_evaluation_classes": 5,
+            "predictions": [
+              29,
+              27,
+              55,
+              27,
+              55,
+              27
+            ]
+          },
+          {
+            "family": "coordinate_mlp",
+            "target": "label",
+            "control": "shuffled_calibration_labels",
+            "accuracy": 0.0,
+            "calibration_majority_accuracy": 0.0,
+            "unseen_evaluation_classes": 5,
+            "predictions": [
+              29,
+              7,
+              15,
+              7,
+              15,
+              7
+            ]
+          }
+        ],
+        "interpretation": "prespecified per-document label classification, not full-sequence recovery; fresh fixed ridge probes plus optional calibration-only MLP; no MINE certificate or trained-defender replication",
+        "nonlinear_probe": {
+          "enabled": true,
+          "hidden_units": 64,
+          "steps": 300,
+          "optimizer": "Adam",
+          "learning_rate": 0.01,
+          "seed": 33
+        },
+        "uncertainty": "descriptive held-out metrics; no population confidence claim"
+      }
+    },
+    "support": "released-feature adapter; provenance supplied by operator"
+  },
+  "summary": [],
+  "source_provenance": {
+    "source": "document-disjoint public auxiliary release oracle",
+    "defender": "in-repo trained bottleneck",
+    "release_stage": "post-training encoder output"
+  },
+  "phase_provenance": null,
+  "input_sha256": "04d930b34e90cd1dfbc3bee8511b4cdf84dfd56a860c8ff431eb01f18b594cd2"
+}

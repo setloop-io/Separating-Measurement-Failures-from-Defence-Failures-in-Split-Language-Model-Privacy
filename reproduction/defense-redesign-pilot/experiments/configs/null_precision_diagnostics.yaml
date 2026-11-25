@@ -1,0 +1,29 @@
+protocol_id: p4-null-precision-engineering-0.1
+kind: null_precision
+cohort: engineering
+status: engineering_ready
+sources:
+- manifest: experiments/manifests/p4-warmup-warmup-20260910-a-setup-s410301.json
+  control_seed: 410401
+- manifest: experiments/manifests/p4-warmup-warmup-20260910-a-setup-s410302.json
+  control_seed: 410402
+release_conditions:
+- id: d0-q8
+  q_bits: 8
+  defense: {name: none}
+- id: d1-warm-s01-q8
+  q_bits: 8
+  defense: {name: property_noise, noise_scale: 0.1}
+- id: d3-q2
+  q_bits: 2
+  defense: {name: aggressive_rate}
+panel_sizes: [256, 1024]
+matched_null_counts: [1, 16, 64]
+outer_null_repeats: 32
+positive_doses: [0.5, 2.0]
+ridge_penalty: 1.0
+null_band: 0.02
+candidate_acceptance_threshold: 0.02
+property_positive_floor: 0.10
+cpu_threads: 2
+capture_batch_size: 8

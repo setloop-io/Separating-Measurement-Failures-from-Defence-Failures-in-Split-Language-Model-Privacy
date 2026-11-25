@@ -1,0 +1,174 @@
+{
+  "schema": "llm_attacker.domain_shift_summary.v1",
+  "gate": {
+    "version": "frozen-gate.v2",
+    "z": 2.5391848136513127,
+    "gate_pp": 1.0,
+    "n_seeds_required": 3,
+    "control": "label_free_majority"
+  },
+  "corpora": {
+    "code": {
+      "run_dir": "results/domain-shift-v1/code",
+      "corpus": "results/domain-shift-v1/inputs/code-corpus-v1.jsonl",
+      "corpus_sha256": "25841c8e8b116e173304b79068b68a09bf6afab017848cdbe8cb3fa61b452025",
+      "split": "6",
+      "seq_len": 32,
+      "train_steps": 8,
+      "attack_steps": 20,
+      "wall_seconds": 71.6,
+      "n_docs": 96,
+      "defense_paired_pp": {},
+      "cells": {
+        "training/none": {
+          "n_seeds": 3,
+          "seeds": [
+            11,
+            22,
+            33
+          ],
+          "n_tokens": 768,
+          "n_sequences": 24,
+          "recovery_pooled": 0.688802,
+          "control_pooled": 0.200521,
+          "recovery_mean_over_seeds": 0.688802,
+          "control_mean_over_seeds": 0.200521,
+          "upper95_pct": 72.95033828917086,
+          "excess_pp": 52.89825495583752,
+          "floor_pp": 3.9110904631194323,
+          "at_floor": false,
+          "gate_verdict": "FAIL",
+          "attack_seconds_total": 13.77
+        },
+        "inference/none": {
+          "n_seeds": 3,
+          "seeds": [
+            11,
+            22,
+            33
+          ],
+          "n_tokens": 3072,
+          "n_sequences": 96,
+          "recovery_pooled": 0.649414,
+          "control_pooled": 0.203125,
+          "recovery_mean_over_seeds": 0.649414,
+          "control_mean_over_seeds": 0.203125,
+          "upper95_pct": 67.09400497372971,
+          "excess_pp": 46.7815049737297,
+          "floor_pp": 1.9044447269924296,
+          "at_floor": false,
+          "gate_verdict": "FAIL",
+          "attack_seconds_total": 15.58
+        }
+      }
+    },
+    "clinical": {
+      "run_dir": "results/domain-shift-v1/clinical",
+      "corpus": "results/domain-shift-v1/inputs/clinical-synth-corpus-v1.jsonl",
+      "corpus_sha256": "66a82a24be16421f102a4227ae5095361d7641ad1cc7af8fe3af490762861ba5",
+      "split": "6",
+      "seq_len": 32,
+      "train_steps": 8,
+      "attack_steps": 20,
+      "wall_seconds": 56.6,
+      "n_docs": 96,
+      "defense_paired_pp": {},
+      "cells": {
+        "training/none": {
+          "n_seeds": 3,
+          "seeds": [
+            11,
+            22,
+            33
+          ],
+          "n_tokens": 768,
+          "n_sequences": 24,
+          "recovery_pooled": 1.0,
+          "control_pooled": 0.0625,
+          "recovery_mean_over_seeds": 1.0,
+          "control_mean_over_seeds": 0.0625,
+          "upper95_pct": 100.0,
+          "excess_pp": 93.75,
+          "floor_pp": 2.602695630273261,
+          "at_floor": false,
+          "gate_verdict": "FAIL",
+          "attack_seconds_total": 11.73
+        },
+        "inference/none": {
+          "n_seeds": 3,
+          "seeds": [
+            11,
+            22,
+            33
+          ],
+          "n_tokens": 3072,
+          "n_sequences": 96,
+          "recovery_pooled": 1.0,
+          "control_pooled": 0.0625,
+          "recovery_mean_over_seeds": 1.0,
+          "control_mean_over_seeds": 0.0625,
+          "upper95_pct": 100.00000000000003,
+          "excess_pp": 93.75000000000003,
+          "floor_pp": 1.203193937261389,
+          "at_floor": false,
+          "gate_verdict": "FAIL",
+          "attack_seconds_total": 12.47
+        }
+      }
+    },
+    "wikitext-reference": {
+      "run_dir": "results/domain-shift-v1/wikitext-reference",
+      "corpus": "results/pilot-gpt2-wikitext2/inputs/pilot-corpus.jsonl",
+      "corpus_sha256": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77",
+      "split": "6",
+      "seq_len": 32,
+      "train_steps": 8,
+      "attack_steps": 20,
+      "wall_seconds": 63.9,
+      "n_docs": 96,
+      "defense_paired_pp": {},
+      "cells": {
+        "training/none": {
+          "n_seeds": 3,
+          "seeds": [
+            11,
+            22,
+            33
+          ],
+          "n_tokens": 768,
+          "n_sequences": 24,
+          "recovery_pooled": 0.657552,
+          "control_pooled": 0.046875,
+          "recovery_mean_over_seeds": 0.657552,
+          "control_mean_over_seeds": 0.046875,
+          "upper95_pct": 69.95575741367081,
+          "excess_pp": 65.26825741367081,
+          "floor_pp": 2.342392765605128,
+          "at_floor": false,
+          "gate_verdict": "FAIL",
+          "attack_seconds_total": 13.29
+        },
+        "inference/none": {
+          "n_seeds": 3,
+          "seeds": [
+            11,
+            22,
+            33
+          ],
+          "n_tokens": 3072,
+          "n_sequences": 96,
+          "recovery_pooled": 0.632487,
+          "control_pooled": 0.026367,
+          "recovery_mean_over_seeds": 0.632487,
+          "control_mean_over_seeds": 0.026367,
+          "upper95_pct": 65.42755675192586,
+          "excess_pp": 62.79083800192586,
+          "floor_pp": 0.839136317403548,
+          "at_floor": false,
+          "gate_verdict": "FAIL",
+          "attack_seconds_total": 13.6
+        }
+      }
+    }
+  }
+}

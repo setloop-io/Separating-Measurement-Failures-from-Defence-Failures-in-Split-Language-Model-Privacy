@@ -1,0 +1,167 @@
+{
+  "schema": "llm_attacker.bisr_fidelity_audit.v1",
+  "date": "2026-09-17",
+  "verdict": "NOT_ESTABLISHED",
+  "allows_v4_frozen_capture_evaluation": false,
+  "predeclared_fidelity_tolerance": null,
+  "tolerance_search_scope": [
+    "frozen v4",
+    "open commitments plan",
+    "phase2 fleet runbook",
+    "module docstring",
+    "koula SplitLLM FIDELITY-NOTES.md and run scripts"
+  ],
+  "reason_codes": [
+    "NO_OPERATIONAL_PREDECLARED_TOLERANCE",
+    "REFERENCE_AUX_SUBSTITUTED",
+    "REFERENCE_TRAINING_SHRUNK",
+    "SINGLE_REFERENCE_SEED",
+    "UNMATCHED_SEAMS_DECODERS_AND_VICTIMS",
+    "UNMATCHED_BATCHES_AND_METRICS",
+    "LOCAL_PREDICTIONS_NOT_RETAINED",
+    "V4_BF_ORDER_PROSE_CONFLICT"
+  ],
+  "reference": {
+    "BiSR(b)": {
+      "batches": 13,
+      "steps": [
+        199,
+        200,
+        201,
+        202,
+        203,
+        399,
+        400,
+        401,
+        402,
+        403,
+        599,
+        600,
+        601
+      ],
+      "n_correct": 3313,
+      "n_tokens": 3328,
+      "positional_accuracy": 0.9954927884615384,
+      "rouge_l_f": 0.9983710892252639,
+      "token_set_f1": 0.9967370791177702
+    },
+    "BiSR(b+f)": {
+      "batches": 13,
+      "steps": [
+        199,
+        200,
+        201,
+        202,
+        203,
+        399,
+        400,
+        401,
+        402,
+        403,
+        599,
+        600,
+        601
+      ],
+      "n_correct": 3283,
+      "n_tokens": 3328,
+      "positional_accuracy": 0.9864783653846154,
+      "rouge_l_f": 0.9922211823294387,
+      "token_set_f1": 0.9924365909167862
+    },
+    "BiSR(f)": {
+      "batches": 13,
+      "steps": [
+        199,
+        200,
+        201,
+        202,
+        203,
+        399,
+        400,
+        401,
+        402,
+        403,
+        599,
+        600,
+        601
+      ],
+      "n_correct": 3283,
+      "n_tokens": 3328,
+      "positional_accuracy": 0.9864783653846154,
+      "rouge_l_f": 0.991709399837827,
+      "token_set_f1": 0.991963298130391
+    },
+    "SIP": {
+      "batches": 13,
+      "steps": [
+        199,
+        200,
+        201,
+        202,
+        203,
+        399,
+        400,
+        401,
+        402,
+        403,
+        599,
+        600,
+        601
+      ],
+      "n_correct": 3078,
+      "n_tokens": 3328,
+      "positional_accuracy": 0.9248798076923077,
+      "rouge_l_f": 0.9499726804741027,
+      "token_set_f1": 0.9474629252022749
+    }
+  },
+  "local": {
+    "batches": 12,
+    "steps": [
+      200,
+      201,
+      202,
+      203,
+      204,
+      400,
+      401,
+      402,
+      403,
+      404,
+      600,
+      601
+    ],
+    "n_tokens": 3072,
+    "beam_positional_accuracy": 0.990234375,
+    "bre_bf_positional_accuracy": 0.9996744791666666,
+    "immutable_token_predictions_saved": false
+  },
+  "upstream_commit": "c376590227f9718077765824af4088665bb78687",
+  "local_run_commit": "ae37fe7f7d1dd1c6815d76286f4f6fea65204827",
+  "protocol_commit": "adf4cf688373b3983ebc3d6cbe2c1eebc99a97d2",
+  "primary_sources": [
+    "https://arxiv.org/html/2409.00960v2",
+    "https://github.com/StupidTrees/SplitLLM/tree/c376590227f9718077765824af4088665bb78687"
+  ],
+  "remediation": [
+    "Predeclare an operational prospective fidelity gate, with scope, tolerance justification, seeds, metrics and missing-data rule in an additive protocol amendment; preserve v4.",
+    "Obtain original SensiReplaced or explicitly amend the target to a substituted-data implementation comparison; do not call it exact published replication.",
+    "Align GRU/MLP scope, dual cuts, victim snapshots, sample IDs, auxiliary training budgets, GM/SM order and numerical environment before running.",
+    "Retain predictions and inputs with hashes; compute reference ROUGE/METEOR/token-set F1 and positional accuracy on both implementations.",
+    "Run the predeclared independent validation once, retain every failure, then resolve B1 before matched v3 evaluation."
+  ],
+  "sha256": {
+    "experiments/validation_protocol.v4.json": "cc23f15d5d7597ff2e73edd45e6f77b65aaf19ce3ed6f86d121352ce1ca5c4fc",
+    "attacker/attacks/bisr_baseline.py": "7422dce575dbd1a9bf4dfcd4a400aabd965a3db5fed95ed9bffae1757008eeaa",
+    "experiments/audit_bisr_fidelity_20260917.py": "3fa6c7167c42c8ebd57bc5607dc691e588df1a38fe50f0220154e6a9bafc76ec",
+    "results/phase2-status-2026-09-17/splitllm-reference/attacks.jsonl": "64644ac191b12dd2d1df79f02af1dcfb66016613aff444ad879491efcbafbe21",
+    "results/phase2-status-2026-09-17/splitllm-reference/attacks.jsonl.aggregate.json": "5f93a49090f53aaa7bdd1760cf5bf43bb79fe62bbe80afa93ceba8f5bb8e4955",
+    "results/phase2-status-2026-09-17/bisr-fidelity-v1/our-bisr-attack.json": "0a4352eeff527e6ee511959d76589c3ec396a2aeaf66e4e2d85474239bbadb04",
+    "results/phase2-status-2026-09-17/bisr-fidelity-v1/our-bisr-attack.json.evidence.json": "c32fe5604dc4ccc1641b67de4359c38310bdf6befc84af299a868cba22e120f8",
+    "results/phase2-status-2026-09-17/bisr-audit-sources/FIDELITY-NOTES.md": "8290806df4ae1f05a032c807f22f10c7aac3b0ea37cff8189ee52ca073bdd6e8",
+    "results/phase2-status-2026-09-17/bisr-audit-sources/reference-metric.py.txt": "27ec4fbfb233a681a1929bddf5dd72420930db9ae18a50f4e5b31442f3c3be98",
+    "results/phase2-status-2026-09-17/bisr-audit-sources/run-scripts.txt": "1092822fd98e54274a42ff9326b52697e905eafecc703481c14839a27a16d906",
+    "results/phase2-status-2026-09-17/bisr-audit-sources/sip-train.json": "a4c973093e38de07da714eb82e731c1bd68c03ddc9c8509346eb711ab08bb75c",
+    "results/phase2-status-2026-09-17/bisr-audit-sources/splitllm-working-tree.patch": "4d70d448c731edbef7f2e5af27a5f39acea3bf82dd2df3e79c5ab0a36600c5cb"
+  }
+}

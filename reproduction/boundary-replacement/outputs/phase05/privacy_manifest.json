@@ -1,0 +1,140 @@
+{
+  "jobs": [
+    {
+      "attack": "latent-probe",
+      "attack_arguments": {
+        "observed_surface": [
+          "cloud_state_history",
+          "forward_wire",
+          "outbound_training_gradient",
+          "protocol_metadata"
+        ],
+        "privacy_cell_id": "sha256:21eaa511ffe3e9f37132527dd256c88ffc7255f57feac3ac37264f0288c26e22",
+        "scope_evidence": "docs/experiments/THREAT_MODEL_SCOPE_AUDIT.md",
+        "validated_scope_id": "paper1.latent-native.capture.v1"
+      },
+      "bundle": null,
+      "privacy_cell_id": "sha256:21eaa511ffe3e9f37132527dd256c88ffc7255f57feac3ac37264f0288c26e22",
+      "required_observed_surfaces": [
+        "cloud_state_history",
+        "forward_wire",
+        "outbound_training_gradient",
+        "protocol_metadata"
+      ],
+      "runner_artifact": "outputs/phase04/wikitext2_clean_split21_s42_runner.json",
+      "runner_coordinates": {
+        "adversary_strength": 0.25,
+        "analysis_stage": "exploratory",
+        "bundle_canonical_fraction": 0.0,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+        "delegate_sublayer": "full",
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "frozen_grid_cell_id": null,
+        "frozen_grid_id": null,
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "seed": 42,
+        "sequence_length": 32,
+        "split_after": 21,
+        "steps": 4000,
+        "surrogate_mode": "trained",
+        "surrogate_placement": "remote",
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      }
+    },
+    {
+      "attack": "latent-probe",
+      "attack_arguments": {
+        "observed_surface": [
+          "cloud_state_history",
+          "forward_wire",
+          "outbound_training_gradient",
+          "protocol_metadata"
+        ],
+        "privacy_cell_id": "sha256:1e0169b9670a8cd737dfa24e33efaeb16277c9beccd1b28bcbec7189606e1825",
+        "scope_evidence": "docs/experiments/THREAT_MODEL_SCOPE_AUDIT.md",
+        "validated_scope_id": "paper1.latent-native.capture.v1"
+      },
+      "bundle": null,
+      "privacy_cell_id": "sha256:1e0169b9670a8cd737dfa24e33efaeb16277c9beccd1b28bcbec7189606e1825",
+      "required_observed_surfaces": [
+        "cloud_state_history",
+        "forward_wire",
+        "outbound_training_gradient",
+        "protocol_metadata"
+      ],
+      "runner_artifact": "outputs/phase04/wikitext2_failed_split19_s42_runner.json",
+      "runner_coordinates": {
+        "adversary_strength": 0.25,
+        "analysis_stage": "exploratory",
+        "bundle_canonical_fraction": 0.0,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+        "delegate_sublayer": "full",
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "frozen_grid_cell_id": null,
+        "frozen_grid_id": null,
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "seed": 42,
+        "sequence_length": 32,
+        "split_after": 19,
+        "steps": 4000,
+        "surrogate_mode": "trained",
+        "surrogate_placement": "remote",
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      }
+    }
+  ],
+  "limitations": [
+    "The scope identifier is a provenance reference, not a privacy proof.",
+    "Do not transfer a privacy result to a different privacy_cell_id."
+  ],
+  "schema": "dtraining.privacy_evaluation_manifest.v1",
+  "scope_evidence": "docs/experiments/THREAT_MODEL_SCOPE_AUDIT.md",
+  "status": "frozen",
+  "validated_scope_id": "paper1.latent-native.capture.v1"
+}

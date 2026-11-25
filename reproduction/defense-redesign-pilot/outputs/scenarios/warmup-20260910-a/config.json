@@ -1,0 +1,74 @@
+{
+  "backbone": {
+    "d_ff": 1024,
+    "d_model": 256,
+    "init_std": 0.02,
+    "max_seq_len": 128,
+    "n_heads": 8,
+    "n_layers": 8,
+    "vocab_size": 256
+  },
+  "basis_sequences": 512,
+  "branch_steps": 16,
+  "cohort": "engineering",
+  "cpu_threads": 2,
+  "data": {
+    "batch_size": 8,
+    "fractions": [
+      0,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0
+    ],
+    "path": "data/raw/tinyshakespeare.txt",
+    "sequence_length": 32,
+    "sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed"
+  },
+  "eval_batches": 8,
+  "kind": "warmup",
+  "modes": [
+    "trained",
+    "frozen_random",
+    "removed_remote"
+  ],
+  "noise_scale": 0.1,
+  "null_repeats": 16,
+  "optimizer": {
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "grad_clip": 1.0,
+    "lr": 0.0003,
+    "min_lr": 3e-05,
+    "warmup_steps": 2,
+    "weight_decay": 0.1
+  },
+  "panel_sizes": [
+    16,
+    64,
+    256,
+    1024
+  ],
+  "protocol_id": "p4-warmup-stability-engineering-0.1",
+  "seeds": [
+    410301,
+    410302
+  ],
+  "split": {
+    "q_bits": 8,
+    "remote_depth": 1,
+    "span": 4,
+    "start": 2,
+    "width": 256
+  },
+  "status": "engineering_ready",
+  "variants": [
+    "d0",
+    "d1_initial_basis",
+    "d1_warm_basis"
+  ],
+  "warmup_steps": 16
+}

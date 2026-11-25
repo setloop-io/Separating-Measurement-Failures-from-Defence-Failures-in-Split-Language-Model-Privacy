@@ -1,0 +1,327 @@
+{
+  "param_digest": null,
+  "eval_loss": 3.634175936381022,
+  "eval_loss_std": 0.6850072145462036,
+  "eval_blocks": 3,
+  "final_train_loss": 5.211533851921558,
+  "config": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "n_layers": 28,
+    "split_after": 7,
+    "resume_after": 26,
+    "local_params": 312892928,
+    "cloud_params": 283156992,
+    "cloud_trainable_params": 0,
+    "cloud": "ws://10.10.10.2:5003",
+    "wire_dtype": "bf16",
+    "pipeline": "sync",
+    "max_inflight": null,
+    "lora_rank": 0,
+    "lr": 0.0001,
+    "seq_len": 64,
+    "micro_batch_size": 1,
+    "grad_accum": 16,
+    "steps": 1,
+    "dtype": "bf16",
+    "device": "cuda",
+    "seed": 42,
+    "corpus_file": "/workspace/experiments/private/er9/corpus.fixed.txt",
+    "act_noise_sigma": 0.0,
+    "tee": {
+      "requested": false,
+      "mode": "none",
+      "note": null
+    },
+    "act_noise": null,
+    "dp_sgd": null,
+    "obf": null
+  },
+  "steps": [
+    {
+      "step": 0,
+      "loss": 5.211533851921558,
+      "t_step": 2.8736778059974313,
+      "t_blocked_cloud": 0.0,
+      "overlap_savings_s": 0.0
+    }
+  ],
+  "microbatch_timing": [
+    {
+      "step": 0,
+      "microbatch": 0,
+      "block_indices": [
+        20
+      ],
+      "t_local_fwd": 0.525708151049912,
+      "t_cloud_fwd": 0.4204272429924458,
+      "t_wait_cloud_fwd": 0.4204272429924458,
+      "loss": 7.333521366119385,
+      "t_tail_fwd": 0.03564069792628288,
+      "t_local_bwd": 0.07377117802388966,
+      "t_cloud_bwd": 0.06332088401541114,
+      "t_wait_cloud_bwd": 0.06332088401541114,
+      "bytes_crossed": 262144,
+      "t_total": 1.155945718055591
+    },
+    {
+      "step": 0,
+      "microbatch": 1,
+      "block_indices": [
+        3
+      ],
+      "t_local_fwd": 0.004163225064985454,
+      "t_cloud_fwd": 0.023568432894535363,
+      "t_wait_cloud_fwd": 0.023568432894535363,
+      "loss": 3.4577126502990723,
+      "t_tail_fwd": 0.003733590943738818,
+      "t_local_bwd": 0.02641491894610226,
+      "t_cloud_bwd": 0.033095380989834666,
+      "t_wait_cloud_bwd": 0.033095380989834666,
+      "bytes_crossed": 262144,
+      "t_total": 0.10339080693665892
+    },
+    {
+      "step": 0,
+      "microbatch": 2,
+      "block_indices": [
+        0
+      ],
+      "t_local_fwd": 0.004074472934007645,
+      "t_cloud_fwd": 0.02454606699757278,
+      "t_wait_cloud_fwd": 0.02454606699757278,
+      "loss": 1.9581005573272705,
+      "t_tail_fwd": 0.003706888062879443,
+      "t_local_bwd": 0.004131465102545917,
+      "t_cloud_bwd": 0.036133850924670696,
+      "t_wait_cloud_bwd": 0.036133850924670696,
+      "bytes_crossed": 262144,
+      "t_total": 0.11087971890810877
+    },
+    {
+      "step": 0,
+      "microbatch": 3,
+      "block_indices": [
+        8
+      ],
+      "t_local_fwd": 0.003437351086176932,
+      "t_cloud_fwd": 0.023573584971018136,
+      "t_wait_cloud_fwd": 0.023573584971018136,
+      "loss": 2.423691749572754,
+      "t_tail_fwd": 0.003661478986032307,
+      "t_local_bwd": 0.011197975953109562,
+      "t_cloud_bwd": 0.029624668997712433,
+      "t_wait_cloud_bwd": 0.029624668997712433,
+      "bytes_crossed": 262144,
+      "t_total": 0.10897773096803576
+    },
+    {
+      "step": 0,
+      "microbatch": 4,
+      "block_indices": [
+        7
+      ],
+      "t_local_fwd": 0.003542582970112562,
+      "t_cloud_fwd": 0.0159701929660514,
+      "t_wait_cloud_fwd": 0.0159701929660514,
+      "loss": 10.652381896972656,
+      "t_tail_fwd": 0.0036549039650708437,
+      "t_local_bwd": 0.010711526032537222,
+      "t_cloud_bwd": 0.02855378796812147,
+      "t_wait_cloud_bwd": 0.02855378796812147,
+      "bytes_crossed": 262144,
+      "t_total": 0.10017014399636537
+    },
+    {
+      "step": 0,
+      "microbatch": 5,
+      "block_indices": [
+        7
+      ],
+      "t_local_fwd": 0.003524486906826496,
+      "t_cloud_fwd": 0.016188306035473943,
+      "t_wait_cloud_fwd": 0.016188306035473943,
+      "loss": 10.652381896972656,
+      "t_tail_fwd": 0.0036439759423956275,
+      "t_local_bwd": 0.010733445989899337,
+      "t_cloud_bwd": 0.028449194971472025,
+      "t_wait_cloud_bwd": 0.028449194971472025,
+      "bytes_crossed": 262144,
+      "t_total": 0.0996097760507837
+    },
+    {
+      "step": 0,
+      "microbatch": 6,
+      "block_indices": [
+        4
+      ],
+      "t_local_fwd": 0.0035595749504864216,
+      "t_cloud_fwd": 0.02461417904123664,
+      "t_wait_cloud_fwd": 0.02461417904123664,
+      "loss": 5.3951005935668945,
+      "t_tail_fwd": 0.003646678989753127,
+      "t_local_bwd": 0.010638438980095088,
+      "t_cloud_bwd": 0.02908886002842337,
+      "t_wait_cloud_bwd": 0.02908886002842337,
+      "bytes_crossed": 262144,
+      "t_total": 0.10861109010875225
+    },
+    {
+      "step": 0,
+      "microbatch": 7,
+      "block_indices": [
+        3
+      ],
+      "t_local_fwd": 0.0034546309616416693,
+      "t_cloud_fwd": 0.023252191953361034,
+      "t_wait_cloud_fwd": 0.023252191953361034,
+      "loss": 3.4577126502990723,
+      "t_tail_fwd": 0.0036284710513427854,
+      "t_local_bwd": 0.01053144596517086,
+      "t_cloud_bwd": 0.02837690699379891,
+      "t_wait_cloud_bwd": 0.02837690699379891,
+      "bytes_crossed": 262144,
+      "t_total": 0.10656489292159677
+    },
+    {
+      "step": 0,
+      "microbatch": 8,
+      "block_indices": [
+        21
+      ],
+      "t_local_fwd": 0.003472774988040328,
+      "t_cloud_fwd": 0.016484498977661133,
+      "t_wait_cloud_fwd": 0.016484498977661133,
+      "loss": 11.287322998046875,
+      "t_tail_fwd": 0.0036698790499940515,
+      "t_local_bwd": 0.010074164951220155,
+      "t_cloud_bwd": 0.028226042981259525,
+      "t_wait_cloud_bwd": 0.028226042981259525,
+      "bytes_crossed": 262144,
+      "t_total": 0.09966270404402167
+    },
+    {
+      "step": 0,
+      "microbatch": 9,
+      "block_indices": [
+        17
+      ],
+      "t_local_fwd": 0.0035358319291844964,
+      "t_cloud_fwd": 0.024147649994120002,
+      "t_wait_cloud_fwd": 0.024147649994120002,
+      "loss": 1.2285687923431396,
+      "t_tail_fwd": 0.003622055985033512,
+      "t_local_bwd": 0.010774757945910096,
+      "t_cloud_bwd": 0.029137692996300757,
+      "t_wait_cloud_bwd": 0.029137692996300757,
+      "bytes_crossed": 262144,
+      "t_total": 0.10887163504958153
+    },
+    {
+      "step": 0,
+      "microbatch": 10,
+      "block_indices": [
+        2
+      ],
+      "t_local_fwd": 0.003385863034054637,
+      "t_cloud_fwd": 0.024625875987112522,
+      "t_wait_cloud_fwd": 0.024625875987112522,
+      "loss": 3.215175151824951,
+      "t_tail_fwd": 0.003641142975538969,
+      "t_local_bwd": 0.009878229000605643,
+      "t_cloud_bwd": 0.029432076960802078,
+      "t_wait_cloud_bwd": 0.029432076960802078,
+      "bytes_crossed": 262144,
+      "t_total": 0.108195377048105
+    },
+    {
+      "step": 0,
+      "microbatch": 11,
+      "block_indices": [
+        18
+      ],
+      "t_local_fwd": 0.0033914309460669756,
+      "t_cloud_fwd": 0.020938667934387922,
+      "t_wait_cloud_fwd": 0.020938667934387922,
+      "loss": 7.034740924835205,
+      "t_tail_fwd": 0.003663846990093589,
+      "t_local_bwd": 0.009673541062511504,
+      "t_cloud_bwd": 0.02883834799285978,
+      "t_wait_cloud_bwd": 0.02883834799285978,
+      "bytes_crossed": 262144,
+      "t_total": 0.1037167760077864
+    },
+    {
+      "step": 0,
+      "microbatch": 12,
+      "block_indices": [
+        13
+      ],
+      "t_local_fwd": 0.003554104012437165,
+      "t_cloud_fwd": 0.01927786401938647,
+      "t_wait_cloud_fwd": 0.01927786401938647,
+      "loss": 8.903048515319824,
+      "t_tail_fwd": 0.0036403279518708587,
+      "t_local_bwd": 0.010505381971597672,
+      "t_cloud_bwd": 0.02926633204333484,
+      "t_wait_cloud_bwd": 0.02926633204333484,
+      "bytes_crossed": 262144,
+      "t_total": 0.103691800031811
+    },
+    {
+      "step": 0,
+      "microbatch": 13,
+      "block_indices": [
+        1
+      ],
+      "t_local_fwd": 0.0035174000076949596,
+      "t_cloud_fwd": 0.025278531946241856,
+      "t_wait_cloud_fwd": 0.025278531946241856,
+      "loss": 1.2118061780929565,
+      "t_tail_fwd": 0.0036372389877215028,
+      "t_local_bwd": 0.010919847059994936,
+      "t_cloud_bwd": 0.028428490972146392,
+      "t_wait_cloud_bwd": 0.028428490972146392,
+      "bytes_crossed": 262144,
+      "t_total": 0.109341571922414
+    },
+    {
+      "step": 0,
+      "microbatch": 14,
+      "block_indices": [
+        0
+      ],
+      "t_local_fwd": 0.00353419897146523,
+      "t_cloud_fwd": 0.024349458049982786,
+      "t_wait_cloud_fwd": 0.024349458049982786,
+      "loss": 1.9581005573272705,
+      "t_tail_fwd": 0.003644680022262037,
+      "t_local_bwd": 0.010073604993522167,
+      "t_cloud_bwd": 0.030055821989662945,
+      "t_wait_cloud_bwd": 0.030055821989662945,
+      "bytes_crossed": 262144,
+      "t_total": 0.10860582604072988
+    },
+    {
+      "step": 0,
+      "microbatch": 15,
+      "block_indices": [
+        2
+      ],
+      "t_local_fwd": 0.003546310937963426,
+      "t_cloud_fwd": 0.025904325069859624,
+      "t_wait_cloud_fwd": 0.025904325069859624,
+      "loss": 3.215175151824951,
+      "t_tail_fwd": 0.0036385509883984923,
+      "t_local_bwd": 0.01065922190900892,
+      "t_cloud_bwd": 0.028795516001991928,
+      "t_wait_cloud_bwd": 0.028795516001991928,
+      "bytes_crossed": 262144,
+      "t_total": 0.10962406801991165
+    }
+  ],
+  "bytes_crossed_total": {
+    "activations": 2097152,
+    "grads": 2097152
+  },
+  "note": "remote cloud: t_cloud_* includes network round-trip"
+}

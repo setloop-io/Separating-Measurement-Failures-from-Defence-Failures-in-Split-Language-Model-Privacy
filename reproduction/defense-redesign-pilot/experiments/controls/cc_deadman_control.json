@@ -1,0 +1,17 @@
+{
+  "schema": "p4.cc_lifecycle_control.v1",
+  "control": "deadman",
+  "implementation": "p4d.cc_lifecycle",
+  "clock": "time.monotonic_ns",
+  "packet_bound": "execution_contract.deadman_timeout_minutes",
+  "heartbeat_observation": "ed25519-signed-hash-chained-guest-heartbeat",
+  "workload_heartbeat_contract": "launch-nonce-arm-instance-and-guest-argv-bound",
+  "supervisor_launch_context_required": true,
+  "stale_preexisting_heartbeat_gives_credit": false,
+  "on_violation": [
+    "terminate-workload-group",
+    "kill-after-grace",
+    "run-teardown-adapter",
+    "run-resource-absence-verifier"
+  ]
+}

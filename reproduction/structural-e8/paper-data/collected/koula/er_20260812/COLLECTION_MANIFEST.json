@@ -1,0 +1,101 @@
+{
+  "schema": "dtraining.collection_manifest.v1",
+  "collection": "koula_er_20260812_lab_suite",
+  "experiment": "E-R3/E-R4/E-R5 rotation-lifetime laboratory suite",
+  "source_host": "koula",
+  "source_path": "~/experiments/results/training/",
+  "collection_date": "2026-08-12",
+  "measurement_kind": "measured",
+  "evidence_status": "primary",
+  "scope_note": "Only completed aggregate JSON artifacts and per-cell JSONL journals were collected. Raw .pt captures, checkpoints, model weights, key files, credentials, SSH material, and broad result directories were excluded.",
+  "validation": {
+    "aggregate_json_files": 5,
+    "jsonl_journals": 4,
+    "all_json_parsed": true,
+    "schema": "dtraining.rotation_lifetime.v1",
+    "embedded_error_count": 0,
+    "source_hashes_match": true,
+    "forbidden_file_count": 0,
+    "secret_scan_note": "master_seed_base=42 is an intentionally public laboratory reproducibility seed, not an operational obfuscation secret"
+  },
+  "provenance": {
+    "hostname": "koula",
+    "model": "qwen36-27b",
+    "model_manifest_sha256": "f8c3bc4bd8e650242cc38e534146672c60a932e92202cd4d5d47b29fde8a7d30",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe",
+    "container_image": "split-inference:spark",
+    "er3_commit": "05228d268a0f4af8ee9d93cc475740d2c63143f6",
+    "er4_commit": "749d721ad6486bce62903f5fece3616dc3339560",
+    "er5_commit": "5c9832c44e3025bf2116971c3e9ee07c2b572dc5"
+  },
+  "artifacts": [
+    {
+      "file": "lab_suite/rotation_lifetime_27b_er3_bf16_20260811_koula.json",
+      "sha256": "97f1ee2398544eb492b8b13c1a2fce1c71d7cdd96db0b9df7e7b2b7a7bf9df82",
+      "experiment": "E-R3",
+      "result_cells": 18,
+      "embedded_errors": 0
+    },
+    {
+      "file": "lab_suite/rotation_lifetime_27b_er3_bf16_20260811_koula.json.jsonl",
+      "sha256": "c52b53692269f2f2169461fe89b5c45307bfdfa0b4785c28238868137f8d63ba",
+      "experiment": "E-R3 journal",
+      "rows": 288,
+      "embedded_errors": 0
+    },
+    {
+      "file": "lab_suite/rotation_lifetime_27b_er4_bf16_20260811_koula.json",
+      "sha256": "afe00961e3623e3f8cf859b9cb8cc738282ad2788a75e4d19367387989420bd6",
+      "experiment": "E-R4",
+      "result_cells": 9,
+      "embedded_errors": 0
+    },
+    {
+      "file": "lab_suite/rotation_lifetime_27b_er5_d1_bf16_20260812_koula.json",
+      "sha256": "9e7b4e11957584507a56cd062447035d3047a1cee66a154c2e030510a678bdc3",
+      "experiment": "E-R5 depth 1",
+      "result_cells": 9,
+      "embedded_errors": 0
+    },
+    {
+      "file": "lab_suite/rotation_lifetime_27b_er5_d1_bf16_20260812_koula.json.jsonl",
+      "sha256": "39589f41f47383e6eb0e7340b9f700dacf71360b790936ba990691337893482a",
+      "experiment": "E-R5 depth 1 journal",
+      "rows": 126,
+      "embedded_errors": 0
+    },
+    {
+      "file": "lab_suite/rotation_lifetime_27b_er5_d4_bf16_20260812_koula.json",
+      "sha256": "e091684b3eb1a6eb7096cb667271f9b1d186eac004b2616a2715f67003377d8f",
+      "experiment": "E-R5 depth 4",
+      "result_cells": 9,
+      "embedded_errors": 0
+    },
+    {
+      "file": "lab_suite/rotation_lifetime_27b_er5_d4_bf16_20260812_koula.json.jsonl",
+      "sha256": "11d754fc2e9854e90a464c562312a80bbda2fde6a893ba7fe5956294a786cc44",
+      "experiment": "E-R5 depth 4 journal",
+      "rows": 81,
+      "embedded_errors": 0
+    },
+    {
+      "file": "lab_suite/rotation_lifetime_27b_er5_d8_bf16_20260812_koula.json",
+      "sha256": "f417fc0b1ade7f9db054215b15170ab922033c6c34593ffea5476022947911de",
+      "experiment": "E-R5 depth 8",
+      "result_cells": 9,
+      "embedded_errors": 0
+    },
+    {
+      "file": "lab_suite/rotation_lifetime_27b_er5_d8_bf16_20260812_koula.json.jsonl",
+      "sha256": "cb870416ff71b512c9c905262d07d711849fd8b7349e44369b1f68e3301b1022",
+      "experiment": "E-R5 depth 8 journal",
+      "rows": 81,
+      "embedded_errors": 0
+    }
+  ],
+  "known_limitations": [
+    "Victim document indices and corpus/model hashes are present, but victim_doc_sha256 is empty in the immutable source artifacts.",
+    "E-R3 jitter covers pad insertion and slot permutation; stronger approximate alignment search is outside this artifact.",
+    "E-R5 static sharding is a negative control and must not be interpreted as a deployable defense without the staggered schedule."
+  ]
+}

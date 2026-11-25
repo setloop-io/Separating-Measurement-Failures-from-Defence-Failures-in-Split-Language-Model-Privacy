@@ -1,0 +1,114 @@
+protocol_id: p4-p0-nowarmup-b8000-0.1
+status: engineering_ready
+cohort: engineering
+seed_policy: reserved IDs checked against inherited manifests; each stream independently
+  keyed
+seeds:
+- 410001
+- 410002
+reserved_prior_seeds:
+- 3
+- 7
+- 9
+- 11
+- 13
+- 17
+- 19
+- 21
+- 22
+- 23
+- 27
+- 29
+- 31
+- 33
+- 37
+- 39
+- 41
+- 43
+- 44
+- 47
+- 49
+- 51
+- 53
+- 55
+- 57
+- 59
+- 61
+- 63
+- 66
+- 67
+- 69
+- 71
+- 77
+- 81
+- 83
+- 87
+- 88
+- 89
+- 91
+- 101
+- 202
+- 303
+- 909
+- 919
+- 929
+- 939
+- 949
+- 959
+- 969
+- 9390
+- 9391
+- 9490
+- 9491
+- 9590
+- 9690
+backbone:
+  vocab_size: 256
+  d_model: 256
+  n_heads: 8
+  n_layers: 8
+  d_ff: 1024
+  max_seq_len: 128
+  init_std: 0.02
+split:
+  start: 2
+  span: 4
+  width: 256
+  remote_depth: 1
+data:
+  path: data/raw/gutenberg_p4.txt
+  sha256: af3d0245c0ec27d7021f5fd29256bc845bb20cf9c562b37bbe23663b6ebe7436
+  fractions:
+  - 0
+  - 0.60105
+  - 0.751458
+  - 0.877262
+  - 1.0
+  batch_size: 32
+  sequence_length: 128
+optimizer:
+  lr: 0.0003
+  min_lr: 3.0e-05
+  warmup_steps: 100
+  weight_decay: 0.1
+  grad_clip: 1.0
+  betas:
+  - 0.9
+  - 0.95
+  steps: 8000
+modes:
+- trained
+- frozen_random
+- removed_remote
+cells:
+- id: d0-q8
+  q_bits: 8
+  defense:
+    name: none
+calibration_batches: 0
+eval_batches: 64
+probe_batches: 8
+probe_epochs: 2
+cpu_threads: 2
+claim_scope: Engineering no-warmup gain check on the new corpus only; not a pilot,
+  no privacy claim.

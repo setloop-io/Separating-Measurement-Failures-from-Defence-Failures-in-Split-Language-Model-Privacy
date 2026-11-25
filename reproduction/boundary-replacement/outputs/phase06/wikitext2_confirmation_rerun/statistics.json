@@ -1,0 +1,506 @@
+{
+  "analysis_stage": "confirmatory",
+  "block_clustered_estimator": "paired nonparametric bootstrap over held-out sequence blocks",
+  "confirmation_manifest": "outputs/phase06/wikitext2_confirmation_manifest.json",
+  "limitations": [
+    "Seed-level training uncertainty and within-run block uncertainty are not pooled.",
+    "Artifacts without evaluation_blocks cannot yield a block-clustered interval.",
+    "Exploratory results remain descriptive even when their interval is below the utility gate.",
+    "Missing actual remote FLOPs remain missing; coverage is not substituted for them."
+  ],
+  "points": [
+    {
+      "block_clustered_status": "available_per_run",
+      "cells": [
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.5384750157827511,
+              "ci95_low": 0.494561463361606,
+              "cluster_count": 4096,
+              "estimate": 0.5161401323857717,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 5.44645696983207,
+            "delegated_eval_seconds": 361.18489166899235,
+            "delegated_eval_time_ratio": 1.1811287383818527,
+            "remote_compute_ms": 117031.74229888828,
+            "training_seconds": 663.1592639720184,
+            "utility_nll_delta": 0.5161401323857717,
+            "wire_bytes": 496894436
+          },
+          "path": "outputs/phase06/wikitext2_confirmation_rerun/confirm_split19_s51.json",
+          "seed": 51
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.540757916518487,
+              "ci95_low": 0.4973458271706477,
+              "cluster_count": 4096,
+              "estimate": 0.519561173976399,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 5.4498780114226975,
+            "delegated_eval_seconds": 361.09718839402194,
+            "delegated_eval_time_ratio": 1.178531489405426,
+            "remote_compute_ms": 142356.00245275418,
+            "training_seconds": 694.9660879059811,
+            "utility_nll_delta": 0.519561173976399,
+            "wire_bytes": 496893158
+          },
+          "path": "outputs/phase06/wikitext2_confirmation_rerun/confirm_split19_s52.json",
+          "seed": 52
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.5432919736485928,
+              "ci95_low": 0.49736536492127925,
+              "cluster_count": 4096,
+              "estimate": 0.5204684074560646,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 5.450785244902363,
+            "delegated_eval_seconds": 360.91853397799423,
+            "delegated_eval_time_ratio": 1.1796734006972225,
+            "remote_compute_ms": 116555.94193653087,
+            "training_seconds": 666.3974556490139,
+            "utility_nll_delta": 0.5204684074560646,
+            "wire_bytes": 496894261
+          },
+          "path": "outputs/phase06/wikitext2_confirmation_rerun/confirm_split19_s53.json",
+          "seed": 53
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.5308146938914433,
+              "ci95_low": 0.48644033042364754,
+              "cluster_count": 4096,
+              "estimate": 0.5087074979383033,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 5.439024335384602,
+            "delegated_eval_seconds": 360.70806783699663,
+            "delegated_eval_time_ratio": 1.1760599484350764,
+            "remote_compute_ms": 130512.22560889437,
+            "training_seconds": 682.905233352998,
+            "utility_nll_delta": 0.5087074979383033,
+            "wire_bytes": 496892772
+          },
+          "path": "outputs/phase06/wikitext2_confirmation_rerun/confirm_split19_s54.json",
+          "seed": 54
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.5383065328933299,
+              "ci95_low": 0.49334660108434036,
+              "cluster_count": 4096,
+              "estimate": 0.5157939231721684,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 5.446110760618467,
+            "delegated_eval_seconds": 360.55200562701793,
+            "delegated_eval_time_ratio": 1.178521499412466,
+            "remote_compute_ms": 135751.12449991866,
+            "training_seconds": 686.887786206993,
+            "utility_nll_delta": 0.5157939231721684,
+            "wire_bytes": 496892547
+          },
+          "path": "outputs/phase06/wikitext2_confirmation_rerun/confirm_split19_s55.json",
+          "seed": 55
+        }
+      ],
+      "configuration": {
+        "adversary_strength": 0.25,
+        "analysis_stage": "confirmatory",
+        "bundle_canonical_fraction": 0.0,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+        "delegate_sublayer": "full",
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "frozen_grid_id": "sha256:104d2bdbfb780488d43e04f66e0ae3bfe1d769f32a5f5fef70f29112bd744b98",
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "sequence_length": 32,
+        "split_after": 19,
+        "steps": 4000,
+        "surrogate_mode": "trained",
+        "surrogate_placement": "remote",
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      },
+      "seed_level": {
+        "actual_remote_flops": {
+          "ci95": null,
+          "ci95_high": null,
+          "ci95_low": null,
+          "mean": null,
+          "n": 0,
+          "sd": null
+        },
+        "baseline_nll": {
+          "ci95": 0.0,
+          "ci95_high": 4.9303168374462985,
+          "ci95_low": 4.9303168374462985,
+          "mean": 4.9303168374462985,
+          "n": 5,
+          "sd": 0.0
+        },
+        "candidate_nll": {
+          "ci95": 0.005749779970856148,
+          "ci95_high": 5.452200844402896,
+          "ci95_low": 5.440701284461183,
+          "mean": 5.44645106443204,
+          "n": 5,
+          "sd": 0.004631447719921148
+        },
+        "delegated_eval_seconds": {
+          "ci95": 0.327296744539812,
+          "ci95_high": 361.21943424554445,
+          "ci95_low": 360.56484075646483,
+          "mean": 360.89213750100464,
+          "n": 5,
+          "sd": 0.2636375250739924
+        },
+        "delegated_eval_time_ratio": {
+          "ci95": 0.002309421114321863,
+          "ci95_high": 1.1810924363807305,
+          "ci95_low": 1.176473594152087,
+          "mean": 1.1787830152664087,
+          "n": 5,
+          "sd": 0.0018602386888677952
+        },
+        "remote_compute_ms": {
+          "ci95": 14192.677770157678,
+          "ci95_high": 142634.08512955494,
+          "ci95_low": 114248.72958923959,
+          "mean": 128441.40735939727,
+          "n": 5,
+          "sd": 11432.201828826623
+        },
+        "training_seconds": {
+          "ci95": 16.909046515179302,
+          "ci95_high": 695.7722119325801,
+          "ci95_low": 661.9541189022216,
+          "mean": 678.8631654174009,
+          "n": 5,
+          "sd": 13.620236830924659
+        },
+        "utility_nll_delta": {
+          "ci95": 0.005749779970856148,
+          "ci95_high": 0.5218840069565975,
+          "ci95_low": 0.5103844470148853,
+          "mean": 0.5161342269857414,
+          "n": 5,
+          "sd": 0.004631447719921148
+        },
+        "wire_bytes": {
+          "ci95": 1073.1886031287509,
+          "ci95_high": 496894507.9886031,
+          "ci95_low": 496892361.6113969,
+          "mean": 496893434.8,
+          "n": 5,
+          "sd": 864.453411121733
+        }
+      },
+      "utility_gate_status": "above_utility_gate"
+    },
+    {
+      "block_clustered_status": "available_per_run",
+      "cells": [
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": -0.027503964869538322,
+              "ci95_low": -0.06204518140293658,
+              "cluster_count": 4096,
+              "estimate": -0.0447191572166048,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 4.885597680229694,
+            "delegated_eval_seconds": 384.349089884985,
+            "delegated_eval_time_ratio": 1.257340963744292,
+            "remote_compute_ms": 116174.9320915842,
+            "training_seconds": 654.5503510330163,
+            "utility_nll_delta": -0.0447191572166048,
+            "wire_bytes": 496894261
+          },
+          "path": "outputs/phase06/wikitext2_confirmation_rerun/confirm_split21_s51.json",
+          "seed": 51
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": -0.025685712491394952,
+              "ci95_low": -0.0611421607027296,
+              "cluster_count": 4096,
+              "estimate": -0.043497796956216916,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 4.8868190404900815,
+            "delegated_eval_seconds": 381.67976252900553,
+            "delegated_eval_time_ratio": 1.2441765150777744,
+            "remote_compute_ms": 139132.38837351673,
+            "training_seconds": 684.301717565977,
+            "utility_nll_delta": -0.043497796956216916,
+            "wire_bytes": 496892403
+          },
+          "path": "outputs/phase06/wikitext2_confirmation_rerun/confirm_split21_s52.json",
+          "seed": 52
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": -0.030296477081719786,
+              "ci95_low": -0.06493664137087762,
+              "cluster_count": 4096,
+              "estimate": -0.0475767285679467,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 4.882740108878352,
+            "delegated_eval_seconds": 381.76941697101574,
+            "delegated_eval_time_ratio": 1.245995807508194,
+            "remote_compute_ms": 126845.99039854947,
+            "training_seconds": 667.58691408101,
+            "utility_nll_delta": -0.0475767285679467,
+            "wire_bytes": 496893163
+          },
+          "path": "outputs/phase06/wikitext2_confirmation_rerun/confirm_split21_s53.json",
+          "seed": 53
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": -0.032367443724069744,
+              "ci95_low": -0.06698906980454922,
+              "cluster_count": 4096,
+              "estimate": -0.049562537227757275,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 4.880754300218541,
+            "delegated_eval_seconds": 381.1344953350199,
+            "delegated_eval_time_ratio": 1.2403136180085057,
+            "remote_compute_ms": 116161.020065716,
+            "training_seconds": 656.9660260489909,
+            "utility_nll_delta": -0.049562537227757275,
+            "wire_bytes": 496894435
+          },
+          "path": "outputs/phase06/wikitext2_confirmation_rerun/confirm_split21_s54.json",
+          "seed": 54
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": -0.029539992450736463,
+              "ci95_low": -0.06533438042970374,
+              "cluster_count": 4096,
+              "estimate": -0.047304254956543446,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 4.9303168374462985,
+            "candidate_nll": 4.883012582489755,
+            "delegated_eval_seconds": 381.1633835179964,
+            "delegated_eval_time_ratio": 1.246078653794639,
+            "remote_compute_ms": 125088.0973857711,
+            "training_seconds": 676.4714474159991,
+            "utility_nll_delta": -0.047304254956543446,
+            "wire_bytes": 496893547
+          },
+          "path": "outputs/phase06/wikitext2_confirmation_rerun/confirm_split21_s55.json",
+          "seed": 55
+        }
+      ],
+      "configuration": {
+        "adversary_strength": 0.25,
+        "analysis_stage": "confirmatory",
+        "bundle_canonical_fraction": 0.0,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/experiments/models/wikitext2_corpus.txt",
+        "delegate_sublayer": "full",
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "frozen_grid_id": "sha256:104d2bdbfb780488d43e04f66e0ae3bfe1d769f32a5f5fef70f29112bd744b98",
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "sequence_length": 32,
+        "split_after": 21,
+        "steps": 4000,
+        "surrogate_mode": "trained",
+        "surrogate_placement": "remote",
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      },
+      "seed_level": {
+        "actual_remote_flops": {
+          "ci95": null,
+          "ci95_high": null,
+          "ci95_low": null,
+          "mean": null,
+          "n": 0,
+          "sd": null
+        },
+        "baseline_nll": {
+          "ci95": 0.0,
+          "ci95_high": 4.9303168374462985,
+          "ci95_low": 4.9303168374462985,
+          "mean": 4.9303168374462985,
+          "n": 5,
+          "sd": 0.0
+        },
+        "candidate_nll": {
+          "ci95": 0.0030004424226471108,
+          "ci95_high": 4.886785184883932,
+          "ci95_low": 4.880784300038638,
+          "mean": 4.883784742461285,
+          "n": 5,
+          "sd": 0.0024168563471228728
+        },
+        "delegated_eval_seconds": {
+          "ci95": 1.6564511359138658,
+          "ci95_high": 383.6756807835184,
+          "ci95_low": 380.36277851169064,
+          "mean": 382.0192296476045,
+          "n": 5,
+          "sd": 1.3342713765526468
+        },
+        "delegated_eval_time_ratio": {
+          "ci95": 0.007881909837545099,
+          "ci95_high": 1.2546630214642263,
+          "ci95_low": 1.238899201789136,
+          "mean": 1.2467811116266811,
+          "n": 5,
+          "sd": 0.006348878310257626
+        },
+        "remote_compute_ms": {
+          "ci95": 11755.283073250854,
+          "ci95_high": 136435.76873627835,
+          "ci95_low": 112925.20258977664,
+          "mean": 124680.4856630275,
+          "n": 5,
+          "sd": 9468.8804202239
+        },
+        "training_seconds": {
+          "ci95": 15.707360646544952,
+          "ci95_high": 683.6826518755437,
+          "ci95_low": 652.2679305824537,
+          "mean": 667.9752912289987,
+          "n": 5,
+          "sd": 12.65227887347967
+        },
+        "utility_nll_delta": {
+          "ci95": 0.0030004424226471108,
+          "ci95_high": -0.04353165256236672,
+          "ci95_low": -0.04953253740766094,
+          "mean": -0.04653209498501383,
+          "n": 5,
+          "sd": 0.0024168563471228728
+        },
+        "wire_bytes": {
+          "ci95": 1030.0113733759642,
+          "ci95_high": 496894591.8113734,
+          "ci95_low": 496892531.7886266,
+          "mean": 496893561.8,
+          "n": 5,
+          "sd": 829.6741529058261
+        }
+      },
+      "utility_gate_status": "below_utility_gate"
+    }
+  ],
+  "schema": "dtraining.delegation_statistics.v1",
+  "seed_level_estimator": "two-sided Student-t interval across independent seeds",
+  "skipped": [],
+  "status": "completed",
+  "utility_gate_nll_delta": 0.35
+}

@@ -1,0 +1,506 @@
+{
+  "analysis_stage": "confirmatory",
+  "block_clustered_estimator": "paired nonparametric bootstrap over held-out sequence blocks",
+  "confirmation_manifest": "outputs/phase06/penn_treebank_confirmation_manifest.json",
+  "limitations": [
+    "Seed-level training uncertainty and within-run block uncertainty are not pooled.",
+    "Artifacts without evaluation_blocks cannot yield a block-clustered interval.",
+    "Exploratory results remain descriptive even when their interval is below the utility gate.",
+    "Missing actual remote FLOPs remain missing; coverage is not substituted for them."
+  ],
+  "points": [
+    {
+      "block_clustered_status": "available_per_run",
+      "cells": [
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.4948672723257914,
+              "ci95_low": 0.4481541510904208,
+              "cluster_count": 4096,
+              "estimate": 0.4715086087817326,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 5.726383802655619,
+            "candidate_nll": 6.197892411437351,
+            "delegated_eval_seconds": 309.042562157003,
+            "delegated_eval_time_ratio": 1.0099146399506511,
+            "remote_compute_ms": 125126.9933716103,
+            "training_seconds": 678.1379966950044,
+            "utility_nll_delta": 0.4715086087817326,
+            "wire_bytes": 496893356
+          },
+          "path": "outputs/phase06/penn_treebank_confirmation_rerun/confirm_split14_s51.json",
+          "seed": 51
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.4970925367088057,
+              "ci95_low": 0.44964243372669443,
+              "cluster_count": 4096,
+              "estimate": 0.4727928300271742,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 5.726383802655619,
+            "candidate_nll": 6.199176632682793,
+            "delegated_eval_seconds": 309.0953897470026,
+            "delegated_eval_time_ratio": 1.008108070499381,
+            "remote_compute_ms": 134639.6993372473,
+            "training_seconds": 673.4447414629976,
+            "utility_nll_delta": 0.4727928300271742,
+            "wire_bytes": 496892870
+          },
+          "path": "outputs/phase06/penn_treebank_confirmation_rerun/confirm_split14_s52.json",
+          "seed": 52
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.4986394458101131,
+              "ci95_low": 0.45098106004297733,
+              "cluster_count": 4096,
+              "estimate": 0.47468465339625254,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 5.726383802655619,
+            "candidate_nll": 6.201068456051871,
+            "delegated_eval_seconds": 308.38776956297806,
+            "delegated_eval_time_ratio": 1.0083832166550357,
+            "remote_compute_ms": 111539.7854821349,
+            "training_seconds": 661.8438462439808,
+            "utility_nll_delta": 0.47468465339625254,
+            "wire_bytes": 496892431
+          },
+          "path": "outputs/phase06/penn_treebank_confirmation_rerun/confirm_split14_s53.json",
+          "seed": 53
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.4389455840573646,
+              "ci95_low": 0.39043588377535343,
+              "cluster_count": 4096,
+              "estimate": 0.41438235237728804,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 5.726383802655619,
+            "candidate_nll": 6.140766155032907,
+            "delegated_eval_seconds": 308.7768193829979,
+            "delegated_eval_time_ratio": 1.0093371303457417,
+            "remote_compute_ms": 122757.9580716847,
+            "training_seconds": 670.1027788260253,
+            "utility_nll_delta": 0.41438235237728804,
+            "wire_bytes": 496893622
+          },
+          "path": "outputs/phase06/penn_treebank_confirmation_rerun/confirm_split14_s54.json",
+          "seed": 54
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": 0.4377134550595656,
+              "ci95_low": 0.389782031707,
+              "cluster_count": 4096,
+              "estimate": 0.41409837984247133,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 5.726383802655619,
+            "candidate_nll": 6.14048218249809,
+            "delegated_eval_seconds": 308.6092141609988,
+            "delegated_eval_time_ratio": 1.0099805122585717,
+            "remote_compute_ms": 37005.0686984614,
+            "training_seconds": 578.4107599039853,
+            "utility_nll_delta": 0.41409837984247133,
+            "wire_bytes": 496891289
+          },
+          "path": "outputs/phase06/penn_treebank_confirmation_rerun/confirm_split14_s55.json",
+          "seed": 55
+        }
+      ],
+      "configuration": {
+        "adversary_strength": 0.25,
+        "analysis_stage": "confirmatory",
+        "bundle_canonical_fraction": 0.0,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/datasets/ptb.train.txt",
+        "delegate_sublayer": "full",
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "frozen_grid_id": "sha256:f8689ab4d9eed1b89dd33cfa49911c22c96de7af3ae2dd7ccf2b275f83362134",
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "sequence_length": 32,
+        "split_after": 14,
+        "steps": 4000,
+        "surrogate_mode": "trained",
+        "surrogate_placement": "remote",
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      },
+      "seed_level": {
+        "actual_remote_flops": {
+          "ci95": null,
+          "ci95_high": null,
+          "ci95_low": null,
+          "mean": null,
+          "n": 0,
+          "sd": null
+        },
+        "baseline_nll": {
+          "ci95": 0.0,
+          "ci95_high": 5.726383802655619,
+          "ci95_low": 5.726383802655619,
+          "mean": 5.726383802655619,
+          "n": 5,
+          "sd": 0.0
+        },
+        "candidate_nll": {
+          "ci95": 0.039976931198490974,
+          "ci95_high": 6.215854098739094,
+          "ci95_low": 6.135900236342112,
+          "mean": 6.175877167540603,
+          "n": 5,
+          "sd": 0.03220141775636094
+        },
+        "delegated_eval_seconds": {
+          "ci95": 0.36796640622530097,
+          "ci95_high": 309.1503174084214,
+          "ci95_low": 308.4143845959708,
+          "mean": 308.7823510021961,
+          "n": 5,
+          "sd": 0.29639693723201543
+        },
+        "delegated_eval_time_ratio": {
+          "ci95": 0.0010720674618444335,
+          "ci95_high": 1.0102167814037206,
+          "ci95_low": 1.0080726464800316,
+          "mean": 1.009144713941876,
+          "n": 5,
+          "sd": 0.0008635503318263025
+        },
+        "remote_compute_ms": {
+          "ci95": 49103.29078206874,
+          "ci95_high": 155317.19177429646,
+          "ci95_low": 57110.61021015898,
+          "mean": 106213.90099222772,
+          "n": 5,
+          "sd": 39552.70032696128
+        },
+        "training_seconds": {
+          "ci95": 51.86852989133728,
+          "ci95_high": 704.2565545177359,
+          "ci95_low": 600.5194947350614,
+          "mean": 652.3880246263986,
+          "n": 5,
+          "sd": 41.780100407064104
+        },
+        "utility_nll_delta": {
+          "ci95": 0.039976931198490974,
+          "ci95_high": 0.48947029608347475,
+          "ci95_low": 0.40951643368649276,
+          "mean": 0.44949336488498376,
+          "n": 5,
+          "sd": 0.03220141775636094
+        },
+        "wire_bytes": {
+          "ci95": 1139.7968660771794,
+          "ci95_high": 496893853.3968661,
+          "ci95_low": 496891573.80313396,
+          "mean": 496892713.6,
+          "n": 5,
+          "sd": 918.1063663868147
+        }
+      },
+      "utility_gate_status": "above_utility_gate"
+    },
+    {
+      "block_clustered_status": "available_per_run",
+      "cells": [
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": -0.033447800495196134,
+              "ci95_low": -0.07653868960915133,
+              "cluster_count": 4096,
+              "estimate": -0.05456854106159881,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 5.726383802655619,
+            "candidate_nll": 5.67181526159402,
+            "delegated_eval_seconds": 338.7098685870005,
+            "delegated_eval_time_ratio": 1.1080915628962928,
+            "remote_compute_ms": 117780.17856166116,
+            "training_seconds": 668.8842537840246,
+            "utility_nll_delta": -0.05456854106159881,
+            "wire_bytes": 496894107
+          },
+          "path": "outputs/phase06/penn_treebank_confirmation_rerun/confirm_split17_s51.json",
+          "seed": 51
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": -0.021633937198203057,
+              "ci95_low": -0.06366541667375714,
+              "cluster_count": 4096,
+              "estimate": -0.04215401620604098,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 5.726383802655619,
+            "candidate_nll": 5.684229786449578,
+            "delegated_eval_seconds": 339.1889229970111,
+            "delegated_eval_time_ratio": 1.1088909801153215,
+            "remote_compute_ms": 123101.06731849373,
+            "training_seconds": 673.1037997319945,
+            "utility_nll_delta": -0.04215401620604098,
+            "wire_bytes": 496892298
+          },
+          "path": "outputs/phase06/penn_treebank_confirmation_rerun/confirm_split17_s52.json",
+          "seed": 52
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": -0.016680895118042827,
+              "ci95_low": -0.05818680644733831,
+              "cluster_count": 4096,
+              "estimate": -0.03764993144432083,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 5.726383802655619,
+            "candidate_nll": 5.688733871211298,
+            "delegated_eval_seconds": 339.28832274500746,
+            "delegated_eval_time_ratio": 1.1081163487391568,
+            "remote_compute_ms": 83754.91034577135,
+            "training_seconds": 625.1344399670197,
+            "utility_nll_delta": -0.03764993144432083,
+            "wire_bytes": 496893053
+          },
+          "path": "outputs/phase06/penn_treebank_confirmation_rerun/confirm_split17_s53.json",
+          "seed": 53
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": -0.019945257168728858,
+              "ci95_low": -0.05988550744950771,
+              "cluster_count": 4096,
+              "estimate": -0.0399497487815097,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 5.726383802655619,
+            "candidate_nll": 5.686434053874109,
+            "delegated_eval_seconds": 339.0529981550062,
+            "delegated_eval_time_ratio": 1.1090531295558528,
+            "remote_compute_ms": 88305.41391513543,
+            "training_seconds": 633.5183628749801,
+            "utility_nll_delta": -0.0399497487815097,
+            "wire_bytes": 496893473
+          },
+          "path": "outputs/phase06/penn_treebank_confirmation_rerun/confirm_split17_s54.json",
+          "seed": 54
+        },
+        {
+          "block_clustered_evaluation": {
+            "candidate_minus_baseline_nll": {
+              "ci95_high": -0.02208321471698582,
+              "ci95_low": -0.06287384702591226,
+              "cluster_count": 4096,
+              "estimate": -0.04182776587549597,
+              "replicates": 2000
+            },
+            "cluster_unit": "held_out_sequence_block"
+          },
+          "metrics": {
+            "actual_remote_flops": null,
+            "baseline_nll": 5.726383802655619,
+            "candidate_nll": 5.684556036780123,
+            "delegated_eval_seconds": 339.2892537860025,
+            "delegated_eval_time_ratio": 1.1083532352739598,
+            "remote_compute_ms": 87085.64088479034,
+            "training_seconds": 634.7617181520036,
+            "utility_nll_delta": -0.04182776587549597,
+            "wire_bytes": 496892724
+          },
+          "path": "outputs/phase06/penn_treebank_confirmation_rerun/confirm_split17_s55.json",
+          "seed": 55
+        }
+      ],
+      "configuration": {
+        "adversary_strength": 0.25,
+        "analysis_stage": "confirmatory",
+        "bundle_canonical_fraction": 0.0,
+        "byzantine_threshold": null,
+        "byzantine_verify": false,
+        "chaff_tokens": 48,
+        "clip_norm": 1.0,
+        "cloud_channels": 1,
+        "cloud_experts": 8,
+        "cloud_kind": "monomial_moe_radial",
+        "cloud_layers": 2,
+        "corpus": "/home/geo/datasets/ptb.train.txt",
+        "delegate_sublayer": "full",
+        "eval_blocks": 4096,
+        "fragment_channels": 1,
+        "frozen_grid_id": "sha256:f8689ab4d9eed1b89dd33cfa49911c22c96de7af3ae2dd7ccf2b275f83362134",
+        "gram_flatten": 0.0,
+        "latent_dim": 64,
+        "lr": 0.0003,
+        "mine_penalty": 0.0,
+        "model": "/home/geo/experiments/models/qwen3-0.6b",
+        "noise_multiplier": 0.35,
+        "public_steps": 0,
+        "remote_grad_clip": 1.0,
+        "resume_after": 26,
+        "secret_token_gauge": false,
+        "secret_token_permutation": true,
+        "secret_wire_rotation": true,
+        "sequence_length": 32,
+        "split_after": 17,
+        "steps": 4000,
+        "surrogate_mode": "trained",
+        "surrogate_placement": "remote",
+        "token_scale_sigma": 0.75,
+        "train_blocks": 4096,
+        "warmup_steps": 400,
+        "wire_quant": "none"
+      },
+      "seed_level": {
+        "actual_remote_flops": {
+          "ci95": null,
+          "ci95_high": null,
+          "ci95_low": null,
+          "mean": null,
+          "n": 0,
+          "sd": null
+        },
+        "baseline_nll": {
+          "ci95": 0.0,
+          "ci95_high": 5.726383802655619,
+          "ci95_low": 5.726383802655619,
+          "mean": 5.726383802655619,
+          "n": 5,
+          "sd": 0.0
+        },
+        "candidate_nll": {
+          "ci95": 0.008178223402256301,
+          "ci95_high": 5.6913320253840824,
+          "ci95_low": 5.674975578579569,
+          "mean": 5.683153801981826,
+          "n": 5,
+          "sd": 0.006587558884230799
+        },
+        "delegated_eval_seconds": {
+          "ci95": 0.2999037107641498,
+          "ci95_high": 339.40577696476976,
+          "ci95_low": 338.8059695432414,
+          "mean": 339.1058732540056,
+          "n": 5,
+          "sd": 0.24157243658972422
+        },
+        "delegated_eval_time_ratio": {
+          "ci95": 0.0005532399014679446,
+          "ci95_high": 1.1090542912175847,
+          "ci95_low": 1.1079478114146486,
+          "mean": 1.1085010513161166,
+          "n": 5,
+          "sd": 0.00044563473614827454
+        },
+        "remote_compute_ms": {
+          "ci95": 23368.255760828404,
+          "ci95_high": 123373.69796599881,
+          "ci95_low": 76637.18644434199,
+          "mean": 100005.4422051704,
+          "n": 5,
+          "sd": 18823.12982594142
+        },
+        "training_seconds": {
+          "ci95": 27.55051901475318,
+          "ci95_high": 674.6310339167577,
+          "ci95_low": 619.5299958872514,
+          "mean": 647.0805149020046,
+          "n": 5,
+          "sd": 22.191942843079485
+        },
+        "utility_nll_delta": {
+          "ci95": 0.008178223402256301,
+          "ci95_high": -0.03505177727153695,
+          "ci95_low": -0.05140822407604956,
+          "mean": -0.043230000673793255,
+          "n": 5,
+          "sd": 0.006587558884230799
+        },
+        "wire_bytes": {
+          "ci95": 863.5015622600805,
+          "ci95_high": 496893994.50156224,
+          "ci95_low": 496892267.49843776,
+          "mean": 496893131.0,
+          "n": 5,
+          "sd": 695.5505014015877
+        }
+      },
+      "utility_gate_status": "below_utility_gate"
+    }
+  ],
+  "schema": "dtraining.delegation_statistics.v1",
+  "seed_level_estimator": "two-sided Student-t interval across independent seeds",
+  "skipped": [],
+  "status": "completed",
+  "utility_gate_nll_delta": 0.35
+}

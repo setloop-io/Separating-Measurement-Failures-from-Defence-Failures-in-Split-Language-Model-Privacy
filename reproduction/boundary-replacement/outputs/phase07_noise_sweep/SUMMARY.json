@@ -1,0 +1,297 @@
+{
+  "schema": "dtraining.noise_delegation_sweep.v1",
+  "model": "Qwen3-0.6B",
+  "corpus": "wikitext2",
+  "protocol": {
+    "steps": 4000,
+    "train_blocks": 4096,
+    "eval_blocks": 4096,
+    "latent_dim": 64,
+    "chaff": 48,
+    "rotation": true,
+    "permutation": true,
+    "cloud": "monomial_moe_radial 8/2",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "concurrency": "two lanes on one GPU; train_seconds contended by design",
+    "privacy_instrument": "in-runner nine-arm battery, forward view only; no attacker bundles captured"
+  },
+  "cells": [
+    {
+      "noise_multiplier": 0.2,
+      "split_after": 14,
+      "nominal_covered_pct": 39.3,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 1.45754,
+      "eval_loss_delta_sd": 0.00644,
+      "privacy_excess_pp_min": 0.0189,
+      "privacy_excess_pp_max": 0.1804,
+      "utility_gate_pass": false
+    },
+    {
+      "noise_multiplier": 0.2,
+      "split_after": 17,
+      "nominal_covered_pct": 28.6,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 0.98794,
+      "eval_loss_delta_sd": 0.01762,
+      "privacy_excess_pp_min": -0.0189,
+      "privacy_excess_pp_max": 0.1196,
+      "utility_gate_pass": false
+    },
+    {
+      "noise_multiplier": 0.2,
+      "split_after": 19,
+      "nominal_covered_pct": 21.4,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 0.53925,
+      "eval_loss_delta_sd": 0.0123,
+      "privacy_excess_pp_min": -0.6009,
+      "privacy_excess_pp_max": 0.2255,
+      "utility_gate_pass": false
+    },
+    {
+      "noise_multiplier": 0.2,
+      "split_after": 21,
+      "nominal_covered_pct": 14.3,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": -0.00512,
+      "eval_loss_delta_sd": 0.01561,
+      "privacy_excess_pp_min": 0.0613,
+      "privacy_excess_pp_max": 0.2539,
+      "utility_gate_pass": true
+    },
+    {
+      "noise_multiplier": 0.25,
+      "split_after": 14,
+      "nominal_covered_pct": 39.3,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 1.50119,
+      "eval_loss_delta_sd": 0.00679,
+      "privacy_excess_pp_min": -0.0552,
+      "privacy_excess_pp_max": 0.3693,
+      "utility_gate_pass": false
+    },
+    {
+      "noise_multiplier": 0.25,
+      "split_after": 17,
+      "nominal_covered_pct": 28.6,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 0.99559,
+      "eval_loss_delta_sd": 0.00581,
+      "privacy_excess_pp_min": 0.0308,
+      "privacy_excess_pp_max": 0.3394,
+      "utility_gate_pass": false
+    },
+    {
+      "noise_multiplier": 0.25,
+      "split_after": 19,
+      "nominal_covered_pct": 21.4,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 0.55905,
+      "eval_loss_delta_sd": 0.00404,
+      "privacy_excess_pp_min": 0.1764,
+      "privacy_excess_pp_max": 0.3067,
+      "utility_gate_pass": false
+    },
+    {
+      "noise_multiplier": 0.25,
+      "split_after": 21,
+      "nominal_covered_pct": 14.3,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 0.00795,
+      "eval_loss_delta_sd": 0.00326,
+      "privacy_excess_pp_min": -0.2722,
+      "privacy_excess_pp_max": 0.1956,
+      "utility_gate_pass": true
+    },
+    {
+      "noise_multiplier": 0.3,
+      "split_after": 14,
+      "nominal_covered_pct": 39.3,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 1.52307,
+      "eval_loss_delta_sd": 0.00738,
+      "privacy_excess_pp_min": -0.0372,
+      "privacy_excess_pp_max": 0.2414,
+      "utility_gate_pass": false
+    },
+    {
+      "noise_multiplier": 0.3,
+      "split_after": 17,
+      "nominal_covered_pct": 28.6,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 0.99813,
+      "eval_loss_delta_sd": 0.00392,
+      "privacy_excess_pp_min": 0.1935,
+      "privacy_excess_pp_max": 0.2493,
+      "utility_gate_pass": false
+    },
+    {
+      "noise_multiplier": 0.3,
+      "split_after": 19,
+      "nominal_covered_pct": 21.4,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 0.55787,
+      "eval_loss_delta_sd": 0.00289,
+      "privacy_excess_pp_min": 0.0949,
+      "privacy_excess_pp_max": 0.2338,
+      "utility_gate_pass": false
+    },
+    {
+      "noise_multiplier": 0.3,
+      "split_after": 21,
+      "nominal_covered_pct": 14.3,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 0.00499,
+      "eval_loss_delta_sd": 0.00484,
+      "privacy_excess_pp_min": -0.2954,
+      "privacy_excess_pp_max": 0.0934,
+      "utility_gate_pass": true
+    },
+    {
+      "noise_multiplier": 0.35,
+      "split_after": 14,
+      "nominal_covered_pct": 39.3,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 1.52499,
+      "eval_loss_delta_sd": 0.01456,
+      "privacy_excess_pp_min": 0.1297,
+      "privacy_excess_pp_max": 0.246,
+      "utility_gate_pass": false
+    },
+    {
+      "noise_multiplier": 0.35,
+      "split_after": 17,
+      "nominal_covered_pct": 28.6,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 0.98241,
+      "eval_loss_delta_sd": 0.00931,
+      "privacy_excess_pp_min": 0.1633,
+      "privacy_excess_pp_max": 0.3091,
+      "utility_gate_pass": false
+    },
+    {
+      "noise_multiplier": 0.35,
+      "split_after": 19,
+      "nominal_covered_pct": 21.4,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 0.54415,
+      "eval_loss_delta_sd": 0.00358,
+      "privacy_excess_pp_min": -0.4559,
+      "privacy_excess_pp_max": 0.2985,
+      "utility_gate_pass": false
+    },
+    {
+      "noise_multiplier": 0.35,
+      "split_after": 21,
+      "nominal_covered_pct": 14.3,
+      "n_seeds": 3,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "eval_loss_delta_mean": 0.00656,
+      "eval_loss_delta_sd": 0.0039,
+      "privacy_excess_pp_min": -0.0015,
+      "privacy_excess_pp_max": 0.2551,
+      "utility_gate_pass": true
+    }
+  ],
+  "headline": "Privacy excess is at or below the floor band at EVERY noise level including sigma=0.20, and utility is insensitive to noise at every split (split14: +1.46..+1.53 across sigma 0.20..0.35). The clean delegation frontier is unchanged (only split 21 clean). At this training budget the binding constraint is surrogate approximation, not channel capacity: 3x capacity buys nothing.",
+  "strong_instrument_audit": {
+    "cell": "n020_split14_fullaudit (noise 0.20, split 14, seed 42, 4000 steps, 4096 blocks)",
+    "artifacts": "paper-data/collected/diagnostic/noise020_audit/",
+    "utility_delta": 1.4512,
+    "battery_arms_excess_pp_max": 0.342,
+    "support_disclosure_frames": "0/4096",
+    "deep_probe": {
+      "best_acc_pct": 4.7,
+      "majority_pct": 4.14,
+      "excess_pp": 0.64,
+      "approx_z": 16.1,
+      "n_rows": 327680,
+      "interpretation": "small but statistically significant token signal at sigma=0.20; raw gain +0.56 pp over majority, ~7x above the statistical floor, within the pre-declared two-leg gate (floor+0.70)"
+    },
+    "conclusion": "battery-only privacy rows at low noise are downgraded: the floor reading at sigma=0.20 is instrument blindness, not absence of signal. The measured privacy tripwire sits between 0.20 and 0.35; sigma=0.35 remains the floor-verified operating point under both instruments."
+  }
+}

@@ -1,0 +1,456 @@
+{
+  "eval_batches": 8,
+  "gaps_trained_minus_all_local": {
+    "is_digit": {
+      "ci": {
+        "ci_high": 6.680959047040477e-05,
+        "ci_low": -6.680959047040477e-05,
+        "mean": 0.0,
+        "n": 8,
+        "sd": 7.991377816259487e-05
+      },
+      "per_seed": {
+        "19": -3.0517578125e-05,
+        "29": 6.103515625e-05,
+        "39": 0.0,
+        "49": -6.103515625e-05,
+        "59": -6.103515625e-05,
+        "69": 0.000152587890625,
+        "89": 3.0517578125e-05,
+        "9": -9.1552734375e-05
+      }
+    },
+    "is_uppercase_letter": {
+      "ci": {
+        "ci_high": 0.0016267030018140818,
+        "ci_low": -0.0005967347400953318,
+        "mean": 0.000514984130859375,
+        "n": 8,
+        "sd": 0.0013297739831529105
+      },
+      "per_seed": {
+        "19": 0.001190185546875,
+        "29": -0.000457763671875,
+        "39": 0.001007080078125,
+        "49": -0.002197265625,
+        "59": 0.002105712890625,
+        "69": 0.00115966796875,
+        "89": 0.0010986328125,
+        "9": 0.000213623046875
+      }
+    },
+    "is_vowel": {
+      "ci": {
+        "ci_high": 0.007720931826908436,
+        "ci_low": 0.003814712704341564,
+        "mean": 0.005767822265625,
+        "n": 8,
+        "sd": 0.002336196990711802
+      },
+      "per_seed": {
+        "19": 0.006439208984375,
+        "29": 0.00457763671875,
+        "39": 0.009674072265625,
+        "49": 0.001617431640625,
+        "59": 0.00531005859375,
+        "69": 0.007476806640625,
+        "89": 0.004974365234375,
+        "9": 0.006072998046875
+      }
+    },
+    "is_whitespace": {
+      "ci": {
+        "ci_high": 0.0003727979478076029,
+        "ci_low": -0.0005330152329638529,
+        "mean": -8.0108642578125e-05,
+        "n": 8,
+        "sd": 0.0005417407371849589
+      },
+      "per_seed": {
+        "19": 0.0006103515625,
+        "29": 0.000152587890625,
+        "39": -3.0517578125e-05,
+        "49": -9.1552734375e-05,
+        "59": -0.000152587890625,
+        "69": -3.0517578125e-05,
+        "89": -0.00128173828125,
+        "9": 0.00018310546875
+      }
+    }
+  },
+  "missing_checkpoints": [],
+  "note": "P3 downstream probes (descriptive, not gated): multinomial logistic probes on final-layer hidden states of A2C2 final checkpoints; token-inversion-family privacy scope omission still applies.",
+  "probe": {
+    "epochs": 200,
+    "init": "deterministic, seeded per (run seed, property, mode)",
+    "lr": 0.01,
+    "optimizer": "adam"
+  },
+  "properties": [
+    "is_uppercase_letter",
+    "is_vowel",
+    "is_digit",
+    "is_whitespace"
+  ],
+  "protocol_version": "p3-replication-1.0",
+  "runs": {
+    "a2c2-all_local-s19": {
+      "mode": "all_local",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.99957275390625,
+          "train_accuracy": 0.9998321533203125
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.995574951171875,
+          "train_accuracy": 0.995361328125
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.985748291015625,
+          "train_accuracy": 0.98687744140625
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.9969482421875,
+          "train_accuracy": 0.9977874755859375
+        }
+      },
+      "seed": 19
+    },
+    "a2c2-all_local-s29": {
+      "mode": "all_local",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.999664306640625,
+          "train_accuracy": 0.9998779296875
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.995849609375,
+          "train_accuracy": 0.9958038330078125
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.987640380859375,
+          "train_accuracy": 0.9884490966796875
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.99835205078125,
+          "train_accuracy": 0.997955322265625
+        }
+      },
+      "seed": 29
+    },
+    "a2c2-all_local-s39": {
+      "mode": "all_local",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.999603271484375,
+          "train_accuracy": 0.9998931884765625
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.995635986328125,
+          "train_accuracy": 0.9958648681640625
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.98602294921875,
+          "train_accuracy": 0.9865264892578125
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.998321533203125,
+          "train_accuracy": 0.99847412109375
+        }
+      },
+      "seed": 39
+    },
+    "a2c2-all_local-s49": {
+      "mode": "all_local",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.999786376953125,
+          "train_accuracy": 0.999969482421875
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.997802734375,
+          "train_accuracy": 0.9973907470703125
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.991119384765625,
+          "train_accuracy": 0.98980712890625
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.998321533203125,
+          "train_accuracy": 0.9981231689453125
+        }
+      },
+      "seed": 49
+    },
+    "a2c2-all_local-s59": {
+      "mode": "all_local",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.999359130859375,
+          "train_accuracy": 0.99981689453125
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.993194580078125,
+          "train_accuracy": 0.9934234619140625
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.989349365234375,
+          "train_accuracy": 0.9900665283203125
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.998291015625,
+          "train_accuracy": 0.9983673095703125
+        }
+      },
+      "seed": 59
+    },
+    "a2c2-all_local-s69": {
+      "mode": "all_local",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.99957275390625,
+          "train_accuracy": 0.9999237060546875
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.9954833984375,
+          "train_accuracy": 0.996337890625
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.985198974609375,
+          "train_accuracy": 0.986480712890625
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.998016357421875,
+          "train_accuracy": 0.9982147216796875
+        }
+      },
+      "seed": 69
+    },
+    "a2c2-all_local-s89": {
+      "mode": "all_local",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.999298095703125,
+          "train_accuracy": 0.999908447265625
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.994232177734375,
+          "train_accuracy": 0.996368408203125
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.984619140625,
+          "train_accuracy": 0.9847259521484375
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.997344970703125,
+          "train_accuracy": 0.9983062744140625
+        }
+      },
+      "seed": 89
+    },
+    "a2c2-all_local-s9": {
+      "mode": "all_local",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.999786376953125,
+          "train_accuracy": 0.9998931884765625
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.99713134765625,
+          "train_accuracy": 0.9955902099609375
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.9879150390625,
+          "train_accuracy": 0.98785400390625
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.998199462890625,
+          "train_accuracy": 0.9982452392578125
+        }
+      },
+      "seed": 9
+    },
+    "a2c2-trained-s19": {
+      "mode": "trained",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.999542236328125,
+          "train_accuracy": 0.999786376953125
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.99676513671875,
+          "train_accuracy": 0.996856689453125
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.9921875,
+          "train_accuracy": 0.9920806884765625
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.99755859375,
+          "train_accuracy": 0.9978485107421875
+        }
+      },
+      "seed": 19
+    },
+    "a2c2-trained-s29": {
+      "mode": "trained",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.999725341796875,
+          "train_accuracy": 0.9998779296875
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.995391845703125,
+          "train_accuracy": 0.99456787109375
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.992218017578125,
+          "train_accuracy": 0.9922332763671875
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.998504638671875,
+          "train_accuracy": 0.99810791015625
+        }
+      },
+      "seed": 29
+    },
+    "a2c2-trained-s39": {
+      "mode": "trained",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.999603271484375,
+          "train_accuracy": 0.9998626708984375
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.99664306640625,
+          "train_accuracy": 0.9974822998046875
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.995697021484375,
+          "train_accuracy": 0.9954376220703125
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.998291015625,
+          "train_accuracy": 0.99853515625
+        }
+      },
+      "seed": 39
+    },
+    "a2c2-trained-s49": {
+      "mode": "trained",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.999725341796875,
+          "train_accuracy": 0.999908447265625
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.99560546875,
+          "train_accuracy": 0.9949798583984375
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.99273681640625,
+          "train_accuracy": 0.9906463623046875
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.99822998046875,
+          "train_accuracy": 0.9982452392578125
+        }
+      },
+      "seed": 49
+    },
+    "a2c2-trained-s59": {
+      "mode": "trained",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.999298095703125,
+          "train_accuracy": 0.9997406005859375
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.99530029296875,
+          "train_accuracy": 0.9958038330078125
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.994659423828125,
+          "train_accuracy": 0.9933013916015625
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.998138427734375,
+          "train_accuracy": 0.9985198974609375
+        }
+      },
+      "seed": 59
+    },
+    "a2c2-trained-s69": {
+      "mode": "trained",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.999725341796875,
+          "train_accuracy": 0.999908447265625
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.99664306640625,
+          "train_accuracy": 0.997161865234375
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.99267578125,
+          "train_accuracy": 0.99267578125
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.99798583984375,
+          "train_accuracy": 0.9982452392578125
+        }
+      },
+      "seed": 69
+    },
+    "a2c2-trained-s89": {
+      "mode": "trained",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.99932861328125,
+          "train_accuracy": 0.9999237060546875
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.995330810546875,
+          "train_accuracy": 0.995361328125
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.989593505859375,
+          "train_accuracy": 0.9898529052734375
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.996063232421875,
+          "train_accuracy": 0.9985198974609375
+        }
+      },
+      "seed": 89
+    },
+    "a2c2-trained-s9": {
+      "mode": "trained",
+      "properties": {
+        "is_digit": {
+          "held_out_accuracy": 0.99969482421875,
+          "train_accuracy": 0.9998931884765625
+        },
+        "is_uppercase_letter": {
+          "held_out_accuracy": 0.997344970703125,
+          "train_accuracy": 0.996490478515625
+        },
+        "is_vowel": {
+          "held_out_accuracy": 0.993988037109375,
+          "train_accuracy": 0.993011474609375
+        },
+        "is_whitespace": {
+          "held_out_accuracy": 0.998382568359375,
+          "train_accuracy": 0.9983673095703125
+        }
+      },
+      "seed": 9
+    }
+  },
+  "setting": "a2c2",
+  "streams": {
+    "eval": "downstream-eval (held-out)",
+    "train": "downstream-train (train split)"
+  },
+  "train_batches": 16
+}

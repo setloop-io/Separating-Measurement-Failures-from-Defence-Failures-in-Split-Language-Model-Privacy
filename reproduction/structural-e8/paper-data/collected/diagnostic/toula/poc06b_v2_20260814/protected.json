@@ -1,0 +1,386 @@
+{
+  "param_digest": null,
+  "eval_loss": 7.308614730834961,
+  "eval_loss_std": 3.0004024505615234,
+  "eval_blocks": 3,
+  "final_train_loss": 3.5423253625631332,
+  "config": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "n_layers": 28,
+    "split_after": 7,
+    "resume_after": 26,
+    "local_params": 312892928,
+    "cloud_params": 283156992,
+    "cloud_trainable_params": 0,
+    "cloud": "ws://10.10.10.2:5003",
+    "wire_dtype": "bf16",
+    "pipeline": "sync",
+    "max_inflight": null,
+    "lora_rank": 0,
+    "lr": 0.0001,
+    "seq_len": 64,
+    "micro_batch_size": 1,
+    "grad_accum": 16,
+    "steps": 1,
+    "dtype": "bf16",
+    "device": "cuda",
+    "seed": 42,
+    "corpus_file": "/workspace/experiments/private/er9/corpus.jitter.txt.1",
+    "act_noise_sigma": 0.0,
+    "tee": {
+      "requested": false,
+      "mode": "none",
+      "note": null
+    },
+    "act_noise": null,
+    "dp_sgd": {
+      "scope": "private_local_weight_updates_only",
+      "cloud_frozen": true,
+      "per_example_clipping": true,
+      "max_grad_norm": 1.0,
+      "noise_multiplier": 1.2,
+      "accountant": {
+        "method": "zcdp_no_subsampling_replace_one_upper_bound",
+        "rho": 1.3888888888888888,
+        "epsilon": 10.149758505150443,
+        "delta": 1e-06
+      },
+      "boundary_activations_covered_by_weight_dp": false,
+      "note": "Weight DP-SGD bounds model update leakage; live activation noise is empirical and TEE is emulated unless hardware evidence is supplied."
+    },
+    "obf": {
+      "mode": "fold",
+      "version": "v2",
+      "seed_base": "redacted",
+      "seed_delivery": "preprovisioned_on_cloud",
+      "ratchet_tokens": 0,
+      "budget_events": 64,
+      "strict_budget": true,
+      "oversized_forwards": 0,
+      "served_tokens": 1216,
+      "final_epoch": 19,
+      "privacy_scope": "capture_resistance_negative_control",
+      "compromised_cloud_privacy": false
+    }
+  },
+  "steps": [
+    {
+      "step": 0,
+      "loss": 3.5423253625631332,
+      "t_step": 91.75768597098067,
+      "t_blocked_cloud": 0.0,
+      "overlap_savings_s": 0.0
+    }
+  ],
+  "microbatch_timing": [
+    {
+      "step": 0,
+      "microbatch": 0,
+      "block_indices": [
+        20
+      ],
+      "t_local_fwd": 0.5471649760147557,
+      "t_cloud_fwd": 6.114121992024593,
+      "t_wait_cloud_fwd": 6.114121992024593,
+      "loss": 6.158509731292725,
+      "t_tail_fwd": 0.029952484997920692,
+      "t_local_bwd": 0.05154132598545402,
+      "t_cloud_bwd": 0.06464487209450454,
+      "t_wait_cloud_bwd": 0.06464487209450454,
+      "dp_grad_norm_before_clip": 71.83515882638656,
+      "dp_clip_scale": 0.013920759922266159,
+      "bytes_crossed": 262144,
+      "t_total": 6.990991989965551
+    },
+    {
+      "step": 0,
+      "microbatch": 1,
+      "block_indices": [
+        3
+      ],
+      "t_local_fwd": 0.004278742941096425,
+      "t_cloud_fwd": 5.5379382239189,
+      "t_wait_cloud_fwd": 5.5379382239189,
+      "loss": 3.4481732845306396,
+      "t_tail_fwd": 0.004034643992781639,
+      "t_local_bwd": 0.00432107993401587,
+      "t_cloud_bwd": 0.031874763080850244,
+      "t_wait_cloud_bwd": 0.031874763080850244,
+      "dp_grad_norm_before_clip": 49.77537016729651,
+      "dp_clip_scale": 0.020090257423278822,
+      "bytes_crossed": 262144,
+      "t_total": 5.694518388016149
+    },
+    {
+      "step": 0,
+      "microbatch": 2,
+      "block_indices": [
+        0
+      ],
+      "t_local_fwd": 0.004337719990871847,
+      "t_cloud_fwd": 5.627253093058243,
+      "t_wait_cloud_fwd": 5.627253093058243,
+      "loss": 1.9567553997039795,
+      "t_tail_fwd": 0.003830961068160832,
+      "t_local_bwd": 0.004490696941502392,
+      "t_cloud_bwd": 0.03571557707618922,
+      "t_wait_cloud_bwd": 0.03571557707618922,
+      "dp_grad_norm_before_clip": 37.65529761195604,
+      "dp_clip_scale": 0.02655668825951493,
+      "bytes_crossed": 262144,
+      "t_total": 5.74668435100466
+    },
+    {
+      "step": 0,
+      "microbatch": 3,
+      "block_indices": [
+        8
+      ],
+      "t_local_fwd": 0.003965490963310003,
+      "t_cloud_fwd": 5.511567989946343,
+      "t_wait_cloud_fwd": 5.511567989946343,
+      "loss": 3.5013577938079834,
+      "t_tail_fwd": 0.003842512029223144,
+      "t_local_bwd": 0.004389367997646332,
+      "t_cloud_bwd": 0.035683909081853926,
+      "t_wait_cloud_bwd": 0.035683909081853926,
+      "dp_grad_norm_before_clip": 47.98406159410677,
+      "dp_clip_scale": 0.02084025334201379,
+      "bytes_crossed": 262144,
+      "t_total": 5.630913904984482
+    },
+    {
+      "step": 0,
+      "microbatch": 4,
+      "block_indices": [
+        7
+      ],
+      "t_local_fwd": 0.003895921050570905,
+      "t_cloud_fwd": 5.477350016008131,
+      "t_wait_cloud_fwd": 5.477350016008131,
+      "loss": 1.8119902610778809,
+      "t_tail_fwd": 0.0038787369849160314,
+      "t_local_bwd": 0.00426571792922914,
+      "t_cloud_bwd": 0.033265668083913624,
+      "t_wait_cloud_bwd": 0.033265668083913624,
+      "dp_grad_norm_before_clip": 36.05413394969982,
+      "dp_clip_scale": 0.027736070471006225,
+      "bytes_crossed": 262144,
+      "t_total": 5.594999723951332
+    },
+    {
+      "step": 0,
+      "microbatch": 5,
+      "block_indices": [
+        7
+      ],
+      "t_local_fwd": 0.003918673028238118,
+      "t_cloud_fwd": 5.554678521933965,
+      "t_wait_cloud_fwd": 5.554678521933965,
+      "loss": 1.8159782886505127,
+      "t_tail_fwd": 0.0038531520403921604,
+      "t_local_bwd": 0.004391127033159137,
+      "t_cloud_bwd": 0.03243512602057308,
+      "t_wait_cloud_bwd": 0.03243512602057308,
+      "dp_grad_norm_before_clip": 35.687781667222545,
+      "dp_clip_scale": 0.028020794604849936,
+      "bytes_crossed": 262144,
+      "t_total": 5.672921071993187
+    },
+    {
+      "step": 0,
+      "microbatch": 6,
+      "block_indices": [
+        4
+      ],
+      "t_local_fwd": 0.003947794088162482,
+      "t_cloud_fwd": 5.533632774022408,
+      "t_wait_cloud_fwd": 5.533632774022408,
+      "loss": 6.204203128814697,
+      "t_tail_fwd": 0.0038580159889534116,
+      "t_local_bwd": 0.00432555703446269,
+      "t_cloud_bwd": 0.035503432038240135,
+      "t_wait_cloud_bwd": 0.035503432038240135,
+      "dp_grad_norm_before_clip": 79.7943822046197,
+      "dp_clip_scale": 0.012532210568854965,
+      "bytes_crossed": 262144,
+      "t_total": 5.653241569059901
+    },
+    {
+      "step": 0,
+      "microbatch": 7,
+      "block_indices": [
+        3
+      ],
+      "t_local_fwd": 0.00400025793351233,
+      "t_cloud_fwd": 5.4957514790585265,
+      "t_wait_cloud_fwd": 5.4957514790585265,
+      "loss": 3.4442622661590576,
+      "t_tail_fwd": 0.003874048008583486,
+      "t_local_bwd": 0.004258388886228204,
+      "t_cloud_bwd": 0.03265614598058164,
+      "t_wait_cloud_bwd": 0.03265614598058164,
+      "dp_grad_norm_before_clip": 48.764850264828496,
+      "dp_clip_scale": 0.02050657378356038,
+      "bytes_crossed": 262144,
+      "t_total": 5.611894686007872
+    },
+    {
+      "step": 0,
+      "microbatch": 8,
+      "block_indices": [
+        17
+      ],
+      "t_local_fwd": 0.003945376956835389,
+      "t_cloud_fwd": 5.489055254962295,
+      "t_wait_cloud_fwd": 5.489055254962295,
+      "loss": 0.5427138805389404,
+      "t_tail_fwd": 0.00386524701025337,
+      "t_local_bwd": 0.004124882980249822,
+      "t_cloud_bwd": 0.0348951939959079,
+      "t_wait_cloud_bwd": 0.0348951939959079,
+      "dp_grad_norm_before_clip": 22.533284008815055,
+      "dp_clip_scale": 0.04437879536816534,
+      "bytes_crossed": 262144,
+      "t_total": 5.607640704023652
+    },
+    {
+      "step": 0,
+      "microbatch": 9,
+      "block_indices": [
+        2
+      ],
+      "t_local_fwd": 0.004003681009635329,
+      "t_cloud_fwd": 5.531017840956338,
+      "t_wait_cloud_fwd": 5.531017840956338,
+      "loss": 3.219637870788574,
+      "t_tail_fwd": 0.003886863007210195,
+      "t_local_bwd": 0.004456101916730404,
+      "t_cloud_bwd": 0.032630554982461035,
+      "t_wait_cloud_bwd": 0.032630554982461035,
+      "dp_grad_norm_before_clip": 37.97441218905642,
+      "dp_clip_scale": 0.026333521504466013,
+      "bytes_crossed": 262144,
+      "t_total": 5.648757171002217
+    },
+    {
+      "step": 0,
+      "microbatch": 10,
+      "block_indices": [
+        18
+      ],
+      "t_local_fwd": 0.003975520026870072,
+      "t_cloud_fwd": 5.449443315039389,
+      "t_wait_cloud_fwd": 5.449443315039389,
+      "loss": 5.647766590118408,
+      "t_tail_fwd": 0.00385511911008507,
+      "t_local_bwd": 0.004100496997125447,
+      "t_cloud_bwd": 0.03293426800519228,
+      "t_wait_cloud_bwd": 0.03293426800519228,
+      "dp_grad_norm_before_clip": 240.22713318636573,
+      "dp_clip_scale": 0.004162727110530875,
+      "bytes_crossed": 262144,
+      "t_total": 5.565482056001201
+    },
+    {
+      "step": 0,
+      "microbatch": 11,
+      "block_indices": [
+        13
+      ],
+      "t_local_fwd": 0.0038972790353000164,
+      "t_cloud_fwd": 5.586758952005766,
+      "t_wait_cloud_fwd": 5.586758952005766,
+      "loss": 7.582156181335449,
+      "t_tail_fwd": 0.003823661943897605,
+      "t_local_bwd": 0.0030357319628819823,
+      "t_cloud_bwd": 0.03400967002380639,
+      "t_wait_cloud_bwd": 0.03400967002380639,
+      "dp_grad_norm_before_clip": 958.7450887949849,
+      "dp_clip_scale": 0.0010430301147689486,
+      "bytes_crossed": 262144,
+      "t_total": 5.70410188799724
+    },
+    {
+      "step": 0,
+      "microbatch": 12,
+      "block_indices": [
+        1
+      ],
+      "t_local_fwd": 0.003684955998323858,
+      "t_cloud_fwd": 5.542199891991913,
+      "t_wait_cloud_fwd": 5.542199891991913,
+      "loss": 1.2204524278640747,
+      "t_tail_fwd": 0.003818589961156249,
+      "t_local_bwd": 0.004121679929085076,
+      "t_cloud_bwd": 0.03399929800070822,
+      "t_wait_cloud_bwd": 0.03399929800070822,
+      "dp_grad_norm_before_clip": 28.96262910489622,
+      "dp_clip_scale": 0.03452725221795947,
+      "bytes_crossed": 262144,
+      "t_total": 5.659619154059328
+    },
+    {
+      "step": 0,
+      "microbatch": 13,
+      "block_indices": [
+        0
+      ],
+      "t_local_fwd": 0.003664218937046826,
+      "t_cloud_fwd": 5.449450169107877,
+      "t_wait_cloud_fwd": 5.449450169107877,
+      "loss": 1.9614259004592896,
+      "t_tail_fwd": 0.003816301003098488,
+      "t_local_bwd": 0.0033573510590940714,
+      "t_cloud_bwd": 0.034456757013686,
+      "t_wait_cloud_bwd": 0.034456757013686,
+      "dp_grad_norm_before_clip": 38.16339329665236,
+      "dp_clip_scale": 0.026203120677104265,
+      "bytes_crossed": 262144,
+      "t_total": 5.565702190971933
+    },
+    {
+      "step": 0,
+      "microbatch": 14,
+      "block_indices": [
+        2
+      ],
+      "t_local_fwd": 0.0036805389681831002,
+      "t_cloud_fwd": 5.578806361998431,
+      "t_wait_cloud_fwd": 5.578806361998431,
+      "loss": 3.2119107246398926,
+      "t_tail_fwd": 0.0038240760331973433,
+      "t_local_bwd": 0.0034802649170160294,
+      "t_cloud_bwd": 0.03206927003338933,
+      "t_wait_cloud_bwd": 0.03206927003338933,
+      "dp_grad_norm_before_clip": 37.648012854593944,
+      "dp_clip_scale": 0.026561826884787355,
+      "bytes_crossed": 262144,
+      "t_total": 5.692893787985668
+    },
+    {
+      "step": 0,
+      "microbatch": 15,
+      "block_indices": [
+        6
+      ],
+      "t_local_fwd": 0.003695082967169583,
+      "t_cloud_fwd": 5.504348888993263,
+      "t_wait_cloud_fwd": 5.504348888993263,
+      "loss": 4.949912071228027,
+      "t_tail_fwd": 0.003865340957418084,
+      "t_local_bwd": 0.004744582925923169,
+      "t_cloud_bwd": 0.0353919129120186,
+      "t_wait_cloud_bwd": 0.0353919129120186,
+      "dp_grad_norm_before_clip": 65.08601881984309,
+      "dp_clip_scale": 0.015364282808078436,
+      "bytes_crossed": 262144,
+      "t_total": 5.623695853981189
+    }
+  ],
+  "bytes_crossed_total": {
+    "activations": 2097152,
+    "grads": 2097152
+  },
+  "note": "remote cloud: t_cloud_* includes network round-trip"
+}

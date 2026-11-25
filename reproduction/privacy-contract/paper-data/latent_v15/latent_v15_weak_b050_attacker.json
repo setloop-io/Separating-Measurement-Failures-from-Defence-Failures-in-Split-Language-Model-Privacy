@@ -1,0 +1,123 @@
+{
+  "schema": "dtraining.attacker.latent_probe.v1",
+  "config": {
+    "attack": "latent_probe",
+    "mode": "training",
+    "bundle_schema": "dtraining.latent_release_bundle.v1",
+    "latent_dim": 64,
+    "train_blocks": 256,
+    "eval_blocks": 256,
+    "sequence_length": 32,
+    "epochs": 20,
+    "batch_size": 512,
+    "restarts": 3,
+    "models": [
+      "coordinate_plus_invariants",
+      "invariant_only",
+      "invariant_graph"
+    ]
+  },
+  "threat_model": "Known-plaintext evaluator with labels confined to trusted Toula. Each block preserves exactly the released Koula view, including fresh coordinate rotation and token permutation. The invariant-only arm uses norms, sorted Gram similarities and observed row position; the graph arm attacks the complete sign-invariant Gram structure.",
+  "provenance": {
+    "hostname": "toula",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-08-18T00:25:27Z",
+    "dtraining_commit": "unknown"
+  },
+  "results": [
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 0,
+      "correct": 538,
+      "total": 8192,
+      "top1_pct": 6.5673828125,
+      "bonferroni_upper95_pct": 7.297041126240765
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 1,
+      "correct": 551,
+      "total": 8192,
+      "top1_pct": 6.72607421875,
+      "bonferroni_upper95_pct": 7.463337841390579
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "coordinate_plus_invariants",
+      "restart": 2,
+      "correct": 523,
+      "total": 8192,
+      "top1_pct": 6.38427734375,
+      "bonferroni_upper95_pct": 7.1050163250903395
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 0,
+      "correct": 397,
+      "total": 8192,
+      "top1_pct": 4.84619140625,
+      "bonferroni_upper95_pct": 5.484949073719642
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 1,
+      "correct": 382,
+      "total": 8192,
+      "top1_pct": 4.6630859375,
+      "bonferroni_upper95_pct": 5.291097476481118
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_only",
+      "restart": 2,
+      "correct": 397,
+      "total": 8192,
+      "top1_pct": 4.84619140625,
+      "bonferroni_upper95_pct": 5.484949073719642
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 0,
+      "correct": 325,
+      "total": 8192,
+      "top1_pct": 3.96728515625,
+      "bonferroni_upper95_pct": 4.552057027363435
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 1,
+      "correct": 339,
+      "total": 8192,
+      "top1_pct": 4.13818359375,
+      "bonferroni_upper95_pct": 4.733956189213347
+    },
+    {
+      "experiment": "latent_probe",
+      "model": "invariant_graph",
+      "restart": 2,
+      "correct": 392,
+      "total": 8192,
+      "top1_pct": 4.78515625,
+      "bonferroni_upper95_pct": 5.420358732096049
+    }
+  ],
+  "summary": [
+    {
+      "experiment": "latent_probe",
+      "best_probe_top1_pct": 6.72607421875,
+      "best_probe_model": "coordinate_plus_invariants",
+      "best_probe_restart": 1,
+      "worst_bonferroni_upper95_pct": 7.463337841390579,
+      "label_free_majority_pct": 4.84619140625,
+      "upper95_excess_over_majority_pp": 2.6171464351405787,
+      "known_eval_fraction": 0.7037353515625
+    }
+  ],
+  "interpretation": "Production privacy fails if the Bonferroni-adjusted upper confidence recovery exceeds the exact matched majority control by more than the declared margin."
+}

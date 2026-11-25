@@ -1,0 +1,157 @@
+{
+  "schema": "llm_attacker.defense_gap_scope.v1",
+  "reviewed_date": "2026-09-08",
+  "distinction": "A reference-backed conditional argument is not attack coverage or verified deployment security. Synthetic adapters do not close production assurance gaps.",
+  "mechanisms": [
+    {
+      "id": "tls13",
+      "mechanism": "TLS1.3 transport",
+      "adversary": "passive_network",
+      "implemented_scope": "reference-backed conditional confidentiality; endpoint/pretermination and traffic metadata excluded",
+      "implementation": "attacker.security_assumptions",
+      "remaining_limit": "deployment configuration not independently verified"
+    },
+    {
+      "id": "kdf",
+      "mechanism": "SHA256 counter expansion",
+      "adversary": "observer without secret",
+      "implemented_scope": "custom construction review; no primitive-breaking exercise",
+      "implementation": "attacker.security_assumptions",
+      "remaining_limit": "custom raw-hash KDF is not certified by standardized HMAC-KDF guidance"
+    },
+    {
+      "id": "ratchet",
+      "mechanism": "Epoch-key derivation",
+      "adversary": "passive fixed-key pooling attacker",
+      "implemented_scope": "narrow pooling limit under separated epochs and enforced budgets",
+      "implementation": "stale-key, seed-disclosure, accumulation, subspace-joint",
+      "remaining_limit": "rotation-invariant leakage and retained-master compromise remain; no irreversible ratchet claim"
+    },
+    {
+      "id": "replicas",
+      "mechanism": "Median replica integrity",
+      "adversary": "one or more malicious participants",
+      "implemented_scope": "synthetic/capture-replay integrity and availability measurements",
+      "implementation": "replica-integrity",
+      "remaining_limit": "target median/abort policy still needs exact deployment integration"
+    },
+    {
+      "id": "two_channels",
+      "mechanism": "K=2 channels",
+      "adversary": "one malicious channel",
+      "implemented_scope": "disagreement detection versus availability abort",
+      "implementation": "replica-integrity",
+      "remaining_limit": "cannot identify dishonest channel without extra trust assumptions"
+    },
+    {
+      "id": "mixup",
+      "mechanism": "Secret mixup and nonlinear correction",
+      "adversary": "repeated-release observer with explicit auxiliary calibration",
+      "implemented_scope": "calibrated/naive/oracle demixing and correction residuals",
+      "implementation": "view-privacy",
+      "remaining_limit": "unknown pool mean/lambda can prevent identification; finite calibration uncertainty"
+    },
+    {
+      "id": "complementary",
+      "mechanism": "K=3 complementary views",
+      "adversary": "coalitions of one, two or three servers",
+      "implemented_scope": "all coordinate-union coalitions with measured coverage",
+      "implementation": "view-privacy",
+      "remaining_limit": "coordinate coverage is not threshold secret sharing"
+    },
+    {
+      "id": "fragmentation",
+      "mechanism": "Two half-views",
+      "adversary": "single server and colluding servers",
+      "implemented_scope": "single-view property probe and union reconstruction",
+      "implementation": "view-privacy",
+      "remaining_limit": "no trained fragmentation claim; partial coordinates can disclose properties"
+    },
+    {
+      "id": "controller",
+      "mechanism": "Adaptive tripwires",
+      "adversary": "rate-controlled repeated-query observer",
+      "implemented_scope": "fixed/sliding count monitors; same-epoch accumulation",
+      "implementation": "view-privacy",
+      "remaining_limit": "count-monitor surrogate is not a reproduced trained adaptive controller"
+    },
+    {
+      "id": "bottleneck",
+      "mechanism": "Adversarial compression and MINE",
+      "adversary": "observer with auxiliary labeled public releases",
+      "implemented_scope": "coordinate/norm/Gram and optional nonlinear MLP probes",
+      "implementation": "representation-privacy",
+      "remaining_limit": "trained defender/MINE optimization not reproduced; low lower-bound estimator not privacy certificate"
+    },
+    {
+      "id": "gram_flattening",
+      "mechanism": "Gram flattening",
+      "adversary": "observer of released representations",
+      "implemented_scope": "fresh invariant and coordinate/nonlinear probes",
+      "implementation": "representation-privacy",
+      "remaining_limit": "normalized fixture is not a trained flattening regularizer"
+    },
+    {
+      "id": "private_phase",
+      "mechanism": "Public pretraining/private re-hardening",
+      "adversary": "membership adversary with attacker-owned reference models",
+      "implemented_scope": "public-exposure-matched private-phase LiRA and relative likelihood",
+      "implementation": "representation-privacy",
+      "remaining_limit": "reported1.49pp upstream is token gate upper-excess, not membership; phase captures required"
+    },
+    {
+      "id": "gradient_clip",
+      "mechanism": "Gradient clipping/non-finite abort",
+      "adversary": "backward seam observer; optional forward access",
+      "implemented_scope": "token/sequence/batch clipping, abort, noise and quantization replay",
+      "implementation": "gradient-hardening",
+      "remaining_limit": "no DP claim or deployed sanitizer reproduction; frozen validation protocol unchanged"
+    }
+  ],
+  "references": [
+    {
+      "title": "TLS1.3 specification",
+      "url": "https://www.rfc-editor.org/rfc/rfc8446.html",
+      "supports": "Content protection, scope limits, 0RTT and traffic analysis"
+    },
+    {
+      "title": "NIST SP800-108r1 Update1",
+      "url": "https://csrc.nist.gov/pubs/sp/800/108/r1/upd1/final",
+      "supports": "Standard PRF-based HMAC/CMAC/KMAC KDFs; does not certify custom raw hashing"
+    },
+    {
+      "title": "HKDF",
+      "url": "https://www.rfc-editor.org/rfc/rfc5869.html",
+      "supports": "HMAC extraction/expansion and context separation"
+    },
+    {
+      "title": "MINE",
+      "url": "https://proceedings.mlr.press/v80/belghazi18a.html",
+      "supports": "Neural variational lower-bound estimation; no upper privacy certificate inferred"
+    },
+    {
+      "title": "Deep Leakage from Gradients",
+      "url": "https://arxiv.org/abs/1906.08935",
+      "supports": "Published feasibility of gradient reconstruction; exact clipping result here follows from our direction decoder"
+    }
+  ],
+  "local_defender_sources": [
+    {
+      "relative_path": "privacy_runtime/ratchet_v2.py",
+      "sha256": "ef5d9ee07399b93d72a52ddd08cf47de84c6c1876bf25922c5773608aefaa6af",
+      "finding": "epoch=SHA256(domain||128bit_master||uint64epoch); stream=SHA256(domain||epoch_key||uint64counter); custom construction, master-derived epochs"
+    },
+    {
+      "relative_path": "split-training/latent_native_v9/README.md",
+      "sha256": "8e551c682a837a1e9e4323571985cc3f7279eda69a82f66c168fe7bb7110efe0",
+      "finding": "v9.3 +1.49pp refers to upper95 attacker excess over majority; not membership AUC"
+    }
+  ],
+  "unrequested_remaining_architectural_gaps": [
+    "deep defended-cloud isolation/capacity experiment"
+  ],
+  "implemented_architectural_gaps": [
+    "two-segment delegation A/island/B: implemented as the two-seam-delegation attack (attacker/attacks/two_seam_delegation.py, toy-tier chained-segment machinery; real tier pending dual-seam capture naming in splitbench)"
+  ],
+  "heldout_reconstruction_study": "Unmodified; these exploratory engineering audits are outside the frozen protocol."
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "distributed-privacy.e2e.v3",
+  "experiment_id": "e2e_inference_production_v3",
+  "status": "implemented_not_launchable",
+  "trusted_node": "toula",
+  "compromised_nodes": ["koula", "peer_b"],
+  "attacker_knowledge": "unknown_at_start_then_adaptive_persistent",
+  "mechanisms": [
+    "deeper_private_split",
+    "learned_irreversible_bottleneck",
+    "formal_bidirectional_activation_dp",
+    "atomic_request_response_accounting",
+    "request_template_randomization",
+    "two_server_finite_field_additive_sharing"
+  ],
+  "acceptance": {
+    "privacy_reference": "matched_label_free_and_undefended_controls",
+    "max_recovery_excess_percentage_points": 2.0,
+    "max_task_quality_delta": 0.35,
+    "formal_composed_epsilon_max": 3.0,
+    "all_attacker_framework_modes_complete": true
+  }
+}

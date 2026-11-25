@@ -1,0 +1,30 @@
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}lrrrl@{}}
+\toprule
+Configuration & $\Delta_U$ & $G_F$ & $G_B$ & Rejection reasons \\
+\midrule
+base & 0.035 & 0.013 & 0.006 & P \\
+clipping-only & 0.035 & 0.013 & 0.006 & P \\
+depth-2 & 0.024 & 0.033 & 0.017 & P \\
+depth-4 & 0.009 & 0.039 & 0.031 & P \\
+noise-001 & 0.821 & 0.082 & 0.087 & U,G \\
+noise-003 & 1.049 & 0.018 & 0.030 & U,G \\
+noise-010 & 1.183 & 0.098 & 0.004 & U \\
+noise-030 & 1.255 & 0.086 & -0.020 & U,G \\
+position-early & 0.056 & 0.045 & -0.003 & P \\
+position-late & 0.033 & 0.003 & 0.002 & G,P \\
+precision-q16 & 0.035 & 0.012 & 0.006 & P \\
+precision-q32 & 0.035 & 0.012 & 0.006 & P \\
+precision-q4 & 0.061 & 0.018 & -0.010 & P \\
+q4-clipping-only & 0.061 & 0.018 & -0.010 & P \\
+q4-noise-010 & 1.200 & 0.099 & -0.031 & U \\
+span-2 & 0.021 & 0.016 & -0.005 & P \\
+span-6 & 0.100 & 0.001 & -0.011 & G,P \\
+width-128 & 0.042 & 0.001 & -0.005 & G,P \\
+width-64 & 0.038 & 0.000 & -0.007 & G \\
+\bottomrule
+\end{tabular}
+\caption{Exploratory paired-seed mean contrasts in nats, four seeds per configuration. U: utility gate; G: gain against freezing; P: qualified privacy breach. Removal benefit is reported separately. Figure~\ref{fig:r1-contrasts} shows 95\% Student-$t$ intervals. All 19 configurations are reported, with no outcome-based selection.}
+\label{tab:r1-results}
+\end{table}

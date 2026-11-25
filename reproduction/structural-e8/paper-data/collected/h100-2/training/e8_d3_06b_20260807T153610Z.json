@@ -1,0 +1,257 @@
+{
+  "config": {
+    "model": "/workspace/experiments/models/qwen3-0.6b",
+    "n_layers": 28,
+    "depths": [
+      1
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "victim_docs": 8,
+    "seq_len": 64,
+    "max_pairs": 20000,
+    "epochs": 30,
+    "k_list": [
+      100
+    ],
+    "d3_repetitions": 3,
+    "d3_probe_pool_size": 1000,
+    "leak_fracs": [
+      0.5,
+      0.9
+    ],
+    "sessions": 3,
+    "W_seed": 42,
+    "dtype": "bf16",
+    "device": "cuda",
+    "quick": false
+  },
+  "threat_model": "attacks 1/2/4: PASSIVE observer of h'=h@W with public text+model but no victim labels. attack 3: ORACLE / chosen-plaintext (K exact position-0 pairs) \u2014 strictly stronger than the E8 default; the K-curve is the honest security parameter, not a claim about the default model.",
+  "random_baseline_top1_pct": 0.0007,
+  "provenance": {
+    "corpus_source": "corpus_file",
+    "corpus_n_docs": 9991,
+    "victim_doc_indices": [
+      9983,
+      9984,
+      9985,
+      9986,
+      9987,
+      9988,
+      9989,
+      9990
+    ],
+    "container_image": "split-inference:spark-x86",
+    "hostname": "0206-dsm3-smh100nvl-prxmx260050",
+    "victim_doc_sha256": {},
+    "dtraining_commit": "9e82010eafbfd1d11c619da91aadcb3881a0bfd0",
+    "model_manifest_sha256": "d3ad538fab96c0c1ada1a6356e9a23ecd1760958f7b87e84a339a397c67f8003",
+    "model_manifest_algo": "v2-sizes-no-cache",
+    "model_manifest_n_files": 10,
+    "model_path": "qwen3-0.6b",
+    "corpus_sha256": "78b6bfb90cfd718f0c27d42b1fd2231b139d1dda75d7d796e6a603b2e5cd7efe"
+  },
+  "oracle_k50": {
+    "1": {
+      "k50_interpolated": null,
+      "k50_bracket": [
+        null,
+        100
+      ],
+      "k50_bracket_ratio": null,
+      "k50_method": "crossed_at_or_below_min_k",
+      "k50_threshold_pct": 50.0,
+      "k50_max_sampled_k": 100,
+      "k50_n_points": 1
+    }
+  },
+  "d3_oracle_repeatability": [
+    {
+      "attack": "3_oracle_pairs_independent_probes",
+      "depth": 1,
+      "setting": "K=100",
+      "probe_selection": "uniform_without_replacement_from_frequent_pool",
+      "probe_pool_size_requested": 1000,
+      "probe_pool_size_effective": 1000,
+      "probe_repetitions": [
+        {
+          "probe_repetition": 0,
+          "probe_seed": 10042,
+          "selected_token_ids_sha256": "ef2bebd4249753de7033212a178c247aa0386ed6546e0c28be37694ba3039870",
+          "K_effective": 100,
+          "W_recovery_rel_err": 1.342533,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            27.73,
+            31.25,
+            30.27
+          ],
+          "top5": [
+            40.82,
+            45.12,
+            37.3
+          ]
+        },
+        {
+          "probe_repetition": 1,
+          "probe_seed": 10043,
+          "selected_token_ids_sha256": "95da9a2d04984f98f73da9362930cf5e0e9adb96fef9986ae56707cb752ec4d7",
+          "K_effective": 100,
+          "W_recovery_rel_err": 1.343322,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            26.95,
+            24.22,
+            22.27
+          ],
+          "top5": [
+            41.02,
+            38.67,
+            35.16
+          ]
+        },
+        {
+          "probe_repetition": 2,
+          "probe_seed": 10044,
+          "selected_token_ids_sha256": "06796c0a44ea4187eea610b211c3c05c1a015a2a375239c5cdba4543337de947",
+          "K_effective": 100,
+          "W_recovery_rel_err": 1.343131,
+          "decoder_seeds": [
+            0,
+            1,
+            2
+          ],
+          "top1": [
+            21.68,
+            19.73,
+            24.8
+          ],
+          "top5": [
+            34.57,
+            36.13,
+            35.35
+          ]
+        }
+      ],
+      "top1_variance_decomposition": {
+        "grand_mean": 25.4333,
+        "between_probe_std": 3.9278,
+        "within_decoder_std": 2.2633,
+        "n_probe_repetitions": 3,
+        "n_decoder_seeds_per_probe": 3
+      },
+      "top5_variance_decomposition": {
+        "grand_mean": 38.2378,
+        "between_probe_std": 2.8653,
+        "within_decoder_std": 2.8661,
+        "n_probe_repetitions": 3,
+        "n_decoder_seeds_per_probe": 3
+      }
+    }
+  ],
+  "verdict": "PASSIVE: label-free attacks (whiten-NN, moment alignment, session pooling) recover at most 3.19% top-1 (random 0.0007%) -> no label-free route past W. ORACLE: top-1 is already at or above 50% at the smallest K sampled (K=100, depth 1), so the crossing is at or below it \u2014 extend --k-list downward to resolve it (H=1024) -> chosen-plaintext queries are the real security parameter; rotate W per session to cap an oracle's accumulation. PARTIAL LEAK: 90% of rows leaked -> 68.4233% top-1.",
+  "summary": [
+    {
+      "attack": "0_baseline_no_defense",
+      "depth": 1,
+      "setting": "plain_h",
+      "top1_mean": 69.7267,
+      "top1_std": 0.7003,
+      "top5_mean": 70.6367,
+      "top5_std": 0.1097,
+      "n_seeds": 3
+    },
+    {
+      "attack": "0_obfuscated_static_W",
+      "depth": 1,
+      "setting": "h@W",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.0,
+      "top5_std": 0.0,
+      "n_seeds": 3
+    },
+    {
+      "attack": "1a_whiten_nn",
+      "depth": 1,
+      "setting": "label-free",
+      "top1_mean": 0.0,
+      "top1_std": 0.0,
+      "top5_mean": 0.0,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "ref_token_coverage_pct": 70.7,
+      "note": "seed-independent; top5==top1 (NN decode)"
+    },
+    {
+      "attack": "1b_moment_align",
+      "depth": 1,
+      "setting": "label-free",
+      "top1_mean": 3.19,
+      "top1_std": 0.4107,
+      "top5_mean": 5.3367,
+      "top5_std": 0.4067,
+      "n_seeds": 3
+    },
+    {
+      "attack": "2_session_rotation",
+      "depth": 1,
+      "setting": "3_sessions",
+      "top1_mean": 1.37,
+      "top1_std": 0.0,
+      "top5_mean": 3.91,
+      "top5_std": 0.0,
+      "n_seeds": 1,
+      "per_session_top1": [
+        2.08,
+        1.04,
+        0.0
+      ],
+      "marginal_info_per_session": "pooled 1.37% vs per-session [2.08, 1.04, 0.0]"
+    },
+    {
+      "attack": "3_oracle_pairs",
+      "depth": 1,
+      "setting": "K=100",
+      "top1_mean": 51.6933,
+      "top1_std": 0.4934,
+      "top5_mean": 55.9233,
+      "top5_std": 0.4561,
+      "n_seeds": 3,
+      "K_effective": 100,
+      "W_recovery_rel_err": 1.3434
+    },
+    {
+      "attack": "4_partial_leak",
+      "depth": 1,
+      "setting": "rows_leaked=50%",
+      "top1_mean": 59.44,
+      "top1_std": 2.5796,
+      "top5_mean": 65.3667,
+      "top5_std": 2.0304,
+      "n_seeds": 3
+    },
+    {
+      "attack": "4_partial_leak",
+      "depth": 1,
+      "setting": "rows_leaked=90%",
+      "top1_mean": 68.4233,
+      "top1_std": 0.9636,
+      "top5_mean": 69.9867,
+      "top5_std": 0.6824,
+      "n_seeds": 3
+    }
+  ],
+  "results": []
+}

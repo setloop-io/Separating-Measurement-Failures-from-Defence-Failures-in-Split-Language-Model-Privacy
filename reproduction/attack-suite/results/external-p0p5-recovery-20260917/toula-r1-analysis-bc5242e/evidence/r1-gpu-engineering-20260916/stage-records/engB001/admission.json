@@ -1,0 +1,49 @@
+{
+  "budget": {
+    "approval_reference": "owner instruction 2026-09-16 (owned nodes toula/koula) + approved execution plan forager-storm-rogue",
+    "bundle_sha256": "45d7682eaf0ef8a3c2445901df8c521fa9f9dbcbff3ed1d04cfd982a33ac041d",
+    "hourly_usd": 0.5,
+    "max_runs": 4,
+    "max_total_usd": 4.0,
+    "max_wall_seconds": 1800,
+    "note": "Owned hardware (koula, NVIDIA GB10). USD 0.50/h is a nominal amortization+power accounting rate; the binding constraint is the 1800 s whole-stage wall-clock cap from the frozen matrix. No metered spend exists on this hardware. External lifetime control: owner-attended SSH session; engineering runs are loopback and self-terminating under the runner watchdog.",
+    "reviewed_at_utc": "2026-09-16T00:03:59Z",
+    "reviewed_by": "Georgios Politis (owner)",
+    "schema_version": "r1-budget-1.0",
+    "stage": "performance_calibration",
+    "status": "approved_for_engineering",
+    "study_id": "p3-r1-fresh-start"
+  },
+  "budget_sha256": "903a605158c473f76ef28ed52bf1e7bb22541155b883f0f6e1e46faa5f6b5f01",
+  "bundle_sha256": "45d7682eaf0ef8a3c2445901df8c521fa9f9dbcbff3ed1d04cfd982a33ac041d",
+  "created_at_utc": "2026-09-16T00:16:51.054030+00:00",
+  "environment": {
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "deterministic_algorithms": false,
+    "gpu_name": "NVIDIA GB10",
+    "pip_freeze": "attrs==26.1.0\ncontourpy==1.4.0\ncuda-bindings==13.4.1\ncuda-pathfinder==1.8.1\ncuda-toolkit==13.0.3.0\ncycler==0.12.1\nfilelock==3.32.6\nfonttools==4.65.0\nfsspec==2026.7.0\niniconfig==2.3.0\nJinja2==3.1.6\njsonschema==4.26.0\njsonschema-specifications==2025.9.1\nkiwisolver==1.5.1\nMarkupSafe==3.0.3\nmatplotlib==3.11.1\nmpmath==1.3.0\nnetworkx==3.6.1\nnumpy==2.5.2\nnvidia-cublas==13.1.1.3\nnvidia-cuda-cupti==13.0.85\nnvidia-cuda-nvrtc==13.0.88\nnvidia-cuda-runtime==13.0.96\nnvidia-cudnn-cu13==9.24.0.43\nnvidia-cufft==12.0.0.61\nnvidia-cufile==1.15.1.6\nnvidia-curand==10.4.0.35\nnvidia-cusolver==12.0.4.66\nnvidia-cusparse==12.6.3.3\nnvidia-cusparselt-cu13==0.8.1\nnvidia-nccl-cu13==2.30.7\nnvidia-nvjitlink==13.4.52\nnvidia-nvshmem-cu13==3.4.5\nnvidia-nvtx==13.0.85\npackaging==26.3\npillow==12.3.0\npluggy==1.6.0\nPygments==2.21.0\npyparsing==3.3.2\npytest==9.1.1\npython-dateutil==2.9.0.post0\nPyYAML==6.0.3\nreferencing==0.37.0\nrpds-py==2026.6.3\nsetuptools==84.0.0\nsix==1.17.0\nsympy==1.14.0\ntorch==2.14.0+cu130\ntriton==3.8.0\ntyping_extensions==4.16.0\n",
+    "platform": "Linux-6.17.0-1026-nvidia-aarch64-with-glibc2.36",
+    "python": "3.12.12 (main, Feb 24 2026, 20:41:46) [GCC 12.2.0]",
+    "torch_version": "2.14.0+cu130"
+  },
+  "environment_review": {
+    "approval_reference": "owner instruction 2026-09-16 (owned nodes toula/koula) + approved execution plan forager-storm-rogue",
+    "bundle_sha256": "45d7682eaf0ef8a3c2445901df8c521fa9f9dbcbff3ed1d04cfd982a33ac041d",
+    "container_image_digest": "sha256:469d38df1ac06059a9e3299beb446c94d0119f4e21d9abc8ec8e49024c68e238",
+    "environment_sha256": "f90239f3736d5afe838e1e3617cc0cdbda816e32fe1232b498ed7856c19adbde",
+    "note": "Node koula (owned, NVIDIA GB10, driver 580.159.03 / CUDA 13.0, R580+ satisfied). Image r1-cuda-runtime:20260916 built locally from environment/r1/cuda/uv.lock on base python:3.12.12-slim-bookworm@sha256:228390eced221ad2986a3dd77e10b1accca6ba8ceb36f1572de1b346a337cc1a (linux/arm64/v8; manifest list sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c). The digest is an operator-supplied local image identity; no registry digest exists. Acceptance evidence: nvidia-smi OK in-container; smoke test 2026-09-16 ran real forward/backward/optimizer/checkpoint (torch 2.14.0+cu130, 1 GPU, import 1.61 s, CUDA init 0.31 s, 8-step train 2.35 s, checkpoint 334491 bytes). DEVIATION: dcgmi unavailable (no sudo on node); GPU health evidence is nvidia-smi only. inspect-environment record retained at r1-acceptance/inspect-environment-koula.json.",
+    "pip_freeze_sha256": "37513847fb8e7ad5d15a981e77925683456cbcfb8bbeeca516f7fb34d8f1f0f4",
+    "reviewed_at_utc": "2026-09-16T00:16:37Z",
+    "reviewed_by": "Georgios Politis (owner)",
+    "schema_version": "r1-environment-review-1.0",
+    "status": "approved_for_engineering"
+  },
+  "environment_review_sha256": "cfa2170971662dd38f50fbf4bd4cc04da0563e564511a8ed9185ecc2db827f8d",
+  "environment_sha256": "f90239f3736d5afe838e1e3617cc0cdbda816e32fe1232b498ed7856c19adbde",
+  "schema_version": "r1-engineering-admission-1.0",
+  "scientific_evidence": false,
+  "scope": "Local pre-execution binding; no independently witnessed preregistration asserted.",
+  "stage": "performance_calibration",
+  "study_id": "p3-r1-fresh-start"
+}

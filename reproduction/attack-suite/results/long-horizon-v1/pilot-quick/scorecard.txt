@@ -1,0 +1,53 @@
+ATTACKER SCORECARD — gate frozen-gate.v2 (Bonferroni z=2.5392, alpha=0.05, 9 trials; gate: excess <= +1.0 pp over label_free_majority; seeds >= 3)
+
+artifacts: 7
+
+attack               mode      labels     headline                                    excess_pp verdict source
+?                    finetune  unknown    captures_written=40                         -         INFO    results/long-horizon-v1/pilot-quick/artifacts/splitbench_none.json
+seam-inversion       training  label-free seq_accuracy=0.5898                         +66.476   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_none.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0.5                            +70.475   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_none.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0.75                           +89.029   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_none.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0.6562                         +82.630   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_none.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0.5312                         +73.043   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_none.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0.625                          +80.339   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_none.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0.5                            +70.475   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_none.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0.5312                         +73.043   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_none.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0.625                          +80.339   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_none.json
+  * n_seeds=None < required 3
+label-scoring        training  label-free n_info_cells=20                             -         INFO    results/long-horizon-v1/pilot-quick/artifacts/label-scoring_norm_none.json
+?                    finetune  unknown    captures_written=40                         -         INFO    results/long-horizon-v1/pilot-quick/artifacts/splitbench_mid-lite.json
+seam-inversion       training  label-free seq_accuracy=0                              +2.457    FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_mid-lite.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0                              +16.770   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_mid-lite.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0                              +16.770   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_mid-lite.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0                              +16.770   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_mid-lite.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0                              +16.770   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_mid-lite.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0                              +16.770   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_mid-lite.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0                              +16.770   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_mid-lite.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0                              +16.770   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_mid-lite.json
+  * n_seeds=None < required 3
+seam-inversion       training  label-free seq_accuracy=0                              +16.770   FAIL*   results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_mid-lite.json
+  * n_seeds=None < required 3
+label-scoring        training  label-free n_info_cells=20                             -         INFO    results/long-horizon-v1/pilot-quick/artifacts/label-scoring_norm_mid-lite.json
+gpu-memory           None      unknown    -                                           -         INFO    results/long-horizon-v1/pilot-quick/artifacts/gpu-memory_scrub-check.json
+
+WORST CELL: seam-inversion (results/long-horizon-v1/pilot-quick/artifacts/seam-inversion_vmi_none.json) excess +89.029 pp -> FAIL
+
+NOT SHOWN (error cells, excluded from verdicts):
+  - gpu-memory [results/long-horizon-v1/pilot-quick/artifacts/gpu-memory_scrub-check.json]: cell rc=1: [gpu_memory_residue] no hardware probe tier available on this host (need pynvml or torch+CUDA; see attacker/hwprobe.py). Use --toy for the pure-python simulation tier.  cell={"experiment": "gpu-memory"}
+
+OVERALL: FAIL (0 PASS, 18 FAIL, 5 INFO, 1 not shown)

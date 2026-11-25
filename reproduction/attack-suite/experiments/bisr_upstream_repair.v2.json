@@ -1,0 +1,38 @@
+{
+  "schema": "bisr.repair_preflight.v2",
+  "upstream_commit": "c376590227f9718077765824af4088665bb78687",
+  "profile": "splitllm-c376590",
+  "source_sha256": {
+    "docs/bisr-conformance-amendment-v2-2026-09-17.md": "dd3617ba913dbc9ea1b1794a6cbf4b44b0f7cd52eabfaa6bfe292e79171cde15",
+    "experiments/bisr_upstream_preflight.py": "49144b04caeb46748eb4dfe67e76dbcc362344c610bad24855b221082e5cc098",
+    "experiments/freeze_bisr_inputs.py": "54023ad2ef7bf417d380dce09055661a8901c2e97c7539b01a6bce5b80b066a0",
+    "attacker/attacks/bisr_baseline.py": "4e1254f5961ac24a690b48aca85a60ebd4ad48b4f807d31fd0779609fdb84b0b",
+    "attacker/bisr_fidelity.py": "925e7e22428ce1735c94aa6281a9a2337124a7c3a3db485cf716c21b17a6c517",
+    "tests/test_bisr_fidelity.py": "49f672b08ec6da72474e5d0bd2a2eb6240abb1c1b7a4ba139e6eea225f42a645"
+  },
+  "mechanical": {
+    "seed": 31415,
+    "device": "cpu",
+    "steps_per_stage": 1,
+    "stages": [
+      "GM",
+      "SM"
+    ],
+    "atol": 1e-06,
+    "rtol": 1e-05,
+    "full_C_claim": false
+  },
+  "inputs": {
+    "validation": "all eligible WikiText-2 test articles",
+    "auxiliary": "112 selected WikiText-2 train articles; historical training reuse disclosed",
+    "seeds": [
+      31415,
+      27182,
+      16180
+    ],
+    "equivalence_margin": 0.01
+  },
+  "fresh_output_root": "koula:/tmp/bisr-upstream-repair-20260917",
+  "previous_failed_attempt": "/tmp/bisr-upstream-preflight-20260917",
+  "launch_admitted": false
+}

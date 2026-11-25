@@ -1,0 +1,240 @@
+{
+  "schema": "llm_attacker.defended_pilot.v1",
+  "tier": "development_pilot",
+  "purpose": "development pilot over the trained splitbench defenders; the frozen 256-document evaluation corpus stays untouched",
+  "defenses": [
+    "none",
+    "gaussian",
+    "trained-bottleneck",
+    "secret-mixup",
+    "replica-median"
+  ],
+  "splits": [
+    3,
+    6
+  ],
+  "seeds": [
+    11,
+    22,
+    33
+  ],
+  "expected_cells": 30,
+  "corpus": {
+    "path": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/pilot-corpus.jsonl",
+    "sha256": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77"
+  },
+  "disjointness": {
+    "corpus_sha256": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77",
+    "articles": 96,
+    "frozen_manifest": "experiments/validation_corpus_manifest.json",
+    "excluded_pilot_sha256": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77",
+    "article_ids_disjoint_from_frozen": true,
+    "identity_checked": true
+  },
+  "access_spec_sha256": "6719a04b14587370b444387d57d1dda75f692b61ca724d89ba1db43d8dc0a30c",
+  "budgets": {
+    "seq_len": 32,
+    "train_steps": 64,
+    "calibration_seqs": 32,
+    "forward_candidates": 8,
+    "beam_width": 2,
+    "sipit_steps": 64,
+    "attack_sequences": 32,
+    "lr": 5e-05,
+    "sigma": 0.1,
+    "data_seed": 2026,
+    "tb_minimax_steps": 200
+  },
+  "runner": "run_defended_pilot.py",
+  "runner_sha256": "75014644d1f0c1575f6a17e12f13f6fe423bea0228ef6c5226a82a86fd77a857",
+  "limits": [
+    "development pilot for effect sizes and plumbing; not a confirmatory security claim",
+    "three victim seeds; intervals are conditional on this fixed article sample",
+    "trained defenders are in-repo re-implementations, not the original defense projects' code or weights",
+    "the MINE reading in bottleneck provenance is a diagnostic, never a certificate",
+    "split depth and defense are confounded with cell ordering on a single host"
+  ],
+  "cells": [
+    {
+      "path": "split3/seed-11/none",
+      "split": 3,
+      "seed": 11,
+      "defense": "none"
+    },
+    {
+      "path": "split3/seed-11/gaussian",
+      "split": 3,
+      "seed": 11,
+      "defense": "gaussian"
+    },
+    {
+      "path": "split3/seed-11/trained-bottleneck",
+      "split": 3,
+      "seed": 11,
+      "defense": "trained-bottleneck"
+    },
+    {
+      "path": "split3/seed-11/secret-mixup",
+      "split": 3,
+      "seed": 11,
+      "defense": "secret-mixup"
+    },
+    {
+      "path": "split3/seed-11/replica-median",
+      "split": 3,
+      "seed": 11,
+      "defense": "replica-median"
+    },
+    {
+      "path": "split3/seed-22/none",
+      "split": 3,
+      "seed": 22,
+      "defense": "none"
+    },
+    {
+      "path": "split3/seed-22/gaussian",
+      "split": 3,
+      "seed": 22,
+      "defense": "gaussian"
+    },
+    {
+      "path": "split3/seed-22/trained-bottleneck",
+      "split": 3,
+      "seed": 22,
+      "defense": "trained-bottleneck"
+    },
+    {
+      "path": "split3/seed-22/secret-mixup",
+      "split": 3,
+      "seed": 22,
+      "defense": "secret-mixup"
+    },
+    {
+      "path": "split3/seed-22/replica-median",
+      "split": 3,
+      "seed": 22,
+      "defense": "replica-median"
+    },
+    {
+      "path": "split3/seed-33/none",
+      "split": 3,
+      "seed": 33,
+      "defense": "none"
+    },
+    {
+      "path": "split3/seed-33/gaussian",
+      "split": 3,
+      "seed": 33,
+      "defense": "gaussian"
+    },
+    {
+      "path": "split3/seed-33/trained-bottleneck",
+      "split": 3,
+      "seed": 33,
+      "defense": "trained-bottleneck"
+    },
+    {
+      "path": "split3/seed-33/secret-mixup",
+      "split": 3,
+      "seed": 33,
+      "defense": "secret-mixup"
+    },
+    {
+      "path": "split3/seed-33/replica-median",
+      "split": 3,
+      "seed": 33,
+      "defense": "replica-median"
+    },
+    {
+      "path": "split6/seed-11/none",
+      "split": 6,
+      "seed": 11,
+      "defense": "none"
+    },
+    {
+      "path": "split6/seed-11/gaussian",
+      "split": 6,
+      "seed": 11,
+      "defense": "gaussian"
+    },
+    {
+      "path": "split6/seed-11/trained-bottleneck",
+      "split": 6,
+      "seed": 11,
+      "defense": "trained-bottleneck"
+    },
+    {
+      "path": "split6/seed-11/secret-mixup",
+      "split": 6,
+      "seed": 11,
+      "defense": "secret-mixup"
+    },
+    {
+      "path": "split6/seed-11/replica-median",
+      "split": 6,
+      "seed": 11,
+      "defense": "replica-median"
+    },
+    {
+      "path": "split6/seed-22/none",
+      "split": 6,
+      "seed": 22,
+      "defense": "none"
+    },
+    {
+      "path": "split6/seed-22/gaussian",
+      "split": 6,
+      "seed": 22,
+      "defense": "gaussian"
+    },
+    {
+      "path": "split6/seed-22/trained-bottleneck",
+      "split": 6,
+      "seed": 22,
+      "defense": "trained-bottleneck"
+    },
+    {
+      "path": "split6/seed-22/secret-mixup",
+      "split": 6,
+      "seed": 22,
+      "defense": "secret-mixup"
+    },
+    {
+      "path": "split6/seed-22/replica-median",
+      "split": 6,
+      "seed": 22,
+      "defense": "replica-median"
+    },
+    {
+      "path": "split6/seed-33/none",
+      "split": 6,
+      "seed": 33,
+      "defense": "none"
+    },
+    {
+      "path": "split6/seed-33/gaussian",
+      "split": 6,
+      "seed": 33,
+      "defense": "gaussian"
+    },
+    {
+      "path": "split6/seed-33/trained-bottleneck",
+      "split": 6,
+      "seed": 33,
+      "defense": "trained-bottleneck"
+    },
+    {
+      "path": "split6/seed-33/secret-mixup",
+      "split": 6,
+      "seed": 33,
+      "defense": "secret-mixup"
+    },
+    {
+      "path": "split6/seed-33/replica-median",
+      "split": 6,
+      "seed": 33,
+      "defense": "replica-median"
+    }
+  ],
+  "status": "COMPLETE"
+}

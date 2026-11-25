@@ -1,0 +1,140 @@
+{
+  "schema": "dtraining.attacker.er1a.v1",
+  "config": {
+    "attack": "er1a_accumulation",
+    "mode": "training",
+    "toy": false,
+    "capture_dir": "/Users/geo/LLM-Attacker/results/long-horizon-v1/matrix/captures/none_s1234_h100",
+    "hidden": 64,
+    "epoch_sizes": [
+      64,
+      256,
+      768
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "solve_seeds": [
+      0,
+      1,
+      2
+    ],
+    "phase": "fwd"
+  },
+  "threat_model": "oracle/self-labeled attacker under per-epoch rotation: E labeled (h, h @ W_t) pairs from WITHIN one epoch -> polar(lstsq) W solve -> victim-token recovery. Cross-epoch pooling control (pairs pooled across differently-keyed epochs solved as one W) must sit in the label-free band.",
+  "provenance": {
+    "hostname": "MacBookPro",
+    "container_image": "unknown",
+    "timestamp_utc": "2026-09-16T01:36:48Z",
+    "dtraining_commit": "ec08486849760f2233f7036d44f580412976088f"
+  },
+  "results": [
+    {
+      "experiment": "er1a_accumulation",
+      "epoch_size": 64,
+      "seed": 0,
+      "within_epoch_top1": 7.7474,
+      "pooled_cross_epoch_top1": 5.8594,
+      "n_solves": 3
+    },
+    {
+      "experiment": "er1a_accumulation",
+      "epoch_size": 256,
+      "seed": 0,
+      "within_epoch_top1": 38.151,
+      "pooled_cross_epoch_top1": 42.903633333333325,
+      "n_solves": 3
+    },
+    {
+      "experiment": "er1a_accumulation",
+      "epoch_size": 768,
+      "seed": 0,
+      "within_epoch_top1": 28.7109,
+      "pooled_cross_epoch_top1": 29.296900000000004,
+      "n_solves": 3
+    },
+    {
+      "experiment": "er1a_accumulation",
+      "epoch_size": 64,
+      "seed": 1,
+      "within_epoch_top1": 7.7474,
+      "pooled_cross_epoch_top1": 6.445333333333333,
+      "n_solves": 3
+    },
+    {
+      "experiment": "er1a_accumulation",
+      "epoch_size": 256,
+      "seed": 1,
+      "within_epoch_top1": 38.3463,
+      "pooled_cross_epoch_top1": 43.5547,
+      "n_solves": 3
+    },
+    {
+      "experiment": "er1a_accumulation",
+      "epoch_size": 768,
+      "seed": 1,
+      "within_epoch_top1": 28.6458,
+      "pooled_cross_epoch_top1": 29.296900000000004,
+      "n_solves": 3
+    },
+    {
+      "experiment": "er1a_accumulation",
+      "epoch_size": 64,
+      "seed": 2,
+      "within_epoch_top1": 7.7474,
+      "pooled_cross_epoch_top1": 6.510433333333334,
+      "n_solves": 3
+    },
+    {
+      "experiment": "er1a_accumulation",
+      "epoch_size": 256,
+      "seed": 2,
+      "within_epoch_top1": 38.0208,
+      "pooled_cross_epoch_top1": 43.4245,
+      "n_solves": 3
+    },
+    {
+      "experiment": "er1a_accumulation",
+      "epoch_size": 768,
+      "seed": 2,
+      "within_epoch_top1": 28.9062,
+      "pooled_cross_epoch_top1": 29.296900000000004,
+      "n_solves": 3
+    }
+  ],
+  "summary": [
+    {
+      "experiment": "er1a_accumulation",
+      "seed": 0,
+      "max_safe_epoch": 768,
+      "k50_crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": null,
+        "k50_method": "not_bracketed"
+      }
+    },
+    {
+      "experiment": "er1a_accumulation",
+      "seed": 1,
+      "max_safe_epoch": 768,
+      "k50_crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": null,
+        "k50_method": "not_bracketed"
+      }
+    },
+    {
+      "experiment": "er1a_accumulation",
+      "seed": 2,
+      "max_safe_epoch": 768,
+      "k50_crossing": {
+        "k50_interpolated": null,
+        "k50_bracket": null,
+        "k50_method": "not_bracketed"
+      }
+    }
+  ],
+  "interpretation": "recovery < 50% at epoch size E => the per-epoch budget is safe at E; the K50 crossing is the honest security parameter vs the static-W prior."
+}

@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "binding",
+    "cohort",
+    "scientific_evidence",
+    "qualified",
+    "qualification_status",
+    "privacy_outcome",
+    "normal_score",
+    "null_score",
+    "doses",
+    "control_seed",
+    "attacker_seed",
+    "probe_epochs",
+    "null_fit_sha256",
+    "null_test_sha256",
+    "fit_donors",
+    "test_donors",
+    "signal_spec",
+    "scope"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "p4-control-diagnostic-0.1"
+    },
+    "binding": {
+      "type": "object",
+      "required": [
+        "source_run",
+        "source_manifest_sha256",
+        "capture_sha256",
+        "source_tree_sha256",
+        "corpus_sha256",
+        "training_seed",
+        "mode",
+        "cell",
+        "defense",
+        "q_bits",
+        "basis_policy",
+        "attacker_side_information",
+        "channel",
+        "target",
+        "family",
+        "fit_sha256",
+        "test_sha256"
+      ],
+      "properties": {
+        "source_manifest_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "capture_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_tree_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "corpus_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "fit_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "test_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "channel": {
+          "enum": [
+            "forward_values",
+            "returned_values",
+            "inbound_gradients",
+            "outbound_gradients",
+            "quantizer_metadata",
+            "forward_and_metadata"
+          ]
+        },
+        "q_bits": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        },
+        "defense": {
+          "type": "object",
+          "required": [
+            "name"
+          ]
+        }
+      }
+    },
+    "cohort": {
+      "const": "engineering"
+    },
+    "scientific_evidence": {
+      "const": false
+    },
+    "qualified": {
+      "const": false
+    },
+    "qualification_status": {
+      "const": "engineering_only"
+    },
+    "privacy_outcome": {
+      "const": "undetermined"
+    },
+    "normal_score": {
+      "type": "object"
+    },
+    "null_score": {
+      "type": "object"
+    },
+    "doses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "dose",
+          "positive_score",
+          "positive_fit_sha256",
+          "positive_test_sha256",
+          "control_checks_passed",
+          "thresholds"
+        ],
+        "properties": {
+          "dose": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "positive_score": {
+            "type": "object"
+          },
+          "positive_fit_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "positive_test_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "control_checks_passed": {
+            "type": "boolean"
+          },
+          "thresholds": {
+            "type": "object",
+            "required": [
+              "positive_floor",
+              "null_band",
+              "acceptance_threshold",
+              "binding",
+              "instrument_version"
+            ]
+          }
+        }
+      }
+    },
+    "control_seed": {
+      "type": "integer"
+    },
+    "attacker_seed": {
+      "type": "integer"
+    },
+    "probe_epochs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "null_fit_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "null_test_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "fit_donors": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "test_donors": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "signal_spec": {
+      "type": "object"
+    },
+    "scope": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

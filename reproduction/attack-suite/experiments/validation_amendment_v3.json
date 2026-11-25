@@ -1,0 +1,23 @@
+{
+  "schema": "llm_attacker.validation_amendment.v1",
+  "amendment_id": "validation-v3-measurement-contract",
+  "date": "2026-09-10",
+  "summary": "Declare the corrected defended-measurement contract (measurement_contract=matched-final-state-v2) that the frozen-study runner requires before held-out execution of defended arms. The defended-pilot measurement-stage correction (commits 8574117/7ef4edd/efa4e50) landed after v2 was frozen, so v2's defended-capture arms cannot execute held-out as-is. No cells, axes, seeds, budgets, statistics, corpus or frozen_inputs change — this amendment only records the measurement contract under which the v2 defended cells are executed and evaluated. Evidence: the corrected defended pilot analysis (utility stages verified per-cell against the contract by experiments/analyze_defended_pilot.py:108).",
+  "changes": [
+    {
+      "axis": "measurement_contract",
+      "new_axis": true,
+      "value": "matched-final-state-v2",
+      "rationale": "Defended and undefended utility/leakage are measured at matched final training state (corrected stage assignment verified in the defended development pilot); the runner refuses held-out defended execution without this declaration (experiments/validate_reconstruction.py:307). Required to execute the v2 capture_defenses axis.",
+      "evidence": {
+        "path": "results/pilot-defended-corrected-8574117/analysis/analysis.json",
+        "sha256": "08448a96544a7114a6d558678a1a9eeb798024c66b24c107f86b66a2d21b6d78"
+      }
+    }
+  ],
+  "decisions": [
+    "Frozen v2 remains immutable; v3 differs from v2 only by the measurement_contract declaration and version/status fields.",
+    "The bottleneck sweep negative outcome (experiments/bottleneck_sweep_selection_v1.json) is unchanged and no bottleneck arms are added.",
+    "Freeze of v3 requires explicit user approval; the automated pipeline drafts but never freezes."
+  ]
+}

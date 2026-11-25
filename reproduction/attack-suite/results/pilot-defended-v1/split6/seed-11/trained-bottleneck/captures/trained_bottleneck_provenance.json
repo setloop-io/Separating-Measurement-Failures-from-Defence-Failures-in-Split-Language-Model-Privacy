@@ -1,0 +1,41 @@
+{
+  "bottleneck_dim": 64,
+  "checkpoint": {
+    "path": "/home/geo/llm-attacker-pilots/gpt2-wikitext2-v01/results-defended-v1/split6/seed-11/trained-bottleneck/captures/trained_bottleneck_encoder.pt",
+    "sha256": "9578f80b23b93996d90e09884f8a9ba0e5d96b706f85ad8b1811e30bb5ef03fc"
+  },
+  "config": {
+    "allow_cpu": false,
+    "batch_rows": 1024,
+    "bottleneck_dim": 64,
+    "encoder_hidden": 256,
+    "lr": 0.001,
+    "mi_weight": 0.1,
+    "minimax_steps": 200,
+    "probe_hidden": 128,
+    "property_classes": 8,
+    "seed": 21577
+  },
+  "config_sha256": "d26d9ff637bd27de2d8eeed8a444dc9097e3c96d2899d7b9ab58c345e95393b8",
+  "created_by": "attacker.trained_defenses (in-repo re-implementation of the adversarial-bottleneck + MINE defense family; NOT the original defense project's code or weights)",
+  "mi_reading": {
+    "caveat": "diagnostic reading logged for provenance; NOT a certificate of the true mutual information and not an upper bound on attacker leakage",
+    "certificate": false,
+    "estimator": "MINE-style Donsker-Varadhan lower bound from the defender's own statistics net",
+    "value": -0.521967887878418
+  },
+  "schema": "llm_attacker.trained_bottleneck_provenance.v1",
+  "seam_width": 768,
+  "seed": 21577,
+  "utility": {
+    "utility_after": {
+      "cross_entropy": 16.64479112625122,
+      "perplexity": 16933274.106912743
+    },
+    "utility_before": {
+      "cross_entropy": 4.444623708724976,
+      "perplexity": 85.16782389784635
+    }
+  },
+  "vocab": 49961
+}

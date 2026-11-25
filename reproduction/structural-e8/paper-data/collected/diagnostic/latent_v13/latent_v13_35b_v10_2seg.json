@@ -1,0 +1,122 @@
+{
+  "schema": "dtraining.latent_native_v10_2seg.v1",
+  "status": "completed",
+  "model": "/workspace/experiments/models/qwen36-35b-a3b",
+  "device": "cuda",
+  "seed": 42,
+  "layout": {
+    "prefix": [
+      0,
+      15
+    ],
+    "segment_a": [
+      16,
+      19
+    ],
+    "island": [
+      20,
+      21
+    ],
+    "segment_b": [
+      22,
+      25
+    ],
+    "tail": [
+      26,
+      39
+    ]
+  },
+  "delegated_layer_share": 0.2,
+  "sequence_length": 32,
+  "steps": 2000,
+  "hidden_dim": 2048,
+  "latent_dim": 64,
+  "noise_multiplier": 0.4,
+  "cloud_kind": "monomial_moe_radial",
+  "cloud_experts": 8,
+  "chaff_tokens": 48,
+  "remote_protocol": {
+    "a": {
+      "op": "hello_ack",
+      "session_id": "b78256fd-5749-4673-bbc8-3d13a6f742b7",
+      "latent_dim": 64,
+      "cloud_kind": "monomial_moe_radial",
+      "cloud_experts": 8,
+      "cloud_layers": 2,
+      "cloud_seed": 42,
+      "latent_only_audit": true,
+      "max_parameter_dimension": 8,
+      "state_shape_digest": "db573d04caa3eb69ceab368412149b0ba83b72453c329591fcb5c342ff5905d1"
+    },
+    "b": {
+      "op": "hello_ack",
+      "session_id": "938e6416-e18e-423c-9c44-ad105907acc4",
+      "latent_dim": 64,
+      "cloud_kind": "monomial_moe_radial",
+      "cloud_experts": 8,
+      "cloud_layers": 2,
+      "cloud_seed": 1042,
+      "latent_only_audit": true,
+      "max_parameter_dimension": 8,
+      "state_shape_digest": "db573d04caa3eb69ceab368412149b0ba83b72453c329591fcb5c342ff5905d1"
+    }
+  },
+  "remote_tampered_frames": 0,
+  "transport_tls": true,
+  "baseline_eval_loss": 3.697661980986595,
+  "candidate_eval_loss": 5.117829564958811,
+  "eval_loss_delta": 1.4201675839722157,
+  "zero_a_eval_loss": 5.212733641266823,
+  "zero_b_eval_loss": 5.106259974651039,
+  "cloud_a_improvement": 0.09490407630801201,
+  "cloud_b_improvement": -0.01156959030777216,
+  "baseline_eval_seconds": 57.337276941980235,
+  "candidate_eval_seconds": 128.92440543707926,
+  "eval_time_ratio": 2.248526827800669,
+  "probe_recovery_pct": [
+    4.560546875,
+    4.55078125,
+    3.85498046875
+  ],
+  "token_recovery_pct": 4.560546875,
+  "label_free_majority_pct": 5.31005859375,
+  "recovery_above_label_free_pct": -0.74951171875,
+  "train_seconds": 1036.2289070760598,
+  "mean_step_seconds": 0.5181144535380299,
+  "training_tail": [
+    {
+      "step": 1998,
+      "attacker_loss": 15.440373420715332,
+      "distill_a": 1.2574565410614014,
+      "distill_b": 1.142065405845642,
+      "language_loss": 4.616268634796143
+    },
+    {
+      "step": 1999,
+      "attacker_loss": 14.924997329711914,
+      "distill_a": 1.2587522268295288,
+      "distill_b": 1.1906118392944336,
+      "language_loss": 4.320395469665527
+    },
+    {
+      "step": 1999,
+      "attacker_loss": 14.924997329711914,
+      "distill_a": 1.2587522268295288,
+      "distill_b": 1.1906118392944336,
+      "language_loss": 4.320395469665527
+    }
+  ],
+  "gates": {
+    "utility_delta_le_0_35": false,
+    "privacy_above_band_le_1pct": true,
+    "eval_time_ratio_le_3": true,
+    "cloud_latent_only": true,
+    "cloud_a_improves_loss": true,
+    "cloud_b_improves_loss": false
+  },
+  "limitations": [
+    "two-segment two-node latent protocol exercised",
+    "short training run; not convergence or paper evidence",
+    "fresh probe is a diagnostic subset, not the complete /attacker suite"
+  ]
+}

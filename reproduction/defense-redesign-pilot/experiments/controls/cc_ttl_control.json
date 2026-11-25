@@ -1,0 +1,14 @@
+{
+  "schema": "p4.cc_lifecycle_control.v1",
+  "control": "ttl",
+  "implementation": "p4d.cc_lifecycle",
+  "clock": "time.monotonic_ns",
+  "packet_bound": "execution_contract.hard_ttl_minutes",
+  "runtime_must_not_exceed_packet": true,
+  "on_violation": [
+    "terminate-workload-group",
+    "kill-after-grace",
+    "run-teardown-adapter",
+    "run-resource-absence-verifier"
+  ]
+}

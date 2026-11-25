@@ -1,0 +1,51 @@
+{
+  "schema": "distributed-privacy.production-profile.v1",
+  "mode": "inference",
+  "launchable": false,
+  "reason": "Required compromised-Koula privacy mechanisms are not yet implemented and validated.",
+  "topology": {
+    "trusted": "toula",
+    "compromised": "koula",
+    "model_class": "7B",
+    "split_after_depth": 8
+  },
+  "knowledge_evaluation": {
+    "operational": "K0",
+    "known_plaintext": "adaptive_until_saturation",
+    "fixed_pair_target": null
+  },
+  "ratchet": {
+    "version": "v2",
+    "width": "full",
+    "matrix": "orthogonal",
+    "max_pairs_per_key": 64,
+    "oversized_forward": "fail",
+    "master_bits": 128,
+    "master_source": "toula_csprng_mode_0600",
+    "master_on_koula": "forbidden_for_privacy_candidate",
+    "shared_seed_mode_allowed_for_claim": false
+  },
+  "prefill": {
+    "maximum_rows": 64,
+    "oversized_request": "reject_until_context_safe_chunking_exists"
+  },
+  "directions": ["forward", "return"],
+  "prompt_template_randomization": {
+    "enabled": true,
+    "rng": "csprng",
+    "slot_permutation": true,
+    "padding": true,
+    "matched_block_manifest": true
+  },
+  "required_before_launch": [
+    "superseded_by_production_v3",
+    "private_local_encoder",
+    "learned_irreversible_bottleneck",
+    "adversarial_representation_training",
+    "formal_forward_activation_ldp",
+    "formal_return_activation_ldp",
+    "metadata_normalization",
+    "live_active_cloud_defence",
+    "real_two_node_runtime_validation"
+  ]
+}

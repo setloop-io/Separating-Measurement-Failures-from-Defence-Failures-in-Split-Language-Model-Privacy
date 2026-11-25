@@ -1,0 +1,97 @@
+{
+  "schema": "p3.secure_compute_preorder.v1",
+  "protocol_id": "cross-paper-secure-compute-d0q8-1.0",
+  "cohort_id": "cross-paper-secure-compute-d0q8-engineering-1",
+  "status": "draft",
+  "legacy_r1_evidence_used": false,
+  "anchor": {
+    "id": "p4-d0-q8",
+    "source_repository": "paper4",
+    "corpus": "gutenberg_p4",
+    "start": 2,
+    "span": 4,
+    "width": 256,
+    "remote_depth": 1,
+    "q_bits": 8,
+    "sequence_length": 128,
+    "batch_size": 32,
+    "training_steps": 2000
+  },
+  "bindings": {
+    "evidence_bundle_schema": "cross-paper.secure-compute-evidence.v1",
+    "repository_revisions": {
+      "paper3": "b9407bba6fbedfe2954939b664635d6a81044a9b",
+      "paper4": "ebf91f656e13581bd3c8153393c00f913ce2ea7d",
+      "llm_attacker": "ebe4624db838705856780369f7b45d9d107d90ce"
+    },
+    "deployment_manifest_sha256": null,
+    "attack_plan_sha256": "39b82f79c8c9741cd3b8949b46b3edb5f936be373d7ae860e80e56642b426434",
+    "workload_config_sha256": "dd6ef9724d0ca9ed085c2ef40934d6167cb8deb5b730fa96d093ee07e6b5746d"
+  },
+  "observation_contract": {
+    "views": ["external_attacker", "trusted_diagnostic"],
+    "protected_phases": [
+      "ingress",
+      "tokenisation",
+      "forward",
+      "return",
+      "backward",
+      "update",
+      "optimizer",
+      "cpu-gpu-staging",
+      "ipc",
+      "vram",
+      "checkpointing",
+      "logging",
+      "crash-restart",
+      "egress"
+    ],
+    "common_identity_fields": ["request_id", "session_id", "step_id"],
+    "trusted_view_is_attacker_visible": false
+  },
+  "attack_contract": {
+    "categories": [
+      "attestation-key-release",
+      "protocol-integrity",
+      "malicious-computation",
+      "boundary-canary",
+      "confidential-host-trace"
+    ],
+    "invalid_secret_release_tolerance": 0,
+    "mutation_accept_tolerance": 0,
+    "external_canary_tolerance": 0,
+    "positive_controls_required": true,
+    "matched_nulls_required": true
+  },
+  "hardware_selection": {
+    "provider": "Microsoft Azure",
+    "sku": "Standard_NCC40ads_H100_v5",
+    "cpu_tee": "AMD SEV-SNP",
+    "gpu": "NVIDIA H100 NVL 94 GB",
+    "cc_mode": "Azure confidential GPU VM with NVIDIA Confidential Computing",
+    "attestation_service": "Microsoft Azure Attestation plus NVIDIA GPU driver/device attestation",
+    "billing_unit": "provider VM-hour plus disk, private access, and egress",
+    "quote_reference": null
+  },
+  "budget": {
+    "currency": "USD",
+    "maximum_cost": 60,
+    "maximum_wall_minutes": 240,
+    "approved": false,
+    "review_reference": "../Paper-4-Defense-Redesign/docs/TEE_FHE_HARDWARE_PREORDER.md"
+  },
+  "authorization": {
+    "hardware_order_authorized": false,
+    "reference": null
+  },
+  "governance": {
+    "stage": "engineering",
+    "scientific_evidence": false,
+    "confirmation_authorized": false
+  },
+  "claim_status": {
+    "paper3": "UNDETERMINED_NO_EXECUTION",
+    "paper4": "UNDETERMINED_NO_EXECUTION",
+    "llm_attacker": "UNDETERMINED_NO_EXECUTION"
+  }
+}

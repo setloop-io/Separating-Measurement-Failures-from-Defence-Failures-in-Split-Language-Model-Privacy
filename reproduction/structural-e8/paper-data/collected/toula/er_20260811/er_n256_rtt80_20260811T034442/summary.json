@@ -1,0 +1,69 @@
+{
+  "schema": "dtraining.er.rotation.v1",
+  "experiment": "E-R deployed ratcheted per-epoch rotation",
+  "config": {
+    "measurement_kind": "measured",
+    "run_id": "er_n256_rtt80_20260811T034442",
+    "model": "mistral-nemo-12b-instruct",
+    "ratchet_n": 256,
+    "budget_b": 0,
+    "rtt_ms": 80,
+    "sessions": 3,
+    "key_seed_base": 77000
+  },
+  "evidence_status": "supporting",
+  "known_limitations": [
+    "In shared-key mode the cloud derives W_t itself, so per-epoch freshness protects the wire and logged captures, not cloud RAM.",
+    "prefix channel activated synthetically"
+  ],
+  "sessions": [
+    {
+      "session": 1,
+      "A_tps": 4.4,
+      "ratchet_tps": 4.0,
+      "epochs_advanced": 0,
+      "B_identity": false,
+      "C_identity": true,
+      "key_sha256": {
+        "0": "1cd797573b35aa18"
+      }
+    },
+    {
+      "session": 2,
+      "A_tps": null,
+      "ratchet_tps": 4.0,
+      "epochs_advanced": 0,
+      "B_identity": false,
+      "C_identity": true,
+      "key_sha256": {
+        "0": "1cd797573b35aa18"
+      }
+    },
+    {
+      "session": 3,
+      "A_tps": null,
+      "ratchet_tps": 3.9,
+      "epochs_advanced": 0,
+      "B_identity": false,
+      "C_identity": true,
+      "key_sha256": {
+        "0": "1cd797573b35aa18"
+      }
+    }
+  ],
+  "attacks": {
+    "1": [
+      "/home/geo/experiments/results/er/er_n256_rtt80_20260811T034442/session_1/wire_attack_ratchet_sess1.json",
+      "/home/geo/experiments/results/er/er_n256_rtt80_20260811T034442/session_1/wire_attack_base_sess1.json",
+      "/home/geo/experiments/results/er/er_n256_rtt80_20260811T034442/session_1/wire_attack_static_sess1.json"
+    ],
+    "2": [
+      "/home/geo/experiments/results/er/er_n256_rtt80_20260811T034442/session_2/wire_attack_ratchet_sess2.json",
+      "/home/geo/experiments/results/er/er_n256_rtt80_20260811T034442/session_2/wire_attack_static_sess2.json"
+    ],
+    "3": [
+      "/home/geo/experiments/results/er/er_n256_rtt80_20260811T034442/session_3/wire_attack_static_sess3.json",
+      "/home/geo/experiments/results/er/er_n256_rtt80_20260811T034442/session_3/wire_attack_ratchet_sess3.json"
+    ]
+  }
+}

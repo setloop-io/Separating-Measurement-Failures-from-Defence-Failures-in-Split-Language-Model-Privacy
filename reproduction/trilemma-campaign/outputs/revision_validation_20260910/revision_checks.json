@@ -1,0 +1,63 @@
+{
+  "checked_at": "2026-09-10T13:28:25.270849+00:00",
+  "scope": "Prospective runner repairs and revised manuscript; no historical cohort training rerun. Existing unit tests use tiny disposable synthetic executions.",
+  "tests": {
+    "full_suite": {
+      "command": "VECLIB_MAXIMUM_THREADS=2 OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 .venv/bin/python -m pytest tests/ -q",
+      "passed": 224,
+      "failed": 0,
+      "subtests_passed": 29,
+      "seconds": 56.39,
+      "log": "tests_full_suite.log"
+    },
+    "followup": {
+      "command": ".venv/bin/python -m pytest tests/test_manifest_resume.py -q",
+      "passed": 34,
+      "failed": 0,
+      "log": "tests_provenance_followup.log",
+      "reason": "Added explicit unavailable-Git-diff fallback regression after full-suite run; same source archive verification remains required."
+    },
+    "fixture_correction": "Initial suite found five disposable-run fixtures without corpus digests; their real generated-corpus hashes were added. No scientific assertion or original evidence was changed."
+  },
+  "pdf": {
+    "path": "paper/main.pdf",
+    "pages": 15,
+    "sha256": "ec53f0a21faa3b2a8b3d4d1ed4c5d6d922c7312b287ac947ce1b9fbcd7ea6b4c",
+    "build": "PATH=/Library/TeX/texbin:$PATH paper/build.sh",
+    "latex_warnings": 0,
+    "visual_check": "All 15 rendered pages reviewed in contact sheet; title, known-plaintext results, P5 verification and outcome table inspected at full size. No clipping or overlaps."
+  },
+  "changed_file_sha256": {
+    "README.md": "ab7b4f01a3baa10065bbfdf61f94f966bdf0656ea77c6ae0fc9374610449ea85",
+    "docs/CLAIM_EVIDENCE_LEDGER.md": "31ffa806eb2b0b46e180671e0297259ea0ba99df6d0918f868baedc0310c658a",
+    "docs/REVIEWER_EVIDENCE.md": "b8bdf381fa7045ea8b0162c5996ea3303060cb31a3756f0ef1cffe4cc705f06f",
+    "docs/REVIEWER_RESPONSE_PLAN.md": "60308ee9038c414bc9bd349ea872cbfa98d92b4d7352c4714d5f8c4a65b2a435",
+    "environment/README.md": "b9c9da786354faa66ff201ccf6b9e5e369ae7f77bd0d23ccc318573e2a1f889e",
+    "experiments/schemas/run_manifest.schema.json": "e34050ab50f4e97fdf15b267a34d97ec86771dd61be224c78106217d98f1e20c",
+    "paper/figures/README.md": "8510126c35c1db098549a3e9fbef8838a74a75284dc5a7fb46a4faf26a72dd4f",
+    "paper/main.pdf": "ec53f0a21faa3b2a8b3d4d1ed4c5d6d922c7312b287ac947ce1b9fbcd7ea6b4c",
+    "paper/main.tex": "9c31af19250f1b7245dd9afa8ffa7acd646c45c902bff4b2db4c9ca06120819b",
+    "paper/tables/p5_outcomes.tex": "aed81a1ab9ccc94b5e4a2fdce55d6fe1dbe887c1373f9d4332a12b8c7bbbc574",
+    "scripts/build_manuscript_visuals.py": "e1f0ee0c205243f46b1626d82b904c9e63093ee2cb3cc4151d58c7c99c3ba4b9",
+    "scripts/run_confirmatory.py": "3866263250b95c54b8f15bfa002132333de09a312e01f49f1dffee7e2f5b8d21",
+    "scripts/run_delegation.py": "90f52412160ab0537eadb48f7b9fd40c062db9a40916c35941396b0efa5a2f1b",
+    "scripts/run_p5_calibration.py": "3b61074eb9c73bc325ceab68467b7b9caaf0fa185846fdd5532577ff1e9ac733",
+    "scripts/run_pilot.py": "b13fda11e75af1c627df49fb32f0e8acfba701a07a29aebb310e24ea2623edf9",
+    "scripts/run_privacy_calibration.py": "a675ce83fd3e16937f4f0f579570168efb4b3ba5c67c7113db8c4854ef0fba6e",
+    "scripts/run_privacy_calibration_p4b.py": "904dd6b12a0f855ebe6cec04ea4178a7c771abb798f4e5a374be8caad12e725c",
+    "scripts/run_rate_sweep.py": "06abe4714cc0fbd67b7763912fba7807945f6e32ae07d0f70639fe257dea0e17",
+    "scripts/run_replication.py": "8426a6124c426521116b20bbbcb37a4068ec48ef45c6e70b473f59437bf1a8b2",
+    "scripts/run_segment_stats.py": "e3616906079a2d865fe429d7e2d96e0eebadbd8ec17a661574d34e455659f4c7",
+    "src/pcr/manifest.py": "452bb8873b4412c0444f9f1360cf4aa1eb9d9d1e0a3a88e89380d8ea6fa162df",
+    "src/pcr/run_experiment.py": "1d159cd013fea1f17afb611ae6a173ab98c11606db89b6e4035eec7c5628f47e",
+    "src/pcr/train.py": "9cc0b90f245f593a9b2359868ab2a6abe8cfbfc36acb021892f3c2736eff2602",
+    "tests/test_delegation.py": "ea245843cd6d50e624753a9fcb1576258504c67f18133d2397203d8565157d49",
+    "tests/test_privacy_extended.py": "ff6f241a4e180e8a1ea8cb4d1fbacd679f7df6853b1ad93e5bd15b24aa1fcce4",
+    "tests/test_replication.py": "22b324a9dd773f94276ba7583c780541bc05e1f51bbda2965dd575112fd25525",
+    "tests/test_scaffold.py": "efcf216f896cd0a3e5d34ff60d62f48f7ad5794f1654116e2d68d94804e01786",
+    "src/pcr/provenance.py": "a897f69c4f41d7cf7f320eb11e331db07ad54356f8931120331e14c0bb285aa0",
+    "tests/test_manifest_resume.py": "8716d9648ca35c5002fd18898cf14de46d651efd0802a106a612037f0a28515c"
+  },
+  "historical_provenance": "Original execution snapshots and independent pre-outcome freeze timing remain unrecovered.",
+  "release_index_unchanged": true
+}

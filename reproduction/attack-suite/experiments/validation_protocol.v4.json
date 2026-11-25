@@ -1,0 +1,118 @@
+{
+  "schema": "llm_attacker.validation.v1",
+  "status": "frozen",
+  "version": 4,
+  "origin": {
+    "amendment_of": "experiments/validation_protocol.v3.json",
+    "base_protocol_sha256": "a94bbd307455aba89ba01f192617147dac951b61ec61de1c4c144acf6d97b2c5",
+    "purpose": "Add faithful BiSR (Chen et al., CCS 2024, arXiv:2409.00960) arms to the frozen v3 evidence base for a matched confirmatory comparison, discharging both papers' 'pilot-scale / not reproduced' disclaimers. v3 remains immutable; no v3 cells, axes, seeds, budgets, statistics, corpus or frozen inputs change.",
+    "execution_model": "post-hoc on frozen captures. The v3 runner stays untouched: new arms consume the SAME frozen wire captures (binary tier on koula, all 16 shards) and are scored with the same metrics and pairing semantics as the published v3 arms. Reused-measurement doctrine follows v3 (identical activation-only executions are reused, never re-measured)."
+  },
+  "arms": {
+    "bisr_sip": {
+      "description": "BiSR stage 1: SIP learned forward inversion (auto-encoder CE on aux seam rows, public head), budgeted per BiSR Table 1 GPT2-large column.",
+      "budgets": {
+        "train_steps": 20000,
+        "inverter": "sip-mlp (pilot decoder per module docstring)"
+      }
+    },
+    "bisr_bre_bf": {
+      "description": "BiSR stage 1+2: SIP initialization followed by BRE bidirectional optimization (f smashed-data cosine matching then b gradient matching, sequential per paper section 3.2), Table 1 GPT2-large constants (AdamW(0.9, 0.999); GM 32 iters lr 0.09 tau 1.2; SM 800 iters lr 0.01 wd 0.01).",
+      "budgets": {
+        "sm_iters": 800,
+        "gm_iters": 32,
+        "namoe": "off at primary; NaMoE arm optional secondary"
+      }
+    },
+    "implementation": "attacker/attacks/bisr_baseline.py arms (--phase train / --phase attack --opt-arm bf), clean-room; SplitLLM (Apache-2.0) used only as the Phase-B1 validation reference."
+  },
+  "matrix": {
+    "depths": [
+      3,
+      6
+    ],
+    "knowledge": [
+      "public",
+      "exact"
+    ],
+    "victim_seeds": [
+      101,
+      202,
+      303,
+      404,
+      505,
+      606,
+      707,
+      808,
+      909,
+      1010
+    ],
+    "attack_seeds": [
+      17,
+      29
+    ],
+    "candidate_count": 32,
+    "evaluation_documents": "the same 256 fixed held-out documents as v3 (frozen_inputs of v3 apply unchanged)",
+    "aux_corpus": "disjoint from all v3 partitions; fail-closed assertion against experiments/validation_corpus_manifest.json and the pilot corpus BEFORE any tokenization (bisr_baseline doctrine); target scale ~75k-1M windows per the Phase-A ceiling measurement"
+  },
+  "primary": {
+    "depth": 6,
+    "knowledge": "public",
+    "contrast": "bisr_bre_bf minus joint_true_k32, paired within victim run (attack seeds averaged first)",
+    "metric": "token_accuracy",
+    "practical_margin": 0.02,
+    "interpretation": "two-sided: reports whether the faithful BiSR exceeds, matches, or trails the framework's joint beam at matched budget; no direction is pre-committed"
+  },
+  "secondary_contrasts": [
+    "bisr_bre_bf vs forward_k32 (both depths, both knowledge conditions)",
+    "bisr_bre_bf vs sipit_128 (both depths, both knowledge conditions)",
+    "bisr_sip vs forward_k32 (isolates the stage-2 BRE contribution)",
+    "bisr_bre_bf vs joint_true_k32 at L=3 public and both exact-knowledge cells"
+  ],
+  "statistics": {
+    "alpha": 0.05,
+    "bootstrap_replicates": 100000,
+    "bootstrap_seed": 93281,
+    "unit": "crossed document and independently trained victim run; average attack seeds first",
+    "secondary_correction": "Bonferroni percentile bootstrap intervals across all prespecified secondary contrasts",
+    "pairing": "BiSR cells pair to v3 cells on (victim seed, depth, knowledge, attack seed, document); the v3 published numbers are the frozen controls and are NOT re-run",
+    "missing": "No complete-case deletion. Any missing/failed cell blocks comparative analysis; retain failure and rerun in a fresh directory with the same protocol.",
+    "stopping": "Exactly 256 fixed evaluation documents and 10 victim seeds; no outcome-driven sample extension."
+  },
+  "execution": {
+    "host": "koula (GPU; holds the v3 binary tier and all 16 shard copies)",
+    "phases": [
+      "B1: fidelity gate - reproduce the published BiSR reference setting (SplitLLM demo_bisr gpt2-large/wikitext config, Apache-2.0 attribution) and record tolerance vs the paper's published numbers before any v3-capture evaluation",
+      "B2: aux-scale SIP(+NaMoE) training on the disjoint aux corpus (resume-safe shard cache)",
+      "B3: arm evaluation on frozen v3 captures at the matrix above; --evidence on every run; per-cell JSONL journals",
+      "B4: statistics per this protocol; cluster-aware check (experiments/analyze_clustered_gate.py) on any gate-relevant table before it enters a paper"
+    ],
+    "checkpoint": "Per-cell hash-chained measurement events and immutable predictions; report checkpoint after each victim run and at completion/failure. No outcome-based retries."
+  },
+  "freeze_rule": "Freeze requires explicit user approval after the Phase-2 canary gate completes; the automated pipeline drafts but never freezes (v3 amendment doctrine).",
+  "freeze_record": {
+    "schema": "llm_attacker.validation_amendment.v1",
+    "amendment_id": "v4-freeze-2026-09-16",
+    "date": "2026-09-16",
+    "summary": "Freeze of validation protocol v4 (BiSR arms amendment of v3). GPU canary passed on koula 2026-09-16: capture + SIP train + BRE-bf attack end-to-end, evidence-sealed, bisr_opt 0.84375 vs sip_fwd_only 0.375 vs control 0.0625 at toy scale. Aux corpus gated disjoint (112 wikitext-2-train articles, sha256 225c861a82c129d25aa751c49482eeb3881e96c06ad272c7fa4ff50ab5ff67e1).",
+    "changes": [
+      {
+        "axis": "status",
+        "new_axis": false,
+        "value": "frozen",
+        "rationale": "GPU canary gate complete; approved via user instruction to proceed with phase 2 per experiments/phase2_fleet_runbook.md section A"
+      }
+    ],
+    "decisions": [
+      "Execution order binds: B1 fidelity gate (SplitLLM reference setting) must complete and record tolerance before B3 arm evaluation on frozen v3 captures; B2 aux scale is set from the B1 reference config (112-article wikitext-disjoint corpus is the fallback, C4-derived gated corpus if B1 requires more).",
+      "v3 remains immutable; v4 cells are post-hoc on frozen v3 captures and never re-measure reused activation-only executions.",
+      "No outcome-based retries; failed cells journal and block comparative analysis per the missing-data rule."
+    ],
+    "budget": {
+      "base": "~10-30 GPU-hours on koula (BiSR Phase-B plan)",
+      "amended": "unchanged",
+      "delta": 0
+    },
+    "record_sha256": "78df71755b9086e13dcb30c1e4f45c7e00ce531bfe27eb0449388ad630b589fc"
+  }
+}

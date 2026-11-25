@@ -1,0 +1,131 @@
+{
+  "schema": "llm_attacker.v4_adaptation.v1",
+  "id": "v4-single-seam-adaptation-20260919",
+  "status": "SCOPE_FROZEN_EXECUTION_NOT_ADMITTED",
+  "authorization": "User approved separately named route A amendment by proceed on 2026-09-19",
+  "original_v4_sha256": "cc23f15d5d7597ff2e73edd45e6f77b65aaf19ce3ed6f86d121352ce1ca5c4fc",
+  "scope": "Single-seam GPT-2 adaptation qualified by C-A; not published original-setting reproduction",
+  "matrix": {
+    "depths": [
+      3,
+      6
+    ],
+    "knowledge": [
+      "public",
+      "exact"
+    ],
+    "victim_seeds": [
+      101,
+      202,
+      303,
+      404,
+      505,
+      606,
+      707,
+      808,
+      909,
+      1010
+    ],
+    "attack_seeds": [
+      17,
+      29
+    ],
+    "candidate_count": 32,
+    "evaluation_documents": "the same 256 fixed held-out documents as v3 (frozen_inputs of v3 apply unchanged)",
+    "aux_corpus": "C-A fresh 112-article/15604-window disjoint auxiliary corpus; pending artifact pins"
+  },
+  "primary": {
+    "depth": 6,
+    "knowledge": "public",
+    "contrast": "bisr_bre_bf minus joint_true_k32, paired within victim run (attack seeds averaged first)",
+    "metric": "token_accuracy",
+    "practical_margin": 0.02,
+    "interpretation": "Two-sided adapted-algorithm comparison at declared distinct budgets; no original-setting or equal-compute claim."
+  },
+  "secondary_contrasts": [
+    "bisr_bre_bf vs forward_k32 (both depths, both knowledge conditions)",
+    "bisr_bre_bf vs sipit_128 (both depths, both knowledge conditions)",
+    "bisr_sip vs forward_k32 (isolates the stage-2 BRE contribution)",
+    "bisr_bre_bf vs joint_true_k32 at L=3 public and both exact-knowledge cells"
+  ],
+  "statistics": {
+    "alpha": 0.05,
+    "bootstrap_replicates": 100000,
+    "bootstrap_seed": 93281,
+    "unit": "crossed document and independently trained victim run; average attack seeds first",
+    "secondary_correction": "Bonferroni percentile bootstrap intervals across all prespecified secondary contrasts",
+    "pairing": "BiSR cells pair to v3 cells on (victim seed, depth, knowledge, attack seed, document); the v3 published numbers are the frozen controls and are NOT re-run",
+    "missing": "No complete-case deletion. Any missing/failed cell blocks comparative analysis; retain failure and rerun in a fresh directory with the same protocol.",
+    "stopping": "Exactly 256 fixed evaluation documents and 10 victim seeds; no outcome-driven sample extension."
+  },
+  "algorithm": {
+    "inverter": "GRU hidden256 dropout0.1",
+    "training_epochs": 20,
+    "training_batch_size": 32,
+    "training_lr": 0.001,
+    "training_optimizer": "AdamW betas(0.9,0.999), eps1e-8, weight_decay0",
+    "attack_seeds": [
+      17,
+      29
+    ],
+    "stage_order": [
+      "SIP",
+      "GM32",
+      "SM800"
+    ],
+    "opt_batch": 1,
+    "precision": "FP32 eager, deterministic, TF32 off",
+    "auxiliary": "C-A fresh 112-article/15604-window disjoint auxiliary corpus; pending artifact pins",
+    "claims": "No equal-compute claim; continuous BRE and k32 control have distinct measured budgets"
+  },
+  "gradient_conversion": {
+    "original_bytes_preserved": true,
+    "multiplier": 256,
+    "reason": "Original capture CE sum divided by 256*(sequence_length-1); recover per-document mean CE gradient. This is a loss-normalisation factor, not capture batch size.",
+    "replay_check_required": true
+  },
+  "resource": {
+    "approved_gpu_hours": 30,
+    "online_estimate_gpu_hours": 30.2116757299,
+    "full_launch_admitted": false,
+    "canary_excluded_from_comparative_evidence": true
+  },
+  "gates": [
+    "All original input and grant hashes verified",
+    "Exact-head replay and public downstream isolation",
+    "Fresh seed17/29 GRUs, trained mechanical gates",
+    "Final manifest binds all inputs, source, environment and checkpoints",
+    "Resource canary and total budget admission"
+  ],
+  "fleet": {
+    "toula": {
+      "role": "GPU",
+      "victim_seeds": [
+        101,
+        202,
+        303,
+        404,
+        505
+      ]
+    },
+    "koula": {
+      "role": "GPU",
+      "victim_seeds": [
+        606,
+        707,
+        808,
+        909,
+        1010
+      ]
+    },
+    "soula": {
+      "role": "CPU input audit"
+    },
+    "voula": {
+      "role": "CPU grant and journal audit"
+    },
+    "sasa": {
+      "role": "CPU frozen controls and complete-set statistics"
+    }
+  }
+}

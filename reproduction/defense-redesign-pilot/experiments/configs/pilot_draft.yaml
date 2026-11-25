@@ -1,0 +1,145 @@
+protocol_id: p4-defense-pilot-0.2-draft
+status: draft
+cohort: exploratory
+seed_policy: reserved IDs checked against inherited manifests; each stream independently
+  keyed
+seeds:
+- 411101
+- 411102
+- 411103
+reserved_prior_seeds:
+- 3
+- 7
+- 9
+- 11
+- 13
+- 17
+- 19
+- 21
+- 22
+- 23
+- 27
+- 29
+- 31
+- 33
+- 37
+- 39
+- 41
+- 43
+- 44
+- 47
+- 49
+- 51
+- 53
+- 55
+- 57
+- 59
+- 61
+- 63
+- 66
+- 67
+- 69
+- 71
+- 77
+- 81
+- 83
+- 87
+- 88
+- 89
+- 91
+- 101
+- 202
+- 303
+- 909
+- 919
+- 929
+- 939
+- 949
+- 959
+- 969
+- 9390
+- 9391
+- 9490
+- 9491
+- 9590
+- 9690
+backbone:
+  vocab_size: 256
+  d_model: 256
+  n_heads: 8
+  n_layers: 8
+  d_ff: 1024
+  max_seq_len: 128
+  init_std: 0.02
+split:
+  start: 2
+  span: 4
+  width: 256
+  remote_depth: 1
+quantizer: per-token-affine-width-axis; min/scale visible; differs from Paper3 per-tensor
+data:
+  path: data/raw/tinyshakespeare.txt
+  sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+  fractions:
+  - 0
+  - 0.8
+  - 0.9
+  - 0.95
+  - 1.0
+  batch_size: 32
+  sequence_length: 128
+optimizer:
+  steps: 2000
+  lr: 0.0003
+  min_lr: 3.0e-05
+  warmup_steps: 100
+  weight_decay: 0.1
+  grad_clip: 1.0
+  betas:
+  - 0.9
+  - 0.95
+modes:
+- trained
+- frozen_random
+- removed_remote
+cells:
+- id: d0-q8
+  q_bits: 8
+  defense:
+    name: none
+- id: d1-s0.1-q8
+  q_bits: 8
+  defense:
+    name: property_noise
+    noise_scale: 0.1
+- id: d1-s0.5-q8
+  q_bits: 8
+  defense:
+    name: property_noise
+    noise_scale: 0.5
+- id: d1-s1.0-q8
+  q_bits: 8
+  defense:
+    name: property_noise
+    noise_scale: 1.0
+- id: d3-q1
+  q_bits: 1
+  defense:
+    name: aggressive_rate
+- id: d3-q2
+  q_bits: 2
+  defense:
+    name: aggressive_rate
+- id: d3-q3
+  q_bits: 3
+  defense:
+    name: aggressive_rate
+calibration_batches: 64
+eval_batches: 64
+probe_batches: 64
+probe_epochs: 100
+cpu_threads: 2
+basis_policy: 'UNRESOLVED: common pre-defense warmup/checkpoint and calibration schedule
+  must be frozen before pilot execution'
+claim_scope: Draft only; require same-cell utility/gain/qualifiedprivacy conjunction;
+  no positive defenseclaim beforeactivecoverage

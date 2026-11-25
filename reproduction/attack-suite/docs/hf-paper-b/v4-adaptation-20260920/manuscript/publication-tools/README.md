@@ -1,0 +1,1 @@
+These exact helper bytes produced the additive evidence/manuscript releases. The strict evidence gate requires a successful full CPU analysis reproduction. Scientific execution and analysis sources are independently frozen and included in the evidence package. Publication credentials are not included.

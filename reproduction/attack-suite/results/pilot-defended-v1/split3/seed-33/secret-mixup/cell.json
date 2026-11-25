@@ -1,0 +1,190 @@
+{
+  "schema": "llm_attacker.defended_pilot_cell.v1",
+  "status": "COMPLETE",
+  "split": 3,
+  "seed": 33,
+  "defense": "secret-mixup",
+  "paired_control": "../none/cell.json",
+  "wall_seconds": 5.869619549950585,
+  "attack_seconds": 245.5392716389615,
+  "cuda_peak_allocated_bytes": 1551906816,
+  "resources_scope": "cell wall includes capture I/O; cuda peak is process-wide (experiment.json convention)",
+  "utility_before": {
+    "cross_entropy": 4.103222370147705,
+    "perplexity": 60.53503995238685
+  },
+  "utility_after": {
+    "cross_entropy": 4.309037446975708,
+    "perplexity": 74.36887049639066
+  },
+  "training": {
+    "steps_run": 64,
+    "final_loss": 2.941180944442749,
+    "mean_loss": 4.052478559315205
+  },
+  "access": {
+    "schema": "llm_attacker.defended_pilot_access.v1",
+    "matched_across_defenses": true,
+    "calibration": {
+      "documents": 32,
+      "source": "public calibration partition of the 96-article development corpus",
+      "distinct_from_scoring_truth": true
+    },
+    "public_head": "pretrained public head exported before victim training (split{N}/public-head-{seed}.pt)",
+    "victim_final_head_granted": false,
+    "observations": "post-defense training-phase fwd wire captures plus canonical scoring truth (scoring only)",
+    "query_budgets": {
+      "ridge_fit": "one pass over the public calibration partition",
+      "forward_beam": {
+        "candidate_count": 8,
+        "beam_width": 2
+      },
+      "sipit": {
+        "steps_per_token": 64
+      },
+      "scored_sequences": 32
+    }
+  },
+  "provenance": {
+    "path": "captures/secret_mixup_provenance.json",
+    "sha256": "6d7145caa261b693b12afae0cd96b03fae2218dbd686636997af2f51708eae53"
+  },
+  "run_artifact": "run.json",
+  "evidence": "run.json.evidence.json",
+  "captures_dir": "captures",
+  "attacks": {
+    "forward": {
+      "accuracy": 0.85546875,
+      "n_tokens": 1024,
+      "n_sequences": 32,
+      "candidate_count": 8,
+      "beam_width": 2,
+      "work": {
+        "head_forward_calls": 32,
+        "head_forward_sequences": 16128,
+        "head_forward_token_positions": 270080,
+        "head_backward_calls": 0,
+        "head_backward_token_positions": 0,
+        "vocabulary_dot_products": 51463168,
+        "wall_seconds": 3.5037066219374537,
+        "cuda_seconds": 3.50358447265625,
+        "peak_allocated_bytes": 2362026496,
+        "incremental_peak_allocated_bytes": 1311798272
+      },
+      "artifact": "forward-baseline.json"
+    },
+    "sipit": {
+      "accuracy": 0.8408203125,
+      "n_tokens": 1024,
+      "n_sequences": 32,
+      "steps_per_token": 64,
+      "work": {
+        "head_forward_calls": 4096,
+        "head_forward_sequences": 131072,
+        "head_forward_token_positions": 2162688,
+        "head_backward_calls": 2048,
+        "head_backward_token_positions": 1081344,
+        "vocabulary_dot_products": 3293642752,
+        "wall_seconds": 43.53746481798589,
+        "cuda_seconds": 43.537265625,
+        "peak_allocated_bytes": 1551906816,
+        "incremental_peak_allocated_bytes": 295742976
+      },
+      "artifact": "sipit-baseline.json"
+    },
+    "view-privacy": {
+      "bundle": "view-bundle.json",
+      "artifact": "view-privacy.json",
+      "rows": [
+        {
+          "arm": "calibrated_mean",
+          "mse": 58.06774053299182
+        },
+        {
+          "arm": "naive_zero_mean",
+          "mse": 61.34094369689607
+        },
+        {
+          "arm": "oracle_pool_mean",
+          "mse": 57.962685522973224
+        },
+        {
+          "arm": "calibrated_mean",
+          "mse": 39.67216836102695
+        },
+        {
+          "arm": "naive_zero_mean",
+          "mse": 41.18249965908538
+        },
+        {
+          "arm": "oracle_pool_mean",
+          "mse": 40.07536466774723
+        },
+        {
+          "arm": "calibrated_mean",
+          "mse": 34.88770526586002
+        },
+        {
+          "arm": "naive_zero_mean",
+          "mse": 35.47841814239536
+        },
+        {
+          "arm": "oracle_pool_mean",
+          "mse": 35.29072252230133
+        },
+        {
+          "arm": "no_observation_calibration_mean",
+          "mse": 255.43990118088
+        },
+        {
+          "arm": "nonlinear_corrected_output",
+          "mse": 12.370284678037756
+        },
+        {
+          "arm": "calibrated_mean",
+          "mse": 24.052232535581364
+        },
+        {
+          "arm": "naive_zero_mean",
+          "mse": 28.57082144579423
+        },
+        {
+          "arm": "oracle_pool_mean",
+          "mse": 24.025302812949583
+        },
+        {
+          "arm": "calibrated_mean",
+          "mse": 13.470061354115439
+        },
+        {
+          "arm": "naive_zero_mean",
+          "mse": 15.648551989082307
+        },
+        {
+          "arm": "oracle_pool_mean",
+          "mse": 13.91517249756071
+        },
+        {
+          "arm": "calibrated_mean",
+          "mse": 13.979998340089049
+        },
+        {
+          "arm": "naive_zero_mean",
+          "mse": 14.882827169851511
+        },
+        {
+          "arm": "oracle_pool_mean",
+          "mse": 14.4025951915403
+        },
+        {
+          "arm": "no_observation_calibration_mean",
+          "mse": 255.43990118088
+        },
+        {
+          "arm": "nonlinear_corrected_output",
+          "mse": 0.0
+        }
+      ]
+    }
+  }
+}

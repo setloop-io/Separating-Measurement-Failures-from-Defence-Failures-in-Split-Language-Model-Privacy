@@ -1,0 +1,2018 @@
+{
+  "meta": {
+    "access_conditions": {
+      "split-training-wire": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+      "split-training-wire-whitebox": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it."
+    },
+    "description": "Adversary-conditioned assurance matrix: defense x attacker access x measured leakage x utility cost x evidence strength. Per-row measurements only \u2014 no universal risk score and no maturity model; the current evidence does not validate either.",
+    "evidence_ladder": [
+      {
+        "level": "fixture",
+        "meaning": "Fixture/synthetic batteries (e.g. replica-integrity fixtures, view-privacy synthetic de-mixing). Engineering checks on synthetic data; positives do not falsify a deployed defense."
+      },
+      {
+        "level": "live_channel_engineering",
+        "meaning": "Live in-repo channels exercised end to end (capture/transport/recovery plumbing). Demonstrates mechanism, not measured leakage against a defended target."
+      },
+      {
+        "level": "defended_pilot_paired",
+        "meaning": "Defended development pilot over trained defenders: paired defense-minus-none seed differences with percentile bootstrap CIs, utility deltas, failures-and-nulls accounting. Development tier; conditional on a fixed article sample; not a confirmatory claim."
+      },
+      {
+        "level": "strengthened_attacker_development_sweep",
+        "meaning": "Development sweep over the bottleneck defense family (pca-compress / tb-frozen / tb-cotrain x dims x splits) with a strengthened attacker: base-tier forward/SIPIT attacks plus a defense-aware surrogate arm, and a separately labeled white-box tier that grants the true defense checkpoint. Predefined dual utility gates (no retuning); the sweep selection outcome was NEGATIVE. Development tier \u2014 stronger attacker access than the defended pilot, still not a confirmatory claim."
+      },
+      {
+        "level": "frozen_crossed_bootstrap",
+        "meaning": "Frozen crossed-bootstrap study under the v2 protocol (crossed document/run bootstrap with multiplicity correction). Protocol frozen; evidence counts at this level only once executed."
+      }
+    ],
+    "fail_closed_policy": "Rows with missing leakage or utility fields are emitted as INCOMPLETE, never dropped or imputed. White-box cells declared non-evaluable by the source analysis are emitted as NOT_EVALUABLE rows with the source reason, never dropped.",
+    "sources": [
+      {
+        "analysis_script_sha256": "2cd3e64bd0d316414b872f8ebf9ac08b73ccb79ea63e28634f1ae4c2f3cc8bb3",
+        "bootstrap": {
+          "method": "percentile, paired over seeds",
+          "replicates": 10000,
+          "seed": 2026
+        },
+        "cells_failed": 0,
+        "cells_ok": 30,
+        "failures": [],
+        "kind": "defended_pilot",
+        "status": "COMPLETE",
+        "tier": "development_pilot"
+      },
+      {
+        "analysis_script_sha256": "e1b62210457084e48212767f2f9390add270de8bb0837c0ccd1f2fa8ad459dcc",
+        "bootstrap": {
+          "method": "percentile, paired over seeds",
+          "replicates": 10000,
+          "seed": 2026
+        },
+        "cells_failed": 0,
+        "cells_ok": 60,
+        "disjointness": {
+          "article_ids_disjoint_from_frozen": true,
+          "articles": 96,
+          "corpus_sha256": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77",
+          "excluded_pilot_sha256": "d11d88a6c0331024683e462814aff07d8158ae3829487d714bf77086bfbb7c77",
+          "frozen_manifest": "experiments/validation_corpus_manifest.json",
+          "identity_checked": true
+        },
+        "expected_cells": 60,
+        "failures": [],
+        "kind": "bottleneck_sweep",
+        "status": "COMPLETE",
+        "tier": "development_sweep",
+        "whitebox_cells_ok": 36
+      }
+    ],
+    "sweep_selection": {
+      "access_labels": {
+        "surrogate_arm": "the defense-aware arm fits a PCA surrogate (stand-in) inverse on public calibration; it is NOT a faithful decoder of the true defense transform and its recovery numbers are an approximation, not a certificate",
+        "whitebox_e2e_tier": "adaptive end-to-end rows grant the attacker the TRUE defense checkpoint and optimize each wire's token sequence straight through it \u2014 a strictly stronger, adaptive access condition. Adaptive e2e recovery is a stronger-access measurement only: it does not constrain black-box recovery of the same wire, nor the surrogate arm, nor any defense-internals-hidden adversary",
+        "whitebox_tier": "white-box-aware rows grant the attacker the TRUE defense checkpoint (encoder weights / PCA basis + provenance) \u2014 a strictly stronger access condition than the matched matrix. White-box recovery is a stronger-access measurement; it does not constrain black-box recovery of the same wire, nor the reverse"
+      },
+      "analysis_status": "COMPLETE",
+      "candidate_methods": [
+        "tb-frozen",
+        "tb-cotrain"
+      ],
+      "compute_factor": 2.0,
+      "control_method": "pca-compress",
+      "eligibility_conditions": "PCA-superiority requires BOTH the bootstrap condition (point estimate > 0 AND bootstrap CI lower > 0 on the paired per-seed differences) AND the all-seeds-positive condition (per-seed paired difference > 0 for EVERY seed). They are separate mechanical checks, recorded separately per candidate; the bootstrap condition alone does not imply improvement on every paired seed.",
+      "gates": {
+        "predefined": true,
+        "primary_ppl_ratio": 1.5,
+        "retuning": "refused (no-retuning rule)",
+        "secondary_ppl_ratio": 2.0
+      },
+      "leakage_statistic": "strongest observed across measured arms: per-seed max over the base-tier forward/SIPIT attacks, the defense-aware surrogate arm, the white-box-aware arms, and \u2014 when present \u2014 the adaptive end-to-end (true transform) arm. A measured statistic over the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+      "negative_splits": [
+        "3",
+        "6"
+      ],
+      "negative_statement": "split(s) ['3', '6'] selected NO operating point; the NEGATIVE result is retained and v3 remains UNFROZEN",
+      "outcome": "NEGATIVE",
+      "schema": "llm_attacker.operating_point_selection.v1",
+      "v3_rule": "a negative outcome retains the NEGATIVE result; v3 remains UNFROZEN \u2014 this tool never freezes anything",
+      "v3_status": "UNFROZEN"
+    }
+  },
+  "rows": [
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "gaussian",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": 0.0166015625,
+        "ci_low": 0.001953125,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": 0.007161458333333333,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 1.8740464581076068,
+        "ci_low": -1.4258829390364909,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 0.3456169277368725
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "none",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": 0.0,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 0.0
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "replica-median",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": -0.6494140625,
+        "ci_low": -0.6767578125,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": -0.6669921875,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 97.34171242381652,
+        "ci_low": 6.70263692983017,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 49.11271525388921
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "secret-mixup",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": -0.044921875,
+        "ci_low": -0.0673828125,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": -0.057942708333333336,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 67.96341240959953,
+        "ci_low": 11.01413518520338,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 35.07797688518422
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "trained-bottleneck",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": -0.91015625,
+        "ci_low": -0.9208984375,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": -0.916015625,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 101033823.11347729,
+        "ci_low": 38439400.79602491,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 66407648.624861635
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "pca-compress",
+      "dim": 64,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.5322265625,
+          "base forward": 0.5927734375,
+          "defense-aware surrogate SIPIT": 0.041015625,
+          "defense-aware surrogate forward": 0.06770833333333333
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.5927734375,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "outcome": "negative",
+        "role": "control",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 153.75862949213763,
+        "ci_low": 130.11196071066433,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 144.14685310012732,
+        "ppl_ratio_mean": 3.9820579676811163
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "tb-cotrain",
+      "dim": 64,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.5348307291666666,
+          "base forward": 0.5924479166666666,
+          "defense-aware surrogate SIPIT": 0.030924479166666668,
+          "defense-aware surrogate forward": 0.05078125
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.5924479166666666,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.0078125, 0.017578125] includes 0 (ESTIMATED)",
+          "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 144.07469566517085,
+        "ci_low": 134.2621786221149,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 140.46476575536352,
+        "ppl_ratio_mean": 3.9070372720621402
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "tb-frozen",
+      "dim": 64,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.5341796875,
+          "base forward": 0.5944010416666666,
+          "defense-aware surrogate SIPIT": 0.029947916666666668,
+          "defense-aware surrogate forward": 0.0498046875
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.5944010416666666,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.0107421875, 0.0078125] includes 0 (ESTIMATED)",
+          "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 143.04847203990775,
+        "ci_low": 134.87929817657846,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 140.1943160349004,
+        "ppl_ratio_mean": 3.9014859291769297
+      }
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 3
+      },
+      "defense": "pca-compress",
+      "dim": 64,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "white-box inverter SIPIT": 0.4788411458333333,
+          "white-box inverter forward": 0.5983072916666666,
+          "white-box optimized forward": 0.5927734375,
+          "white-box optimized snapshot": 0.017578125
+        },
+        "metric": "strongest_observed_recovery_whitebox_arms",
+        "note": "White-box tier: attacker granted the true defense checkpoint. Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.5983072916666666,
+        "strongest_arm": "white-box inverter forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "outcome": "negative",
+        "role": "control",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 153.75862949213763,
+        "ci_low": 130.11196071066433,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 144.14685310012732,
+        "ppl_ratio_mean": 3.9820579676811163
+      }
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 3
+      },
+      "defense": "tb-cotrain",
+      "dim": 64,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": null,
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.0078125, 0.017578125] includes 0 (ESTIMATED)",
+          "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "NOT_EVALUABLE",
+      "utility_cost": null
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 3
+      },
+      "defense": "tb-frozen",
+      "dim": 64,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "white-box inverter SIPIT": 0.4755859375,
+          "white-box inverter forward": 0.5924479166666666,
+          "white-box optimized forward": 0.5911458333333334,
+          "white-box optimized snapshot": 0.017252604166666668
+        },
+        "metric": "strongest_observed_recovery_whitebox_arms",
+        "note": "White-box tier: attacker granted the true defense checkpoint. Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.5924479166666666,
+        "strongest_arm": "white-box inverter forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.0107421875, 0.0078125] includes 0 (ESTIMATED)",
+          "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 143.04847203990775,
+        "ci_low": 134.87929817657846,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 140.1943160349004,
+        "ppl_ratio_mean": 3.9014859291769297
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "pca-compress",
+      "dim": 128,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.7760416666666666,
+          "base forward": 0.8190104166666666,
+          "defense-aware surrogate SIPIT": 0.03515625,
+          "defense-aware surrogate forward": 0.06477864583333333
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8190104166666666,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "outcome": "negative",
+        "role": "control",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 44.58383941175663,
+        "ci_low": 39.58978337420791,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "PASS",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 41.955057493030864,
+        "ppl_ratio_mean": 1.8684368711519683
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "tb-cotrain",
+      "dim": 128,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.7643229166666666,
+          "base forward": 0.8072916666666666,
+          "defense-aware surrogate SIPIT": 0.0322265625,
+          "defense-aware surrogate forward": 0.053059895833333336
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8072916666666666,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.01171875, 0.025390625] includes 0 (ESTIMATED)",
+          "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 48.230337002851215,
+        "ci_low": 35.12038918047119,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 41.75872619642409,
+        "ppl_ratio_mean": 1.8638180369514894
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "tb-frozen",
+      "dim": 128,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.7620442708333334,
+          "base forward": 0.8069661458333334,
+          "defense-aware surrogate SIPIT": 0.029622395833333332,
+          "defense-aware surrogate forward": 0.0517578125
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8069661458333334,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.01171875, 0.0205078125] includes 0 (ESTIMATED)",
+          "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 48.575390339257126,
+        "ci_low": 35.018194992551074,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 41.818779157060504,
+        "ppl_ratio_mean": 1.8650668939976864
+      }
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 3
+      },
+      "defense": "pca-compress",
+      "dim": 128,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "white-box inverter SIPIT": 0.6057942708333334,
+          "white-box inverter forward": 0.7568359375,
+          "white-box optimized forward": 0.8186848958333334,
+          "white-box optimized snapshot": 0.022786458333333332
+        },
+        "metric": "strongest_observed_recovery_whitebox_arms",
+        "note": "White-box tier: attacker granted the true defense checkpoint. Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8186848958333334,
+        "strongest_arm": "white-box optimized forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "outcome": "negative",
+        "role": "control",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 44.58383941175663,
+        "ci_low": 39.58978337420791,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "PASS",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 41.955057493030864,
+        "ppl_ratio_mean": 1.8684368711519683
+      }
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 3
+      },
+      "defense": "tb-cotrain",
+      "dim": 128,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": null,
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.01171875, 0.025390625] includes 0 (ESTIMATED)",
+          "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "NOT_EVALUABLE",
+      "utility_cost": null
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 3
+      },
+      "defense": "tb-frozen",
+      "dim": 128,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "white-box inverter SIPIT": 0.6009114583333334,
+          "white-box inverter forward": 0.7535807291666666,
+          "white-box optimized forward": 0.8108723958333334,
+          "white-box optimized snapshot": 0.022135416666666668
+        },
+        "metric": "strongest_observed_recovery_whitebox_arms",
+        "note": "White-box tier: attacker granted the true defense checkpoint. Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8108723958333334,
+        "strongest_arm": "white-box optimized forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.01171875, 0.0205078125] includes 0 (ESTIMATED)",
+          "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 48.575390339257126,
+        "ci_low": 35.018194992551074,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 41.818779157060504,
+        "ppl_ratio_mean": 1.8650668939976864
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "pca-compress",
+      "dim": 256,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.8932291666666666,
+          "base forward": 0.8935546875,
+          "defense-aware surrogate SIPIT": 0.03125,
+          "defense-aware surrogate forward": 0.06803385416666667
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8935546875,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "outcome": "negative",
+        "role": "control",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 16.334405274056735,
+        "ci_low": 14.107342446922814,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "PASS",
+          "2.0x": "PASS",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 15.47610409827786,
+        "ppl_ratio_mean": 1.3201725027287436
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "tb-cotrain",
+      "dim": 256,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.8935546875,
+          "base forward": 0.8922526041666666,
+          "defense-aware surrogate SIPIT": 0.027669270833333332,
+          "defense-aware surrogate forward": 0.051432291666666664
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8935546875,
+        "strongest_arm": "base SIPIT",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.0087890625, 0.0078125] includes 0 (ESTIMATED)",
+          "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 16.000159409059812,
+        "ci_low": 12.364285677400382,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "PASS",
+          "2.0x": "PASS",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 14.604345873281039,
+        "ppl_ratio_mean": 1.3018582641287297
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 3
+      },
+      "defense": "tb-frozen",
+      "dim": 256,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.8932291666666666,
+          "base forward": 0.8922526041666666,
+          "defense-aware surrogate SIPIT": 0.026041666666666668,
+          "defense-aware surrogate forward": 0.051106770833333336
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8932291666666666,
+        "strongest_arm": "base SIPIT",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.0078125, 0.0068359375] includes 0 (ESTIMATED)",
+          "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 15.977043324745615,
+        "ci_low": 12.390772780144545,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "PASS",
+          "2.0x": "PASS",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 14.603667420454281,
+        "ppl_ratio_mean": 1.3018514982441993
+      }
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 3
+      },
+      "defense": "pca-compress",
+      "dim": 256,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "white-box inverter SIPIT": 0.6201171875,
+          "white-box inverter forward": 0.7763671875,
+          "white-box optimized forward": 0.8935546875,
+          "white-box optimized snapshot": 0.029296875
+        },
+        "metric": "strongest_observed_recovery_whitebox_arms",
+        "note": "White-box tier: attacker granted the true defense checkpoint. Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8935546875,
+        "strongest_arm": "white-box optimized forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "outcome": "negative",
+        "role": "control",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 16.334405274056735,
+        "ci_low": 14.107342446922814,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "PASS",
+          "2.0x": "PASS",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 15.47610409827786,
+        "ppl_ratio_mean": 1.3201725027287436
+      }
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 3
+      },
+      "defense": "tb-cotrain",
+      "dim": 256,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": null,
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.0087890625, 0.0078125] includes 0 (ESTIMATED)",
+          "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "NOT_EVALUABLE",
+      "utility_cost": null
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 3
+      },
+      "defense": "tb-frozen",
+      "dim": 256,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "white-box inverter SIPIT": 0.6149088541666666,
+          "white-box inverter forward": 0.771484375,
+          "white-box optimized forward": 0.8922526041666666,
+          "white-box optimized snapshot": 0.027669270833333332
+        },
+        "metric": "strongest_observed_recovery_whitebox_arms",
+        "note": "White-box tier: attacker granted the true defense checkpoint. Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8922526041666666,
+        "strongest_arm": "white-box optimized forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "strongest observed leakage improvement over pca-compress not established: bootstrap CI [-0.0078125, 0.0068359375] includes 0 (ESTIMATED)",
+          "per-seed paired difference not positive for every seed (seeds [22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 15.977043324745615,
+        "ci_low": 12.390772780144545,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "PASS",
+          "2.0x": "PASS",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 14.603667420454281,
+        "ppl_ratio_mean": 1.3018514982441993
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "gaussian",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": 0.017578125,
+        "ci_low": -0.0166015625,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": 0.001953125,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 0.779637952666306,
+        "ci_low": -1.2211024026457622,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 0.07716568482156798
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "none",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": 0.0,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 0.0,
+        "ci_low": 0.0,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 0.0
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "replica-median",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": -0.705078125,
+        "ci_low": -0.716796875,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": -0.7122395833333334,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 93.57816581879413,
+        "ci_low": 7.1908850249277165,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 45.32309471428886
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "secret-mixup",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": -0.056640625,
+        "ci_low": -0.0859375,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": -0.072265625,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 71.12558541849407,
+        "ci_low": 15.960607117503791,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 36.32052107452661
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "trained-bottleneck",
+      "evidence_strength": "defended_pilot_paired",
+      "leakage": {
+        "ci_high": -0.865234375,
+        "ci_low": -0.8857421875,
+        "estimation_status": "ESTIMATED",
+        "metric": "forward_recovery_minus_none",
+        "note": "Paired defense-minus-none position-aligned token recovery; negative means the defense reduced recovery.",
+        "paired_effect": -0.8759765625,
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 260444642.69833675,
+        "ci_low": 16933224.631866507,
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 124342398.41026768
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "pca-compress",
+      "dim": 64,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.4622395833333333,
+          "base forward": 0.5481770833333334,
+          "defense-aware surrogate SIPIT": 0.015625,
+          "defense-aware surrogate forward": 0.016927083333333332
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.5481770833333334,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "outcome": "negative",
+        "role": "control",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 182.30898559247905,
+        "ci_low": 156.03408251057886,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 169.53757742844732,
+        "ppl_ratio_mean": 4.507791480249403
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "tb-cotrain",
+      "dim": 64,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.4847005208333333,
+          "base forward": 0.5540364583333334,
+          "defense-aware surrogate SIPIT": 0.013671875,
+          "defense-aware surrogate forward": 0.01171875
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.5540364583333334,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage NOT below pca-compress control (paired point estimate -0.0048828125)",
+          "per-seed paired difference not positive for every seed (seeds [11, 22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 154.2932697804464,
+        "ci_low": 138.54879213339268,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 146.73957581974418,
+        "ppl_ratio_mean": 4.0388446422070405
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "tb-frozen",
+      "dim": 64,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.4840494791666667,
+          "base forward": 0.5533854166666666,
+          "defense-aware surrogate SIPIT": 0.011067708333333334,
+          "defense-aware surrogate forward": 0.012044270833333334
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.5533854166666666,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage NOT below pca-compress control (paired point estimate -0.008138020833333334)",
+          "per-seed paired difference not positive for every seed (seeds [11, 22, 33]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 154.2990639577277,
+        "ci_low": 138.60076081130205,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 146.70990570312804,
+        "ppl_ratio_mean": 4.038256604873856
+      }
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 6
+      },
+      "defense": "pca-compress",
+      "dim": 64,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "white-box inverter SIPIT": 0.4248046875,
+          "white-box inverter forward": 0.5348307291666666,
+          "white-box optimized forward": 0.5491536458333334,
+          "white-box optimized snapshot": 0.005859375
+        },
+        "metric": "strongest_observed_recovery_whitebox_arms",
+        "note": "White-box tier: attacker granted the true defense checkpoint. Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.5491536458333334,
+        "strongest_arm": "white-box optimized forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "outcome": "negative",
+        "role": "control",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 182.30898559247905,
+        "ci_low": 156.03408251057886,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 169.53757742844732,
+        "ppl_ratio_mean": 4.507791480249403
+      }
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 6
+      },
+      "defense": "tb-cotrain",
+      "dim": 64,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": null,
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage NOT below pca-compress control (paired point estimate -0.0048828125)",
+          "per-seed paired difference not positive for every seed (seeds [11, 22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "NOT_EVALUABLE",
+      "utility_cost": null
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 6
+      },
+      "defense": "tb-frozen",
+      "dim": 64,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "white-box inverter SIPIT": 0.4264322916666667,
+          "white-box inverter forward": 0.548828125,
+          "white-box optimized forward": 0.5553385416666666,
+          "white-box optimized snapshot": 0.007486979166666667
+        },
+        "metric": "strongest_observed_recovery_whitebox_arms",
+        "note": "White-box tier: attacker granted the true defense checkpoint. Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.5553385416666666,
+        "strongest_arm": "white-box optimized forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage NOT below pca-compress control (paired point estimate -0.008138020833333334)",
+          "per-seed paired difference not positive for every seed (seeds [11, 22, 33]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 154.2990639577277,
+        "ci_low": 138.60076081130205,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 146.70990570312804,
+        "ppl_ratio_mean": 4.038256604873856
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "pca-compress",
+      "dim": 128,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.6927083333333334,
+          "base forward": 0.7529296875,
+          "defense-aware surrogate SIPIT": 0.0146484375,
+          "defense-aware surrogate forward": 0.016927083333333332
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.7529296875,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "outcome": "negative",
+        "role": "control",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 72.3473651726922,
+        "ci_low": 65.15461686635575,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 69.15431888237528,
+        "ppl_ratio_mean": 2.4311923608477435
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "tb-cotrain",
+      "dim": 128,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.7158203125,
+          "base forward": 0.75390625,
+          "defense-aware surrogate SIPIT": 0.012044270833333334,
+          "defense-aware surrogate forward": 0.0107421875
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.75390625,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage NOT below pca-compress control (paired point estimate -0.0006510416666666666)",
+          "per-seed paired difference not positive for every seed (seeds [11, 22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 57.61397484232381,
+        "ci_low": 55.77676148901586,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 56.799428377226825,
+        "ppl_ratio_mean": 2.1762743411525034
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "tb-frozen",
+      "dim": 128,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.7112630208333334,
+          "base forward": 0.7535807291666666,
+          "defense-aware surrogate SIPIT": 0.012044270833333334,
+          "defense-aware surrogate forward": 0.010416666666666666
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.7535807291666666,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage NOT below pca-compress control (paired point estimate -0.0068359375)",
+          "per-seed paired difference not positive for every seed (seeds [11, 22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 57.78884970863004,
+        "ci_low": 56.01326239894836,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 56.87049634022618,
+        "ppl_ratio_mean": 2.1777256470298276
+      }
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 6
+      },
+      "defense": "pca-compress",
+      "dim": 128,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "white-box inverter SIPIT": 0.5563151041666666,
+          "white-box inverter forward": 0.7057291666666666,
+          "white-box optimized forward": 0.7532552083333334,
+          "white-box optimized snapshot": 0.005208333333333333
+        },
+        "metric": "strongest_observed_recovery_whitebox_arms",
+        "note": "White-box tier: attacker granted the true defense checkpoint. Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.7532552083333334,
+        "strongest_arm": "white-box optimized forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "outcome": "negative",
+        "role": "control",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 72.3473651726922,
+        "ci_low": 65.15461686635575,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 69.15431888237528,
+        "ppl_ratio_mean": 2.4311923608477435
+      }
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 6
+      },
+      "defense": "tb-cotrain",
+      "dim": 128,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": null,
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage NOT below pca-compress control (paired point estimate -0.0006510416666666666)",
+          "per-seed paired difference not positive for every seed (seeds [11, 22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "NOT_EVALUABLE",
+      "utility_cost": null
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 6
+      },
+      "defense": "tb-frozen",
+      "dim": 128,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "white-box inverter SIPIT": 0.5625,
+          "white-box inverter forward": 0.7083333333333334,
+          "white-box optimized forward": 0.759765625,
+          "white-box optimized snapshot": 0.0078125
+        },
+        "metric": "strongest_observed_recovery_whitebox_arms",
+        "note": "White-box tier: attacker granted the true defense checkpoint. Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.759765625,
+        "strongest_arm": "white-box optimized forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "utility gate FAIL at both predefined thresholds (1.5x / 2.0x) on the per-seed rows",
+          "strongest observed leakage NOT below pca-compress control (paired point estimate -0.0068359375)",
+          "per-seed paired difference not positive for every seed (seeds [11, 22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 57.78884970863004,
+        "ci_low": 56.01326239894836,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 56.87049634022618,
+        "ppl_ratio_mean": 2.1777256470298276
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "pca-compress",
+      "dim": 256,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.828125,
+          "base forward": 0.8385416666666666,
+          "defense-aware surrogate SIPIT": 0.014322916666666666,
+          "defense-aware surrogate forward": 0.015950520833333332
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8385416666666666,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "outcome": "negative",
+        "role": "control",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 49.33435524473316,
+        "ci_low": 24.54160152569505,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 35.758622444464436,
+        "ppl_ratio_mean": 1.7439946337808558
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "tb-cotrain",
+      "dim": 256,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.8401692708333334,
+          "base forward": 0.8424479166666666,
+          "defense-aware surrogate SIPIT": 0.010091145833333334,
+          "defense-aware surrogate forward": 0.013346354166666666
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8424479166666666,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "strongest observed leakage NOT below pca-compress control (paired point estimate -0.011393229166666666)",
+          "per-seed paired difference not positive for every seed (seeds [11, 22, 33]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 26.261327575759665,
+        "ci_low": 19.902346554483422,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "PASS",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 22.2292528435576,
+        "ppl_ratio_mean": 1.4604955837904323
+      }
+    },
+    {
+      "access": {
+        "condition": "Captured training-phase forward/backward wires at the split point; public calibration partition; pretrained public head only (final victim head not granted); query budgets matched across defenses.",
+        "id": "split-training-wire",
+        "split": 6
+      },
+      "defense": "tb-frozen",
+      "dim": 256,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "base SIPIT": 0.83984375,
+          "base forward": 0.8421223958333334,
+          "defense-aware surrogate SIPIT": 0.009440104166666666,
+          "defense-aware surrogate forward": 0.013346354166666666
+        },
+        "metric": "strongest_observed_recovery_across_measured_arms",
+        "note": "Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8421223958333334,
+        "strongest_arm": "base forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "strongest observed leakage NOT below pca-compress control (paired point estimate -0.008463541666666666)",
+          "per-seed paired difference not positive for every seed (seeds [11, 22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 26.240438093184636,
+        "ci_low": 19.903531637149378,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "PASS",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 22.21527683227175,
+        "ppl_ratio_mean": 1.4602024174742072
+      }
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 6
+      },
+      "defense": "pca-compress",
+      "dim": 256,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "white-box inverter SIPIT": 0.5895182291666666,
+          "white-box inverter forward": 0.7220052083333334,
+          "white-box optimized forward": 0.8385416666666666,
+          "white-box optimized snapshot": 0.006510416666666667
+        },
+        "metric": "strongest_observed_recovery_whitebox_arms",
+        "note": "White-box tier: attacker granted the true defense checkpoint. Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.8385416666666666,
+        "strongest_arm": "white-box optimized forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "outcome": "negative",
+        "role": "control",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 49.33435524473316,
+        "ci_low": 24.54160152569505,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "FAIL",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 35.758622444464436,
+        "ppl_ratio_mean": 1.7439946337808558
+      }
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 6
+      },
+      "defense": "tb-cotrain",
+      "dim": 256,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": null,
+      "reason": "tb-cotrain co-trains the encoder DURING victim finetuning (splitbench interleaves a minimax encoder update every tb_cotrain_interval steps), but only the FINAL co-trained encoder checkpoint is saved. The base sweep captures training-phase fwd wires only, so every capture was produced by an EARLIER encoder version than the saved checkpoint and no post-training/inference capture exists for which the saved checkpoint is the authoritative encoder. Evaluating these captures against the final checkpoint would silently attack with a mismatched encoder, so the cell is NOT_EVALUABLE. A future capture rig that stores per-update encoder versions (or post-training inference captures) can lift this exclusion.",
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "strongest observed leakage NOT below pca-compress control (paired point estimate -0.011393229166666666)",
+          "per-seed paired difference not positive for every seed (seeds [11, 22, 33]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "NOT_EVALUABLE",
+      "utility_cost": null
+    },
+    {
+      "access": {
+        "condition": "As split-training-wire, plus the attacker is granted the TRUE defense checkpoint (encoder weights / PCA basis + provenance). Strictly stronger access than the matched wire tier: white-box recovery is a stronger-access measurement \u2014 it neither bounds black-box recovery of the same wire nor is bounded by it.",
+        "id": "split-training-wire-whitebox",
+        "split": 6
+      },
+      "defense": "tb-frozen",
+      "dim": 256,
+      "evidence_strength": "strengthened_attacker_development_sweep",
+      "leakage": {
+        "arms_considered": {
+          "white-box inverter SIPIT": 0.6009114583333334,
+          "white-box inverter forward": 0.7291666666666666,
+          "white-box optimized forward": 0.841796875,
+          "white-box optimized snapshot": 0.009114583333333334
+        },
+        "metric": "strongest_observed_recovery_whitebox_arms",
+        "note": "White-box tier: attacker granted the true defense checkpoint. Strongest observed attack result across the measured arms only \u2014 stronger or better-optimized attacks may recover more.",
+        "observed": 0.841796875,
+        "strongest_arm": "white-box optimized forward",
+        "unit": "fraction"
+      },
+      "seeds": 3,
+      "selection": {
+        "eligible": false,
+        "outcome": "negative",
+        "reasons": [
+          "strongest observed leakage NOT below pca-compress control (paired point estimate -0.008463541666666666)",
+          "per-seed paired difference not positive for every seed (seeds [11, 22]); the bootstrap condition alone does not establish improvement on every paired seed"
+        ],
+        "role": "candidate",
+        "selected": null,
+        "v3_status": "UNFROZEN"
+      },
+      "status": "ESTIMATED",
+      "utility_cost": {
+        "ci_high": 26.240438093184636,
+        "ci_low": 19.903531637149378,
+        "estimation_status": "ESTIMATED",
+        "gates": {
+          "1.5x": "FAIL",
+          "2.0x": "PASS",
+          "retuning": "refused (no-retuning rule)",
+          "thresholds_predefined": true
+        },
+        "metric": "heldout_ppl_delta_vs_none",
+        "note": "Positive means the defense cost held-out perplexity.",
+        "paired_effect": 22.21527683227175,
+        "ppl_ratio_mean": 1.4602024174742072
+      }
+    }
+  ],
+  "schema": "llm_attacker.assurance_matrix.v1"
+}

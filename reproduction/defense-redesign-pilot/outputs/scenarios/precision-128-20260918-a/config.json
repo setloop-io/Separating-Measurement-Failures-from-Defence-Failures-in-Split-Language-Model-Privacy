@@ -1,0 +1,64 @@
+{
+  "candidate_acceptance_threshold": 0.02,
+  "capture_batch_size": 64,
+  "claim_scope": "Engineering diagnostics only; no defense selection, qualification, or privacy claim. All records keep scientific_evidence false, qualified false, privacy undetermined.",
+  "cohort": "engineering",
+  "cpu_threads": 2,
+  "device": "cuda",
+  "full_budget": true,
+  "kind": "null_precision_128",
+  "matched_null_counts": [
+    16,
+    64
+  ],
+  "null_band": 0.02,
+  "outer_null_repeats": 32,
+  "panel_sizes": [
+    8192,
+    16384
+  ],
+  "positive_doses": [
+    0.5,
+    2.0
+  ],
+  "property_positive_floor": 0.1,
+  "protocol_id": "p4-null-precision-128-0.1",
+  "release_conditions": [
+    {
+      "defense": {
+        "name": "none"
+      },
+      "id": "d0-q8",
+      "q_bits": 8
+    },
+    {
+      "defense": {
+        "name": "property_noise",
+        "noise_scale": 1.0
+      },
+      "id": "d1-warm-s1.0-q8",
+      "q_bits": 8
+    },
+    {
+      "defense": {
+        "name": "aggressive_rate"
+      },
+      "id": "d3-q1",
+      "q_bits": 1
+    }
+  ],
+  "ridge_penalty": 1.0,
+  "sources": [
+    {
+      "branch_manifest": "experiments/manifests/p4-warmup_budget-warmup-budget-20260918-a-d0-trained-s410501.json",
+      "control_seed": 410601,
+      "setup_manifest": "experiments/manifests/p4-warmup_budget-warmup-budget-20260918-a-setup-s410501.json"
+    },
+    {
+      "branch_manifest": "experiments/manifests/p4-warmup_budget-warmup-budget-20260918-a-d0-trained-s410502.json",
+      "control_seed": 410602,
+      "setup_manifest": "experiments/manifests/p4-warmup_budget-warmup-budget-20260918-a-setup-s410502.json"
+    }
+  ],
+  "status": "engineering_ready"
+}
